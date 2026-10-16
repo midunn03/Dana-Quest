@@ -1,0 +1,18 @@
+[
+  {
+    "id": "cho-han",
+    "name": "Chợ Hàn",
+    "position": [16.0679, 108.224],
+    "location": "119 Trần Phú, Đà Nẵng",
+    "category": "legacy",
+    "tags": ["lịch sử dữ liệu", "chợ", "ẩm thực", "mua sắm"],
+    "description": "Khu chợ trung tâm với nhiều gian hàng đặc sản, quà lưu niệm và món ăn địa phương.",
+    "detail": "Địa điểm này đã được gỡ khỏi bản đồ hoạt động. Bản ghi chỉ dùng để đọc tiến độ, nhiệm vụ và ảnh lịch sử đã lưu trên thiết bị.",
+    "suggestedActivities": [],
+    "highlightReason": "Điểm đến lịch sử đã lưu",
+    "featuredScore": 0,
+    "markerAsset": "cho-han.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang+Vietnam",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang+Vietnam"
+  }
+]

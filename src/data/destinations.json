@@ -1,0 +1,472 @@
+[
+  {
+    "id": "cau-rong",
+    "name": "Cầu Rồng",
+    "position": [
+      16.0611042,
+      108.2276926
+    ],
+    "location": "Cầu Rồng bắc qua sông Hàn, trục Nguyễn Văn Linh – Võ Văn Kiệt, Đà Nẵng",
+    "category": "landmark",
+    "tags": [
+      "cầu",
+      "kiến trúc",
+      "sông Hàn",
+      "biểu tượng",
+      "đi bộ"
+    ],
+    "description": "Cây cầu hình rồng bắc qua sông Hàn, nối trung tâm thành phố với khu vực phía đông.",
+    "detail": "Quan sát dáng cầu và cảnh quan hai bờ sông từ lối đi công cộng an toàn. Việc tiếp cận có thể thay đổi khi phân luồng giao thông hoặc tổ chức sự kiện.",
+    "suggestedActivities": [
+      "Ngắm kiến trúc cây cầu từ lối đi bộ ven sông.",
+      "Quan sát cảnh quan sông Hàn và các công trình hai bờ."
+    ],
+    "highlightReason": "Biểu tượng kiến trúc bên sông Hàn",
+    "featuredScore": 100,
+    "markerAsset": "cau-rong.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang+Vietnam",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang+Vietnam",
+    "photo": "/photos/cau-rong.jpg",
+    "photoCredit": "Somerset999 — Wikimedia Commons (CC BY-SA 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Dragon_Bridge,_Da_Nang_at_night_-_20230819.jpg"
+  },
+  {
+    "id": "cau-song-han",
+    "name": "Cầu Sông Hàn",
+    "position": [
+      16.0721501,
+      108.2267961
+    ],
+    "location": "Cầu Sông Hàn, nối trục Lê Duẩn – Phạm Văn Đồng, Đà Nẵng",
+    "category": "landmark",
+    "tags": [
+      "cầu",
+      "kiến trúc",
+      "sông Hàn",
+      "đi bộ",
+      "thành phố"
+    ],
+    "description": "Cây cầu quay bắc qua sông Hàn, một công trình giao thông và dấu mốc kiến trúc của thành phố.",
+    "detail": "Ngắm nhịp sống hai bờ sông từ khu vực dành cho người đi bộ. Tuân theo biển báo tại cầu; lịch vận hành hoặc hạn chế giao thông không được cung cấp trực tiếp trong ứng dụng.",
+    "suggestedActivities": [
+      "Quan sát kết cấu cầu và dòng sông từ khu vực công cộng.",
+      "Đi bộ ven sông và nhận diện các cây cầu lân cận."
+    ],
+    "highlightReason": "Cây cầu quay đặc trưng của Đà Nẵng",
+    "featuredScore": 94,
+    "markerAsset": "cau-song-han.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=Han+River+Bridge+Da+Nang+Vietnam",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Han+River+Bridge+Da+Nang+Vietnam",
+    "photo": "/photos/cau-song-han.jpg",
+    "photoCredit": "Nobbipunktcom — Wikimedia Commons (CC BY-SA 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Han_River_Bridge,_Da_Nang,_20241209,_Ansicht01.jpeg"
+  },
+  {
+    "id": "bao-tang-da-nang",
+    "name": "Bảo tàng Đà Nẵng",
+    "position": [
+      16.0745542,
+      108.2239668
+    ],
+    "location": "Cổng đón khách số 31 Trần Phú; khu nhà bảo tàng tại 42–44 Bạch Đằng, Hải Châu, Đà Nẵng",
+    "category": "museum",
+    "tags": [
+      "bảo tàng",
+      "lịch sử",
+      "văn hóa",
+      "trong nhà",
+      "kiến trúc"
+    ],
+    "description": "Bảo tàng thành phố tại cụm công trình 42–44 Bạch Đằng và 31 Trần Phú, giới thiệu lịch sử, văn hóa và con người Đà Nẵng.",
+    "detail": "Điểm ghim đặt tại cổng đón khách 31 Trần Phú theo thông tin du lịch thành phố. Nội dung trưng bày giúp tìm hiểu thiên nhiên, lịch sử đô thị và đời sống văn hóa địa phương.",
+    "suggestedActivities": [
+      "Tìm hiểu các chủ đề về lịch sử đô thị và văn hóa Đà Nẵng.",
+      "Quan sát kiến trúc tòa nhà lịch sử từ khu vực được phép tham quan."
+    ],
+    "highlightReason": "Không gian tìm hiểu lịch sử thành phố",
+    "featuredScore": 88,
+    "markerAsset": "bao-tang-da-nang.svg",
+    "sourceUrl": "https://danangfantasticity.com/cn/bao-tang-da-nang-42-44-bach-dang-31-tran-phu",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Da+Nang+Museum+31+Tran+Phu",
+    "photo": "/photos/bao-tang-da-nang.jpg",
+    "photoCredit": "Linhcandng — Wikimedia Commons (CC BY-SA 3.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%A3o_t%C3%A0ng_%C4%90%C3%A0_N%E1%BA%B5ng.jpeg"
+  },
+  {
+    "id": "bao-tang-dieu-khac-cham",
+    "name": "Bảo tàng Điêu khắc Chăm",
+    "position": [
+      16.0603007,
+      108.2232677
+    ],
+    "location": "02 đường 2 Tháng 9, Hải Châu, Đà Nẵng",
+    "category": "museum",
+    "tags": [
+      "bảo tàng",
+      "Chăm",
+      "điêu khắc",
+      "lịch sử",
+      "văn hóa"
+    ],
+    "description": "Bảo tàng chuyên sưu tầm và trưng bày hiện vật điêu khắc Chăm tại trung tâm Đà Nẵng.",
+    "detail": "Các bộ sưu tập gồm tượng, đài thờ và phù điêu gắn với nghệ thuật Champa. Hãy kiểm tra quy định chụp ảnh và thông tin tham quan hiện hành từ bảo tàng trước khi ghé.",
+    "suggestedActivities": [
+      "Quan sát các hiện vật điêu khắc và kiến trúc bảo tàng.",
+      "Tìm hiểu tên gọi các phòng trưng bày và nguồn gốc hiện vật."
+    ],
+    "highlightReason": "Bộ sưu tập điêu khắc Champa",
+    "featuredScore": 91,
+    "markerAsset": "bao-tang-dieu-khac-cham.svg",
+    "sourceUrl": "https://chammuseum.vn/",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Cham+Sculpture+Museum+02+2+Thang+9+Da+Nang",
+    "photo": "/photos/bao-tang-dieu-khac-cham.jpg",
+    "photoCredit": "Daderot — Wikimedia Commons (CC0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Interior_view_-_Museum_of_Cham_Sculpture_-_Danang,_Vietnam_-_DSC01931.JPG"
+  },
+  {
+    "id": "cong-vien-apec",
+    "name": "Công viên APEC",
+    "position": [
+      16.0581055,
+      108.2232435
+    ],
+    "location": "Đường 2 Tháng 9, phía tây sông Hàn, gần Cầu Rồng, Đà Nẵng",
+    "category": "park",
+    "tags": [
+      "công viên",
+      "kiến trúc",
+      "không gian công cộng",
+      "sông Hàn",
+      "đi bộ"
+    ],
+    "description": "Công viên công cộng bên sông Hàn với mái vòm kiến trúc uốn lượn và không gian đi bộ.",
+    "detail": "Dạo quanh khu vực công cộng, quan sát mái vòm và các tác phẩm ngoài trời. Sự kiện hoặc khu vực trong nhà có thể có quy định riêng.",
+    "suggestedActivities": [
+      "Đi bộ quanh mái vòm và quan sát công trình từ nhiều phía.",
+      "Nghỉ chân tại khu vực công cộng và nhìn về phía sông Hàn."
+    ],
+    "highlightReason": "Mái vòm kiến trúc ven sông",
+    "featuredScore": 90,
+    "markerAsset": "cong-vien-apec.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=APEC+Park+Da+Nang+Vietnam",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=APEC+Park+Da+Nang+Vietnam",
+    "photo": "/photos/cong-vien-apec.jpg",
+    "photoCredit": "Quang Nguyen Vinh — Pexels (Pexels License)",
+    "photoSourceUrl": "https://www.pexels.com/photo/apec-park-in-da-nang-vietnam-14021726/"
+  },
+  {
+    "id": "cau-tinh-yeu",
+    "name": "Cầu Tình Yêu",
+    "position": [
+      16.0629967,
+      108.2298146
+    ],
+    "location": "507–493 đường Trần Hưng Đạo, An Hải, Đà Nẵng",
+    "category": "landmark",
+    "tags": [
+      "cầu",
+      "ven sông",
+      "đi bộ",
+      "cảnh quan",
+      "sông Hàn"
+    ],
+    "description": "Lối đi bộ ven sông Hàn nhìn sang các cây cầu và cảnh quan trung tâm Đà Nẵng.",
+    "detail": "Dạo trên lối công cộng ven sông và quan sát cảnh quan hai bờ. Một số khu vực có thể đông hoặc được điều tiết theo sự kiện; không có lịch hoạt động cố định được xác nhận.",
+    "suggestedActivities": [
+      "Đi bộ ven sông và quan sát Cầu Rồng từ bờ đông.",
+      "Tìm các chi tiết trang trí trên lối đi mà không cản trở người qua lại."
+    ],
+    "highlightReason": "Góc đi bộ ngắm sông Hàn",
+    "featuredScore": 84,
+    "markerAsset": "cau-tinh-yeu.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=C%E1%BA%A7u+T%C3%ACnh+Y%C3%AAu+-+Love+Pier+Da+Nang",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=C%E1%BA%A7u+T%C3%ACnh+Y%C3%AAu+-+Love+Pier+Da+Nang",
+    "photo": "/photos/cau-tinh-yeu.jpg",
+    "photoCredit": "Supanut Arunoprayote — Wikimedia Commons (CC BY 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Love_Lock_Bridge_Da_Nang_05.19.jpg"
+  },
+  {
+    "id": "bai-bien-my-khe",
+    "name": "Bãi biển Mỹ Khê",
+    "position": [
+      16.0616944,
+      108.2469346
+    ],
+    "location": "Dải bờ biển Mỹ Khê, quận Sơn Trà, Đà Nẵng",
+    "category": "beach",
+    "tags": [
+      "biển",
+      "bãi cát",
+      "ngoài trời",
+      "đi bộ",
+      "cảnh quan"
+    ],
+    "description": "Bãi biển công cộng trên dải bờ biển phía đông Đà Nẵng.",
+    "detail": "Dạo bờ biển và quan sát cảnh quan từ khu vực công cộng. Điều kiện tắm biển, cứu hộ và khu vực được phép xuống nước thay đổi theo thời tiết và thông báo tại chỗ.",
+    "suggestedActivities": [
+      "Đi bộ trên khu vực bờ biển công cộng.",
+      "Quan sát cảnh biển và tuân thủ cờ hiệu, biển báo an toàn tại chỗ."
+    ],
+    "highlightReason": "Không gian bờ biển phía đông thành phố",
+    "featuredScore": 93,
+    "markerAsset": "bai-bien-my-khe.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Da+Nang+Vietnam",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Da+Nang+Vietnam",
+    "coordinateNote": "Điểm ghim tham chiếu khu vực bãi biển; bờ biển kéo dài, không đại diện cho mọi lối xuống biển.",
+    "photo": "/photos/bai-bien-my-khe.jpg",
+    "photoCredit": "Christophe95 — Wikimedia Commons (CC BY-SA 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Boats_on_My_Khe_Beach_1.jpg"
+  },
+  {
+    "id": "cong-vien-bien-dong",
+    "name": "Công viên Biển Đông",
+    "position": [
+      16.0703173,
+      108.2458368
+    ],
+    "location": "Đường Võ Nguyên Giáp, An Hải, Đà Nẵng",
+    "category": "park",
+    "tags": [
+      "công viên",
+      "biển",
+      "không gian công cộng",
+      "đi bộ",
+      "tượng đài"
+    ],
+    "description": "Công viên công cộng ven biển Đà Nẵng, hướng ra bờ biển và khu vực bán đảo Sơn Trà.",
+    "detail": "Dạo trong không gian công cộng và quan sát cảnh quan biển. Sự kiện, hoạt động tập trung hoặc quyền tiếp cận có thể thay đổi theo thông báo tại chỗ.",
+    "suggestedActivities": [
+      "Đi bộ trong công viên và quan sát bờ biển từ khu vực an toàn.",
+      "Tìm hiểu các tượng đài và không gian sinh hoạt công cộng."
+    ],
+    "highlightReason": "Công viên công cộng ven biển",
+    "featuredScore": 88,
+    "markerAsset": "cong-vien-bien-dong.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=East+Sea+Park+Da+Nang+Vietnam",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=East+Sea+Park+Da+Nang+Vietnam",
+    "photo": "/photos/cong-vien-bien-dong.jpg",
+    "photoCredit": "Leanh2001 — Wikimedia Commons (CC BY-SA 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:C%C3%B4ng_vi%C3%AAn_Bi%E1%BB%83n_%C4%90%C3%B4ng_%C4%90%C3%A0_N%E1%BA%B5ng.jpg"
+  },
+  {
+    "id": "bien-man-thai-sup",
+    "name": "Bãi biển Mân Thái – chèo SUP",
+    "position": [
+      16.0890212,
+      108.2495942
+    ],
+    "location": "Bãi tắm Mân Thái, đường Hoàng Sa, Sơn Trà, Đà Nẵng",
+    "category": "beach",
+    "tags": [
+      "biển",
+      "SUP",
+      "chèo ván",
+      "ngoài trời",
+      "thể thao nước"
+    ],
+    "description": "Bãi tắm Mân Thái trên bán đảo Sơn Trà; khu vực ven biển có thể được dùng cho hoạt động ngoài trời theo điều kiện thực tế.",
+    "detail": "Điểm ghim xác định bãi tắm Mân Thái, không phải điểm hẹn của một nhà tổ chức SUP cụ thể. Hãy xác nhận đơn vị, điểm tập trung, thời tiết và tình trạng hoạt động trước khi tham gia; không xuống nước khi có cảnh báo.",
+    "suggestedActivities": [
+      "Tìm hiểu hoạt động chèo SUP do đơn vị tổ chức hợp pháp cung cấp; điểm hẹn và khả năng tổ chức cần xác nhận trực tiếp.",
+      "Quan sát bờ biển và chỉ xuống nước khi điều kiện, thiết bị an toàn và hướng dẫn tại chỗ cho phép."
+    ],
+    "highlightReason": "Bãi biển Sơn Trà cho hoạt động ngoài trời",
+    "featuredScore": 82,
+    "markerAsset": "bien-man-thai-sup.svg",
+    "sourceUrl": "https://danangfantasticity.com/vi/ban-dao-son-tra",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Man+Thai+Beach+Da+Nang+Vietnam",
+    "activityAvailability": "unknown",
+    "verificationNote": "Chưa xác minh được điểm hẹn SUP cố định hoặc đơn vị đang hoạt động tại đúng bãi tắm này.",
+    "photo": "/photos/bien-man-thai-sup.jpg",
+    "photoCredit": "Alexkom000 — Wikimedia Commons (CC BY 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2024-11-30_Da_Nang,_Tho_Quang_Beach.jpg"
+  },
+  {
+    "id": "chua-linh-ung-bai-but",
+    "name": "Chùa Linh Ứng – Bãi Bụt, Sơn Trà",
+    "position": [
+      16.1002055,
+      108.2778816
+    ],
+    "location": "Khu vực Bãi Bụt, bán đảo Sơn Trà, Đà Nẵng",
+    "category": "pagoda",
+    "tags": [
+      "chùa",
+      "văn hóa",
+      "tâm linh",
+      "Sơn Trà",
+      "cảnh quan"
+    ],
+    "description": "Chùa Linh Ứng tại khu vực Bãi Bụt, bán đảo Sơn Trà, hướng nhìn ra biển.",
+    "detail": "Tham quan không gian chùa với thái độ tôn kính, ăn mặc phù hợp và làm theo nội quy. Đây là chùa Linh Ứng Bãi Bụt trên Sơn Trà, không phải chùa Linh Ứng Ngũ Hành Sơn hay Bà Nà.",
+    "suggestedActivities": [
+      "Quan sát kiến trúc và cảnh quan núi – biển từ khu vực được phép.",
+      "Tìm hiểu không gian thờ tự và giữ yên tĩnh, tôn trọng nội quy."
+    ],
+    "highlightReason": "Không gian văn hóa bên biển Sơn Trà",
+    "featuredScore": 92,
+    "markerAsset": "chua-linh-ung-bai-but.svg",
+    "sourceUrl": "https://danangfantasticity.com/chua-linh-ung-bai-but-da-nang",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Linh+Ung+Temple+Bai+But+Son+Tra+Da+Nang",
+    "photo": "/photos/chua-linh-ung-bai-but.jpg",
+    "photoCredit": "Alexkom000 — Wikimedia Commons (CC BY 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2024-12-07_Linh_Ung_Pagoda_2.jpg"
+  },
+  {
+    "id": "dinh-ban-co",
+    "name": "Đỉnh Bàn Cờ",
+    "position": [
+      16.1189365,
+      108.2719826
+    ],
+    "location": "Đỉnh Bàn Cờ, bán đảo Sơn Trà, Đà Nẵng",
+    "category": "nature",
+    "tags": [
+      "núi",
+      "thiên nhiên",
+      "đi bộ",
+      "ngắm cảnh",
+      "Sơn Trà"
+    ],
+    "description": "Điểm ngắm cảnh trên cao tại bán đảo Sơn Trà, nhìn về thành phố và vùng biển xung quanh.",
+    "detail": "Đường lên có đoạn dốc và bậc thang. Tuân thủ tuyến và khung giờ được cơ quan quản lý cho phép; điều kiện đường, thời tiết và phương tiện tiếp cận cần kiểm tra trước chuyến đi.",
+    "suggestedActivities": [
+      "Ngắm cảnh thành phố từ khu vực được phép tiếp cận.",
+      "Đi bộ trên lối an toàn, đánh giá sức khỏe và điều kiện thời tiết trước khi lên cao."
+    ],
+    "highlightReason": "Góc nhìn cao trên bán đảo Sơn Trà",
+    "featuredScore": 89,
+    "markerAsset": "dinh-ban-co.svg",
+    "sourceUrl": "https://danangfantasticity.com/vi/ban-dao-son-tra",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Ban+Co+Peak+Son+Tra+Da+Nang",
+    "photo": "/photos/dinh-ban-co.jpg",
+    "photoCredit": "Christophe95 — Wikimedia Commons (CC BY-SA 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Da_Nang_Bay_seen_from_the_Son_Tra_Mountain.jpg"
+  },
+  {
+    "id": "hai-van-quan",
+    "name": "Hải Vân Quan",
+    "position": [
+      16.1877377,
+      108.1312942
+    ],
+    "location": "Di tích Hải Vân Quan trên đỉnh đèo Hải Vân, ranh giới Đà Nẵng – Huế",
+    "category": "heritage",
+    "tags": [
+      "di tích",
+      "lịch sử",
+      "đèo",
+      "cảnh quan",
+      "kiến trúc"
+    ],
+    "description": "Cửa ải cổ trên đỉnh đèo Hải Vân, di tích lịch sử nhìn ra núi và biển miền Trung.",
+    "detail": "Điểm ghim hướng tới Hải Vân Quan, không phải toàn tuyến đèo. Tiếp cận bằng đường đèo cần chú ý giao thông, thời tiết và biển báo; không dừng xe tại vị trí nguy hiểm.",
+    "suggestedActivities": [
+      "Quan sát cổng thành và dấu tích kiến trúc từ khu vực được phép tham quan.",
+      "Ngắm cảnh núi – biển tại điểm dừng an toàn, không đi vào lòng đường."
+    ],
+    "highlightReason": "Cửa ải lịch sử trên đỉnh đèo",
+    "featuredScore": 86,
+    "markerAsset": "hai-van-quan.svg",
+    "sourceUrl": "https://danangfantasticity.com/di-san-canh-quan/deo-hai-van-thien-ha-de-nhat-hung-quan",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Hai+Van+Quan+Da+Nang+Vietnam",
+    "photo": "/photos/hai-van-quan.jpg",
+    "photoCredit": "David McKelvey — Wikimedia Commons (CC BY 2.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BA%A3i_V%C3%A2n_Gate,_H%E1%BA%A3i_V%C3%A2n_Pass,_Vietnam_(6944533488).jpg"
+  },
+  {
+    "id": "ngu-hanh-son",
+    "name": "Danh thắng Ngũ Hành Sơn",
+    "position": [
+      16.0037104,
+      108.2631605
+    ],
+    "location": "81 Huyền Trân Công Chúa, khu danh thắng Ngũ Hành Sơn, Đà Nẵng",
+    "category": "heritage",
+    "tags": [
+      "danh thắng",
+      "núi",
+      "hang động",
+      "chùa",
+      "di sản",
+      "đi bộ"
+    ],
+    "description": "Quần thể núi đá vôi, hang động, chùa và điểm nhìn cảnh quan ở phía nam Đà Nẵng.",
+    "detail": "Khu tham quan gồm nhiều địa điểm và lối bậc thang; điểm ghim tham chiếu khu danh thắng/lối tiếp cận chung, không đại diện từng hang động. Tuân thủ hướng dẫn, nội quy và sức khỏe cá nhân khi leo bậc.",
+    "suggestedActivities": [
+      "Khám phá các lối tham quan, hang động và công trình văn hóa đang mở cửa.",
+      "Dành thời gian quan sát địa hình đá và cảnh quan từ lối được phép."
+    ],
+    "highlightReason": "Quần thể núi đá, hang động và chùa",
+    "featuredScore": 95,
+    "markerAsset": "ngu-hanh-son.svg",
+    "sourceUrl": "https://danangfantasticity.com/danh-thang-ngu-hanh-son",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Marble+Mountains+Ngu+Hanh+Son+Da+Nang+Vietnam",
+    "photo": "/photos/ngu-hanh-son.jpg",
+    "photoCredit": "Kuroczynski — Wikimedia Commons (CC BY-SA 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Da_Nang_Marble_Mountains_2020_IMG_4008.jpg"
+  },
+  {
+    "id": "cau-vang-ba-na-hills",
+    "name": "Bà Nà Hills – khu vực Cầu Vàng",
+    "position": [
+      15.9949375,
+      107.9965625
+    ],
+    "location": "Cầu Vàng, khu du lịch Bà Nà Hills, Hòa Vang, Đà Nẵng",
+    "category": "landmark",
+    "tags": [
+      "cầu",
+      "kiến trúc",
+      "ngắm cảnh",
+      "Bà Nà",
+      "đi bộ"
+    ],
+    "description": "Cầu đi bộ trên cao tại khu du lịch Bà Nà Hills, nổi bật với kết cấu tạo hình đôi bàn tay nâng cầu.",
+    "detail": "Điểm ghim nằm tại Cầu Vàng bên trong khu du lịch, không phải cổng vào Bà Nà Hills. Việc tiếp cận phụ thuộc vé, tuyến cáp và quy định hiện hành của đơn vị quản lý; hãy kiểm tra trực tiếp trước chuyến đi.",
+    "suggestedActivities": [
+      "Quan sát kết cấu cây cầu và cảnh quan núi từ khu vực được phép.",
+      "Đi bộ trên cầu theo luồng tham quan, không vượt rào hoặc gây cản trở."
+    ],
+    "highlightReason": "Cầu đi bộ trên cao với kiến trúc đặc trưng",
+    "featuredScore": 96,
+    "markerAsset": "cau-vang-ba-na-hills.svg",
+    "sourceUrl": "https://sunworld.vn/vi/banahills",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Cau+Vang+Golden+Bridge+Ba+Na+Hills+Da+Nang",
+    "photo": "/photos/cau-vang-ba-na-hills.jpg",
+    "photoCredit": "Vivu Vietnam — Wikimedia Commons (CC BY-SA 4.0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Bridge_above_the_clouds_Ba_Na_Hills_Da_Nang_Vietnam.jpg"
+  },
+  {
+    "id": "bai-bien-nam-o",
+    "name": "Bãi biển Nam Ô",
+    "position": [
+      16.1190151,
+      108.1303016
+    ],
+    "location": "Bãi tắm Nam Ô, khu vực Nam Ô, Đà Nẵng",
+    "category": "beach",
+    "tags": [
+      "biển",
+      "bãi đá",
+      "thiên nhiên",
+      "cảnh quan",
+      "đi bộ"
+    ],
+    "description": "Bãi biển phía bắc Đà Nẵng với bờ biển và khu vực đá ven nước.",
+    "detail": "Điểm ghim tham chiếu Bãi Tắm Nam Ô trên bản đồ. Địa hình đá, thủy triều và sóng có thể thay đổi; chỉ quan sát từ lối an toàn, không đi lên đá trơn hoặc xuống nước khi có cảnh báo.",
+    "suggestedActivities": [
+      "Quan sát đường bờ và cảnh quan tự nhiên từ khu vực công cộng.",
+      "Tìm hiểu cảnh quan ven biển; tránh làm hư hại hệ sinh thái và tuân thủ cảnh báo tại chỗ."
+    ],
+    "highlightReason": "Bờ biển tự nhiên phía bắc Đà Nẵng",
+    "featuredScore": 83,
+    "markerAsset": "bai-bien-nam-o.svg",
+    "sourceUrl": "https://www.google.com/maps/search/?api=1&query=Bai+Nam+O+Da+Nang+Vietnam+beach",
+    "coordinateSourceUrl": "https://www.google.com/maps/search/?api=1&query=Bai+Nam+O+Da+Nang+Vietnam+beach",
+    "coordinateNote": "Ghim tại bản đồ Bãi Tắm Nam Ô; không phải điểm hẹn tour hay điểm xuống nước bảo đảm an toàn.",
+    "photo": "/photos/bai-bien-nam-o.jpg",
+    "photoCredit": "Bánhmỳchảo — Wikimedia Commons (CC0)",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Bi%E1%BB%83n_Nam_%C3%94.jpg"
+  }
+]

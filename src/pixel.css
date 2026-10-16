@@ -1,0 +1,561 @@
+/* ============================================================
+   DANA QUEST — Pixel UI Kit (16-bit JRPG / cozy pixel game)
+   Tự thiết kế bằng CSS thuần. Không dùng asset ngoài.
+   Palette "biển Đà Nẵng": teal biển, cát vàng, cam hoàng hôn,
+   xanh lá dừa, mực tàu.
+   ============================================================ */
+:root {
+  --px-ink: #22333b;
+  --px-ink-soft: #43565f;
+  --px-cream: #fffdf4;
+  --px-parchment: #fdf3d8;
+  --px-sea: #1f8a99;
+  --px-sea-deep: #0f6f7f;
+  --px-sea-ink: #0b4f5c;
+  --px-foam: #cdeff2;
+  --px-sky: #8fd8f2;
+  --px-sand: #f2dfae;
+  --px-sand-deep: #ddb968;
+  --px-sunset: #ff9046;
+  --px-coral: #e8604c;
+  --px-leaf: #63a86b;
+  --px-leaf-deep: #3f7d4e;
+  --px-coin: #ffca49;
+  --px-coin-deep: #c98f22;
+  --px-wood: #8a5a33;
+  --px-danger: #d6483b;
+  --px-cut: polygon(
+    0 8px, 4px 8px, 4px 4px, 8px 4px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 4px, calc(100% - 4px) 4px, calc(100% - 4px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 4px) calc(100% - 8px), calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 8px) calc(100% - 4px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 4px), 4px calc(100% - 4px), 4px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+  --px-font-display: 'Handjet', 'VT323', ui-monospace, monospace;
+  --px-font-body: 'VT323', 'Handjet', ui-monospace, monospace;
+  --px-font-ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.app-shell {
+  font-family: var(--px-font-ui);
+  color: var(--px-ink);
+}
+
+/* ---------- nền body: caro pixel mờ ---------- */
+body {
+  background-color: #dfe9e4 !important;
+  background-image:
+    repeating-conic-gradient(#d3e2da 0% 25%, transparent 0% 50%);
+  background-size: 24px 24px;
+}
+
+/* ---------- khung app: viền mực dày kiểu máy game ---------- */
+.app-shell {
+  border: 4px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: 8px 8px 0 rgba(34, 51, 59, 0.22) !important;
+  background: var(--px-cream) !important;
+}
+@media (max-width: 767px) {
+  .app-shell { border: 0 !important; box-shadow: none !important; }
+}
+
+/* ---------- chữ: Handjet cho tiêu đề/nút, VT323 cho thoại ---------- */
+.app-shell h1, .app-shell h2, .app-shell h3,
+.game-logo, .game-button, .primary-button, .blue-button,
+.bottom-nav a, .completion-ribbon, .giant-coin span {
+  font-family: var(--px-font-display);
+  letter-spacing: 0.02em;
+}
+.app-shell h1 { font-size: 30px; line-height: 1.15; }
+.app-shell h2 { font-size: 24px; line-height: 1.2; }
+
+/* ============================================================
+   NÚT PIXEL — bóng cứng, nhấn chìm khi bấm
+   ============================================================ */
+.game-button, .primary-button, .blue-button,
+.quest-page button:not(.primary-button):not(.cancel-quest-button):not(.shutter-button),
+.filter-bar button, .confirm-actions button,
+.reward-card > button, .sheet-actions .primary-button,
+.sheet-actions .secondary-button, .destination-option,
+.camera-page > div > button {
+  font-family: var(--px-font-display) !important;
+  font-weight: 700 !important;
+  font-size: 19px !important;
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  filter: drop-shadow(0 4px 0 var(--px-ink));
+  box-shadow: inset -4px -4px 0 rgba(34, 51, 59, 0.16), inset 4px 4px 0 rgba(255, 255, 255, 0.35) !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.05s steps(2), filter 0.05s steps(2);
+}
+.game-button, .primary-button, .camera-page > div > button,
+.photo-complete-bar button, .sheet-actions .primary-button {
+  background: var(--px-coin) !important;
+  color: var(--px-ink) !important;
+}
+.blue-button, .reward-card > button {
+  background: var(--px-sea) !important;
+  color: #fff !important;
+}
+.quest-page button:not(.primary-button):not(.cancel-quest-button):not(.shutter-button),
+.filter-bar button, .sheet-actions .secondary-button,
+.confirm-actions button:not(.confirm-action) {
+  background: var(--px-cream) !important;
+  color: var(--px-ink) !important;
+}
+.confirm-actions .confirm-action { background: var(--px-leaf-deep) !important; color: #fff !important; }
+.confirm-actions .confirm-action.danger { background: var(--px-danger) !important; }
+.cancel-quest-button {
+  font-family: var(--px-font-display) !important;
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  filter: drop-shadow(0 4px 0 var(--px-ink));
+  background: #ffd9d2 !important;
+}
+.game-button:hover, .primary-button:hover, .blue-button:hover,
+button:hover:not(:disabled) { filter: drop-shadow(0 4px 0 var(--px-ink)) brightness(1.06); }
+.game-button:active, .primary-button:active, .blue-button:active,
+button:active:not(:disabled) {
+  transform: translateY(4px);
+  filter: drop-shadow(0 0 0 var(--px-ink)) !important;
+}
+button:disabled { filter: grayscale(0.7) drop-shadow(0 4px 0 #6b7a80) !important; }
+
+/* ============================================================
+   PANEL / THẺ — khung thoại RPG
+   ============================================================ */
+.quest-panel, .place-card, .reward-card, .memory-card,
+.route-instruction, .route-sheet, .destination-sheet,
+.utility-panel, .detail-sheet, .notice, .travel-tip,
+.image-check, .wallet-strip, .player-card, .confirm-dialog,
+.album-tabs, .reward-history > div, .place-facts {
+  background: var(--px-cream) !important;
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  filter: drop-shadow(5px 5px 0 rgba(34, 51, 59, 0.16));
+  box-shadow: none !important;
+}
+.quest-panel h2, .reward-info h2, .memory-card h2 { font-family: var(--px-font-display); }
+
+/* thẻ nhiệm vụ: dải màu phân loại ở cạnh trái */
+.mission-list .quest-panel {
+  border-left: 10px solid var(--px-sea) !important;
+  position: relative;
+}
+.mission-list .quest-panel::before {
+  content: 'NHIỆM VỤ';
+  position: absolute;
+  top: 8px; right: 10px;
+  font-family: var(--px-font-display);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--px-sea-deep);
+  background: var(--px-foam);
+  padding: 2px 8px;
+  border: 2px solid var(--px-ink);
+}
+
+/* khung thoại RPG cho confirm dialog */
+.confirm-backdrop { background: rgba(18, 42, 48, 0.72) !important; }
+.confirm-dialog { text-align: left !important; position: relative; }
+.confirm-dialog::after {
+  content: '▼';
+  position: absolute;
+  right: 16px; bottom: 10px;
+  font-size: 18px; color: var(--px-sea-deep);
+  animation: px-blink 1s steps(2) infinite;
+}
+.confirm-symbol {
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  border: 3px solid var(--px-ink);
+  font-family: var(--px-font-display);
+}
+@keyframes px-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .confirm-dialog::after { animation: none; } }
+
+/* dải phân cách pixel */
+.px-divider {
+  height: 8px; margin: 14px 0;
+  background: repeating-linear-gradient(90deg, var(--px-ink) 0 8px, transparent 8px 16px);
+  border: 0;
+}
+
+/* ============================================================
+   THANH TIẾN ĐỘ PIXEL
+   ============================================================ */
+progress {
+  -webkit-appearance: none; appearance: none;
+  height: 18px !important;
+  border: 3px solid var(--px-ink);
+  background: #e8e2cf !important;
+  border-radius: 0 !important;
+}
+progress::-webkit-progress-bar { background: #e8e2cf; }
+progress::-webkit-progress-value {
+  background: repeating-linear-gradient(90deg, var(--px-leaf) 0 8px, var(--px-leaf-deep) 8px 16px);
+}
+progress::-moz-progress-bar {
+  background: repeating-linear-gradient(90deg, var(--px-leaf) 0 8px, var(--px-leaf-deep) 8px 16px);
+}
+
+/* ============================================================
+   INPUT / SELECT PIXEL
+   ============================================================ */
+.filter-bar input, .filter-bar select,
+.quest-page select, .camera-page input,
+.auth-card form input, .account-edit-form input, .account-edit-form select {
+  font-family: var(--px-font-body) !important;
+  font-size: 19px !important;
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: inset 3px 3px 0 #e6e0cc !important;
+  padding: 8px 10px !important;
+}
+.distance-tools summary, .map-tools summary, .more-info summary {
+  font-family: var(--px-font-display);
+  font-size: 17px !important;
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  background: var(--px-parchment) !important;
+  filter: drop-shadow(0 3px 0 var(--px-ink));
+}
+.album-tabs { padding: 6px; gap: 6px; }
+.album-tabs button {
+  font-family: var(--px-font-display) !important;
+  font-size: 18px !important;
+  border: 3px solid transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+.album-tabs button[aria-pressed='true'] {
+  border-color: var(--px-ink) !important;
+  background: var(--px-coin) !important;
+  clip-path: var(--px-cut);
+  color: var(--px-ink) !important;
+}
+
+/* ============================================================
+   BOTTOM NAV — thanh tab pixel
+   ============================================================ */
+.bottom-nav {
+  background: var(--px-sea-ink) !important;
+  border-top: 4px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  padding: 6px 4px max(6px, env(safe-area-inset-bottom)) !important;
+  gap: 4px;
+}
+.bottom-nav a {
+  color: var(--px-foam) !important;
+  font-size: 15px !important;
+  font-weight: 700;
+  border: 3px solid transparent;
+  border-radius: 0 !important;
+  background: transparent !important;
+  text-transform: uppercase;
+}
+.bottom-nav a svg { image-rendering: pixelated; }
+.bottom-nav a[aria-current='page'] {
+  color: var(--px-ink) !important;
+  background: var(--px-coin) !important;
+  border-color: var(--px-ink);
+  clip-path: var(--px-cut);
+}
+
+/* ============================================================
+   WELCOME / ONBOARDING
+   ============================================================ */
+.onboarding { background: var(--px-sea-ink) !important; }
+.welcome-game, .avatar-card {
+  border: 4px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  filter: drop-shadow(8px 8px 0 rgba(0, 0, 0, 0.25));
+  overflow: hidden;
+}
+.app-shell .welcome-game { background: linear-gradient(#2e3d6e 0%, #4a4a86 30%, #d96a55 62%, #ff9046 78%, #1f8a99 78.5%, #0f6f7f 100%) !important; }
+.welcome-copy .game-kicker { display: none; }
+.app-shell .game-logo { width: 250px; }
+.game-logo svg {
+  filter: drop-shadow(3px 0 0 var(--px-ink)) drop-shadow(-3px 0 0 var(--px-ink))
+    drop-shadow(0 -3px 0 var(--px-ink)) drop-shadow(0 4px 0 var(--px-ink)) !important;
+}
+.welcome-copy p {
+  font-family: var(--px-font-body);
+  font-size: 24px !important;
+  color: #fff !important;
+  text-shadow: 2px 2px 0 var(--px-ink);
+}
+.scenery { position: relative; height: min(36svh, 330px); overflow: hidden; border-top: 4px solid var(--px-ink); }
+.px-scene-bg { position: absolute; inset: 0; }
+.welcome-explorer, .scene-label { z-index: 1; }
+.welcome-actions { background: var(--px-sea-ink) !important; border-top: 4px solid var(--px-ink); }
+.quiet-link { font-family: var(--px-font-display); font-size: 17px !important; color: var(--px-foam) !important; }
+.scene-label { font-family: var(--px-font-display); font-size: 13px !important; letter-spacing: 0.2em !important; }
+
+/* chọn avatar */
+.avatar-card { background: var(--px-parchment) !important; }
+.avatar-options button {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  background: var(--px-cream) !important;
+  filter: drop-shadow(0 3px 0 var(--px-ink));
+}
+.avatar-options button[aria-pressed='true'] {
+  background: var(--px-foam) !important;
+  border-color: var(--px-sea-deep) !important;
+}
+.avatar-stage > button {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  background: var(--px-coin) !important;
+  filter: drop-shadow(0 3px 0 var(--px-ink));
+}
+.avatar-spotlight { background: radial-gradient(ellipse at center, #fff3cf 0%, #ffe9a800 62%) !important; }
+
+/* ============================================================
+   BẢN ĐỒ — giữ tile Leaflet, pixel hoá chrome xung quanh
+   ============================================================ */
+.explore-page { background: var(--px-cream) !important; }
+.map-panel .map {
+  border: 4px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  filter: drop-shadow(6px 6px 0 rgba(34, 51, 59, 0.2));
+}
+.leaflet-bar a {
+  border-radius: 0 !important;
+  border: 2px solid var(--px-ink) !important;
+  font-family: var(--px-font-display);
+}
+.illustrated-pin b {
+  font-family: var(--px-font-display);
+  font-size: 13px !important;
+  background: var(--px-cream) !important;
+  border: 2px solid var(--px-ink);
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  box-shadow: none !important;
+  padding: 4px 8px !important;
+  position: relative;
+}
+.illustrated-pin b::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: -8px;
+  width: 8px; height: 8px;
+  background: var(--px-cream);
+  border-right: 2px solid var(--px-ink);
+  border-bottom: 2px solid var(--px-ink);
+  transform: translateX(-50%) rotate(45deg);
+}
+.map-search-bar {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  filter: drop-shadow(0 4px 0 rgba(34, 51, 59, 0.25));
+}
+.map-search-bar input { font-family: var(--px-font-body); font-size: 19px !important; }
+.explore-heading h1 { font-family: var(--px-font-display); font-size: 20px !important; }
+.distance-tools[open] {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+}
+.suggestion-chip {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  background: var(--px-parchment) !important;
+  font-family: var(--px-font-display);
+  font-size: 15px !important;
+}
+.destination-dock {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  background: var(--px-cream) !important;
+}
+
+/* ============================================================
+   TRANG ĐIỂM ĐẾN / NHIỆM VỤ
+   ============================================================ */
+.quest-page { background: var(--px-cream); }
+.quest-nav a, .quest-links a { font-family: var(--px-font-display); font-size: 16px !important; }
+.arrival-bubble {
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  border: 3px solid var(--px-ink);
+  font-family: var(--px-font-display);
+  filter: drop-shadow(3px 3px 0 rgba(34, 51, 59, 0.3));
+}
+.detail-sheet { border-bottom: 0 !important; }
+.destination-hero { border-bottom: 4px solid var(--px-ink); }
+.round-back {
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  border: 3px solid var(--px-ink) !important;
+  font-family: var(--px-font-display);
+}
+.tag-row span {
+  border-radius: 0 !important;
+  border: 2px solid var(--px-ink);
+  font-family: var(--px-font-display);
+  font-size: 13px !important;
+}
+.image-check { font-family: var(--px-font-body); font-size: 19px !important; }
+.image-check.pass { background: #d8efcf !important; }
+.image-check.fail { background: #ffd9d2 !important; }
+.image-check.review { background: #ffecbe !important; }
+.success { font-family: var(--px-font-display); font-size: 18px !important; }
+
+/* ============================================================
+   CAMERA — khung ngắm pixel
+   ============================================================ */
+.camera-page { background: #141d24 !important; }
+.camera-page h1 { font-family: var(--px-font-display); color: var(--px-coin) !important; font-size: 24px !important; }
+.camera-illustration, .immersive-camera > .camera-preview {
+  border: 4px solid var(--px-coin) !important;
+  border-radius: 0 !important;
+  position: relative;
+}
+.camera-illustration::before, .camera-illustration::after {
+  content: '';
+  position: absolute;
+  width: 26px; height: 26px;
+  border: 5px solid #fff;
+  z-index: 2;
+}
+.camera-illustration::before { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.camera-illustration::after { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+.shutter-button {
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  border: 4px solid #fff !important;
+  font-family: var(--px-font-display);
+}
+.camera-page .notice { background: #1e2c36 !important; color: var(--px-foam) !important; }
+
+/* ============================================================
+   ĂN MỪNG
+   ============================================================ */
+.celebration-screen { background: #12262e !important; }
+.celebration-content h1 { font-family: var(--px-font-display); font-size: 40px !important; }
+.completion-ribbon {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  font-size: 22px !important;
+  filter: drop-shadow(0 4px 0 var(--px-ink));
+}
+.celebration-content p { font-family: var(--px-font-body); font-size: 21px !important; }
+
+/* ============================================================
+   ALBUM / CỬA HÀNG
+   ============================================================ */
+.memory-card { padding-bottom: 10px; }
+.memory-card .mission-photo, .memory-card .landmark-art { border-radius: 0 !important; border-bottom: 3px solid var(--px-ink); }
+.memory-add {
+  border: 3px dashed var(--px-ink) !important;
+  border-radius: 0 !important;
+  background: var(--px-parchment) !important;
+  font-family: var(--px-font-display);
+  font-size: 18px !important;
+}
+.wallet-strip strong {
+  font-family: var(--px-font-display);
+  font-size: 20px !important;
+  border: 3px solid var(--px-ink);
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  background: var(--px-coin) !important;
+  color: var(--px-ink) !important;
+}
+.reward-info strong { font-family: var(--px-font-display); font-size: 19px !important; color: var(--px-coin-deep); }
+.redeemed-label { border-radius: 0 !important; border: 2px solid var(--px-ink); font-family: var(--px-font-display); font-size: 15px !important; }
+.reward-missing { font-family: var(--px-font-display); font-size: 14px !important; }
+
+/* ============================================================
+   CHỈ ĐƯỜNG
+   ============================================================ */
+.route-instruction > b { font-family: var(--px-font-display); }
+.route-sheet h1 { font-family: var(--px-font-display); }
+.demo-tag { font-family: var(--px-font-display); font-size: 13px !important; letter-spacing: 0.14em !important; }
+
+/* ============================================================
+   AUTH / TÀI KHOẢN
+   ============================================================ */
+.auth-card, .account-hero-card {
+  background: var(--px-cream) !important;
+  border: 4px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  filter: drop-shadow(6px 6px 0 rgba(34, 51, 59, 0.18));
+}
+.auth-screen { background: var(--px-sea-ink) !important; }
+.auth-tabs { gap: 8px; }
+.auth-tabs button {
+  font-family: var(--px-font-display) !important;
+  font-size: 18px !important;
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  background: var(--px-parchment) !important;
+  color: var(--px-ink) !important;
+}
+.auth-tabs button[aria-pressed='true'], .auth-tabs button[aria-selected='true'] {
+  background: var(--px-coin) !important;
+  filter: drop-shadow(0 3px 0 var(--px-ink));
+}
+.account-edit-form button[type='submit'] {
+  font-family: var(--px-font-display) !important;
+  font-size: 20px !important;
+}
+.auth-link-button { font-family: var(--px-font-display) !important; font-size: 17px !important; }
+
+/* player card trên bản đồ */
+.player-card .player-coins {
+  font-family: var(--px-font-display);
+  font-size: 16px !important;
+  border: 2px solid var(--px-ink);
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+}
+.player-card strong { font-family: var(--px-font-display); font-size: 16px !important; }
+
+/* thông báo */
+.toast {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  font-family: var(--px-font-body);
+  font-size: 19px !important;
+  background: var(--px-sea-ink) !important;
+  color: #fff !important;
+  filter: drop-shadow(0 4px 0 rgba(34, 51, 59, 0.35));
+}
+
+/* active mission indicator */
+.active-mission-indicator {
+  border: 3px solid var(--px-ink) !important;
+  border-radius: 0 !important;
+  clip-path: var(--px-cut);
+  font-family: var(--px-font-display);
+  background: var(--px-coral) !important;
+  color: #fff !important;
+  filter: drop-shadow(0 4px 0 var(--px-ink));
+}
+
+/* ảnh thật điểm đến */
+.destination-photo { width: 100%; height: 100%; display: block; object-fit: cover; }
+.destination-hero .destination-photo, .arrival-hero .destination-photo { position: absolute; inset: 0; }
+.photo-credit { position: absolute; bottom: 7px; right: 10px; color: #fff; font-size: 9px; font-family: var(--px-font-body); background: rgba(34, 51, 59, 0.72); padding: 3px 6px; border: 2px solid var(--px-ink); max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.destination-hero, .arrival-hero { position: relative; }

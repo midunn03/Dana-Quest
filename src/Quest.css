@@ -1,0 +1,35 @@
+.quest-page { max-width: 1000px; margin: auto; padding: 24px; }
+.quest-page h1 { font-size: clamp(2rem, 6vw, 3.4rem); }
+.quest-page p { font-size: 16px; margin: 10px 0; overflow-wrap: anywhere; }
+.quest-nav { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.quest-page a, .quest-links a { color: #163e35; text-underline-offset: 4px; }
+.quest-links { display: flex; flex-wrap: wrap; gap: 18px; margin: 18px 0; }
+.quest-panel { padding: 20px; margin: 20px 0; background: white; border: 1px solid #d4ded5; border-radius: 16px; }
+.quest-panel h2 { font-size: 21px; margin: 0 0 12px; }
+.quest-panel h3 { font-size: 18px; }
+.quest-page button:not(.primary-button), .filter-bar button { min-height: 44px; padding: 10px 16px; margin-top: 8px; border: 1px solid #366f65; border-radius: 10px; background: #eef3eb; color: #163e35; font: inherit; cursor: pointer; }
+button:disabled { opacity: 0.55; cursor: not-allowed !important; }
+.quest-page input[type='checkbox'] { width: 24px; height: 24px; vertical-align: middle; accent-color: #163e35; cursor: pointer; }
+.quest-page progress { width: 100%; height: 20px; accent-color: #366f65; }
+.success { color: #246237; font-weight: 700; }
+.notice { background: #fff1db; padding: 12px; border-radius: 10px; }
+.error { color: #8d2525; }
+.muted { color: #526b65; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin-bottom: 12px; }
+.filter-bar label { display: grid; gap: 8px; flex: 1 1 200px; }
+.filter-bar input, .filter-bar select { width: 100%; min-height: 44px; font: inherit; color: #163e35; background: white; border: 1px solid #aebfaf; border-radius: 8px; padding: 10px; }
+.filter-bar + div { margin-bottom: 20px; }
+.distance-label { display: block; color: #526b65; }
+.explore-nav { flex-wrap: wrap; }
+.mission-photo { display: block; width: 100%; max-height: 340px; object-fit: contain; border-radius: 10px; margin: 12px 0; background: #eef3eb; }
+.photo-input { display: block; margin: 16px 0; font-weight: 600; }
+.photo-input input { display: block; width: 100%; margin-top: 8px; font: inherit; font-size: 14px; }
+.mission-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.mission-list .quest-panel { margin: 0; }
+@media (max-width: 650px) { .quest-page { padding: 16px; } .mission-list { grid-template-columns: minmax(0, 1fr); } }
+.image-check { padding: 10px 12px; border-radius: 10px; background: #eef3eb; }.image-check.pass { color: #246237; background: #e4f3e2; }.image-check.fail { color: #8d2525; background: #fde9e6; }.image-check.review { color: #74520c; background: #fff2ce; }
+.photo-complete-bar { position: sticky; z-index: 5; bottom: -1px; margin: 14px -4px -4px; padding: 10px 4px max(10px,env(safe-area-inset-bottom)); background: linear-gradient(transparent,#fff 18%); }
+.photo-complete-bar button { width: 100%; min-height: 48px; font-weight: 800; }
+.camera-page .photo-complete-bar { bottom: -1px; margin-inline: -16px; padding: 16px 16px max(16px,env(safe-area-inset-bottom)); background: linear-gradient(transparent,#20252b 22%); }
+.camera-page .photo-complete-bar button { background: #ffca49; color: #34372d; }
+.cancel-quest-button { color: #9b302b!important; background: #fdf0ed!important; }

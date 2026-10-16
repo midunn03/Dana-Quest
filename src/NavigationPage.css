@@ -1,0 +1,19 @@
+﻿.navigation-screen .live-route-sheet {
+  height: 210px; max-height: 72%; padding: 0 16px 16px;
+  display: flex; flex-direction: column; overflow: hidden;
+  transition: height .25s ease;
+}
+.navigation-screen .live-route-sheet.expanded { height: 72%; }
+.navigation-screen .live-route-sheet.dragging { transition: none; }
+.route-sheet-handle {
+  flex: 0 0 32px; width: 100%; display: grid; place-items: center;
+  padding: 0; border: 0; background: transparent; cursor: grab; touch-action: none;
+}
+.route-sheet-handle span { width: 44px; height: 5px; border-radius: 99px; background: #b8c7c1; }
+.route-sheet-handle:active { cursor: grabbing; }
+.route-sheet-content { overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
+.live-route-sheet .route-distance { font-size: 16px; margin: 12px 0 18px; }
+.navigation-player-marker { background: transparent; border: 0; }
+.navigation-player-marker > div, .navigation-player-marker .pixel-avatar { width: 100%; height: 100%; }
+.navigation-player-marker .pixel-avatar { filter: drop-shadow(0 2px 2px #163e3570); }
+@media (prefers-reduced-motion: reduce) { .navigation-screen .live-route-sheet { transition: none; } }

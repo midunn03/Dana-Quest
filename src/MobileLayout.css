@@ -1,0 +1,76 @@
+﻿/* Every screen shares the same bounded phone viewport and persistent nav row. */
+html, body, #root { height: 100%; min-height: 0; }
+html { height: 100dvh; }
+body { padding: 0; overflow: hidden; }
+#root { min-height: 0; overflow: hidden; }
+.app-shell {
+  --app-nav-height: calc(60px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-direction: column; min-height: 0;
+  padding: env(safe-area-inset-top, 0px) 0 0;
+  isolation: isolate; contain: layout paint;
+}
+.app-shell > main {
+  flex: 1 1 0; min-height: 0; min-width: 0; width: 100%; height: auto;
+  overflow-x: hidden; overflow-y: auto;
+  overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch;
+}
+.app-shell > .bottom-nav {
+  flex: 0 0 var(--app-nav-height); height: var(--app-nav-height);
+  min-height: var(--app-nav-height); margin-top: auto;
+  position: relative; inset: auto; transform: none; width: 100%;
+  padding: 5px 5px calc(5px + env(safe-area-inset-bottom, 0px));
+  border-radius: 0; align-items: stretch;
+}
+.app-shell > .bottom-nav a {
+  min-height: 44px; min-width: 0; gap: 3px;
+  font-size: 11px; line-height: 1.2;
+}
+.app-shell > .bottom-nav a svg { width: 22px; height: 22px; flex-shrink: 0; }
+.app-shell.onboarding-shell { --app-nav-height: 0px; }
+.app-shell > main.explore-page, .app-shell > main.navigation-screen { overflow: hidden; height: auto; min-height: 0; }
+.app-shell > main.navigation-screen > .route-map { position: absolute; inset: 0; height: 100%; min-height: 0; width: 100%; }
+.app-shell > main.navigation-screen .live-route-sheet { height: min(210px, 40%); }
+.app-shell > main.navigation-screen .live-route-sheet.expanded { height: 72%; }
+.app-shell > main.detail-screen { background: #fffcf5; }
+.app-shell > main.detail-screen .destination-hero { height: clamp(180px, 29dvh, 250px); }
+.app-shell > main.onboarding, .app-shell > main.camera-page, .app-shell > main.celebration-screen { height: auto; min-height: 0; }
+.app-shell > main.onboarding .welcome-game, .app-shell > main.onboarding .avatar-card { min-height: 100%; }
+.app-shell > main.onboarding .welcome-game { flex: 1; }
+.app-shell > .notifications { position: absolute; }
+.app-shell > .active-mission-indicator { bottom: calc(var(--app-nav-height) + 12px); }
+/* Sheets expand within the content area and never cover the nav row. */
+.app-shell > .gesture-sheet { bottom: var(--app-nav-height); max-height: calc(100% - var(--app-nav-height)); }
+.app-shell > .gesture-sheet.open.expanded { bottom: var(--app-nav-height); height: calc(100% - var(--app-nav-height)); max-height: calc(100% - var(--app-nav-height)); }
+.app-shell .round-back, .app-shell .route-instruction > a,
+.app-shell .celebration-close, .app-shell .camera-page > header > a {
+  width: 48px; height: 48px; min-width: 48px; min-height: 48px;
+  display: grid; place-items: center; flex-shrink: 0;
+  font-size: 28px; line-height: 1; text-decoration: none;
+}
+.app-shell .back-link, .app-shell .avatar-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 48px; padding: 8px 12px; border-radius: 12px;
+  color: #254d47; background: #ffffffb8; border: 1px solid #254d4720;
+  font-size: 16px; font-weight: 600; line-height: 1.4; text-decoration: none;
+}
+.app-shell .back-link > span { font-size: 28px; line-height: 1; }
+.app-shell .back-link:focus-visible, .app-shell .avatar-back:focus-visible,
+.app-shell .round-back:focus-visible, .app-shell .route-instruction > a:focus-visible {
+  outline: 3px solid #2488d8; outline-offset: 2px;
+}
+.app-shell > main.auth-screen { display: flex; flex-direction: column; align-items: stretch; padding: 0; }
+.auth-header { position: sticky; top: 0; z-index: 2; flex: 0 0 auto; padding: 8px 18px; background: #fcf8ef; }
+.app-shell .auth-card { flex: 0 0 auto; margin: 0 auto; padding: 16px 18px 24px; }
+.app-shell input, .app-shell select, .app-shell textarea { font-size: 16px; }
+@media (max-width: 767px) {
+  .app-shell { width: 100%; max-width: 100%; height: 100dvh; max-height: 100dvh; border: 0; border-radius: 0; margin: 0; }
+}
+@media (min-width: 768px) {
+  .app-shell { width: min(390px, calc(100vw - 24px)); height: min(844px, calc(100dvh - 24px)); max-height: calc(100dvh - 24px); margin: auto; }
+}
+@media (max-height: 650px) {
+  .app-shell > main.onboarding .welcome-copy { padding-top: 20px; }
+  .app-shell > main.onboarding .avatar-card { padding: 16px 22px 24px; }
+  .app-shell > main.onboarding .avatar-stage { margin-top: 20px; }
+  .app-shell > main.onboarding .avatar-options { margin-bottom: 22px; }
+}

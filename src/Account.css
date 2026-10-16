@@ -1,0 +1,329 @@
+.account-journey { padding: 20px; border-radius: 20px; background: #163e35; color: #fffdf5; }
+.account-journey .game-kicker { color: #bce1ce; font-size: 10px; letter-spacing: .12em; }
+.account-journey h2 { margin: 10px 0; font-size: 20px; line-height: 1.3; }
+.account-journey p { margin: 0 0 16px; color: #d3e5dc; font-size: 13px; line-height: 1.6; }
+.account-journey a { display: flex; justify-content: space-between; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #ffca49; color: #163e35; text-decoration: none; font-size: 13px; font-weight: 700; }
+.account-page {
+  color: #163e35;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.account-page .screen-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.account-page .screen-heading h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.account-logout-btn {
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid #d0ded6;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #a23b38;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+.account-logout-btn:hover {
+  background: #fdf3f2;
+}
+
+/* Hero Header Card (inspired by Grab account UI) */
+.account-hero-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(22, 62, 53, 0.06);
+  border: 1px solid #e6eee8;
+  position: relative;
+}
+
+.account-hero-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #edf5f0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid #317d70;
+}
+.account-hero-avatar .pixel-avatar {
+  width: 44px;
+  height: 50px;
+}
+.account-avatar-placeholder {
+  font-size: 28px;
+}
+
+.account-hero-info {
+  flex: 1;
+  min-width: 0;
+}
+.account-hero-info h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #163e35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #315e51;
+  margin-bottom: 4px;
+}
+.star-icon {
+  background: #fff8eb;
+  color: #d97706;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: 1px solid #fef3c7;
+}
+
+.account-contact-summary {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #63766d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-edit-avatar-link {
+  font-size: 24px;
+  color: #94a3b8;
+  text-decoration: none;
+  padding: 4px;
+}
+
+/* Quick stats row */
+.account-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px 8px;
+  text-align: center;
+  border: 1px solid #e6eee8;
+  box-shadow: 0 2px 8px rgba(22, 62, 53, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #163e35;
+}
+.stat-label {
+  font-size: 11px;
+  color: #71817a;
+}
+
+/* "Tài khoản của tôi" Circular icon buttons grid */
+.account-quick-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid #e6eee8;
+  box-shadow: 0 4px 16px rgba(22, 62, 53, 0.05);
+}
+.account-quick-section h2 {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #163e35;
+}
+
+.account-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  text-align: center;
+}
+
+.quick-action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  font: inherit;
+  color: #163e35;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.action-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s ease;
+}
+.quick-action-item:hover .action-icon-circle {
+  transform: translateY(-2px);
+}
+
+.color-purple { background: #f3e8ff; }
+.color-blue { background: #e0f2fe; }
+.color-orange { background: #ffedd5; }
+.color-green { background: #dcfce7; }
+
+.quick-action-item span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.2;
+}
+
+/* Edit profile form */
+.account-edit-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #d0ded6;
+  box-shadow: 0 4px 12px rgba(22, 62, 53, 0.08);
+}
+.account-edit-section h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #163e35;
+}
+
+.account-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.account-edit-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #526b65;
+}
+.account-edit-form input {
+  padding: 10px 12px;
+  border: 1px solid #c8d7cc;
+  border-radius: 10px;
+  font-size: 14px;
+  font: inherit;
+}
+.account-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* History sections */
+.account-history-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #e6eee8;
+}
+.account-history-section h2 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.account-empty {
+  margin: 0;
+  padding: 8px 0;
+  color: #71817a;
+  font-size: 12px;
+}
+.account-history-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.account-history-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid #f0f4f1;
+}
+.account-history-list li:first-child {
+  border-top: none;
+}
+.account-history-list strong {
+  font-size: 13px;
+  color: #163e35;
+}
+.account-history-list span {
+  color: #71817a;
+  font-size: 11px;
+}
+
+.account-data-note {
+  margin: 4px 0;
+  color: #71817a;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+.account-map-link {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  color: #267765;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.success-msg {
+  color: #15803d;
+  background: #f0fdf4;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  border: 1px solid #bbf7d0;
+  margin: 0;
+}
