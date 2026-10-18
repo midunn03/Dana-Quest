@@ -17,6 +17,8 @@ export interface Destination {
   featuredScore: number
   highlightReason: string
   markerAsset: string
+  /** Ghim đại diện cho bao nhiêu mét ngoài đời; quyết định kích thước khi zoom (mặc định 70). */
+  markerMeters?: number
   sourceUrl: string
   coordinateSourceUrl: string
   photo?: string

@@ -4,7 +4,7 @@ import { getDestination } from './data/destinations'
 import { getMissions } from './data/missions'
 import { useProgress } from './lib/useProgress'
 import { coinBalance } from './lib/progress'
-import { avatars } from './lib/avatar'
+import { resolveAvatar } from './lib/avatar'
 import { useAuth } from './AuthContext'
 import PixelAvatar from './PixelAvatar'
 import ConfirmDialog from './ConfirmDialog'
@@ -29,7 +29,7 @@ export default function AccountPage({ user, onLogout }: { user: AuthUser; onLogo
   const [updateMsg, setUpdateMsg] = useState('')
   const [updateError, setUpdateError] = useState('')
   const [saving, setSaving] = useState(false)
-  const avatar = avatars.find(item => item.id === user.avatarId)
+  const avatar = resolveAvatar(user.avatarId)
 
   const entries = Object.entries(state.destinations).flatMap(([destinationId, progress]) => {
     const place = getDestination(destinationId)

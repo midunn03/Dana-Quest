@@ -15,6 +15,7 @@ import { readAvatar, avatars } from './lib/avatar'
 import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import NearbyDrawer from './NearbyDrawer'
+import { DEFAULT_MARKER_METERS, PIN_LABEL_ZOOM, pinMode, pinScale } from './lib/markerScale'
 
 const DESTINATION_MARKER_MIN_ZOOM = 15
 const PLAYER_OVERVIEW_ZOOM = 15
@@ -36,12 +37,35 @@ function resizeIllustration(marker: L.Marker, zoom: number, size: [number, numbe
   element.style.marginTop = `${-anchor[1] * scale}px`
   element.classList.toggle('overview-pin', !player && zoom < 14)
 }
+function resizePlacePin(marker: L.Marker, zoom: number, lat: number, size: [number, number], anchor: [number, number], meters: number) {
+  const element = marker.getElement()
+  if (!element) return
+  const scale = pinScale(lat, zoom, meters, size[0])
+  const mode = pinMode(zoom)
+  element.style.width = `${size[0] * scale}px`
+  element.style.height = `${size[1] * scale}px`
+  element.style.marginLeft = `${-anchor[0] * scale}px`
+  element.style.marginTop = `${-anchor[1] * scale}px`
+  element.classList.toggle('hidden-pin', mode === 'hidden')
+  element.classList.toggle('dot-pin', mode === 'dot')
+  element.classList.toggle('overview-pin', zoom < PIN_LABEL_ZOOM)
+}
 export default function Explore() {
   const container = useRef<HTMLDivElement>(null)
   const mapRef = useRef<L.Map | null>(null)
   const [selected, setSelected] = useState<Destination | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
   const [tileError, setTileError] = useState(false)
+  const [sprites, setSprites] = useState<Record<string, { url: string; meters: number }>>({})
+  useEffect(() => {
+    // Ảnh pixel do admin chọn (Django). Lỗi mạng hoặc chưa có thì dùng ảnh mặc định.
+    if (typeof fetch !== 'function') return
+    let alive = true
+    fetch('/api/pixel/places').then(r => r.ok ? r.json() : null).then(data => {
+      if (alive && data && typeof data.items === 'object' && data.items) setSprites(data.items)
+    }).catch(() => undefined)
+    return () => { alive = false }
+  }, [])
   const [mapUnavailable, setMapUnavailable] = useState(false)
   const [loadingTiles, setLoadingTiles] = useState(true)
   const [attempt, setAttempt] = useState(0)
@@ -174,24 +198,24 @@ export default function Explore() {
     if (!map) return
     const resizeFrame = requestAnimationFrame(() => map.invalidateSize({ pan: false }))
     const layer = L.layerGroup()
-    const pins: { marker: L.Marker; size: [number, number]; anchor: [number, number] }[] = []
+    const pins: { marker: L.Marker; size: [number, number]; anchor: [number, number]; lat: number; meters: number }[] = []
     filtered.forEach(place => {
       const dragon = place.id === 'cau-rong'
       const marker = L.marker(place.position, {
         title: place.name, alt: place.name,
-        icon: L.divIcon({ className: `destination-pin illustrated-pin ${dragon ? 'dragon-pin' : ''}`, html: `<img src="${import.meta.env.BASE_URL}markers/${place.markerAsset}" alt=""/><b>${place.name}</b>`, iconSize: dragon ? [92, 82] : [68, 66], iconAnchor: dragon ? [46, 68] : [34, 55] }),
+        icon: L.divIcon({ className: `destination-pin illustrated-pin ${dragon ? 'dragon-pin' : ''}`, html: `<img src="${sprites[place.id]?.url ?? `${import.meta.env.BASE_URL}markers/${place.markerAsset}`}" alt=""/><b>${place.name}</b>`, iconSize: dragon ? [92, 82] : [68, 66], iconAnchor: dragon ? [46, 68] : [34, 55] }),
       }).addTo(layer).bindTooltip(place.name, { direction: 'top', offset: [0, -20] }).on('click', () => showPlace(place))
       marker.on('add', () => marker.getElement()?.setAttribute('aria-label', place.name))
-      pins.push({ marker, size: dragon ? [92, 82] : [68, 66], anchor: dragon ? [46, 68] : [34, 55] })
+      pins.push({ marker, size: dragon ? [92, 82] : [68, 66], anchor: dragon ? [46, 68] : [34, 55], lat: place.position[0], meters: sprites[place.id]?.meters ?? place.markerMeters ?? (dragon ? 160 : DEFAULT_MARKER_METERS) })
     })
     const syncVisibility = () => {
-      pins.forEach(({ marker, size, anchor }) => resizeIllustration(marker, map.getZoom(), size, anchor))
+      pins.forEach(({ marker, size, anchor, lat, meters }) => resizePlacePin(marker, map.getZoom(), lat, size, anchor, meters))
     }
     layer.addTo(map)
     syncVisibility()
     map.on('zoom', syncVisibility)
     return () => { cancelAnimationFrame(resizeFrame); map.off('zoom', syncVisibility); layer.remove() }
-  }, [filtered, attempt, showPlace])
+  }, [filtered, attempt, showPlace, sprites])
 
   function selectPlace(place: Destination) {
     showPlace(place)

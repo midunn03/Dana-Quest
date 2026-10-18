@@ -394,3 +394,8 @@ a:focus-visible, button:focus-visible, .leaflet-marker-icon:focus-visible {
   .explore-heading h1 { font-size: 1.7rem; }
 }
 
+
+/* Ghim địa điểm co theo mức zoom: ẩn khi xem xa, chấm nhỏ khi xa vừa, đầy đủ khi zoom gần */
+.illustrated-pin.hidden-pin{display:none!important}
+.illustrated-pin.dot-pin img,.illustrated-pin.dot-pin b{display:none}
+.illustrated-pin.dot-pin::before{content:'';position:absolute;left:50%;bottom:0;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#ffc64b;border:2px solid #23444e;box-shadow:0 1px 3px #0005}

@@ -58,3 +58,16 @@
   .avatar-options button { height: 66px; }
   .avatar-card .avatar-hint { margin-top: 16px; }
 }
+
+/* Trình tạo nhân vật */
+.pixel-avatar-custom{image-rendering:pixelated}
+.creator-open,.creator-actions button{margin:10px auto 0;padding:8px 16px;border:2px solid #23444e;border-radius:10px;background:#fff8e6;font:inherit;font-weight:700;cursor:pointer}
+.avatar-creator{display:grid;gap:8px;margin:12px 0;padding:12px;border:2px solid #23444e22;border-radius:14px;background:#ffffffaa;max-height:42vh;overflow:auto;text-align:left}
+.creator-row{display:grid;gap:4px}
+.creator-label{font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#476477}
+.creator-chips{display:flex;flex-wrap:wrap;gap:6px}
+.creator-chips button{padding:6px 12px;border:2px solid #23444e55;border-radius:999px;background:#fff;font:inherit;cursor:pointer}
+.creator-chips button[aria-pressed="true"]{border-color:#23444e;background:#ffc64b;font-weight:800}
+.creator-chips .creator-swatch{width:30px;height:30px;padding:0;border-radius:8px;border:2px solid #23444e55}
+.creator-chips .creator-swatch[aria-pressed="true"]{border:3px solid #23444e;box-shadow:0 0 0 2px #fff inset}
+.creator-actions{display:flex;gap:8px;flex-wrap:wrap}
