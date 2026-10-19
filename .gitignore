@@ -39,3 +39,8 @@ test-results.txt
 *.njsproj
 *.sln
 *.sw?
+backend/db.sqlite3
+backend/media/
+__pycache__/
+*.pyc
+.venv/

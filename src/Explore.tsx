@@ -15,13 +15,17 @@ import { readAvatar, avatars } from './lib/avatar'
 import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import NearbyDrawer from './NearbyDrawer'
+import { dateLabel, parseEvents, reminderText, timeRange, type EventItem } from './lib/events'
 import { DEFAULT_MARKER_METERS, PIN_LABEL_ZOOM, pinMode, pinScale } from './lib/markerScale'
 
 const DESTINATION_MARKER_MIN_ZOOM = 15
 const PLAYER_OVERVIEW_ZOOM = 15
+const DA_NANG_CENTER: [number, number] = [16.0544, 108.2022]
+// Chỉ kéo bản đồ về phía người chơi khi họ đang ở gần Đà Nẵng; ở xa thì vẫn mở ngay Đà Nẵng.
+const PLAYER_NEAR_METERS = 40000
 function fitOverview(map: L.Map, player?: [number, number]) {
   const bounds = L.latLngBounds(destinations.map(place => place.position))
-  if (player) bounds.extend(player)
+  if (player && distanceMeters(player, DA_NANG_CENTER) <= PLAYER_NEAR_METERS) bounds.extend(player)
   map.invalidateSize({ pan: false })
   const { x: width, y: height } = map.getSize()
   const side = Math.min(55, width * .12)
@@ -57,6 +61,29 @@ export default function Explore() {
   const [sheetOpen, setSheetOpen] = useState(false)
   const [tileError, setTileError] = useState(false)
   const [sprites, setSprites] = useState<Record<string, { url: string; meters: number }>>({})
+  const [events, setEvents] = useState<EventItem[]>([])
+  const [showEvents, setShowEvents] = useState(false)
+  const reminded = useRef(new Set<string>())
+  useEffect(() => {
+    // Sự kiện theo giờ thực (Django). Làm mới mỗi phút; lỗi mạng thì giữ danh sách cũ.
+    if (typeof fetch !== 'function') return
+    let alive = true
+    const load = () => fetch('/api/events/feed').then(r => r.ok ? r.json() : null).then(data => { if (alive && data) setEvents(parseEvents(data)) }).catch(() => undefined)
+    void load()
+    const timer = window.setInterval(load, 60000)
+    return () => { alive = false; window.clearInterval(timer) }
+  }, [])
+  useEffect(() => {
+    // Nhắc một lần cho mỗi sự kiện đang diễn ra hoặc sắp diễn ra.
+    events.forEach(event => {
+      const key = `${event.id}-${event.start}`
+      const message = reminderText(event)
+      if (!message || reminded.current.has(key)) return
+      reminded.current.add(key)
+      window.dispatchEvent(new CustomEvent('dana-toast', { detail: message }))
+    })
+  }, [events])
+  const happeningPlaces = useMemo(() => new Set(events.filter(event => event.status !== 'later' && event.placeId).map(event => event.placeId as string)), [events])
   useEffect(() => {
     // Ảnh pixel do admin chọn (Django). Lỗi mạng hoặc chưa có thì dùng ảnh mặc định.
     if (typeof fetch !== 'function') return
@@ -153,7 +180,8 @@ export default function Explore() {
     }, 12000)
     const resize = () => { if (active) map?.invalidateSize({ pan: false }) }
     try {
-      map = L.map(container.current, { scrollWheelZoom: false, zoomControl: false, touchZoom: true }).setView([16.0678, 108.224], DESTINATION_MARKER_MIN_ZOOM)
+      map = L.map(container.current, { scrollWheelZoom: false, zoomControl: false, touchZoom: true, minZoom: 9 }).setView(DA_NANG_CENTER, 12)
+      L.control.zoom({ position: 'topright', zoomInTitle: 'Phóng to', zoomOutTitle: 'Thu nhỏ' }).addTo(map)
       map.attributionControl.setPrefix(false)
       mapRef.current = map
       centered.current = false
@@ -203,7 +231,7 @@ export default function Explore() {
       const dragon = place.id === 'cau-rong'
       const marker = L.marker(place.position, {
         title: place.name, alt: place.name,
-        icon: L.divIcon({ className: `destination-pin illustrated-pin ${dragon ? 'dragon-pin' : ''}`, html: `<img src="${sprites[place.id]?.url ?? `${import.meta.env.BASE_URL}markers/${place.markerAsset}`}" alt=""/><b>${place.name}</b>`, iconSize: dragon ? [92, 82] : [68, 66], iconAnchor: dragon ? [46, 68] : [34, 55] }),
+        icon: L.divIcon({ className: `destination-pin illustrated-pin ${dragon ? 'dragon-pin' : ''} ${happeningPlaces.has(place.id) ? 'event-pin' : ''}`, html: `${sprites[place.id] ? `<img src="${encodeURI(sprites[place.id].url)}" alt=""/>` : '<span class="plain-pin" aria-hidden="true"></span>'}<b>${place.name}</b>`, iconSize: dragon ? [92, 82] : [68, 66], iconAnchor: dragon ? [46, 68] : [34, 55] }),
       }).addTo(layer).bindTooltip(place.name, { direction: 'top', offset: [0, -20] }).on('click', () => showPlace(place))
       marker.on('add', () => marker.getElement()?.setAttribute('aria-label', place.name))
       pins.push({ marker, size: dragon ? [92, 82] : [68, 66], anchor: dragon ? [46, 68] : [34, 55], lat: place.position[0], meters: sprites[place.id]?.meters ?? place.markerMeters ?? (dragon ? 160 : DEFAULT_MARKER_METERS) })
@@ -215,7 +243,7 @@ export default function Explore() {
     syncVisibility()
     map.on('zoom', syncVisibility)
     return () => { cancelAnimationFrame(resizeFrame); map.off('zoom', syncVisibility); layer.remove() }
-  }, [filtered, attempt, showPlace, sprites])
+  }, [filtered, attempt, showPlace, sprites, happeningPlaces])
 
   function selectPlace(place: Destination) {
     showPlace(place)
@@ -276,15 +304,25 @@ export default function Explore() {
         </div>
 
         {!sheetOpen && <NearbyDrawer>
-          <div className="nearby-tabs"><button type="button" aria-pressed={!showAllPlaces} onClick={() => setShowAllPlaces(false)}>Trong 3 km</button><button type="button" aria-pressed={showAllPlaces} onClick={() => setShowAllPlaces(true)}>Tất cả</button></div>
-          {showAllPlaces ? <div className="utility-body">
+          <div className="nearby-tabs"><button type="button" aria-pressed={!showAllPlaces && !showEvents} onClick={() => { setShowEvents(false); setShowAllPlaces(false) }}>Trong 3 km</button><button type="button" aria-pressed={showAllPlaces && !showEvents} onClick={() => { setShowEvents(false); setShowAllPlaces(true) }}>Tất cả</button><button type="button" aria-pressed={showEvents} onClick={() => setShowEvents(true)}>Sự kiện{events.some(event => event.status !== 'later') ? ' •' : ''}</button></div>
+          {showEvents ? <div className="event-list">
+            {!events.length && <p>Chưa có sự kiện sắp tới.</p>}
+            {events.slice(0, 12).map(event => {
+              const place = destinations.find(item => item.id === event.placeId)
+              return <button type="button" key={`${event.id}-${event.start}`} className={`event-item event-${event.status}`} disabled={!place} onClick={() => place && selectPlace(place)}>
+                <span className="event-when">{event.status === 'live' ? 'ĐANG DIỄN RA' : event.status === 'soon' ? `CÒN ${Math.max(1, event.minutesUntil)} PHÚT` : dateLabel(event.start)}</span>
+                <strong>{event.title}</strong>
+                <small>{timeRange(event)}{event.placeName ? ` · ${event.placeName}` : ''}</small>
+              </button>
+            })}
+          </div> : showAllPlaces ? <div className="utility-body">
             {filtered.map(place => <button key={place.id} className="destination-option" onClick={() => selectPlace(place)}>{place.name}<span aria-hidden="true">↗</span></button>)}
             {!filtered.length && <p>Không tìm thấy địa điểm phù hợp.</p>}
           </div> : <div className="nearby-list">
             <p>Tối đa 6 địa điểm trong 3 km quanh vị trí thiết bị, có tính đến sai số định vị.</p>
             {!sample && <p role="status">{locationError || 'Đang chờ quyền định vị và vị trí thiết bị…'}</p>}
             {sample && !recommendedPlaces.length && <p>Chưa có địa điểm phù hợp trong 3 km quanh bạn.</p>}
-            {recommendedPlaces.map(({place, distance}) => <button type="button" className="suggestion-chip" key={place.id} onClick={() => selectPlace(place)}><img src={import.meta.env.BASE_URL + "markers/" + place.markerAsset} alt=""/><span>{place.name}<small>{place.highlightReason} · {(distance / 1000).toFixed(1)} km</small></span></button>)}
+            {recommendedPlaces.map(({place, distance}) => <button type="button" className="suggestion-chip" key={place.id} onClick={() => selectPlace(place)}>{sprites[place.id] ? <img src={sprites[place.id].url} alt=""/> :    <span className="plain-chip" aria-hidden="true"/>}<span>{place.name}<small>{place.highlightReason} · {(distance / 1000).toFixed(1)} km</small></span></button>)}
           </div>}
         </NearbyDrawer>}
 

@@ -12,7 +12,8 @@ export default defineConfig({
     proxy: {
     '/api/auth': 'http://127.0.0.1:8000',
     '/api/pixel': 'http://127.0.0.1:8000',
-    '/media': 'http://127.0.0.1:8000',},
+    '/media': 'http://127.0.0.1:8000',
+      '/api/events': 'http://127.0.0.1:8000'},
   },
   plugins: [react(), {
     name: 'nearby-recommendations-api',
