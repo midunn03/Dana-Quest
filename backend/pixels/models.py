@@ -1,8 +1,15 @@
+import os
+from io import BytesIO
+
 from django.core.exceptions import ValidationError
+from django.core.files.base import ContentFile
 from django.db import models, transaction
 
-MAX_BYTES = 5 * 1024 * 1024   # 5 MB
-MAX_SIDE = 4096
+# Nhận ảnh gốc khá lớn, rồi tự thu nhỏ để bản đồ luôn nhẹ.
+MAX_BYTES = 15 * 1024 * 1024   # ảnh tải lên tối đa 15 MB
+MAX_SIDE = 4096                # và tối đa 4096 px mỗi cạnh
+OUT_SIDE = 512                 # ảnh lưu lại sẽ được thu nhỏ về tối đa 512 px
+OUT_BYTES = 300 * 1024         # và cố gắng nhẹ hơn 300 KB
 
 
 def validate_sprite(file):
@@ -10,7 +17,7 @@ def validate_sprite(file):
     from PIL import Image
 
     if file.size > MAX_BYTES:
-        raise ValidationError('Ảnh quá nặng (tối đa 512 KB).')
+        raise ValidationError('Ảnh quá nặng (tối đa 15 MB).')
     try:
         image = Image.open(file)
         image.verify()
@@ -20,6 +27,8 @@ def validate_sprite(file):
         raise ValidationError('Chỉ nhận ảnh PNG hoặc WebP (nên nền trong suốt).')
     if max(image.size) > MAX_SIDE:
         raise ValidationError(f'Ảnh tối đa {MAX_SIDE}×{MAX_SIDE} pixel.')
+    if not hasattr(file, 'seek'):
+        return
     file.seek(0)
 
 
@@ -53,7 +62,28 @@ class PlaceSprite(models.Model):
     def __str__(self):
         return f'{self.place.name} – {self.label}'
 
+    def _shrink_new_upload(self):
+        """Ảnh mới tải lên: thu nhỏ về tối đa 512 px, lưu PNG và nén nhẹ."""
+        from PIL import Image
+
+        upload = self.image
+        if not upload or getattr(upload, '_committed', True):
+            return  # không có ảnh mới
+        upload.seek(0)
+        img = Image.open(upload)
+        img.load()
+        img = img.convert('RGBA')
+        img.thumbnail((OUT_SIDE, OUT_SIDE), Image.LANCZOS)
+        buffer = BytesIO()
+        img.save(buffer, 'PNG', optimize=True)
+        if buffer.tell() > OUT_BYTES:  # còn nặng: giảm còn 256 màu
+            buffer = BytesIO()
+            img.quantize(256, method=Image.FASTOCTREE).save(buffer, 'PNG', optimize=True)
+        name = os.path.splitext(os.path.basename(upload.name))[0][:60] + '.png'
+        self.image.save(name, ContentFile(buffer.getvalue()), save=False)
+
     def save(self, *args, **kwargs):
+        self._shrink_new_upload()
         with transaction.atomic():
             super().save(*args, **kwargs)
             if self.is_active:  # mỗi địa điểm chỉ có một bản vẽ đang dùng
