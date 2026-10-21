@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { destinations, type Destination, type DestinationCategory } from './data/destinations'
+import { destinations, type Destination } from './data/destinations'
 import './Explore.css'
 import './Quest.css'
 import { filterDestinations, searchText } from './lib/filters'
@@ -16,13 +16,6 @@ import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import NearbyDrawer from './NearbyDrawer'
 import { quests } from './data/quests'
-import { cityEvents, nextEventOccurrence } from './data/events'
-
-type MapFilter = 'all' | 'quest' | 'event' | DestinationCategory
-const mapFilters: { id: MapFilter; label: string }[] = [
-  { id: 'all', label: 'Tất cả' }, { id: 'quest', label: 'Quest' }, { id: 'event', label: 'Sự kiện' },
-  { id: 'museum', label: 'Bảo tàng' }, { id: 'beach', label: 'Biển' }, { id: 'landmark', label: 'Kiến trúc' },
-]
 
 const DESTINATION_MARKER_MIN_ZOOM = 15
 const PLAYER_OVERVIEW_ZOOM = 15
@@ -60,24 +53,16 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
   const [locating, setLocating] = useState(false)
   const [showAllPlaces, setShowAllPlaces] = useState(false)
   const [viewMode, setViewMode] = useState<'map' | 'list'>(searchOpen ? 'list' : 'map')
-  const [mapFilter, setMapFilter] = useState<MapFilter>('all')
   const [now, setNow] = useState(() => Date.now())
   const { sample, error: locationError, updatePosition } = usePlayerLocation()
   const centered = useRef(false)
   const [avatar, setAvatar] = useState(() => readAvatar() ?? avatars[0])
   const nearIntent = /\b(gan|quanh|xung quanh)\b/.test(searchText(query))
-  const searchResults = useMemo(() => filterDestinations(destinations, query, nearIntent && sample ? 3 : 0, sample, now), [query, nearIntent, sample, now])
-  const filtered = useMemo(() => searchResults.filter(place => mapFilter === 'all' || mapFilter === place.category), [searchResults, mapFilter])
+  const filtered = useMemo(() => filterDestinations(destinations, query, nearIntent && sample ? 3 : 0, sample, now), [query, nearIntent, sample, now])
   const visibleQuests = useMemo(() => {
     const searched = searchText(query)
-    if (!['all', 'quest'].includes(mapFilter)) return []
     return quests.filter(quest => !searched || searchText(`${quest.title} ${quest.area} đại học kinh tế due`).includes(searched))
-  }, [query, mapFilter])
-  const visibleEvents = useMemo(() => {
-    if (!['all', 'event'].includes(mapFilter)) return []
-    const searched = searchText(query)
-    return cityEvents.filter(event => event.destinationId && (!searched || searchText(`${event.title} ${event.location}`).includes(searched)))
-  }, [query, mapFilter])
+  }, [query])
   function notify(message: string) {
     window.dispatchEvent(new CustomEvent('dana-toast', { detail: message }))
   }
@@ -226,16 +211,6 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
       }).addTo(layer).bindPopup(`<div class="quest-map-popup"><small>QUEST MẪU · ${quest.estimatedMinutes} PHÚT</small><strong>${quest.title}</strong><p>${quest.checkpoints.length} nhiệm vụ tại ${quest.area}</p><a href="#/quest/${quest.id}">Xem quest →</a></div>`)
       marker.on('add', () => marker.getElement()?.setAttribute('aria-label', `Quest ${quest.title}`))
     })
-    visibleEvents.forEach(event => {
-      const place = event.destinationId ? destinations.find(item => item.id === event.destinationId) : undefined
-      if (!place) return
-      const next = nextEventOccurrence(event)
-      const marker = L.marker(place.position, {
-        title: event.title, alt: event.title, zIndexOffset: 800,
-        icon: L.divIcon({ className: 'event-map-pin', html: `<span aria-hidden="true">◷</span><b>${event.title}</b>`, iconSize: [78, 62], iconAnchor: [39, 54] }),
-      }).addTo(layer).bindPopup(`<div class="quest-map-popup"><small>SỰ KIỆN SẮP DIỄN RA</small><strong>${event.title}</strong><p>${next ? next.toLocaleString('vi-VN', { weekday: 'short', hour: '2-digit', minute: '2-digit' }) : event.scheduleLabel}</p><a href="#/su-kien/${event.id}">Xem sự kiện →</a></div>`)
-      marker.on('add', () => marker.getElement()?.setAttribute('aria-label', `Sự kiện ${event.title}`))
-    })
     const syncVisibility = () => {
       pins.forEach(({ marker, size, anchor }) => resizeIllustration(marker, map.getZoom(), size, anchor))
     }
@@ -243,7 +218,7 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
     syncVisibility()
     map.on('zoom', syncVisibility)
     return () => { cancelAnimationFrame(resizeFrame); map.off('zoom', syncVisibility); layer.remove() }
-  }, [filtered, visibleQuests, visibleEvents, attempt, showPlace])
+  }, [filtered, visibleQuests, attempt, showPlace])
 
   function selectPlace(place: Destination) {
     showPlace(place)
@@ -290,7 +265,6 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
           <button type="button" className="voice-search" aria-label={listening ? 'Đang nghe…' : 'Tìm bằng giọng nói'} disabled={listening} onClick={startVoiceSearch}>{listening ? '…' : '🎙'}</button>
         </div>
         <div className="explore-view-switch" aria-label="Kiểu hiển thị"><button type="button" aria-pressed={viewMode === 'map'} onClick={() => setViewMode('map')}>Bản đồ</button><button type="button" aria-pressed={viewMode === 'list'} onClick={() => setViewMode('list')}>Danh sách</button></div>
-        {viewMode === 'map' && <div className="map-category-filters" aria-label="Lọc nội dung trên bản đồ">{mapFilters.map(filter => <button type="button" key={filter.id} aria-pressed={mapFilter === filter.id} onClick={() => setMapFilter(filter.id)}>{filter.label}</button>)}</div>}
         {viewMode === 'map' && <button className="map-compass" type="button" aria-label={locating ? 'Đang xác định vị trí của tôi' : 'Đưa bản đồ về vị trí của tôi'} title={locationError || 'Vị trí của tôi'} disabled={locating} onClick={centerOnDevice}>{locating ? '…' : '🧭'}</button>}
 
         <div className="map-shell" hidden={viewMode !== 'map'}>
@@ -310,10 +284,9 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
           {visibleQuests.map(quest => <a className="quest-result-card" href={`#/quest/${quest.id}`} key={quest.id}>
             <div><small>{quest.area} · {quest.estimatedMinutes} phút</small><strong>{quest.title}</strong><span>{quest.checkpoints.length} nhiệm vụ · Xem chi tiết →</span></div>
           </a>)}
-          {visibleEvents.map(event => <a className="event-result-card" href={`#/su-kien/${event.id}`} key={event.id}><small>SỰ KIỆN · {nextEventOccurrence(event)?.toLocaleString('vi-VN', { weekday: 'short', hour: '2-digit', minute: '2-digit' }) ?? event.scheduleLabel}</small><strong>{event.title}</strong><span>{event.location} →</span></a>)}
           <p className="result-eyebrow">ĐỊA ĐIỂM TẠI ĐÀ NẴNG</p>
           <div className="place-result-list">{filtered.map(place => <button type="button" key={place.id} onClick={() => { setViewMode('map'); selectPlace(place) }}><img src={`${import.meta.env.BASE_URL}markers/${place.markerAsset}`} alt=""/><span><strong>{place.name}</strong><small>{place.highlightReason}</small></span><b aria-hidden="true">›</b></button>)}</div>
-          {!visibleQuests.length && !visibleEvents.length && !filtered.length && <p className="empty-results">Không tìm thấy quest, sự kiện hoặc địa điểm phù hợp.</p>}
+          {!visibleQuests.length && !filtered.length && <p className="empty-results">Không tìm thấy quest hoặc địa điểm phù hợp.</p>}
         </section>}
 
         {viewMode === 'map' && !sheetOpen && <NearbyDrawer>

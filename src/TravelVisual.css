@@ -27,8 +27,7 @@ body { background: #e8eeea; }
 .app-shell .destination-option,.app-shell .distance-tools button,.app-shell .distance-tools select { min-height: 44px; }
 .app-shell .bottom-nav a { font-size: 12px; min-height: 48px; }
 .app-shell .bottom-nav a::before { content: none; }
-.app-shell .bottom-nav a:not(.bottom-search)[aria-current='page'] { color: #176d69; background: #e4f0e9; }
-.app-shell .bottom-nav .bottom-search[aria-current='page'] { color: #172e2a; background: transparent; }
+.app-shell .bottom-nav a[aria-current='page'] { color: #176d69; background: #e4f0e9; }
 .app-shell .primary-button,.app-shell .blue-button { border-radius: 14px; min-height: 44px; font-size: 14px; }
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline: 3px solid #197a86; outline-offset: 3px; }
 @media(max-width:767px) { .app-shell { border: 0; } }
