@@ -38,9 +38,8 @@ function resizeIllustration(marker: L.Marker, zoom: number, size: [number, numbe
   element.style.marginTop = `${-anchor[1] * scale}px`
   element.classList.toggle('overview-pin', !player && zoom < 14)
 }
-export default function Explore({ searchOpen = false }: { searchOpen?: boolean }) {
+export default function Explore() {
   const container = useRef<HTMLDivElement>(null)
-  const searchInput = useRef<HTMLInputElement>(null)
   const mapRef = useRef<L.Map | null>(null)
   const [selected, setSelected] = useState<Destination | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
@@ -52,7 +51,6 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
   const [listening, setListening] = useState(false)
   const [locating, setLocating] = useState(false)
   const [showAllPlaces, setShowAllPlaces] = useState(false)
-  const [viewMode, setViewMode] = useState<'map' | 'list'>(searchOpen ? 'list' : 'map')
   const [now, setNow] = useState(() => Date.now())
   const { sample, error: locationError, updatePosition } = usePlayerLocation()
   const centered = useRef(false)
@@ -66,14 +64,6 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
   function notify(message: string) {
     window.dispatchEvent(new CustomEvent('dana-toast', { detail: message }))
   }
-  useEffect(() => {
-    if (!searchOpen) return
-    const timer = window.setTimeout(() => {
-      setViewMode('list')
-      searchInput.current?.focus()
-    }, 50)
-    return () => window.clearTimeout(timer)
-  }, [searchOpen])
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 15000); return () => window.clearInterval(timer) }, [])
   function centerOnDevice() {
     if (!window.isSecureContext || !navigator.geolocation) {
@@ -252,22 +242,21 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
 
   return (
     <>
-    <main className={`explore-page ${viewMode === 'list' ? 'list-mode' : ''}`}>
+    <main className="explore-page">
       <header className="explore-nav">
-        <a className="explore-location" href="#/kham-pha" aria-label="Đang khám phá Đà Nẵng"><small>ĐANG KHÁM PHÁ</small><strong>Đà Nẵng⌄</strong></a>
-        <a className="event-bell" href="#/su-kien" aria-label="Xem sự kiện và thông báo"><span aria-hidden="true">♢</span><i aria-hidden="true" /></a>
+        <a className="brand" href="#/">DANA QUEST</a>
+        <a href="#/tai-khoan">Tài khoản →</a>
       </header>
 
       <section className="map-screen" aria-label="Khám phá bản đồ">
         <div className="map-search-bar" aria-label="Tìm kiếm địa điểm">
           <span className="map-search-icon" aria-hidden="true">⌕</span>
-          <input ref={searchInput} type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Tìm quest hoặc địa điểm" aria-label="Tìm kiếm quest hoặc điểm đến" />
+          <input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="VD: bảo tàng gần tôi" aria-label="Tìm kiếm điểm đến" />
           <button type="button" className="voice-search" aria-label={listening ? 'Đang nghe…' : 'Tìm bằng giọng nói'} disabled={listening} onClick={startVoiceSearch}>{listening ? '…' : '🎙'}</button>
         </div>
-        <div className="explore-view-switch" aria-label="Kiểu hiển thị"><button type="button" aria-pressed={viewMode === 'map'} onClick={() => setViewMode('map')}>Bản đồ</button><button type="button" aria-pressed={viewMode === 'list'} onClick={() => setViewMode('list')}>Danh sách</button></div>
-        {viewMode === 'map' && <button className="map-compass" type="button" aria-label={locating ? 'Đang xác định vị trí của tôi' : 'Đưa bản đồ về vị trí của tôi'} title={locationError || 'Vị trí của tôi'} disabled={locating} onClick={centerOnDevice}>{locating ? '…' : '🧭'}</button>}
+        <button className="map-compass" type="button" aria-label={locating ? 'Đang xác định vị trí của tôi' : 'Đưa bản đồ về vị trí của tôi'} title={locationError || 'Vị trí của tôi'} disabled={locating} onClick={centerOnDevice}>{locating ? '…' : '🧭'}</button>
 
-        <div className="map-shell" hidden={viewMode !== 'map'}>
+        <div className="map-shell">
           {(tileError || mapUnavailable) && <div className="map-notice" role="alert">
             <p>{mapUnavailable ? 'Không thể khởi tạo bản đồ trên trình duyệt này.' : 'Không tải được nền bản đồ OpenStreetMap hoặc chỉ tải được một phần. Hãy kiểm tra kết nối mạng.'} Bạn vẫn có thể chọn một điểm đến từ tùy chọn dưới đây.</p>
             <div className="map-fallback-links">
@@ -279,18 +268,7 @@ export default function Explore({ searchOpen = false }: { searchOpen?: boolean }
           <div className="map" hidden={mapUnavailable} ref={container} role="region" aria-label="Bản đồ các điểm đến Đà Nẵng" />
         </div>
 
-        {viewMode === 'list' && <section className="explore-results" aria-label="Kết quả khám phá">
-          <p className="result-eyebrow">QUEST NỔI BẬT</p>
-          {visibleQuests.map(quest => <a className="quest-result-card" href={`#/quest/${quest.id}`} key={quest.id}>
-            <div><small>{quest.area} · {quest.estimatedMinutes} phút</small><strong>{quest.title}</strong><span>{quest.checkpoints.length} nhiệm vụ · Xem chi tiết →</span></div>
-          </a>)}
-          <p className="result-eyebrow">ĐỊA ĐIỂM TẠI ĐÀ NẴNG</p>
-          <div className="place-result-list">{filtered.map(place => <button type="button" key={place.id} onClick={() => { setViewMode('map'); selectPlace(place) }}><img src={`${import.meta.env.BASE_URL}markers/${place.markerAsset}`} alt=""/><span><strong>{place.name}</strong><small>{place.highlightReason}</small></span><b aria-hidden="true">›</b></button>)}</div>
-          {!visibleQuests.length && !filtered.length && <p className="empty-results">Không tìm thấy quest hoặc địa điểm phù hợp.</p>}
-        </section>}
-
-        {viewMode === 'map' && !sheetOpen && <NearbyDrawer>
-          {visibleQuests[0] && <a className="featured-quest-row" href={`#/quest/${visibleQuests[0].id}`}><span aria-hidden="true">★</span><div><small>QUEST GẦN BẠN</small><strong>{visibleQuests[0].title}</strong><b>{visibleQuests[0].checkpoints.length} nhiệm vụ · {visibleQuests[0].estimatedMinutes} phút</b></div><i aria-hidden="true">›</i></a>}
+        {!sheetOpen && <NearbyDrawer>
           <div className="nearby-tabs"><button type="button" aria-pressed={!showAllPlaces} onClick={() => setShowAllPlaces(false)}>Trong 3 km</button><button type="button" aria-pressed={showAllPlaces} onClick={() => setShowAllPlaces(true)}>Tất cả</button></div>
           {showAllPlaces ? <div className="utility-body">
             {filtered.map(place => <button key={place.id} className="destination-option" onClick={() => selectPlace(place)}>{place.name}<span aria-hidden="true">↗</span></button>)}
