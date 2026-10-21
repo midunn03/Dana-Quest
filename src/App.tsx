@@ -42,7 +42,8 @@ function AppRouter() {
   const normalized = hash.replace(/\/+$/, '')
   const route = !normalized || normalized === '#' ? '#/' : normalized
   useEffect(() => { const page = shell.current?.querySelector(':scope > main'); if (page instanceof HTMLElement) page.scrollTop = 0 }, [route])
-  const isMap = ['#/kham-pha', '#/explore', '#/map'].includes(route)
+  const isSearch = route === '#/kham-pha/tim-kiem'
+  const isMap = ['#/kham-pha', '#/explore', '#/map'].includes(route) || isSearch
   const publicRoute = route === '#/' || route === '#/dang-nhap' || route === '#/dang-ky'
   const authRoute = route === '#/dang-nhap' || route === '#/dang-ky'
   useEffect(() => {
@@ -60,7 +61,7 @@ function AppRouter() {
     ? auth.status === 'checking' ? <main className="auth-loading"><p role="status">Đang kiểm tra phiên tài khoản…</p></main> : <AuthPage />
     : route === '#/dang-nhap' ? <AuthPage initialMode="login" />
     : route === '#/dang-ky' ? <AuthPage initialMode="register" />
-    : isMap ? <Explore />
+    : isMap ? <Explore searchOpen={isSearch} />
     : route === '#/tai-khoan' ? <AccountPage user={auth.user!} onLogout={auth.logout} />
     : route === '#/chon-nhan-vat' || route === '#/nhan-vat' ? <AvatarPage editing={route === '#/nhan-vat'} initialAvatarId={auth.user?.avatarId} onAvatarConfirmed={auth.saveAvatar} />
     : route === '#/album' ? <AlbumPage />
@@ -89,11 +90,12 @@ function AppRouter() {
   return <div ref={shell} className={`app-shell ${onboarding ? 'onboarding-shell' : ''} ${route === '#/tai-khoan' ? 'account-shell' : ''}`}>
     <Suspense fallback={<main className="auth-loading"><p role="status">Đang mở bản đồ…</p></main>}>{page}</Suspense><Notifications />{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}
     <nav className="bottom-nav" aria-label="Điều hướng chính">
-      <a href="#/kham-pha" aria-label="Bản đồ" aria-current={isMap || /#\/(dia-diem|nhiem-vu|chi-duong|quest)\//.test(route) ? 'page' : undefined}><GameIcon kind="map"/>Bản đồ</a>
+      <a href="#/kham-pha" aria-label="Khám phá" aria-current={(isMap && !isSearch) || /#\/(dia-diem|nhiem-vu|chi-duong|quest)\//.test(route) ? 'page' : undefined}><GameIcon kind="map"/>Khám phá</a>
       <a href="#/su-kien" aria-label="Sự kiện" aria-current={route.startsWith('#/su-kien') ? 'page' : undefined}><span aria-hidden="true">◷</span>Sự kiện</a>
-      <a href="#/album" aria-label="Album" aria-current={route === '#/album' ? 'page' : undefined}><GameIcon kind="album"/>Thư viện</a>
-      <a href="#/cua-hang" aria-label="Đổi quà" aria-current={route === '#/cua-hang' ? 'page' : undefined}><GameIcon kind="gift"/>Phần thưởng</a>
-      <a href="#/tai-khoan" aria-label="Tài khoản" aria-current={route === '#/tai-khoan' ? 'page' : undefined}><GameIcon kind="person"/>Tài khoản</a>    </nav>
+      <a className="bottom-search" href="#/kham-pha/tim-kiem" aria-label="Tìm kiếm" aria-current={isSearch ? 'page' : undefined}><span aria-hidden="true">⌕</span>Tìm kiếm</a>
+      <a href="#/cua-hang" aria-label="Cửa hàng" aria-current={route === '#/cua-hang' ? 'page' : undefined}><GameIcon kind="gift"/>Cửa hàng</a>
+      <a href="#/tai-khoan" aria-label="Hồ sơ" aria-current={route === '#/tai-khoan' || route === '#/album' ? 'page' : undefined}><GameIcon kind="person"/>Hồ sơ</a>
+    </nav>
   </div>
 }
 
