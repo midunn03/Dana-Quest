@@ -33,3 +33,21 @@ button:disabled { opacity: 0.55; cursor: not-allowed !important; }
 .camera-page .photo-complete-bar { bottom: -1px; margin-inline: -16px; padding: 16px 16px max(16px,env(safe-area-inset-bottom)); background: linear-gradient(transparent,#20252b 22%); }
 .camera-page .photo-complete-bar button { background: #ffca49; color: #34372d; }
 .cancel-quest-button { color: #9b302b!important; background: #fdf0ed!important; }
+.quest-experience { width: min(100%, 720px); overflow-y: auto; }
+.quest-intro h1, .checkpoint-card h1, .quest-finished h1 { font-size: clamp(2rem, 9vw, 4rem); }
+.quest-badge { padding: 6px 10px; border-radius: 999px; background: #f8e5cf; color: #80491d; font-size: 12px; font-weight: 800; }
+.quest-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.quest-meta span, .checkpoint-place { padding: 8px 10px; border-radius: 10px; background: #edf3ee; color: #365d54; font-size: 13px; }
+.checkpoint-preview { display: grid; gap: 14px; padding: 0; list-style: none; }
+.checkpoint-preview li { display: flex; align-items: center; gap: 12px; }
+.checkpoint-preview li > span { display: grid; flex: 0 0 36px; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #163e35; color: white; font-weight: 800; }
+.checkpoint-preview p { color: #526b65; font-size: 14px; }
+.quest-start { width: 100%; margin-top: 18px; }
+.checkpoint-story { padding: 14px; border-left: 4px solid #d78b49; background: #fff8ef; }
+.checkpoint-place { display: inline-block; margin: 16px 0 8px; }
+.text-answer { display: grid; gap: 8px; margin-top: 20px; font-weight: 700; }
+.text-answer input { min-height: 48px; padding: 0 12px; border: 1px solid #aebfaf; border-radius: 10px; font: inherit; }
+.choice-list { display: grid; gap: 10px; margin-top: 20px; border: 0; padding: 0; }
+.choice-list legend { margin-bottom: 10px; font-weight: 800; }
+.choice-list label { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 12px; border: 1px solid #d4ded5; border-radius: 10px; }
+.choice-list input { width: 20px; height: 20px; accent-color: #163e35; }

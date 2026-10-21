@@ -1,6 +1,32 @@
 ﻿# DANA QUEST
 
-Ứng dụng Vite + React + TypeScript với giao diện tiếng Việt. Giữ trang chủ ban đầu, thêm bản đồ và luồng khám phá tự chọn.
+Ứng dụng Vite + React + TypeScript với giao diện tiếng Việt, bản đồ khám phá, quest theo địa điểm, dẫn đường đi bộ và lịch sự kiện Đà Nẵng.
+
+## Quest demo DUE
+
+Quest **DUE — Dấu ấn 50 năm** xuất hiện bằng marker riêng trên bản đồ. Luồng chơi: xem tổng quan → chỉ đường đến Trường Đại học Kinh tế – Đại học Đà Nẵng → GPS xác nhận đã đến → hai checkpoint có dạng nhập đáp án và trắc nghiệm → tổng kết XP/xu quest. Quest dùng route và dữ liệu tiến trình phiên bản 2 riêng, không ghi đè nhiệm vụ ngẫu nhiên hoặc tiến trình phiên bản 1.
+
+Các route chính:
+
+- `#/quest/due-dau-an-50-nam`
+- `#/quest/due-dau-an-50-nam/chi-duong`
+- `#/quest/due-dau-an-50-nam/choi`
+
+## Sự kiện và thông báo
+
+Trang `#/su-kien` hiển thị sự kiện có nguồn công khai và mở trang chi tiết khi bấm vào thẻ. Cầu Rồng được tính lịch gần nhất lúc 21:00 thứ Sáu, thứ Bảy và Chủ nhật; nếu người dùng chủ động bật quyền thông báo, app lên lịch nhắc trước 60 phút. Sự kiện chỉ có ngày dự kiến không được tự gán giờ nhắc.
+
+Thông báo hiện là nhắc cục bộ khi PWA hoặc trang đang hoạt động. Muốn đánh thức thiết bị khi app đã đóng hoàn toàn cần bổ sung dịch vụ Web Push phía máy chủ.
+
+## Cài ứng dụng từ đường link
+
+Production build có Web App Manifest và service worker. Trên Chrome/Edge, mở trang Tài khoản và chọn **Cài ứng dụng** khi trình duyệt cung cấp nút; trên iPhone/iPad dùng Safari → Chia sẻ → **Thêm vào Màn hình chính**. Ứng dụng chạy dạng standalone, không cần App Store hoặc Google Play.
+
+Service worker lưu bộ khung đã truy cập để mở lại giao diện; nền OpenStreetMap, đăng nhập, tuyến đi bộ và dữ liệu trực tiếp vẫn cần mạng. Không cache hàng loạt tile bản đồ.
+
+## Triển khai công khai
+
+`npm run build && npm start` phục vụ cả thư mục `dist` và API trên cùng domain. `render.yaml` là cấu hình mẫu cho Render; cách này phù hợp hơn GitHub Pages vì dự án cần API đăng nhập và dẫn đường. Khi triển khai thực tế cần cấu hình kho dữ liệu bền vững cho `.data` thay vì filesystem tạm của gói miễn phí.
 
 ## Chạy website
 

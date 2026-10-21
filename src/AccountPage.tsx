@@ -11,6 +11,7 @@ import ConfirmDialog from './ConfirmDialog'
 import { notify } from './lib/notifications'
 import './Quest.css'
 import './Account.css'
+import InstallAppCard from './InstallAppCard'
 
 function recordedDate(value?: number) {
   return typeof value === 'number' && Number.isFinite(value) ? new Date(value).toLocaleString('vi-VN') : 'Ngày chưa được lưu'
@@ -109,6 +110,7 @@ export default function AccountPage({ user, onLogout }: { user: AuthUser; onLogo
         <p>{entries.length ? `Bạn đã hoàn thành ${entries.length} nhiệm vụ tại ${visits.length} điểm đến. Cùng lưu thêm những kỷ niệm mới nhé.` : 'Chọn một địa điểm trên bản đồ, khám phá và hoàn thành nhiệm vụ để lưu dấu hành trình.'}</p>
         <a href="#/kham-pha">{entries.length ? 'Tiếp tục hành trình' : 'Khám phá bản đồ'} <span aria-hidden="true">→</span></a>
       </section>
+      <InstallAppCard />
 
       {/* Quick stats summary */}
       <section className="account-stats-row" aria-label="Thống kê nhanh">

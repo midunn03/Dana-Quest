@@ -128,3 +128,16 @@ it('allows the mission button to continue the journey without an exit popup', ()
   expect(canNavigateFrom(current)).toBe(true)
   expect(screen.queryByRole('alertdialog')).toBeNull()
 })
+
+it('reuses navigation for a quest and locks its first checkpoint until arrival', async () => {
+  let success: PositionCallback
+  vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, json: async () => ({ route: walkingFixture }) })))
+  vi.stubGlobal('navigator', { geolocation: { watchPosition: vi.fn(ok => { success = ok; return 8 }), clearWatch: vi.fn() } })
+  vi.stubGlobal('ResizeObserver', class { observe() {} disconnect() {} })
+  const target = { id: 'due-dau-an-50-nam', name: 'Trường Đại học Kinh tế – Đại học Đà Nẵng', position: [16.04752, 108.23987] as [number, number], backHref: '#/quest/due-dau-an-50-nam', continueHref: '#/quest/due-dau-an-50-nam/choi', continueLabel: 'Mở nhiệm vụ đầu tiên', requireArrival: true }
+  render(<NavigationPage id={target.id} target={target} />)
+  expect((screen.getByRole('button', { name: 'Đến điểm bắt đầu để mở nhiệm vụ' }) as HTMLButtonElement).disabled).toBe(true)
+  act(() => success({ coords: { latitude: target.position[0], longitude: target.position[1], accuracy: 10 }, timestamp: Date.now() } as GeolocationPosition))
+  expect((await screen.findByRole('link', { name: 'Mở nhiệm vụ đầu tiên →' })).getAttribute('href')).toBe(target.continueHref)
+  expect(screen.getAllByText('Bạn đã đến nơi!').length).toBeGreaterThan(0)
+})

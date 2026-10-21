@@ -137,6 +137,14 @@ a:focus-visible, button:focus-visible, .leaflet-marker-icon:focus-visible {
   z-index: 0;
   font-family: inherit;
 }
+.quest-map-pin { background: transparent; border: 0; text-align: center; }
+.quest-map-pin span { display: grid; place-items: center; width: 44px; height: 44px; margin: 0 auto; border: 3px solid white; border-radius: 50%; background: #d78b49; color: #fff; font-size: 23px; box-shadow: 0 5px 14px #173d3555; }
+.quest-map-pin b { display: block; width: 120px; margin: 2px 0 0 -21px; color: #163e35; font-size: 11px; line-height: 1.1; text-shadow: 0 1px 2px white, 0 0 4px white; }
+.quest-map-popup { display: grid; gap: 6px; max-width: 220px; color: #163e35; }
+.quest-map-popup small { color: #9a5b24; font-weight: 800; }
+.quest-map-popup strong { font-size: 16px; }
+.quest-map-popup p { margin: 0; font-size: 13px; line-height: 1.4; }
+.quest-map-popup a { color: #163e35; font-weight: 800; }
 
 .map-caption {
   font-size: 12px;

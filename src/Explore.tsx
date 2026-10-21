@@ -15,11 +15,13 @@ import { readAvatar, avatars } from './lib/avatar'
 import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import NearbyDrawer from './NearbyDrawer'
+import { quests } from './data/quests'
 
 const DESTINATION_MARKER_MIN_ZOOM = 15
 const PLAYER_OVERVIEW_ZOOM = 15
 function fitOverview(map: L.Map, player?: [number, number]) {
   const bounds = L.latLngBounds(destinations.map(place => place.position))
+  quests.forEach(quest => bounds.extend(quest.startPosition))
   if (player) bounds.extend(player)
   map.invalidateSize({ pan: false })
   const { x: width, y: height } = map.getSize()
@@ -49,14 +51,20 @@ export default function Explore() {
   const [listening, setListening] = useState(false)
   const [locating, setLocating] = useState(false)
   const [showAllPlaces, setShowAllPlaces] = useState(false)
+  const [now, setNow] = useState(() => Date.now())
   const { sample, error: locationError, updatePosition } = usePlayerLocation()
   const centered = useRef(false)
   const [avatar, setAvatar] = useState(() => readAvatar() ?? avatars[0])
   const nearIntent = /\b(gan|quanh|xung quanh)\b/.test(searchText(query))
-  const filtered = useMemo(() => filterDestinations(destinations, query, nearIntent && sample ? 3 : 0, sample, Date.now()), [query, nearIntent, sample])
+  const filtered = useMemo(() => filterDestinations(destinations, query, nearIntent && sample ? 3 : 0, sample, now), [query, nearIntent, sample, now])
+  const visibleQuests = useMemo(() => {
+    const searched = searchText(query)
+    return quests.filter(quest => !searched || searchText(`${quest.title} ${quest.area} đại học kinh tế due`).includes(searched))
+  }, [query])
   function notify(message: string) {
     window.dispatchEvent(new CustomEvent('dana-toast', { detail: message }))
   }
+  useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 15000); return () => window.clearInterval(timer) }, [])
   function centerOnDevice() {
     if (!window.isSecureContext || !navigator.geolocation) {
       notify('Không thể dùng định vị. Hãy mở ứng dụng bằng HTTPS hoặc localhost và kiểm tra hỗ trợ định vị của thiết bị.')
@@ -184,6 +192,15 @@ export default function Explore() {
       marker.on('add', () => marker.getElement()?.setAttribute('aria-label', place.name))
       pins.push({ marker, size: dragon ? [92, 82] : [68, 66], anchor: dragon ? [46, 68] : [34, 55] })
     })
+    visibleQuests.forEach(quest => {
+      const marker = L.marker(quest.startPosition, {
+        title: quest.title,
+        alt: quest.title,
+        zIndexOffset: 900,
+        icon: L.divIcon({ className: 'quest-map-pin', html: `<span aria-hidden="true">★</span><b>${quest.title}</b>`, iconSize: [78, 66], iconAnchor: [39, 58] }),
+      }).addTo(layer).bindPopup(`<div class="quest-map-popup"><small>QUEST MẪU · ${quest.estimatedMinutes} PHÚT</small><strong>${quest.title}</strong><p>${quest.checkpoints.length} nhiệm vụ tại ${quest.area}</p><a href="#/quest/${quest.id}">Xem quest →</a></div>`)
+      marker.on('add', () => marker.getElement()?.setAttribute('aria-label', `Quest ${quest.title}`))
+    })
     const syncVisibility = () => {
       pins.forEach(({ marker, size, anchor }) => resizeIllustration(marker, map.getZoom(), size, anchor))
     }
@@ -191,7 +208,7 @@ export default function Explore() {
     syncVisibility()
     map.on('zoom', syncVisibility)
     return () => { cancelAnimationFrame(resizeFrame); map.off('zoom', syncVisibility); layer.remove() }
-  }, [filtered, attempt, showPlace])
+  }, [filtered, visibleQuests, attempt, showPlace])
 
   function selectPlace(place: Destination) {
     showPlace(place)

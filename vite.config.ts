@@ -7,6 +7,7 @@ import { navigationApi } from './server/navigation.mjs'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: process.env.GITHUB_ACTIONS ? '/Dana-Quest/' : '/',
   server: { fs: { deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**', '**/.data/**'] } },
   plugins: [react(), {
     name: 'nearby-recommendations-api',

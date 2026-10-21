@@ -1,4 +1,7 @@
 .account-journey { padding: 20px; border-radius: 20px; background: #163e35; color: #fffdf5; }
+.install-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px; border: 1px solid #d8e4dc; border-radius: 18px; background: white; }
+.install-card p { margin-top: 4px; color: #63766d; font-size: 12px; }
+.install-card button { flex: 0 0 auto; min-height: 42px; padding: 0 13px; border: 0; border-radius: 12px; background: #d78b49; color: white; font: inherit; font-weight: 700; }
 .account-journey .game-kicker { color: #bce1ce; font-size: 10px; letter-spacing: .12em; }
 .account-journey h2 { margin: 10px 0; font-size: 20px; line-height: 1.3; }
 .account-journey p { margin: 0 0 16px; color: #d3e5dc; font-size: 13px; line-height: 1.6; }
