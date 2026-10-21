@@ -37,7 +37,7 @@ body { padding: 0; overflow: hidden; }
 .app-shell > main.onboarding .welcome-game, .app-shell > main.onboarding .avatar-card { min-height: 100%; }
 .app-shell > main.onboarding .welcome-game { flex: 1; }
 .app-shell > .notifications { position: absolute; }
-.app-shell > .active-mission-indicator { bottom: calc(var(--app-nav-height) + 12px); }
+.app-shell > .active-mission-indicator { bottom: calc(var(--app-nav-height) + 68px); }
 /* Sheets expand within the content area and never cover the nav row. */
 .app-shell > .gesture-sheet { bottom: var(--app-nav-height); max-height: calc(100% - var(--app-nav-height)); }
 .app-shell > .gesture-sheet.open.expanded { bottom: var(--app-nav-height); height: calc(100% - var(--app-nav-height)); max-height: calc(100% - var(--app-nav-height)); }

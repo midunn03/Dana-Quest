@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { migrateQuestState, newQuestState, updateQuestProgress, type QuestProgressAction } from './questProgress'
 
 const STORAGE_KEY = 'dana-quest-progress-v2'
@@ -16,10 +16,23 @@ export function useQuestProgress() {
   const [state, setState] = useState(loadQuestProgress)
   const [error, setError] = useState('')
 
+  useEffect(() => {
+    const refresh = () => setState(loadQuestProgress())
+    window.addEventListener('dana-quest-progress-changed', refresh)
+    window.addEventListener('storage', refresh)
+    return () => {
+      window.removeEventListener('dana-quest-progress-changed', refresh)
+      window.removeEventListener('storage', refresh)
+    }
+  }, [])
+
   function dispatch(action: QuestProgressAction) {
     try {
       const next = updateQuestProgress(state, action)
-      if (next !== state) localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+      if (next !== state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+        window.dispatchEvent(new Event('dana-quest-progress-changed'))
+      }
       setState(next)
       setError('')
       return true

@@ -95,6 +95,11 @@ a:focus-visible, button:focus-visible, .leaflet-marker-icon:focus-visible {
 .explore-view-switch { z-index: 500; align-self: center; display: grid; grid-template-columns: 1fr 1fr; width: min(230px, calc(100% - 90px)); margin-bottom: 7px; padding: 3px; border-radius: 999px; background: #dfe6e2; }
 .explore-view-switch button { min-height: 34px; border: 0; border-radius: 999px; background: transparent; color: #53615e; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
 .explore-view-switch button[aria-pressed='true'] { background: #172e2a; color: #fff; box-shadow: 0 3px 8px #172e2a30; }
+.explore-page:not(.list-mode) .explore-view-switch { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); margin: 0; }
+.explore-page.list-mode .map-search-bar { position: relative; inset: auto; flex: 0 0 auto; margin: 10px 12px 7px; }
+.explore-page.list-mode .explore-view-switch { position: relative; flex: 0 0 auto; margin-bottom: 7px; }
+.explore-page:not(.list-mode) .map-category-filters { top: 102px; right: 58px; }
+.explore-page:not(.list-mode) .map-compass { top: 98px; }
 
 .explore-heading {
   padding: 0 16px 8px;
@@ -156,6 +161,9 @@ a:focus-visible, button:focus-visible, .leaflet-marker-icon:focus-visible {
 .quest-map-popup strong { font-size: 16px; }
 .quest-map-popup p { margin: 0; font-size: 13px; line-height: 1.4; }
 .quest-map-popup a { color: #163e35; font-weight: 800; }
+.event-map-pin { background: transparent; border: 0; text-align: center; }
+.event-map-pin span { display: grid; place-items: center; width: 40px; height: 40px; margin: 0 auto; border: 3px solid white; border-radius: 50%; background: #8d4fc1; color: white; font-size: 22px; box-shadow: 0 5px 14px #35204855; }
+.event-map-pin b { display: block; width: 118px; margin: 2px 0 0 -20px; color: #3b2850; font-size: 10px; line-height: 1.1; text-shadow: 0 1px 2px white, 0 0 4px white; }
 
 .featured-quest-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 11px; margin: 2px 4px 10px; padding: 11px 12px; border-radius: 16px; background: #172e2a; color: white; text-decoration: none; }
 .featured-quest-row > span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 13px; background: #f4a641; color: #172e2a; font-size: 20px; }
@@ -172,6 +180,10 @@ a:focus-visible, button:focus-visible, .leaflet-marker-icon:focus-visible {
 .quest-result-card small { color: #bfd2cc; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 .quest-result-card strong { max-width: 300px; font-size: 22px; line-height: 1.15; }
 .quest-result-card span { color: #ffe0ae; font-size: 12px; font-weight: 700; }
+.event-result-card { display: grid; gap: 5px; margin-top: 10px; padding: 15px; border: 1px solid #dec9ed; border-radius: 18px; background: #f7effc; color: #352048; text-decoration: none; }
+.event-result-card small { color: #8054a1; font-size: 10px; font-weight: 900; }
+.event-result-card strong { font-size: 17px; }
+.event-result-card span { color: #65566f; font-size: 12px; }
 .place-result-list { display: grid; gap: 8px; }
 .place-result-list button { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; align-items: center; gap: 11px; width: 100%; min-height: 70px; padding: 8px 12px 8px 8px; border: 1px solid #dfe5e2; border-radius: 16px; background: #fff; color: #172e2a; text-align: left; cursor: pointer; }
 .place-result-list img { width: 54px; height: 54px; object-fit: contain; border-radius: 12px; background: #edf3ef; }
