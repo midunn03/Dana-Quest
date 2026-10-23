@@ -13,12 +13,15 @@ import LocationCheck from './LocationCheck'
 import PhotoMission from './PhotoMission'
 import QuestLinks from './QuestLinks'
 import ConfirmDialog from './ConfirmDialog'
+import { usePlaceData } from './lib/placeContent'
 
 export default function DestinationPage({ id }: { id: string }) {
   const [count, setCount] = useState(5)
   const [cancelOpen, setCancelOpen] = useState(false)
   const [resetOpen, setResetOpen] = useState(false)
   const place = getDestination(id)
+  const custom = usePlaceData().content[id]
+  const heroPhoto = custom?.photos[0]
   const { state, loading, busy, error, corrupt, dispatch, resetProgress } = useProgress()
   const location = useLocation()
   const progress = state.destinations[id] ?? emptyProgress()
@@ -28,15 +31,17 @@ export default function DestinationPage({ id }: { id: string }) {
   const needed = requiredCount(progress.selected.length)
   return <main className="quest-page arrival-screen">
     <nav className="quest-nav"><a className="back-link" href="#/kham-pha">← Bản đồ</a><a href="#/album">Album ảnh</a><a href="#/">DANA QUEST</a></nav>
-    <h1>{location.sample && hasArrived(location.sample, place.position, location.now) ? `Đã đến ${place.name}!` : `Khám phá ${place.name}`}</h1><div className="arrival-hero">{place.photo
+    <h1>{location.sample && hasArrived(location.sample, place.position, location.now) ? `Đã đến ${place.name}!` : `Khám phá ${place.name}`}</h1><div className="arrival-hero">{custom
+      ? (heroPhoto ? <img className="destination-photo" src={heroPhoto.url} alt={heroPhoto.caption || place.name} /> : <span className="admin-hero-empty" aria-hidden="true" />)
+      : place.photo
       ? <img className="destination-photo" src={`${import.meta.env.BASE_URL}${place.photo.replace(/^\//, '')}`} alt={`Ảnh thật ${place.name}`} />
-      : <LandmarkArt id={id}/>}<div className="arrival-explorer"><PixelAvatar avatar={readAvatar()??avatars[0]}/></div><span className="arrival-bubble">!</span>{place.photo && place.photoCredit && <span className="photo-credit">Ảnh: {place.photoCredit}</span>}</div>
+      : <LandmarkArt id={id}/>}<div className="arrival-explorer"><PixelAvatar avatar={readAvatar()??avatars[0]}/></div><span className="arrival-bubble">!</span>{!custom && place.photo && place.photoCredit && <span className="photo-credit">Ảnh: {place.photoCredit}</span>}</div>
     <details className="more-info"><summary>Tiện ích hành trình</summary><QuestLinks /></details>
     {error && <p className="notice error" role="alert">{error}</p>}
     {corrupt && <div className="notice error" role="alert"><p>Dữ liệu tiến độ đã lưu bị hỏng nên không thể tiếp tục. Bạn có thể đặt lại tiến độ để chơi tiếp — một bản sao dữ liệu hỏng được giữ lại để khôi phục thủ công, ảnh đã lưu không bị xóa.</p><button type="button" className="cancel-quest-button" disabled={busy} onClick={() => setResetOpen(true)}>Đặt lại tiến độ</button></div>}
     <ConfirmDialog open={resetOpen} title="Đặt lại tiến độ?" message="Toàn bộ tiến độ nhiệm vụ, xu và voucher đã đổi sẽ bị xóa và bắt đầu lại từ đầu. Ảnh trong album được giữ lại. Bạn có chắc chắn?" confirmLabel="Đặt lại" busyLabel="Đang đặt lại…" busy={busy} tone="danger" onCancel={() => setResetOpen(false)} onConfirm={() => void resetProgress().then(ok => { if (ok) setResetOpen(false) })} />
     <details className="more-info"><summary>Kiểm tra đến nơi · thông tin địa điểm</summary>
-      <p>{place.description}</p><p>{place.detail}</p><p>{place.location}</p>
+      {custom ? <>{custom.description && <p>{custom.description}</p>}{custom.detail && <p>{custom.detail}</p>}{custom.address && <p>{custom.address}</p>}</> : <><p>{place.description}</p><p>{place.detail}</p><p>{place.location}</p></>}
       <LocationCheck location={location} target={place.position} />
       <p>Tiến độ lưu trên trình duyệt này. Mỗi nhiệm vụ hoàn thành nhận 10 Green Coins demo một lần. Chưa có xác minh AI.</p>
     </details>    <section className={`quest-panel ${progress.started ? 'compact-progress' : ''}`}>

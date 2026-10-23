@@ -16,25 +16,27 @@ import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import NearbyDrawer from './NearbyDrawer'
 import { dateLabel, parseEvents, reminderText, timeRange, type EventItem } from './lib/events'
-import { DEFAULT_MARKER_METERS, PIN_LABEL_ZOOM, pinMode, pinScale } from './lib/markerScale'
+import { clockOverride, mapDarkness } from './lib/daylight'
+import { usePlaceData } from './lib/placeContent'
+import { GroundSpriteLayer } from './lib/groundSprite'
+import { pixelTileLayer } from './lib/pixelTiles'
+import { DEFAULT_MARKER_METERS, DRAGON_MARKER_METERS, PIN_LABEL_ZOOM, pinMode, pinScale } from './lib/markerScale'
 
 const DESTINATION_MARKER_MIN_ZOOM = 15
 const PLAYER_OVERVIEW_ZOOM = 15
 const DA_NANG_CENTER: [number, number] = [16.0544, 108.2022]
 // Chỉ kéo bản đồ về phía người chơi khi họ đang ở gần Đà Nẵng; ở xa thì vẫn mở ngay Đà Nẵng.
 const PLAYER_NEAR_METERS = 40000
-function fitOverview(map: L.Map, player?: [number, number]) {
-  const bounds = L.latLngBounds(destinations.map(place => place.position))
-  if (player && distanceMeters(player, DA_NANG_CENTER) <= PLAYER_NEAR_METERS) bounds.extend(player)
+// Khi mở bản đồ chỉ hiện quanh một điểm (bán kính khoảng 1 km); người dùng vẫn có thể thu nhỏ để xem xa hơn.
+const AROUND_METERS = 1500
+function fitAround(map: L.Map, center: [number, number]) {
   map.invalidateSize({ pan: false })
-  const { x: width, y: height } = map.getSize()
-  const side = Math.min(55, width * .12)
-  map.fitBounds(bounds, { paddingTopLeft: [side, Math.min(90, height * .25)], paddingBottomRight: [side, Math.min(110, height * .3)], maxZoom: PLAYER_OVERVIEW_ZOOM, animate: false })
+  map.fitBounds(L.latLng(center).toBounds(AROUND_METERS), { animate: false, maxZoom: PLAYER_OVERVIEW_ZOOM })
 }
 function resizeIllustration(marker: L.Marker, zoom: number, size: [number, number], anchor: [number, number], player = false) {
   const element = marker.getElement()
   if (!element) return
-  const scale = Math.max(player ? .6 : .28, Math.min(1.2, 2 ** ((zoom - 15) * .5)))
+  const scale = Math.max(player ? .75 : .28, Math.min(1.2, 2 ** ((zoom - 15) * .5)))
   element.style.width = `${size[0] * scale}px`
   element.style.height = `${size[1] * scale}px`
   element.style.marginLeft = `${-anchor[0] * scale}px`
@@ -60,10 +62,20 @@ export default function Explore() {
   const [selected, setSelected] = useState<Destination | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
   const [tileError, setTileError] = useState(false)
-  const [sprites, setSprites] = useState<Record<string, { url: string; meters: number }>>({})
+  const { sprites } = usePlaceData()
   const [events, setEvents] = useState<EventItem[]>([])
   const [showEvents, setShowEvents] = useState(false)
   const reminded = useRef(new Set<string>())
+  useEffect(() => {
+    // Bản đồ tối dần theo giờ thật ở Đà Nẵng (hoàng hôn → tối nhẹ, bình minh → sáng lại).
+    const apply = () => {
+      const now = clockOverride(window.location.search) ?? new Date()
+      container.current?.style.setProperty('--map-dark', mapDarkness(now).toFixed(3))
+    }
+    apply()
+    const timer = window.setInterval(apply, 60000)
+    return () => window.clearInterval(timer)
+  }, [])
   useEffect(() => {
     // Sự kiện theo giờ thực (Django). Làm mới mỗi phút; lỗi mạng thì giữ danh sách cũ.
     if (typeof fetch !== 'function') return
@@ -84,15 +96,6 @@ export default function Explore() {
     })
   }, [events])
   const happeningPlaces = useMemo(() => new Set(events.filter(event => event.status !== 'later' && event.placeId).map(event => event.placeId as string)), [events])
-  useEffect(() => {
-    // Ảnh pixel do admin chọn (Django). Lỗi mạng hoặc chưa có thì dùng ảnh mặc định.
-    if (typeof fetch !== 'function') return
-    let alive = true
-    fetch('/api/pixel/places').then(r => r.ok ? r.json() : null).then(data => {
-      if (alive && data && typeof data.items === 'object' && data.items) setSprites(data.items)
-    }).catch(() => undefined)
-    return () => { alive = false }
-  }, [])
   const [mapUnavailable, setMapUnavailable] = useState(false)
   const [loadingTiles, setLoadingTiles] = useState(true)
   const [attempt, setAttempt] = useState(0)
@@ -185,8 +188,8 @@ export default function Explore() {
       map.attributionControl.setPrefix(false)
       mapRef.current = map
       centered.current = false
-      fitOverview(map)
-      const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      fitAround(map, DA_NANG_CENTER)
+      const tiles = pixelTileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       })
@@ -229,12 +232,14 @@ export default function Explore() {
     const pins: { marker: L.Marker; size: [number, number]; anchor: [number, number]; lat: number; meters: number }[] = []
     filtered.forEach(place => {
       const dragon = place.id === 'cau-rong'
+      const ground = sprites[place.id]?.ground
+      if (ground) new GroundSpriteLayer(sprites[place.id].url, ground, () => showPlace(place)).addTo(layer)
       const marker = L.marker(place.position, {
         title: place.name, alt: place.name,
-        icon: L.divIcon({ className: `destination-pin illustrated-pin ${dragon ? 'dragon-pin' : ''} ${happeningPlaces.has(place.id) ? 'event-pin' : ''}`, html: `${sprites[place.id] ? `<img src="${encodeURI(sprites[place.id].url)}" alt=""/>` : '<span class="plain-pin" aria-hidden="true"></span>'}<b>${place.name}</b>`, iconSize: dragon ? [92, 82] : [68, 66], iconAnchor: dragon ? [46, 68] : [34, 55] }),
+        icon: L.divIcon({ className: `destination-pin illustrated-pin ${ground ? 'ground-pin' : ''} ${dragon ? 'dragon-pin' : ''} ${happeningPlaces.has(place.id) ? 'event-pin' : ''}`, html: `${ground ? '<span class="plain-pin ground-plain" aria-hidden="true"></span>' : sprites[place.id] ? `<img src="${encodeURI(sprites[place.id].url)}" alt=""/>` : '<span class="plain-pin" aria-hidden="true"></span>'}<b>${place.name}</b>`, iconSize: dragon ? [92, 82] : [68, 66], iconAnchor: dragon ? [46, 68] : [34, 55] }),
       }).addTo(layer).bindTooltip(place.name, { direction: 'top', offset: [0, -20] }).on('click', () => showPlace(place))
       marker.on('add', () => marker.getElement()?.setAttribute('aria-label', place.name))
-      pins.push({ marker, size: dragon ? [92, 82] : [68, 66], anchor: dragon ? [46, 68] : [34, 55], lat: place.position[0], meters: sprites[place.id]?.meters ?? place.markerMeters ?? (dragon ? 160 : DEFAULT_MARKER_METERS) })
+      pins.push({ marker, size: dragon ? [92, 82] : [68, 66], anchor: dragon ? [46, 68] : [34, 55], lat: place.position[0], meters: ground ? 60 : sprites[place.id]?.meters ?? place.markerMeters ?? (dragon ? DRAGON_MARKER_METERS : DEFAULT_MARKER_METERS) })
     })
     const syncVisibility = () => {
       pins.forEach(({ marker, size, anchor, lat, meters }) => resizePlacePin(marker, map.getZoom(), lat, size, anchor, meters))
@@ -255,22 +260,33 @@ export default function Explore() {
     window.addEventListener('dana-avatar-changed', update)
     return () => window.removeEventListener('dana-avatar-changed', update)
   }, [])
+  // Lời nhắn của nhân vật khi bạn đang đứng gần một địa điểm.
+  const playerHint = useMemo(() => {
+    if (!sample) return null
+    const here: [number, number] = [sample.latitude, sample.longitude]
+    const nearest = destinations.map(place => ({ place, meters: distanceMeters(here, place.position) })).sort((a, b) => a.meters - b.meters)[0]
+    if (!nearest || nearest.meters > 300) return null
+    const text = nearest.meters + sample.accuracy <= 100 ? `Bạn đã tới ${nearest.place.name}! Bấm vào mình để mở nhiệm vụ.` : `Gần ${nearest.place.name} · ${Math.round(nearest.meters / 10) * 10} m`
+    return { place: nearest.place, text }
+  }, [sample])
   useEffect(() => {
     const map = mapRef.current
     if (!map || !sample) return
     const point: [number, number] = [sample.latitude, sample.longitude]
     const avatarElement = document.createElement('div')
     const avatarRoot = createRoot(avatarElement)
-    avatarRoot.render(<PixelAvatar avatar={avatar}/>)
-    const marker = L.marker(point, { title: `Vị trí của bạn · ${avatar.name}`, alt: `Nhân vật ${avatar.name}`, zIndexOffset: 2000, icon: L.divIcon({ className: 'player-location-marker', html: avatarElement, iconSize: [40, 50], iconAnchor: [20, 50] }) }).addTo(map)
+    avatarRoot.render(<><PixelAvatar avatar={avatar}/>{playerHint && <span className="player-bubble" role="status">{playerHint.text}</span>}<span className="player-shadow" aria-hidden="true"/></>)
+    const marker = L.marker(point, { title: `Vị trí của bạn · ${avatar.name}`, alt: `Nhân vật ${avatar.name}`, zIndexOffset: 2000, icon: L.divIcon({ className: 'player-location-marker', html: avatarElement, iconSize: [48, 60], iconAnchor: [24, 60] }) }).addTo(map)
     marker.bindTooltip(`Vị trí ước tính của bạn · ${avatar.name}`)
+    // Bấm vào nhân vật: nếu đang ở gần một địa điểm thì mở địa điểm đó, không thì căn bản đồ về chỗ bạn.
+    marker.on('click', () => { if (playerHint) showPlace(playerHint.place); else map.setView(point, Math.max(map.getZoom(), 16)) })
     const circle = L.circle(point, { radius: sample.accuracy, color: '#2385bd', weight: 1, fillOpacity: .12, interactive: false }).addTo(map)
-    if (!centered.current) { fitOverview(map, point); centered.current = true }
-    const resizePlayer = () => resizeIllustration(marker, map.getZoom(), [40, 50], [20, 50], true)
+    if (!centered.current) { fitAround(map, distanceMeters(point, DA_NANG_CENTER) <= PLAYER_NEAR_METERS ? point : DA_NANG_CENTER); centered.current = true }
+    const resizePlayer = () => resizeIllustration(marker, map.getZoom(), [48, 60], [24, 60], true)
     resizePlayer()
     map.on('zoom', resizePlayer)
     return () => { map.off('zoom', resizePlayer); marker.remove(); circle.remove(); queueMicrotask(() => avatarRoot.unmount()) }
-  }, [sample, avatar, attempt])
+  }, [sample, avatar, attempt, playerHint, showPlace])
   const recommendedPlaces = sample ? filtered.map(place => ({ place, distance: distanceMeters([sample.latitude, sample.longitude], place.position) }))
     .filter(item => item.distance + sample.accuracy <= 3000)
     .sort((a, b) => (b.place.featuredScore - b.distance / 100) - (a.place.featuredScore - a.distance / 100)).slice(0, 6) : []
@@ -322,7 +338,7 @@ export default function Explore() {
             <p>Tối đa 6 địa điểm trong 3 km quanh vị trí thiết bị, có tính đến sai số định vị.</p>
             {!sample && <p role="status">{locationError || 'Đang chờ quyền định vị và vị trí thiết bị…'}</p>}
             {sample && !recommendedPlaces.length && <p>Chưa có địa điểm phù hợp trong 3 km quanh bạn.</p>}
-            {recommendedPlaces.map(({place, distance}) => <button type="button" className="suggestion-chip" key={place.id} onClick={() => selectPlace(place)}>{sprites[place.id] ? <img src={sprites[place.id].url} alt=""/> :    <span className="plain-chip" aria-hidden="true"/>}<span>{place.name}<small>{place.highlightReason} · {(distance / 1000).toFixed(1)} km</small></span></button>)}
+            {recommendedPlaces.map(({place, distance}) => <button type="button" className="suggestion-chip" key={place.id} onClick={() => selectPlace(place)}>{sprites[place.id] ? <img src={sprites[place.id].url} alt=""/> : <span className="plain-chip" aria-hidden="true"/>}<span>{place.name}<small>{place.highlightReason} · {(distance / 1000).toFixed(1)} km</small></span></button>)}
           </div>}
         </NearbyDrawer>}
 

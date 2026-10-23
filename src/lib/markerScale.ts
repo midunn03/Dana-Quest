@@ -4,7 +4,9 @@ export const PIN_DOT_ZOOM = 14    // thấp hơn: chỉ còn chấm nhỏ
 export const PIN_LABEL_ZOOM = 16  // từ mức này mới hiện tên địa điểm
 export const MAX_PIN_SCALE = 1.25
 export const MIN_PIN_SCALE = 0.02
-export const DEFAULT_MARKER_METERS = 70
+// Ở mức zoom 15 (khi vừa mở bản đồ) ghim rộng khoảng 44 px; zoom 16 trở lên là kích thước đầy đủ.
+export const DEFAULT_MARKER_METERS = 200
+export const DRAGON_MARKER_METERS = 320
 
 /** Số mét thực tế ứng với 1 pixel màn hình tại vĩ độ và mức zoom đã cho. */
 export function metersPerPixel(lat: number, zoom: number): number {
