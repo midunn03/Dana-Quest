@@ -15,13 +15,13 @@ import { readAvatar, avatars } from './lib/avatar'
 import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import NearbyDrawer from './NearbyDrawer'
-<<<<<<< HEAD
 import { dateLabel, parseEvents, reminderText, timeRange, type EventItem } from './lib/events'
 import { clockOverride, mapDarkness } from './lib/daylight'
 import { usePlaceData } from './lib/placeContent'
 import { GroundSpriteLayer } from './lib/groundSprite'
 import { pixelTileLayer } from './lib/pixelTiles'
 import { DEFAULT_MARKER_METERS, DRAGON_MARKER_METERS, PIN_LABEL_ZOOM, pinMode, pinScale } from './lib/markerScale'
+import { quests } from './data/quests'
 
 const DESTINATION_MARKER_MIN_ZOOM = 15
 const PLAYER_OVERVIEW_ZOOM = 15
@@ -31,16 +31,6 @@ const PLAYER_NEAR_METERS = 40000
 // Khi mở bản đồ chỉ hiện quanh một điểm (bán kính khoảng 1 km); người dùng vẫn có thể thu nhỏ để xem xa hơn.
 const AROUND_METERS = 1500
 function fitAround(map: L.Map, center: [number, number]) {
-=======
-import { quests } from './data/quests'
-
-const DESTINATION_MARKER_MIN_ZOOM = 15
-const PLAYER_OVERVIEW_ZOOM = 15
-function fitOverview(map: L.Map, player?: [number, number]) {
-  const bounds = L.latLngBounds(destinations.map(place => place.position))
-  quests.forEach(quest => bounds.extend(quest.startPosition))
-  if (player) bounds.extend(player)
->>>>>>> origin/main
   map.invalidateSize({ pan: false })
   map.fitBounds(L.latLng(center).toBounds(AROUND_METERS), { animate: false, maxZoom: PLAYER_OVERVIEW_ZOOM })
 }
@@ -274,11 +264,7 @@ export default function Explore() {
     syncVisibility()
     map.on('zoom', syncVisibility)
     return () => { cancelAnimationFrame(resizeFrame); map.off('zoom', syncVisibility); layer.remove() }
-<<<<<<< HEAD
-  }, [filtered, attempt, showPlace, sprites, happeningPlaces])
-=======
-  }, [filtered, visibleQuests, attempt, showPlace])
->>>>>>> origin/main
+  }, [filtered, visibleQuests, attempt, showPlace, sprites, happeningPlaces])
 
   function selectPlace(place: Destination) {
     showPlace(place)
