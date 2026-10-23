@@ -13,9 +13,11 @@ export interface StoredPhotoMeta { id: string; destinationId: string; missionId?
 type StoredPhoto = StoredPhotoMeta & { data: string }
 interface Snapshot { revision: number; state: ReturnType<typeof readState>; photos: StoredPhotoMeta[] }
 interface FullSnapshot { revision: number; state: ReturnType<typeof readState>; photos: StoredPhoto[] }
+// Django yêu cầu mã CSRF (lấy từ cookie "csrftoken") cho các yêu cầu ghi dữ liệu.
+const csrfToken = () => decodeURIComponent(document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.slice(10) ?? '')
 async function request<T>(id: string, body?: unknown, query = ''): Promise<T> {
   if (owner !== id) throw new Error('Tài khoản đã thay đổi. Hãy tải lại trang.')
-  const response = await fetch(`${authApiBase()}/game${query}`, { method: body ? 'POST' : 'GET', credentials: 'include', headers: { 'Content-Type': 'application/json', 'X-Dana-User': id }, body: body ? JSON.stringify(body) : undefined })
+  const response = await fetch(`${authApiBase()}/game${query}`, { method: body ? 'POST' : 'GET', credentials: 'include', headers: { 'Content-Type': 'application/json', 'X-Dana-User': id, 'X-CSRFToken': csrfToken() }, body: body ? JSON.stringify(body) : undefined })
   const data = await response.json()
   if (!response.ok) throw Object.assign(new Error(data.message ?? 'Không đồng bộ được dữ liệu. Hãy kiểm tra kết nối và thử lại.'), { status: response.status })
   if (owner !== id) throw new Error('Tài khoản đã thay đổi. Hãy tải lại trang.')

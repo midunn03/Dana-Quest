@@ -203,14 +203,14 @@ it('shows recovery links for unknown routes and keeps map aliases and trailing s
   await waitFor(() => expect(window.location.hash).toBe('#/kham-pha'))
 })
 
-it('uses touch zoom without +/- controls and respects search', async () => {
+it('shows +/- zoom controls and respects search', async () => {
   const user = userEvent.setup()
   window.location.hash = '#/kham-pha'
   render(<StrictMode><App /></StrictMode>)
   await screen.findByRole('region', { name: 'Khám phá bản đồ' })
   expect(document.querySelectorAll('.destination-pin')).toHaveLength(15)
-  expect(screen.queryByRole('button', { name: 'Thu nhỏ', exact: true })).toBeNull()
-  expect(screen.queryByRole('button', { name: 'Phóng to', exact: true })).toBeNull()
+  expect(screen.getByRole('button', { name: 'Thu nhỏ', exact: true })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Phóng to', exact: true })).toBeTruthy()
   await user.type(screen.getByRole('searchbox'), 'cau rong')
   await waitFor(() => expect(document.querySelectorAll('.destination-pin')).toHaveLength(1))
   expect(screen.getByRole('button', { name: 'Cầu Rồng', exact: true })).toBeTruthy()

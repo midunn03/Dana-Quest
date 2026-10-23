@@ -402,3 +402,50 @@ a:focus-visible, button:focus-visible, .leaflet-marker-icon:focus-visible {
   .explore-heading h1 { font-size: 1.7rem; }
 }
 
+
+/* Ghim địa điểm co theo mức zoom: ẩn khi xem xa, chấm nhỏ khi xa vừa, đầy đủ khi zoom gần */
+.illustrated-pin.hidden-pin{display:none!important}
+.illustrated-pin.dot-pin img,.illustrated-pin.dot-pin b{display:none}
+.illustrated-pin.dot-pin::before{content:'';position:absolute;left:50%;bottom:0;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#ffc64b;border:2px solid #23444e;box-shadow:0 1px 3px #0005}
+
+/* Ghim mặc định (chưa có ảnh pixel từ admin) và ảnh pixel do admin tải lên */
+.illustrated-pin img{object-fit:contain;image-rendering:pixelated}
+.illustrated-pin .plain-pin{height:calc(100% - 18px);aspect-ratio:1;border-radius:50%;background:#ffc64b;border:3px solid #23444e;box-shadow:0 2px 4px #0004}
+.suggestion-chip .plain-chip{display:inline-grid;place-items:center;width:40px;font-size:22px}
+@media (min-width:768px){.map-screen .leaflet-top.leaflet-right{top:116px}}
+.leaflet-control-zoom a{width:36px!important;height:36px!important;line-height:36px!important;font-size:20px}
+
+/* Sự kiện theo giờ */
+.event-list{display:grid;gap:8px;padding:4px 2px}
+.event-item{display:grid;gap:2px;text-align:left;padding:10px 12px;border:2px solid #23444e33;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.event-item:disabled{cursor:default}
+.event-item .event-when{font-size:.7rem;font-weight:800;letter-spacing:.05em;color:#476477}
+.event-item.event-live,.event-item.event-soon{border-color:#e0892b;background:#fff6e2}
+.event-item.event-live .event-when,.event-item.event-soon .event-when{color:#b45f0a}
+.event-item small{color:#555}
+.illustrated-pin.event-pin::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:3px solid #e0892b;animation:event-pulse 1.4s ease-out infinite;pointer-events:none}
+@keyframes event-pulse{from{transform:scale(.7);opacity:.9}to{transform:scale(1.4);opacity:0}}
+@media (prefers-reduced-motion:reduce){.illustrated-pin.event-pin::after{animation:none}}
+
+/* Nhân vật của bạn trên bản đồ */
+.player-location-marker{overflow:visible}
+.player-location-marker > div{position:relative;overflow:visible}
+.player-location-marker .pixel-avatar{animation:player-bob 1.1s ease-in-out infinite;transform-origin:50% 100%}
+.player-location-marker .player-shadow{position:absolute;left:12%;right:12%;bottom:-3px;height:8px;border-radius:50%;background:#0003}
+.player-location-marker .player-bubble{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:190px;padding:6px 9px;border-radius:10px;background:#fffbed;border:2px solid #23444e;color:#234b4e;font-size:11px;font-weight:700;line-height:1.25;text-align:center;box-shadow:0 2px 6px #0003;cursor:pointer}
+.player-location-marker .player-bubble::after{content:'';position:absolute;left:50%;top:100%;margin-left:-5px;border:5px solid transparent;border-top-color:#23444e}
+@keyframes player-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.player-location-marker .pixel-avatar{animation:none}}
+.suggestion-chip .plain-chip::before{content:'📍'}
+
+/* Bản đồ tối nhẹ vào buổi tối: --map-dark chạy từ 0 (ngày) đến 1 (đêm) */
+.map{background-color:hsl(200 22% calc(88% - var(--map-dark, 0) * 48%))}
+.map .leaflet-tile-pane{filter:brightness(calc(1 - var(--map-dark, 0) * .36)) saturate(calc(1 - var(--map-dark, 0) * .25)) hue-rotate(calc(var(--map-dark, 0) * -8deg));transition:filter 1s}
+
+/* Ảnh pixel dán xuống mặt đất: to nhỏ theo bản đồ, nằm dưới các ghim */
+.ground-sprite { position: absolute; left: 0; top: 0; max-width: none; image-rendering: pixelated; pointer-events: none; user-select: none; will-change: transform; }
+.ground-sprite.ground-clickable { pointer-events: auto; cursor: pointer; }
+.ground-pin .ground-plain { opacity: .9; }
+.ground-pin b { opacity: 0; }
+/* Nền bản đồ kiểu pixel: ô bản đồ được thu nhỏ rồi phóng to không làm mịn */
+.leaflet-tile-pane .leaflet-tile { image-rendering: pixelated; image-rendering: crisp-edges; image-rendering: pixelated; }

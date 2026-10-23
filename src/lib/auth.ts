@@ -1,3 +1,4 @@
+const csrfToken = () => decodeURIComponent(document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.slice(10) ?? '')
 export interface AuthUser {
   id: string
   name: string
@@ -17,7 +18,7 @@ async function request(path: string, method = 'GET', body?: unknown): Promise<{ 
   const response = await fetch(`${base}${path}`, {
     method,
     credentials: 'include',
-    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+        headers: body ? { 'Content-Type': 'application/json', 'X-CSRFToken': csrfToken() } : undefined,
     body: body ? JSON.stringify(body) : undefined,
   })
   if (!response.ok) {
@@ -49,7 +50,7 @@ export async function loginAccount(input: { username?: string; email?: string; p
 export async function logoutAccount(): Promise<void> {
   const base = authApiBase()
   if (!base) throw new Error('Dịch vụ xác thực chưa được cấu hình.')
-  const response = await fetch(`${base}/logout`, { method: 'POST', credentials: 'include' })
+    const response = await fetch(`${base}/logout`, { method: 'POST', credentials: 'include', headers: { 'X-CSRFToken': csrfToken() } })
   if (!response.ok) throw new Error(`Không thể kết thúc phiên (lỗi ${response.status}).`)
 }
 

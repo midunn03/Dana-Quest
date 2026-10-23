@@ -44,7 +44,7 @@ it('starts collapsed, displays the player, restricts nearby places to 3 km and u
   await waitFor(() => expect(document.querySelectorAll('.player-location-marker')).toHaveLength(1))
   const map = fitBounds.mock.instances.at(-1)! as L.Map
   expect(map.getBounds().contains([16.0611, 108.2275])).toBe(true)
-  for (const place of destinations) expect(map.getBounds().contains(place.position)).toBe(true)
+  expect(map.getZoom()).toBe(15) // mở bản đồ quanh vị trí người chơi (khoảng 1 km), không thu nhỏ toàn thành phố
   expect(document.querySelectorAll('.destination-pin')).toHaveLength(destinations.length)
   const smallPinWidth = parseFloat((document.querySelector('.destination-pin') as HTMLElement).style.width)
   const smallPlayerWidth = parseFloat((document.querySelector('.player-location-marker') as HTMLElement).style.width)
