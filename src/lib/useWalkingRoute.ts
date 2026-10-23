@@ -3,7 +3,7 @@ import { routeProgress, validRoute, type WalkingRoute } from './routing'
 import { hasArrived, isFresh, type LocationSample } from './location'
 import { getDestination } from '../data/destinations'
 import { NAVIGATION_MAX_ACCURACY } from './usePlayerLocation'
-export function useWalkingRoute(id: string, sample: LocationSample | null) {
+export function useWalkingRoute(id: string, sample: LocationSample | null, target?: [number, number]) {
   const [route, setRoute] = useState<WalkingRoute | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -18,8 +18,8 @@ export function useWalkingRoute(id: string, sample: LocationSample | null) {
   }, [id])
   useEffect(() => {
     const state = request.current
-    const destination = getDestination(id)
-    if (!sample || !isFresh(sample) || sample.accuracy > NAVIGATION_MAX_ACCURACY || !destination || hasArrived(sample, destination.position)) return
+    const position = target ?? getDestination(id)?.position
+    if (!sample || !isFresh(sample) || sample.accuracy > NAVIGATION_MAX_ACCURACY || !position || hasArrived(sample, position)) return
     const progress = current.current ? routeProgress(current.current, sample) : null
     const refined = originAccuracy.current > 50 && sample.accuracy <= 50
     if (progress && !refined && progress.offRoute <= Math.max(35, sample.accuracy * 1.5)) return
@@ -36,7 +36,7 @@ export function useWalkingRoute(id: string, sample: LocationSample | null) {
       .then(value => { if (generation !== state.generation) return; current.current = value; setRoute(value) })
       .catch(cause => { if (generation === state.generation && !controller.signal.aborted) setError(cause instanceof Error ? cause.message : 'Chưa tính được đường đi.') })
       .finally(() => { if (generation === state.generation) { state.controller = null; setBusy(false) } })
-  }, [id, sample, tick])
+  }, [id, sample, target, tick])
   const progress = route && sample ? routeProgress(route, sample) : null
   const onRoute = progress && sample && progress.offRoute <= Math.max(35, sample.accuracy * 1.5)
   return { route, progress: onRoute ? progress : null, busy, error, usable: !!sample && sample.accuracy <= NAVIGATION_MAX_ACCURACY, precise: !!sample && sample.accuracy <= 50 }

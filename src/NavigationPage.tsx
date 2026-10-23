@@ -1,6 +1,6 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { getDestination } from './data/destinations'
@@ -18,7 +18,17 @@ function routeViewport(map: L.Map): L.FitBoundsOptions {
   return { paddingTopLeft: [side, Math.min(110, height * .32)], paddingBottomRight: [side, Math.min(230, height * .44)], maxZoom: 16, animate: false }
 }
 
-export default function NavigationPage({ id }: { id: string }) {
+export interface NavigationTarget {
+  id: string
+  name: string
+  position: [number, number]
+  backHref: string
+  continueHref: string
+  continueLabel?: string
+  requireArrival?: boolean
+}
+
+export default function NavigationPage({ id, target }: { id: string; target?: NavigationTarget }) {
   const container = useRef<HTMLDivElement>(null)
   const panel = useRef<HTMLElement>(null)
   const mapRef = useRef<L.Map | null>(null)
@@ -35,19 +45,27 @@ export default function NavigationPage({ id }: { id: string }) {
   const allowLeave = useRef(false)
   const backLink = useRef<HTMLAnchorElement>(null)
   const cancelLeave = useCallback(() => { setPendingLeave(null); backLink.current?.focus() }, [])
-  const place = getDestination(id)
+  const destination = getDestination(id)
+  const place: NavigationTarget | undefined = useMemo(() => target ?? (destination ? {
+    id: destination.id,
+    name: destination.name,
+    position: destination.position,
+    backHref: `#/dia-diem/${destination.id}`,
+    continueHref: `#/nhiem-vu/${destination.id}`,
+  } : undefined), [destination, target])
   const { sample, error: locationError, retry: retryLocation } = usePlayerLocation()
-  const navigation = useWalkingRoute(id, sample)
+  const navigation = useWalkingRoute(id, sample, place?.position)
+  const currentHref = target ? `#/quest/${id}/chi-duong` : `#/chi-duong/${id}`
   useEffect(() => {
     const guard = (event: Event) => {
       const target = (event as CustomEvent<{ hash: string }>).detail.hash
-      if (allowLeave.current || target === `#/chi-duong/${id}`) return
+      if (allowLeave.current || target === currentHref) return
       event.preventDefault()
       setPendingLeave(target || '#/')
     }
     window.addEventListener('dana-before-navigation', guard)
     return () => window.removeEventListener('dana-before-navigation', guard)
-  }, [id])
+  }, [currentHref])
   useEffect(() => {
     if (!container.current || !place) return
     const map = L.map(container.current, { zoomControl: false }).setView(place.position, 15)
@@ -114,7 +132,7 @@ export default function NavigationPage({ id }: { id: string }) {
   const instruction = arrived ? 'Bạn đã đến nơi!' : progress ? progress.toTurn <= 12 ? navigation.precise ? turnText(progress.next) : 'Gần chỗ rẽ · vị trí ước tính' : `Đi thẳng ${formatMeters(progress.toTurn)}` : !sample ? locationError || 'Đang xác định vị trí…' : !navigation.usable ? 'Vị trí còn lệch nhiều. Đang lấy GPS tốt hơn…' : navigation.busy ? 'Đang tính đường đi bộ…' : navigation.error || 'Đang tính lại đường đi…'
   return <main className="navigation-screen">
     <div className="route-map" ref={container} role="region" aria-label="Bản đồ vị trí của bạn và điểm đến" />
-    <div className="route-instruction"><a ref={backLink} href={`#/dia-diem/${id}`} aria-label="Quay lại chi tiết" onClick={event => { event.preventDefault(); setPendingLeave(`#/dia-diem/${id}`) }}>←</a><b aria-hidden="true">{turnIcon(progress?.next)}</b><div aria-live="polite"><strong>{instruction}</strong><small>{!arrived && progress ? progress.toTurn > 12 ? `Sau đó ${nextTurnText(progress.next)}` : navigation.precise ? `Tiếp tục ${formatMeters(progress.next.distance)}` : turnText(progress.next) : `Đến ${place.name}`}</small></div></div>
+    <div className="route-instruction"><a ref={backLink} href={place.backHref} aria-label="Quay lại chi tiết" onClick={event => { event.preventDefault(); setPendingLeave(place.backHref) }}>←</a><b aria-hidden="true">{turnIcon(progress?.next)}</b><div aria-live="polite"><strong>{instruction}</strong><small>{!arrived && progress ? progress.toTurn > 12 ? `Sau đó ${nextTurnText(progress.next)}` : navigation.precise ? `Tiếp tục ${formatMeters(progress.next.distance)}` : turnText(progress.next) : `Đến ${place.name}`}</small></div></div>
     <section ref={panel} className={`route-sheet live-route-sheet ${expanded ? 'expanded' : ''} ${height !== null ? 'dragging' : ''}`} style={height !== null ? { height } : undefined} aria-label={`Hướng dẫn đến ${place.name}`}>
       <button type="button" className="route-sheet-handle" aria-label="Mở rộng hoặc thu gọn hướng dẫn" aria-expanded={expanded} aria-controls="route-sheet-content"
         onClick={() => { if (!moved.current) setExpanded(value => !value) }}
@@ -135,7 +153,9 @@ export default function NavigationPage({ id }: { id: string }) {
         {locationError && <p role="status" className="error">{locationError}</p>}
         {!sample && locationError && <button type="button" onClick={retryLocation}>Thử lấy vị trí</button>}
         {error && <p role="alert" className="error">Không tải được nền bản đồ.</p>}
-        <a className="blue-button" href={`#/nhiem-vu/${id}`} onClick={() => { allowLeave.current = true }}>Xem nhiệm vụ →</a>
+        {place.requireArrival && !arrived
+          ? <button type="button" className="blue-button" disabled>Đến điểm bắt đầu để mở nhiệm vụ</button>
+          : <a className="blue-button" href={place.continueHref} onClick={() => { allowLeave.current = true }}>{place.continueLabel ?? 'Xem nhiệm vụ'} →</a>}
       </div>
     </section>
     <ConfirmDialog open={pendingLeave !== null} title="Rời khỏi hành trình?" message="Bạn có muốn rời khỏi hành trình hiện tại và quay về trang trước không?" confirmLabel="Rời khỏi hành trình" cancelLabel="Tiếp tục hành trình" onCancel={cancelLeave} onConfirm={() => { if (pendingLeave !== null) { allowLeave.current = true; window.location.hash = pendingLeave; setPendingLeave(null) } }} />

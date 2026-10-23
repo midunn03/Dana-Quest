@@ -1,19 +1,26 @@
 import GameIcon from './GameIcon'
 import CelebrationPage from './CelebrationPage'
 import DestinationDetails from './DestinationDetails'
-import NavigationPage from './NavigationPage'
 import CameraPage from './CameraPage'
 import WelcomePage from './WelcomePage'
 import AvatarPage from './AvatarPage'
 import Notifications from './Notifications'
-import { useEffect, useRef, useState } from 'react'
-import Explore from './Explore'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import DestinationPage from './DestinationPage'
 import AlbumPage from './AlbumPage'
 import ShopPage from './ShopPage'
 import AccountPage from './AccountPage'
 import AuthPage from './AuthPage'
 import ActiveMissionIndicator from './ActiveMissionIndicator'
+import QuestDetailsPage from './QuestDetailsPage'
+import QuestPlayPage from './QuestPlayPage'
+import EventsPage from './EventsPage'
+import EventDetailsPage from './EventDetailsPage'
+import { scheduleEventReminders } from './lib/eventReminders'
+
+const Explore = lazy(() => import('./Explore'))
+const NavigationPage = lazy(() => import('./NavigationPage'))
+const QuestNavigationPage = lazy(() => import('./QuestNavigationPage'))
 import { AuthProvider, useAuth } from './AuthContext'
 import './App.css'
 import './GameVisual.css'
@@ -26,6 +33,7 @@ function AppRouter() {
   const auth = useAuth()
   const [hash, setHash] = useState(window.location.hash)
   const shell = useRef<HTMLDivElement>(null)
+  useEffect(() => { scheduleEventReminders() }, [])
   useEffect(() => {
     const navigate = () => { if (canNavigateFrom(hash)) { setHash(window.location.hash); window.scrollTo(0, 0) } }
     window.addEventListener('hashchange', navigate)
@@ -57,6 +65,11 @@ function AppRouter() {
     : route === '#/chon-nhan-vat' || route === '#/nhan-vat' ? <AvatarPage editing={route === '#/nhan-vat'} initialAvatarId={auth.user?.avatarId} onAvatarConfirmed={auth.saveAvatar} />
     : route === '#/album' ? <AlbumPage />
     : route === '#/cua-hang' ? <ShopPage />
+    : route === '#/su-kien' ? <EventsPage />
+    : route.startsWith('#/su-kien/') ? <EventDetailsPage key={route} id={route.slice('#/su-kien/'.length)} />
+    : /^#\/quest\/[^/]+\/chi-duong$/.test(route) ? <QuestNavigationPage key={route} id={route.split('/')[2]} />
+    : /^#\/quest\/[^/]+\/choi$/.test(route) ? <QuestPlayPage key={route} id={route.split('/')[2]} />
+    : route.startsWith('#/quest/') ? <QuestDetailsPage key={route} id={route.slice('#/quest/'.length)} />
     : route.startsWith('#/chi-duong/') ? <NavigationPage key={route} id={route.slice('#/chi-duong/'.length)} />
     : route.startsWith('#/hoan-thanh/') ? <CelebrationPage key={route} id={route.split('/')[2]} missionId={route.split('/')[3]} />
     : route.startsWith('#/may-anh/') ? <CameraPage key={route} id={route.split('/')[2]} missionId={route.split('/')[3]} />
@@ -74,9 +87,10 @@ function AppRouter() {
     ) : <WelcomePage />
   const onboarding = route === '#/' || authRoute || route === '#/chon-nhan-vat' || route === '#/nhan-vat' || route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
   return <div ref={shell} className={`app-shell ${onboarding ? 'onboarding-shell' : ''} ${route === '#/tai-khoan' ? 'account-shell' : ''}`}>
-    {page}<Notifications />{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}
+    <Suspense fallback={<main className="auth-loading"><p role="status">Đang mở bản đồ…</p></main>}>{page}</Suspense><Notifications />{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}
     <nav className="bottom-nav" aria-label="Điều hướng chính">
-      <a href="#/kham-pha" aria-label="Bản đồ" aria-current={isMap || /#\/(dia-diem|nhiem-vu|chi-duong)\//.test(route) ? 'page' : undefined}><GameIcon kind="map"/>Bản đồ</a>
+      <a href="#/kham-pha" aria-label="Bản đồ" aria-current={isMap || /#\/(dia-diem|nhiem-vu|chi-duong|quest)\//.test(route) ? 'page' : undefined}><GameIcon kind="map"/>Bản đồ</a>
+      <a href="#/su-kien" aria-label="Sự kiện" aria-current={route.startsWith('#/su-kien') ? 'page' : undefined}><span aria-hidden="true">◷</span>Sự kiện</a>
       <a href="#/album" aria-label="Album" aria-current={route === '#/album' ? 'page' : undefined}><GameIcon kind="album"/>Thư viện</a>
       <a href="#/cua-hang" aria-label="Đổi quà" aria-current={route === '#/cua-hang' ? 'page' : undefined}><GameIcon kind="gift"/>Phần thưởng</a>
       <a href="#/tai-khoan" aria-label="Tài khoản" aria-current={route === '#/tai-khoan' ? 'page' : undefined}><GameIcon kind="person"/>Tài khoản</a>    </nav>

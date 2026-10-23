@@ -1,0 +1,14 @@
+{
+  "name": "DANA QUEST",
+  "short_name": "Dana Quest",
+  "description": "Khám phá Đà Nẵng qua bản đồ, quest và sự kiện địa phương.",
+  "start_url": "./#/kham-pha",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f1",
+  "theme_color": "#163e35",
+  "lang": "vi",
+  "icons": [
+    { "src": "./dana-quest.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

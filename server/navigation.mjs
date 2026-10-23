@@ -1,12 +1,13 @@
 ﻿import { readFileSync } from 'node:fs'
 const places = JSON.parse(readFileSync(new URL('../src/data/destinations.json', import.meta.url), 'utf8'))
+const questLocations = JSON.parse(readFileSync(new URL('../src/data/questLocations.json', import.meta.url), 'utf8'))
 export async function navigationApi(request, response, next) {
   const url = new URL(request.url ?? '/', 'http://localhost')
   if (url.pathname !== '/api/navigation/route') return next()
   const send = (status, data) => { response.statusCode = status; response.setHeader('Content-Type', 'application/json; charset=utf-8'); response.setHeader('Cache-Control', 'no-store'); response.end(JSON.stringify(data)) }
   if (request.method !== 'GET') return send(405, { error: 'Method not allowed' })
   const lat = Number(url.searchParams.get('lat')), lon = Number(url.searchParams.get('lng'))
-  const place = places.find(item => item.id === url.searchParams.get('id'))
+  const place = [...places, ...questLocations].find(item => item.id === url.searchParams.get('id'))
   if (!place || !url.searchParams.has('lat') || !url.searchParams.has('lng') || !Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return send(400, { error: 'Invalid route coordinates or destination' })
   try {
     const result = await fetch(new URL('route', process.env.VALHALLA_URL ?? 'https://valhalla1.openstreetmap.de/'), {

@@ -17,7 +17,7 @@
   position: relative;
   z-index: 1000;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 6px;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid #d4ded5;
@@ -25,16 +25,31 @@
   box-shadow: 0 -8px 18px rgba(22, 62, 53, 0.04);
 }
 .bottom-nav a {
+  flex-direction: column;
+  gap: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 52px;
   border-radius: 12px;
   color: #163e35;
-  font-size: 14px;
+  font-size: 12px;
   text-decoration: none;
   text-align: center;
 }
+.events-screen { overflow-y: auto; }
+.reminder-card { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px; border-radius: 16px; background: #e7f0e9; }
+.reminder-card p { color: #526b65; font-size: 13px; }
+.reminder-card button { flex: 0 0 auto; min-height: 42px; padding: 0 14px; border: 0; border-radius: 12px; background: #163e35; color: white; font: inherit; font-weight: 700; }
+.event-list { display: grid; gap: 14px; margin-top: 18px; }
+.event-card { display: block; padding: 18px; border: 1px solid #d4ded5; border-radius: 16px; background: white; color: #163e35; text-decoration: none; }
+.event-card h2 { margin: 8px 0; font-size: 20px; }
+.event-card p { color: #526b65; font-size: 14px; }
+.event-card > div { display: grid; gap: 5px; margin-top: 14px; color: #526b65; font-size: 12px; }
+.event-status { display: inline-flex; width: fit-content; padding: 5px 8px; border-radius: 999px; background: #f8e5cf; color: #80491d; font-size: 11px; font-weight: 800; }
+.event-details { overflow-y: auto; }
+.event-facts div { margin-top: 12px; }.event-facts dt { color: #526b65; font-size: 12px; font-weight: 800; }.event-facts dd { margin: 3px 0 0; }
+.event-actions { display: grid; gap: 10px; margin-top: 18px; }
 .bottom-nav a:hover, .bottom-nav a[aria-current='page'] { background: #dfeadc; font-weight: 700; }
 .home {
   min-height: calc(100svh - 84px);
