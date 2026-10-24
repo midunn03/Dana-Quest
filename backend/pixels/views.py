@@ -1,36 +1,46 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 
-from .destinations import destination_data
 from .models import Place, PlaceSprite
+
+
+def place_payload(place, position):
+    """Một địa điểm đầy đủ để giao diện hiển thị (không cần nội dung có sẵn trong code)."""
+    return {
+        'id': place.slug, 'name': place.name, 'lat': position[0], 'lng': position[1], 'category': place.category,
+        'area': place.area, 'tags': place.tag_list(), 'featuredScore': place.featured_score,
+        'highlight': place.highlight_reason, 'description': place.description, 'detail': place.detail,
+        'activities': place.activity_list(), 'hours': place.hours, 'hoursNote': place.hours_note,
+        'tip': place.tip, 'address': place.address, 'crowd': place.crowd_list(), 'crowdNote': place.crowd_note,
+        'photos': [{'url': photo.image.url, 'caption': photo.caption, 'credit': photo.credit} for photo in place.photos.all()],
+    }
 
 
 @require_GET
 def places(request):
     """Dữ liệu địa điểm cho giao diện.
 
+    managed: đã có địa điểm trong admin → giao diện dùng danh sách này thay cho danh sách mẫu trong code
+    places:  các địa điểm đang bật (đủ nội dung, ảnh)
     items:   {mã: {url, meters, ground?}} — ảnh pixel đang dùng (ground = dán xuống mặt đất)
-    content: {mã: {...}} — nội dung trang chi tiết của các địa điểm bật "Dùng nội dung do admin viết"
     """
-    known = destination_data()
+    rows = list(Place.objects.prefetch_related('photos'))
+    listed = {}
+    for place in rows:
+        position = place.position()
+        if place.is_active and position:
+            listed[place.slug] = place_payload(place, position)
+
     items = {}
-    for sprite in PlaceSprite.objects.filter(is_active=True).select_related('place'):
+    for sprite in PlaceSprite.objects.filter(is_active=True, place__is_active=True).select_related('place'):
         entry = {'url': sprite.image.url, 'meters': sprite.place.marker_meters}
         if sprite.is_ground:
             lat, lng = sprite.ground_lat, sprite.ground_lng
             if lat is None or lng is None:
-                lat, lng = (known.get(sprite.place.slug) or {}).get('position', (None, None))
+                position = sprite.place.position()
+                lat, lng = position if position else (None, None)
             if lat is not None and lng is not None:
                 entry['ground'] = {'lat': lat, 'lng': lng, 'widthM': sprite.ground_width_m,
                                    'heightM': sprite.ground_height_m, 'rotation': sprite.ground_rotation}
         items[sprite.place.slug] = entry
-
-    content = {}
-    for place in Place.objects.filter(use_admin_content=True).prefetch_related('photos'):
-        content[place.slug] = {
-            'description': place.description, 'detail': place.detail, 'highlight': place.highlight_reason,
-            'activities': place.activity_list(), 'hours': place.hours, 'hoursNote': place.hours_note,
-            'tip': place.tip, 'address': place.address,
-            'photos': [{'url': photo.image.url, 'caption': photo.caption, 'credit': photo.credit} for photo in place.photos.all()],
-        }
-    return JsonResponse({'items': items, 'content': content})
+    return JsonResponse({'managed': bool(rows), 'places': list(listed.values()), 'items': items})

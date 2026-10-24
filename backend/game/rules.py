@@ -43,14 +43,24 @@ def _load_positions():
         return {place['id']: place['position'] for place in json.load(handle)}
 
 
-_positions = None
+_builtin = None
 
 
 def positions():
-    global _positions
-    if _positions is None:
-        _positions = _load_positions()
-    return _positions
+    """Vị trí của mọi địa điểm hợp lệ: danh sách mẫu trong code, cộng địa điểm do admin thêm (admin ghi đè nếu trùng mã)."""
+    global _builtin
+    if _builtin is None:
+        _builtin = _load_positions()
+    result = dict(_builtin)
+    try:
+        from pixels.models import Place
+        for place in Place.objects.all():
+            position = place.position()
+            if position:
+                result[place.slug] = list(position)
+    except Exception:  # chưa migrate hoặc chưa có bảng: dùng danh sách mẫu
+        pass
+    return result
 
 
 def distance_meters(a, b):

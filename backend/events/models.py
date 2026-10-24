@@ -25,6 +25,16 @@ class Event(models.Model):
     start_time = models.TimeField('Giờ bắt đầu')
     end_time = models.TimeField('Giờ kết thúc')
     is_active = models.BooleanField('Đang bật', default=True)
+    # Thông báo cho người chơi
+    notify_radius_m = models.PositiveIntegerField(
+        'Báo cho người chơi trong bán kính (mét)', default=1500,
+        help_text='Người chơi đang ở cách địa điểm không quá chừng này mét sẽ nhận thông báo khi sự kiện sắp/đang diễn ra. Nhập 0 để không báo theo khoảng cách. Cần chọn địa điểm.')
+    notify_before_minutes = models.PositiveIntegerField(
+        'Báo trước (phút)', default=30, help_text='Báo trước giờ bắt đầu chừng này phút (vẫn báo nếu sự kiện đang diễn ra).')
+    is_featured = models.BooleanField(
+        'Hoạt động nổi bật của Đà Nẵng', default=False,
+        help_text='Bật: báo cho mọi người chơi đang mở ứng dụng, dù họ ở xa địa điểm.')
+    source_url = models.URLField('Link nguồn thông tin', blank=True)
 
     class Meta:
         ordering = ['start_time', 'title']
