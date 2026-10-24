@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 
@@ -22,7 +23,7 @@ def feed(request):
     first = now.date() - timedelta(days=1)  # lấy cả lần diễn ra qua nửa đêm từ hôm qua
     last = now.date() + timedelta(days=days)
     items = []
-    for event in Event.objects.filter(is_active=True).select_related('place'):
+    for event in Event.objects.filter(Q(place__isnull=True) | Q(place__is_active=True), is_active=True).select_related('place'):
         for start, end in event.occurrences(first, last):
             if end <= now:
                 continue
@@ -31,10 +32,14 @@ def feed(request):
             else:
                 minutes = int((start - now).total_seconds() // 60)
                 status = 'soon' if minutes <= SOON_MINUTES else 'later'
+            position = event.place.position() if event.place else None
             items.append({
                 'id': event.pk, 'title': event.title, 'description': event.description, 'kind': event.kind,
                 'placeId': event.place.slug if event.place else None,
                 'placeName': event.place.name if event.place else '',
+                'placeLat': position[0] if position else None, 'placeLng': position[1] if position else None,
+                'radiusM': event.notify_radius_m, 'notifyBefore': event.notify_before_minutes,
+                'featured': event.is_featured, 'sourceUrl': event.source_url,
                 'start': start.isoformat(), 'end': end.isoformat(),
                 'status': status, 'minutesUntil': minutes,
             })

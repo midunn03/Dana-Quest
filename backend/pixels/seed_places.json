@@ -1,0 +1,408 @@
+[
+ {
+  "slug": "cau-rong",
+  "name": "Cầu Rồng",
+  "latitude": 16.0611042,
+  "longitude": 108.2276926,
+  "category": "landmark",
+  "area": "Cầu Rồng bắc qua sông Hàn, trục Nguyễn Văn Linh – Võ Văn Kiệt, Đà Nẵng",
+  "tags": [
+   "cầu",
+   "kiến trúc",
+   "sông Hàn",
+   "biểu tượng",
+   "đi bộ"
+  ],
+  "description": "Cây cầu hình rồng bắc qua sông Hàn, nối trung tâm thành phố với khu vực phía đông.",
+  "detail": "Quan sát dáng cầu và cảnh quan hai bờ sông từ lối đi công cộng an toàn. Việc tiếp cận có thể thay đổi khi phân luồng giao thông hoặc tổ chức sự kiện.",
+  "highlight_reason": "Biểu tượng kiến trúc bên sông Hàn",
+  "activities": [
+   "Ngắm kiến trúc cây cầu từ lối đi bộ ven sông.",
+   "Quan sát cảnh quan sông Hàn và các công trình hai bờ."
+  ],
+  "featured_score": 100,
+  "marker_meters": 320,
+  "hours": "Điểm tham quan ngoài trời",
+  "hours_note": "Chưa có lịch đóng/mở cố định được xác nhận. Việc tiếp cận cầu có thể thay đổi khi phân luồng giao thông hoặc tổ chức sự kiện.",
+  "address": "Cầu Rồng, Đà Nẵng."
+ },
+ {
+  "slug": "cau-song-han",
+  "name": "Cầu Sông Hàn",
+  "latitude": 16.0721501,
+  "longitude": 108.2267961,
+  "category": "landmark",
+  "area": "Cầu Sông Hàn, nối trục Lê Duẩn – Phạm Văn Đồng, Đà Nẵng",
+  "tags": [
+   "cầu",
+   "kiến trúc",
+   "sông Hàn",
+   "đi bộ",
+   "thành phố"
+  ],
+  "description": "Cây cầu quay bắc qua sông Hàn, một công trình giao thông và dấu mốc kiến trúc của thành phố.",
+  "detail": "Ngắm nhịp sống hai bờ sông từ khu vực dành cho người đi bộ. Tuân theo biển báo tại cầu; lịch vận hành hoặc hạn chế giao thông không được cung cấp trực tiếp trong ứng dụng.",
+  "highlight_reason": "Cây cầu quay đặc trưng của Đà Nẵng",
+  "activities": [
+   "Quan sát kết cấu cầu và dòng sông từ khu vực công cộng.",
+   "Đi bộ ven sông và nhận diện các cây cầu lân cận."
+  ],
+  "featured_score": 94,
+  "marker_meters": 200,
+  "hours": "Điểm tham quan ngoài trời",
+  "hours_note": "Chưa có lịch đóng/mở cố định được xác nhận. Tuân theo biển báo giao thông tại cầu; lịch vận hành cầu quay cần kiểm tra riêng.",
+  "address": "Cầu Sông Hàn, Đà Nẵng."
+ },
+ {
+  "slug": "bao-tang-da-nang",
+  "name": "Bảo tàng Đà Nẵng",
+  "latitude": 16.0745542,
+  "longitude": 108.2239668,
+  "category": "museum",
+  "area": "Cổng đón khách số 31 Trần Phú; khu nhà bảo tàng tại 42–44 Bạch Đằng, Hải Châu, Đà Nẵng",
+  "tags": [
+   "bảo tàng",
+   "lịch sử",
+   "văn hóa",
+   "trong nhà",
+   "kiến trúc"
+  ],
+  "description": "Bảo tàng thành phố tại cụm công trình 42–44 Bạch Đằng và 31 Trần Phú, giới thiệu lịch sử, văn hóa và con người Đà Nẵng.",
+  "detail": "Điểm ghim đặt tại cổng đón khách 31 Trần Phú theo thông tin du lịch thành phố. Nội dung trưng bày giúp tìm hiểu thiên nhiên, lịch sử đô thị và đời sống văn hóa địa phương.",
+  "highlight_reason": "Không gian tìm hiểu lịch sử thành phố",
+  "activities": [
+   "Tìm hiểu các chủ đề về lịch sử đô thị và văn hóa Đà Nẵng.",
+   "Quan sát kiến trúc tòa nhà lịch sử từ khu vực được phép tham quan."
+  ],
+  "featured_score": 88,
+  "marker_meters": 200,
+  "hours": "08:00 – 17:00, các ngày trong tuần",
+  "hours_note": "Giờ tham khảo; lịch ngày lễ hoặc sự kiện có thể thay đổi.",
+  "address": "42–44 Bạch Đằng và 31 Trần Phú, Đà Nẵng."
+ },
+ {
+  "slug": "bao-tang-dieu-khac-cham",
+  "name": "Bảo tàng Điêu khắc Chăm",
+  "latitude": 16.0603007,
+  "longitude": 108.2232677,
+  "category": "museum",
+  "area": "02 đường 2 Tháng 9, Hải Châu, Đà Nẵng",
+  "tags": [
+   "bảo tàng",
+   "Chăm",
+   "điêu khắc",
+   "lịch sử",
+   "văn hóa"
+  ],
+  "description": "Bảo tàng chuyên sưu tầm và trưng bày hiện vật điêu khắc Chăm tại trung tâm Đà Nẵng.",
+  "detail": "Các bộ sưu tập gồm tượng, đài thờ và phù điêu gắn với nghệ thuật Champa. Hãy kiểm tra quy định chụp ảnh và thông tin tham quan hiện hành từ bảo tàng trước khi ghé.",
+  "highlight_reason": "Bộ sưu tập điêu khắc Champa",
+  "activities": [
+   "Quan sát các hiện vật điêu khắc và kiến trúc bảo tàng.",
+   "Tìm hiểu tên gọi các phòng trưng bày và nguồn gốc hiện vật."
+  ],
+  "featured_score": 91,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "02 đường 2 Tháng 9, Hải Châu, Đà Nẵng"
+ },
+ {
+  "slug": "cong-vien-apec",
+  "name": "Công viên APEC",
+  "latitude": 16.0581055,
+  "longitude": 108.2232435,
+  "category": "park",
+  "area": "Đường 2 Tháng 9, phía tây sông Hàn, gần Cầu Rồng, Đà Nẵng",
+  "tags": [
+   "công viên",
+   "kiến trúc",
+   "không gian công cộng",
+   "sông Hàn",
+   "đi bộ"
+  ],
+  "description": "Công viên công cộng bên sông Hàn với mái vòm kiến trúc uốn lượn và không gian đi bộ.",
+  "detail": "Dạo quanh khu vực công cộng, quan sát mái vòm và các tác phẩm ngoài trời. Sự kiện hoặc khu vực trong nhà có thể có quy định riêng.",
+  "highlight_reason": "Mái vòm kiến trúc ven sông",
+  "activities": [
+   "Đi bộ quanh mái vòm và quan sát công trình từ nhiều phía.",
+   "Nghỉ chân tại khu vực công cộng và nhìn về phía sông Hàn."
+  ],
+  "featured_score": 90,
+  "marker_meters": 200,
+  "hours": "Không gian công cộng ngoài trời",
+  "hours_note": "Chưa có lịch đóng/mở cố định được xác nhận. Các khu vực trong nhà và sự kiện có thể có lịch riêng.",
+  "address": "Công viên APEC, Đà Nẵng."
+ },
+ {
+  "slug": "cau-tinh-yeu",
+  "name": "Cầu Tình Yêu",
+  "latitude": 16.0629967,
+  "longitude": 108.2298146,
+  "category": "landmark",
+  "area": "507–493 đường Trần Hưng Đạo, An Hải, Đà Nẵng",
+  "tags": [
+   "cầu",
+   "ven sông",
+   "đi bộ",
+   "cảnh quan",
+   "sông Hàn"
+  ],
+  "description": "Lối đi bộ ven sông Hàn nhìn sang các cây cầu và cảnh quan trung tâm Đà Nẵng.",
+  "detail": "Dạo trên lối công cộng ven sông và quan sát cảnh quan hai bờ. Một số khu vực có thể đông hoặc được điều tiết theo sự kiện; không có lịch hoạt động cố định được xác nhận.",
+  "highlight_reason": "Góc đi bộ ngắm sông Hàn",
+  "activities": [
+   "Đi bộ ven sông và quan sát Cầu Rồng từ bờ đông.",
+   "Tìm các chi tiết trang trí trên lối đi mà không cản trở người qua lại."
+  ],
+  "featured_score": 84,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "507–493 đường Trần Hưng Đạo, An Hải, Đà Nẵng"
+ },
+ {
+  "slug": "bai-bien-my-khe",
+  "name": "Bãi biển Mỹ Khê",
+  "latitude": 16.0616944,
+  "longitude": 108.2469346,
+  "category": "beach",
+  "area": "Dải bờ biển Mỹ Khê, quận Sơn Trà, Đà Nẵng",
+  "tags": [
+   "biển",
+   "bãi cát",
+   "ngoài trời",
+   "đi bộ",
+   "cảnh quan"
+  ],
+  "description": "Bãi biển công cộng trên dải bờ biển phía đông Đà Nẵng.",
+  "detail": "Dạo bờ biển và quan sát cảnh quan từ khu vực công cộng. Điều kiện tắm biển, cứu hộ và khu vực được phép xuống nước thay đổi theo thời tiết và thông báo tại chỗ.",
+  "highlight_reason": "Không gian bờ biển phía đông thành phố",
+  "activities": [
+   "Đi bộ trên khu vực bờ biển công cộng.",
+   "Quan sát cảnh biển và tuân thủ cờ hiệu, biển báo an toàn tại chỗ."
+  ],
+  "featured_score": 93,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Dải bờ biển Mỹ Khê, quận Sơn Trà, Đà Nẵng"
+ },
+ {
+  "slug": "cong-vien-bien-dong",
+  "name": "Công viên Biển Đông",
+  "latitude": 16.0703173,
+  "longitude": 108.2458368,
+  "category": "park",
+  "area": "Đường Võ Nguyên Giáp, An Hải, Đà Nẵng",
+  "tags": [
+   "công viên",
+   "biển",
+   "không gian công cộng",
+   "đi bộ",
+   "tượng đài"
+  ],
+  "description": "Công viên công cộng ven biển Đà Nẵng, hướng ra bờ biển và khu vực bán đảo Sơn Trà.",
+  "detail": "Dạo trong không gian công cộng và quan sát cảnh quan biển. Sự kiện, hoạt động tập trung hoặc quyền tiếp cận có thể thay đổi theo thông báo tại chỗ.",
+  "highlight_reason": "Công viên công cộng ven biển",
+  "activities": [
+   "Đi bộ trong công viên và quan sát bờ biển từ khu vực an toàn.",
+   "Tìm hiểu các tượng đài và không gian sinh hoạt công cộng."
+  ],
+  "featured_score": 88,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Đường Võ Nguyên Giáp, An Hải, Đà Nẵng"
+ },
+ {
+  "slug": "bien-man-thai-sup",
+  "name": "Bãi biển Mân Thái – chèo SUP",
+  "latitude": 16.0890212,
+  "longitude": 108.2495942,
+  "category": "beach",
+  "area": "Bãi tắm Mân Thái, đường Hoàng Sa, Sơn Trà, Đà Nẵng",
+  "tags": [
+   "biển",
+   "SUP",
+   "chèo ván",
+   "ngoài trời",
+   "thể thao nước"
+  ],
+  "description": "Bãi tắm Mân Thái trên bán đảo Sơn Trà; khu vực ven biển có thể được dùng cho hoạt động ngoài trời theo điều kiện thực tế.",
+  "detail": "Điểm ghim xác định bãi tắm Mân Thái, không phải điểm hẹn của một nhà tổ chức SUP cụ thể. Hãy xác nhận đơn vị, điểm tập trung, thời tiết và tình trạng hoạt động trước khi tham gia; không xuống nước khi có cảnh báo.",
+  "highlight_reason": "Bãi biển Sơn Trà cho hoạt động ngoài trời",
+  "activities": [
+   "Tìm hiểu hoạt động chèo SUP do đơn vị tổ chức hợp pháp cung cấp; điểm hẹn và khả năng tổ chức cần xác nhận trực tiếp.",
+   "Quan sát bờ biển và chỉ xuống nước khi điều kiện, thiết bị an toàn và hướng dẫn tại chỗ cho phép."
+  ],
+  "featured_score": 82,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Bãi tắm Mân Thái, đường Hoàng Sa, Sơn Trà, Đà Nẵng"
+ },
+ {
+  "slug": "chua-linh-ung-bai-but",
+  "name": "Chùa Linh Ứng – Bãi Bụt, Sơn Trà",
+  "latitude": 16.1002055,
+  "longitude": 108.2778816,
+  "category": "pagoda",
+  "area": "Khu vực Bãi Bụt, bán đảo Sơn Trà, Đà Nẵng",
+  "tags": [
+   "chùa",
+   "văn hóa",
+   "tâm linh",
+   "Sơn Trà",
+   "cảnh quan"
+  ],
+  "description": "Chùa Linh Ứng tại khu vực Bãi Bụt, bán đảo Sơn Trà, hướng nhìn ra biển.",
+  "detail": "Tham quan không gian chùa với thái độ tôn kính, ăn mặc phù hợp và làm theo nội quy. Đây là chùa Linh Ứng Bãi Bụt trên Sơn Trà, không phải chùa Linh Ứng Ngũ Hành Sơn hay Bà Nà.",
+  "highlight_reason": "Không gian văn hóa bên biển Sơn Trà",
+  "activities": [
+   "Quan sát kiến trúc và cảnh quan núi – biển từ khu vực được phép.",
+   "Tìm hiểu không gian thờ tự và giữ yên tĩnh, tôn trọng nội quy."
+  ],
+  "featured_score": 92,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Khu vực Bãi Bụt, bán đảo Sơn Trà, Đà Nẵng"
+ },
+ {
+  "slug": "dinh-ban-co",
+  "name": "Đỉnh Bàn Cờ",
+  "latitude": 16.1189365,
+  "longitude": 108.2719826,
+  "category": "nature",
+  "area": "Đỉnh Bàn Cờ, bán đảo Sơn Trà, Đà Nẵng",
+  "tags": [
+   "núi",
+   "thiên nhiên",
+   "đi bộ",
+   "ngắm cảnh",
+   "Sơn Trà"
+  ],
+  "description": "Điểm ngắm cảnh trên cao tại bán đảo Sơn Trà, nhìn về thành phố và vùng biển xung quanh.",
+  "detail": "Đường lên có đoạn dốc và bậc thang. Tuân thủ tuyến và khung giờ được cơ quan quản lý cho phép; điều kiện đường, thời tiết và phương tiện tiếp cận cần kiểm tra trước chuyến đi.",
+  "highlight_reason": "Góc nhìn cao trên bán đảo Sơn Trà",
+  "activities": [
+   "Ngắm cảnh thành phố từ khu vực được phép tiếp cận.",
+   "Đi bộ trên lối an toàn, đánh giá sức khỏe và điều kiện thời tiết trước khi lên cao."
+  ],
+  "featured_score": 89,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Đỉnh Bàn Cờ, bán đảo Sơn Trà, Đà Nẵng"
+ },
+ {
+  "slug": "hai-van-quan",
+  "name": "Hải Vân Quan",
+  "latitude": 16.1877377,
+  "longitude": 108.1312942,
+  "category": "heritage",
+  "area": "Di tích Hải Vân Quan trên đỉnh đèo Hải Vân, ranh giới Đà Nẵng – Huế",
+  "tags": [
+   "di tích",
+   "lịch sử",
+   "đèo",
+   "cảnh quan",
+   "kiến trúc"
+  ],
+  "description": "Cửa ải cổ trên đỉnh đèo Hải Vân, di tích lịch sử nhìn ra núi và biển miền Trung.",
+  "detail": "Điểm ghim hướng tới Hải Vân Quan, không phải toàn tuyến đèo. Tiếp cận bằng đường đèo cần chú ý giao thông, thời tiết và biển báo; không dừng xe tại vị trí nguy hiểm.",
+  "highlight_reason": "Cửa ải lịch sử trên đỉnh đèo",
+  "activities": [
+   "Quan sát cổng thành và dấu tích kiến trúc từ khu vực được phép tham quan.",
+   "Ngắm cảnh núi – biển tại điểm dừng an toàn, không đi vào lòng đường."
+  ],
+  "featured_score": 86,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Di tích Hải Vân Quan trên đỉnh đèo Hải Vân, ranh giới Đà Nẵng – Huế"
+ },
+ {
+  "slug": "ngu-hanh-son",
+  "name": "Danh thắng Ngũ Hành Sơn",
+  "latitude": 16.0037104,
+  "longitude": 108.2631605,
+  "category": "heritage",
+  "area": "81 Huyền Trân Công Chúa, khu danh thắng Ngũ Hành Sơn, Đà Nẵng",
+  "tags": [
+   "danh thắng",
+   "núi",
+   "hang động",
+   "chùa",
+   "di sản",
+   "đi bộ"
+  ],
+  "description": "Quần thể núi đá vôi, hang động, chùa và điểm nhìn cảnh quan ở phía nam Đà Nẵng.",
+  "detail": "Khu tham quan gồm nhiều địa điểm và lối bậc thang; điểm ghim tham chiếu khu danh thắng/lối tiếp cận chung, không đại diện từng hang động. Tuân thủ hướng dẫn, nội quy và sức khỏe cá nhân khi leo bậc.",
+  "highlight_reason": "Quần thể núi đá, hang động và chùa",
+  "activities": [
+   "Khám phá các lối tham quan, hang động và công trình văn hóa đang mở cửa.",
+   "Dành thời gian quan sát địa hình đá và cảnh quan từ lối được phép."
+  ],
+  "featured_score": 95,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "81 Huyền Trân Công Chúa, khu danh thắng Ngũ Hành Sơn, Đà Nẵng"
+ },
+ {
+  "slug": "cau-vang-ba-na-hills",
+  "name": "Bà Nà Hills – khu vực Cầu Vàng",
+  "latitude": 15.9949375,
+  "longitude": 107.9965625,
+  "category": "landmark",
+  "area": "Cầu Vàng, khu du lịch Bà Nà Hills, Hòa Vang, Đà Nẵng",
+  "tags": [
+   "cầu",
+   "kiến trúc",
+   "ngắm cảnh",
+   "Bà Nà",
+   "đi bộ"
+  ],
+  "description": "Cầu đi bộ trên cao tại khu du lịch Bà Nà Hills, nổi bật với kết cấu tạo hình đôi bàn tay nâng cầu.",
+  "detail": "Điểm ghim nằm tại Cầu Vàng bên trong khu du lịch, không phải cổng vào Bà Nà Hills. Việc tiếp cận phụ thuộc vé, tuyến cáp và quy định hiện hành của đơn vị quản lý; hãy kiểm tra trực tiếp trước chuyến đi.",
+  "highlight_reason": "Cầu đi bộ trên cao với kiến trúc đặc trưng",
+  "activities": [
+   "Quan sát kết cấu cây cầu và cảnh quan núi từ khu vực được phép.",
+   "Đi bộ trên cầu theo luồng tham quan, không vượt rào hoặc gây cản trở."
+  ],
+  "featured_score": 96,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Cầu Vàng, khu du lịch Bà Nà Hills, Hòa Vang, Đà Nẵng"
+ },
+ {
+  "slug": "bai-bien-nam-o",
+  "name": "Bãi biển Nam Ô",
+  "latitude": 16.1190151,
+  "longitude": 108.1303016,
+  "category": "beach",
+  "area": "Bãi tắm Nam Ô, khu vực Nam Ô, Đà Nẵng",
+  "tags": [
+   "biển",
+   "bãi đá",
+   "thiên nhiên",
+   "cảnh quan",
+   "đi bộ"
+  ],
+  "description": "Bãi biển phía bắc Đà Nẵng với bờ biển và khu vực đá ven nước.",
+  "detail": "Điểm ghim tham chiếu Bãi Tắm Nam Ô trên bản đồ. Địa hình đá, thủy triều và sóng có thể thay đổi; chỉ quan sát từ lối an toàn, không đi lên đá trơn hoặc xuống nước khi có cảnh báo.",
+  "highlight_reason": "Bờ biển tự nhiên phía bắc Đà Nẵng",
+  "activities": [
+   "Quan sát đường bờ và cảnh quan tự nhiên từ khu vực công cộng.",
+   "Tìm hiểu cảnh quan ven biển; tránh làm hư hại hệ sinh thái và tuân thủ cảnh báo tại chỗ."
+  ],
+  "featured_score": 83,
+  "marker_meters": 200,
+  "hours": "",
+  "hours_note": "",
+  "address": "Bãi tắm Nam Ô, khu vực Nam Ô, Đà Nẵng"
+ }
+]

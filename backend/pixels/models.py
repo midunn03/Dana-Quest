@@ -4,6 +4,9 @@ from io import BytesIO
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.db import models, transaction
+from django.utils.text import slugify
+
+from .destinations import destination_data
 
 # Nhận ảnh gốc khá lớn, rồi tự thu nhỏ để trang luôn nhẹ.
 MAX_BYTES = 15 * 1024 * 1024   # ảnh tải lên tối đa 15 MB
@@ -69,27 +72,54 @@ def shrink_upload(field_file, side, max_bytes, keep_alpha=True):
     return True
 
 
+CATEGORIES = [
+    ('landmark', 'Kiến trúc / biểu tượng'), ('museum', 'Bảo tàng'), ('park', 'Công viên'), ('beach', 'Biển'),
+    ('pagoda', 'Chùa'), ('nature', 'Thiên nhiên'), ('heritage', 'Di tích'),
+]
+CROWD_HOURS = list(range(6, 24))  # biểu đồ giờ đông đúc: 6:00 → 23:00
+
+
+def make_slug(name, exclude_pk=None):
+    """Mã địa điểm không dấu, không trùng (vd: 'Chợ Cồn' -> 'cho-con')."""
+    base = slugify((name or '').replace('đ', 'd').replace('Đ', 'D')) or 'dia-diem'
+    slug, number = base, 2
+    queryset = Place.objects.exclude(pk=exclude_pk) if exclude_pk else Place.objects.all()
+    while queryset.filter(slug=slug).exists():
+        slug = f'{base}-{number}'
+        number += 1
+    return slug
+
+
 class Place(models.Model):
-    slug = models.SlugField('Mã địa điểm', unique=True, help_text='Trùng với id trong giao diện, ví dụ: cau-rong')
+    """Một địa điểm trên bản đồ. Mọi thứ hiển thị trong ứng dụng (vị trí, giới thiệu, ảnh...) đều chỉnh ở đây."""
+
+    is_active = models.BooleanField('Hiện trên bản đồ', default=True, help_text='Bỏ tick để ẩn tạm thời mà không xóa.')
+    slug = models.SlugField('Mã địa điểm', unique=True, blank=True, help_text='Để trống để tự tạo từ tên. Đừng đổi mã sau khi đã có người chơi, vì tiến độ nhiệm vụ gắn với mã này.')
     name = models.CharField('Tên', max_length=120)
+    category = models.CharField('Loại', max_length=12, choices=CATEGORIES, default='landmark')
+    latitude = models.FloatField('Vĩ độ', null=True, blank=True, help_text='Mở Google Maps, bấm phải vào đúng vị trí, bấm vào hai con số đầu tiên để chép (ví dụ 16.0611, 108.2277).')
+    longitude = models.FloatField('Kinh độ', null=True, blank=True)
+    area = models.CharField('Khu vực', max_length=200, blank=True, help_text='Ví dụ: Hải Châu, Đà Nẵng.')
+    tags = models.CharField('Từ khóa tìm kiếm', max_length=200, blank=True, help_text='Cách nhau bằng dấu phẩy, ví dụ: cầu, kiến trúc, sông Hàn.')
+    featured_score = models.PositiveIntegerField('Độ nổi bật (0–100)', default=50, help_text='Địa điểm điểm cao được ưu tiên khi gợi ý quanh bạn.')
     marker_meters = models.PositiveIntegerField(
         'Kích thước ghim ngoài đời (mét)', default=200,
         help_text='Ghim rộng bằng chừng này mét trên bản đồ: càng lớn thì ghim càng to. Gợi ý: 200 cho địa điểm thường, 320 cho Cầu Rồng. Không áp dụng cho ảnh dán xuống mặt đất (xem phần Bản vẽ pixel).')
 
-    # Nội dung trang chi tiết do admin tự viết
-    use_admin_content = models.BooleanField(
-        'Dùng nội dung do admin viết', default=False,
-        help_text='Bật: trang chi tiết chỉ hiện nội dung bên dưới (ô trống thì ẩn mục đó, không dùng lại nội dung mặc định). Tắt: dùng nội dung mặc định của ứng dụng.')
-    description = models.TextField('Giới thiệu ngắn', blank=True)
-    detail = models.TextField('Chi tiết', blank=True)
+    # Nội dung trang chi tiết
     highlight_reason = models.CharField('Lý do nổi bật (một dòng)', max_length=140, blank=True)
+    description = models.TextField('Tổng quan (đoạn 1)', blank=True)
+    detail = models.TextField('Tổng quan (đoạn 2 / chi tiết)', blank=True)
     activities = models.TextField('Gợi ý hoạt động', blank=True, help_text='Mỗi dòng là một hoạt động.')
-    hours = models.CharField('Giờ mở cửa', max_length=120, blank=True)
+    hours = models.CharField('Giờ mở cửa', max_length=120, blank=True, help_text='Ví dụ: 08:00 – 17:00, các ngày trong tuần.')
     hours_note = models.TextField('Ghi chú về giờ mở cửa', blank=True)
     tip = models.TextField('Mẹo nhỏ', blank=True)
     address = models.CharField('Địa chỉ', max_length=200, blank=True)
+    crowd = models.JSONField('Giờ đông đúc', default=list, blank=True)
+    crowd_note = models.CharField('Ghi chú giờ đông đúc', max_length=200, blank=True, help_text='Ví dụ: Đông nhất vào buổi tối cuối tuần.')
 
     class Meta:
+        ordering = ['name']
         verbose_name = 'địa điểm'
         verbose_name_plural = 'địa điểm'
 
@@ -98,6 +128,37 @@ class Place(models.Model):
 
     def activity_list(self):
         return [line.strip() for line in self.activities.splitlines() if line.strip()]
+
+    def tag_list(self):
+        return [tag.strip() for tag in self.tags.split(',') if tag.strip()]
+
+    def crowd_list(self):
+        """18 mức (0–100) cho 6:00 → 23:00; không có dữ liệu thì rỗng."""
+        values = self.crowd if isinstance(self.crowd, list) else []
+        if len(values) != len(CROWD_HOURS) or not any(isinstance(v, (int, float)) for v in values):
+            return []
+        return [max(0, min(100, int(v))) if isinstance(v, (int, float)) and not isinstance(v, bool) else 0 for v in values]
+
+    def position(self):
+        """(vĩ độ, kinh độ); nếu chưa nhập thì lấy tọa độ có sẵn của địa điểm mẫu cùng mã."""
+        if self.latitude is not None and self.longitude is not None:
+            return (self.latitude, self.longitude)
+        builtin = destination_data().get(self.slug)
+        return tuple(builtin['position']) if builtin else None
+
+    def clean(self):
+        super().clean()
+        if (self.latitude is None) != (self.longitude is None):
+            raise ValidationError('Hãy nhập cả vĩ độ và kinh độ.')
+        if self.latitude is not None and not (-90 <= self.latitude <= 90 and -180 <= self.longitude <= 180):
+            raise ValidationError('Tọa độ không hợp lệ.')
+        if self.latitude is None and self.slug not in destination_data():
+            raise ValidationError('Hãy nhập vĩ độ và kinh độ để địa điểm hiện lên bản đồ.')
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = make_slug(self.name, self.pk)
+        super().save(*args, **kwargs)
 
 
 class PlaceSprite(models.Model):

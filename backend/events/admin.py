@@ -31,10 +31,15 @@ class EventForm(forms.ModelForm):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     form = EventForm
-    list_display = ('title', 'place', 'when', 'start_time', 'end_time', 'is_active')
-    list_filter = ('is_active', 'kind', 'place')
+    list_display = ('title', 'place', 'when', 'start_time', 'end_time', 'is_featured', 'notify_radius_m', 'is_active')
+    list_filter = ('is_active', 'is_featured', 'kind', 'place')
     list_editable = ('is_active',)
     search_fields = ('title', 'description')
+    fieldsets = (
+        ('Sự kiện', {'fields': ('title', 'kind', 'place', 'description', 'source_url', 'is_active')}),
+        ('Thời gian', {'fields': ('weekdays', 'start_date', 'end_date', 'start_time', 'end_time')}),
+        ('Thông báo cho người chơi', {'fields': ('notify_radius_m', 'notify_before_minutes', 'is_featured')}),
+    )
 
     @admin.display(description='Lặp')
     def when(self, obj):
