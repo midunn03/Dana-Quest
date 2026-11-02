@@ -51,3 +51,4 @@ button:disabled { opacity: 0.55; cursor: not-allowed !important; }
 .choice-list legend { margin-bottom: 10px; font-weight: 800; }
 .choice-list label { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 12px; border: 1px solid #d4ded5; border-radius: 10px; }
 .choice-list input { width: 20px; height: 20px; accent-color: #163e35; }
+.event-card small { display: block; margin-top: 6px; color: #5a6b63; font-size: 12px; }

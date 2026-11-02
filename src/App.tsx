@@ -16,7 +16,6 @@ import QuestDetailsPage from './QuestDetailsPage'
 import QuestPlayPage from './QuestPlayPage'
 import EventsPage from './EventsPage'
 import EventDetailsPage from './EventDetailsPage'
-import { scheduleEventReminders } from './lib/eventReminders'
 
 const Explore = lazy(() => import('./Explore'))
 const NavigationPage = lazy(() => import('./NavigationPage'))
@@ -33,7 +32,6 @@ function AppRouter() {
   const auth = useAuth()
   const [hash, setHash] = useState(window.location.hash)
   const shell = useRef<HTMLDivElement>(null)
-  useEffect(() => { scheduleEventReminders() }, [])
   useEffect(() => {
     const navigate = () => { if (canNavigateFrom(hash)) { setHash(window.location.hash); window.scrollTo(0, 0) } }
     window.addEventListener('hashchange', navigate)

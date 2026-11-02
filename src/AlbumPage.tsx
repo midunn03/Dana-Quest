@@ -1,14 +1,17 @@
 ﻿import { useEffect, useState } from 'react'
 import { deletePhoto, loadPhotos, type LocalPhoto } from './lib/photos'
 import { hasSyncAccount } from './lib/accountSync'
-import { destinations, getDestination } from './data/destinations'
+import { getDestination, useDestinations } from './data/destinations'
+import PlaceArt from './PlaceArt'
+import { usePlaceData } from './lib/placeContent'
 import { getMissions } from './data/missions'
 import { PhotoPreview } from './PhotoMission'
-import LandmarkArt from './LandmarkArt'
 import { notify } from './lib/notifications'
 import ConfirmDialog from './ConfirmDialog'
 import './Quest.css'
 export default function AlbumPage() {
+  const destinations = useDestinations()
+  usePlaceData() // tải danh sách địa điểm từ Django
   const [photos, setPhotos] = useState<LocalPhoto[]>([])
   const [tab,setTab]=useState<'saved'|'discover'>('saved')
   const [loading, setLoading] = useState(true)
@@ -41,7 +44,7 @@ export default function AlbumPage() {
       const hasCaptureDate=typeof photo.createdAt==='number'&&Number.isFinite(photo.createdAt)
       return <article className="memory-card" key={photo.id}><PhotoPreview photo={photo} alt={`Ảnh tại ${place?.name??'điểm đến'}`} download/><div className="memory-info"><h2>{place?.name??'Điểm đến'}</h2><p>{mission?.title??'Chưa xác định nhiệm vụ'}</p>{hasCaptureDate?<time dateTime={new Date(photo.createdAt!).toISOString()}>{new Date(photo.createdAt!).toLocaleString('vi-VN')}</time>:<small>Ngày chụp chưa được lưu</small>}</div><button type="button" className="memory-delete" aria-label={`Xóa ảnh tại ${place?.name??'điểm đến'}`} title="Xóa ảnh" onClick={()=>setPendingDelete(photo)}>×</button><details><summary>Chi tiết kỷ niệm</summary><p>{mission?.title??'Chưa xác định nhiệm vụ'}</p>{hasCaptureDate&&<p>{new Date(photo.createdAt!).toLocaleString('vi-VN')}</p>}<a href={`#/nhiem-vu/${photo.destinationId}`}>Xem nhiệm vụ tại điểm đến</a></details></article>
     })}<a className="memory-add" href="#/kham-pha"><span>＋</span>Thêm kỷ niệm</a></div>{!loading&&photos.length===0&&<p className="album-note">Chưa có ảnh. Chọn một điểm đến và lưu ảnh nhiệm vụ đầu tiên của bạn.</p>}</>}
-    {(tab==='discover'||photos.length===0)&&<><p className="album-note">Điểm đến gợi ý · hình minh họa, chưa phải ảnh của bạn</p><div className="memory-grid">{destinations.filter(place=>!photos.some(photo=>photo.destinationId===place.id)).map(place=><a className="memory-card illustrated-memory" key={place.id} href={`#/dia-diem/${place.id}`}><LandmarkArt id={place.id} sunset={place.id==='cau-rong'}/><h2>{place.name}</h2><small>Chưa có kỷ niệm</small></a>)}</div></>}
+    {(tab==='discover'||photos.length===0)&&<><p className="album-note">Điểm đến gợi ý · hình minh họa, chưa phải ảnh của bạn</p><div className="memory-grid">{destinations.filter(place=>!photos.some(photo=>photo.destinationId===place.id)).map(place=><a className="memory-card illustrated-memory" key={place.id} href={`#/dia-diem/${place.id}`}><PlaceArt place={place} sunset={place.id==='cau-rong'}/><h2>{place.name}</h2><small>Chưa có kỷ niệm</small></a>)}</div></>}
     <p className="album-note">{accountMode ? 'Ảnh của tài khoản được lưu trên máy chủ, chưa được AI xác minh. Hãy tải ảnh muốn giữ về máy.' : 'Ảnh được lưu trên trình duyệt này, chưa được AI xác minh. Hãy tải ảnh muốn giữ về máy.'}</p>
     <ConfirmDialog open={!!pendingDelete} title="Xóa ảnh này?" message="Ảnh đã lưu sẽ bị xóa vĩnh viễn. Tiến độ nhiệm vụ và Green Coins không thay đổi." confirmLabel="Xóa ảnh" busyLabel="Đang xóa…" busy={deleting} tone="danger" onCancel={()=>setPendingDelete(null)} onConfirm={()=>void confirmDelete()} />
   </main>

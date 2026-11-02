@@ -7,7 +7,11 @@ export async function navigationApi(request, response, next) {
   const send = (status, data) => { response.statusCode = status; response.setHeader('Content-Type', 'application/json; charset=utf-8'); response.setHeader('Cache-Control', 'no-store'); response.end(JSON.stringify(data)) }
   if (request.method !== 'GET') return send(405, { error: 'Method not allowed' })
   const lat = Number(url.searchParams.get('lat')), lon = Number(url.searchParams.get('lng'))
-  const place = [...places, ...questLocations].find(item => item.id === url.searchParams.get('id'))
+  // Địa điểm do admin Django thêm không nằm trong danh sách tĩnh, nên giao diện gửi kèm tọa độ đích (dlat, dlng).
+  // Chỉ nhận trong vùng Đà Nẵng - Huế để không bị dùng làm cổng định tuyến cho nơi khác.
+  const dlat = Number(url.searchParams.get('dlat')), dlon = Number(url.searchParams.get('dlng'))
+  const sentDestination = url.searchParams.has('dlat') && url.searchParams.has('dlng') && Number.isFinite(dlat) && Number.isFinite(dlon) && dlat >= 15.2 && dlat <= 16.8 && dlon >= 107.4 && dlon <= 108.8
+  const place = sentDestination ? { position: [dlat, dlon] } : [...places, ...questLocations].find(item => item.id === url.searchParams.get('id'))
   if (!place || !url.searchParams.has('lat') || !url.searchParams.has('lng') || !Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return send(400, { error: 'Invalid route coordinates or destination' })
   try {
     const result = await fetch(new URL('route', process.env.VALHALLA_URL ?? 'https://valhalla1.openstreetmap.de/'), {

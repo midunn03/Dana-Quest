@@ -5,6 +5,16 @@ export interface EventItem {
   kind: string
   placeId: string | null
   placeName: string
+  /** Tọa độ địa điểm (nếu sự kiện gắn với địa điểm). */
+  placeLat: number | null
+  placeLng: number | null
+  /** Báo cho người chơi trong bán kính này (mét); 0 = không báo theo khoảng cách. */
+  radiusM: number
+  /** Báo trước giờ bắt đầu bao nhiêu phút. */
+  notifyBefore: number
+  /** Hoạt động nổi bật của Đà Nẵng: báo cho mọi người dùng, không cần ở gần. */
+  featured: boolean
+  sourceUrl: string
   start: string
   end: string
   status: 'live' | 'soon' | 'later'
@@ -20,7 +30,19 @@ export function parseEvents(data: unknown): EventItem[] {
     && typeof item.start === 'string' && typeof item.end === 'string'
     && (item.status === 'live' || item.status === 'soon' || item.status === 'later')
     && Number.isFinite(Date.parse(item.start)) && Number.isFinite(Date.parse(item.end)))
-    .map(item => ({ ...item, description: String(item.description ?? ''), kind: String(item.kind ?? 'other'), placeId: typeof item.placeId === 'string' ? item.placeId : null, placeName: String(item.placeName ?? ''), minutesUntil: Number(item.minutesUntil) || 0 }))
+    .map(item => {
+      const raw = item as unknown as Record<string, unknown>
+      const lat = raw.placeLat, lng = raw.placeLng
+      const hasPlace = typeof lat === 'number' && typeof lng === 'number' && Number.isFinite(lat) && Number.isFinite(lng)
+      return {
+        ...item, description: String(item.description ?? ''), kind: String(item.kind ?? 'other'),
+        placeId: typeof item.placeId === 'string' ? item.placeId : null, placeName: String(item.placeName ?? ''),
+        placeLat: hasPlace ? lat : null, placeLng: hasPlace ? lng : null,
+        radiusM: Math.max(0, Number(raw.radiusM) || 0), notifyBefore: Math.max(0, Number(raw.notifyBefore ?? 30) || 0),
+        featured: raw.featured === true, sourceUrl: typeof raw.sourceUrl === 'string' && /^https?:\/\//.test(raw.sourceUrl) ? raw.sourceUrl : '',
+        minutesUntil: Number(item.minutesUntil) || 0,
+      }
+    })
 }
 
 const hhmm = (iso: string) => new Date(iso).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' })

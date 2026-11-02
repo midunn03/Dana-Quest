@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
-import type { AdminPhoto } from './lib/placeContent'
+import type { PlacePhoto } from './data/destinations'
 
 /** Bộ ảnh do admin tự tải lên cho địa điểm (vuốt ngang hoặc bấm mũi tên). */
-export default function AdminGallery({ name, photos }: { name: string; photos: AdminPhoto[] }) {
+export default function AdminGallery({ name, photos }: { name: string; photos: PlacePhoto[] }) {
   const track = useRef<HTMLDivElement>(null)
   const [index, setIndex] = useState(0)
   if (photos.length === 0) return null
