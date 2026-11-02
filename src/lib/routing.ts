@@ -47,3 +47,23 @@ export function routeProgress(route: WalkingRoute, sample: LocationSample): Rout
 export function validRoute(route: WalkingRoute) {
   return Number.isFinite(route?.distance) && route.distance >= 0 && Number.isFinite(route.duration) && route.duration >= 0 && route.geometry?.coordinates?.length >= 2 && route.geometry.coordinates.every(p => p.length === 2 && p.every(Number.isFinite) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90) && route.legs?.length > 0 && route.legs.every(leg => leg.steps?.length > 0 && leg.steps.every(step => step.maneuver?.location?.length === 2 && step.maneuver.location.every(Number.isFinite)))
 }
+
+// ---- Hướng đi, giờ đến và gợi ý khi lệch tuyến ----
+const toRad = (degrees: number) => degrees * Math.PI / 180
+/** Góc hướng đi từ a tới b, tính theo độ (0 = Bắc, 90 = Đông), trong khoảng 0–360. */
+export function bearing(a: Point, b: Point): number {
+  const dLng = toRad(b[1] - a[1])
+  const y = Math.sin(dLng) * Math.cos(toRad(b[0]))
+  const x = Math.cos(toRad(a[0])) * Math.sin(toRad(b[0])) - Math.sin(toRad(a[0])) * Math.cos(toRad(b[0])) * Math.cos(dLng)
+  return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360
+}
+const COMPASS = ['Bắc', 'Đông Bắc', 'Đông', 'Đông Nam', 'Nam', 'Tây Nam', 'Tây', 'Tây Bắc']
+export const directionName = (degrees: number) => COMPASS[Math.round((((degrees % 360) + 360) % 360) / 45) % 8]
+/** Hướng nhân vật đang đi, suy ra từ hai vị trí GPS liên tiếp; di chuyển dưới `minMeters` thì coi như đứng yên (trả về null). */
+export function headingBetween(previous: Point, current: Point, minMeters = 5): number | null {
+  return distanceMeters(previous, current) < minMeters ? null : bearing(previous, current)
+}
+/** Giờ dự kiến đến nơi, dạng 09:08 (giờ Việt Nam). */
+export function arrivalClock(now: number, secondsLeft: number): string {
+  return new Date(now + Math.max(0, secondsLeft) * 1000).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' })
+}

@@ -1,8 +1,12 @@
-import { getDestination } from '../data/destinations'
+import { getDestination, type Destination } from '../data/destinations'
 import { getMissions } from '../data/missions'
 import { emptyProgress, type DestinationProgress } from './rules'
 import { hasArrived, type LocationSample } from './location'
 import { COINS_PER_MISSION, rewards } from '../data/rewards'
+
+// Mã nhiệm vụ giống nhau ở mọi địa điểm. Kiểm tra theo danh sách này (không cần biết địa điểm) để tiến độ của
+// một địa điểm đã bị xóa khỏi admin, hoặc khi danh sách địa điểm chưa tải xong, không bị coi là dữ liệu hỏng.
+const MISSION_IDS = getMissions({ name: '', category: 'landmark', suggestedActivities: [], highlightReason: '' } as unknown as Destination).map(item => item.id)
 
 export interface Redemption { rewardId: string; redeemedAt: number }
 export interface ProgressState { version: 1; destinations: Record<string, DestinationProgress>; redemptions: Redemption[] }
@@ -20,9 +24,8 @@ export function readState(value: unknown): ProgressState {
   if (value === undefined) return newState()
   const state = value as ProgressState
   if (state?.version !== 1 || !state.destinations || typeof state.destinations !== 'object') throw new CorruptStateError('Dữ liệu lưu không hợp lệ. Chưa ghi đè dữ liệu cũ.')
-  for (const [id, progress] of Object.entries(state.destinations)) {
-    const place = getDestination(id)
-    const ids = place ? getMissions(place).map(item => item.id) : []
+  for (const [_id, progress] of Object.entries(state.destinations)) {
+    const ids = MISSION_IDS
     const completedAt = progress?.completedAt
     const invalidCompletedAt = completedAt !== undefined && (completedAt === null || typeof completedAt !== 'object' || Array.isArray(completedAt) || Object.entries(completedAt).some(([missionId, timestamp]) => !progress.completed.includes(missionId) || !Number.isFinite(timestamp)))
     if (!progress || typeof progress.started !== 'boolean' || !Array.isArray(progress.selected) || !Array.isArray(progress.completed) ||

@@ -447,5 +447,3 @@ a:focus-visible, button:focus-visible, .leaflet-marker-icon:focus-visible {
 .ground-sprite.ground-clickable { pointer-events: auto; cursor: pointer; }
 .ground-pin .ground-plain { opacity: .9; }
 .ground-pin b { opacity: 0; }
-/* Nền bản đồ kiểu pixel: ô bản đồ được thu nhỏ rồi phóng to không làm mịn */
-.leaflet-tile-pane .leaflet-tile { image-rendering: pixelated; image-rendering: crisp-edges; image-rendering: pixelated; }

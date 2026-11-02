@@ -1,11 +1,11 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import { type Destination } from './data/destinations'
-import LandmarkArt from './LandmarkArt'
 import DestinationGallery from './DestinationGallery'
 import { visitInfo } from './data/visitInfo'
 import { useLiveVisitInfo } from './lib/useLiveVisitInfo'
 import AdminGallery from './AdminGallery'
-import { usePlaceData } from './lib/placeContent'
+import PlaceArt from './PlaceArt'
+import CrowdChart from './CrowdChart'
 
 type Drag = { pointerId: number; startX: number; startY: number; gallery: boolean; height: number; full: number; lastY: number; lastTime: number; velocity: number; moved: boolean }
 
@@ -14,10 +14,8 @@ export default function DestinationSheet({ place, onClose }: { place: Destinatio
   const drag = useRef<Drag | null>(null)
   const ignoreClick = useRef(false)
   const fallbackInfo = visitInfo[place.id]
-  const { info, loading } = useLiveVisitInfo(place, fallbackInfo)
-  const { sprites, content } = usePlaceData()
-  const custom = content[place.id]
-  const thumb = custom?.photos[0]?.url ?? sprites[place.id]?.url
+  const admin = place.source === 'admin'
+  const { info, loading } = useLiveVisitInfo(place, fallbackInfo, !admin)
   const [expanded, setExpanded] = useState(false)
   const [visible, setVisible] = useState(false)
   const [closing, setClosing] = useState(false)
@@ -123,19 +121,20 @@ export default function DestinationSheet({ place, onClose }: { place: Destinatio
     }}>
       <div className="sheet-grab" aria-hidden="true"><span className="sheet-handle" /></div>
       <div className="sheet-header">
-        <div className="sheet-thumbnail" aria-hidden="true">{custom ? (thumb ? <img className="sheet-thumb-img" src={thumb} alt=""/> : null) : <LandmarkArt id={place.id}/>}</div>
+        <div className="sheet-thumbnail" aria-hidden="true"><PlaceArt place={place}/></div>
         <div><h2>{place.name}</h2></div>
         <button type="button" className="sheet-close" aria-label="Đóng thông tin điểm đến" onClick={close}>×</button>
       </div>
     </div>
-    {custom ? <div className="sheet-body" id="destination-sheet-details">
-      <AdminGallery key={place.id} name={place.name} photos={custom.photos}/>
-      {custom.highlight && <p className="admin-highlight">{custom.highlight}</p>}
-      {(custom.description || custom.detail) && <section className="sheet-detail-group visit-section"><h3>Tổng quan</h3>{custom.description && <p>{custom.description}</p>}{custom.detail && <p>{custom.detail}</p>}</section>}
-      {custom.activities.length > 0 && <section className="sheet-detail-group visit-section"><h3>Gợi ý hoạt động</h3><ul>{custom.activities.map(activity => <li key={activity}>{activity}</li>)}</ul></section>}
-      {(custom.hours || custom.hoursNote) && <section className="sheet-detail-group visit-section"><h3>Giờ mở cửa</h3>{custom.hours && <p className="visit-hours">{custom.hours}</p>}{custom.hoursNote && <p>{custom.hoursNote}</p>}</section>}
-      {custom.address && <section className="sheet-detail-group visit-section"><h3>Địa chỉ</h3><p>{custom.address}</p></section>}
-      {custom.tip && <section className="sheet-detail-group visit-section"><h3>Mẹo nhỏ</h3><p>{custom.tip}</p></section>}
+    {admin ? <div className="sheet-body" id="destination-sheet-details">
+      <AdminGallery key={place.id} name={place.name} photos={place.photos ?? []}/>
+      {place.highlightReason && <p className="admin-highlight">{place.highlightReason}</p>}
+      {(place.description || place.detail) && <section className="sheet-detail-group visit-section"><h3>Tổng quan</h3>{place.description && <p>{place.description}</p>}{place.detail && <p>{place.detail}</p>}</section>}
+      {place.suggestedActivities.length > 0 && <section className="sheet-detail-group visit-section"><h3>Gợi ý hoạt động</h3><ul>{place.suggestedActivities.map(activity => <li key={activity}>{activity}</li>)}</ul></section>}
+      {(place.hours || place.hoursNote) && <section className="sheet-detail-group visit-section"><h3>Giờ mở cửa</h3>{place.hours && <p className="visit-hours">{place.hours}</p>}{place.hoursNote && <p>{place.hoursNote}</p>}</section>}
+      {(place.crowd?.length ?? 0) > 0 && <section className="sheet-detail-group visit-section crowd-section"><h3>Giờ đông đúc</h3><CrowdChart levels={place.crowd ?? []} note={place.crowdNote}/></section>}
+      {place.address && <section className="sheet-detail-group visit-section"><h3>Địa chỉ</h3><p>{place.address}</p></section>}
+      {place.tip && <section className="sheet-detail-group visit-section"><h3>Mẹo nhỏ</h3><p>{place.tip}</p></section>}
     </div> : <div className="sheet-body" id="destination-sheet-details">
       <DestinationGallery key={place.id} place={place}/>
       <section className="sheet-detail-group visit-section"><h3>Tổng quan</h3><p>{place.description}</p><p>{place.detail}</p></section>

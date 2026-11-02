@@ -1,9 +1,9 @@
-﻿
+
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { destinations, type Destination } from './data/destinations'
+import { useDestinations, type Destination } from './data/destinations'
 import './Explore.css'
 import './Quest.css'
 import { filterDestinations, searchText } from './lib/filters'
@@ -15,11 +15,12 @@ import { readAvatar, avatars } from './lib/avatar'
 import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import NearbyDrawer from './NearbyDrawer'
-import { dateLabel, parseEvents, reminderText, timeRange, type EventItem } from './lib/events'
+import { dateLabel, timeRange } from './lib/events'
+import { useEvents } from './lib/eventStore'
+import { runEventNotifications } from './lib/eventNotifier'
 import { clockOverride, mapDarkness } from './lib/daylight'
 import { usePlaceData } from './lib/placeContent'
 import { GroundSpriteLayer } from './lib/groundSprite'
-import { pixelTileLayer } from './lib/pixelTiles'
 import { DEFAULT_MARKER_METERS, DRAGON_MARKER_METERS, PIN_LABEL_ZOOM, pinMode, pinScale } from './lib/markerScale'
 import { quests } from './data/quests'
 
@@ -64,9 +65,9 @@ export default function Explore() {
   const [sheetOpen, setSheetOpen] = useState(false)
   const [tileError, setTileError] = useState(false)
   const { sprites } = usePlaceData()
-  const [events, setEvents] = useState<EventItem[]>([])
+  const events = useEvents()
+  const destinations = useDestinations()
   const [showEvents, setShowEvents] = useState(false)
-  const reminded = useRef(new Set<string>())
   useEffect(() => {
     // Bản đồ tối dần theo giờ thật ở Đà Nẵng (hoàng hôn → tối nhẹ, bình minh → sáng lại).
     const apply = () => {
@@ -77,25 +78,6 @@ export default function Explore() {
     const timer = window.setInterval(apply, 60000)
     return () => window.clearInterval(timer)
   }, [])
-  useEffect(() => {
-    // Sự kiện theo giờ thực (Django). Làm mới mỗi phút; lỗi mạng thì giữ danh sách cũ.
-    if (typeof fetch !== 'function') return
-    let alive = true
-    const load = () => fetch('/api/events/feed').then(r => r.ok ? r.json() : null).then(data => { if (alive && data) setEvents(parseEvents(data)) }).catch(() => undefined)
-    void load()
-    const timer = window.setInterval(load, 60000)
-    return () => { alive = false; window.clearInterval(timer) }
-  }, [])
-  useEffect(() => {
-    // Nhắc một lần cho mỗi sự kiện đang diễn ra hoặc sắp diễn ra.
-    events.forEach(event => {
-      const key = `${event.id}-${event.start}`
-      const message = reminderText(event)
-      if (!message || reminded.current.has(key)) return
-      reminded.current.add(key)
-      window.dispatchEvent(new CustomEvent('dana-toast', { detail: message }))
-    })
-  }, [events])
   const happeningPlaces = useMemo(() => new Set(events.filter(event => event.status !== 'later' && event.placeId).map(event => event.placeId as string)), [events])
   const [mapUnavailable, setMapUnavailable] = useState(false)
   const [loadingTiles, setLoadingTiles] = useState(true)
@@ -109,7 +91,7 @@ export default function Explore() {
   const centered = useRef(false)
   const [avatar, setAvatar] = useState(() => readAvatar() ?? avatars[0])
   const nearIntent = /\b(gan|quanh|xung quanh)\b/.test(searchText(query))
-  const filtered = useMemo(() => filterDestinations(destinations, query, nearIntent && sample ? 3 : 0, sample, now), [query, nearIntent, sample, now])
+  const filtered = useMemo(() => filterDestinations(destinations, query, nearIntent && sample ? 3 : 0, sample, now), [destinations, query, nearIntent, sample, now])
   const visibleQuests = useMemo(() => {
     const searched = searchText(query)
     return quests.filter(quest => !searched || searchText(`${quest.title} ${quest.area} đại học kinh tế due`).includes(searched))
@@ -118,6 +100,10 @@ export default function Explore() {
     window.dispatchEvent(new CustomEvent('dana-toast', { detail: message }))
   }
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 15000); return () => window.clearInterval(timer) }, [])
+  useEffect(() => {
+    // Thông báo sự kiện: người chơi trong bán kính của địa điểm có sự kiện, và các hoạt động nổi bật của Đà Nẵng.
+    runEventNotifications(events, sample ? { lat: sample.latitude, lng: sample.longitude } : null, now)
+  }, [events, sample, now])
   function centerOnDevice() {
     if (!window.isSecureContext || !navigator.geolocation) {
       notify('Không thể dùng định vị. Hãy mở ứng dụng bằng HTTPS hoặc localhost và kiểm tra hỗ trợ định vị của thiết bị.')
@@ -159,7 +145,7 @@ export default function Explore() {
     recognition.onend = () => setListening(false)
     setListening(true); recognition.start()
   }
-  const activeSelected = selected && filtered.some(place => place.id === selected.id) ? selected : null
+  const activeSelected = selected ? (filtered.find(place => place.id === selected.id) ?? destinations.find(place => place.id === selected.id) ?? selected) : null
   const showPlace = useCallback((place: Destination) => {
     setSelected(place)
     setSheetOpen(true)
@@ -196,7 +182,7 @@ export default function Explore() {
       mapRef.current = map
       centered.current = false
       fitAround(map, DA_NANG_CENTER)
-      const tiles = pixelTileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       })
@@ -284,7 +270,7 @@ export default function Explore() {
     if (!nearest || nearest.meters > 300) return null
     const text = nearest.meters + sample.accuracy <= 100 ? `Bạn đã tới ${nearest.place.name}! Bấm vào mình để mở nhiệm vụ.` : `Gần ${nearest.place.name} · ${Math.round(nearest.meters / 10) * 10} m`
     return { place: nearest.place, text }
-  }, [sample])
+  }, [sample, destinations])
   useEffect(() => {
     const map = mapRef.current
     if (!map || !sample) return

@@ -1,28 +1,16 @@
-import { cityEvents, nextEventOccurrence } from '../data/events'
-
 const ENABLED_KEY = 'dana-event-reminders-v1'
-let timers: number[] = []
 
-export const remindersEnabled = () => localStorage.getItem(ENABLED_KEY) === 'enabled'
-
-async function showEventReminder(eventId: string, title: string, body: string) {
-  const registration = await navigator.serviceWorker?.ready.catch(() => null)
-  if (registration) return registration.showNotification(title, { body, icon: `${import.meta.env.BASE_URL}dana-quest.svg`, data: { url: `#/su-kien/${eventId}` }, tag: `dana-event-${eventId}` })
-  if ('Notification' in window && Notification.permission === 'granted') new Notification(title, { body, icon: `${import.meta.env.BASE_URL}dana-quest.svg` })
+export const remindersEnabled = () => {
+  try { return localStorage.getItem(ENABLED_KEY) === 'enabled' } catch { return false }
 }
 
-export function scheduleEventReminders(now = new Date()) {
-  timers.forEach(window.clearTimeout)
-  timers = []
-  if (!remindersEnabled()) return
-  cityEvents.forEach(event => {
-    if (!event.reminderMinutes) return
-    const occurrence = nextEventOccurrence(event, now)
-    if (!occurrence) return
-    const delay = occurrence.getTime() - now.getTime() - event.reminderMinutes * 60_000
-    if (delay <= 0 || delay > 2_147_000_000) return
-    timers.push(window.setTimeout(() => void showEventReminder(event.id, `Sắp diễn ra: ${event.title}`, `${event.scheduleLabel} · ${event.location}`), delay))
-  })
+/** Thông báo hệ thống (cần người chơi cho phép). Thông báo trong app luôn hiện, không phụ thuộc hàm này. */
+export async function showSystemNotification(eventId: string, title: string, body: string) {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return
+  const icon = `${import.meta.env.BASE_URL}dana-quest.svg`
+  const registration = await navigator.serviceWorker?.ready.catch(() => null)
+  if (registration) return registration.showNotification(title, { body, icon, data: { url: `#/su-kien/${eventId}` }, tag: `dana-event-${eventId}` })
+  new Notification(title, { body, icon })
 }
 
 export async function enableEventReminders() {
@@ -30,11 +18,8 @@ export async function enableEventReminders() {
   const permission = await Notification.requestPermission()
   if (permission !== 'granted') throw new Error('Bạn chưa cho phép DANA QUEST gửi thông báo.')
   localStorage.setItem(ENABLED_KEY, 'enabled')
-  scheduleEventReminders()
 }
 
 export function disableEventReminders() {
   localStorage.removeItem(ENABLED_KEY)
-  scheduleEventReminders()
 }
-
