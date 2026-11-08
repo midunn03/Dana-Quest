@@ -1,7 +1,7 @@
 ﻿// @vitest-environment jsdom
 import { act, cleanup, renderHook, waitFor } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
-import { useWalkingRoute } from '../src/lib/useWalkingRoute'
+import { offRouteLimit, useWalkingRoute } from '../src/lib/useWalkingRoute'
 import { walkingFixture } from './routing-fixture'
 import type { LocationSample } from '../src/lib/location'
 afterEach(() => { cleanup(); vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.useRealTimers() })
@@ -20,6 +20,26 @@ it('updates progress locally and reroutes after leaving the road without request
   hook.rerender({ sample: gps(16.09, 108.25) })
   expect(hook.result.current.progress).toBeNull()
   await waitFor(() => expect(fetcher).toHaveBeenCalledTimes(2))
+})
+it('keeps the previous line while rerouting but withholds turn progress when off route', async () => {
+  const fetcher = vi.fn()
+    .mockResolvedValueOnce({ ok: true, json: async () => ({ route: walkingFixture }) })
+    .mockImplementationOnce(() => new Promise(() => {}))
+  vi.stubGlobal('fetch', fetcher)
+  const hook = renderHook(({ sample }) => useWalkingRoute('cau-rong', sample), { initialProps: { sample: gps(16.08, 108.24) } })
+  await waitFor(() => expect(hook.result.current.route).toBeTruthy())
+  const originalRoute = hook.result.current.route
+  vi.spyOn(Date, 'now').mockReturnValue(Date.now() + 16000)
+  hook.rerender({ sample: gps(16.09, 108.25) })
+  await waitFor(() => expect(fetcher).toHaveBeenCalledTimes(2))
+  expect(hook.result.current.route).toBe(originalRoute)
+  expect(hook.result.current.progress).toBeNull()
+  expect(hook.result.current.busy).toBe(true)
+})
+it('caps the off-route allowance when GPS accuracy is very poor', () => {
+  expect(offRouteLimit(10)).toBe(35)
+  expect(offRouteLimit(40)).toBe(60)
+  expect(offRouteLimit(150)).toBe(60)
 })
 it('waits for accurate GPS, rejects malformed routes and never substitutes a direct route on failures', async () => {
   const fetcher = vi.fn(async () => ({ ok: false, json: async () => ({ error: 'Không có tuyến' }) }))

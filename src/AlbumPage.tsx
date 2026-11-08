@@ -1,48 +1,19 @@
-﻿import { useEffect, useState } from 'react'
-import { deletePhoto, loadPhotos, type LocalPhoto } from './lib/photos'
-import { hasSyncAccount } from './lib/accountSync'
-import { destinations, getDestination } from './data/destinations'
-import { getMissions } from './data/missions'
-import { PhotoPreview } from './PhotoMission'
-import LandmarkArt from './LandmarkArt'
-import { notify } from './lib/notifications'
+import QuestCoverCard from './ui/QuestCoverCard'
+import { interpolate } from './i18n/locale'
+import { t } from './i18n/locale'
+import {useEffect,useState} from 'react'
+import {quests} from './data/quests'
+import {useQuestProgress} from './lib/useQuestProgress'
+import {useAuth} from './AuthContext'
+import {accountPhotoCount,clearAccountPhotos} from './lib/accountSync'
+import {displayText} from './lib/questDisplay'
+import QuestCover from './QuestCover'
 import ConfirmDialog from './ConfirmDialog'
-import './Quest.css'
-export default function AlbumPage() {
-  const [photos, setPhotos] = useState<LocalPhoto[]>([])
-  const [tab,setTab]=useState<'saved'|'discover'>('saved')
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [pendingDelete, setPendingDelete] = useState<LocalPhoto | null>(null)
-  const [deleting, setDeleting] = useState(false)
-  const [accountMode] = useState(() => hasSyncAccount())
-  useEffect(() => {
-    let active = true
-    loadPhotos().then(value => { if (active) setPhotos(value.sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))) }).catch(() => { if (active) setError('Không đọc được album. Hãy tải lại trang.') }).finally(() => { if (active) setLoading(false) })
-    return () => { active = false }
-  }, [])
-  async function confirmDelete() {
-    if (!pendingDelete || deleting) return
-    setDeleting(true); setError('')
-    try {
-      await deletePhoto(pendingDelete.id)
-      setPhotos(current => current.filter(photo => photo.id !== pendingDelete.id))
-      setPendingDelete(null)
-      notify('Ảnh đã xóa. Tiến độ và Green Coins không bị thay đổi.')
-    } catch (cause) { setError(cause instanceof Error ? cause.message : 'Không xóa được ảnh.') }
-    finally { setDeleting(false) }
-  }
-  return <main className="album-screen screen-page"><header className="screen-heading"><a href="#/kham-pha" aria-label="Về bản đồ">‹</a><h1>Thư viện kỷ niệm</h1></header>
-    <div className="album-tabs" role="group" aria-label="Lọc kỷ niệm"><button aria-pressed={tab==='saved'} onClick={()=>setTab('saved')}>Ảnh đã lưu ({photos.length})</button><button aria-pressed={tab==='discover'} onClick={()=>setTab('discover')}>Chưa khám phá</button></div>
-    {loading && <p role="status">Đang đọc album…</p>}{error && <p role="alert" className="error">{error}</p>}
-    {tab==='saved'&&<><div className="memory-grid">{photos.map(photo=>{
-      const place=getDestination(photo.destinationId)
-      const mission=place&&photo.missionId?getMissions(place).find(item=>item.id===photo.missionId):undefined
-      const hasCaptureDate=typeof photo.createdAt==='number'&&Number.isFinite(photo.createdAt)
-      return <article className="memory-card" key={photo.id}><PhotoPreview photo={photo} alt={`Ảnh tại ${place?.name??'điểm đến'}`} download/><div className="memory-info"><h2>{place?.name??'Điểm đến'}</h2><p>{mission?.title??'Chưa xác định nhiệm vụ'}</p>{hasCaptureDate?<time dateTime={new Date(photo.createdAt!).toISOString()}>{new Date(photo.createdAt!).toLocaleString('vi-VN')}</time>:<small>Ngày chụp chưa được lưu</small>}</div><button type="button" className="memory-delete" aria-label={`Xóa ảnh tại ${place?.name??'điểm đến'}`} title="Xóa ảnh" onClick={()=>setPendingDelete(photo)}>×</button><details><summary>Chi tiết kỷ niệm</summary><p>{mission?.title??'Chưa xác định nhiệm vụ'}</p>{hasCaptureDate&&<p>{new Date(photo.createdAt!).toLocaleString('vi-VN')}</p>}<a href={`#/nhiem-vu/${photo.destinationId}`}>Xem nhiệm vụ tại điểm đến</a></details></article>
-    })}<a className="memory-add" href="#/kham-pha"><span>＋</span>Thêm kỷ niệm</a></div>{!loading&&photos.length===0&&<p className="album-note">Chưa có ảnh. Chọn một điểm đến và lưu ảnh nhiệm vụ đầu tiên của bạn.</p>}</>}
-    {(tab==='discover'||photos.length===0)&&<><p className="album-note">Điểm đến gợi ý · hình minh họa, chưa phải ảnh của bạn</p><div className="memory-grid">{destinations.filter(place=>!photos.some(photo=>photo.destinationId===place.id)).map(place=><a className="memory-card illustrated-memory" key={place.id} href={`#/dia-diem/${place.id}`}><LandmarkArt id={place.id} sunset={place.id==='cau-rong'}/><h2>{place.name}</h2><small>Chưa có kỷ niệm</small></a>)}</div></>}
-    <p className="album-note">{accountMode ? 'Ảnh của tài khoản được lưu trên máy chủ, chưa được AI xác minh. Hãy tải ảnh muốn giữ về máy.' : 'Ảnh được lưu trên trình duyệt này, chưa được AI xác minh. Hãy tải ảnh muốn giữ về máy.'}</p>
-    <ConfirmDialog open={!!pendingDelete} title="Xóa ảnh này?" message="Ảnh đã lưu sẽ bị xóa vĩnh viễn. Tiến độ nhiệm vụ và Green Coins không thay đổi." confirmLabel="Xóa ảnh" busyLabel="Đang xóa…" busy={deleting} tone="danger" onCancel={()=>setPendingDelete(null)} onConfirm={()=>void confirmDelete()} />
-  </main>
+import './QuestLibrary.css'
+export default function AlbumPage(){
+ const {user}=useAuth(),{state,loading,error:progressError}=useQuestProgress(),[tab,setTab]=useState('all'),[oldCount,setOldCount]=useState<number|null>(null),[error,setError]=useState(''),[confirm,setConfirm]=useState(false),[busy,setBusy]=useState(false),[notice,setNotice]=useState('')
+ useEffect(()=>{let alive=true;if(user)void accountPhotoCount().then(count=>{if(alive)setOldCount(count)}).catch(cause=>{if(alive)setError(cause.message)});return()=>{alive=false}},[user])
+ const visible=quests.filter(q=>tab==='all'||tab==='started'&&state.quests[q.id]||tab==='completed'&&state.quests[q.id]?.completedAt)
+ async function clear(){if(busy)return;setBusy(true);setError('');try{const count=await clearAccountPhotos();setOldCount(0);setConfirm(false);setNotice(interpolate("Đã xóa vĩnh viễn ${0} ảnh cũ của tài khoản này. Tiến độ và xu vẫn được giữ.",[count]))}catch(cause){setError(cause instanceof Error?cause.message:t("Chưa xóa được ảnh."))}finally{setBusy(false)}}
+ return <main className="library-page"><div className="library-frame"><header><a href="#/tai-khoan" aria-label={t("Về tài khoản")}>‹</a><div><h1>{t("Thư viện kỷ niệm")}</h1><p>{t("Những nơi có câu chuyện đang chờ bạn.")}</p></div></header><div className="library-note"><strong>{t("Ảnh đại diện của từng quest")}</strong><p>{t("Thư viện dùng cùng hình bìa với các quest để bạn nhận ra điểm đến. Đây không phải ảnh người chơi đã chụp hay bằng chứng bạn đã ghé thăm.")}</p></div><nav aria-label={t("Lọc thư viện")}>{[['all',t("Tất cả")],['started',t("Đã bắt đầu")],['completed',t("Hoàn thành")]].map(([value,label])=><button key={value} aria-pressed={tab===value} onClick={()=>setTab(value)}>{label}</button>)}</nav>{loading&&<p role="status">{t("Đang tải tiến độ…")}</p>}{(error||progressError)&&<p role="alert">{error||progressError}</p>}<div className="library-grid quest-cover-grid">{visible.map(quest=>{const run=state.quests[quest.id];return <QuestCoverCard className="library-card" href={`#/quest/${quest.id}`} key={quest.id} cover={<QuestCover id={quest.id} credit/>}><span>{run?.completedAt?t("Đã hoàn thành"):run?t("Đang khám phá"):t("Chưa bắt đầu")}</span><h2>{displayText(quest.title)}</h2><p>{displayText(quest.area)}</p><small>{quest.checkpoints.length} {" " + t("thử thách")}{run?interpolate("(${0}/${1} đã giải)",[run.completedCheckpointIds.length,quest.checkpoints.length]):''}</small></QuestCoverCard>})}</div>{!visible.length&&!loading&&<section className="library-empty"><h2>{t("Chưa có hành trình trong mục này")}</h2><p>{t("Bắt đầu một quest để lưu dấu hành trình của bạn.")}</p><button onClick={()=>setTab('all')}>{t("Xem tất cả quest")}</button></section>}<section className="library-cleanup"><h2>{t("Ảnh cũ của tài khoản")}</h2><p>{oldCount===null?t("Đang kiểm tra ảnh cũ…"):oldCount?interpolate("Có ${0} ảnh cũ vẫn lưu trên máy chủ. Ảnh không còn được hiển thị trong thư viện quest.",[oldCount]):t("Không còn ảnh cũ trong tài khoản.")}</p>{!!oldCount&&<button className="library-delete" disabled={busy} onClick={()=>setConfirm(true)}>{t("Xóa vĩnh viễn ảnh cũ của tôi")}</button>}{notice&&<p role="status">{t(notice)}</p>}</section></div><ConfirmDialog open={confirm} title={t("Xóa vĩnh viễn ảnh cũ?")} message={interpolate("Xóa ${0} ảnh của đúng tài khoản đang đăng nhập. Không khôi phục được ảnh qua ứng dụng. Ảnh bìa quest, tiến độ và phần thưởng được giữ nguyên.",[oldCount??0])} confirmLabel={t("Xóa vĩnh viễn ảnh cũ")} busy={busy} busyLabel={t("Đang xóa…")} tone="danger" onCancel={()=>setConfirm(false)} onConfirm={()=>void clear()}/></main>
 }

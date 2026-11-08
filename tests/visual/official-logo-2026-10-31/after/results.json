@@ -1,0 +1,434 @@
+[
+  {
+    "name": "home",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "login",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "login",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "login",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "login",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 600,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "login",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 600,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "login",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  }
+]

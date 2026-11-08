@@ -1,0 +1,3 @@
+
+.app-shell .pixel-avatar { image-rendering:pixelated; }
+.pixel-avatar { display:block; width:100%; height:100%; image-rendering:pixelated; }

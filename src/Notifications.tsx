@@ -1,3 +1,6 @@
+import './Notifications.css'
+import { PixelToast } from './ui/PixelUI'
+import { t } from './i18n/locale'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Notifications() {
@@ -15,5 +18,5 @@ export default function Notifications() {
     window.addEventListener('dana-toast', receive)
     return () => { window.removeEventListener('dana-toast', receive); timers.forEach(clearTimeout) }
   }, [])
-  return <aside className="notifications" aria-label="Thông báo" aria-live="polite">{items.map(item => <div className="toast" key={item.id}><span>{item.message}</span><button aria-label="Đóng thông báo" onClick={() => setItems(old => old.filter(value => value.id !== item.id))}>×</button></div>)}</aside>
+  return <aside className="notifications" aria-label={t("Thông báo")} aria-live="polite">{items.map(item => <PixelToast className="toast" key={item.id}><span>{item.message}</span><button aria-label={t("Đóng thông báo")} onClick={() => setItems(old => old.filter(value => value.id !== item.id))}>{t("×")}</button></PixelToast>)}</aside>
 }

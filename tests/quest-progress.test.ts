@@ -6,11 +6,11 @@ import { migrateQuestState, newQuestState, questRewardTotal, updateQuestProgress
 const questId = 'due-dau-an-50-nam'
 
 describe('DUE demo quest data', () => {
-  it('contains two ordered, distinct checkpoints with attributable sources', () => {
+  it('contains five ordered, distinct checkpoints with attributable sources', () => {
     const quest = getQuest(questId)!
-    expect(quest.checkpoints).toHaveLength(2)
+    expect(quest.checkpoints).toHaveLength(5)
     expect(quest.checkpointOrder).toEqual(quest.checkpoints.map(item => item.id))
-    expect(new Set(quest.checkpoints.map(item => item.challenge.type)).size).toBe(2)
+    expect(new Set(quest.checkpoints.map(item => item.challenge.type)).size).toBe(5)
     expect(quest.checkpoints.every(item => item.sourceUrls.every(url => url.startsWith('https://')))).toBe(true)
   })
 })
@@ -24,14 +24,16 @@ describe('Quest progress version 2', () => {
     expect(migrated.quests).toEqual({})
   })
 
-  it('enforces order and evidence, then completes the two-checkpoint quest', () => {
+  it('enforces order and evidence, preserves the first two rewards before completing all five types', () => {
     let state = updateQuestProgress(newQuestState(), { type: 'start', questId, now: 100 })
     expect(() => updateQuestProgress(state, { type: 'complete-checkpoint', questId, checkpointId: 'dau-moc-1975', answer: '1975', now: 200 })).toThrow('thứ tự')
     expect(() => updateQuestProgress(state, { type: 'complete-checkpoint', questId, checkpointId: 'cong-71', answer: '72', now: 200 })).toThrow('chưa chính xác')
     state = updateQuestProgress(state, { type: 'complete-checkpoint', questId, checkpointId: 'cong-71', answer: 'Số 71', now: 200 })
     state = updateQuestProgress(state, { type: 'complete-checkpoint', questId, checkpointId: 'dau-moc-1975', answer: '1975', now: 300 })
-    expect(state.quests[questId].completedAt).toBe(300)
-    expect(questRewardTotal(state)).toEqual({ xp: 120, coins: 20 })
+    expect(state.quests[questId].completedAt).toBeUndefined()
+    for(const [checkpointId,answer] of [['sap-xep-ky-uc',JSON.stringify(['1975','2000','2015','2025'])],['ghep-dau-moc',JSON.stringify([['2000','25'],['2025','50'],['1975','0'],['2015','40']])],['mat-thu-tong-ket',JSON.stringify(['address','start','25','40','50'])]])state=updateQuestProgress(state,{type:'complete-checkpoint',questId,checkpointId,answer,now:400})
+    expect(state.quests[questId].completedAt).toBe(400)
+    expect(questRewardTotal(state)).toEqual({ xp: 400, coins: 50 })
   })
 
   it('is idempotent and never awards a checkpoint twice', () => {

@@ -1,0 +1,42 @@
+.page-tools {
+  flex:0 0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:center;
+  gap:var(--px-space-3);
+  padding:var(--px-space-3) var(--px-page-gutter);
+  background:var(--px-surface);
+  border-bottom:2px solid var(--px-ink);
+}
+.page-tools:has(>.active-mission-indicator) {
+  grid-template-columns:minmax(0,1fr) minmax(0,420px);
+}
+.page-tools-search {
+  display:flex;
+  align-items:center;
+  gap:var(--px-space-3);
+  width:100%;
+  max-width:600px;
+  min-width:0;
+  min-height:48px;
+  padding:var(--px-space-2) var(--px-space-3);
+  border:var(--px-border);
+  background:var(--px-page);
+  color:var(--px-ink);
+  font-size:var(--text-sm);
+  text-decoration:none;
+}
+.page-tools-search svg { width:24px; height:24px; flex-shrink:0; }
+.page-tools-search-arrow { margin-left:auto; }
+.page-tools-search:hover, .page-tools-search[aria-current="page"] { background:var(--px-surface-hover); }
+.page-tools-search:focus-visible { outline:4px solid var(--px-focus); outline-offset:3px; }
+.app-shell:has(>main.quest-player)>.page-tools,
+.app-shell:has(>main.due-start)>.page-tools,
+.app-shell:has(>main.camera-page)>.page-tools,
+.app-shell:has(>main.onboarding)>.page-tools,
+.onboarding-shell:not(.home-shell)>.page-tools { display:none; }
+@media(max-width:767px) {
+  .page-tools:has(>.active-mission-indicator) { grid-template-columns:minmax(0,1fr); }
+  .page-tools { gap:var(--px-space-2); }
+  .page-tools-search { max-width:none; }
+}

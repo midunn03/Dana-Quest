@@ -1,0 +1,1546 @@
+[
+  {
+    "id": "due-dau-an-50-nam",
+    "title": "The Memory Keeper’s Secret Letter",
+    "summary": "A fictional exploration story: you find a letter without a sender. Five fragments lead to the University of Economics, the University of Đà Nẵng: an address, a starting year and intervals waiting to be joined.",
+    "city": "Đà Nẵng",
+    "area": "Trường Đại học Kinh tế – Đại học Đà Nẵng",
+    "startPosition": [
+      16.04752,
+      108.23987
+    ],
+    "estimatedMinutes": 20,
+    "safetyNote": "Observe from public areas without blocking the entrance. Do not enter restricted university areas; follow signs and local instructions.",
+    "checkpointOrder": [
+      "cong-71",
+      "dau-moc-1975",
+      "sap-xep-ky-uc",
+      "ghep-dau-moc",
+      "mat-thu-tong-ket"
+    ],
+    "checkpoints": [
+      {
+        "id": "cong-71",
+        "title": "The number that opens the gate",
+        "story": "The first page has an empty address field. The memory keeper asks you to confirm the number on Ngũ Hành Sơn Street before opening the next page. This fictional clue refers to a real address; no letter is hidden at the university gate.",
+        "instruction": "From a public area, check the address and enter its building number. Do not enter restricted areas.",
+        "placeLabel": "Public area near the university entrance",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the university’s building number on Ngũ Hành Sơn Street?",
+          "acceptedAnswers": [
+            "71",
+            "số 71",
+            "so 71"
+          ],
+          "placeholder": "Enter the building number"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://due.udn.vn/",
+          "https://daotao.due.udn.vn/"
+        ],
+        "hint": "Find the building number in the address, not a year mentioned in the story.",
+        "feedback": "The letter has its address. The next fragment establishes the timeline’s starting point."
+      },
+      {
+        "id": "dau-moc-1975",
+        "title": "Half a century",
+        "story": "The inside page says “fifty years”, but ink covers its starting point. The keeper recalls the starting year mentioned by the university: 1975. Choose that fragment to anchor the story’s timeline, rather than guessing the age of a building.",
+        "instruction": "Read the story and choose the stated starting year.",
+        "placeLabel": "Public area near the university entrance",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which starting year matches the university’s fifty-year journey?",
+          "options": [
+            {
+              "id": "1965",
+              "label": "Year 1965"
+            },
+            {
+              "id": "1975",
+              "label": "Year 1975"
+            },
+            {
+              "id": "1995",
+              "label": "Year 1995"
+            }
+          ],
+          "correctOptionId": "1975"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "Read the starting year stated in the letter; the other years are distractors.",
+        "feedback": "The starting point is restored. The loose year fragments can now share a timeline."
+      },
+      {
+        "id": "sap-xep-ky-uc",
+        "title": "Fragments of time",
+        "story": "Four paper fragments fall out of the envelope in the wrong order. The keeper asks for no new historical research: this is a logic puzzle using years as clues. Arrange them from earliest to latest without assuming every year marks a ceremony.",
+        "instruction": "Choose fragments in order; use the move controls to correct positions.",
+        "placeLabel": "Public area near the university entrance",
+        "challenge": {
+          "type": "ordering",
+          "prompt": "Arrange the four year fragments from earliest to latest.",
+          "items": [
+            {
+              "id": "2015",
+              "label": "2015"
+            },
+            {
+              "id": "1975",
+              "label": "1975"
+            },
+            {
+              "id": "2025",
+              "label": "2025"
+            },
+            {
+              "id": "2000",
+              "label": "2000"
+            }
+          ],
+          "correctOrder": [
+            "1975",
+            "2000",
+            "2015",
+            "2025"
+          ]
+        },
+        "reward": {
+          "xp": 80,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "Compare the four year values: the smallest begins and the largest ends the sequence.",
+        "feedback": "The pages run in chronological order. The keeper still needs the distances between them."
+      },
+      {
+        "id": "ghep-dau-moc",
+        "title": "Joining the ends of memory",
+        "story": "The ordered fragments reveal empty intervals on their reverse sides. Use 1975 as the starting point and calculate the distance to each year. These numbers are keys to the letter’s matching puzzle, not claims about activities at the university.",
+        "instruction": "Match each year to the interval from 1975. Use each option once.",
+        "placeLabel": "Public area near the university entrance",
+        "challenge": {
+          "type": "matching",
+          "prompt": "Which interval belongs to each year?",
+          "pairs": [
+            {
+              "id": "2000",
+              "label": "Year 2000",
+              "correctOptionId": "25"
+            },
+            {
+              "id": "2025",
+              "label": "Year 2025",
+              "correctOptionId": "50"
+            },
+            {
+              "id": "1975",
+              "label": "Year 1975",
+              "correctOptionId": "0"
+            },
+            {
+              "id": "2015",
+              "label": "Year 2015",
+              "correctOptionId": "40"
+            }
+          ],
+          "options": [
+            {
+              "id": "40",
+              "label": "40 years"
+            },
+            {
+              "id": "0",
+              "label": "Starting point (0 years)"
+            },
+            {
+              "id": "50",
+              "label": "50 years"
+            },
+            {
+              "id": "25",
+              "label": "25 years"
+            }
+          ]
+        },
+        "reward": {
+          "xp": 90,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "Subtract 1975 from each year. Every interval has one matching year.",
+        "feedback": "The intervals fit. One final fragment asks you to check the whole letter before sealing it."
+      },
+      {
+        "id": "mat-thu-tong-ket",
+        "title": "The half-century cipher",
+        "story": "The keeper gives you a final copy mixing accurate lines with copying mistakes. The address, 1975 and the intervals were established earlier. Keep only statements agreeing fully with those pages to return a complete letter: not every line is reliable.",
+        "instruction": "Select all correct statements. Extra or missing choices leave the copy incorrect.",
+        "placeLabel": "Public area near the university entrance",
+        "challenge": {
+          "type": "multi-select",
+          "prompt": "Select every accurate memory fragment to seal the letter.",
+          "options": [
+            {
+              "id": "address",
+              "label": "The starting address has building number 71."
+            },
+            {
+              "id": "wrong-address",
+              "label": "The starting address has building number 1975."
+            },
+            {
+              "id": "start",
+              "label": "The story’s starting year is 1975."
+            },
+            {
+              "id": "25",
+              "label": "The year 2000 is 25 years after the starting point."
+            },
+            {
+              "id": "wrong-40",
+              "label": "The year 2015 is 50 years after the starting point."
+            },
+            {
+              "id": "40",
+              "label": "The year 2015 is 40 years after the starting point."
+            },
+            {
+              "id": "50",
+              "label": "The year 2025 is 50 years after the starting point."
+            },
+            {
+              "id": "wrong-50",
+              "label": "The year 2025 is 60 years after the starting point."
+            }
+          ],
+          "correctOptionIds": [
+            "address",
+            "start",
+            "25",
+            "40",
+            "50"
+          ]
+        },
+        "reward": {
+          "xp": 110,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "Check each line against the address and intervals from 1975. Extra selections also make the copy wrong.",
+        "feedback": "The seal closes. The letter now has a clear address, timeline and meaning to return to its keeper."
+      }
+    ],
+    "catalogVersion": 2,
+    "ending": "The letter has all five fragments again. Its keeper had not lost the past; they needed a reader who could distinguish an address, a milestone and an interval. Return the completed fictional letter, then take a fresh journal page to Dragon Bridge to follow a line of light by the river.",
+    "nextQuestId": "cau-rong"
+  },
+  {
+    "id": "cau-rong",
+    "title": "Awakening the Dragon Vein",
+    "summary": "A fictional exploration story: A lantern maker gives you a sketch missing its final stroke. Find the bridge and read its dragon form to reconnect the city’s line of light.",
+    "city": "Đà Nẵng",
+    "area": "Cầu Rồng bắc qua sông Hàn, trục Nguyễn Văn Linh – Võ Văn Kiệt, Đà Nẵng",
+    "startPosition": [
+      16.0611042,
+      108.2276926
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The dragon-shaped bridge crosses the Hàn River between the city centre and its eastern side. Observe from a safe public walkway; access may change during traffic control or events.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The unnamed stroke",
+        "story": "The lantern maker calls you a light keeper. A long stroke crosses water on the sketch, but its name is missing. Establish the real place before interpreting the drawing; there is no need to enter traffic or wait for a performance.\n\nThe dragon-shaped bridge crosses the Hàn River between the city centre and its eastern side. Observe from a safe public walkway; access may change during traffic control or events.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Dragon Bridge",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Cầu Rồng"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the sign or map. Use the local name “Cầu Rồng”, rather than this chapter’s title.",
+        "feedback": "The unnamed stroke: the clue has its location again. Continue to A light across the river to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "A light across the river",
+        "story": "Naming the bridge reveals the curve of a dragon’s body. The maker is not looking for a real sleeping dragon. He wants the shape through which a traveller recognises the city. Choose the architectural clue that joins his sketch.\n\nThe dragon-shaped bridge crosses the Hàn River between the city centre and its eastern side. Observe from a safe public walkway; access may change during traffic control or events.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Dragon Bridge",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "An architectural landmark beside the Hàn River"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Dragon Bridge, rather than an unrelated place.",
+        "feedback": "The final stroke is restored. The story’s Dragon Vein connects the riverbanks and the people who see them each day. Keep the illuminated sketch, then visit the Hàn River Bridge to read a different kind of movement."
+      }
+    ],
+    "ending": "The final stroke is restored. The story’s Dragon Vein connects the riverbanks and the people who see them each day. Keep the illuminated sketch, then visit the Hàn River Bridge to read a different kind of movement.",
+    "nextQuestId": "cau-song-han"
+  },
+  {
+    "id": "cau-song-han",
+    "title": "When the River Turns",
+    "summary": "A fictional exploration story: A courier asks you to repair a paper compass pointing at a bridge span. Find the bridge’s name and the feature behind a message about turning.",
+    "city": "Đà Nẵng",
+    "area": "Cầu Sông Hàn, nối trục Lê Duẩn – Phạm Văn Đồng, Đà Nẵng",
+    "startPosition": [
+      16.0721501,
+      108.2267961
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The Hàn River Bridge is a swing bridge and a city landmark. Use pedestrian areas and obey signs. The app does not provide a live operating schedule or traffic restrictions.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The courier’s compass",
+        "story": "A paper compass carries a note: “Where I cross, the city learns to turn.” The courier needs the bridge’s name, not the direction of the current. Confirm it from a sign or map while standing somewhere safe to restore the letter’s address.\n\nThe Hàn River Bridge is a swing bridge and a city landmark. Use pedestrian areas and obey signs. The app does not provide a live operating schedule or traffic restrictions.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Hàn River Bridge",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Cầu Sông Hàn"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Han+River+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the sign or map. Use the local name “Cầu Sông Hàn”, rather than this chapter’s title.",
+        "feedback": "The courier’s compass: the clue has its location again. Continue to The span that can turn to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "The span that can turn",
+        "story": "The letter has its address again. Inside is a bridge span with a curved arrow: a clue about the structure, not a promise that it will operate today. Distinguish that feature from descriptions that do not belong to this place.\n\nThe Hàn River Bridge is a swing bridge and a city landmark. Use pedestrian areas and obey signs. The app does not provide a live operating schedule or traffic restrictions.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Hàn River Bridge",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "Đà Nẵng’s distinctive swing bridge"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Han+River+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Hàn River Bridge, rather than an unrelated place.",
+        "feedback": "The paper compass stops wandering. The message describes the bridge’s ability to turn, not a river reversing its flow. The courier has a route again; the next page leads to memories preserved at the Đà Nẵng Museum."
+      }
+    ],
+    "ending": "The paper compass stops wandering. The message describes the bridge’s ability to turn, not a river reversing its flow. The courier has a route again; the next page leads to memories preserved at the Đà Nẵng Museum.",
+    "nextQuestId": "bao-tang-da-nang"
+  },
+  {
+    "id": "bao-tang-da-nang",
+    "title": "The City’s Missing Pages",
+    "summary": "A fictional exploration story: You are a book sorter. A journal has lost the name of the place that keeps its memories. Follow the museum’s name and subject to restore its contents page.",
+    "city": "Đà Nẵng",
+    "area": "Cổng đón khách số 31 Trần Phú; khu nhà bảo tàng tại 42–44 Bạch Đằng, Hải Châu, Đà Nẵng",
+    "startPosition": [
+      16.0745542,
+      108.2239668
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The city museum occupies the 42–44 Bạch Đằng and 31 Trần Phú building complex. The visitor entrance pin is at 31 Trần Phú. Its subjects include local history, culture and people.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The erased book cover",
+        "story": "A book sorter leaves a journal cover reading “Our City”, with its keeper’s name worn away. You do not need to collect a physical object at the museum. Identify the destination to restore the label of this book in the story.\n\nThe city museum occupies the 42–44 Bạch Đằng and 31 Trần Phú building complex. The visitor entrance pin is at 31 Trần Phú. Its subjects include local history, culture and people.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Đà Nẵng Museum",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Bảo tàng Đà Nẵng"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/cn/bao-tang-da-nang-42-44-bach-dang-31-tran-phu"
+        ],
+        "hint": "Read the sign or map. Use the local name “Bảo tàng Đà Nẵng”, rather than this chapter’s title.",
+        "feedback": "The erased book cover: the clue has its location again. Continue to The city’s contents page to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "The city’s contents page",
+        "story": "The museum’s name reveals a contents page about people, daily life and a changing city. One page slipped into the wrong folder. Choose the description matching this place’s work of preserving memories to put it back in its book.\n\nThe city museum occupies the 42–44 Bạch Đằng and 31 Trần Phú building complex. The visitor entrance pin is at 31 Trần Phú. Its subjects include local history, culture and people.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Đà Nẵng Museum",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A place to explore the city’s history"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/cn/bao-tang-da-nang-42-44-bach-dang-31-tran-phu"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Đà Nẵng Museum, rather than an unrelated place.",
+        "feedback": "The contents page is restored: a city’s memory belongs to many lives rather than one character. The journal has a home again. To read a different kind of record, continue to the Museum of Cham Sculpture."
+      }
+    ],
+    "ending": "The contents page is restored: a city’s memory belongs to many lives rather than one character. The journal has a home again. To read a different kind of record, continue to the Museum of Cham Sculpture.",
+    "nextQuestId": "bao-tang-dieu-khac-cham"
+  },
+  {
+    "id": "bao-tang-dieu-khac-cham",
+    "title": "Whispers in Stone",
+    "summary": "A fictional exploration story: A conservation apprentice gives you an unnamed label. Identify the museum and collection to restore a notebook’s voice without touching any exhibit.",
+    "city": "Đà Nẵng",
+    "area": "02 đường 2 Tháng 9, Hải Châu, Đà Nẵng",
+    "startPosition": [
+      16.0603007,
+      108.2232677
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The museum collects and displays Cham sculpture, including statues, altars and reliefs. Check current visiting and photography rules directly with the museum.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The apprentice’s label",
+        "story": "The paper label asks its reader to identify a place before interpreting anything. You are the conservation apprentice’s checker. Confirm the museum’s name from its signs instead of guessing an exhibit’s identity or touching stone to look for writing.\n\nThe museum collects and displays Cham sculpture, including statues, altars and reliefs. Check current visiting and photography rules directly with the museum.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Museum of Cham Sculpture",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Bảo tàng Điêu khắc Chăm"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://chammuseum.vn/"
+        ],
+        "hint": "Read the sign or map. Use the local name “Bảo tàng Điêu khắc Chăm”, rather than this chapter’s title.",
+        "feedback": "The apprentice’s label: the clue has its location again. Continue to Listening through observation to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Listening through observation",
+        "story": "The label names its keeper again. The notebook needs a description of the collection. Its “whisper” means looking carefully at artworks; it is neither a supernatural message nor a new historical claim. Choose the collection belonging here.\n\nThe museum collects and displays Cham sculpture, including statues, altars and reliefs. Check current visiting and photography rules directly with the museum.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Museum of Cham Sculpture",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A collection of Cham sculpture"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://chammuseum.vn/"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Museum of Cham Sculpture, rather than an unrelated place.",
+        "feedback": "You return a clear label and a rule: observe first, interpret second. The stone does not speak; careful attention makes its story heard. Carry that rule to the canopy at APEC Park."
+      }
+    ],
+    "ending": "You return a clear label and a rule: observe first, interpret second. The stone does not speak; careful attention makes its story heard. Carry that rule to the canopy at APEC Park.",
+    "nextQuestId": "cong-vien-apec"
+  },
+  {
+    "id": "cong-vien-apec",
+    "title": "The Code Beneath the Kite",
+    "summary": "A fictional exploration story: A kite designer has lost a drawing’s heading. Find the park and the architectural lines that bring the paper kite back into balance.",
+    "city": "Đà Nẵng",
+    "area": "Đường 2 Tháng 9, phía tây sông Hàn, gần Cầu Rồng, Đà Nẵng",
+    "startPosition": [
+      16.0581055,
+      108.2232435
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "This public park beside the Hàn River has a curved architectural canopy and walking areas. Events and indoor spaces may have separate access rules.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The drifting drawing",
+        "story": "The designer marks a riverside meeting point but omits the park’s name. You need not fly a kite or find a real drawing. Confirm your location using a sign or map to restore the heading of this paper clue in the story.\n\nThis public park beside the Hàn River has a curved architectural canopy and walking areas. Events and indoor spaces may have separate access rules.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "APEC Park",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Công viên APEC",
+            "APEC"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=APEC+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the sign or map. Use the local name “Công viên APEC”, rather than this chapter’s title.",
+        "feedback": "The drifting drawing: the clue has its location again. Continue to The curve that holds the wind to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "The curve that holds the wind",
+        "story": "The park’s name fits the first corner. The other corner shows a broad curve the designer calls a “wing that holds the wind”. It is a metaphor, not an official building name. Choose the matching riverside architectural description.\n\nThis public park beside the Hàn River has a curved architectural canopy and walking areas. Events and indoor spaces may have separate access rules.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "APEC Park",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A riverside architectural canopy"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=APEC+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of APEC Park, rather than an unrelated place.",
+        "feedback": "The drawing reveals no secret building code. It teaches the designer to look again at the surrounding shapes. The paper kite is balanced; continue to the Love Bridge, where a letter needs the right view of the river."
+      }
+    ],
+    "ending": "The drawing reveals no secret building code. It teaches the designer to look again at the surrounding shapes. The paper kite is balanced; continue to the Love Bridge, where a letter needs the right view of the river.",
+    "nextQuestId": "cau-tinh-yeu"
+  },
+  {
+    "id": "cau-tinh-yeu",
+    "title": "A Letter by the Hàn River",
+    "summary": "A fictional exploration story: A letter has no recipient, only a description of where its writer once paused. Find the name and viewpoint that complete its greeting.",
+    "city": "Đà Nẵng",
+    "area": "507–493 đường Trần Hưng Đạo, An Hải, Đà Nẵng",
+    "startPosition": [
+      16.0629967,
+      108.2298146
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "This public riverside walking area overlooks the Hàn River and central city. Crowding and access may change during events; no fixed activity schedule is confirmed here.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "An address without a recipient",
+        "story": "“To whoever pauses here” begins a letter in the journal. You need not find a stranger or leave anything on the bridge. The writer simply needs an address: the destination’s name confirmed by a sign or map at a safe stopping place.\n\nThis public riverside walking area overlooks the Hàn River and central city. Crowding and access may change during events; no fixed activity schedule is confirmed here.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Love Bridge",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Cầu Tình Yêu"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=C%E1%BA%A7u+T%C3%ACnh+Y%C3%AAu+-+Love+Pier+Da+Nang"
+        ],
+        "hint": "Read the sign or map. Use the local name “Cầu Tình Yêu”, rather than this chapter’s title.",
+        "feedback": "An address without a recipient: the clue has its location again. Continue to A greeting across the water to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "A greeting across the water",
+        "story": "The address is clear but the greeting needs an image. Looking across the riverbanks finally gave the writer words. Choose the description of a riverside walking viewpoint; the story asks for no padlock or alteration to the site.\n\nThis public riverside walking area overlooks the Hàn River and central city. Crowding and access may change during events; no fixed activity schedule is confirmed here.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Love Bridge",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A riverside walking viewpoint"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=C%E1%BA%A7u+T%C3%ACnh+Y%C3%AAu+-+Love+Pier+Da+Nang"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Love Bridge, rather than an unrelated place.",
+        "feedback": "The letter ends with a greeting for anyone who pauses to look at the city. You have become the reader the story awaited rather than finding a secret recipient. Carry that slower attention to Mỹ Khê Beach."
+      }
+    ],
+    "ending": "The letter ends with a greeting for anyone who pauses to look at the city. You have become the reader the story awaited rather than finding a secret recipient. Carry that slower attention to Mỹ Khê Beach.",
+    "nextQuestId": "bai-bien-my-khe"
+  },
+  {
+    "id": "bai-bien-my-khe",
+    "title": "Footprints of the Wave Collector",
+    "summary": "A fictional exploration story: The wave collector gathers sounds, never objects from the sea. Fill a blank notebook page with this beach’s name and its eastern coastal setting.",
+    "city": "Đà Nẵng",
+    "area": "Dải bờ biển Mỹ Khê, quận Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.0616944,
+      108.2469346
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Mỹ Khê is a public beach on the eastern coast of Đà Nẵng. Swimming, lifeguard coverage and permitted water access depend on weather and notices at the site.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The wave collector’s notebook",
+        "story": "The collector takes no shells home, only names of places where they heard the sea. A notebook page is missing its heading. Fill in the beach’s name from a sign or map while remaining in a permitted public area.\n\nMỹ Khê is a public beach on the eastern coast of Đà Nẵng. Swimming, lifeguard coverage and permitted water access depend on weather and notices at the site.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Mỹ Khê Beach",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Bãi biển Mỹ Khê",
+            "Mỹ Khê"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the sign or map. Use the local name “Bãi biển Mỹ Khê”, rather than this chapter’s title.",
+        "feedback": "The wave collector’s notebook: the clue has its location again. Continue to The eastern shore remembered to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "The eastern shore remembered",
+        "story": "The named beach reveals a question: how does the city meet water here? Distinguish a seashore from unrelated places for the collector. There is no need to enter the sea; its sound and the view from land complete the notebook page.\n\nMỹ Khê is a public beach on the eastern coast of Đà Nẵng. Swimming, lifeguard coverage and permitted water access depend on weather and notices at the site.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Mỹ Khê Beach",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A coastal space on the city’s eastern side"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Mỹ Khê Beach, rather than an unrelated place.",
+        "feedback": "The page holds a name and a view, not an object taken from the sea. The collector’s footprints remind you to tread lightly and leave the beach intact. A page about dawn awaits at East Sea Park."
+      }
+    ],
+    "ending": "The page holds a name and a view, not an object taken from the sea. The collector’s footprints remind you to tread lightly and leave the beach intact. A page about dawn awaits at East Sea Park.",
+    "nextQuestId": "cong-vien-bien-dong"
+  },
+  {
+    "id": "cong-vien-bien-dong",
+    "title": "The Keeper of Dawn",
+    "summary": "A fictional exploration story: A keeper of dawn forgets where a light clock belongs. Identify the park and coastal setting to restore a calendar page; play at any safe time of day.",
+    "city": "Đà Nẵng",
+    "area": "Đường Võ Nguyên Giáp, An Hải, Đà Nẵng",
+    "startPosition": [
+      16.0703173,
+      108.2458368
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "East Sea Park is a public coastal park facing the sea and Sơn Trà. Events, gatherings and access may change according to local notices.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The clock without hands",
+        "story": "The keeper uses a clock without hands to record the city waking up. Today its location field is blank. Confirm the park’s name from a sign; this task does not require arriving before sunrise or waiting for an event.\n\nEast Sea Park is a public coastal park facing the sea and Sơn Trà. Events, gatherings and access may change according to local notices.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "East Sea Park",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Công viên Biển Đông",
+            "Biển Đông"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=East+Sea+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the sign or map. Use the local name “Công viên Biển Đông”, rather than this chapter’s title.",
+        "feedback": "The clock without hands: the clue has its location again. Continue to A sky opening to the sea to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "A sky opening to the sea",
+        "story": "The clock needs no hands because its keeper remembers places through their surroundings. The calendar describes a public space facing the sea, not an event time. Choose that feature to return the story’s clock to its proper page.\n\nEast Sea Park is a public coastal park facing the sea and Sơn Trà. Events, gatherings and access may change according to local notices.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "East Sea Park",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A public park beside the sea"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=East+Sea+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of East Sea Park, rather than an unrelated place.",
+        "feedback": "The clock returns to an open space by the sea. The keeper learns that noticing a place can be a fresh beginning. Follow the calendar to Mân Thái to read the course of a small sail."
+      }
+    ],
+    "ending": "The clock returns to an open space by the sea. The keeper learns that noticing a place can be a fresh beginning. Follow the calendar to Mân Thái to read the course of a small sail.",
+    "nextQuestId": "bien-man-thai-sup"
+  },
+  {
+    "id": "bien-man-thai-sup",
+    "title": "Voyage of the Little Sail",
+    "summary": "A fictional exploration story: A navigator needs a paper chart repaired from land. Find Mân Thái’s name and the Sơn Trà coast; no booking or water activity is required.",
+    "city": "Đà Nẵng",
+    "area": "Bãi tắm Mân Thái, đường Hoàng Sa, Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.0890212,
+      108.2495942
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The pin identifies Mân Thái Beach, not a particular SUP operator’s meeting point. Check organisers, meeting places, weather and operations before any separate activity. Never enter the water against warnings.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "A chart missing its shore",
+        "story": "The little sail’s navigator travels only across paper pages. Her chart has lost its starting shore, so check the real beach’s name. Stay on land in a permitted area; neither a SUP operator nor a water activity is needed to finish the story.\n\nThe pin identifies Mân Thái Beach, not a particular SUP operator’s meeting point. Check organisers, meeting places, weather and operations before any separate activity. Never enter the water against warnings.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Mân Thái Beach",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Bãi biển Mân Thái – chèo SUP",
+            "Bãi biển Mân Thái",
+            "Mân Thái",
+            "Bãi biển Mân Thái (chèo SUP)"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Read the sign or map. Use the local name “Bãi biển Mân Thái – chèo SUP”, rather than this chapter’s title.",
+        "feedback": "A chart missing its shore: the clue has its location again. Continue to Choosing a course from land to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Choosing a course from land",
+        "story": "The chart has an address but the sail needs a setting. Its navigator wants a description of the Sơn Trà coast rather than a service package. Use the story and a safe observation from shore to continue drawing the paper route.\n\nThe pin identifies Mân Thái Beach, not a particular SUP operator’s meeting point. Check organisers, meeting places, weather and operations before any separate activity. Never enter the water against warnings.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Mân Thái Beach",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A Sơn Trà beach for outdoor activities"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Mân Thái Beach, rather than an unrelated place.",
+        "feedback": "The paper sail has a clear course without leaving land. The navigator learns to check a setting before any real journey. The next page leads up Sơn Trà to a place asking for quiet and respect: Linh Ứng at Bãi Bụt."
+      }
+    ],
+    "ending": "The paper sail has a clear course without leaving land. The navigator learns to check a setting before any real journey. The next page leads up Sơn Trà to a place asking for quiet and respect: Linh Ứng at Bãi Bụt.",
+    "nextQuestId": "chua-linh-ung-bai-but"
+  },
+  {
+    "id": "chua-linh-ung-bai-but",
+    "title": "A Quiet Note on Sơn Trà",
+    "summary": "A fictional exploration story: A copyist loses a rest from a musical score about the city. Identify the correct Linh Ứng pagoda and coastal setting to restore a pause; no ritual is needed.",
+    "city": "Đà Nẵng",
+    "area": "Khu vực Bãi Bụt, bán đảo Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.1002055,
+      108.2778816
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "This is Linh Ứng Pagoda at Bãi Bụt on Sơn Trà, distinct from the pagodas of the same name at the Marble Mountains and Bà Nà. Dress respectfully and follow local rules.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "A note without an address",
+        "story": "The copyist writes “Linh Ứng” but omits the words distinguishing its location. Find the Bãi Bụt page on Sơn Trà. Check the signs rather than searching for symbols or hidden objects in a place of worship to solve the story.\n\nThis is Linh Ứng Pagoda at Bãi Bụt on Sơn Trà, distinct from the pagodas of the same name at the Marble Mountains and Bà Nà. Dress respectfully and follow local rules.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Linh Ứng Pagoda at Bãi Bụt, Sơn Trà",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Chùa Linh Ứng – Bãi Bụt, Sơn Trà",
+            "Chùa Linh Ứng",
+            "Linh Ứng",
+            "Chùa Linh Ứng (Bãi Bụt, Sơn Trà)"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/chua-linh-ung-bai-but-da-nang"
+        ],
+        "hint": "Read the sign or map. Use the local name “Chùa Linh Ứng – Bãi Bụt, Sơn Trà”, rather than this chapter’s title.",
+        "feedback": "A note without an address: the clue has its location again. Continue to A pause facing the sea to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "A pause facing the sea",
+        "story": "The score has its address. The copyist realises the rest vanished because they listened only for sound. Choose the cultural setting beside the Sơn Trà sea. Quiet observation and respect for local rules are enough; no ceremony is needed.\n\nThis is Linh Ứng Pagoda at Bãi Bụt on Sơn Trà, distinct from the pagodas of the same name at the Marble Mountains and Bà Nà. Dress respectfully and follow local rules.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Linh Ứng Pagoda at Bãi Bụt, Sơn Trà",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A cultural setting beside the Sơn Trà sea"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/chua-linh-ung-bai-but-da-nang"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Linh Ứng Pagoda at Bãi Bụt, Sơn Trà, rather than an unrelated place.",
+        "feedback": "The rest returns to the score: quiet belongs to the journey too. The copyist has the correct Bãi Bụt page, distinct from other pagodas of the same name. When route conditions permit, a higher viewpoint chapter awaits at Bàn Cờ Peak."
+      }
+    ],
+    "ending": "The rest returns to the score: quiet belongs to the journey too. The copyist has the correct Bãi Bụt page, distinct from other pagodas of the same name. When route conditions permit, a higher viewpoint chapter awaits at Bàn Cờ Peak.",
+    "nextQuestId": "dinh-ban-co"
+  },
+  {
+    "id": "dinh-ban-co",
+    "title": "A Move Among the Clouds",
+    "summary": "A fictional exploration story: A chess player asks you to read a position drawn with the skyline. Name the viewpoint and recognise its elevated setting, staying within permitted paths.",
+    "city": "Đà Nẵng",
+    "area": "Đỉnh Bàn Cờ, bán đảo Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.1189365,
+      108.2719826
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Bàn Cờ is a high viewpoint on Sơn Trà. The approach includes steep sections and steps. Check permitted routes, access hours, transport and weather before travelling.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The unnamed board",
+        "story": "A chess player arranges pieces by viewpoints but forgets the largest board’s name. You are his map reader. Confirm the destination before interpreting his position; there is no need to find a real piece or approach an exposed edge.\n\nBàn Cờ is a high viewpoint on Sơn Trà. The approach includes steep sections and steps. Check permitted routes, access hours, transport and weather before travelling.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Bàn Cờ Peak",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Đỉnh Bàn Cờ"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Read the sign or map. Use the local name “Đỉnh Bàn Cờ”, rather than this chapter’s title.",
+        "feedback": "The unnamed board: the clue has its location again. Continue to The move that sees farther to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "The move that sees farther",
+        "story": "The player draws a move that does not advance a piece but broadens a view towards the city and sea. Choose the high Sơn Trà setting to interpret it. It is a story metaphor, not an instruction to leave the path for a better outlook.\n\nBàn Cờ is a high viewpoint on Sơn Trà. The approach includes steep sections and steps. Check permitted routes, access hours, transport and weather before travelling.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Bàn Cờ Peak",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "An elevated viewpoint on Sơn Trà"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Bàn Cờ Peak, rather than an unrelated place.",
+        "feedback": "The final move is knowing where to stop and see farther. You return a complete position while keeping to safe paths. The next chapter at Hải Vân Gate tells of a gateway between different winds."
+      }
+    ],
+    "ending": "The final move is knowing where to stop and see farther. You return a complete position while keeping to safe paths. The next chapter at Hải Vân Gate tells of a gateway between different winds.",
+    "nextQuestId": "hai-van-quan"
+  },
+  {
+    "id": "hai-van-quan",
+    "title": "The Gate of Two Winds",
+    "summary": "A fictional exploration story: A road keeper has two route sheets with swapped labels. Identify the gate and its position atop the pass from permitted visitor areas to put the route in order.",
+    "city": "Đà Nẵng",
+    "area": "Di tích Hải Vân Quan trên đỉnh đèo Hải Vân, ranh giới Đà Nẵng – Huế",
+    "startPosition": [
+      16.1877377,
+      108.1312942
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Hải Vân Gate is a historic gateway at the top of Hải Vân Pass. The pin marks the monument rather than the whole pass road. Observe traffic, weather and signs; never stop in a dangerous road position.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Two route sheets",
+        "story": "The keeper offers sheets showing mountains and sea, but only one belongs to the gate. Name the destination to distinguish the monument from the whole pass. Check only after stopping somewhere safe, never while operating a vehicle.\n\nHải Vân Gate is a historic gateway at the top of Hải Vân Pass. The pin marks the monument rather than the whole pass road. Observe traffic, weather and signs; never stop in a dangerous road position.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Hải Vân Gate",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Hải Vân Quan"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/di-san-canh-quan/deo-hai-van-thien-ha-de-nhat-hung-quan"
+        ],
+        "hint": "Read the sign or map. Use the local name “Hải Vân Quan”, rather than this chapter’s title.",
+        "feedback": "Two route sheets: the clue has its location again. Continue to A frame between directions to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "A frame between directions",
+        "story": "The gate’s name opens a frame in the story. The paper winds are not a weather forecast: they represent routes meeting at a historic site atop the pass. Choose its description to return the route sheet to the right place.\n\nHải Vân Gate is a historic gateway at the top of Hải Vân Pass. The pin marks the monument rather than the whole pass road. Observe traffic, weather and signs; never stop in a dangerous road position.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Hải Vân Gate",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A historic gateway at the top of a pass"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/di-san-canh-quan/deo-hai-van-thien-ha-de-nhat-hung-quan"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Hải Vân Gate, rather than an unrelated place.",
+        "feedback": "The sheets are separated: one describes a route, the other the gate itself. Remember the difference between a destination and its approach. The Marble Mountains chapter continues that question among stone and stairways."
+      }
+    ],
+    "ending": "The sheets are separated: one describes a route, the other the gate itself. Remember the difference between a destination and its approach. The Marble Mountains chapter continues that question among stone and stairways.",
+    "nextQuestId": "ngu-hanh-son"
+  },
+  {
+    "id": "ngu-hanh-son",
+    "title": "Five Pieces of the Mountain Seal",
+    "summary": "A fictional exploration story: A seal engraver asks you to read five mountain strokes. Name the complex and recognise its layers; collect no stones and enter no cave to retrieve an item.",
+    "city": "Đà Nẵng",
+    "area": "81 Huyền Trân Công Chúa, khu danh thắng Ngũ Hành Sơn, Đà Nẵng",
+    "startPosition": [
+      16.0037104,
+      108.2631605
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The Marble Mountains complex includes limestone hills, caves, pagodas and viewpoints. The pin refers to general access, not each cave. Follow local guidance and consider your health on stairways.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The paper seal",
+        "story": "An engraver keeps five mountain strokes on paper but omits the complex’s name. As print keeper, identify the place before stamping. The pieces exist only in the story; no item needs collecting from a cave, pagoda or rock face.\n\nThe Marble Mountains complex includes limestone hills, caves, pagodas and viewpoints. The pin refers to general access, not each cave. Follow local guidance and consider your health on stairways.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Marble Mountains",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Danh thắng Ngũ Hành Sơn",
+            "Ngũ Hành Sơn"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/danh-thang-ngu-hanh-son"
+        ],
+        "hint": "Read the sign or map. Use the local name “Danh thắng Ngũ Hành Sơn”, rather than this chapter’s title.",
+        "feedback": "The paper seal: the clue has its location again. Continue to Layers of the seal to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Layers of the seal",
+        "story": "The named seal reveals overlapping layers: hills, caves and places of worship. You need not visit each layer to solve the task. Choose the description encompassing the complex, and adapt any real walking to your health and local conditions.\n\nThe Marble Mountains complex includes limestone hills, caves, pagodas and viewpoints. The pin refers to general access, not each cave. Follow local guidance and consider your health on stairways.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Marble Mountains",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A complex of stone hills, caves and pagodas"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/danh-thang-ngu-hanh-son"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Marble Mountains, rather than an unrelated place.",
+        "feedback": "Five strokes form one seal when read as a single landscape. The engraver keeps the print while you leave stones and sacred spaces untouched. The Golden Bridge chapter explores another way of imagining stone and hands in architecture."
+      }
+    ],
+    "ending": "Five strokes form one seal when read as a single landscape. The engraver keeps the print while you leave stones and sacred spaces untouched. The Golden Bridge chapter explores another way of imagining stone and hands in architecture.",
+    "nextQuestId": "cau-vang-ba-na-hills"
+  },
+  {
+    "id": "cau-vang-ba-na-hills",
+    "title": "A Path on the Hands of Clouds",
+    "summary": "A fictional exploration story: A stage designer loses a drawing’s label. Identify its Bà Nà Hills setting and elevated bridge form; the story includes no ticket or access rights.",
+    "city": "Đà Nẵng",
+    "area": "Cầu Vàng, khu du lịch Bà Nà Hills, Hòa Vang, Đà Nẵng",
+    "startPosition": [
+      15.9949375,
+      107.9965625
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The elevated pedestrian bridge at Bà Nà Hills has sculpted hands supporting its form. The pin is inside the attraction, not at its entrance. Access depends on tickets, cable routes and the operator’s rules.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "The drawing’s location label",
+        "story": "A high walkway is drawn without naming its area. Restore Bà Nà Hills on the label before reading the picture. The map pin is not an entrance: any real visit must follow ticketing and venue rules, never an imagined route in the story.\n\nThe elevated pedestrian bridge at Bà Nà Hills has sculpted hands supporting its form. The pin is inside the attraction, not at its entrance. Access depends on tickets, cable routes and the operator’s rules.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Bà Nà Hills — Golden Bridge area",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Bà Nà Hills – khu vực Cầu Vàng",
+            "Bà Nà Hills",
+            "Bà Nà Hills (khu vực Cầu Vàng)"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://sunworld.vn/vi/banahills"
+        ],
+        "hint": "Read the sign or map. Use the local name “Bà Nà Hills – khu vực Cầu Vàng”, rather than this chapter’s title.",
+        "feedback": "The drawing’s location label: the clue has its location again. Continue to Hands holding the horizon to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Hands holding the horizon",
+        "story": "The labelled drawing asks what makes the walkway different from a normal street. The designer imagines its sculpted hands as hands of cloud. That is the character’s metaphor; choose the architectural description matching the real bridge.\n\nThe elevated pedestrian bridge at Bà Nà Hills has sculpted hands supporting its form. The pin is inside the attraction, not at its entrance. Access depends on tickets, cable routes and the operator’s rules.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Bà Nà Hills — Golden Bridge area",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "An elevated pedestrian bridge with distinctive architecture"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://sunworld.vn/vi/banahills"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Bà Nà Hills — Golden Bridge area, rather than an unrelated place.",
+        "feedback": "The drawing now has a setting and a form. The designer no longer confuses an imagined scene with the practical way in. Keep the cloud page; the Nam Ô chapter returns to ground level and traces of a shoreline."
+      }
+    ],
+    "ending": "The drawing now has a setting and a form. The designer no longer confuses an imagined scene with the practical way in. Keep the cloud page; the Nam Ô chapter returns to ground level and traces of a shoreline.",
+    "nextQuestId": "bai-bien-nam-o"
+  },
+  {
+    "id": "bai-bien-nam-o",
+    "title": "The Map Fragment at the Wave’s Edge",
+    "summary": "A fictional exploration story: A cartographer leaves a fragment showing only a shoreline. Find Nam Ô and the city’s northern coast to join the final page without climbing slippery rocks or searching underwater.",
+    "city": "Đà Nẵng",
+    "area": "Bãi tắm Nam Ô, khu vực Nam Ô, Đà Nẵng",
+    "startPosition": [
+      16.1190151,
+      108.1303016
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "The pin refers to Nam Ô Beach in northern Đà Nẵng. Rocks, tides and waves can change. Observe from safe paths, avoid slippery rocks and obey water warnings.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "A fragment without direction",
+        "story": "The cartographer buried no treasure: he lost a shoreline’s name on paper. Reconnect the fragment from a safe viewpoint. Confirm the beach’s name from a sign or map rather than following waves in search of a physical clue.\n\nThe pin refers to Nam Ô Beach in northern Đà Nẵng. Rocks, tides and waves can change. Observe from safe paths, avoid slippery rocks and obey water warnings.",
+        "instruction": "From a permitted safe area, check the sign or map and enter the Vietnamese place name as shown. No hidden object needs collecting.",
+        "placeLabel": "Nam Ô Beach",
+        "challenge": {
+          "type": "text",
+          "prompt": "What is the Vietnamese name of this destination?",
+          "acceptedAnswers": [
+            "Bãi biển Nam Ô",
+            "Nam Ô"
+          ],
+          "placeholder": "Enter the Vietnamese place name shown on the sign or map"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Bai+Nam+O+Da+Nang+Vietnam+beach"
+        ],
+        "hint": "Read the sign or map. Use the local name “Bãi biển Nam Ô”, rather than this chapter’s title.",
+        "feedback": "A fragment without direction: the clue has its location again. Continue to Joining the northern coast to read its missing meaning."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Joining the northern coast",
+        "story": "Nam Ô’s name reveals the final stroke: a natural coast in the north of the city. Rock marks on paper are drawings, not a route to cross. Choose the matching landscape to join the map while staying on a safe path away from the water’s edge.\n\nThe pin refers to Nam Ô Beach in northern Đà Nẵng. Rocks, tides and waves can change. Observe from safe paths, avoid slippery rocks and obey water warnings.",
+        "instruction": "Use the story and factual description to choose the feature matching this destination. Stay in a permitted safe area.",
+        "placeLabel": "Nam Ô Beach",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Which description matches the destination you are exploring?",
+          "options": [
+            {
+              "id": "a",
+              "label": "A different meeting place unrelated to the story"
+            },
+            {
+              "id": "identity",
+              "label": "A natural shoreline in northern Đà Nẵng"
+            },
+            {
+              "id": "c",
+              "label": "An international airport with a runway and check-in area"
+            },
+            {
+              "id": "d",
+              "label": "A closed industrial area not open for sightseeing"
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Bai+Nam+O+Da+Nang+Vietnam+beach"
+        ],
+        "hint": "Read the factual description after the story. Choose the feature of Nam Ô Beach, rather than an unrelated place.",
+        "feedback": "The final fragment fits. The cartographer’s treasure is a city seen with care, not something taken from its shore. Return to Dragon Bridge and read familiar pages with a different eye."
+      }
+    ],
+    "ending": "The final fragment fits. The cartographer’s treasure is a city seen with care, not something taken from its shore. Return to Dragon Bridge and read familiar pages with a different eye.",
+    "nextQuestId": "due-dau-an-50-nam"
+  }
+]

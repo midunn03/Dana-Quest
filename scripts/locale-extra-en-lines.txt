@@ -1,0 +1,406 @@
+0|Playing quest: ${0}
+1|Continue quest ${0}
+2|Previous progress at ${0}
+3|Photo ${0}
+4|Photo: ${0}
+5|Permanently deleted ${0} previous photos from this account. Progress and coins are kept.
+6|(${0}/${1} solved)
+7|${0} previous photos remain on the server. They are no longer shown in the quest gallery.
+8|Delete ${0} photos belonging to the signed-in account. Photos cannot be recovered in the app. Quest covers, progress and rewards are kept.
+9|Move ${0} up
+10|Move ${0} down
+11|Remove ${0}
+12|Architecture
+13|Museum
+14|Park
+15|Beach
+16|Pagoda
+17|Nature
+18|Heritage
+19|Archive
+20|Keep quiet, dress appropriately and follow the rules of the place of worship.
+21|Follow the venue rules and keep paths clear.
+22|Arrive at ${0}
+23|Use browser location to check you are near ${0}. Coordinates are a reference, not the exact entrance.
+24|A view of ${0}
+25|Take or upload a photo of ${0} from a safe place where photography is allowed.
+26|A memorable detail
+27|Save a photo of a detail you love at ${0}. Respect photography rules and privacy.
+28|Learn about ${0}
+29|Read the introduction to ${0} and ${1}.
+30|Observe the destination
+31|Stop somewhere safe and spend a minute observing ${0}.
+32|Discover something new
+33|Learn about ${0} using signs or observations on site.
+34|Explore safely
+35|Explore ${0} along permitted paths suitable for your health.
+36|Respect venue rules
+37|Leave no litter
+38|Keep your own litter until you reach a proper bin. Do not handle dangerous waste.
+39|Bring home a memory
+40|Take a moment to think about what impressed you most here.
+41|An in-app keepsake; no commercial partner is connected.
+42|No payment value, delivery, admission or real booking.
+43|Đà Nẵng postcard
+44|Đà Nẵng postcard
+45|Local drink
+46|Mì Quảng
+47|City journey
+48|Sightseeing keepsake
+49|Kayaking
+50|Add a keepsake to your journey collection.
+51|Outdoor attraction
+52|No fixed opening schedule has been confirmed. Access may change with traffic arrangements or events.
+53|Cầu Rồng, Đà Nẵng.
+54|No fixed opening schedule has been confirmed. Follow bridge traffic signs and check the swing bridge operating schedule separately.
+55|Cầu Sông Hàn, Đà Nẵng.
+56|08:00–17:00, daily
+57|Reference hours; holidays and events may change the schedule.
+58|42–44 Bạch Đằng and 31 Trần Phú, Đà Nẵng.
+59|Outdoor public space
+60|No fixed opening schedule has been confirmed. Indoor areas and events may have separate hours.
+61|Công viên APEC, Đà Nẵng.
+62|Verified opening hours unavailable
+63|Opening hours may change. Information will update when Google Places is connected.
+64|Destination information
+65|Illustrations of ${0}
+66|${0} – ${1} (illustration ${2}/3)
+67|View photo ${0}: ${1}
+68|Arrived at ${0}!
+69|Explore ${0}
+70|Real photo of ${0}
+71|Complete ${0} more missions to finish this destination.
+72|The mission list for ${0} will be deleted. You can request a new list later.
+73|About ${0}
+74|${0} challenges (${1} minutes)
+75|Joined (${0}/${1})
+76|SECRET LETTER
+77|City memories
+78|Save and leave the journey?
+79|Return to the starting point from Your quests. Navigation happens only after progress is saved.
+80|Save and continue
+81|Stay here
+82|Could not connect to the account service. Please retry.
+83|Extended profile service is not ready. Your previous data is kept.
+84|Could not load the leaderboard.
+85|The account changed. Please reload the page.
+86|Could not synchronize data. Check your connection and retry.
+87|Data is being changed on another device. Please retry.
+88|Assigned ${0} missions and saved them to your account.
+89|Destination journey cancelled.
+90|Voucher redeemed successfully.
+91|Mission complete! +10 Dana Coins.
+92|Congratulations! You completed the destination.
+93|Could not read photo.
+94|The account changed. Please retry.
+95|XÓA ẢNH CŨ
+96|Could not load activated quests.
+97|The activated quest list response is invalid.
+98|Could not activate code. Please retry.
+99|Authentication service is not configured.
+100|Not signed in.
+101|Authentication service returned error ${0}.
+102|The authentication service returned an invalid profile.
+103|Could not end session (error ${0}).
+104|Sea explorer
+105|Bring your curiosity and a little sea breeze.
+106|Sunshine friend
+107|A smile and something new to discover.
+108|Green explorer
+109|Small steps, a great love for nature.
+110|Cloud friend
+111|Slow down a little and see more of the city.
+112|Created by you.
+113|Invalid character.
+114|This browser does not support system notifications.
+115|You have not allowed DANA QUEST to send notifications.
+116|at ${0}
+117|Happening now: ${0}${1} (${2})
+118|In ${0} minutes: ${1}${2} (${3})
+119|This browser cannot analyze photos on your device. You can check and confirm manually.
+120|The photo is too small. Choose a clearer image of at least about 320 × 240 px.
+121|Could not read photo contents. You can check and confirm manually.
+122|The photo is too dark to check. Try again in better light.
+123|The photo is too bright. Retake it so the scene is visible.
+124|The photo has too little detail or is obstructed. Take a clearer photo of the scene.
+125|Local check passed: the photo has enough light, size and detail to save.
+126|Could not analyze the photo on this device. You can inspect it and confirm manually.
+127|This device does not support location. You can still explore places manually.
+128|Location enabled. DANA QUEST will calculate your distance from destinations.
+129|Could not obtain location. Retry when using nearby places.
+130|This feature needs your location. Allow location access in your browser and retry.
+131|Could not save your choice on this device. You can still select Skip to continue.
+132|Choose JPG, PNG or WebP. Convert HEIC photos to JPG first.
+133|The photo is too large. Choose a photo up to 10 MB.
+134|Could not read photo. Choose another image file.
+135|Your browser could not process the photo.
+136|Could not process photo.
+137|The processed photo is still too large. Choose a smaller image.
+138|Invalid photo mission.
+139|The photo is invalid or too large.
+140|Photos can be saved only for selected missions in progress.
+141|Could not save photo. Browser storage may be full.
+142|Could not find the photo to delete.
+143|Could not delete photo. Progress and coins are unchanged.
+144|Could not read the album in this browser.
+145|Female
+146|Round
+147|Square
+148|Flat
+149|Oval
+150|Straight black
+151|Curly
+152|Curtains
+153|Short sleeves
+154|Long sleeves
+155|Sleeveless
+156|Long trousers
+157|Shorts
+158|Light
+159|Light brown
+160|Brown
+161|Dark brown
+162|Black
+163|Yellow
+164|Red
+165|Purple
+166|Blue
+167|Green
+168|Pink
+169|White
+170|Moss green
+171|Dark purple
+172|Saved data is invalid. Previous data has not been overwritten.
+173|Saved progress is invalid. Previous data has not been overwritten.
+174|Coin or voucher data is invalid. Previous data has not been overwritten.
+175|Voucher not found.
+176|This voucher has already been redeemed. Each item can be redeemed once.
+177|You do not have enough Dana Coins for this voucher.
+178|Destination not found.
+179|A journey with completed missions cannot be cancelled because this would affect awarded coins.
+180|Choose between 5 and 10 missions.
+181|The mission has not been selected or started.
+182|Your location does not meet the requirements or has expired. Please check again.
+183|Save a mission photo before confirming completion.
+184|Use safe walking paths, bring water and respect shared spaces.
+185|I have done this
+186|Invalid quest progress.
+187|Invalid player step.
+188|Invalid checkpoint order.
+189|Invalid checkpoint completion time.
+190|Invalid quest completion state.
+191|Invalid quest data.
+192|Quest not found.
+193|Invalid update time.
+194|The quest has not started.
+195|The quest is paused.
+196|Invalid action.
+197|Complete checkpoints in order.
+198|The answer or evidence is not correct yet.
+199|onto ${0}
+200|Arrive at destination
+201|Enter the roundabout${0}${1}
+202|, take exit ${0}
+203|Make a U-turn${0}
+204|Bear left
+205|Turn sharply left
+206|Turn left
+207|Bear right
+208|Turn sharply right
+209|Turn right
+210|Continue straight${0}
+211|on ${0}
+212|This browser does not support local storage.
+213|Could not open local storage. Check browser storage permissions.
+214|Close other DANA QUEST tabs and reload.
+215|Could not read saved progress.
+216|Could not read previous data for backup.
+217|Could not reset progress. Please retry.
+218|Assigned ${0} missions. Your list has been saved.
+219|Could not save progress. Storage may be full; your change was not recorded.
+220|Location needs a compatible browser and HTTPS or localhost.
+221|The device returned an invalid location. Your previous reading is kept.
+222|Location permission was denied. Allow it in your browser and retry.
+223|Location timed out. Your previous reading is kept; retry in an open area.
+224|Could not find location. Your previous reading is kept; enable location services and retry.
+225|Approximate location accuracy is ±${0} m. Obtaining a more accurate GPS fix.
+226|This browser does not support location.
+227|Location permission was denied. Enable it for this website and retry.
+228|Device location has not arrived. Retrying; please enable location services.
+229|Could not obtain device location. Enable location services; retrying.
+230|No location received. Allow location access and enable location services on your device.
+231|Location is old. Obtaining a new device location…
+232|Could not load progress. Check your connection and reload; previous data has not been overwritten.
+233|Could not save changes.
+234|Could not reset progress.
+235|Could not load community data. Please retry.
+236|Could not read your saved choice.
+237|Could not save your choice.
+238|Could not read quest progress on this device. Previous data is preserved and has not been overwritten.
+239|Could not save quest progress. Check your connection and retry.
+240|Could not save quest state.
+241|Could not calculate directions.
+242|Invalid route data.
+243|You do not have enough Dana Coins.
+244|Your wallet needs reconciliation. History is preserved; redemption is temporarily unavailable.
+245|The account changed. Please reload.
+246|Sign in to view and use Dana Coins.
+247|Could not load your wallet. Please retry.
+248|You are ${0} away
+249|You have not arrived yet. About ${0} remaining.
+250|Continue straight ${0}
+251|Then ${0}
+252|Continue ${0}
+253|Arrive at ${0}
+254|Directions to ${0}
+255|${0} walking remaining
+256|Step ${0} of 3
+257|Continue quest (${0}/${1})
+258|${0} minutes
+259|${0} selected missions
+260|${0} challenges
+261|(goal ${0})
+262|<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600"><rect width="900" height="600" rx="36" fill="#19152f"/><text x="60" y="100" fill="#70deb0" font-size="28" font-family="sans-serif">DANA QUEST</text><text x="60" y="200" fill="#fff" font-size="42" font-family="sans-serif">${0}</text><text x="60" y="300" fill="#c6b6e8" font-size="30" font-family="sans-serif">${1} / ${2} challenges solved</text><text x="60" y="420" fill="#f3d36e" font-size="46" font-family="sans-serif">${3} XP · ${4} coins</text><text x="60" y="520" fill="#a99bbf" font-size="20" font-family="sans-serif">Your personal journey card.</text></svg>
+263|Story ${0}
+264|Challenge ${0} (${1})
+265|Use your earned coins in the Shop. Collected rewards are saved in Account → My vouchers.
+266|Completed progress is kept. Your current answer stays here if you keep playing.
+267|coins recorded. Challenges unlock in order.
+268|bridge
+269|architecture
+270|Hàn River
+271|landmark
+272|walking
+273|A dragon-shaped bridge across the Hàn River, linking the city centre to the east.
+274|Observe the bridge and both riverbanks from safe public paths. Access may change during traffic arrangements or events.
+275|Admire the bridge architecture from the riverside path.
+276|Observe the Hàn River and buildings along both banks.
+277|An architectural landmark on the Hàn River
+278|city
+279|A swing bridge across the Hàn River, a transport link and architectural landmark of the city.
+280|Watch river life from pedestrian areas. Follow bridge signs; operating schedules and traffic restrictions are not provided live in the app.
+281|Observe the bridge structure and river from a public area.
+282|Walk along the river and identify nearby bridges.
+283|Đà Nẵng's distinctive swing bridge
+284|museum
+285|history
+286|culture
+287|indoors
+288|The city museum at 42–44 Bạch Đằng and 31 Trần Phú presents Đà Nẵng's history, culture and people.
+289|The pin marks the visitor entrance at 31 Trần Phú according to city tourism information. Exhibits introduce nature, urban history and local culture.
+290|Explore Đà Nẵng's urban history and culture.
+291|Observe the historic building from permitted visitor areas.
+292|A place to discover the city's history
+293|Cham
+294|sculpture
+295|A museum collecting and exhibiting Cham sculpture in central Đà Nẵng.
+296|Collections include statues, altars and reliefs from Champa art. Check current visitor information and photography rules with the museum before visiting.
+297|Observe the sculptures and museum architecture.
+298|Learn the names of galleries and origins of objects.
+299|A collection of Champa sculpture
+300|park
+301|public space
+302|A public park beside the Hàn River with a flowing architectural canopy and walking spaces.
+303|Walk through public areas and observe the canopy and outdoor artworks. Events and indoor areas may have their own rules.
+304|Walk around the canopy and observe it from different sides.
+305|Rest in a public area and look toward the Hàn River.
+306|A riverside architectural canopy
+307|riverside
+308|landscape
+309|A pedestrian path along the Hàn River overlooking bridges and central Đà Nẵng.
+310|Walk along public riverside paths and observe both banks. Areas may be busy or restricted during events; no fixed opening schedule is confirmed.
+311|Walk along the river and observe Dragon Bridge from the east bank.
+312|Find decorative details on the path without blocking pedestrians.
+313|A riverside walking viewpoint
+314|sea
+315|sand
+316|outdoors
+317|A public beach on Đà Nẵng's eastern coastline.
+318|Walk along the shore and observe from public areas. Swimming conditions, lifeguards and permitted water access vary with weather and local notices.
+319|Walk along public sections of the shore.
+320|Observe the sea and follow safety flags and signs.
+321|An open coastal space east of the city
+322|The pin is a reference for the beach area. The long coastline has many access paths, which it does not all represent.
+323|monument
+324|A public seaside park facing the coast and Sơn Trà peninsula.
+325|Walk through public space and observe the coast. Events, gatherings and access may change according to local notices.
+326|Walk in the park and observe the coast from a safe area.
+327|Discover monuments and public gathering spaces.
+328|A public seaside park
+329|paddleboarding
+330|water sports
+331|Mân Thái Beach on the Sơn Trà peninsula, a coastal area where outdoor activities depend on current conditions.
+332|The pin marks Mân Thái Beach, not a particular SUP operator's meeting point. Confirm the organizer, meeting point, weather and operating conditions before joining; stay out of the water during warnings.
+333|Find SUP activities offered by a lawful operator; confirm the meeting point and availability directly.
+334|Observe the coast and enter the water only when conditions, equipment and local guidance allow.
+335|A Sơn Trà beach for outdoor activities
+336|A fixed SUP meeting point or operator at this exact beach has not been verified.
+337|pagoda
+338|spirituality
+339|Sơn Trà
+340|Linh Ứng Pagoda in the Bãi Bụt area of Sơn Trà peninsula, overlooking the sea.
+341|Visit respectfully, dress appropriately and follow venue rules. This is Linh Ứng Bãi Bụt on Sơn Trà, not the pagodas at Ngũ Hành Sơn or Bà Nà.
+342|Observe architecture and mountain–sea scenery from permitted areas.
+343|Discover the place of worship quietly and respect its rules.
+344|A cultural space beside the Sơn Trà coast
+345|mountain
+346|nature
+347|sightseeing
+348|A high viewpoint on Sơn Trà peninsula overlooking the city and surrounding sea.
+349|The approach includes steep sections and stairs. Follow authorized routes and hours; check road conditions, weather and permitted transport before travelling.
+350|View the city from an accessible permitted area.
+351|Use safe walking paths and consider your health and the weather before climbing.
+352|An elevated view from Sơn Trà peninsula
+353|heritage site
+354|mountain pass
+355|An ancient gateway at the summit of Hải Vân Pass, a historic site overlooking central Vietnam's mountains and sea.
+356|The pin marks Hải Vân Quan, not the whole pass. Watch traffic, weather and signs on the approach; do not stop vehicles in dangerous places.
+357|Observe the gate and architectural remains from permitted visitor areas.
+358|Enjoy mountain and sea views from a safe stopping point, away from the road.
+359|A historic gateway at the mountain pass summit
+360|scenic site
+361|caves
+362|heritage
+363|A complex of limestone hills, caves, pagodas and scenic viewpoints in southern Đà Nẵng.
+364|The site has many places and stairways. The pin marks the general scenic area or approach, not each cave. Follow guidance and rules and consider your health on stairs.
+365|Explore visitor paths, caves and cultural buildings that are open.
+366|Observe the rock formations and landscape from permitted paths.
+367|A complex of stone hills, caves and pagodas
+368|Bà Nà
+369|An elevated footbridge at Bà Nà Hills, known for its giant hands supporting the bridge.
+370|The pin marks Golden Bridge inside the resort, not the Bà Nà Hills entrance. Access depends on tickets, cable car routes and current operator rules; check directly before travelling.
+371|Observe the bridge structure and mountain landscape from permitted areas.
+372|Follow the visitor flow on the bridge without crossing barriers or obstructing others.
+373|An elevated footbridge with distinctive architecture
+374|rocky shore
+375|A beach in northern Đà Nẵng with a coastline and rocky water's edge.
+376|The pin is a reference for Nam Ô Beach. Rocks, tides and waves vary; observe from safe paths and avoid slippery rocks or entering water during warnings.
+377|Observe the coastline and natural landscape from public areas.
+378|Discover the coastal landscape, protect ecosystems and follow local warnings.
+379|A natural coastline in northern Đà Nẵng
+380|The pin marks Nam Ô Beach. It is not a tour meeting point or a guaranteed safe water access point.
+381|Bánhmỳchảo — Wikimedia Commons (CC0)
+382|historical data
+383|market
+384|food
+385|shopping
+386|A central market with local specialities, souvenirs and food stalls.
+387|This place has been removed from the active map. Its record is retained only for previously saved progress, missions and photos.
+388|A saved historical destination
+389|Dragon Bridge fire and water show
+390|Spend an evening by the Hàn River watching Đà Nẵng's landmark light up. Arrive early for a safe viewing area and follow traffic guidance.
+391|21:00 on Friday, Saturday and Sunday (holidays follow separate announcements)
+392|Performance
+393|Hàn River
+394|Keep away from the dragon's head, avoid water spray and do not stop vehicles on the bridge. The displayed duration is about 20 minutes for reference; check the official schedule before going.
+395|Vietnam Cultural Heritage Day activities
+396|Discover cultural activities in Hội An Ancient Town. The detailed programme awaits an organizer update.
+397|23 November to 7 December 2026 (expected; exact times unavailable)
+398|Culture
+399|Hội An
+400|Some attractions require separate tickets. Expected schedules do not trigger automatic notifications.
+401|A Christmas setting with shopping, food, performances and decorative lights. Check organizer information before making plans.
+402|4–6 December 2026 (exact times unavailable)
+403|Festival
+404|Coast
+405|Illustration of the Đà Nẵng area. Reminders 30 minutes before the event are unavailable without an exact start time.

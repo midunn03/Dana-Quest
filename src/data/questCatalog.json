@@ -1,0 +1,1546 @@
+[
+  {
+    "id": "due-dau-an-50-nam",
+    "title": "Mật thư của người giữ ký ức",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: bạn nhặt được một phong thư không ghi người gửi. Năm mảnh ký ức dẫn về Trường Đại học Kinh tế – Đại học Đà Nẵng: một địa chỉ, một mốc khởi đầu và những khoảng thời gian cần được ghép lại.",
+    "city": "Đà Nẵng",
+    "area": "Trường Đại học Kinh tế – Đại học Đà Nẵng",
+    "startPosition": [
+      16.04752,
+      108.23987
+    ],
+    "estimatedMinutes": 20,
+    "safetyNote": "Chỉ quan sát ở khu vực công cộng, không cản trở cổng ra vào và tuân theo hướng dẫn của nhà trường.",
+    "checkpointOrder": [
+      "cong-71",
+      "dau-moc-1975",
+      "sap-xep-ky-uc",
+      "ghep-dau-moc",
+      "mat-thu-tong-ket"
+    ],
+    "checkpoints": [
+      {
+        "id": "cong-71",
+        "title": "Con số mở cổng",
+        "story": "Phong thư đầu chỉ có ô địa chỉ trống. Người giữ ký ức nhờ bạn xác nhận con số trên đường Ngũ Hành Sơn trước khi mở trang bên trong. Đây là đầu mối hư cấu gắn với địa chỉ thật; không có phong thư cần tìm ở cổng trường.",
+        "instruction": "Đứng ở khu vực công cộng, quan sát biển tên hoặc địa chỉ của trường rồi nhập số nhà. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Khu vực cổng Trường Đại học Kinh tế – Đại học Đà Nẵng",
+        "challenge": {
+          "type": "text",
+          "prompt": "Số nhà trên đường Ngũ Hành Sơn của trường là bao nhiêu?",
+          "acceptedAnswers": [
+            "71",
+            "số 71",
+            "so 71"
+          ],
+          "placeholder": "Nhập số nhà"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://due.udn.vn/",
+          "https://daotao.due.udn.vn/"
+        ],
+        "hint": "Tìm số nhà trong địa chỉ, không dùng năm kỷ niệm.",
+        "feedback": "Địa chỉ của lá thư đã rõ. Mảnh tiếp theo kể khi nào trục thời gian bắt đầu."
+      },
+      {
+        "id": "dau-moc-1975",
+        "title": "Nửa thế kỷ",
+        "story": "Trang trong ghi “năm mươi năm” nhưng mốc đầu bị che mực. Người giữ ký ức nhớ điểm xuất phát được nhà trường nhắc tới là năm 1975. Chọn đúng mảnh năm để trục thời gian của câu chuyện có điểm tựa, thay vì đoán theo tuổi một tòa nhà.",
+        "instruction": "Đọc câu chuyện và chọn dấu mốc phù hợp với nền tảng 50 năm xây dựng, phát triển được nhà trường nhắc đến.",
+        "placeLabel": "Khuôn viên công cộng của trường",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Dấu mốc khởi đầu nào phù hợp với hành trình 50 năm của DUE?",
+          "options": [
+            {
+              "id": "1965",
+              "label": "Năm 1965"
+            },
+            {
+              "id": "1975",
+              "label": "Năm 1975"
+            },
+            {
+              "id": "1995",
+              "label": "Năm 1995"
+            }
+          ],
+          "correctOptionId": "1975"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "Đọc lại năm khởi đầu đã nêu trong trang thư; các năm khác gây nhiễu.",
+        "feedback": "Mốc đầu đã về đúng ô. Những mảnh năm rời có thể đặt lên cùng một trục."
+      },
+      {
+        "id": "sap-xep-ky-uc",
+        "title": "Những mảnh thời gian",
+        "story": "Bốn mảnh giấy rơi khỏi thư theo thứ tự lộn xộn. Người giữ ký ức không yêu cầu tìm thêm sự kiện lịch sử; đây là bài logic dùng các năm làm vật chứng. Đặt chúng từ sớm đến muộn để đọc đúng chiều, không suy đoán mỗi năm có một lễ kỷ niệm.",
+        "instruction": "Chạm một mảnh để thêm vào thứ tự. Có thể dùng nút lên/xuống để sửa vị trí.",
+        "placeLabel": "Khu vực công cộng Trường Đại học Kinh tế (Đại học Đà Nẵng)",
+        "challenge": {
+          "type": "ordering",
+          "prompt": "Sắp xếp bốn mảnh năm từ sớm nhất đến muộn nhất.",
+          "items": [
+            {
+              "id": "2015",
+              "label": "2015"
+            },
+            {
+              "id": "1975",
+              "label": "1975"
+            },
+            {
+              "id": "2025",
+              "label": "2025"
+            },
+            {
+              "id": "2000",
+              "label": "2000"
+            }
+          ],
+          "correctOrder": [
+            "1975",
+            "2000",
+            "2015",
+            "2025"
+          ]
+        },
+        "reward": {
+          "xp": 80,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "So sánh giá trị bốn năm. Mảnh nhỏ nhất mở đầu, mảnh lớn nhất kết thúc.",
+        "feedback": "Các trang đi đúng chiều thời gian. Nhưng người giữ thư còn cần biết khoảng cách giữa chúng."
+      },
+      {
+        "id": "ghep-dau-moc",
+        "title": "Nối hai đầu ký ức",
+        "story": "Thứ tự đã rõ, mặt sau mỗi mảnh lộ một ô số năm còn trống. Dùng 1975 làm gốc và tính khoảng cách tới từng năm. Những con số là khóa của bài ghép trong phong thư, không phải niên biểu về hoạt động diễn ra tại trường.",
+        "instruction": "Ghép mỗi năm với đúng số năm tính từ 1975. Mỗi đáp án chỉ được dùng một lần.",
+        "placeLabel": "Khu vực công cộng Trường Đại học Kinh tế (Đại học Đà Nẵng)",
+        "challenge": {
+          "type": "matching",
+          "prompt": "Năm nào gắn với quãng thời gian nào?",
+          "pairs": [
+            {
+              "id": "2000",
+              "label": "Năm 2000",
+              "correctOptionId": "25"
+            },
+            {
+              "id": "2025",
+              "label": "Năm 2025",
+              "correctOptionId": "50"
+            },
+            {
+              "id": "1975",
+              "label": "Năm 1975",
+              "correctOptionId": "0"
+            },
+            {
+              "id": "2015",
+              "label": "Năm 2015",
+              "correctOptionId": "40"
+            }
+          ],
+          "options": [
+            {
+              "id": "40",
+              "label": "40 năm"
+            },
+            {
+              "id": "0",
+              "label": "Mốc khởi đầu (0 năm)"
+            },
+            {
+              "id": "50",
+              "label": "50 năm"
+            },
+            {
+              "id": "25",
+              "label": "25 năm"
+            }
+          ]
+        },
+        "reward": {
+          "xp": 90,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "Lấy năm trên mảnh giấy trừ 1975; mỗi đáp án ghép một lần.",
+        "feedback": "Khoảng cách đã khớp. Mảnh cuối yêu cầu bạn kiểm tra cả lá thư trước khi đóng dấu."
+      },
+      {
+        "id": "mat-thu-tong-ket",
+        "title": "Mật thư nửa thế kỷ",
+        "story": "Người giữ ký ức đưa bản chép cuối có dòng đúng lẫn dòng ghi nhầm. Địa chỉ, mốc 1975 và các khoảng thời gian đều được xác nhận ở trang trước. Chỉ giữ nhận định hoàn toàn khớp để trả lá thư nguyên vẹn; không phải mọi dòng đều đáng tin.",
+        "instruction": "Chọn tất cả nhận định đúng. Có nhiều đáp án; chọn thừa hoặc thiếu đều chưa mở được mật thư.",
+        "placeLabel": "Khu vực công cộng Trường Đại học Kinh tế (Đại học Đà Nẵng)",
+        "challenge": {
+          "type": "multi-select",
+          "prompt": "Chọn mọi mảnh ký ức đúng để đóng dấu hành trình.",
+          "options": [
+            {
+              "id": "address",
+              "label": "Địa chỉ xuất phát có số nhà 71."
+            },
+            {
+              "id": "wrong-address",
+              "label": "Số nhà của điểm xuất phát là 1975."
+            },
+            {
+              "id": "start",
+              "label": "Mốc khởi đầu trong câu chuyện là 1975."
+            },
+            {
+              "id": "25",
+              "label": "Năm 2000 cách mốc khởi đầu 25 năm."
+            },
+            {
+              "id": "wrong-40",
+              "label": "Năm 2015 cách mốc khởi đầu 50 năm."
+            },
+            {
+              "id": "40",
+              "label": "Năm 2015 cách mốc khởi đầu 40 năm."
+            },
+            {
+              "id": "50",
+              "label": "Năm 2025 cách mốc khởi đầu 50 năm."
+            },
+            {
+              "id": "wrong-50",
+              "label": "Năm 2025 cách mốc khởi đầu 60 năm."
+            }
+          ],
+          "correctOptionIds": [
+            "address",
+            "start",
+            "25",
+            "40",
+            "50"
+          ]
+        },
+        "reward": {
+          "xp": 110,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://congvieclam.due.udn.vn/",
+          "https://daotao.due.udn.vn/gioi-thieu-chung/"
+        ],
+        "hint": "Đối chiếu từng dòng với địa chỉ và phép trừ từ 1975. Chọn thừa cũng sai.",
+        "feedback": "Dấu niêm phong đã khép. Lá thư có địa chỉ, thời gian và ý nghĩa rõ ràng để trao lại người giữ ký ức."
+      }
+    ],
+    "catalogVersion": 2,
+    "ending": "Phong thư tìm lại đủ năm mảnh ký ức. Người giữ thư không mất quá khứ; người ấy cần một người đọc biết phân biệt địa chỉ, dấu mốc và khoảng thời gian. Bạn trao lại lá thư hoàn chỉnh trong câu chuyện, rồi mang trang nhật ký mới tới Cầu Rồng để tìm đường sáng bên sông.",
+    "nextQuestId": "cau-rong"
+  },
+  {
+    "id": "cau-rong",
+    "title": "Đánh thức Long Mạch",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người vẽ đèn trao bạn một bản phác thảo thiếu nét cuối. Tìm đúng cây cầu và dáng rồng bên sông để nối lại đường sáng của thành phố.",
+    "city": "Đà Nẵng",
+    "area": "Cầu Rồng bắc qua sông Hàn, trục Nguyễn Văn Linh – Võ Văn Kiệt, Đà Nẵng",
+    "startPosition": [
+      16.0611042,
+      108.2276926
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Nét vẽ chưa có tên",
+        "story": "Người vẽ đèn gọi bạn là người nối sáng. Trên bản phác thảo, một nét dài bắc ngang dòng nước nhưng ô ghi tên còn trống. Bạn phải tìm tên địa điểm thật trước khi đọc hình; không cần ra lòng đường hay chờ một màn trình diễn.\n\nCây cầu hình rồng bắc qua sông Hàn, nối trung tâm thành phố với khu vực phía đông.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Cầu Rồng",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Cầu Rồng"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Cầu Rồng”, không nhập tên chương truyện.",
+        "feedback": "Nét vẽ chưa có tên: bạn đã trả lại tên nơi chốn cho vật chứng. Đường sáng qua sông là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Đường sáng qua sông",
+        "story": "Tên cầu làm hiện ra nét thứ hai: đường cong của thân rồng. Người vẽ đèn không tìm một con rồng đang ngủ thật; ông tìm hình dáng khiến người qua sông nhận ra thành phố. Chọn dấu hiệu kiến trúc nối được hai mảnh phác thảo.\n\nQuan sát dáng cầu và cảnh quan hai bờ sông từ lối đi công cộng an toàn. Việc tiếp cận có thể thay đổi khi phân luồng giao thông hoặc tổ chức sự kiện.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Cầu Rồng",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Biểu tượng kiến trúc bên sông Hàn"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Cầu Rồng, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Nét cuối đã về đúng chỗ: Long Mạch trong câu chuyện là đường nối giữa hai bờ và những người nhìn thấy nó mỗi ngày. Bạn giữ bản phác thảo đã sáng; chương Cầu Sông Hàn tiếp theo kể về một chuyển động khác bên dòng nước."
+      }
+    ],
+    "ending": "Nét cuối đã về đúng chỗ: Long Mạch trong câu chuyện là đường nối giữa hai bờ và những người nhìn thấy nó mỗi ngày. Bạn giữ bản phác thảo đã sáng; chương Cầu Sông Hàn tiếp theo kể về một chuyển động khác bên dòng nước.",
+    "nextQuestId": "cau-song-han"
+  },
+  {
+    "id": "cau-song-han",
+    "title": "Khi dòng sông đổi chiều",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Một người đưa thư nhờ bạn sửa chiếc la bàn giấy luôn chỉ về một nhịp cầu. Tìm tên cầu và đặc trưng giải thích lời nhắn về sự xoay chuyển.",
+    "city": "Đà Nẵng",
+    "area": "Cầu Sông Hàn, nối trục Lê Duẩn – Phạm Văn Đồng, Đà Nẵng",
+    "startPosition": [
+      16.0721501,
+      108.2267961
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "La bàn của người đưa thư",
+        "story": "Chiếc la bàn bằng giấy có một dòng nhắn: “Nơi tôi qua, thành phố học cách chuyển mình.” Người đưa thư cần tên cây cầu, không phải hướng dòng chảy. Dùng biển tên hoặc bản đồ ở vị trí an toàn để khôi phục địa chỉ của bức thư.\n\nCây cầu quay bắc qua sông Hàn, một công trình giao thông và dấu mốc kiến trúc của thành phố.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Cầu Sông Hàn",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Cầu Sông Hàn"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Han+River+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Cầu Sông Hàn”, không nhập tên chương truyện.",
+        "feedback": "La bàn của người đưa thư: bạn đã trả lại tên nơi chốn cho vật chứng. Nhịp cầu biết chuyển mình là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Nhịp cầu biết chuyển mình",
+        "story": "Địa chỉ đã rõ. Bên trong thư là hình một nhịp cầu cùng mũi tên cong: dấu hiệu về công trình, không phải lời hẹn xem cầu vận hành hôm nay. Hãy phân biệt đặc trưng này với những mô tả không thuộc câu chuyện.\n\nNgắm nhịp sống hai bờ sông từ khu vực dành cho người đi bộ. Tuân theo biển báo tại cầu; lịch vận hành hoặc hạn chế giao thông không được cung cấp trực tiếp trong ứng dụng.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Cầu Sông Hàn",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Cây cầu quay đặc trưng của Đà Nẵng"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Han+River+Bridge+Da+Nang+Vietnam"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Cầu Sông Hàn, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "La bàn giấy thôi quay vô định. Lời nhắn nói về khả năng chuyển động của cây cầu, không phải dòng sông đổi hướng. Người đưa thư nhận lại tuyến đường; trang tiếp theo dẫn bạn tới những ký ức được gìn giữ trong Bảo tàng Đà Nẵng."
+      }
+    ],
+    "ending": "La bàn giấy thôi quay vô định. Lời nhắn nói về khả năng chuyển động của cây cầu, không phải dòng sông đổi hướng. Người đưa thư nhận lại tuyến đường; trang tiếp theo dẫn bạn tới những ký ức được gìn giữ trong Bảo tàng Đà Nẵng.",
+    "nextQuestId": "bao-tang-da-nang"
+  },
+  {
+    "id": "bao-tang-da-nang",
+    "title": "Những trang thành phố thất lạc",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Bạn là người sắp sách. Một cuốn nhật ký mất tên nơi lưu giữ ký ức; lần theo tên bảo tàng và chủ đề của nó để trả lại trang mục lục.",
+    "city": "Đà Nẵng",
+    "area": "Cổng đón khách số 31 Trần Phú; khu nhà bảo tàng tại 42–44 Bạch Đằng, Hải Châu, Đà Nẵng",
+    "startPosition": [
+      16.0745542,
+      108.2239668
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Bìa sách bị xóa tên",
+        "story": "Người sắp sách để lại một bìa nhật ký ghi “Thành phố của chúng ta”, nhưng tên nơi cất sách đã phai. Bạn không cần tìm hay nhặt đồ vật thật tại bảo tàng. Xác nhận tên điểm đến để viết lại nhãn của cuốn sách trong truyện.\n\nBảo tàng thành phố tại cụm công trình 42–44 Bạch Đằng và 31 Trần Phú, giới thiệu lịch sử, văn hóa và con người Đà Nẵng.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Bảo tàng Đà Nẵng",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Bảo tàng Đà Nẵng"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/cn/bao-tang-da-nang-42-44-bach-dang-31-tran-phu"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Bảo tàng Đà Nẵng”, không nhập tên chương truyện.",
+        "feedback": "Bìa sách bị xóa tên: bạn đã trả lại tên nơi chốn cho vật chứng. Mục lục của thành phố là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Mục lục của thành phố",
+        "story": "Tên bảo tàng mở ra mục lục gồm con người, đời sống và những thay đổi của đô thị. Một trang đã bị xếp lẫn vào tập tài liệu khác. Chọn mô tả đúng công việc gìn giữ ký ức của nơi này để đặt trang về đúng cuốn sách.\n\nĐiểm ghim đặt tại cổng đón khách 31 Trần Phú theo thông tin du lịch thành phố. Nội dung trưng bày giúp tìm hiểu thiên nhiên, lịch sử đô thị và đời sống văn hóa địa phương.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Bảo tàng Đà Nẵng",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Không gian tìm hiểu lịch sử thành phố"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/cn/bao-tang-da-nang-42-44-bach-dang-31-tran-phu"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Bảo tàng Đà Nẵng, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Trang mục lục đã trở lại: ký ức thành phố được ghép từ nhiều đời sống, không thuộc riêng một nhân vật. Cuốn nhật ký đã có nơi lưu giữ. Để đọc thêm bằng một chất liệu khác, hãy sang chương Bảo tàng Điêu khắc Chăm."
+      }
+    ],
+    "ending": "Trang mục lục đã trở lại: ký ức thành phố được ghép từ nhiều đời sống, không thuộc riêng một nhân vật. Cuốn nhật ký đã có nơi lưu giữ. Để đọc thêm bằng một chất liệu khác, hãy sang chương Bảo tàng Điêu khắc Chăm.",
+    "nextQuestId": "bao-tang-dieu-khac-cham"
+  },
+  {
+    "id": "bao-tang-dieu-khac-cham",
+    "title": "Lời thì thầm trong đá",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người học việc bảo quản trao bạn tấm nhãn không tên. Tìm đúng bảo tàng và bộ sưu tập để trả lại tiếng nói cho trang ghi chép, không chạm vào hiện vật.",
+    "city": "Đà Nẵng",
+    "area": "02 đường 2 Tháng 9, Hải Châu, Đà Nẵng",
+    "startPosition": [
+      16.0603007,
+      108.2232677
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Tấm nhãn của người học việc",
+        "story": "Tấm nhãn giấy chỉ ghi: phải tìm đúng nơi trước khi diễn giải. Bạn là người đối chiếu của học việc bảo quản. Xác nhận tên bảo tàng qua biển chỉ dẫn, thay vì đoán tên một hiện vật hoặc chạm vào bề mặt đá để tìm chữ.\n\nBảo tàng chuyên sưu tầm và trưng bày hiện vật điêu khắc Chăm tại trung tâm Đà Nẵng.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Bảo tàng Điêu khắc Chăm",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Bảo tàng Điêu khắc Chăm"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://chammuseum.vn/"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Bảo tàng Điêu khắc Chăm”, không nhập tên chương truyện.",
+        "feedback": "Tấm nhãn của người học việc: bạn đã trả lại tên nơi chốn cho vật chứng. Nghe bằng cách quan sát là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Nghe bằng cách quan sát",
+        "story": "Nhãn đã có tên nơi lưu giữ. Trang ghi chép còn cần mô tả bộ sưu tập: “tiếng thì thầm” là cách ví von cho việc nhìn kỹ tác phẩm, không phải thông điệp siêu nhiên hay lời giải thích lịch sử mới. Chọn bộ sưu tập phù hợp với nơi này.\n\nCác bộ sưu tập gồm tượng, đài thờ và phù điêu gắn với nghệ thuật Champa. Hãy kiểm tra quy định chụp ảnh và thông tin tham quan hiện hành từ bảo tàng trước khi ghé.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Bảo tàng Điêu khắc Chăm",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Bộ sưu tập điêu khắc Champa"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://chammuseum.vn/"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Bảo tàng Điêu khắc Chăm, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Bạn trả người học việc một nhãn rõ ràng cùng nguyên tắc: quan sát trước, diễn giải sau. Viên đá không nói; chính sự chú ý giúp câu chuyện được lắng nghe. Mang nguyên tắc ấy tới mái vòm ở Công viên APEC."
+      }
+    ],
+    "ending": "Bạn trả người học việc một nhãn rõ ràng cùng nguyên tắc: quan sát trước, diễn giải sau. Viên đá không nói; chính sự chú ý giúp câu chuyện được lắng nghe. Mang nguyên tắc ấy tới mái vòm ở Công viên APEC.",
+    "nextQuestId": "cong-vien-apec"
+  },
+  {
+    "id": "cong-vien-apec",
+    "title": "Mật mã dưới cánh diều",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Một người thiết kế diều làm mất tiêu đề bản vẽ. Tìm tên công viên và đường nét kiến trúc giúp cánh diều trên giấy trở lại cân bằng.",
+    "city": "Đà Nẵng",
+    "area": "Đường 2 Tháng 9, phía tây sông Hàn, gần Cầu Rồng, Đà Nẵng",
+    "startPosition": [
+      16.0581055,
+      108.2232435
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Bản vẽ bay lạc",
+        "story": "Bản vẽ của người thiết kế diều có một dấu hẹn bên sông nhưng không ghi tên công viên. Bạn không cần thả diều hay tìm bản vẽ thật. Xác nhận nơi đứng từ biển tên hoặc bản đồ để gắn lại tiêu đề cho vật chứng trong truyện.\n\nCông viên công cộng bên sông Hàn với mái vòm kiến trúc uốn lượn và không gian đi bộ.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Công viên APEC",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Công viên APEC",
+            "APEC"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=APEC+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Công viên APEC”, không nhập tên chương truyện.",
+        "feedback": "Bản vẽ bay lạc: bạn đã trả lại tên nơi chốn cho vật chứng. Cánh cong giữ gió là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Cánh cong giữ gió",
+        "story": "Tên công viên khớp góc giấy đầu tiên. Góc còn lại có một đường cong lớn được gọi là “cánh giữ gió”. Đó là cách ví von của người thiết kế, không phải tên chính thức của công trình. Tìm mô tả kiến trúc ven sông tương ứng để hoàn thành bản vẽ.\n\nDạo quanh khu vực công cộng, quan sát mái vòm và các tác phẩm ngoài trời. Sự kiện hoặc khu vực trong nhà có thể có quy định riêng.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Công viên APEC",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Mái vòm kiến trúc ven sông"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=APEC+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Công viên APEC, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Bản vẽ không chứa mật mã bí mật của công trình: nó dạy người thiết kế nhìn lại đường nét quanh mình. Cánh diều giấy đã cân bằng. Đi tiếp tới Cầu Tình Yêu, nơi một bức thư cần đúng góc nhìn bên sông."
+      }
+    ],
+    "ending": "Bản vẽ không chứa mật mã bí mật của công trình: nó dạy người thiết kế nhìn lại đường nét quanh mình. Cánh diều giấy đã cân bằng. Đi tiếp tới Cầu Tình Yêu, nơi một bức thư cần đúng góc nhìn bên sông.",
+    "nextQuestId": "cau-tinh-yeu"
+  },
+  {
+    "id": "cau-tinh-yeu",
+    "title": "Bức thư bên bờ Hàn",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Một bức thư không ghi người nhận, chỉ kể chỗ người viết từng dừng chân. Tìm tên và góc nhìn để hiểu lời chào còn bỏ dở.",
+    "city": "Đà Nẵng",
+    "area": "507–493 đường Trần Hưng Đạo, An Hải, Đà Nẵng",
+    "startPosition": [
+      16.0629967,
+      108.2298146
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Địa chỉ không người nhận",
+        "story": "“Gửi người sẽ dừng lại ở đây” là dòng đầu của bức thư trong nhật ký. Bạn không phải tìm người lạ hay để lại đồ trên cầu. Người viết chỉ cần một địa chỉ rõ ràng: tên điểm đến được xác nhận bằng biển chỉ dẫn hoặc bản đồ.\n\nLối đi bộ ven sông Hàn nhìn sang các cây cầu và cảnh quan trung tâm Đà Nẵng.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Cầu Tình Yêu",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Cầu Tình Yêu"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=C%E1%BA%A7u+T%C3%ACnh+Y%C3%AAu+-+Love+Pier+Da+Nang"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Cầu Tình Yêu”, không nhập tên chương truyện.",
+        "feedback": "Địa chỉ không người nhận: bạn đã trả lại tên nơi chốn cho vật chứng. Lời chào nhìn qua sông là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Lời chào nhìn qua sông",
+        "story": "Địa chỉ đã rõ nhưng lời chào còn thiếu một hình ảnh. Người viết kể rằng mình đứng yên nhìn hai bờ rồi mới biết phải viết gì. Chọn mô tả đúng không gian đi bộ ngắm sông; không cần gắn khóa hoặc thay đổi cảnh quan để khép câu chuyện.\n\nDạo trên lối công cộng ven sông và quan sát cảnh quan hai bờ. Một số khu vực có thể đông hoặc được điều tiết theo sự kiện; không có lịch hoạt động cố định được xác nhận.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Cầu Tình Yêu",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Góc đi bộ ngắm sông Hàn"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=C%E1%BA%A7u+T%C3%ACnh+Y%C3%AAu+-+Love+Pier+Da+Nang"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Cầu Tình Yêu, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Bức thư kết bằng lời chào dành cho bất kỳ ai biết dừng lại và nhìn thành phố. Bạn không tìm được người nhận bí mật; bạn trở thành người đọc mà câu chuyện chờ đợi. Mang nhịp quan sát chậm ấy ra bãi biển Mỹ Khê."
+      }
+    ],
+    "ending": "Bức thư kết bằng lời chào dành cho bất kỳ ai biết dừng lại và nhìn thành phố. Bạn không tìm được người nhận bí mật; bạn trở thành người đọc mà câu chuyện chờ đợi. Mang nhịp quan sát chậm ấy ra bãi biển Mỹ Khê.",
+    "nextQuestId": "bai-bien-my-khe"
+  },
+  {
+    "id": "bai-bien-my-khe",
+    "title": "Dấu chân người nhặt sóng",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người nhặt sóng chỉ sưu tầm âm thanh, không mang gì khỏi biển. Điền tên bãi biển và không gian bờ đông vào trang sổ còn trống của người ấy.",
+    "city": "Đà Nẵng",
+    "area": "Dải bờ biển Mỹ Khê, quận Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.0616944,
+      108.2469346
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Trang sổ của người nhặt sóng",
+        "story": "Người nhặt sóng không lấy vỏ sò về nhà; người ấy ghi tên những nơi đã nghe biển. Một trang sổ còn trống phần đầu. Bạn nhận nhiệm vụ điền tên bãi biển từ biển chỉ dẫn hoặc bản đồ, đứng ở khu vực công cộng được phép.\n\nBãi biển công cộng trên dải bờ biển phía đông Đà Nẵng.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Bãi biển Mỹ Khê",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Bãi biển Mỹ Khê",
+            "Mỹ Khê"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Da+Nang+Vietnam"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Bãi biển Mỹ Khê”, không nhập tên chương truyện.",
+        "feedback": "Trang sổ của người nhặt sóng: bạn đã trả lại tên nơi chốn cho vật chứng. Bờ đông trong trí nhớ là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Bờ đông trong trí nhớ",
+        "story": "Tên biển hiện lên cùng câu hỏi: ở đây thành phố gặp nước theo cách nào? Người nhặt sóng nhờ bạn phân biệt bờ biển với địa điểm ngoài câu chuyện. Không cần xuống nước; âm thanh và khoảng nhìn từ trên bờ đã đủ để hoàn thành trang sổ.\n\nDạo bờ biển và quan sát cảnh quan từ khu vực công cộng. Điều kiện tắm biển, cứu hộ và khu vực được phép xuống nước thay đổi theo thời tiết và thông báo tại chỗ.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Bãi biển Mỹ Khê",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Không gian bờ biển phía đông thành phố"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Da+Nang+Vietnam"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Bãi biển Mỹ Khê, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Trang sổ đầy lên bằng tên và một khoảng nhìn, không phải món đồ lấy từ biển. Dấu chân người nhặt sóng nhắc bạn đi nhẹ và để bãi biển nguyên vẹn. Trang bình minh kế tiếp chờ ở Công viên Biển Đông."
+      }
+    ],
+    "ending": "Trang sổ đầy lên bằng tên và một khoảng nhìn, không phải món đồ lấy từ biển. Dấu chân người nhặt sóng nhắc bạn đi nhẹ và để bãi biển nguyên vẹn. Trang bình minh kế tiếp chờ ở Công viên Biển Đông.",
+    "nextQuestId": "cong-vien-bien-dong"
+  },
+  {
+    "id": "cong-vien-bien-dong",
+    "title": "Người gác bình minh",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người gác bình minh quên ghi nơi đặt chiếc đồng hồ ánh sáng. Tìm công viên và cảnh quan ven biển để trả lại trang lịch; có thể chơi vào bất kỳ giờ an toàn nào.",
+    "city": "Đà Nẵng",
+    "area": "Đường Võ Nguyên Giáp, An Hải, Đà Nẵng",
+    "startPosition": [
+      16.0703173,
+      108.2458368
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Chiếc đồng hồ không kim",
+        "story": "Người gác bình minh dùng chiếc đồng hồ không kim ghi những lần thành phố thức dậy. Hôm nay tên nơi đứng bị bỏ trống. Hãy xác nhận công viên bằng biển chỉ dẫn; nhiệm vụ không đòi bạn đến trước khi trời sáng hoặc chờ một sự kiện.\n\nCông viên công cộng ven biển Đà Nẵng, hướng ra bờ biển và khu vực bán đảo Sơn Trà.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Công viên Biển Đông",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Công viên Biển Đông",
+            "Biển Đông"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=East+Sea+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Công viên Biển Đông”, không nhập tên chương truyện.",
+        "feedback": "Chiếc đồng hồ không kim: bạn đã trả lại tên nơi chốn cho vật chứng. Khoảng trời mở ra biển là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Khoảng trời mở ra biển",
+        "story": "Đồng hồ không cần kim vì người gác nhớ nơi chốn bằng cảnh quan. Trang lịch mô tả một không gian công cộng hướng ra biển, không ghi giờ sự kiện. Chọn đặc trưng tương ứng để đặt chiếc đồng hồ của câu chuyện về đúng trang.\n\nDạo trong không gian công cộng và quan sát cảnh quan biển. Sự kiện, hoạt động tập trung hoặc quyền tiếp cận có thể thay đổi theo thông báo tại chỗ.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Công viên Biển Đông",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Công viên công cộng ven biển"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=East+Sea+Park+Da+Nang+Vietnam"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Công viên Biển Đông, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Chiếc đồng hồ trở lại một không gian mở bên biển. Người gác hiểu mỗi lần chú ý tới cảnh quan đều là một cách bắt đầu mới. Theo trang lịch sang Mân Thái để đọc hướng đi của cánh buồm nhỏ."
+      }
+    ],
+    "ending": "Chiếc đồng hồ trở lại một không gian mở bên biển. Người gác hiểu mỗi lần chú ý tới cảnh quan đều là một cách bắt đầu mới. Theo trang lịch sang Mân Thái để đọc hướng đi của cánh buồm nhỏ.",
+    "nextQuestId": "bien-man-thai-sup"
+  },
+  {
+    "id": "bien-man-thai-sup",
+    "title": "Hải trình của cánh buồm nhỏ",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Một hoa tiêu nhờ bạn sửa hải đồ bằng giấy từ trên bờ. Tìm tên Mân Thái và vùng biển Sơn Trà; không cần đặt hoạt động hoặc xuống nước.",
+    "city": "Đà Nẵng",
+    "area": "Bãi tắm Mân Thái, đường Hoàng Sa, Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.0890212,
+      108.2495942
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Hải đồ còn thiếu bến",
+        "story": "Hoa tiêu của cánh buồm nhỏ chỉ đi trên các trang giấy. Hải đồ của cô mất tên bến đầu, nên bạn phải đối chiếu tên bãi biển thật. Đứng trên bờ ở nơi được phép; không cần tìm đơn vị SUP hoặc xuống nước để hoàn thành truyện.\n\nBãi tắm Mân Thái trên bán đảo Sơn Trà; khu vực ven biển có thể được dùng cho hoạt động ngoài trời theo điều kiện thực tế.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Bãi biển Mân Thái – chèo SUP",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Bãi biển Mân Thái – chèo SUP",
+            "Bãi biển Mân Thái",
+            "Mân Thái",
+            "Bãi biển Mân Thái (chèo SUP)"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Bãi biển Mân Thái – chèo SUP”, không nhập tên chương truyện.",
+        "feedback": "Hải đồ còn thiếu bến: bạn đã trả lại tên nơi chốn cho vật chứng. Chọn hướng từ bờ là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Chọn hướng từ bờ",
+        "story": "Hải đồ có địa chỉ nhưng cánh buồm chưa biết mình thuộc cảnh quan nào. Hoa tiêu cần mô tả vùng biển Sơn Trà, không phải tên gói dịch vụ. Xác định điều ấy từ câu chuyện và quan sát bờ biển an toàn để vẽ tiếp đường đi trên giấy.\n\nĐiểm ghim xác định bãi tắm Mân Thái, không phải điểm hẹn của một nhà tổ chức SUP cụ thể. Hãy xác nhận đơn vị, điểm tập trung, thời tiết và tình trạng hoạt động trước khi tham gia; không xuống nước khi có cảnh báo.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Bãi biển Mân Thái – chèo SUP",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Bãi biển Sơn Trà cho hoạt động ngoài trời"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Bãi biển Mân Thái – chèo SUP, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Cánh buồm giấy có hải trình rõ ràng mà không rời bờ. Hoa tiêu học cách kiểm tra nơi chốn trước chuyến đi thật. Trang tiếp theo lên Sơn Trà, tới không gian cần yên lặng và tôn trọng ở Linh Ứng Bãi Bụt."
+      }
+    ],
+    "ending": "Cánh buồm giấy có hải trình rõ ràng mà không rời bờ. Hoa tiêu học cách kiểm tra nơi chốn trước chuyến đi thật. Trang tiếp theo lên Sơn Trà, tới không gian cần yên lặng và tôn trọng ở Linh Ứng Bãi Bụt.",
+    "nextQuestId": "chua-linh-ung-bai-but"
+  },
+  {
+    "id": "chua-linh-ung-bai-but",
+    "title": "Dấu lặng trên Sơn Trà",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người chép nhạc đánh rơi một dấu lặng khỏi bản nhạc thành phố. Tìm đúng chùa Linh Ứng và cảnh quan bên biển để trả lại khoảng yên; không cần thực hiện nghi thức.",
+    "city": "Đà Nẵng",
+    "area": "Khu vực Bãi Bụt, bán đảo Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.1002055,
+      108.2778816
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Nốt nhạc không địa chỉ",
+        "story": "Người chép nhạc viết “Linh Ứng” nhưng quên phần giúp phân biệt nơi chốn. Bạn phải tìm đúng trang Bãi Bụt trên Sơn Trà. Đối chiếu biển chỉ dẫn; đừng tìm ký hiệu hay đồ vật giấu trong không gian thờ tự để giải câu chuyện.\n\nChùa Linh Ứng tại khu vực Bãi Bụt, bán đảo Sơn Trà, hướng nhìn ra biển.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Chùa Linh Ứng – Bãi Bụt, Sơn Trà",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Chùa Linh Ứng – Bãi Bụt, Sơn Trà",
+            "Chùa Linh Ứng",
+            "Linh Ứng",
+            "Chùa Linh Ứng (Bãi Bụt, Sơn Trà)"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/chua-linh-ung-bai-but-da-nang"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Chùa Linh Ứng – Bãi Bụt, Sơn Trà”, không nhập tên chương truyện.",
+        "feedback": "Nốt nhạc không địa chỉ: bạn đã trả lại tên nơi chốn cho vật chứng. Khoảng yên hướng biển là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Khoảng yên hướng biển",
+        "story": "Trang nhạc đúng địa chỉ. Người chép nhạc nhận ra mình mất dấu lặng vì chỉ tìm âm thanh. Chọn mô tả của không gian văn hóa bên biển Sơn Trà để trả nó về. Quan sát yên tĩnh và tôn trọng nội quy đã đủ; không cần làm lễ.\n\nTham quan không gian chùa với thái độ tôn kính, ăn mặc phù hợp và làm theo nội quy. Đây là chùa Linh Ứng Bãi Bụt trên Sơn Trà, không phải chùa Linh Ứng Ngũ Hành Sơn hay Bà Nà.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Chùa Linh Ứng – Bãi Bụt, Sơn Trà",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Không gian văn hóa bên biển Sơn Trà"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/chua-linh-ung-bai-but-da-nang"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Chùa Linh Ứng – Bãi Bụt, Sơn Trà, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Dấu lặng trở lại bản nhạc: khoảng yên cũng thuộc hành trình. Bạn trả người chép nhạc đúng trang Bãi Bụt, không nhầm với chùa cùng tên. Khi điều kiện tuyến đường cho phép, chương nhìn từ trên cao chờ ở Đỉnh Bàn Cờ."
+      }
+    ],
+    "ending": "Dấu lặng trở lại bản nhạc: khoảng yên cũng thuộc hành trình. Bạn trả người chép nhạc đúng trang Bãi Bụt, không nhầm với chùa cùng tên. Khi điều kiện tuyến đường cho phép, chương nhìn từ trên cao chờ ở Đỉnh Bàn Cờ.",
+    "nextQuestId": "dinh-ban-co"
+  },
+  {
+    "id": "dinh-ban-co",
+    "title": "Nước cờ giữa tầng mây",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Một kỳ thủ nhờ bạn đọc thế cờ vẽ bằng đường chân trời. Tìm tên điểm nhìn và đặc trưng trên cao để hoàn thành nước đi, luôn ở trong lối được phép.",
+    "city": "Đà Nẵng",
+    "area": "Đỉnh Bàn Cờ, bán đảo Sơn Trà, Đà Nẵng",
+    "startPosition": [
+      16.1189365,
+      108.2719826
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Bàn cờ thiếu tên",
+        "story": "Kỳ thủ đặt quân cờ theo hướng nhìn nhưng quên tên bàn cờ lớn nhất. Bạn là người đọc bản đồ của ông. Xác nhận tên điểm đến trước khi giải nghĩa thế cờ; không cần tìm quân cờ thật hoặc leo ra mép vực để nhận đầu mối.\n\nĐiểm ngắm cảnh trên cao tại bán đảo Sơn Trà, nhìn về thành phố và vùng biển xung quanh.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Đỉnh Bàn Cờ",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Đỉnh Bàn Cờ"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Đỉnh Bàn Cờ”, không nhập tên chương truyện.",
+        "feedback": "Bàn cờ thiếu tên: bạn đã trả lại tên nơi chốn cho vật chứng. Nước đi nhìn xa là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Nước đi nhìn xa",
+        "story": "Kỳ thủ vẽ nước đi không tiến quân mà mở rộng tầm nhìn về thành phố và biển. Chọn mô tả vị trí cao trên Sơn Trà để hiểu nước đi ấy. Đây là ẩn dụ trong truyện, không phải chỉ dẫn rời lối đi tìm một góc nhìn mới.\n\nĐường lên có đoạn dốc và bậc thang. Tuân thủ tuyến và khung giờ được cơ quan quản lý cho phép; điều kiện đường, thời tiết và phương tiện tiếp cận cần kiểm tra trước chuyến đi.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Đỉnh Bàn Cờ",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Góc nhìn cao trên bán đảo Sơn Trà"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/vi/ban-dao-son-tra"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Đỉnh Bàn Cờ, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Nước cờ cuối là biết dừng đúng chỗ để nhìn xa hơn. Bạn trả kỳ thủ một thế cờ hoàn chỉnh và vẫn ở trong lối an toàn. Chương Hải Vân Quan tiếp theo kể về cửa ngõ giữa những hướng gió khác nhau."
+      }
+    ],
+    "ending": "Nước cờ cuối là biết dừng đúng chỗ để nhìn xa hơn. Bạn trả kỳ thủ một thế cờ hoàn chỉnh và vẫn ở trong lối an toàn. Chương Hải Vân Quan tiếp theo kể về cửa ngõ giữa những hướng gió khác nhau.",
+    "nextQuestId": "hai-van-quan"
+  },
+  {
+    "id": "hai-van-quan",
+    "title": "Cánh cổng của hai miền gió",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người giữ đường có hai tờ chỉ dẫn bị tráo nhãn. Tìm tên cửa ải và vị trí trên đỉnh đèo để sắp lại tuyến đường từ khu vực tham quan được phép.",
+    "city": "Đà Nẵng",
+    "area": "Di tích Hải Vân Quan trên đỉnh đèo Hải Vân, ranh giới Đà Nẵng – Huế",
+    "startPosition": [
+      16.1877377,
+      108.1312942
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Hai tờ chỉ dẫn",
+        "story": "Người giữ đường trao hai tờ giấy vẽ núi và biển, nhưng chỉ một tờ dành cho cửa ải. Bạn phải ghi đúng tên điểm đến để phân biệt di tích với toàn tuyến đèo. Chỉ đối chiếu sau khi dừng ở nơi an toàn; không thao tác khi lái xe.\n\nCửa ải cổ trên đỉnh đèo Hải Vân, di tích lịch sử nhìn ra núi và biển miền Trung.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Hải Vân Quan",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Hải Vân Quan"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/di-san-canh-quan/deo-hai-van-thien-ha-de-nhat-hung-quan"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Hải Vân Quan”, không nhập tên chương truyện.",
+        "feedback": "Hai tờ chỉ dẫn: bạn đã trả lại tên nơi chốn cho vật chứng. Khung cửa giữa hai hướng là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Khung cửa giữa hai hướng",
+        "story": "Tên cửa ải mở một khung nhìn. Hai luồng gió trên giấy không phải dự báo thời tiết; chúng tượng trưng cho những hướng đi gặp nhau ở di tích trên đỉnh đèo. Chọn mô tả đúng để trả tờ chỉ dẫn về nơi nó thuộc về.\n\nĐiểm ghim hướng tới Hải Vân Quan, không phải toàn tuyến đèo. Tiếp cận bằng đường đèo cần chú ý giao thông, thời tiết và biển báo; không dừng xe tại vị trí nguy hiểm.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Hải Vân Quan",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Cửa ải lịch sử trên đỉnh đèo"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/di-san-canh-quan/deo-hai-van-thien-ha-de-nhat-hung-quan"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Hải Vân Quan, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Hai tờ chỉ dẫn hết lẫn lộn: một tờ nói về tuyến đường, tờ kia ghi đúng cửa ải. Người giữ đường nhờ bạn nhớ phân biệt điểm đến với lối tiếp cận. Chương Ngũ Hành Sơn tiếp tục câu hỏi đó giữa đá và bậc thang."
+      }
+    ],
+    "ending": "Hai tờ chỉ dẫn hết lẫn lộn: một tờ nói về tuyến đường, tờ kia ghi đúng cửa ải. Người giữ đường nhờ bạn nhớ phân biệt điểm đến với lối tiếp cận. Chương Ngũ Hành Sơn tiếp tục câu hỏi đó giữa đá và bậc thang.",
+    "nextQuestId": "ngu-hanh-son"
+  },
+  {
+    "id": "ngu-hanh-son",
+    "title": "Năm mảnh ấn sơn",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người khắc dấu nhờ bạn đọc chiếc ấn vẽ bằng năm nét. Tìm tên quần thể và các lớp cảnh quan; không lấy đá hoặc vào hang tìm vật phẩm.",
+    "city": "Đà Nẵng",
+    "area": "81 Huyền Trân Công Chúa, khu danh thắng Ngũ Hành Sơn, Đà Nẵng",
+    "startPosition": [
+      16.0037104,
+      108.2631605
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Chiếc ấn bằng giấy",
+        "story": "Người khắc dấu giữ năm nét núi trên giấy nhưng không ghi tên quần thể. Bạn là người giữ bản in, cần xác nhận nơi chốn trước khi đóng dấu. Năm mảnh ấn chỉ ở trong truyện; không có đồ cần lấy từ hang, chùa hoặc vách đá.\n\nQuần thể núi đá vôi, hang động, chùa và điểm nhìn cảnh quan ở phía nam Đà Nẵng.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Danh thắng Ngũ Hành Sơn",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Danh thắng Ngũ Hành Sơn",
+            "Ngũ Hành Sơn"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/danh-thang-ngu-hanh-son"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Danh thắng Ngũ Hành Sơn”, không nhập tên chương truyện.",
+        "feedback": "Chiếc ấn bằng giấy: bạn đã trả lại tên nơi chốn cho vật chứng. Những lớp của dấu ấn là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Những lớp của dấu ấn",
+        "story": "Chiếc ấn có tên liền hiện nhiều lớp: núi đá, không gian hang và nơi thờ tự. Không cần đi qua từng lớp để giải bài. Chọn mô tả bao quát quần thể, rồi giữ nhịp đi phù hợp với sức khỏe và điều kiện thực tế tại nơi tham quan.\n\nKhu tham quan gồm nhiều địa điểm và lối bậc thang; điểm ghim tham chiếu khu danh thắng/lối tiếp cận chung, không đại diện từng hang động. Tuân thủ hướng dẫn, nội quy và sức khỏe cá nhân khi leo bậc.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Danh thắng Ngũ Hành Sơn",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Quần thể núi đá, hang động và chùa"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://danangfantasticity.com/danh-thang-ngu-hanh-son"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Danh thắng Ngũ Hành Sơn, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Năm nét thành một dấu ấn khi được đọc trong cùng cảnh quan. Người khắc dấu giữ bản in, còn bạn giữ nguyên đá và không gian thiêng tại chỗ. Chương Cầu Vàng tiếp theo tìm cách khác để hình dung đá và bàn tay trong kiến trúc."
+      }
+    ],
+    "ending": "Năm nét thành một dấu ấn khi được đọc trong cùng cảnh quan. Người khắc dấu giữ bản in, còn bạn giữ nguyên đá và không gian thiêng tại chỗ. Chương Cầu Vàng tiếp theo tìm cách khác để hình dung đá và bàn tay trong kiến trúc.",
+    "nextQuestId": "cau-vang-ba-na-hills"
+  },
+  {
+    "id": "cau-vang-ba-na-hills",
+    "title": "Lối đi trên bàn tay mây",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người dựng sân khấu làm mất nhãn bản vẽ về lối đi được nâng đỡ. Xác định khu vực Bà Nà Hills và kiến trúc cầu; câu chuyện không bao gồm vé hoặc quyền vào cửa.",
+    "city": "Đà Nẵng",
+    "area": "Cầu Vàng, khu du lịch Bà Nà Hills, Hòa Vang, Đà Nẵng",
+    "startPosition": [
+      15.9949375,
+      107.9965625
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Tên nơi treo bản vẽ",
+        "story": "Bản vẽ có lối đi cao nhưng thiếu tên khu vực chứa nó. Bạn phải phục hồi tên Bà Nà Hills trên nhãn trước khi đọc hình. Điểm ghim không phải cổng vào; chuyến đi thật cần theo vé và quy định của nơi quản lý, không theo lối tưởng tượng trong truyện.\n\nCầu đi bộ trên cao tại khu du lịch Bà Nà Hills, nổi bật với kết cấu tạo hình đôi bàn tay nâng cầu.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Bà Nà Hills – khu vực Cầu Vàng",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Bà Nà Hills – khu vực Cầu Vàng",
+            "Bà Nà Hills",
+            "Bà Nà Hills (khu vực Cầu Vàng)"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://sunworld.vn/vi/banahills"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Bà Nà Hills – khu vực Cầu Vàng”, không nhập tên chương truyện.",
+        "feedback": "Tên nơi treo bản vẽ: bạn đã trả lại tên nơi chốn cho vật chứng. Bàn tay nâng đường chân trời là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Bàn tay nâng đường chân trời",
+        "story": "Nhãn đã đúng nhưng bản vẽ còn câu hỏi: điều gì khiến lối đi khác đường phố bình thường? Người dựng sân khấu ví hình đôi bàn tay với bàn tay mây. Đó là tưởng tượng của nhân vật; chọn mô tả kiến trúc phù hợp với cây cầu thật.\n\nĐiểm ghim nằm tại Cầu Vàng bên trong khu du lịch, không phải cổng vào Bà Nà Hills. Việc tiếp cận phụ thuộc vé, tuyến cáp và quy định hiện hành của đơn vị quản lý; hãy kiểm tra trực tiếp trước chuyến đi.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Bà Nà Hills – khu vực Cầu Vàng",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Cầu đi bộ trên cao với kiến trúc đặc trưng"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://sunworld.vn/vi/banahills"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Bà Nà Hills – khu vực Cầu Vàng, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Bản vẽ có cả nơi chốn và hình dáng: người dựng sân khấu không còn nhầm cảnh tưởng tượng với đường vào thực tế. Bạn giữ trang mây trong nhật ký. Chương Nam Ô trở lại mặt đất cùng dấu vết của một đường bờ."
+      }
+    ],
+    "ending": "Bản vẽ có cả nơi chốn và hình dáng: người dựng sân khấu không còn nhầm cảnh tưởng tượng với đường vào thực tế. Bạn giữ trang mây trong nhật ký. Chương Nam Ô trở lại mặt đất cùng dấu vết của một đường bờ.",
+    "nextQuestId": "bai-bien-nam-o"
+  },
+  {
+    "id": "bai-bien-nam-o",
+    "title": "Mảnh bản đồ nơi đầu sóng",
+    "summary": "Truyện hư cấu dẫn dắt khám phá: Người vẽ bản đồ để lại mảnh giấy chỉ có đường bờ. Tìm tên Nam Ô và cảnh quan phía bắc thành phố để nối trang cuối, không bước lên đá trơn hoặc tìm đồ dưới nước.",
+    "city": "Đà Nẵng",
+    "area": "Bãi tắm Nam Ô, khu vực Nam Ô, Đà Nẵng",
+    "startPosition": [
+      16.1190151,
+      108.1303016
+    ],
+    "estimatedMinutes": 10,
+    "catalogVersion": 1,
+    "safetyNote": "Chỉ khám phá ở nơi được phép, giữ gìn cảnh quan, không cản trở lối đi và tuân thủ hướng dẫn tại địa điểm.",
+    "checkpointOrder": [
+      "nhan-dien-dia-diem",
+      "doc-vi-dia-diem"
+    ],
+    "checkpoints": [
+      {
+        "id": "nhan-dien-dia-diem",
+        "title": "Mảnh giấy thiếu phương hướng",
+        "story": "Người vẽ bản đồ không chôn kho báu; ông mất tên của một đường bờ trên giấy. Bạn được nhờ nối lại mảnh ấy từ vị trí quan sát an toàn. Xác nhận tên bãi biển bằng biển chỉ dẫn hoặc bản đồ, không lần theo sóng để tìm vật chứng thật.\n\nBãi biển phía bắc Đà Nẵng với bờ biển và khu vực đá ven nước.",
+        "instruction": "Đứng ở khu vực được phép, đối chiếu tên điểm đến trên biển chỉ dẫn hoặc thông tin bản đồ. Không đi vào khu vực hạn chế.",
+        "placeLabel": "Bãi biển Nam Ô",
+        "challenge": {
+          "type": "text",
+          "prompt": "Điểm đến trong hành trình này tên là gì?",
+          "acceptedAnswers": [
+            "Bãi biển Nam Ô",
+            "Nam Ô"
+          ],
+          "placeholder": "Nhập tên điểm đến (có thể không dấu)"
+        },
+        "reward": {
+          "xp": 50,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Bai+Nam+O+Da+Nang+Vietnam+beach"
+        ],
+        "hint": "Đối chiếu tên trên biển hoặc bản đồ; dùng tên địa điểm “Bãi biển Nam Ô”, không nhập tên chương truyện.",
+        "feedback": "Mảnh giấy thiếu phương hướng: bạn đã trả lại tên nơi chốn cho vật chứng. Nối đường bờ phía bắc là bước đọc ý nghĩa còn thiếu."
+      },
+      {
+        "id": "doc-vi-dia-diem",
+        "title": "Nối đường bờ phía bắc",
+        "story": "Tên Nam Ô làm lộ nét cuối: đoạn bờ tự nhiên ở phía bắc thành phố. Vệt đá trên giấy là hình vẽ, không phải đường đi phải vượt qua. Chọn mô tả khớp cảnh quan để nối bản đồ mà vẫn đứng trên lối an toàn, không ra gần mép nước.\n\nĐiểm ghim tham chiếu Bãi Tắm Nam Ô trên bản đồ. Địa hình đá, thủy triều và sóng có thể thay đổi; chỉ quan sát từ lối an toàn, không đi lên đá trơn hoặc xuống nước khi có cảnh báo.",
+        "instruction": "Đọc lại câu chuyện và quan sát đặc trưng của địa điểm. Chọn mô tả phù hợp nhất.",
+        "placeLabel": "Bãi biển Nam Ô",
+        "challenge": {
+          "type": "single-choice",
+          "prompt": "Mô tả nào khớp với điểm đến bạn đang khám phá?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Một điểm hẹn khác, không liên quan đến câu chuyện vừa đọc."
+            },
+            {
+              "id": "identity",
+              "label": "Bờ biển tự nhiên phía bắc Đà Nẵng"
+            },
+            {
+              "id": "c",
+              "label": "Một sân bay quốc tế với đường băng và khu làm thủ tục."
+            },
+            {
+              "id": "d",
+              "label": "Một khu công nghiệp khép kín không dành cho hoạt động tham quan."
+            }
+          ],
+          "correctOptionId": "identity"
+        },
+        "reward": {
+          "xp": 70,
+          "coins": 10
+        },
+        "sourceUrls": [
+          "https://www.google.com/maps/search/?api=1&query=Bai+Nam+O+Da+Nang+Vietnam+beach"
+        ],
+        "hint": "Đọc đoạn thông tin thực tế sau câu chuyện. Chọn đặc trưng của Bãi biển Nam Ô, không chọn một nơi ngoài bối cảnh.",
+        "feedback": "Mảnh bản đồ cuối đã khớp. Kho báu người vẽ bản đồ để lại là một thành phố được nhìn kỹ, không phải thứ bị lấy khỏi bờ biển. Bạn có thể trở về Cầu Rồng và đọc những trang quen bằng góc nhìn mới."
+      }
+    ],
+    "ending": "Mảnh bản đồ cuối đã khớp. Kho báu người vẽ bản đồ để lại là một thành phố được nhìn kỹ, không phải thứ bị lấy khỏi bờ biển. Bạn có thể trở về Cầu Rồng và đọc những trang quen bằng góc nhìn mới.",
+    "nextQuestId": "due-dau-an-50-nam"
+  }
+]

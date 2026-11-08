@@ -1,3 +1,4 @@
+import { t, interpolate } from '../i18n/locale'
 import { notify } from './notifications'
 import { hasSyncAccount, loadAccountProgress, resetAccountProgress, saveAccountAction } from './accountSync'
 import { isDestinationComplete } from './rules'
@@ -6,7 +7,7 @@ import { newState, readState, updateProgress, type ProgressAction, type Progress
 let database: Promise<IDBDatabase> | undefined
 export function openDatabase(): Promise<IDBDatabase> {
   if (!database) database = new Promise((resolve, reject) => {
-    if (!globalThis.indexedDB) { reject(new Error('Trình duyệt không hỗ trợ lưu dữ liệu cục bộ.')); return }
+    if (!globalThis.indexedDB) { reject(new Error(t("Trình duyệt không hỗ trợ lưu dữ liệu cục bộ."))); return }
     const request = indexedDB.open('dana-quest-local', 1)
     request.onupgradeneeded = () => {
       request.result.createObjectStore('state')
@@ -16,8 +17,8 @@ export function openDatabase(): Promise<IDBDatabase> {
       request.result.onversionchange = () => { request.result.close(); database = undefined }
       resolve(request.result)
     }
-    request.onerror = () => { database = undefined; reject(new Error('Không mở được bộ nhớ cục bộ. Hãy kiểm tra quyền lưu trữ của trình duyệt.')) }
-    request.onblocked = () => { database = undefined; reject(new Error('Hãy đóng các tab DANA QUEST khác rồi tải lại.')) }
+    request.onerror = () => { database = undefined; reject(new Error(t("Không mở được bộ nhớ cục bộ. Hãy kiểm tra quyền lưu trữ của trình duyệt."))) }
+    request.onblocked = () => { database = undefined; reject(new Error(t("Hãy đóng các tab DANA QUEST khác rồi tải lại."))) }
   })
   return database
 }
@@ -28,7 +29,7 @@ export async function loadProgress(): Promise<ProgressState> {
   return new Promise((resolve, reject) => {
     const request = db.transaction('state').objectStore('state').get('main')
     request.onsuccess = () => { try { resolve(readState(request.result)) } catch (error) { reject(error) } }
-    request.onerror = () => reject(new Error('Không đọc được tiến độ đã lưu.'))
+    request.onerror = () => reject(new Error(t("Không đọc được tiến độ đã lưu.")))
   })
 }
 
@@ -48,9 +49,9 @@ export async function resetProgressData(): Promise<ProgressState> {
         store.put(newState(), 'main')
       } catch (error) { reject(error) }
     }
-    request.onerror = () => reject(new Error('Không đọc được dữ liệu cũ để sao lưu.'))
+    request.onerror = () => reject(new Error(t("Không đọc được dữ liệu cũ để sao lưu.")))
     transaction.oncomplete = () => resolve(newState())
-    transaction.onabort = () => reject(new Error('Không đặt lại được tiến độ. Hãy thử lại.'))
+    transaction.onabort = () => reject(new Error(t("Không đặt lại được tiến độ. Hãy thử lại.")))
   })
 }
 
@@ -71,14 +72,14 @@ export async function saveAction(action: ProgressAction): Promise<ProgressState>
           const previous = readState(request.result)
           result = updateProgress(previous, action, Boolean(photoRequest.result?.blob))
           if (result !== previous) {
-            if (action.type === 'assign') messages.push(`Đã giao ${action.count} nhiệm vụ. Danh sách đã được lưu.`)
-            if (action.type === 'cancel') messages.push('Đã hủy hành trình tại điểm đến.')
-            if (action.type === 'redeem') messages.push('Đã đổi voucher demo thành công.')
+            if (action.type === 'assign') messages.push(interpolate("Đã giao ${0} nhiệm vụ. Danh sách đã được lưu.",[action.count]))
+            if (action.type === 'cancel') messages.push(t("Đã hủy hành trình tại điểm đến."))
+            if (action.type === 'redeem') messages.push(t("Đã đổi voucher demo thành công."))
             if (action.type === 'complete') {
-              messages.push('Đã hoàn thành nhiệm vụ! +10 Green Coins demo.')
+              messages.push(t("Đã hoàn thành nhiệm vụ! +10 Green Coins demo."))
               const before = previous.destinations[action.destinationId!]
               const after = result.destinations[action.destinationId!]
-              if (!isDestinationComplete(before) && isDestinationComplete(after)) messages.push('Chúc mừng! Bạn đã hoàn thành điểm đến.')
+              if (!isDestinationComplete(before) && isDestinationComplete(after)) messages.push(t("Chúc mừng! Bạn đã hoàn thành điểm đến."))
             }
           }
           store.put(result, 'main')
@@ -87,7 +88,7 @@ export async function saveAction(action: ProgressAction): Promise<ProgressState>
       }
     }
     transaction.oncomplete = () => { if (typeof window !== 'undefined') messages.forEach(notify); resolve(result) }
-    transaction.onabort = () => reject(failure ?? new Error('Không lưu được tiến độ. Có thể bộ nhớ đã đầy; thay đổi chưa được ghi nhận.'))
+    transaction.onabort = () => reject(failure ?? new Error(t("Không lưu được tiến độ. Có thể bộ nhớ đã đầy; thay đổi chưa được ghi nhận.")))
     transaction.onerror = () => { /* onabort reports the failed transaction */ }
   })
 }

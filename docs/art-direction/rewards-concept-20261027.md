@@ -1,0 +1,9 @@
+# Hướng minh họa phần thưởng — 27/10/2026
+
+Trạng thái: concept để duyệt hướng, chưa phải 7 asset riêng đã tích hợp vào cửa hàng.
+
+Đầu ra: `rewards-concept-20261027.png`. Tạo bằng công cụ ImageGen tích hợp, không dùng CLI/API fallback. Tham chiếu phong cách: `Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/brand-contact.png` ở gốc dự án. Ảnh chứa 7 vật phẩm riêng biệt: bưu thiếp Cầu Rồng, cà phê phin, quà lưu niệm, mì Quảng, xe buýt, vé tham quan và kayak. Không tạo tên nhà cung cấp hoặc mã voucher thực.
+
+## Prompt đã dùng
+
+Create an original production concept sheet for seven Dana Quest in-game shop reward illustrations, using the attached contact sheet ONLY as a style reference for the pixel-art coastal adventure game brand. No text, no lettering, no logo, no prices, no UI. 4 equally spaced objects in the top row, 3 equally spaced in the bottom row with generous cream negative space; each object fully separated, no touching. Objects in reading order: a postcard with a stylized golden dragon bridge over blue river, a Vietnamese iced coffee in glass with filter, a wrapped local souvenir gift with a small dragon charm, a bowl of mi Quang noodles with herbs, a small cheerful city bus, a perforated attraction admission ticket bearing a simple mountain silhouette, a kayak and paddle with small wave. Consistent premium pixel illustration craft, crisp stepped edges, warm cream background, muted teal and sea blue, warm gold and restrained coral, dark ink outlines, subtle pixel grounding shadows, readable at small sizes. Attractive to young adult explorers rather than baby toy styling. Do not imply real brands, discounts or participating merchants. Intended as a reviewable art-direction sheet, not a screenshot or full interface. All seven items equally polished and consistent.

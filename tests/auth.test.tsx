@@ -15,17 +15,18 @@ function response(status: number, body: unknown) {
   return { ok: status >= 200 && status < 300, status, json: async () => body } as Response
 }
 
-it.each(['bien', null])('restores a session from home without showing the welcome screen (avatar: %s)', async avatarId => {
+it.each(['bien', null])('restores a session on the public home and offers the correct play destination (avatar: %s)', async avatarId => {
   vi.stubEnv('VITE_AUTH_API_URL', 'https://auth.test/api/auth')
   let resolveSession!: (value: Response) => void
   vi.stubGlobal('fetch', vi.fn(() => new Promise<Response>(resolve => { resolveSession = resolve })))
   window.location.hash = '#/'
   render(<App />)
-  expect(screen.getByRole('status').textContent).toContain('Đang mở hành trình')
+  expect(screen.getByRole('heading', { name: 'Khám phá Đà Nẵng, nhận quà cực chất' })).toBeTruthy()
   resolveSession(response(200, { user: { id: 'returning', name: 'Minh', avatarId } }))
-  await waitFor(() => expect(window.location.hash).toBe(avatarId ? '#/kham-pha' : '#/chon-nhan-vat'))
-  if (avatarId) expect(await screen.findByRole('region', { name: 'Khám phá bản đồ' })).toBeTruthy()
-  else expect(await screen.findByRole('heading', { name: 'Chọn nhân vật' })).toBeTruthy()
+  await screen.findByRole('heading', { name: 'Chào mừng trở lại, Minh!' })
+  expect(window.location.hash).toBe('#/')
+  for (const link of screen.getAllByRole('link', { name: /Vào chơi/ })) expect(link.getAttribute('href')).toBe(avatarId ? '#/kham-pha' : '#/chon-nhan-vat')
+  expect(screen.queryByLabelText('Mật khẩu')).toBeNull()
 })
 
 function mockAuthApi(profile: { id: string; name: string; phone?: string; email?: string; avatarId?: string | null }) {
@@ -43,18 +44,18 @@ function mockAuthApi(profile: { id: string; name: string; phone?: string; email?
   return { requests, fetchMock }
 }
 
-it('blocks a direct private URL and explains missing backend configuration', async () => {
+it('keeps guest Quest visible and explains missing backend configuration', async () => {
   vi.stubEnv('VITE_AUTH_API_URL', '')
-  window.location.hash = '#/kham-pha'
+  window.location.hash = '#/quest-cua-toi'
   render(<App />)
-  await screen.findByRole('heading', { name: 'Đăng nhập' })
+  await screen.findByRole('dialog', { name: 'Đăng nhập hoặc tạo tài khoản' })
   expect(await screen.queryByRole('region', { name: 'Khám phá bản đồ' })).toBeNull()
-  expect(screen.getByText(/VITE_AUTH_API_URL/)).toBeTruthy()
-  await userEvent.click(screen.getByRole('button', { name: 'Đăng ký', exact: true }))
+  expect(screen.getByText('Dịch vụ tài khoản chưa sẵn sàng.')).toBeTruthy()
+  await userEvent.click(screen.getByRole('button', { name: 'Tạo tài khoản', exact: true }))
   await userEvent.type(screen.getByLabelText('Tên người dùng'), 'Linh Nguyễn')
   expect((screen.getByLabelText('Tên người dùng') as HTMLInputElement).value).toBe('Linh Nguyễn')
   expect(screen.getAllByRole('button', { name: 'Tạo tài khoản', exact: true }).at(-1)?.disabled).toBe(true)
-  expect(window.location.hash).toBe('#/dang-ky')
+  expect(window.location.hash).toBe('#/quest-cua-toi')
 })
 
 it('registers username and password through the configured API, then requires avatar setup', async () => {
@@ -67,7 +68,7 @@ it('registers username and password through the configured API, then requires av
   await user.type(screen.getByLabelText('Tên người dùng'), 'Linh Nguyễn')
   await user.type(screen.getByLabelText('Mật khẩu'), 'a-long-test-password')
   await user.click(screen.getAllByRole('button', { name: 'Tạo tài khoản', exact: true }).at(-1)!)
-  await screen.findByRole('heading', { name: 'Chọn nhân vật' })
+  await screen.findByRole('heading', { name: 'Tùy chỉnh nhân vật' })
   const request = requests.find(item => item.url.endsWith('/register'))
   expect(request?.init?.credentials).toBe('include')
   expect(JSON.parse(String(request?.init?.body))).toMatchObject({ username: 'Linh Nguyễn', password: 'a-long-test-password' })
@@ -75,20 +76,22 @@ it('registers username and password through the configured API, then requires av
   expect(localStorage.getItem('session')).toBeNull()
   await user.click(screen.getByRole('button', { name: /Xác nhận nhân vật/ }))
   await waitFor(() => expect(requests.some(item => item.url.endsWith('/profile/avatar'))).toBe(true))
-  await waitFor(() => expect(window.location.hash).toBe('#/kham-pha'))
+  await waitFor(() => expect(window.location.hash).toBe('#/bat-dau/thanh-pho'))
 })
 
-it('logs returning users in with a server session and goes directly to the map', async () => {
+it('logs returning users in with a server session and opens quest discovery', async () => {
   vi.stubEnv('VITE_AUTH_API_URL', 'https://auth.test/api/auth')
   const { requests } = mockAuthApi({ id: 'returning-user', name: 'Minh Trần', avatarId: 'bien' })
   window.location.hash = '#/dang-nhap'
   const user = userEvent.setup()
   render(<App />)
-  await screen.findByRole('heading', { name: 'Đăng nhập' })
+  await screen.findByRole('heading', { name: 'Đăng nhập', exact: true })
+  expect(window.location.hash).toBe('#/')
+  expect(screen.queryByRole('dialog')).toBeNull()
   await user.type(screen.getByLabelText('Tên đăng nhập hoặc Email'), 'Minh Trần')
   await user.type(screen.getByLabelText('Mật khẩu'), 'a-long-test-password')
   await user.click(screen.getAllByRole('button', { name: 'Đăng nhập', exact: true }).at(-1)!)
-  await screen.findByRole('region', { name: 'Khám phá bản đồ' })
+  await screen.findByRole('heading', { name: 'Khám phá Đà Nẵng' })
   const request = requests.find(item => item.url.endsWith('/login'))
   expect(request?.init?.credentials).toBe('include')
   expect(JSON.parse(String(request?.init?.body))).toEqual({ username: 'Minh Trần', password: 'a-long-test-password' })
@@ -116,5 +119,6 @@ it('asks for confirmation before logging out', async () => {
   await user.click(screen.getByRole('button', { name: 'Đăng xuất' }))
   await user.click(within(screen.getByRole('alertdialog')).getByRole('button', { name: 'Đăng xuất' }))
   await waitFor(() => expect(requests.some(url => url.endsWith('/logout'))).toBe(true))
-  await waitFor(() => expect(window.location.hash).toBe('#/dang-nhap'))
+  await waitFor(() => expect(window.location.hash).toBe('#/'))
+  expect(await screen.findByLabelText('Mật khẩu')).toBeTruthy()
 })

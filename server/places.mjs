@@ -2,15 +2,25 @@ import { readFileSync } from 'node:fs'
 
 const destinations = JSON.parse(readFileSync(new URL('../src/data/destinations.json', import.meta.url), 'utf8'))
 const cache = new Map()
+const pending = new Map()
 const cacheDuration = 15 * 60 * 1000
 
 async function fetchPlace(destination) {
   const cached = cache.get(destination.id)
   if (cached && Date.now() - cached.time < cacheDuration) return cached.value
+  if (pending.has(destination.id)) return pending.get(destination.id)
+  const task = requestPlace(destination)
+  pending.set(destination.id, task)
+  try { return await task }
+  finally { pending.delete(destination.id) }
+}
+
+async function requestPlace(destination) {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY
   if (!apiKey) throw new Error('GOOGLE_MAPS_API_KEY is not configured')
   const response = await fetch('https://places.googleapis.com/v1/places:searchText', {
     method: 'POST',
+    signal: AbortSignal.timeout(10000),
     headers: {
       'Content-Type': 'application/json',
       'X-Goog-Api-Key': apiKey,

@@ -1,3 +1,4 @@
+import { t } from './i18n/locale'
 import { useEffect, useState } from 'react'
 
 interface InstallPromptEvent extends Event {
@@ -22,9 +23,9 @@ export default function InstallAppCard() {
     if ((await prompt.userChoice).outcome === 'accepted') setInstalled(true)
     setPrompt(null)
   }
-  return <section className="install-card" aria-label="Cài DANA QUEST">
-    <div><strong>{installed ? 'DANA QUEST đã ở chế độ ứng dụng' : 'Cài DANA QUEST trên điện thoại'}</strong><p>{installed ? 'Bạn đang dùng bản toàn màn hình.' : ios ? 'Trong Safari, chọn Chia sẻ rồi “Thêm vào Màn hình chính”.' : prompt ? 'Cài trực tiếp từ trình duyệt, không cần App Store hoặc Google Play.' : 'Mở menu trình duyệt và chọn “Cài đặt ứng dụng” hoặc “Thêm vào màn hình chính”.'}</p></div>
-    {prompt && !installed && <button type="button" onClick={() => void install()}>Cài ứng dụng</button>}
+  return <section className="install-card" aria-label={t("Cài DANA QUEST")}>
+    <div><strong>{installed ? t("DANA QUEST đã ở chế độ ứng dụng") : t("Cài DANA QUEST trên điện thoại")}</strong><p>{installed ? t("Bạn đang dùng bản toàn màn hình.") : ios ? t("Trong Safari, chọn Chia sẻ rồi “Thêm vào Màn hình chính”.") : prompt ? t("Cài trực tiếp từ trình duyệt, không cần App Store hoặc Google Play.") : t("Mở menu trình duyệt và chọn “Cài đặt ứng dụng” hoặc “Thêm vào màn hình chính”.")}</p></div>
+    {prompt && !installed && <button type="button" onClick={() => void install()}>{t("Cài ứng dụng")}</button>}
   </section>
 }
 

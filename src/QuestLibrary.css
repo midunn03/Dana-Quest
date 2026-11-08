@@ -1,0 +1,30 @@
+.app-shell>main.library-page{padding:var(--px-space-6) 18px var(--px-space-9);background:var(--px-surface);color:var(--px-ink);font-family:var(--font-ui)}
+:where(.library-page) .library-frame{max-width:var(--px-page-width);margin:auto}
+.library-page header{display:flex;gap:var(--px-space-4);align-items:center;margin-bottom:26px}
+.library-page header>a{display:grid;place-items:center;width:44px;height:44px;border:2px solid var(--px-ink);border-radius:0;text-decoration:none;color:var(--px-ink);font-size:var(--text-md);flex-shrink:0}
+.library-page h1{font-size:var(--text-lg);line-height:1.5;letter-spacing:0;margin:0;font-weight:400}
+.library-page p{font-size:var(--px-text-sm);line-height:1.7;color:var(--px-ink)}
+.library-page header p{margin-bottom:0}
+:where(.library-page) .library-note{padding:var(--px-space-5);background:var(--px-page);border-radius:0;margin-bottom:var(--px-space-6)}
+:where(.library-page) .library-note strong{font-size:var(--text-sm)}
+:where(.library-page) .library-note p{margin-bottom:0}
+.library-page nav{display:flex;gap:var(--px-space-2);flex-wrap:wrap;margin-bottom:var(--px-space-6)}
+.library-page button{min-height:44px;border:var(--px-border);background:var(--px-surface);border-radius:0;padding:10px var(--px-space-4);color:var(--px-ink);font:inherit;font-size:var(--px-text-sm);cursor:pointer}
+.library-page nav button[aria-pressed=true]{background:var(--px-selected);border-color:var(--px-ink);color:var(--px-ink)}
+
+
+
+
+
+
+:where(.library-page) .library-card h2{font-size:var(--text-sm);line-height:1.5;margin:var(--px-space-3) 0 9px;font-family:inherit;font-weight:400}
+:where(.library-page) .library-card p{margin:0 0 10px}
+:where(.library-page) .library-card span{font-size:var(--px-text-sm);color:var(--px-ink);background:var(--px-surface-soft);padding:6px 10px;border-radius:0}
+:where(.library-page) .library-card small{font-size:var(--px-text-sm);color:var(--px-ink)}
+:where(.library-page) .library-cleanup{margin-top:30px;border:2px solid var(--px-ink);padding:22px;border-radius:0}
+:where(.library-page) .library-cleanup h2, :where(.library-page) .library-empty h2{font-size:var(--text-sm);font-family:inherit}
+:where(.library-page) .library-cleanup .library-delete{border-color:var(--px-ink);color:var(--px-ink)}
+:where(.library-page) .library-empty{text-align:center;padding:30px;border:2px dashed var(--px-ink);border-radius:0}
+.library-page :is(button,a):focus-visible{outline:4px solid var(--px-focus);outline-offset:3px}
+@media(min-width:900px){.app-shell>main.library-page{padding:34px var(--px-space-10)}.library-page h1{font-size:var(--text-lg)}}
+

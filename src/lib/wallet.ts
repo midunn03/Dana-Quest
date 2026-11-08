@@ -1,0 +1,6 @@
+import { t } from '../i18n/locale'
+export interface WalletEntry { source:string; amount:number; at:number }
+export interface WalletReceipt { id?:string; owner?:string; rewardId:string; redeemedAt:number; status?:'collected'; kind?:'digital-keepsake' }
+export interface Wallet { version:1; status:'ready'|'reconciliation-required'; reason?:string; balance:number|null; entries:WalletEntry[]; receipts:WalletReceipt[] }
+export const emptyWallet=():Wallet=>({version:1,status:'ready',balance:null,entries:[],receipts:[]})
+export function walletMessage(code:string,en=false){const messages:Record<string,[string,string]>={WALLET_INSUFFICIENT:[t("Bạn chưa đủ Xu Dana."),'You need more Dana Coins.'],WALLET_RECONCILIATION:[t("Ví cần đối soát. Lịch sử được giữ nguyên; tạm thời chưa thể đổi quà."),'Your wallet needs reconciliation. History is preserved; redemption is temporarily unavailable.'],WALLET_OWNER_CHANGED:[t("Tài khoản đã thay đổi. Hãy tải lại."),'Your account changed. Please reload.'],WALLET_AUTH_REQUIRED:[t("Đăng nhập để xem và dùng Xu Dana."),'Sign in to view and spend Dana Coins.']};return messages[code]?.[en?1:0]??(en?'Could not load your wallet. Please try again.':t("Chưa đọc được ví. Vui lòng thử lại."))}

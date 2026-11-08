@@ -6,6 +6,8 @@ hai lần...) rồi mới lưu. Danh sách nhiệm vụ và phần thưởng ph�
 src/data/missions.ts và src/data/rewards.ts.
 """
 import json
+import base64
+import binascii
 import math
 import random
 import time
@@ -71,7 +73,10 @@ def distance_meters(a, b):
 
 
 def _number(value):
-    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+    try:
+        return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+    except (OverflowError, ValueError):
+        return False
 
 
 def arrival_ok(sample, position, now_ms=None):
@@ -92,9 +97,83 @@ def empty_state():
     return {'version': 1, 'destinations': {}, 'redemptions': []}
 
 
-def is_healthy(state):
+def _has_state_shape(state):
     return (isinstance(state, dict) and state.get('version') == 1
             and isinstance(state.get('destinations'), dict) and isinstance(state.get('redemptions'), list))
+
+
+def is_healthy(state, photos=None):
+    """Validate persisted input before it reaches the trusted action engine."""
+    if not _has_state_shape(state) or type(state['version']) is not int:
+        return False
+    known_places = positions()
+    historical = Path(settings.BASE_DIR).parent / 'src' / 'data' / 'historicalDestinations.json'
+    with historical.open(encoding='utf-8') as handle:
+        known_places.update({place['id']: place['position'] for place in json.load(handle)})
+    earned = 0
+    for destination, progress in state['destinations'].items():
+        if not isinstance(destination, str) or not isinstance(progress, dict):
+            return False
+        selected, completed = progress.get('selected'), progress.get('completed')
+        if type(progress.get('started')) is not bool:
+            return False
+        for missions in (selected, completed):
+            if not isinstance(missions, list) or any(not isinstance(m, str) or m not in MISSION_KINDS for m in missions):
+                return False
+            if len(set(missions)) != len(missions):
+                return False
+        if not set(completed).issubset(selected):
+            return False
+        if destination not in known_places and selected:
+            return False
+        if progress['started']:
+            if destination not in known_places or not 5 <= len(selected) <= 10:
+                return False
+        elif completed:
+            return False
+        if 'startedAt' in progress and (not progress['started'] or not _number(progress['startedAt'])):
+            return False
+        if 'completedAt' in progress:
+            timestamps = progress['completedAt']
+            if not isinstance(timestamps, dict) or any(m not in completed or not _number(ts) for m, ts in timestamps.items()):
+                return False
+        earned += len(completed) * COINS_PER_MISSION
+    seen, spent = set(), 0
+    for item in state['redemptions']:
+        if not isinstance(item, dict):
+            return False
+        reward = item.get('rewardId')
+        if not isinstance(reward, str) or reward not in REWARD_COSTS or reward in seen or not _number(item.get('redeemedAt')):
+            return False
+        seen.add(reward)
+        spent += REWARD_COSTS[reward]
+    if spent > earned:
+        return False
+    if photos is not None:
+        if not isinstance(photos, list) or len(photos) > 40:
+            return False
+        seen_photos = set()
+        for photo in photos:
+            if not isinstance(photo, dict):
+                return False
+            dest, mission, key = (photo.get(k) for k in ('destinationId', 'missionId', 'id'))
+            if not isinstance(dest, str) or dest not in known_places or not isinstance(mission, str) or mission not in PHOTO_MISSIONS:
+                return False
+            if key != f'{dest}:{mission}' or key in seen_photos:
+                return False
+            seen_photos.add(key)
+            if not _number(photo.get('createdAt')) or photo['createdAt'] < 0:
+                return False
+            data = photo.get('data')
+            if not isinstance(data, str) or not data or len(data) > 4_194_304:
+                return False
+            try:
+                raw = base64.b64decode(data, validate=True)
+            except (ValueError, binascii.Error):
+                return False
+            if raw[:3] != b'\xff\xd8\xff':
+                return False
+    return True
 
 
 def earned_coins(state):
@@ -110,7 +189,7 @@ def apply_action(state, action, photo_keys=(), now_ms=None, rng=random):
     """Áp dụng một hành động và trả về trạng thái mới; sai điều kiện thì ném GameError(400)."""
     if not isinstance(action, dict) or action.get('type') not in ('assign', 'complete', 'redeem', 'cancel'):
         raise GameError(400, 'Thao tác không hợp lệ.')
-    if not is_healthy(state):
+    if not _has_state_shape(state):
         raise GameError(400, 'Tiến độ không hợp lệ.')
     now = int(time.time() * 1000) if now_ms is None else int(now_ms)
     kind = action['type']

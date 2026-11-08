@@ -1,3 +1,5 @@
+import { interpolate } from './i18n/locale'
+import { t } from './i18n/locale'
 import { useRef, useState } from 'react'
 import type { AdminPhoto } from './lib/placeContent'
 
@@ -10,19 +12,19 @@ export default function AdminGallery({ name, photos }: { name: string; photos: A
     const target = Math.max(0, Math.min(photos.length - 1, next))
     track.current?.scrollTo({ left: target * track.current.clientWidth, behavior: 'smooth' })
   }
-  return <section className="destination-gallery admin-gallery" aria-label={`Ảnh ${name}`}>
+  return <section className="destination-gallery admin-gallery" aria-label={interpolate("Ảnh ${0}",[name])}>
     <div className="gallery-frame">
-      <div className="gallery-track" ref={track} tabIndex={0} aria-label="Vuốt ngang để xem ảnh"
+      <div className="gallery-track" ref={track} tabIndex={0} aria-label={t("Vuốt ngang để xem ảnh")}
         onScroll={event => { const el = event.currentTarget; if (el.clientWidth) setIndex(Math.max(0, Math.min(photos.length - 1, Math.round(el.scrollLeft / el.clientWidth)))) }}>
         {photos.map((photo, position) => <figure className="gallery-slide" key={photo.url}>
           <img className="admin-photo" src={photo.url} alt={photo.caption || `${name} (${position + 1}/${photos.length})`} draggable={false} />
-          {(photo.caption || photo.credit) && <figcaption>{photo.caption}{photo.caption && photo.credit ? ' · ' : ''}{photo.credit && `Ảnh: ${photo.credit}`}</figcaption>}
+          {(photo.caption || photo.credit) && <figcaption>{photo.caption}{photo.caption && photo.credit ? ' · ' : ''}{photo.credit && interpolate("Ảnh: ${0}",[photo.credit])}</figcaption>}
         </figure>)}
       </div>
       {photos.length > 1 && <>
         <span className="gallery-counter" aria-live="polite">{index + 1}/{photos.length}</span>
-        <button className="gallery-arrow previous" type="button" aria-label="Ảnh trước" disabled={index === 0} onClick={() => goTo(index - 1)}>‹</button>
-        <button className="gallery-arrow next" type="button" aria-label="Ảnh tiếp theo" disabled={index === photos.length - 1} onClick={() => goTo(index + 1)}>›</button>
+        <button className="gallery-arrow previous" type="button" aria-label={t("Ảnh trước")} disabled={index === 0} onClick={() => goTo(index - 1)}>‹</button>
+        <button className="gallery-arrow next" type="button" aria-label={t("Ảnh tiếp theo")} disabled={index === photos.length - 1} onClick={() => goTo(index + 1)}>›</button>
       </>}
     </div>
   </section>

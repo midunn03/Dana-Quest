@@ -4,6 +4,8 @@ import { authApi } from './server/auth.mjs'
 import { recommendationsApi } from './server/recommendations.mjs'
 import { placesApi } from './server/places.mjs'
 import { navigationApi } from './server/navigation.mjs'
+import { apiRateLimit } from './server/api-rate-limit.mjs'
+import { eventsFeedProxy } from './server/events-feed-proxy.mjs'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -18,7 +20,7 @@ export default defineConfig({
   },
   plugins: [react(), {
     name: 'nearby-recommendations-api',
-    configureServer(server) { server.middlewares.use(authApi); server.middlewares.use(placesApi); server.middlewares.use(recommendationsApi); server.middlewares.use(navigationApi) },
-    configurePreviewServer(server) { server.middlewares.use(authApi); server.middlewares.use(placesApi); server.middlewares.use(recommendationsApi); server.middlewares.use(navigationApi) },
+    configureServer(server) { server.middlewares.use(apiRateLimit); server.middlewares.use(authApi); server.middlewares.use(placesApi); server.middlewares.use(recommendationsApi); server.middlewares.use(navigationApi); server.middlewares.use(eventsFeedProxy) },
+    configurePreviewServer(server) { server.middlewares.use(apiRateLimit); server.middlewares.use(authApi); server.middlewares.use(placesApi); server.middlewares.use(recommendationsApi); server.middlewares.use(navigationApi); server.middlewares.use(eventsFeedProxy) },
   }],
 })

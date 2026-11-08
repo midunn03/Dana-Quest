@@ -1,0 +1,4 @@
+import ts from 'typescript';import fs from 'node:fs';
+const values=new Map();
+for(const file of fs.readdirSync('src').filter(f=>f.endsWith('.tsx')&&!f.startsWith('Account'))){const source=ts.createSourceFile(file,fs.readFileSync('src/'+file,'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);function visit(node){if((ts.isStringLiteral(node)||ts.isJsxText(node)||ts.isNoSubstitutionTemplateLiteral(node))&&/[À-ỹĐđ]/.test(node.text)){let v=node.text.trim().replace(/\s+/g,' ');if(v&&!v.startsWith('#/')&&!v.startsWith('/')&&!v.includes('data:image')){const found=values.get(v)||[];found.push(file);values.set(v,found)}}ts.forEachChild(node,visit)}visit(source)}
+fs.writeFileSync('scripts/locale-inventory.json',JSON.stringify([...values].map(([vi,files])=>({vi,files:[...new Set(files)]})),null,2));console.log(values.size);console.log([...values.keys()].slice(0,180).join('\n'));

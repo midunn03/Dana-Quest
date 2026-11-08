@@ -1,0 +1,8 @@
+.player-card .pixel-avatar { height:35px; flex-basis:28px; }.player-card strong { font-size:var(--text-sm); }.player-card a { font-size:var(--text-sm); min-height:44px; }.player-card .player-coins { flex-shrink:0;background:var(--px-page);border-radius:0;color:var(--px-ink);padding:5px var(--px-space-2);font-size:var(--text-sm);letter-spacing:0; }.player-card a { max-width:52px;text-align:center;line-height:1.5; }.player-card strong { font-size:var(--text-sm); }
+.app-shell .player-card strong, .app-shell .player-card a { font-size:var(--text-sm); }
+.player-card { display:flex; align-items:center; gap:var(--px-space-3); margin:18px 0; padding:var(--px-space-3) var(--px-space-4); border-radius:0; border:var(--px-border); background:var(--px-surface-soft); }
+.player-card .pixel-avatar { flex:0 0 38px; width:38px; height:48px; }
+.player-card > div { flex:1; min-width:0; }
+.player-card span { display:block; font-size:var(--text-sm); letter-spacing:.1em; color:var(--px-ink); }
+.player-card strong { display:block; font-size:var(--text-sm); }
+.player-card a { color:var(--px-ink); font-size:var(--text-sm); min-height:44px; display:flex; align-items:center; }.player-card { padding:10px; gap:var(--px-space-2); }.player-card strong { font-size:var(--text-sm); }

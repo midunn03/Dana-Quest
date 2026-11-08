@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<title>Dana Quest responsive layout review</title>
+<style>
+  body { margin: 24px; font: 16px system-ui; background: #e8eeea; color: #23444e; }
+  nav { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+  section { margin-bottom: 32px; width: max-content; }
+  iframe { display: block; border: 1px solid #b8c8be; background: white; }
+  a { color: inherit; }
+</style>
+<h1>Responsive layout review</h1>
+<p>Development-only review. Frames use exact CSS viewport sizes, independent of browser zoom. Uses the current local session.</p>
+<nav aria-label="Review pages">
+  <a href="?route=/">Welcome</a><a href="?route=/dang-nhap">Login</a>
+  <a href="?route=/nhan-vat">Avatar</a><a href="?route=/map">Map</a>
+  <a href="?route=/kham-pha">Explore</a><a href="?route=/tim-kiem">Search</a><a href="?route=/quest-cua-toi">Joined quests</a>
+  <a href="?route=/album">Album</a><a href="?route=/cua-hang">Shop</a>
+  <a href="?route=/tai-khoan">Account</a><a href="?route=/quest/due-dau-an-50-nam">Quest</a>
+</nav>
+<script>
+  const routes = ['/', '/dang-nhap', '/nhan-vat', '/kham-pha', '/map', '/tim-kiem', '/quest-cua-toi', '/album', '/cua-hang', '/tai-khoan', '/quest/due-dau-an-50-nam'];
+  const requested = new URLSearchParams(location.search).get('route');
+  const route = routes.includes(requested) ? requested : '/kham-pha';
+  const selectedWidth = Number(new URLSearchParams(location.search).get('width'));
+  for (const [width, height] of [[360,800],[390,844],[430,860],[844,390],[1280,720],[1440,900],[1920,1080]]) {
+    if (selectedWidth && width !== selectedWidth) continue;
+    const section = document.createElement('section');
+    const title = document.createElement('h2');
+    title.textContent = `${width} × ${height}`;
+    const frame = document.createElement('iframe');
+    frame.title = title.textContent;
+    frame.width = width;
+    frame.height = height;
+    frame.src = `../#${route}`;
+    section.append(title, frame);
+    document.body.append(section);
+  }
+</script>
+</html>

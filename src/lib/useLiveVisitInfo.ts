@@ -3,17 +3,15 @@ import type { Destination } from '../data/destinations'
 import type { VisitInfo } from '../data/visitInfo'
 
 export function useLiveVisitInfo(place: Destination, fallback?: VisitInfo) {
-  const [info, setInfo] = useState<VisitInfo | undefined>(fallback)
-  const [loading, setLoading] = useState(true)
+  const [result, setResult] = useState<{ id: string; fallback?: VisitInfo; info?: VisitInfo } | null>(null)
   useEffect(() => {
     const controller = new AbortController()
-    setInfo(fallback); setLoading(true)
     fetch(`/api/places/visit-info?id=${encodeURIComponent(place.id)}`, { signal: controller.signal })
       .then(response => response.ok ? response.json() : Promise.reject(new Error('Unavailable')))
-      .then((live: VisitInfo) => setInfo({ ...fallback, ...live }))
-      .catch(() => undefined)
-      .finally(() => { if (!controller.signal.aborted) setLoading(false) })
+      .then((live: VisitInfo) => { if (!controller.signal.aborted) setResult({ id: place.id, fallback, info: { ...fallback, ...live } }) })
+      .catch(() => { if (!controller.signal.aborted) setResult({ id: place.id, fallback, info: fallback }) })
     return () => controller.abort()
   }, [place.id, fallback])
-  return { info, loading }
+  const current = result?.id === place.id && result.fallback === fallback
+  return { info: current ? result.info : fallback, loading: !current }
 }

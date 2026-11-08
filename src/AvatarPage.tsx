@@ -1,16 +1,17 @@
+import './AvatarPage.css'
+import { t } from './i18n/locale'
 import { useState } from 'react'
-import { avatars, readAvatar, resolveAvatar, saveAvatar } from './lib/avatar'
+import { readAvatar, resolveAvatar, saveAvatar } from './lib/avatar'
 import { defaultLook, genders, genderLabels, heads, headLabels, hairs, hairLabels, sleeves, sleeveLabels, pantsKinds, pantsLabels, skinTones, hairColors, shirtColors, pantsColors, lookToCode, randomLook, type AvatarLook } from './lib/pixelAvatar'
 import PixelAvatar from './PixelAvatar'
-import './Onboarding.css'
+import { takeCodeReturn, takePageReturn } from './lib/onboarding'
 export default function AvatarPage({ initialAvatarId, onAvatarConfirmed, editing = false }: { initialAvatarId?: string | null; onAvatarConfirmed?: (id: string) => Promise<void>; editing?: boolean }) {
-  const [selected, setSelected] = useState(() => resolveAvatar(initialAvatarId) ?? readAvatar() ?? avatars[0])
-  const [look, setLook] = useState<AvatarLook | null>(() => selected.look ?? null)
-  const current = look ? resolveAvatar(lookToCode(look)) ?? selected : selected
+  const selected = resolveAvatar(initialAvatarId) ?? readAvatar()
+  const [look, setLook] = useState<AvatarLook>(() => ({ ...(selected?.look ?? defaultLook) }))
+  const current = resolveAvatar(lookToCode(look))!
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
-  function change(patch: Partial<AvatarLook>) { setLook(prev => ({ ...(prev ?? defaultLook), ...patch })) }
-  function step(direction: number) { setLook(null); setSelected(avatars[(avatars.findIndex(item => item.id === selected.id) + direction + avatars.length) % avatars.length]) }
+  function change(patch: Partial<AvatarLook>) { setLook(prev => ({ ...prev, ...patch })) }
   async function confirm() {
     if (saving) return
     setSaving(true)
@@ -18,31 +19,26 @@ export default function AvatarPage({ initialAvatarId, onAvatarConfirmed, editing
     try {
       if (onAvatarConfirmed) await onAvatarConfirmed(current.id)
       else saveAvatar(current.id)
-      window.location.hash = editing ? '#/tai-khoan' : '#/kham-pha'
+      window.location.hash = editing ? '#/tai-khoan' : takePageReturn() ?? takeCodeReturn() ?? '#/bat-dau/thanh-pho'
     }
-    catch { setError('Chưa lưu được nhân vật. Hãy kiểm tra kết nối và thử lại. Lựa chọn trước vẫn được giữ.') }
+    catch { setError(t("Chưa lưu được nhân vật. Hãy kiểm tra kết nối và thử lại. Lựa chọn trước vẫn được giữ.")) }
     finally { setSaving(false) }
   }
-  return <main className="onboarding avatar-screen"><section className="avatar-card" aria-labelledby="avatar-title">
-    <a href={editing ? '#/tai-khoan' : '#/kham-pha'} className="avatar-back">{editing ? '← Tài khoản' : '← Khám phá'}</a><span className="game-kicker">SẴN SÀNG LÊN ĐƯỜNG</span>
-    <h1 id="avatar-title">Chọn nhân vật</h1><p>Đồng hành cùng bạn khám phá<br />Đà Nẵng theo cách riêng.</p>
-    <div className="avatar-stage"><button aria-label="Nhân vật trước" onClick={() => step(-1)}>‹</button><div className="avatar-spotlight"><span className="pixel-spark spark-one" aria-hidden="true">✦</span><PixelAvatar avatar={current} /><span className="pixel-spark spark-two" aria-hidden="true">✦</span></div><button aria-label="Nhân vật tiếp theo" onClick={() => step(1)}>›</button></div>
-    <div className="avatar-caption" aria-live="polite"><h2>{current.name}</h2><p>{current.note}</p></div>
-    <div className="avatar-options" role="group" aria-label="Các nhân vật">{avatars.map(avatar => <button key={avatar.id} aria-label={avatar.name} aria-pressed={!look && selected.id === avatar.id} onClick={() => { setLook(null); setSelected(avatar) }}><PixelAvatar avatar={avatar} />{!look && selected.id === avatar.id && <span className="avatar-check" aria-hidden="true">✓</span>}</button>)}</div>
-    {look ? <div className="avatar-creator" role="group" aria-label="Tạo nhân vật">
-      <Choice label="Giới tính" value={look.gender} options={genders} names={genderLabels} onPick={gender => change({ gender })} />
-      <Choice label="Đầu" value={look.head} options={heads} names={headLabels} onPick={head => change({ head })} />
-      <Choice label="Tóc" value={look.hair} options={hairs} names={hairLabels} onPick={hair => change({ hair })} />
-      <Choice label="Áo" value={look.sleeve} options={sleeves} names={sleeveLabels} onPick={sleeve => change({ sleeve })} />
-      <Choice label="Quần" value={look.pants} options={pantsKinds} names={pantsLabels} onPick={pants => change({ pants })} />
-      <Swatches label="Màu da" value={look.skin} colors={skinTones} onPick={skin => change({ skin })} />
-      <Swatches label="Màu tóc" value={look.hairColor} colors={hairColors} onPick={hairColor => change({ hairColor })} />
-      <Swatches label="Màu áo" value={look.shirt} colors={shirtColors} onPick={shirt => change({ shirt })} />
-      <Swatches label="Màu quần" value={look.pantsColor} colors={pantsColors} onPick={pantsColor => change({ pantsColor })} />
-      <div className="creator-actions"><button type="button" onClick={() => setLook(randomLook())}>🎲 Ngẫu nhiên</button><button type="button" onClick={() => setLook(null)}>Dùng nhân vật có sẵn</button></div>
-    </div> : <button type="button" className="creator-open" onClick={() => setLook({ ...defaultLook })}>✎ Tự tạo nhân vật</button>}
-    {error && <p role="alert" className="error">{error}</p>}
-    <button className="game-button" disabled={saving} onClick={() => void confirm()}>{saving ? 'Đang lưu…' : editing ? 'Lưu nhân vật' : 'Xác nhận nhân vật'} <span aria-hidden="true">→</span></button><p className="avatar-hint">Đổi nhân vật không làm mất tiến độ, ảnh hay xu của bạn.</p>
+  return <main className="onboarding avatar-screen custom-avatar-screen"><section className="avatar-custom-frame" aria-labelledby="avatar-title">
+    <header className="avatar-custom-heading"><a href={editing?'#/tai-khoan':'#/dang-nhap'} className="avatar-custom-back">‹ {editing?t("Tài khoản"):t("Quay lại")}</a><h1 id="avatar-title">{t("Tùy chỉnh nhân vật")}</h1><p>{t("Một người bạn đồng hành mang dấu ấn của bạn.")}</p></header>
+    <div className="avatar-custom-grid"><section className="avatar-custom-preview" aria-label={t("Hình ảnh nhân vật")}><div className="avatar-custom-stage"><PixelAvatar avatar={current}/></div><h2>{t("Nhân vật của bạn")}</h2><p>{t("Hình ảnh thay đổi ngay khi bạn chọn.")}</p><button type="button" disabled={saving} onClick={()=>setLook(randomLook())}>{t("Tạo ngẫu nhiên")}</button></section>
+    <fieldset className="avatar-custom-controls" disabled={saving}><legend className="sr-only">{t("Các tùy chọn nhân vật")}</legend>
+      <Choice label={t("Giới tính")} value={look.gender} options={genders} names={genderLabels} onPick={gender=>change({gender})}/>
+      <Choice label={t("Đầu")} value={look.head} options={heads} names={headLabels} onPick={head=>change({head})}/>
+      <Choice label={t("Tóc")} value={look.hair} options={hairs} names={hairLabels} onPick={hair=>change({hair})}/>
+      <Choice label={t("Áo")} value={look.sleeve} options={sleeves} names={sleeveLabels} onPick={sleeve=>change({sleeve})}/>
+      <Choice label={t("Quần")} value={look.pants} options={pantsKinds} names={pantsLabels} onPick={pants=>change({pants})}/>
+      <Swatches label={t("Màu da")} value={look.skin} colors={skinTones} onPick={skin=>change({skin})}/>
+      <Swatches label={t("Màu tóc")} value={look.hairColor} colors={hairColors} onPick={hairColor=>change({hairColor})}/>
+      <Swatches label={t("Màu áo")} value={look.shirt} colors={shirtColors} onPick={shirt=>change({shirt})}/>
+      <Swatches label={t("Màu quần")} value={look.pantsColor} colors={pantsColors} onPick={pantsColor=>change({pantsColor})}/>
+    </fieldset></div>
+    <footer className="avatar-custom-footer">{error&&<p role="alert" className="login-error">{t(error)}</p>}<button className="journey-primary" disabled={saving} onClick={()=>void confirm()}>{saving?t("Đang lưu…"):editing?t("Lưu nhân vật"):t("Xác nhận nhân vật")}</button><p>{t("Đổi nhân vật không làm mất tiến độ, ảnh hay xu của bạn.")}</p></footer>
   </section></main>
 }
 

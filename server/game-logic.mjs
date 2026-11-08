@@ -14,6 +14,8 @@ const error = (status, message) => Object.assign(new Error(message), { status })
 
 const destinations = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'data', 'destinations.json'), 'utf8'))
 const positions = new Map(destinations.map(place => [place.id, place.position]))
+const historicalDestinations = JSON.parse(readFileSync(new URL('../src/data/historicalDestinations.json', import.meta.url), 'utf8'))
+const storedDestinationIds = new Set([...destinations, ...historicalDestinations].map(place => place.id))
 
 // Mission catalogue: id -> kind. Must match getMissions() in src/data/missions.ts.
 const MISSION_KINDS = {
@@ -73,6 +75,27 @@ function validateStateShape(state) {
   if (state?.version !== 1 || !state.destinations || typeof state.destinations !== 'object' || !Array.isArray(state.redemptions)) throw error(400, 'Tiến độ không hợp lệ.')
 }
 
+// Validate saved records before writing or deciding whether recovery is needed.
+// Older saves can lack timestamps/redemptions; do not discard those saves.
+export function readGameState(state) {
+  const invalid = () => { throw error(422, 'Tiến độ lưu không hợp lệ. Chưa ghi đè dữ liệu cũ.') }
+  if (state?.version !== 1 || !state.destinations || typeof state.destinations !== 'object' || Array.isArray(state.destinations)) invalid()
+  for (const [id, progress] of Object.entries(state.destinations)) {
+    if (!progress || typeof progress.started !== 'boolean' || !Array.isArray(progress.selected) || !Array.isArray(progress.completed)) invalid()
+    const ids = storedDestinationIds.has(id) ? MISSION_IDS : []
+    if (new Set(progress.selected).size !== progress.selected.length || new Set(progress.completed).size !== progress.completed.length ||
+      progress.selected.some(item => !ids.includes(item)) || progress.completed.some(item => !progress.selected.includes(item)) ||
+      (progress.started && (progress.selected.length < 5 || progress.selected.length > 10)) || (!progress.started && progress.completed.length > 0) ||
+      (progress.startedAt !== undefined && (!progress.started || !Number.isFinite(progress.startedAt)))) invalid()
+    const times = progress.completedAt
+    if (times !== undefined && (!times || typeof times !== 'object' || Array.isArray(times) || Object.entries(times).some(([missionId,time]) => !progress.completed.includes(missionId) || !Number.isFinite(time)))) invalid()
+  }
+  const result = state.redemptions === undefined ? { ...state, redemptions: [] } : state
+  if (!Array.isArray(result.redemptions) || result.redemptions.some(item => !item || !Object.hasOwn(REWARD_COSTS,item.rewardId) || !Number.isFinite(item.redeemedAt)) ||
+    new Set(result.redemptions.map(item=>item.rewardId)).size !== result.redemptions.length || coinBalance(result) < 0) invalid()
+  return result
+}
+
 // Applies one game action to the stored state and returns the new state.
 // Throws an error with .status (400) when the action is invalid or its
 // preconditions are not met. Unknown destinations, missions or rewards are
@@ -81,7 +104,7 @@ export function applyGameAction(state, action, photos = []) {
   if (!action || typeof action !== 'object' || !['assign', 'complete', 'redeem', 'cancel'].includes(action.type)) throw error(400, 'Thao tác không hợp lệ.')
   validateStateShape(state)
   if (action.type === 'redeem') {
-    if (typeof action.rewardId !== 'string' || !(action.rewardId in REWARD_COSTS)) throw error(400, 'Không tìm thấy voucher mẫu.')
+    if (typeof action.rewardId !== 'string' || !Object.hasOwn(REWARD_COSTS, action.rewardId)) throw error(400, 'Không tìm thấy voucher mẫu.')
     if (state.redemptions.some(item => item.rewardId === action.rewardId)) throw error(400, 'Voucher này đã đổi. Mỗi mẫu chỉ đổi một lần.')
     if (coinBalance(state) < REWARD_COSTS[action.rewardId]) throw error(400, 'Chưa đủ Green Coins demo để đổi voucher này.')
     return { ...state, redemptions: [...state.redemptions, { rewardId: action.rewardId, redeemedAt: Date.now() }] }
@@ -107,7 +130,7 @@ export function applyGameAction(state, action, photos = []) {
   }
   // action.type === 'complete'
   const missionId = action.missionId
-  if (typeof missionId !== 'string' || !(missionId in MISSION_KINDS)) throw error(400, 'Nhiệm vụ không tồn tại.')
+  if (typeof missionId !== 'string' || !Object.hasOwn(MISSION_KINDS, missionId)) throw error(400, 'Nhiệm vụ không tồn tại.')
   if (!progress.started || !progress.selected.includes(missionId)) throw error(400, 'Nhiệm vụ chưa được chọn hoặc chưa bắt đầu.')
   if (progress.completed.includes(missionId)) return state
   const kind = MISSION_KINDS[missionId]

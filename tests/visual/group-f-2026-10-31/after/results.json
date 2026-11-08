@@ -1,0 +1,953 @@
+[
+  {
+    "name": "home",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "discovery",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 530,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "map",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 530,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "play",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": false,
+    "navHeight": 0,
+    "actionHeight": 112,
+    "scrollHeight": 596,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "q-primary",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ]
+  },
+  {
+    "name": "account",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 383,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "login",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "discovery",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 530,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "map",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 530,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "play",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": false,
+    "navHeight": 0,
+    "actionHeight": 112,
+    "scrollHeight": 596,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "q-primary",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ]
+  },
+  {
+    "name": "account",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 383,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "login",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "discovery",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 691,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "map",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 691,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "play",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": false,
+    "navHeight": 0,
+    "actionHeight": 80,
+    "scrollHeight": 639,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "q-primary",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ]
+  },
+  {
+    "name": "account",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 691,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      },
+      {
+        "selector": "P",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    ]
+  },
+  {
+    "name": "login",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "discovery",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 655,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "map",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 655,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "play",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": false,
+    "navHeight": 0,
+    "actionHeight": 80,
+    "scrollHeight": 639,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "q-primary",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ]
+  },
+  {
+    "name": "account",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 655,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      },
+      {
+        "selector": "P",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    ]
+  },
+  {
+    "name": "login",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 600,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "discovery",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 449,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "map",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 449,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "play",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": false,
+    "navHeight": 0,
+    "actionHeight": 112,
+    "scrollHeight": 596,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "q-primary",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ]
+  },
+  {
+    "name": "account",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 301,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "login",
+    "width": 320,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 600,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "discovery",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 688,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "map",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 688,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      }
+    ]
+  },
+  {
+    "name": "play",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": false,
+    "navHeight": 0,
+    "actionHeight": 80,
+    "scrollHeight": 684,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "q-primary",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ]
+  },
+  {
+    "name": "account",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 688,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "SMALL",
+        "color": "rgb(30, 48, 42)",
+        "background": "rgb(247, 245, 236)"
+      },
+      {
+        "selector": "P",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    ]
+  },
+  {
+    "name": "login",
+    "width": 768,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md login-submit",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "px-button px-button--primary px-button--md home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  }
+]

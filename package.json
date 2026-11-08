@@ -10,7 +10,8 @@
     "lint": "oxlint",
     "test": "vitest run",
     "preview": "vite preview",
-    "start": "node server/index.mjs"
+    "start": "node server/index.mjs",
+    "codes:create": "node server/issue-code.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

@@ -1,0 +1,58 @@
+.login-scrim { position: absolute; inset: 0; background: color-mix(in srgb, var(--px-ink) 75%, transparent); }
+.login-sheet { position: relative; width: 100%; min-width: 0; margin: 0; padding: var(--px-space-6); border: var(--px-border); border-radius: var(--px-radius); background: var(--px-surface); color: var(--px-ink); box-shadow: var(--px-shadow-mid); font-family: var(--font-ui); font-size: var(--px-text-base); line-height: 1.6; }
+.login-sheet-top { position: relative; height: var(--px-space-11); margin-bottom: var(--px-space-3); }
+.login-sheet-handle { display: none; }
+.login-sheet-close { position: absolute; top: 0; right: 0; display: grid; place-items: center; width: var(--px-space-11); height: var(--px-space-11); padding: var(--px-space-3); border: 2px solid var(--px-ink); border-radius: var(--px-radius); background: var(--px-surface-soft); color: var(--px-ink); cursor: pointer; }
+.login-sheet-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+.login-sheet > :is(h1, h2), .app-shell .login-sheet > :is(h1, h2) { margin: 0 0 var(--px-space-3); color: var(--px-ink); font-family: var(--font-ui); font-size: var(--px-text-xl); font-weight: 400; line-height: 1.5; letter-spacing: 0; }
+.login-sheet-description { margin: 0 0 var(--px-space-6); font-size: var(--px-text-base); color: var(--px-ink); line-height: 1.7; }
+.login-methods { display: grid; gap: var(--px-space-3); }
+.login-method { width: 100%; display: flex; align-items: center; justify-content: center; gap: var(--px-space-3); min-height: var(--px-space-14); padding: var(--px-space-3); border: var(--px-border); border-radius: var(--px-radius); background: var(--px-surface); color: var(--px-ink); font: inherit; font-weight: 400; cursor: pointer; }
+.login-method svg { width: 24px; height: 24px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; }
+.login-method:hover { background: var(--px-surface-hover); }
+.login-sheet-back { display: inline-flex; align-items: center; gap: var(--px-space-2); min-height: var(--px-space-11); padding: 0 var(--px-space-3) 0 0; margin: 0 0 var(--px-space-4); border: 0; background: transparent; color: var(--px-ink); font: inherit; font-size: var(--px-text-sm); cursor: pointer; }
+.login-sheet-back span { font-size: var(--px-text-xl); }
+.login-sheet fieldset { display: grid; gap: var(--px-space-2); margin: 0; padding: 0; border: 0; min-width: 0; }
+.login-sheet label { font-size: var(--px-text-sm); font-weight: 400; margin-top: var(--px-space-2); color: var(--px-ink); }
+.login-sheet input { display: block; width: 100%; min-width: 0; min-height: var(--px-space-12); padding: var(--px-space-3); border: 2px solid var(--px-ink); border-radius: var(--px-radius); color: var(--px-ink); background: var(--px-surface); font: inherit; font-size: var(--px-text-base); }
+.login-password { position: relative; }
+.login-password input { padding-right: var(--px-space-18); }
+.login-password button { position: absolute; top: var(--px-space-1); bottom: var(--px-space-1); right: var(--px-space-1); min-width: var(--px-space-14); min-height: var(--px-space-11); padding: var(--px-space-1) var(--px-space-2); border: 0; border-radius: var(--px-radius); background: var(--px-surface-soft); color: var(--px-ink); font: inherit; font-size: var(--px-text-sm); cursor: pointer; }
+.login-sheet small { color: var(--px-ink); font-size: var(--px-text-sm); line-height: 1.6; }
+.login-submit { display: flex; justify-content: center; align-items: center; width: 100%; min-height: var(--px-space-14); padding: var(--px-space-3); margin-top: var(--px-space-4); border: var(--px-border); border-radius: var(--px-radius); background: var(--px-action); color:var(--px-action-ink); box-shadow: var(--px-shadow-low); font: inherit; font-weight: 400; cursor: pointer; }
+:is(.login-submit):hover:not(:disabled){background:var(--px-action-hover);color:var(--px-action-ink)}
+.login-sheet button:disabled { cursor: default; opacity: .55; }
+.login-error, .login-service-notice { border: 2px solid var(--px-warning); background: var(--px-page); color: var(--px-ink); padding: var(--px-space-3); border-radius: var(--px-radius); font-size: var(--px-text-sm); line-height: 1.6; margin: var(--px-space-3) 0; }
+.login-service-notice p { margin: var(--px-space-1) 0 0; }
+.login-switch { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; margin: var(--px-space-3) 0 0; color: var(--px-ink); font-size: var(--px-text-sm); }
+.login-switch button { min-height: var(--px-space-11); padding: var(--px-space-2); border: 0; background: transparent; color: var(--px-ink); font: inherit; font-weight: 400; text-decoration: underline; text-underline-offset: var(--px-space-1); cursor: pointer; }
+.login-account-note { display: flex; gap: var(--px-space-3); align-items: center; margin-top: var(--px-space-6); padding: var(--px-space-3); border: 2px solid var(--px-ink); background: var(--px-page); border-radius: var(--px-radius); color: var(--px-ink); }
+.login-account-note > svg { width: 24px; height: 24px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; box-sizing: content-box; color: var(--px-ink); background: var(--px-reward); padding: var(--px-space-1); }
+.login-account-note strong { font-size: var(--px-text-sm); line-height: 1.6; font-weight: 400; }
+.login-account-note p { font-size: var(--px-text-sm); color: var(--px-ink); line-height: 1.6; margin: var(--px-space-1) 0 0; }
+.login-account-caption { margin: var(--px-space-4) auto 0; max-width: 42ch; font-size: var(--px-text-sm); line-height: 1.7; text-align: center; color: var(--px-ink); }
+.login-legal-links { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: var(--px-space-3); font-size: var(--px-text-sm); margin-top: var(--px-space-2); }
+.login-legal-links a { display: inline-flex; align-items: center; min-height: var(--px-space-11); padding-block: var(--px-space-3); color: var(--px-ink); text-decoration: underline; text-underline-offset: var(--px-space-1); }
+.login-sheet :is(a, button, input):focus-visible { outline: 4px solid var(--px-focus); outline-offset: var(--px-space-1); }
+.login-sheet button:active:not(:disabled) { transform: translateY(3px); }
+.auth-inline { width: 100%; }
+.login-inline-tabs { display: grid; grid-template-columns: 1fr 1fr; margin: calc(-1 * var(--px-space-6)) calc(-1 * var(--px-space-6)) var(--px-space-6); border-bottom: var(--px-border); }
+.login-inline-tabs button { min-height: var(--px-space-14); padding: var(--px-space-2); border: 0; border-right: 2px solid var(--px-ink); border-radius: var(--px-radius); background: var(--px-surface-soft); color: var(--px-ink); font: inherit; font-weight: 400; font-size: var(--px-text-sm); cursor: pointer; }
+.login-inline-tabs button:last-child { border-right: 0; }
+.login-inline-tabs button[aria-pressed=true] { background: var(--px-selected); }
+.auth-modal-layer { position: fixed; inset: 0; z-index: 3000; display: flex; flex-direction: column; justify-content: flex-end; isolation: isolate; }
+:is(.auth-modal-layer, .auth-full-page) > .login-sheet { flex: 0 1 auto; max-height: calc(100dvh - var(--px-space-6)); overflow: auto; overscroll-behavior: contain; padding-bottom: calc(var(--px-space-6) + env(safe-area-inset-bottom, 0px)); animation: auth-sheet-enter 180ms var(--px-ease); }
+@media (min-width: 768px) {
+  .auth-modal-layer { align-items: center; justify-content: center; padding: var(--px-space-6); }
+  :is(.auth-modal-layer, .auth-full-page) > .login-sheet { width: min(500px, 100%); max-height: calc(100dvh - var(--px-space-12)); }
+}
+@media (max-height: 550px) {
+  :is(.auth-modal-layer, .auth-full-page) > .login-sheet { max-height: calc(100dvh - var(--px-space-3)); }
+}
+@keyframes auth-sheet-enter { from { opacity: 0; transform: translateY(var(--px-space-3)); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  :is(.auth-modal-layer, .auth-full-page) > .login-sheet { animation: none; scroll-behavior: auto; }
+  .login-sheet button:active:not(:disabled) { transform: none; }
+}
+
+
