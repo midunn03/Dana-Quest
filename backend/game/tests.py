@@ -256,3 +256,41 @@ class PartnerVoucherTests(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(res.json()['vouchers']), 1)
         self.assertEqual(res.json()['vouchers'][0]['redemptionCode'], body['redemptionCode'])
+
+
+class GroupTests(TestCase):
+    def test_group_create_join_and_cocheckin(self):
+        from django.contrib.auth import get_user_model
+        user1 = get_user_model().objects.create_user(username='leader-user')
+        user2 = get_user_model().objects.create_user(username='member-user')
+
+        # 1. Create group
+        self.client.force_login(user1)
+        res = self.client.post('/api/game/groups/create', json.dumps({'name': 'Nhom Tham Hiem'}), content_type='application/json')
+        self.assertEqual(res.status_code, 200)
+        group_code = res.json()['code']
+
+        # 2. Join group as user2
+        self.client.force_login(user2)
+        res = self.client.post('/api/game/groups/join', json.dumps({'code': group_code}), content_type='application/json')
+        self.assertEqual(res.status_code, 200)
+
+        # 3. View my groups
+        res = self.client.get('/api/game/groups/my')
+        self.assertEqual(res.status_code, 200)
+        groups = res.json()['groups']
+        self.assertEqual(len(groups), 1)
+        self.assertEqual(groups[0]['memberCount'], 2)
+
+        # 4. User 1 check-in at cau-rong
+        self.client.force_login(user1)
+        res1 = self.client.post('/api/game/cocheckin', json.dumps({'destinationId': 'cau-rong'}), content_type='application/json')
+        self.assertEqual(res1.status_code, 200)
+        self.assertFalse(res1.json()['cocheckinBonus'])
+
+        # 5. User 2 check-in at cau-rong -> CoCheckin triggered!
+        self.client.force_login(user2)
+        res2 = self.client.post('/api/game/cocheckin', json.dumps({'destinationId': 'cau-rong'}), content_type='application/json')
+        self.assertEqual(res2.status_code, 200)
+        self.assertTrue(res2.json()['cocheckinBonus'])
+        self.assertEqual(res2.json()['bonusCoins'], 10)

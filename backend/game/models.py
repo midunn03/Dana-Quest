@@ -208,3 +208,68 @@ class UserVoucherRedemption(models.Model):
 
     def __str__(self):
         return f'{self.user.username} · {self.voucher.partner_name} · {self.redemption_code}'
+
+
+class FriendInvite(models.Model):
+    """Loi moi ket ban bang ma moi."""
+
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sent_friend_invites')
+    invite_code = models.CharField('Ma moi ket ban', max_length=20, unique=True)
+    friend = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name='accepted_friend_invites')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'loi moi ket ban'
+        verbose_name_plural = 'cac loi moi ket ban'
+
+
+class PlayerGroup(models.Model):
+    """Nhom ban be kham pha."""
+
+    name = models.CharField('Ten nhom', max_length=100)
+    code = models.CharField('Ma tham gia nhom', max_length=20, unique=True)
+    leader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='led_groups')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'nhom ban be'
+        verbose_name_plural = 'cac nhom ban be'
+
+    def __str__(self):
+        return f'{self.name} (Ma: {self.code})'
+
+
+class GroupMembership(models.Model):
+    """Thanh vien trong nhom ban be."""
+
+    group = models.ForeignKey(PlayerGroup, on_delete=models.CASCADE, related_name='memberships')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='group_memberships')
+    opt_in_leaderboard = models.BooleanField('Tham gia bang xep hang nhom', default=True)
+    joined_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['group', 'user'], name='unique_group_member')]
+        ordering = ['joined_at']
+        verbose_name = 'thanh vien nhom'
+        verbose_name_plural = 'cac thanh vien nhom'
+
+    def __str__(self):
+        return f'{self.user.username} -> {self.group.name}'
+
+
+class CoCheckinRecord(models.Model):
+    """Ghi nhan check-in cung nhau cua nhom ban be."""
+
+    group = models.ForeignKey(PlayerGroup, on_delete=models.CASCADE, null=True, blank=True, related_name='cocheckins')
+    destination_id = models.CharField('Ma dia diem', max_length=60)
+    date_key = models.CharField('Ngay (YYYY-MM-DD)', max_length=10)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='cocheckin_records')
+    bonus_coins = models.PositiveIntegerField('Xu thuong di cung nhau', default=10)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'luot check-in cung nhau'
+        verbose_name_plural = 'lich su check-in cung nhau'

@@ -8,4 +8,9 @@ urlpatterns = [
     path('vouchers', views.partner_vouchers_list, name='partner_vouchers_list'),
     path('vouchers/redeem', views.redeem_partner_voucher, name='redeem_partner_voucher'),
     path('vouchers/my', views.my_partner_vouchers, name='my_partner_vouchers'),
+    path('groups/my', views.my_groups, name='my_groups'),
+    path('groups/create', views.create_group, name='create_group'),
+    path('groups/join', views.join_group, name='join_group'),
+    path('groups/leave', views.leave_group, name='leave_group'),
+    path('cocheckin', views.cocheckin, name='cocheckin'),
 ]

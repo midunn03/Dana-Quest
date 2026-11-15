@@ -3,7 +3,7 @@ import base64
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone, BadgeTheme, Badge, GoldenHourChallenge, PartnerVoucher, UserVoucherRedemption
+from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone, BadgeTheme, Badge, GoldenHourChallenge, PartnerVoucher, UserVoucherRedemption, PlayerGroup, GroupMembership, FriendInvite, CoCheckinRecord
 
 
 @admin.register(GameState)
@@ -129,3 +129,40 @@ class UserVoucherRedemptionAdmin(admin.ModelAdmin):
     list_filter = ('is_used', 'voucher')
     search_fields = ('user__username', 'redemption_code', 'voucher__partner_name')
     readonly_fields = ('user', 'voucher', 'redemption_code', 'coin_spent', 'redeemed_at_ms')
+
+
+class GroupMembershipInline(admin.TabularInline):
+    model = GroupMembership
+    extra = 0
+    readonly_fields = ('user', 'joined_at')
+
+
+@admin.register(PlayerGroup)
+class PlayerGroupAdmin(admin.ModelAdmin):
+    list_display = ('name', 'code', 'leader', 'member_count', 'created_at')
+    search_fields = ('name', 'code', 'leader__username')
+    inlines = [GroupMembershipInline]
+
+    @admin.display(description='Số thành viên')
+    def member_count(self, obj):
+        return obj.memberships.count()
+
+
+@admin.register(GroupMembership)
+class GroupMembershipAdmin(admin.ModelAdmin):
+    list_display = ('user', 'group', 'opt_in_leaderboard', 'joined_at')
+    list_filter = ('opt_in_leaderboard', 'group')
+    search_fields = ('user__username', 'group__name')
+
+
+@admin.register(FriendInvite)
+class FriendInviteAdmin(admin.ModelAdmin):
+    list_display = ('sender', 'invite_code', 'friend', 'created_at')
+    search_fields = ('sender__username', 'invite_code', 'friend__username')
+
+
+@admin.register(CoCheckinRecord)
+class CoCheckinRecordAdmin(admin.ModelAdmin):
+    list_display = ('group', 'destination_id', 'date_key', 'bonus_coins', 'created_at')
+    list_filter = ('date_key', 'destination_id')
+    search_fields = ('group__name', 'destination_id')

@@ -300,3 +300,171 @@ def my_partner_vouchers(request):
         for r in UserVoucherRedemption.objects.filter(user=request.user).select_related('voucher').order_by('-redeemed_at_ms')
     ]
     return JsonResponse({'vouchers': items})
+
+
+@require_http_methods(['GET'])
+def my_groups(request):
+    """GET /api/game/groups/my — danh sach nhom va bang xep hang thanh vien trong nhom."""
+    from .models import GroupMembership
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({'message': 'Vui long dang nhap.'}, status=401)
+
+    memberships = GroupMembership.objects.filter(user=request.user).select_related('group', 'group__leader')
+    groups_data = []
+
+    for m in memberships:
+        grp = m.group
+        # Get members who opted in
+        all_members = GroupMembership.objects.filter(group=grp).select_related('user', 'user__profile')
+        leaderboard = []
+        for mem in all_members:
+            if not mem.opt_in_leaderboard:
+                continue
+            u = mem.user
+            disp_name = getattr(u, 'profile', None) and u.profile.display_name or u.username
+            avatar_id = getattr(u, 'profile', None) and u.profile.avatar_id or ''
+            # Tinh diem XP / xu cua thanh vien tu GameState neu co
+            gs = getattr(u, 'game_state', None)
+            missions_count = sum(len(p.get('completed', [])) for p in (gs and gs.state or {}).get('destinations', {}).values()) if gs else 0
+            score = missions_count * 10
+            leaderboard.append({
+                'userId': u.id,
+                'displayName': disp_name,
+                'avatarId': avatar_id,
+                'score': score,
+                'isLeader': u.id == grp.leader_id,
+                'isSelf': u.id == request.user.id,
+            })
+
+        leaderboard.sort(key=lambda x: x['score'], reverse=True)
+        for idx, item in enumerate(leaderboard):
+            item['rank'] = idx + 1
+
+        groups_data.append({
+            'id': grp.id,
+            'name': grp.name,
+            'code': grp.code,
+            'isLeader': grp.leader_id == request.user.id,
+            'optIn': m.opt_in_leaderboard,
+            'memberCount': all_members.count(),
+            'leaderboard': leaderboard,
+        })
+
+    return JsonResponse({'groups': groups_data})
+
+
+@require_http_methods(['POST'])
+def create_group(request):
+    """POST /api/game/groups/create — tao nhom ban be moi."""
+    from .models import PlayerGroup, GroupMembership
+    import uuid
+
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({'message': 'Vui long dang nhap de tao nhom.'}, status=401)
+
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except Exception:
+        return JsonResponse({'message': 'Du lieu khong hop le.'}, status=400)
+
+    name = (data.get('name') or '').strip()
+    if not name or len(name) < 2 or len(name) > 80:
+        return JsonResponse({'message': 'Ten nhom phai tu 2 den 80 ky tu.'}, status=400)
+
+    code = f'DANA-{uuid.uuid4().hex[:6].upper()}'
+
+    with transaction.atomic():
+        group = PlayerGroup.objects.create(name=name, code=code, leader=request.user)
+        GroupMembership.objects.create(group=group, user=request.user, opt_in_leaderboard=True)
+
+    return JsonResponse({'success': True, 'groupId': group.id, 'name': group.name, 'code': group.code})
+
+
+@require_http_methods(['POST'])
+def join_group(request):
+    """POST /api/game/groups/join — tham gia nhom bang ma moi."""
+    from .models import PlayerGroup, GroupMembership
+
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({'message': 'Vui long dang nhap de tham gia nhom.'}, status=401)
+
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except Exception:
+        return JsonResponse({'message': 'Du lieu khong hop le.'}, status=400)
+
+    code = (data.get('code') or '').strip().upper()
+    group = PlayerGroup.objects.filter(code=code).first()
+    if not group:
+        return JsonResponse({'message': 'Ma nhom khong ton tai.'}, status=404)
+
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        return JsonResponse({'message': 'Ban da o trong nhom nay roi.'}, status=409)
+
+    GroupMembership.objects.create(group=group, user=request.user, opt_in_leaderboard=True)
+    return JsonResponse({'success': True, 'groupId': group.id, 'name': group.name})
+
+
+@require_http_methods(['POST'])
+def leave_group(request):
+    """POST /api/game/groups/leave — roi khoi nhom."""
+    from .models import GroupMembership
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({'message': 'Vui long dang nhap.'}, status=401)
+
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except Exception:
+        return JsonResponse({'message': 'Du lieu khong hop le.'}, status=400)
+
+    group_id = data.get('groupId')
+    mem = GroupMembership.objects.filter(group_id=group_id, user=request.user).first()
+    if not mem:
+        return JsonResponse({'message': 'Ban khong thuoc nhom nay.'}, status=404)
+
+    mem.delete()
+    return JsonResponse({'success': True, 'message': 'Da roi nhom.'})
+
+
+@require_http_methods(['POST'])
+def cocheckin(request):
+    """POST /api/game/cocheckin — thuong di cung nhau neu 2+ thanh vien check-in gan thoi gian."""
+    from .models import GroupMembership, CoCheckinRecord
+    import datetime
+
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({'message': 'Vui long dang nhap.'}, status=401)
+
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except Exception:
+        return JsonResponse({'message': 'Du lieu khong hop le.'}, status=400)
+
+    dest_id = data.get('destinationId')
+    if not dest_id:
+        return JsonResponse({'message': 'Thieu destinationId.'}, status=400)
+
+    today_str = datetime.date.today().isoformat()
+    # Tim cac nhom ma user tham gia
+    user_groups = GroupMembership.objects.filter(user=request.user).values_list('group_id', flat=True)
+    bonus_awarded = False
+    coins = 0
+
+    for g_id in user_groups:
+        # Tim xem co thanh vien khac cua nhom da checkin diem nay hom nay chua
+        existing = CoCheckinRecord.objects.filter(group_id=g_id, destination_id=dest_id, date_key=today_str).first()
+        if existing:
+            if not existing.members.filter(id=request.user.id).exists():
+                existing.members.add(request.user)
+                bonus_awarded = True
+                coins = existing.bonus_coins
+        else:
+            rec = CoCheckinRecord.objects.create(group_id=g_id, destination_id=dest_id, date_key=today_str, bonus_coins=10)
+            rec.members.add(request.user)
+
+    return JsonResponse({
+        'success': True,
+        'cocheckinBonus': bonus_awarded,
+        'bonusCoins': coins if bonus_awarded else 0,
+        'message': f'Thanh cong! Thuong "Di cung nhau" +{coins} xu!' if bonus_awarded else 'Check-in ghi nhan thanh cong.'
+    })
