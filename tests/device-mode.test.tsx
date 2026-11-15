@@ -152,4 +152,14 @@ describe('Device Mode & Mobile Layer (Stage C)', () => {
     fireEvent.click(switchBtn)
     expect(onOpen).toHaveBeenCalled()
   })
+
+  it('handles dana-open-device-modal custom event to trigger selector', () => {
+    const handler = vi.fn()
+    window.addEventListener('dana-open-device-modal', handler)
+
+    window.dispatchEvent(new CustomEvent('dana-open-device-modal'))
+    expect(handler).toHaveBeenCalledTimes(1)
+
+    window.removeEventListener('dana-open-device-modal', handler)
+  })
 })

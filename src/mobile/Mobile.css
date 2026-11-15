@@ -337,7 +337,7 @@
 /* --------------------------------------------------------------------------
    4. Đệm đáy chống che khuất (Bottom Nav Padding)
    -------------------------------------------------------------------------- */
-.app-shell.device-mobile-shell > main,
+.app-shell.device-mobile-shell > main:not(.pixel-home),
 .app-shell.device-mobile-shell > .discovery-page,
 .app-shell.device-mobile-shell > .ap-page,
 .app-shell.device-mobile-shell > .library-page,
@@ -349,6 +349,14 @@
   max-width: 100% !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
+}
+
+.app-shell.device-mobile-shell > main.pixel-home {
+  padding-bottom: 0 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
 }
 
 
@@ -618,55 +626,376 @@
 /* --------------------------------------------------------------------------
    9. Tối ưu Trang Chủ (.pixel-home) trên Điện thoại
    -------------------------------------------------------------------------- */
-.app-shell.device-mobile-shell .pixel-home {
+/* Triệt tiêu hoàn toàn Double Scrollbar trên điện thoại & simulator */
+.app-shell.device-mobile-shell > main.pixel-home,
+.device-mobile .pixel-home {
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  scrollbar-gutter: auto !important;
   padding: 0 !important;
 }
 
-.app-shell.device-mobile-shell .home-container {
-  width: calc(100% - 24px) !important;
-  margin-inline: auto !important;
+/* Header di động trang chủ: Căn chỉnh logo, nút chế độ, nút đăng nhập */
+.device-mobile-shell .home-header,
+.device-mobile .home-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 150 !important;
+  background: var(--px-page, #f7f5ec) !important;
+  border-bottom: 2px solid var(--px-ink, #0f172a) !important;
+  width: 100% !important;
 }
 
-.app-shell.device-mobile-shell .home-header-inner {
+.device-mobile-shell .home-header-inner,
+.device-mobile .home-header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
   padding: 8px 12px !important;
   gap: 8px !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 48px !important;
 }
 
-.app-shell.device-mobile-shell .home-hero-grid {
+.device-mobile-shell .home-brand,
+.device-mobile .home-brand {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+.device-mobile-shell .home-brand img,
+.device-mobile .home-brand img,
+.device-mobile-shell .home-brand .brand-logo,
+.device-mobile .home-brand .brand-logo {
+  width: 88px !important;
+  height: auto !important;
+  max-height: 34px !important;
+  object-fit: contain !important;
+}
+
+/* Ẩn hoàn toàn thanh điều hướng desktop ngang bị ép ký tự */
+.device-mobile-shell .home-header nav:not(.is-open),
+.device-mobile .home-header nav:not(.is-open) {
+  display: none !important;
+}
+
+/* Khi mở menu hamburger trên mobile */
+.device-mobile-shell .home-header nav.is-open,
+.device-mobile .home-header nav.is-open {
+  display: flex !important;
+  flex-direction: column !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 100% !important;
+  padding: 12px 14px !important;
+  background: var(--px-surface, #ffffff) !important;
+  border-bottom: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16) !important;
+  z-index: 200 !important;
+  gap: 6px !important;
+}
+
+.device-mobile-shell .home-header nav.is-open button,
+.device-mobile .home-header nav.is-open button {
+  width: 100% !important;
+  text-align: left !important;
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--px-border, #cbd5e1) !important;
+  border-radius: 4px !important;
+  background: var(--px-surface-soft, #f8fafc) !important;
+  color: var(--px-ink, #0f172a) !important;
+  min-height: 44px !important;
+  cursor: pointer !important;
+}
+
+.device-mobile-shell .home-header nav.is-open button[aria-current=true],
+.device-mobile .home-header nav.is-open button[aria-current=true] {
+  background: var(--px-primary, #216447) !important;
+  color: #ffffff !important;
+  border-color: var(--px-ink, #0f172a) !important;
+}
+
+/* Hành động bên phải header */
+.device-mobile-shell .home-header-actions,
+.device-mobile .home-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+}
+
+.device-mobile-shell .home-language,
+.device-mobile .home-language {
+  display: inline-flex !important;
+  gap: 2px !important;
+}
+
+.device-mobile-shell .home-language button,
+.device-mobile .home-language button {
+  min-width: 28px !important;
+  min-height: 34px !important;
+  padding: 2px 4px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--px-ink, #0f172a) !important;
+}
+
+.home-mode-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 2px solid var(--px-ink, #0f172a);
+  background: var(--px-surface-soft, #f8fafc);
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+  touch-action: manipulation;
+}
+
+/* Tuyệt đối chống ép ký tự đứng ở nút Đăng nhập / Vào chơi */
+.device-mobile-shell .home-header .home-button,
+.device-mobile .home-header .home-button,
+.device-mobile-shell .pixel-home .home-button,
+.device-mobile .pixel-home .home-button {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  flex-shrink: 0 !important;
+}
+
+.device-mobile-shell .home-header .home-button,
+.device-mobile .home-header .home-button {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  border-width: 2px !important;
+  box-shadow: 2px 2px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-menu,
+.device-mobile .home-menu {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  padding: 0 !important;
+  font-size: 18px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  background: var(--px-surface-soft, #f8fafc) !important;
+  color: var(--px-ink, #0f172a) !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+/* Vùng chứa nội dung trang chủ */
+.device-mobile-shell .home-container,
+.device-mobile .home-container {
+  width: calc(100% - 24px) !important;
+  max-width: 100% !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+}
+
+.device-mobile-shell .home-hero,
+.device-mobile .home-hero {
+  padding: 0 0 24px !important;
+}
+
+.device-mobile-shell .home-hero-grid,
+.device-mobile .home-hero-grid {
   display: flex !important;
   flex-direction: column !important;
   gap: 20px !important;
-  padding: 18px 0 !important;
+  padding: 16px 0 !important;
 }
 
-.app-shell.device-mobile-shell .pixel-home h1 {
-  font-size: 20px !important;
-  margin: 10px 0 0 !important;
+.device-mobile-shell .home-hero-copy,
+.device-mobile .home-hero-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.device-mobile-shell .pixel-home h1,
+.device-mobile .pixel-home h1 {
+  font-size: 22px !important;
   line-height: 1.35 !important;
+  margin: 12px 0 8px !important;
+  font-weight: 700 !important;
 }
 
-.app-shell.device-mobile-shell .home-steps {
+.device-mobile-shell .home-hero-copy > p,
+.device-mobile .home-hero-copy > p {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: var(--px-ink-muted, #475569) !important;
+  margin: 0 0 12px !important;
+}
+
+.device-mobile-shell .home-text-link,
+.device-mobile .home-text-link {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 8px 0 !important;
+  min-height: 40px !important;
+  color: var(--px-primary, #216447) !important;
+}
+
+.device-mobile-shell .home-art-frame,
+.device-mobile .home-art-frame {
+  margin-top: 14px !important;
+  border-width: 3px !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.device-mobile-shell .home-art-frame svg,
+.device-mobile .home-art-frame svg {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+.device-mobile-shell .home-art-tag,
+.device-mobile .home-art-tag {
+  font-size: 12px !important;
+  padding: 6px 10px !important;
+  bottom: 8px !important;
+  left: 8px !important;
+}
+
+.device-mobile-shell .home-login-anchor,
+.device-mobile .home-login-anchor {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+.device-mobile-shell .home-section,
+.device-mobile .home-section {
+  padding-block: 40px !important;
+}
+
+.device-mobile-shell .home-steps,
+.device-mobile .home-steps {
   display: flex !important;
   flex-direction: column !important;
   gap: 14px !important;
 }
 
-.app-shell.device-mobile-shell .home-quest-grid {
+.device-mobile-shell .home-steps article,
+.device-mobile .home-steps article {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 14px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  background: var(--px-surface, #ffffff) !important;
+  box-shadow: 2px 2px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-step-number,
+.device-mobile .home-step-number {
+  width: 44px !important;
+  height: 44px !important;
+  font-size: 16px !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.device-mobile-shell .home-quest-grid,
+.device-mobile .home-quest-grid {
   display: flex !important;
   flex-direction: column !important;
   gap: 16px !important;
 }
 
-.app-shell.device-mobile-shell .home-reward-grid {
+.device-mobile-shell .home-quest-card,
+.device-mobile .home-quest-card {
+  display: flex !important;
+  flex-direction: column !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 3px 3px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-quest-art,
+.device-mobile .home-quest-art {
+  max-height: 160px !important;
+  border-bottom: 2px solid var(--px-ink, #0f172a) !important;
+  border-right: none !important;
+}
+
+.device-mobile-shell .home-quest-info,
+.device-mobile .home-quest-info {
+  padding: 14px !important;
+}
+
+.device-mobile-shell .home-reward-grid,
+.device-mobile .home-reward-grid,
+.device-mobile-shell .home-faq-grid,
+.device-mobile .home-faq-grid {
   display: flex !important;
   flex-direction: column !important;
   gap: 20px !important;
 }
 
-.app-shell.device-mobile-shell .home-faq-grid {
+.device-mobile-shell .home-reward-art,
+.device-mobile .home-reward-art {
+  padding: 16px !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-footer,
+.device-mobile .home-footer {
+  padding: 24px 0 !important;
+}
+
+.device-mobile-shell .home-footer-top,
+.device-mobile .home-footer-top,
+.device-mobile-shell .home-footer-bottom,
+.device-mobile .home-footer-bottom {
   display: flex !important;
   flex-direction: column !important;
-  gap: 16px !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+}
+
+/* Thanh cuộn mảnh, gọn gàng chuẩn di động */
+.device-mobile-shell *::-webkit-scrollbar,
+.device-mobile *::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+.device-mobile-shell *::-webkit-scrollbar-track,
+.device-mobile *::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.device-mobile-shell *::-webkit-scrollbar-thumb,
+.device-mobile *::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.25) !important;
+  border-radius: 4px !important;
 }
 
 
