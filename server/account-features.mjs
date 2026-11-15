@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs'
 import { occurrenceFor, dueNotice, decideEvent, claimNotice } from '../shared/event-policy.mjs'
 const catalog=JSON.parse(readFileSync(new URL('../shared/city-events.json',import.meta.url),'utf8'))
 const fail=(status,message)=>Object.assign(new Error(message),{status})
-const fresh=()=>({version:1,profile:{displayName:'',bio:'',home:'',photoData:''},preferences:{language:'vi',leaderboard:false,marketing:false,inApp:true},messages:[]})
+const fresh=()=>({version:1,profile:{displayName:'',bio:'',home:'',photoData:''},preferences:{language:'vi',leaderboard:false,marketing:false,inApp:true,deviceMode:'auto'},messages:[]})
 function text(value,max,label){if(typeof value!=='string'||value.length>max)throw fail(400,`${label} không hợp lệ (tối đa ${max} ký tự).`);return value.trim()}
 export function createAccountFeatures(directory,clock=Date.now,catalogFor=()=>catalog,canClaim=async()=>true){
  let queue=Promise.resolve()
@@ -43,6 +43,7 @@ export function createAccountFeatures(directory,clock=Date.now,catalogFor=()=>ca
    }
   }else if(input.kind==='preferences'){
    if(input.language!==undefined){if(!['vi','en','system'].includes(input.language))throw fail(400,'Ngôn ngữ không hợp lệ.');value.preferences.language=input.language}
+   if(input.deviceMode!==undefined){if(!['desktop','mobile','auto'].includes(input.deviceMode))throw fail(400,'Chế độ thiết bị không hợp lệ.');value.preferences.deviceMode=input.deviceMode}
    for(const key of ['leaderboard','marketing','inApp'])if(input[key]!==undefined){if(typeof input[key]!=='boolean')throw fail(400,'Lựa chọn không hợp lệ.');value.preferences[key]=input[key]}
   }else if(input.kind==='message'){
    if(!['report','support','spot','tour'].includes(input.category))throw fail(400,'Loại yêu cầu không hợp lệ.')

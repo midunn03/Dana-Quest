@@ -5,7 +5,7 @@ import type { EventDecision } from '../../shared/event-policy.mjs'
 export interface AccountFeatures {
  version:1
  profile:{displayName:string;bio:string;home:string;photoData:string}
- preferences:{language:'vi'|'en'|'system';leaderboard:boolean;marketing:boolean;inApp:boolean}
+ preferences:{language:'vi'|'en'|'system';leaderboard:boolean;marketing:boolean;inApp:boolean;deviceMode?:'desktop'|'mobile'|'auto'}
  messages:Array<{id:string;category:string;subject:string;message:string;createdAt:number;status:string}>
  events?:{decisions:Record<string,EventDecision>;lastShown:number}
  eventResult?:{notice:'invite'|'reminder'|null;key:string;serverNow:number}

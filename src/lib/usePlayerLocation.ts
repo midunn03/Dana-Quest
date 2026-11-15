@@ -56,6 +56,7 @@ export function usePlayerLocation() {
     const watch = geo.watchPosition(success, failure, LIVE_LOCATION_OPTIONS)
     quick()
     const timer = window.setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return
       if (latest.current && !isFresh(latest.current)) { latest.current = null; setSample(null); setError(t("Vị trí đã cũ. Đang lấy lại vị trí thiết bị…")) }
       if (!latest.current || latest.current.accuracy > NAVIGATION_MAX_ACCURACY) quick()
     }, 5000)

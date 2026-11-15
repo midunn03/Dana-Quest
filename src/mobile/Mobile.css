@@ -1,0 +1,519 @@
+/* ==========================================================================
+   DANA QUEST — GIAI ĐOẠN C: GIAO DIỆN DI ĐỘNG (MOBILE SHELL & DEVICE MODE)
+   Các quy tắc CSS sử dụng tiền tố .device-mobile-* và .device-mode-*
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Device Selection Modal (.device-mode-*)
+   -------------------------------------------------------------------------- */
+.device-mode-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: deviceModeFadeIn 0.25s ease-out;
+}
+
+@keyframes deviceModeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.device-mode-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--px-surface, #ffffff);
+  border: 1px solid var(--px-border, #e2e8f0);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: deviceModeSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes deviceModeSlideUp {
+  from { transform: translateY(24px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.device-mode-brand {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--px-primary, #216447);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.device-mode-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--px-ink, #0f172a);
+  margin: 0 0 6px;
+}
+
+.device-mode-header p {
+  font-size: 14px;
+  color: var(--px-ink-muted, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.device-mode-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.device-mode-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  border: 2px solid var(--px-border, #e2e8f0);
+  border-radius: 14px;
+  background: var(--px-surface-soft, #f8fafc);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  min-height: 52px;
+}
+
+.device-mode-option:hover {
+  border-color: var(--px-primary, #216447);
+  background: var(--px-surface, #ffffff);
+}
+
+.device-mode-option.active {
+  border-color: var(--px-primary, #216447);
+  background: rgba(33, 100, 71, 0.06);
+  box-shadow: 0 4px 12px rgba(33, 100, 71, 0.12);
+}
+
+.device-mode-icon-circle {
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.device-mode-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.device-mode-option-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.device-mode-option-title strong {
+  font-size: 16px;
+  color: var(--px-ink, #0f172a);
+}
+
+.device-mode-rec-tag {
+  font-size: 11px;
+  font-weight: 700;
+  background: #10b981;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.3px;
+}
+
+.device-mode-info p {
+  font-size: 13px;
+  color: var(--px-ink-muted, #64748b);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.device-mode-radio-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--px-border, #cbd5e1);
+  flex-shrink: 0;
+  margin-top: 4px;
+  position: relative;
+  transition: border-color 0.2s ease;
+}
+
+.device-mode-option.active .device-mode-radio-mark {
+  border-color: var(--px-primary, #216447);
+}
+
+.device-mode-option.active .device-mode-radio-mark::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--px-primary, #216447);
+}
+
+.device-mode-confirm-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  border: none;
+  background: var(--px-primary, #216447);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.device-mode-confirm-btn:hover {
+  background: #174b35;
+}
+
+.device-mode-confirm-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* --------------------------------------------------------------------------
+   2. Mobile Shell Container (.device-mobile-shell)
+   -------------------------------------------------------------------------- */
+.device-mobile-shell {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-width: 360px;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  background: var(--px-page, #f7f5ec);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+  border-left: 1px solid var(--px-border, #e2e8f0);
+  border-right: 1px solid var(--px-border, #e2e8f0);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Khi trên màn hình điện thoại thật hoặc devtools mobile view */
+@media (max-width: 768px) {
+  .device-mobile-shell {
+    max-width: 100%;
+    min-width: 100%;
+    height: 100dvh;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+  }
+}
+
+/* Header di động */
+.device-mobile-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 0 14px;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--px-surface, #ffffff);
+  border-bottom: 1px solid var(--px-border, #e2e8f0);
+  z-index: 100;
+}
+
+.device-mobile-logo {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--px-primary, #216447);
+  letter-spacing: 0.8px;
+}
+
+.device-mobile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.device-mobile-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--px-border, #cbd5e1);
+  background: var(--px-surface-soft, #f8fafc);
+  color: var(--px-ink, #0f172a);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.device-mobile-mode-btn:hover {
+  background: var(--px-surface, #ffffff);
+  border-color: var(--px-primary, #216447);
+}
+
+/* Phần nội dung cuộn được */
+.device-mobile-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-size: 16px; /* Cỡ chữ tối thiểu 16px chống iOS auto-zoom */
+}
+
+/* Trường hợp mở bản đồ (toàn màn hình) */
+.device-mobile-shell.device-mobile-map-active .device-mobile-content {
+  overflow: hidden;
+}
+
+.device-mobile-shell.device-mobile-map-active .explore-page,
+.device-mobile-shell.device-mobile-map-active .navigation-screen {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Thanh Điều Hướng Đáy Di Động (.device-mobile-nav)
+   -------------------------------------------------------------------------- */
+.device-mobile-nav {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 60px;
+  background: var(--px-surface, #ffffff);
+  border-top: 1px solid var(--px-border, #e2e8f0);
+  padding-bottom: max(6px, env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 120;
+}
+
+.device-mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 44px;
+  min-height: 48px;
+  padding: 4px 0;
+  text-decoration: none;
+  color: var(--px-ink-muted, #64748b);
+  touch-action: manipulation;
+  transition: color 0.15s ease;
+  user-select: none;
+}
+
+.device-mobile-nav-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device-mobile-nav-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.device-mobile-nav-label {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.device-mobile-nav-item.active {
+  color: var(--px-primary, #216447);
+  font-weight: 700;
+}
+
+.device-mobile-nav-item.active .device-mobile-nav-icon svg {
+  stroke-width: 2.4;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. Bottom Sheet Di Động (.device-mobile-bottom-sheet)
+   -------------------------------------------------------------------------- */
+.device-mobile-bottom-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 110;
+  background: var(--px-surface, #ffffff);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: height 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: pan-y;
+}
+
+.device-mobile-bottom-sheet.dragging {
+  transition: none;
+}
+
+.device-mobile-sheet-grabber {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+  flex-shrink: 0;
+}
+
+.device-mobile-sheet-handle {
+  width: 48px;
+  height: 5px;
+  border-radius: 3px;
+  background: #cbd5e1;
+}
+
+.device-mobile-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 10px;
+  border-bottom: 1px solid var(--px-border, #e2e8f0);
+  flex-shrink: 0;
+}
+
+.device-mobile-sheet-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--px-ink, #0f172a);
+}
+
+.device-mobile-sheet-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--px-surface-soft, #f1f5f9);
+  color: var(--px-ink, #0f172a);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+.device-mobile-sheet-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px 16px 24px;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Xử lý bàn phím ảo & Xoay màn hình (Virtual Keyboard & Orientation)
+   -------------------------------------------------------------------------- */
+.device-mobile-content input,
+.device-mobile-content textarea,
+.device-mobile-content select {
+  font-size: 16px !important; /* Không tự phóng to trên iOS Safari */
+  scroll-margin-bottom: 120px; /* Bàn phím ảo không che input */
+  min-height: 44px;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .device-mobile-shell {
+    height: 100vh;
+  }
+  .device-mobile-nav {
+    height: 48px;
+    padding-bottom: 2px;
+  }
+  .device-mobile-header {
+    height: 42px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Tích hợp Trang Atlas, Navigation & Account trong Mobile Shell
+   -------------------------------------------------------------------------- */
+.device-mobile-shell .atlas-page {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: minmax(240px, 46%) minmax(0, 1fr) !important;
+  height: 100% !important;
+}
+
+.device-mobile-shell .atlas-map-area {
+  grid-row: 1 !important;
+  position: relative !important;
+}
+
+.device-mobile-shell .atlas-sidebar {
+  grid-row: 2 !important;
+  border-right: 0 !important;
+  border-top: 1px solid var(--px-ink, #0f172a) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.device-mobile-shell .navigation-screen {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.device-mobile-shell .route-tools {
+  bottom: 220px;
+}
+
+.device-mobile-shell .route-tool {
+  min-height: 44px;
+  padding: 8px 14px;
+}
+
+.device-mobile-shell .ap-profile-frame {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.device-mobile-shell .badge-grid {
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+}
+
+.device-mobile-shell .recap-action-bar button {
+  min-height: 44px;
+}
+

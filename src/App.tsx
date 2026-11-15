@@ -40,9 +40,17 @@ const QuestNavigationPage = lazy(() => import('./QuestNavigationPage'))
 const DueStartPage = lazy(() => import('./DueStartPage'))
 import { AuthProvider, useAuth } from './AuthContext'
 import { canNavigateFrom } from './lib/navigationGuard'
+import './mobile/Mobile.css'
+import { useDeviceMode } from './lib/deviceMode'
+import DeviceModeModal from './mobile/DeviceModeModal'
+import MobileShell from './mobile/MobileShell'
 function AppRouter() {
   useLocale()
   const auth = useAuth()
+  const { mode: deviceMode, isExplicit, setMode: setDeviceMode } = useDeviceMode(auth.user?.id)
+  const [showDeviceModal, setShowDeviceModal] = useState(false)
+  const isTest = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test'
+  const isModalOpen = showDeviceModal || (!isExplicit && !isTest)
   const [loginPrompt,setLoginPrompt]=useState(false),[loginMode,setLoginMode]=useState<'login'|'register'>('login'),[dismissedQuest,setDismissedQuest]=useState('')
   const loginOpener=useRef<HTMLElement|null>(null)
   const [homeAuthMode,setHomeAuthMode]=useState<'login'|'register'>(window.location.hash==='#/dang-ky'?'register':'login')
@@ -110,19 +118,31 @@ function AppRouter() {
     : route !== '#/' ? <NotFoundPage/>  : <WelcomePage initialMode={homeAuthMode}/>
   const workspace = route.startsWith('#/tai-khoan') || ['#/album','#/cua-hang'].includes(route)
   const onboarding = /^#\/quest\/[^/]+\/chi-duong$/.test(route) || /^#\/quest\/[^/]+\/choi$/.test(route) || journeyRoute || route === '#/' || authRoute || route === '#/chon-nhan-vat' || route === '#/nhan-vat' || route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
-  return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={event=>{
-      if(auth.status==='authenticated'||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return
-      const link=(event.target as Element).closest<HTMLAnchorElement>('a[href]')
-      if(!link||link.target==='_blank'||link.hasAttribute('download'))return
-      const target=new URL(link.href,window.location.href)
-      if(target.origin!==window.location.origin||target.pathname!==window.location.pathname||!['#/dang-nhap','#/dang-ky'].includes(target.hash))return
-      event.preventDefault();if(route==='#/'){setHomeAuthMode(target.hash==='#/dang-ky'?'register':'login');document.getElementById('home-login')?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});return}loginOpener.current=link;setLoginMode(target.hash==='#/dang-ky'?'register':'login');setLoginPrompt(true)
-    }} inert={showLogin} ref={shell} className={`app-shell ${route==='#/'||authRoute?'home-shell':''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
+  const interceptClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if(auth.status==='authenticated'||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return
+    const link=(event.target as Element).closest<HTMLAnchorElement>('a[href]')
+    if(!link||link.target==='_blank'||link.hasAttribute('download'))return
+    const target=new URL(link.href,window.location.href)
+    if(target.origin!==window.location.origin||target.pathname!==window.location.pathname||!['#/dang-nhap','#/dang-ky'].includes(target.hash))return
+    event.preventDefault();if(route==='#/'){setHomeAuthMode(target.hash==='#/dang-ky'?'register':'login');document.getElementById('home-login')?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});return}loginOpener.current=link;setLoginMode(target.hash==='#/dang-ky'?'register':'login');setLoginPrompt(true)
+  }
+  const renderedPage = <Suspense fallback={<main className="auth-loading"><p role="status">{t("Đang tải trang…")}</p></main>}>{page}</Suspense>
+
+  if (deviceMode === 'mobile') {
+    return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className="device-mobile-root">
+      <MobileShell route={route} user={auth.user} onOpenDeviceSelector={() => setShowDeviceModal(true)}>
+        {renderedPage}
+        <Notifications />
+      </MobileShell>
+    </div>{showLogin&&<AuthPage embedded initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):loginMode} onClose={closeLogin} onAuthenticated={user=>{setLoginPrompt(false);setDismissedQuest(route);if(!user.avatarId){rememberPageReturn(route);window.location.hash='#/chon-nhan-vat'}}}/>}{isModalOpen && <DeviceModeModal open={isModalOpen} currentMode={deviceMode} onSelect={chosen => { setDeviceMode(chosen); setShowDeviceModal(false) }} onClose={() => setShowDeviceModal(false)} />}</EventProvider>
+  }
+
+  return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${route==='#/'||authRoute?'home-shell':''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
     <PageTools route={route}>{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}</PageTools>
     {workspace && <WorkspaceNavigation route={route}/>}
-    <Suspense fallback={<main className="auth-loading"><p role="status">{t("Đang tải trang…")}</p></main>}>{page}</Suspense><Notifications />
+    {renderedPage}<Notifications />
     <MainNavigation route={route} />
-  </div>{showLogin&&<AuthPage embedded initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):loginMode} onClose={closeLogin} onAuthenticated={user=>{setLoginPrompt(false);setDismissedQuest(route);if(!user.avatarId){rememberPageReturn(route);window.location.hash='#/chon-nhan-vat'}}}/>}</EventProvider>
+  </div>{showLogin&&<AuthPage embedded initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):loginMode} onClose={closeLogin} onAuthenticated={user=>{setLoginPrompt(false);setDismissedQuest(route);if(!user.avatarId){rememberPageReturn(route);window.location.hash='#/chon-nhan-vat'}}}/>}{isModalOpen && <DeviceModeModal open={isModalOpen} currentMode={deviceMode} onSelect={chosen => { setDeviceMode(chosen); setShowDeviceModal(false) }} onClose={() => setShowDeviceModal(false)} />}</EventProvider>
 }
 
 export default function App() {
