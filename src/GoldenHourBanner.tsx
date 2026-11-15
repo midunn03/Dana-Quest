@@ -14,7 +14,7 @@ export default function GoldenHourBanner({ destinationId }: { destinationId: str
     let alive = true
     fetchGoldenHours().then((res) => {
       if (!alive || !res) return
-      const found = res.challenges.find(
+      const found = res.challenges?.find(
         (c) => c.destinationId === destinationId || (destinationId.includes('cau-rong') && c.destinationId === 'cau-rong')
       )
       if (found && (found.isActive || found.isUpcoming)) {
