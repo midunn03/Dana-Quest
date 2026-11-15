@@ -3,7 +3,7 @@ import base64
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone, BadgeTheme, Badge
+from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone, BadgeTheme, Badge, GoldenHourChallenge
 
 
 @admin.register(GameState)
@@ -105,3 +105,11 @@ class BadgeAdmin(admin.ModelAdmin):
     list_filter = ('theme', 'rarity', 'is_active')
     search_fields = ('title', 'badge_id', 'description')
     list_editable = ('rarity', 'bonus_coins', 'is_active', 'order')
+
+
+@admin.register(GoldenHourChallenge)
+class GoldenHourChallengeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'destination_id', 'start_time', 'end_time', 'bonus_coins', 'multiplier', 'is_active')
+    list_filter = ('destination_id', 'is_active')
+    search_fields = ('title', 'destination_id', 'description')
+    list_editable = ('bonus_coins', 'multiplier', 'is_active')

@@ -178,3 +178,27 @@ def badge_catalog(request):
             ]
         })
     return JsonResponse({'themes': themes})
+
+
+@require_http_methods(['GET'])
+def golden_hour_challenges(request):
+    """GET /api/game/golden-hours — danh sach thu thach gio vang."""
+    from .models import GoldenHourChallenge
+    items = [
+        {
+            'id': g.id,
+            'destinationId': g.destination_id,
+            'title': g.title,
+            'description': g.description,
+            'daysOfWeek': g.days_of_week,
+            'startTime': g.start_time.strftime('%H:%M'),
+            'endTime': g.end_time.strftime('%H:%M'),
+            'bonusCoins': g.bonus_coins,
+            'multiplier': g.multiplier,
+            'latitude': g.latitude,
+            'longitude': g.longitude,
+            'radiusMeters': g.radius_meters,
+        }
+        for g in GoldenHourChallenge.objects.filter(is_active=True).order_by('destination_id', 'start_time')
+    ]
+    return JsonResponse({'challenges': items})

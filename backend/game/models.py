@@ -139,3 +139,28 @@ class Badge(models.Model):
 
     def __str__(self):
         return f'{self.title} ({self.get_rarity_display()})'
+
+
+class GoldenHourChallenge(models.Model):
+    """Thu thach gio vang tai dia diem."""
+
+    destination_id = models.CharField('Ma dia diem', max_length=60)
+    title = models.CharField('Ten thu thach gio vang', max_length=100)
+    description = models.TextField('Mo ta su kien gio vang', blank=True)
+    days_of_week = models.JSONField('Cac thu trong tuan (0=T2, 6=CN)', default=list, help_text='Vi du: [4, 5, 6] cho T6, T7, CN')
+    start_time = models.TimeField('Gio bat dau')
+    end_time = models.TimeField('Gio ket thuc')
+    bonus_coins = models.PositiveIntegerField('Xu thuong them', default=20)
+    multiplier = models.FloatField('He so nhan thuong', default=1.5)
+    latitude = models.FloatField('Vi do trung tam', default=16.061)
+    longitude = models.FloatField('Kinh do trung tam', default=108.227)
+    radius_meters = models.PositiveIntegerField('Ban kinh hop le (m)', default=120)
+    is_active = models.BooleanField('Kich hoat', default=True)
+
+    class Meta:
+        ordering = ['destination_id', 'start_time']
+        verbose_name = 'thu thach gio vang'
+        verbose_name_plural = 'cac thu thach gio vang'
+
+    def __str__(self):
+        return f'{self.title} ({self.destination_id}: {self.start_time}-{self.end_time})'

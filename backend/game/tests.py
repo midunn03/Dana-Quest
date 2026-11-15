@@ -189,3 +189,25 @@ class BadgeTests(TestCase):
         self.assertEqual(len(data['themes'][0]['badges']), 1)
         self.assertEqual(data['themes'][0]['badges'][0]['id'], 'cau-rong')
         self.assertEqual(data['themes'][0]['badges'][0]['bonusCoins'], 15)
+
+
+class GoldenHourTests(TestCase):
+    def test_golden_hour_creation_and_api(self):
+        from .models import GoldenHourChallenge
+        GoldenHourChallenge.objects.create(
+            destination_id='cau-rong',
+            title='Cau Rong Phun Lua',
+            days_of_week=[4, 5, 6],
+            start_time='20:30:00',
+            end_time='21:30:00',
+            bonus_coins=20,
+            is_active=True
+        )
+
+        response = self.client.get('/api/game/golden-hours')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn('challenges', data)
+        self.assertEqual(len(data['challenges']), 1)
+        self.assertEqual(data['challenges'][0]['destinationId'], 'cau-rong')
+        self.assertEqual(data['challenges'][0]['bonusCoins'], 20)

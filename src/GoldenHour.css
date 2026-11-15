@@ -1,0 +1,76 @@
+/* ---------- Golden Hour Challenge Styles (.golden-*) ---------- */
+
+.golden-banner {
+  margin: var(--px-space-4, 12px) 0;
+  padding: 14px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.golden-banner.is-active {
+  background: #fefce8;
+  border: 2px solid #ca8a04;
+  color: #713f12;
+}
+
+.golden-banner.is-upcoming {
+  background: #eff6ff;
+  border: 2px solid #3b82f6;
+  color: #1e3a8a;
+}
+
+.golden-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.golden-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.golden-title {
+  font-size: var(--text-base, 15px);
+  font-weight: 700;
+  margin: 0;
+}
+
+.golden-desc {
+  font-size: var(--px-text-sm, 13px);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.golden-claim-btn {
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 16px;
+  border: none;
+  background: #ca8a04;
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--px-text-sm, 14px);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.golden-claim-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.golden-claimed-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #15803d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .golden-banner,
+  .golden-claim-btn {
+    transition: none;
+  }
+}
