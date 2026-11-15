@@ -146,3 +146,35 @@ def streak_milestones(request):
         for m in StreakMilestone.objects.filter(is_active=True).order_by('days')
     ]
     return JsonResponse({'milestones': milestones})
+
+
+@require_http_methods(['GET'])
+def badge_catalog(request):
+    """GET /api/game/badges — danh sach chu de va huy hieu."""
+    from .models import BadgeTheme
+    themes = []
+    for t in BadgeTheme.objects.all().prefetch_related('badges').order_by('order', 'id'):
+        themes.append({
+            'slug': t.slug,
+            'name': t.name,
+            'description': t.description,
+            'icon': t.icon,
+            'completionBonusCoins': t.completion_bonus_coins,
+            'completionBonusXp': t.completion_bonus_xp,
+            'badges': [
+                {
+                    'id': b.badge_id,
+                    'title': b.title,
+                    'description': b.description,
+                    'rarity': b.rarity,
+                    'icon': b.icon_placeholder,
+                    'image': b.image.url if b.image else None,
+                    'requiredDestinations': b.required_destinations,
+                    'requiredCount': b.required_count,
+                    'bonusCoins': b.bonus_coins,
+                    'bonusXp': b.bonus_xp,
+                }
+                for b in t.badges.filter(is_active=True).order_by('order', 'id')
+            ]
+        })
+    return JsonResponse({'themes': themes})

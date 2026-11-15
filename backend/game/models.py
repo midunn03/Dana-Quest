@@ -87,3 +87,55 @@ class StreakMilestone(models.Model):
 
     def __str__(self):
         return f'Mốc {self.days} ngày (+{self.bonus_coins} xu)'
+
+
+class BadgeTheme(models.Model):
+    """Chu de bo suu tap huy hieu (vi du: Cau Da Nang, Bien, Am thuc, Van hoa Cham)."""
+
+    slug = models.SlugField('Ma dinh danh', max_length=50, unique=True)
+    name = models.CharField('Ten chu de', max_length=100)
+    description = models.TextField('Mo ta chu de', blank=True)
+    icon = models.CharField('Bieu tuong dai dien', max_length=30, default='🏆')
+    order = models.PositiveIntegerField('Thu tu hien thi', default=0)
+    completion_bonus_coins = models.PositiveIntegerField('Xu thuong khi hoan thanh bo', default=50)
+    completion_bonus_xp = models.PositiveIntegerField('XP thuong khi hoan thanh bo', default=100)
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name = 'chu de huy hieu'
+        verbose_name_plural = 'cac chu de huy hieu'
+
+    def __str__(self):
+        return self.name
+
+
+class Badge(models.Model):
+    """Huy hieu trong bo suu tap."""
+
+    RARITY_CHOICES = [
+        ('common', 'Thuong'),
+        ('rare', 'Hiem'),
+        ('legendary', 'Huyen thoai'),
+    ]
+
+    theme = models.ForeignKey(BadgeTheme, on_delete=models.CASCADE, related_name='badges', verbose_name='Chu de')
+    badge_id = models.CharField('Ma huy hieu', max_length=60, unique=True)
+    title = models.CharField('Ten huy hieu', max_length=100)
+    description = models.TextField('Mo ta dieu kien dat duoc', blank=True)
+    rarity = models.CharField('Do hiem', max_length=20, choices=RARITY_CHOICES, default='common')
+    icon_placeholder = models.CharField('Bieu tuong giu cho', max_length=30, default='🎖️')
+    image = models.ImageField('Hinh anh huy hieu', upload_to='badges/', blank=True, null=True)
+    required_destinations = models.JSONField('Danh sach dia diem yeu cau', default=list, blank=True)
+    required_count = models.PositiveIntegerField('So luong yeu cau', default=1)
+    bonus_coins = models.PositiveIntegerField('Xu thuong', default=10)
+    bonus_xp = models.PositiveIntegerField('XP thuong', default=20)
+    order = models.PositiveIntegerField('Thu tu hien thi', default=0)
+    is_active = models.BooleanField('Kich hoat', default=True)
+
+    class Meta:
+        ordering = ['theme__order', 'order', 'id']
+        verbose_name = 'huy hieu'
+        verbose_name_plural = 'danh sach huy hieu'
+
+    def __str__(self):
+        return f'{self.title} ({self.get_rarity_display()})'

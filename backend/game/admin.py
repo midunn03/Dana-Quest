@@ -3,7 +3,7 @@ import base64
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone
+from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone, BadgeTheme, Badge
 
 
 @admin.register(GameState)
@@ -80,3 +80,28 @@ class StreakMilestoneAdmin(admin.ModelAdmin):
     list_display = ('days', 'bonus_coins', 'bonus_xp', 'message', 'is_active')
     list_editable = ('bonus_coins', 'bonus_xp', 'is_active')
     ordering = ('days',)
+
+
+class BadgeInline(admin.TabularInline):
+    model = Badge
+    extra = 1
+    fields = ('badge_id', 'title', 'rarity', 'required_destinations', 'bonus_coins', 'is_active', 'order')
+
+
+@admin.register(BadgeTheme)
+class BadgeThemeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'icon', 'badge_count', 'completion_bonus_coins', 'order')
+    search_fields = ('name', 'slug')
+    inlines = [BadgeInline]
+
+    @admin.display(description='Số huy hiệu')
+    def badge_count(self, obj):
+        return obj.badges.count()
+
+
+@admin.register(Badge)
+class BadgeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'badge_id', 'theme', 'rarity', 'bonus_coins', 'bonus_xp', 'is_active', 'order')
+    list_filter = ('theme', 'rarity', 'is_active')
+    search_fields = ('title', 'badge_id', 'description')
+    list_editable = ('rarity', 'bonus_coins', 'is_active', 'order')

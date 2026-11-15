@@ -1,0 +1,180 @@
+/* ---------- Badge Collection Styles (.badge-*) ---------- */
+
+.badge-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--px-space-6, 20px);
+}
+
+.badge-summary-card {
+  background: var(--px-surface, #fff);
+  border: var(--px-border, 2px solid #222);
+  padding: var(--px-space-5, 16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-summary-info h2 {
+  font-size: var(--text-md, 18px);
+  margin: 0 0 6px 0;
+}
+
+.badge-summary-info p {
+  margin: 0;
+  font-size: var(--px-text-sm, 14px);
+  color: #555;
+}
+
+.badge-summary-stat {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--px-ink, #222);
+}
+
+.badge-theme-section {
+  background: var(--px-surface, #fff);
+  border: var(--px-border, 2px solid #222);
+  padding: var(--px-space-5, 16px);
+}
+
+.badge-theme-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed #ddd;
+  padding-bottom: 10px;
+}
+
+.badge-theme-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-theme-icon {
+  font-size: 24px;
+}
+
+.badge-theme-title h3 {
+  margin: 0;
+  font-size: var(--text-base, 16px);
+}
+
+.badge-theme-badge-count {
+  font-size: var(--px-text-sm, 13px);
+  font-weight: 700;
+  padding: 4px 10px;
+  background: #f0f0f0;
+  border-radius: 9999px;
+}
+
+.badge-theme-badge-count.is-completed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.badge-item-card {
+  border: 1px solid #ddd;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #fafafa;
+  transition: transform 0.15s ease;
+}
+
+.badge-item-card.is-unlocked {
+  background: #fff;
+  border-color: #f09a3e;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.badge-item-icon-box {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  background: #eee;
+  border-radius: 8px;
+}
+
+.badge-item-card.is-unlocked .badge-item-icon-box {
+  background: #fff8eb;
+  border: 1px solid #f09a3e;
+}
+
+.badge-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.badge-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.badge-item-header strong {
+  font-size: var(--px-text-sm, 14px);
+  color: var(--px-ink, #222);
+}
+
+.badge-rarity-pill {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-rarity-pill.common {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.badge-rarity-pill.rare {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-rarity-pill.legendary {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.badge-item-desc {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+}
+
+.badge-item-reward {
+  font-size: 11px;
+  font-weight: 700;
+  color: #e67e22;
+}
+
+.badge-item-card:not(.is-unlocked) {
+  opacity: 0.65;
+  filter: grayscale(0.85);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-item-card {
+    transition: none;
+  }
+}

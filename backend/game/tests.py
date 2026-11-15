@@ -171,3 +171,21 @@ class StreakMilestoneTests(TestCase):
         self.assertEqual(data['milestones'][0]['days'], 3)
         self.assertEqual(data['milestones'][0]['bonusCoins'], 15)
         self.assertEqual(data['milestones'][1]['days'], 7)
+
+
+class BadgeTests(TestCase):
+    def test_badge_and_theme_creation_and_api(self):
+        from .models import BadgeTheme, Badge
+        theme = BadgeTheme.objects.create(slug='cau-da-nang', name='Cau Da Nang', icon='🌉', completion_bonus_coins=50)
+        Badge.objects.create(theme=theme, badge_id='cau-rong', title='Rong Thep', rarity='common', required_destinations=['cau-rong'], bonus_coins=15)
+        Badge.objects.create(theme=theme, badge_id='cau-song-han', title='Cau Quay', rarity='rare', required_destinations=['cau-song-han'], bonus_coins=25, is_active=False)
+
+        response = self.client.get('/api/game/badges')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn('themes', data)
+        self.assertEqual(len(data['themes']), 1)
+        self.assertEqual(data['themes'][0]['name'], 'Cau Da Nang')
+        self.assertEqual(len(data['themes'][0]['badges']), 1)
+        self.assertEqual(data['themes'][0]['badges'][0]['id'], 'cau-rong')
+        self.assertEqual(data['themes'][0]['badges'][0]['bonusCoins'], 15)
