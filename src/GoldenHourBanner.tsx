@@ -39,7 +39,7 @@ export default function GoldenHourBanner({ destinationId }: { destinationId: str
       latitude: sample.latitude,
       longitude: sample.longitude,
       accuracy: sample.accuracy,
-      isSimulated: sample.isSimulated,
+      isSimulated: (sample as any).isSimulated ?? false,
     })
     setBusy(false)
     if (res.success) {

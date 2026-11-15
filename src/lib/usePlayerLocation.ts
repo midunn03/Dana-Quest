@@ -2,6 +2,7 @@ import { interpolate, t } from '../i18n/locale'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { isFresh, type LocationSample } from './location'
 import { notifyLocationPermissionNeeded } from './locationPermission'
+import { recordTrackPoint } from './journeyTrack'
 
 // Get an initial network/cached fix quickly while GPS improves in the background.
 export const QUICK_LOCATION_OPTIONS = { enableHighAccuracy: false, maximumAge: 30_000, timeout: 5_000 }
@@ -20,6 +21,7 @@ export function usePlayerLocation() {
     if (previous && isFresh(previous) && (value.timestamp < previous.timestamp || (previous.accuracy <= NAVIGATION_MAX_ACCURACY && value.accuracy > NAVIGATION_MAX_ACCURACY))) return false
     latest.current = value
     setSample(value)
+    recordTrackPoint(value)
     setError(value.accuracy > NAVIGATION_MAX_ACCURACY ? interpolate("Vị trí tạm có sai số khoảng ±${0} m. Đang lấy GPS chính xác hơn.",[Math.ceil(value.accuracy)]) : '')
     return true
   }, [])

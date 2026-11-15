@@ -55,7 +55,7 @@ export default function BadgeCollectionPage() {
               </div>
             </div>
             <span className={`badge-theme-badge-count ${theme.completed ? 'is-completed' : ''}`}>
-              {theme.completed ? '✓ ' + t('Đã đủ bộ (+${0} xu)', [theme.completionBonusCoins]) : `${theme.unlockedCount}/${theme.totalCount}`}
+              {theme.completed ? '✓ ' + interpolate(t('Đã đủ bộ (+${0} xu)'), [theme.completionBonusCoins]) : `${theme.unlockedCount}/${theme.totalCount}`}
             </span>
           </div>
 
@@ -78,7 +78,7 @@ export default function BadgeCollectionPage() {
                   </div>
                   <p className="badge-item-desc">{badge.description}</p>
                   <div className="badge-item-reward">
-                    {badge.unlocked ? t('✓ Đã nhận +${0} xu', [badge.bonusCoins]) : t('Thưởng +${0} xu', [badge.bonusCoins])}
+                    {badge.unlocked ? interpolate(t('✓ Đã nhận +${0} xu'), [badge.bonusCoins]) : interpolate(t('Thưởng +${0} xu'), [badge.bonusCoins])}
                   </div>
                 </div>
               </div>

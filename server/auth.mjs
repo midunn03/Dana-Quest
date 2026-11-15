@@ -10,6 +10,7 @@ import { createTransitClaims } from './transit.mjs'
 import { createStreakStore } from './streak.mjs'
 import { createBadgeStore } from './badges.mjs'
 import { createGoldenHourStore } from './golden-hour.mjs'
+import { createGreenMobilityStore } from './green-mobility.mjs'
 import {loadPresentationEvents} from './presentation-events.mjs'
 import { createAccountFeatures } from './account-features.mjs'
 import { createQuestCommunity, isCommunityQuest } from './quest-community.mjs'
@@ -64,12 +65,14 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
     readQuests: owner => questRuns.read(owner),
   })
   const goldenHours = createGoldenHourStore(resolve(dirname(file), 'golden-hours'))
+  const greenMobility = createGreenMobilityStore(resolve(dirname(file), 'green-mobility'))
   const wallet = createWallet(resolve(dirname(file), 'wallets'), {
     readGame: owner => game.read(owner), readQuests: owner => questRuns.read(owner),
     readTransitClaims: owner => transit.read(owner),
     readStreakClaims: owner => streak.read(owner),
     readBadgeClaims: owner => badges.read(owner),
     readGoldenHourClaims: owner => goldenHours.read(owner),
+    readGreenMobilityClaims: owner => greenMobility.read(owner),
     readSourceBackup: async owner => {
       const read = async folder => { try { return JSON.parse(await readFile(resolve(dirname(file), folder, owner + '.json'), 'utf8')) } catch { return null } }
       return { game: await read('players'), quests: await read('quest-runs') }
@@ -176,6 +179,11 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
         if (req.method === 'GET') return send(200, await goldenHours.read(session.userId))
       }
+      if (path === '/api/auth/journey/stats' || path === '/api/journey/stats') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        if (req.method === 'GET') return send(200, await greenMobility.read(session.userId))
+      }
       if (path === '/api/auth/wallet') {
         if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
         if (req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
@@ -258,7 +266,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         if(deleting.has(user.id))throw fail(409,'Tài khoản đang được xóa.')
         deleting.add(user.id)
         try{
-          await Promise.all([wallet.remove(user.id),transit.remove(user.id),streak.remove(user.id),badges.remove(user.id),goldenHours.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id)])
+          await Promise.all([wallet.remove(user.id),transit.remove(user.id),streak.remove(user.id),badges.remove(user.id),goldenHours.remove(user.id),greenMobility.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id)])
           await mutate(users=>{const index=users.findIndex(item=>item.id===user.id);if(index>=0)users.splice(index,1);return user})
           for(const [id,value] of sessions)if(value.userId===user.id)sessions.delete(id)
           setCookie(res,'',secure,0);return send(200,{ok:true})
@@ -310,6 +318,16 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
           bonusCoins: claim.amount,
           balance: updated.balance,
           message: `Nhận thưởng giờ vàng thành công (+${claim.amount} Xu Dana)!`
+        })
+      }
+      if ((path === '/api/auth/journey/track' || path === '/api/journey/track') && req.method === 'POST') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        const result = await greenMobility.recordTrackSession(session.userId, input)
+        const updated = await wallet.read(session.userId)
+        return send(200, {
+          ...result,
+          balance: updated.balance,
         })
       }
       if (path === '/api/auth/wallet' && req.method === 'POST') return send(200, await wallet.redeem(session.userId, input.rewardId))

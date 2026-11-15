@@ -31,6 +31,7 @@ const QuestPlayPage=lazy(()=>import('./QuestPlayPage'))
 const CreatorPage = lazy(() => import('./CreatorPage'))
 const EventsPage = lazy(() => import('./EventsPage'))
 const EventDetailsPage = lazy(() => import('./EventDetailsPage'))
+const JourneyRecapPage = lazy(() => import('./JourneyRecapPage'))
 import EventProvider from './EventProvider'
 
 const Explore = lazy(() => import('./Explore'))
@@ -89,6 +90,7 @@ function AppRouter() {
     : route === '#/quest-cua-toi' ? <DiscoveryPage key="joined" mode="joined" activatedEnabled />
     : route.startsWith('#/tai-khoan') ? <AccountPage key={route} user={auth.user} onLogout={auth.logout} view={route.split('/')[2]||''} />
     : route === '#/chon-nhan-vat' || route === '#/nhan-vat' ? <AvatarPage editing={route === '#/nhan-vat'} initialAvatarId={auth.user?.avatarId} onAvatarConfirmed={auth.saveAvatar} />
+    : route === '#/recap' ? <JourneyRecapPage />
     : route === '#/album' ? <AlbumPage />
     : route === '#/cua-hang' ? <ShopPage />
     : route === '#/su-kien' ? <EventsPage />

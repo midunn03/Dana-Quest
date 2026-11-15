@@ -15,7 +15,7 @@ import {
 
 export default function VoucherWallet({ english: providedEnglish }: { english?: boolean }) {
   const { locale } = useLocale(), english = providedEnglish ?? locale === 'en'
-  const { wallet, loading, error, refresh } = useWallet()
+  const { wallet, loading, error } = useWallet()
   const [available, setAvailable] = useState<PartnerVoucherItem[]>([])
   const [myVouchers, setMyVouchers] = useState<MyVoucherItem[]>([])
   const [redeemingId, setRedeemingId] = useState<number | null>(null)
@@ -42,7 +42,6 @@ export default function VoucherWallet({ english: providedEnglish }: { english?: 
     if (res.success) {
       setNotice(res.message || (english ? 'Voucher redeemed!' : 'Đã đổi voucher thành công!'))
       loadData()
-      refresh?.()
     } else {
       setNotice(res.message || (english ? 'Redemption failed.' : 'Đổi voucher thất bại.'))
     }
