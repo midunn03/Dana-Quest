@@ -1,10 +1,10 @@
 // [UX-FLOW] Component StartHub: Trung tâm xuất phát giúp người chơi biết bắt đầu ở đâu
-import React, { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import './StartHub.css'
-import { t, interpolate } from './i18n/locale'
+import { t } from './i18n/locale'
 import { isUxFlagEnabled } from './lib/uxFlags'
 import { quests, getQuest } from './data/quests'
-import { destinations, getDestination } from './data/destinations'
+import { getDestination } from './data/destinations'
 import { useQuestProgress } from './lib/useQuestProgress'
 import { useProgress } from './lib/useProgress'
 import { usePlayerLocation } from './lib/usePlayerLocation'
@@ -17,7 +17,7 @@ export interface StartHubProps {
   onDismiss?: () => void
 }
 
-export default function StartHub({ variant = 'inline', onSelectQuest, onDismiss }: StartHubProps) {
+export default function StartHub({ variant = 'inline', onSelectQuest, onDismiss: _onDismiss }: StartHubProps) {
   const [collapsed, setCollapsed] = useState(false)
   const { state: questState } = useQuestProgress()
   const { state: destState } = useProgress()

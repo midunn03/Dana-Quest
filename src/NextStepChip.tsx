@@ -1,5 +1,4 @@
 // [UX-FLOW] Component NextStepChip: Chip nổi thông minh luôn chỉ dẫn bước tiếp theo
-import React from 'react'
 import './NextStepChip.css'
 import { t } from './i18n/locale'
 import { isUxFlagEnabled } from './lib/uxFlags'

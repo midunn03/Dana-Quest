@@ -1,5 +1,4 @@
 // [UX-FLOW] Trang Hướng dẫn chơi Dana Quest (#/huong-dan)
-import React from 'react'
 import './HelpPage.css'
 import { t } from './i18n/locale'
 import PixelLogo from './PixelLogo'

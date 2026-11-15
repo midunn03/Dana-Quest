@@ -41,19 +41,19 @@ export default function DiscoveryPage({ mode = 'explore', activatedEnabled = fal
   const cards: Card[] = [
     ...quests.filter(quest => !joined || questState.quests[quest.id]).map(quest => {
       const run = questState.quests[quest.id]
-      return { photo:getDestination(quest.id)?.photo, id: quest.id, title: displayText(quest.title), area: getDestination(quest.id)?.name??displayText(quest.area), description: interpolate("${0} thử thách (${1} phút)",[quest.checkpoints.length,quest.estimatedMinutes]), href: `#/quest/${quest.id}`, sample: quest.id==='due-dau-an-50-nam', status: run ? (run.completedAt ? t("Đã hoàn thành") : t("Đang tham gia")) : undefined, kind: 'quest', position: quest.startPosition }
+      return { photo:getDestination(quest.id)?.photo, id: quest.id, title: displayText(quest.title), area: getDestination(quest.id)?.name??displayText(quest.area), description: interpolate("${0} thử thách (${1} phút)",[quest.checkpoints.length,quest.estimatedMinutes]), href: `#/quest/${quest.id}`, sample: quest.id==='due-dau-an-50-nam', status: run ? (run.completedAt ? t("Đã hoàn thành") : t("Đang tham gia")) : undefined, kind: 'quest' as const, position: quest.startPosition }
     }),
     ...(joined ? Object.keys(state.destinations).map(getDestination).filter(place => !!place && state.destinations[place.id]?.started) : destinations).flatMap(place => {
       if (!place) return []
       const progress = state.destinations[place.id]
-      return [{ id: place.id, title: place.name, area: t("Đà Nẵng"), description: place.highlightReason, photo: place.photo, href: quests.some(q=>q.id===place.id)?`#/quest/${place.id}`:joined ? `#/nhiem-vu/${place.id}` : `#/dia-diem/${place.id}`, status: progress?.started ? (isDestinationComplete(progress) ? t("Đã hoàn thành") : interpolate("Đang tham gia (${0}/${1})",[progress.completed.length,progress.selected.length])) : undefined, kind: 'destination', position: place.position }]
+      return [{ id: place.id, title: place.name, area: t("Đà Nẵng"), description: place.highlightReason, photo: place.photo, href: quests.some(q=>q.id===place.id)?`#/quest/${place.id}`:joined ? `#/nhiem-vu/${place.id}` : `#/dia-diem/${place.id}`, status: progress?.started ? (isDestinationComplete(progress) ? t("Đã hoàn thành") : interpolate("Đang tham gia (${0}/${1})",[progress.completed.length,progress.selected.length])) : undefined, kind: 'destination' as const, position: place.position }]
     }),
   ]
   const activatedCards: Card[]=activated.flatMap(item=>{
     const quest=quests.find(quest=>quest.id===item.questId)
     const place=getDestination(item.questId)
     if(!quest&&!place)return []
-    return [{id:item.questId,title:displayText(quest?.title||place!.name),area:t("Đà Nẵng"),description:t("Hành trình đã gắn vào tài khoản bằng mã Dana Quest."),href:quest?`#/quest/${item.questId}`:`#/dia-diem/${item.questId}`,photo:place?.photo,status:t("Đã kích hoạt"),sample:!!quest, kind: quest ? 'quest' : 'destination', position: quest ? quest.startPosition : place?.position}]
+    return [{id:item.questId,title:displayText(quest?.title||place!.name),area:t("Đà Nẵng"),description:t("Hành trình đã gắn vào tài khoản bằng mã Dana Quest."),href:quest?`#/quest/${item.questId}`:`#/dia-diem/${item.questId}`,photo:place?.photo,status:t("Đã kích hoạt"),sample:!!quest, kind: (quest ? 'quest' : 'destination') as 'quest' | 'destination', position: quest ? quest.startPosition : place?.position}]
   })
   const allCards=[...cards,...activatedCards].filter((card,index,list)=>list.findIndex(item=>item.id===card.id)===index)
   // [UX-FLOW] Lọc theo loại và từ khóa tìm kiếm

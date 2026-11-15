@@ -1,5 +1,5 @@
 // [UX-FLOW] Component CoachMarks: Bong bóng chỉ dẫn 5 bước tương tác lần đầu
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './CoachMarks.css'
 import { t } from './i18n/locale'
 import { isUxFlagEnabled } from './lib/uxFlags'
