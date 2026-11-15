@@ -28,3 +28,59 @@
 @media(prefers-reduced-motion:reduce){.atlas-list>button{transition:none}}
 
 .atlas-pin.is-selected .atlas-pin-symbol{background:var(--px-reward);color:var(--px-ink);outline:3px solid var(--px-ink);outline-offset:3px;transform:scale(1.12)}
+
+
+/* ---------- Lớp Trạm Di Chuyển Xanh (Explore) ---------- */
+.atlas-transit-toggle {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: var(--px-border);
+  background: transparent;
+  color: var(--px-ink);
+  min-height: 44px;
+  font: inherit;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  margin-top: 4px;
+}
+.atlas-transit-toggle[aria-pressed=true] {
+  background: #e8f8f0;
+  border-color: #20874e;
+  color: #0f5132;
+  font-weight: 700;
+}
+.transit-map-pin {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+.transit-map-pin.bike { background: #2fa36b; }
+.transit-map-pin.bus { background: #248ae1; }
+.transit-div-icon { background: transparent; border: 0; }
+
+.qd-transit-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #e8f8f0;
+  border: 1px solid #62c395;
+  border-radius: 8px;
+}
+.qd-transit-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+.qd-transit-row strong {
+  color: #0f5132;
+}

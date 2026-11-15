@@ -162,3 +162,14 @@
 .qd-page :is(h1,h2,h3) {font-family:var(--font-ui);font-weight:400}
 :where(.qd-page) .qd-play-panel .q-briefing-start {flex-shrink:0}
 :where(.qd-page) .q-briefing-start { display:flex; align-items:center; justify-content:center; width:min(100%,520px); margin-inline:auto; min-height:58px; padding:14px var(--px-space-5); border:0; border-radius:0; color:var(--px-ink); background:var(--px-page); font:inherit; font-size:var(--text-sm); font-weight:400; text-decoration:none; text-align:center; cursor:pointer; }
+
+:where(.qd-page) .qd-transit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: 18px;
+  flex-shrink: 0;
+  margin: 2px 0;
+}
