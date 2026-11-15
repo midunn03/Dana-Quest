@@ -1,0 +1,129 @@
+/* [UX-FLOW] Styles for CoachMarks */
+
+.coach-marks-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 29, 24, 0.65);
+  backdrop-filter: blur(2px);
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: coach-fade 0.2s ease-out;
+}
+
+@keyframes coach-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.coach-marks-card {
+  background: #FFFDF7;
+  border: var(--px-border, 4px solid var(--px-ink, #1E302A));
+  box-shadow: var(--px-shadow-high, 0 8px 0 var(--px-ink, #1E302A));
+  max-width: 420px;
+  width: 100%;
+  padding: 18px 20px;
+  font-family: var(--px-font, monospace);
+  color: var(--px-ink, #1E302A);
+  box-sizing: border-box;
+  animation: coach-pop 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes coach-pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.coach-marks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.coach-marks-step-count {
+  font-size: 13px;
+  font-weight: bold;
+  background: #E4F0E5;
+  padding: 2px 8px;
+  border: 1px solid var(--px-ink, #1E302A);
+}
+
+.coach-marks-skip-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--px-muted, #52665C);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.coach-marks-title {
+  margin: 0 0 8px 0;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+.coach-marks-desc {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--px-ink, #1E302A);
+}
+
+.coach-marks-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 2px dashed #CBD5E1;
+  padding-top: 14px;
+}
+
+.coach-marks-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.coach-marks-dot {
+  width: 8px;
+  height: 8px;
+  background: #CBD5E1;
+  border: 1px solid var(--px-ink, #1E302A);
+}
+
+.coach-marks-dot.is-active {
+  background: var(--px-action, #216447);
+  transform: scale(1.2);
+}
+
+.coach-marks-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.coach-marks-prev-btn {
+  background: #ffffff;
+  border: 2px solid var(--px-ink, #1E302A);
+  font-size: 13px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.coach-marks-next-btn {
+  background: var(--px-action, #216447);
+  color: #ffffff;
+  border: 2px solid var(--px-ink, #1E302A);
+  box-shadow: 2px 2px 0 var(--px-ink, #1E302A);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.coach-marks-next-btn:hover {
+  background: var(--px-action-hover, #194D37);
+}

@@ -1,0 +1,168 @@
+/* [UX-FLOW] Styles for HelpPage (#/huong-dan) */
+
+.help-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 16px 80px 16px;
+  font-family: var(--px-font, monospace);
+  color: var(--px-ink, #1E302A);
+  box-sizing: border-box;
+}
+
+.help-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--px-ink, #1E302A);
+}
+
+.help-back-link {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--px-action, #216447);
+  text-decoration: none;
+  border: 2px solid var(--px-ink, #1E302A);
+  padding: 4px 10px;
+  background: #ffffff;
+}
+
+.help-back-link:hover {
+  background: #E4F0E5;
+}
+
+.help-content h1 {
+  font-size: 26px;
+  margin: 0 0 8px 0;
+  line-height: 1.25;
+}
+
+.help-subtitle {
+  font-size: 15px;
+  color: var(--px-muted, #52665C);
+  margin: 0 0 24px 0;
+}
+
+.help-section {
+  margin-bottom: 28px;
+}
+
+.help-section h2 {
+  font-size: 18px;
+  margin: 0 0 12px 0;
+  border-left: 4px solid var(--px-action, #216447);
+  padding-left: 8px;
+}
+
+.help-grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.help-card {
+  background: #ffffff;
+  border: var(--px-border, 3px solid var(--px-ink, #1E302A));
+  box-shadow: var(--px-shadow-low, 0 4px 0 var(--px-ink, #1E302A));
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.help-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border: 1px solid var(--px-ink, #1E302A);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.story-badge {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.place-badge {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.help-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+.help-card p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0 0 12px 0;
+  color: var(--px-muted, #52665C);
+}
+
+.help-card ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.help-action-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.help-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  background: var(--px-action, #216447);
+  color: #ffffff !important;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 14px;
+  border: 2px solid var(--px-ink, #1E302A);
+  box-shadow: 2px 2px 0 var(--px-ink, #1E302A);
+}
+
+.help-cta-btn.secondary {
+  background: #ffffff;
+  color: var(--px-ink, #1E302A) !important;
+}
+
+.help-card.safety-card {
+  background: #FFFBEB;
+  border-left: 6px solid #D97706;
+}
+
+.help-footer-action {
+  text-align: center;
+  margin-top: 36px;
+}
+
+.help-start-play-btn {
+  display: inline-block;
+  background: var(--px-action, #216447);
+  color: #ffffff !important;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 28px;
+  border: 3px solid var(--px-ink, #1E302A);
+  box-shadow: 4px 4px 0 var(--px-ink, #1E302A);
+  transition: transform 0.1s ease;
+}
+
+.help-start-play-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--px-ink, #1E302A);
+}
+
+@media (max-width: 650px) {
+  .help-grid-two {
+    grid-template-columns: 1fr;
+  }
+}

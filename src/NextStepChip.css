@@ -1,0 +1,83 @@
+/* [UX-FLOW] Styles for NextStepChip */
+
+.next-step-chip-container {
+  position: fixed;
+  bottom: calc(var(--px-nav-height, 80px) + 12px);
+  right: 16px;
+  z-index: 950;
+  pointer-events: auto;
+  max-width: calc(100vw - 32px);
+  animation: next-step-pop 0.25s ease-out;
+}
+
+@keyframes next-step-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.next-step-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #152D25;
+  color: #F5F6EF !important;
+  text-decoration: none;
+  font-family: var(--px-font, monospace);
+  font-size: 13px;
+  font-weight: bold;
+  padding: 8px 14px;
+  border: 2px solid #FFE8A3;
+  box-shadow: 0 4px 0 #1E302A;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 380px;
+}
+
+.next-step-chip:hover {
+  background: #1e3d33;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #1E302A;
+}
+
+.next-step-icon {
+  color: #FFE8A3;
+  font-size: 14px;
+}
+
+.next-step-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.next-step-arrow {
+  color: #FFE8A3;
+  font-size: 14px;
+  margin-left: 2px;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .next-step-chip-container {
+    right: 12px;
+    left: 12px;
+    bottom: calc(var(--px-nav-height, 75px) + 10px);
+  }
+
+  .next-step-chip {
+    width: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}

@@ -57,3 +57,61 @@
 @media(min-width:768px) {
  .app-shell>.discovery-page { padding:var(--px-space-8) var(--px-page-gutter) var(--px-space-12); }
 }
+
+/* [UX-FLOW] Game Mode Badges & Quick Filters */
+.discovery-mode-filters {
+  display: flex;
+  gap: var(--px-space-2, 8px);
+  margin-bottom: var(--px-space-5, 20px);
+  flex-wrap: wrap;
+  order: 3;
+}
+
+.discovery-filter-btn {
+  background: var(--px-page, #F7F5EC);
+  border: 2px solid var(--px-ink, #1E302A);
+  color: var(--px-ink, #1E302A);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--px-ink, #1E302A);
+}
+
+.discovery-filter-btn:hover {
+  background: var(--px-surface-soft, #E4F0E5);
+}
+
+.discovery-filter-btn.is-active {
+  background: var(--px-ink, #1E302A);
+  color: #ffffff;
+}
+
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.game-mode-badge {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border: 1px solid var(--px-ink, #1E302A);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.game-mode-badge.mode-quest {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.game-mode-badge.mode-destination {
+  background: #FEF3C7;
+  color: #92400E;
+}

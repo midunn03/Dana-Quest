@@ -16,6 +16,10 @@ import {mapEntries,type MapEntry} from './lib/mapEntries'
 import {EventContext} from './lib/eventContext'
 import {useContext} from 'react'
 import {useLocale} from './i18n/LocaleProvider'
+// [UX-FLOW] Tích hợp StartHub overlay, CoachMarks và cờ tính năng
+import StartHub from './StartHub'
+import CoachMarks from './CoachMarks'
+import { isUxFlagEnabled } from './lib/uxFlags'
 
 export default function Explore(){
  const {t,locale}=useLocale(),container=useRef<HTMLDivElement>(null),map=useRef<L.Map|null>(null)
@@ -95,13 +99,35 @@ export default function Explore(){
  function choose(entry:MapEntry){setSelected(entry);map.current?.flyTo(entry.position,16,{duration:.5,animate:!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches})}
  return <main className="explore-page atlas-page">
   <aside className="atlas-sidebar" aria-label={t('Danh sách trên bản đồ','Map places')}>
-   <header><a href="#/kham-pha">← {t('Khám phá','Discover')}</a><h1>{t('Bản đồ hành trình','Adventure map')}</h1><p>{t('Chọn điểm hẹn, tìm câu chuyện tiếp theo.','Find a meeting point and your next story.')}</p></header>
+   <header>
+    <a href="#/kham-pha">← {t('Khám phá','Discover')}</a>
+    <a href="#/huong-dan" style={{ marginLeft: 'auto', textDecoration: 'underline', fontSize: '13px', color: 'var(--px-ink)' }}>? {t('Hướng dẫn','Guide')}</a>
+    <h1>{t('Bản đồ hành trình','Adventure map')}</h1>
+    <p>{t('Chọn điểm hẹn, tìm câu chuyện tiếp theo.','Find a meeting point and your next story.')}</p>
+   </header>
    <label className="atlas-search"><span className="sr-only">{t('Tìm kiếm trên bản đồ','Search map')}</span><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder={t('Tìm quest, địa điểm, sự kiện…','Search quests, places, events…')}/></label>
    <div className="atlas-filters" aria-label={t('Bộ lọc bản đồ','Map filters')}><button aria-pressed={mode==='quests'} onClick={()=>{setMode('quests');setSelected(null)}}>✦ {t('Địa điểm quest','Quest places')}</button><button aria-pressed={mode==='events'} onClick={()=>{setMode('events');setSelected(null)}}>◆ {t('Sự kiện sắp tới','Upcoming events')}</button><button className="atlas-transit-toggle" aria-pressed={showTransit} onClick={()=>setShowTransit(v=>!v)}>🚲 {showTransit?t('Ẩn trạm xe xanh','Hide eco transit'):t('Hiện trạm xe xanh','Show eco transit')}</button></div>
    <div className="atlas-location"><button onClick={locate} disabled={locating}>◎ {locating?t('Đang định vị…','Locating…'):t('Vị trí của tôi','My location')}</button><small role="status">{message||error||(sample?t(`Sai số vị trí ±${Math.ceil(sample.accuracy)} m`,`Location accuracy ±${Math.ceil(sample.accuracy)} m`):t('Cho phép định vị để đưa nhân vật lên bản đồ.','Allow location to place your avatar on the map.'))}</small></div>
    <div className="atlas-list-heading"><strong>{entries.length} {t('điểm trên bản đồ','map places')}</strong><span>{mode==='quests'?'✦':'◆'} {mode==='quests'?t('Quest','Quest'):t('Sự kiện','Events')}</span></div>
    <div className="atlas-list">{entries.map(entry=><button key={entry.id} className={selected?.id===entry.id?'selected':''} onClick={()=>choose(entry)}><span className={`atlas-list-icon ${entry.kind}`}>{entry.kind==='quest'?'✦':'◆'}</span><span><strong>{entry.title}</strong><small>{entry.subtitle}</small>{entry.start&&<small>{new Date(entry.start).toLocaleString(locale==='en'?'en-US':'vi-VN',{dateStyle:'medium',timeStyle:'short'})}</small>}</span><span aria-hidden="true">↗</span></button>)}{!entries.length&&<p className="atlas-empty">{t('Chưa có điểm phù hợp. Hãy đổi bộ lọc hoặc từ khóa.','No matching places. Change the filter or search.')}</p>}</div>
   </aside>
-  <section className="atlas-map-area" aria-label={t('Bản đồ Đà Nẵng','Da Nang map')}><div ref={container} className="map atlas-map"/>{loading&&<p className="atlas-map-status" role="status">{t('Đang tải bản đồ…','Loading map…')}</p>}{tileError&&<div className="atlas-map-status" role="alert">{t('Nền bản đồ chưa tải đầy đủ. Danh sách vẫn dùng được.','Map tiles are unavailable. The list remains available.')} <button onClick={()=>{setTileError(false);setLoading(true);setAttempt(n=>n+1)}}>{t('Thử lại','Retry')}</button></div>}{selected&&<article className="atlas-selection"><button className="atlas-selection-close" aria-label={t('Đóng','Close')} onClick={()=>setSelected(null)}>×</button><small>{selected.kind==='quest'?t('Hành trình khám phá','Exploration quest'):t('Sự kiện sắp tới','Upcoming event')}</small><h2>{selected.title}</h2><p>{selected.subtitle}</p><a href={selected.href}>{t('Xem chi tiết','View details')} →</a></article>}</section>
+  <section className="atlas-map-area" aria-label={t('Bản đồ Đà Nẵng','Da Nang map')}>
+   <div ref={container} className="map atlas-map"/>
+   {/* [UX-FLOW] StartHub overlay trên bản đồ khi chưa chọn điểm cụ thể */}
+   {isUxFlagEnabled('START_HUB') && !selected && (
+     <StartHub
+       variant="overlay"
+       onSelectQuest={id => {
+         const found = entries.find(e => e.id === id)
+         if (found) choose(found)
+       }}
+     />
+   )}
+   {/* [UX-FLOW] Bong bóng hướng dẫn tương tác lần đầu */}
+   {isUxFlagEnabled('COACH_MARKS') && <CoachMarks />}
+   {loading&&<p className="atlas-map-status" role="status">{t('Đang tải bản đồ…','Loading map…')}</p>}
+   {tileError&&<div className="atlas-map-status" role="alert">{t('Nền bản đồ chưa tải đầy đủ. Danh sách vẫn dùng được.','Map tiles are unavailable. The list remains available.')} <button onClick={()=>{setTileError(false);setLoading(true);setAttempt(n=>n+1)}}>{t('Thử lại','Retry')}</button></div>}
+   {selected&&<article className="atlas-selection"><button className="atlas-selection-close" aria-label={t('Đóng','Close')} onClick={()=>setSelected(null)}>×</button><small>{selected.kind==='quest'?t('Hành trình khám phá','Exploration quest'):t('Sự kiện sắp tới','Upcoming event')}</small><h2>{selected.title}</h2><p>{selected.subtitle}</p><a href={selected.href}>{t('Xem chi tiết','View details')} →</a></article>}
+  </section>
  </main>
 }
