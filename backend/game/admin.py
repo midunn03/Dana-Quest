@@ -3,7 +3,7 @@ import base64
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone, BadgeTheme, Badge, GoldenHourChallenge
+from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone, BadgeTheme, Badge, GoldenHourChallenge, PartnerVoucher, UserVoucherRedemption
 
 
 @admin.register(GameState)
@@ -113,3 +113,19 @@ class GoldenHourChallengeAdmin(admin.ModelAdmin):
     list_filter = ('destination_id', 'is_active')
     search_fields = ('title', 'destination_id', 'description')
     list_editable = ('bonus_coins', 'multiplier', 'is_active')
+
+
+@admin.register(PartnerVoucher)
+class PartnerVoucherAdmin(admin.ModelAdmin):
+    list_display = ('title', 'partner_name', 'destination_id', 'coin_cost', 'remaining_quantity', 'total_quantity', 'expires_at', 'is_sample', 'is_active')
+    list_filter = ('is_sample', 'is_active', 'destination_id')
+    search_fields = ('title', 'partner_name', 'destination_id')
+    list_editable = ('coin_cost', 'remaining_quantity', 'is_active')
+
+
+@admin.register(UserVoucherRedemption)
+class UserVoucherRedemptionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'voucher', 'redemption_code', 'coin_spent', 'is_used')
+    list_filter = ('is_used', 'voucher')
+    search_fields = ('user__username', 'redemption_code', 'voucher__partner_name')
+    readonly_fields = ('user', 'voucher', 'redemption_code', 'coin_spent', 'redeemed_at_ms')

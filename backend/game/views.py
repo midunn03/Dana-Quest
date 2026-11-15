@@ -202,3 +202,101 @@ def golden_hour_challenges(request):
         for g in GoldenHourChallenge.objects.filter(is_active=True).order_by('destination_id', 'start_time')
     ]
     return JsonResponse({'challenges': items})
+
+
+@require_http_methods(['GET'])
+def partner_vouchers_list(request):
+    """GET /api/game/vouchers — danh sach voucher doi tac co the doi bang xu."""
+    from .models import PartnerVoucher
+    import datetime
+    today = datetime.date.today()
+    vouchers = [
+        {
+            'id': v.id,
+            'codePrefix': v.code_prefix,
+            'partnerName': v.partner_name,
+            'destinationId': v.destination_id,
+            'title': v.title,
+            'description': v.description,
+            'coinCost': v.coin_cost,
+            'remaining': v.remaining_quantity,
+            'expiresAt': v.expires_at.isoformat(),
+            'isSample': v.is_sample,
+        }
+        for v in PartnerVoucher.objects.filter(is_active=True, expires_at__gte=today, remaining_quantity__gt=0).order_by('-id')
+    ]
+    return JsonResponse({'vouchers': vouchers})
+
+
+@require_http_methods(['POST'])
+def redeem_partner_voucher(request):
+    """POST /api/game/vouchers/redeem — doi xu lay ma voucher dung mot lan."""
+    from .models import PartnerVoucher, UserVoucherRedemption
+    import uuid, time, datetime
+
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({'message': 'Vui long dang nhap de doi voucher.'}, status=401)
+
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except Exception:
+        return JsonResponse({'message': 'Du lieu khong hop le.'}, status=400)
+
+    voucher_id = data.get('voucherId')
+    voucher = PartnerVoucher.objects.filter(id=voucher_id, is_active=True).first()
+    if not voucher:
+        return JsonResponse({'message': 'Khong tim thay voucher hoac voucher da het han.'}, status=404)
+
+    if voucher.remaining_quantity <= 0 or voucher.expires_at < datetime.date.today():
+        return JsonResponse({'message': 'Voucher nay da het luot doi.'}, status=400)
+
+    # Sinh ma duy nhat dung mot lan
+    random_part = uuid.uuid4().hex[:8].upper()
+    single_use_code = f'{voucher.code_prefix}-{random_part[:4]}-{random_part[4:]}'
+
+    with transaction.atomic():
+        voucher.remaining_quantity -= 1
+        voucher.save(update_fields=['remaining_quantity'])
+
+        redemption = UserVoucherRedemption.objects.create(
+            user=request.user,
+            voucher=voucher,
+            redemption_code=single_use_code,
+            coin_spent=voucher.coin_cost,
+            redeemed_at_ms=int(time.time() * 1000),
+        )
+
+    return JsonResponse({
+        'success': True,
+        'redemptionCode': redemption.redemption_code,
+        'partnerName': voucher.partner_name,
+        'title': voucher.title,
+        'coinSpent': voucher.coin_cost,
+        'expiresAt': voucher.expires_at.isoformat(),
+        'message': f'Doi thanh cong! Ma voucher cua ban la: {single_use_code}',
+    })
+
+
+@require_http_methods(['GET'])
+def my_partner_vouchers(request):
+    """GET /api/game/vouchers/my — danh sach voucher ma nguoi choi da doi."""
+    from .models import UserVoucherRedemption
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({'message': 'Vui long dang nhap.'}, status=401)
+
+    items = [
+        {
+            'id': r.id,
+            'redemptionCode': r.redemption_code,
+            'partnerName': r.voucher.partner_name,
+            'title': r.voucher.title,
+            'description': r.voucher.description,
+            'coinSpent': r.coin_spent,
+            'redeemedAt': r.redeemed_at_ms,
+            'expiresAt': r.voucher.expires_at.isoformat(),
+            'isUsed': r.is_used,
+            'isSample': r.voucher.is_sample,
+        }
+        for r in UserVoucherRedemption.objects.filter(user=request.user).select_related('voucher').order_by('-redeemed_at_ms')
+    ]
+    return JsonResponse({'vouchers': items})

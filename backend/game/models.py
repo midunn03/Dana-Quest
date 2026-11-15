@@ -164,3 +164,47 @@ class GoldenHourChallenge(models.Model):
 
     def __str__(self):
         return f'{self.title} ({self.destination_id}: {self.start_time}-{self.end_time})'
+
+
+class PartnerVoucher(models.Model):
+    """Voucher uu dai tu doi tac / quan am thuc."""
+
+    code_prefix = models.CharField('Tien to ma voucher', max_length=20, default='DANA', help_text='Vi du: MIQUANG, BANHTRANG')
+    partner_name = models.CharField('Ten doi tac / Quan', max_length=120, help_text='Ghi ro (Mau) neu la du lieu thu nghiem')
+    destination_id = models.CharField('Ma dia diem / Quan lien ket', max_length=60, blank=True)
+    title = models.CharField('Tieu de uu dai', max_length=150, help_text='Vi du: Giam 20% to dac biet hoac Tang ly tra da')
+    description = models.TextField('Chi tiet dieu kien su dung', blank=True)
+    coin_cost = models.PositiveIntegerField('Gia doi (xu)', default=30)
+    total_quantity = models.PositiveIntegerField('Tong so luot phat hanh', default=50)
+    remaining_quantity = models.PositiveIntegerField('So luot con lai', default=50)
+    expires_at = models.DateField('Han dung voucher')
+    is_sample = models.BooleanField('Du lieu mau', default=True, help_text='Danh dau neu la uu dai thu nghiem chua ky ket hop tac thuc te')
+    is_active = models.BooleanField('Kich hoat', default=True)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'voucher doi tac'
+        verbose_name_plural = 'cac voucher doi tac'
+
+    def __str__(self):
+        sample_tag = ' [MAU]' if self.is_sample else ''
+        return f'{self.partner_name}: {self.title} ({self.coin_cost} xu){sample_tag}'
+
+
+class UserVoucherRedemption(models.Model):
+    """Ma voucher dung mot lan nguoi choi da doi bang xu."""
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='redeemed_vouchers')
+    voucher = models.ForeignKey(PartnerVoucher, on_delete=models.CASCADE, related_name='redemptions')
+    redemption_code = models.CharField('Ma dung mot lan', max_length=40, unique=True)
+    coin_spent = models.PositiveIntegerField('So xu da tru')
+    redeemed_at_ms = models.BigIntegerField('Thoi diem doi (ms)')
+    is_used = models.BooleanField('Da su dung tai quan', default=False)
+
+    class Meta:
+        ordering = ['-redeemed_at_ms']
+        verbose_name = 'luot doi voucher'
+        verbose_name_plural = 'lich su doi voucher'
+
+    def __str__(self):
+        return f'{self.user.username} · {self.voucher.partner_name} · {self.redemption_code}'

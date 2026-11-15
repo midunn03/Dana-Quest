@@ -211,3 +211,48 @@ class GoldenHourTests(TestCase):
         self.assertEqual(len(data['challenges']), 1)
         self.assertEqual(data['challenges'][0]['destinationId'], 'cau-rong')
         self.assertEqual(data['challenges'][0]['bonusCoins'], 20)
+
+
+class PartnerVoucherTests(TestCase):
+    def test_partner_voucher_list_and_redeem(self):
+        from .models import PartnerVoucher
+        from datetime import date
+        from django.contrib.auth import get_user_model
+        user = get_user_model().objects.create_user(username='voucher-player')
+        voucher = PartnerVoucher.objects.create(
+            code_prefix='TESTVOUCHER',
+            partner_name='Quan Mau',
+            title='Giam 20k',
+            coin_cost=30,
+            total_quantity=10,
+            remaining_quantity=10,
+            expires_at=date(2028, 1, 1),
+            is_sample=True,
+            is_active=True
+        )
+
+        # 1. Anonymous get vouchers list
+        res = self.client.get('/api/game/vouchers')
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.json()['vouchers']), 1)
+
+        # 2. Redeem without login -> 401
+        res = self.client.post('/api/game/vouchers/redeem', json.dumps({'voucherId': voucher.id}), content_type='application/json')
+        self.assertEqual(res.status_code, 401)
+
+        # 3. Redeem with login -> 200 & unique code
+        self.client.force_login(user)
+        res = self.client.post('/api/game/vouchers/redeem', json.dumps({'voucherId': voucher.id}), content_type='application/json')
+        self.assertEqual(res.status_code, 200)
+        body = res.json()
+        self.assertTrue(body['success'])
+        self.assertTrue(body['redemptionCode'].startswith('TESTVOUCHER-'))
+
+        voucher.refresh_from_db()
+        self.assertEqual(voucher.remaining_quantity, 9)
+
+        # 4. View my vouchers
+        res = self.client.get('/api/game/vouchers/my')
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.json()['vouchers']), 1)
+        self.assertEqual(res.json()['vouchers'][0]['redemptionCode'], body['redemptionCode'])

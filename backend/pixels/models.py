@@ -75,6 +75,7 @@ def shrink_upload(field_file, side, max_bytes, keep_alpha=True):
 CATEGORIES = [
     ('landmark', 'Kiến trúc / biểu tượng'), ('museum', 'Bảo tàng'), ('park', 'Công viên'), ('beach', 'Biển'),
     ('pagoda', 'Chùa'), ('nature', 'Thiên nhiên'), ('heritage', 'Di tích'),
+    ('food', 'Ẩm thực / Đặc sản'),
 ]
 CROWD_HOURS = list(range(6, 24))  # biểu đồ giờ đông đúc: 6:00 → 23:00
 
