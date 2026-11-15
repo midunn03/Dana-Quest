@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 
-from .models import Place, PlaceSprite
+from .models import Place, PlaceSprite, TransitStation
+from accounts.ownership import public_owner_checked
 
 
 def place_payload(place, position):
@@ -16,6 +17,7 @@ def place_payload(place, position):
     }
 
 
+@public_owner_checked
 @require_GET
 def places(request):
     """Dữ liệu địa điểm cho giao diện.
@@ -44,3 +46,26 @@ def places(request):
                                    'heightM': sprite.ground_height_m, 'rotation': sprite.ground_rotation}
         items[sprite.place.slug] = entry
     return JsonResponse({'managed': bool(rows), 'places': list(listed.values()), 'items': items})
+
+
+
+@public_owner_checked
+@require_GET
+def transit_stations(request):
+    """API trả về danh sách trạm di chuyển xanh đã xác minh và đang hoạt động."""
+    stations = TransitStation.objects.filter(verified=True, is_active=True)
+    items = [
+        {
+            'id': s.station_id,
+            'name': s.name,
+            'type': s.transit_type,
+            'position': [s.latitude, s.longitude],
+            'address': s.address,
+            'operator': s.operator,
+            'sourceUrl': s.source_url,
+            'verified': s.verified,
+            'bonusCoins': s.bonus_coins,
+        }
+        for s in stations
+    ]
+    return JsonResponse({'stations': items})

@@ -1,11 +1,13 @@
-﻿import { useRef, useState } from 'react'
+import { interpolate } from './i18n/locale'
+import { t } from './i18n/locale'
+import { useRef, useState } from 'react'
 import type { Destination } from './data/destinations'
 import LandmarkArt from './LandmarkArt'
 
 const scenes = [
-  { key: 'day', label: 'Ban ngày' },
-  { key: 'sunset', label: 'Hoàng hôn' },
-  { key: 'night', label: 'Đêm bên thành phố' },
+  { key: 'day', label: t("Ban ngày") },
+  { key: 'sunset', label: t("Hoàng hôn") },
+  { key: 'night', label: t("Đêm bên thành phố") },
 ] as const
 
 export default function DestinationGallery({ place }: { place: Destination }) {
@@ -23,9 +25,9 @@ export default function DestinationGallery({ place }: { place: Destination }) {
     setDragging(false)
     if (moved && track.current?.clientWidth) goTo(Math.round(track.current.scrollLeft / track.current.clientWidth))
   }
-  return <section className="destination-gallery" aria-label={`Bộ ảnh minh họa ${place.name}`}>
+  return <section className="destination-gallery" aria-label={interpolate("Bộ ảnh minh họa ${0}",[place.name])}>
     <div className="gallery-frame">
-      <div className={`gallery-track ${dragging ? 'is-dragging' : ''}`} ref={track} tabIndex={0} aria-label="Vuốt ngang để xem ảnh"
+      <div className={`gallery-track ${dragging ? 'is-dragging' : ''}`} ref={track} tabIndex={0} aria-label={t("Vuốt ngang để xem ảnh")}
         onDragStart={event => event.preventDefault()}
         onPointerDown={event => { if (event.pointerType === 'mouse' && event.button === 0) mouse.current = { id: event.pointerId, x: event.clientX, y: event.clientY, left: event.currentTarget.scrollLeft, moved: false } }}
         onPointerMove={event => {
@@ -42,14 +44,14 @@ export default function DestinationGallery({ place }: { place: Destination }) {
         onPointerUp={finishMouse} onPointerCancel={finishMouse} onLostPointerCapture={finishMouse}
         onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); goTo(index + (event.key === 'ArrowRight' ? 1 : -1)) } }}
         onScroll={event => { const el = event.currentTarget; if (el.clientWidth) setIndex(Math.max(0, Math.min(2, Math.round(el.scrollLeft / el.clientWidth)))) }}>
-        {scenes.map((scene, position) => <figure className="gallery-slide" key={scene.key} role="img" aria-label={`${place.name} – ${scene.label} (minh họa ${position + 1}/3)`}>
-          <LandmarkArt id={place.id} scene={scene.key}/><figcaption>{scene.label} · Hình minh họa</figcaption>
+        {scenes.map((scene, position) => <figure className="gallery-slide" key={scene.key} role="img" aria-label={interpolate("${0} – ${1} (minh họa ${2}/3)",[place.name,scene.label,position + 1])}>
+          <LandmarkArt id={place.id} scene={scene.key}/><figcaption>{scene.label} {" " + t("· Hình minh họa")}</figcaption>
         </figure>)}
       </div>
       <span className="gallery-counter" aria-live="polite">{index + 1}/3</span>
-      <button className="gallery-arrow previous" type="button" aria-label="Ảnh trước" disabled={index === 0} onClick={() => goTo(index - 1)}>‹</button>
-      <button className="gallery-arrow next" type="button" aria-label="Ảnh tiếp theo" disabled={index === 2} onClick={() => goTo(index + 1)}>›</button>
+      <button className="gallery-arrow previous" type="button" aria-label={t("Ảnh trước")} disabled={index === 0} onClick={() => goTo(index - 1)}>‹</button>
+      <button className="gallery-arrow next" type="button" aria-label={t("Ảnh tiếp theo")} disabled={index === 2} onClick={() => goTo(index + 1)}>›</button>
     </div>
-    <div className="gallery-dots" role="group" aria-label="Chọn ảnh minh họa">{scenes.map((scene, position) => <button type="button" key={scene.key} aria-label={`Xem ảnh ${position + 1}: ${scene.label}`} aria-pressed={index === position} onClick={() => goTo(position)}><span/></button>)}</div>
+    <div className="gallery-dots" role="group" aria-label={t("Chọn ảnh minh họa")}>{scenes.map((scene, position) => <button type="button" key={scene.key} aria-label={interpolate("Xem ảnh ${0}: ${1}",[position + 1,scene.label])} aria-pressed={index === position} onClick={() => goTo(position)}><span/></button>)}</div>
   </section>
 }

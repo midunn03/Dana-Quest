@@ -1,47 +1,85 @@
-import { useState } from 'react'
-import { getQuest, type QuestChallenge } from './data/quests'
-import { questRewardTotal } from './lib/questProgress'
+import { interpolate } from './i18n/locale'
+import { localized } from './i18n/locale'
+import { t } from './i18n/locale'
+import {useQuestNavigationGuard} from './lib/useQuestNavigationGuard'
+import {challengeAnswerReady} from '../shared/quest-challenges.mjs'
+import ChallengeInput from './ChallengeInput'
+import QuestCover from './QuestCover'
+import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react'
+import { getQuest } from './data/quests'
 import { useQuestProgress } from './lib/useQuestProgress'
+import { PlayerIcon, PlayerDialog } from './QuestPlayerUi'
+import { displayText, downloadLocalFile } from './lib/questDisplay'
+import DueSupport from './DueSupport'
+import DueMemory from './DueMemory'
+const DueMap=lazy(()=>import('./DueMap'))
+import './QuestPlayPage.css'
 
-function ChallengeInput({ challenge, answer, setAnswer }: { challenge: QuestChallenge; answer: string; setAnswer: (value: string) => void }) {
-  if (challenge.type === 'single-choice') return <fieldset className="choice-list"><legend>{challenge.prompt}</legend>{challenge.options.map(option => <label key={option.id}><input type="radio" name="quest-answer" value={option.id} checked={answer === option.id} onChange={() => setAnswer(option.id)} />{option.label}</label>)}</fieldset>
-  if (challenge.type === 'observation') return <label className="confirm-answer"><input type="checkbox" checked={answer === 'confirmed'} onChange={event => setAnswer(event.target.checked ? 'confirmed' : '')} />{challenge.confirmationLabel}</label>
-  if (challenge.type === 'photo') return <p className="notice">Chức năng ảnh sẽ được nối với camera ở phần sau.</p>
-  return <label className="text-answer">{challenge.prompt}<input value={answer} onChange={event => setAnswer(event.target.value)} placeholder={challenge.placeholder} autoComplete="off" /></label>
+const challengeNames=localized({text:"Nhập đáp án",'single-choice':"Chọn một đáp án",ordering:"Sắp xếp thứ tự",matching:"Ghép cặp",'multi-select':"Chọn nhiều đáp án",observation:"Quan sát",photo:"Ảnh"})
+type Dialog='menu'|'help'|'challenge-help'|'hint-confirm'|'hint'|'report'|'faq'|'leave'|'recap'|'story'|'image'|'guide'|'journey'|'memory'|'card'|null
+const dialogTitles:Record<Exclude<Dialog,null>,string>=localized({menu:'Menu',help:"Trợ giúp thử thách",'challenge-help':"Trợ giúp thử thách",'hint-confirm':"Mở gợi ý này?",hint:"Gợi ý quan sát",report:"Báo sự cố",faq:"Câu hỏi thường gặp",leave:"Rời màn chơi?",recap:"Câu chuyện đã mở",story:"Câu chuyện hiện tại",image:"Hình ảnh hành trình",guide:"Đường đến điểm bắt đầu",journey:"Các điểm dừng",memory:"Ảnh kỷ niệm",card:"Thẻ hành trình của bạn"})
+
+export default function QuestPlayPage({id}:{id:string}) {
+ const quest=getQuest(id)
+ const {state,error,dispatch,busy,loading,ready}=useQuestProgress()
+ const [answer,setAnswer]=useState('')
+ const [dialog,setDialog]=useState<Dialog>(null)
+ const [fontSize,setFontSize]=useState(24)
+ const [exited,setExited]=useState(false)
+ const [cardNotice,setCardNotice]=useState('')
+ const [imageScale,setImageScale]=useState(1)
+ const scroll=useRef<HTMLDivElement>(null)
+ const title=useRef<HTMLHeadingElement>(null)
+ const run=state.quests[id]
+ const phase=run?.phase??(run?.completedAt?'results':'story')
+ const solved=run?.completedCheckpointIds.length??0
+ const index=phase==='feedback'?Math.max(0,solved-1):solved
+ const checkpoint=quest?.checkpoints[index]
+ const navigation=useQuestNavigationGuard(!!run&&!!run.arrivalConfirmedAt&&!run.paused&&!run.completedAt&&!exited,()=>dispatch({type:'pause',questId:id}),busy)
+ useEffect(()=>{if(scroll.current)scroll.current.scrollTop=0;title.current?.focus()},[phase,index,run?.paused])
+ if(!quest)return <main className="quest-page"><h1>{t("Không tìm thấy quest")}</h1><a href="#/kham-pha">{t("Về Khám phá")}</a></main>
+ if(loading)return <main className="quest-player q-status-screen"><p role="status">{t("Đang tải hành trình của bạn…")}</p></main>
+ if(!ready)return <main className="quest-player q-status-screen"><h1>{t("Chưa mở được hành trình")}</h1><p role="alert">{t(error)}</p><button className="q-primary" onClick={()=>window.location.reload()}>{t("Thử tải lại")}</button><a href={`#/quest/${id}`}>{t("Về thông tin quest")}</a></main>
+ if(!run)return <main className="quest-player q-status-screen"><h1>{t("Quest chưa bắt đầu")}</h1><a className="q-primary" href={`#/quest/${id}`}>{t("Mở thông tin quest")}</a></main>
+ if(!run.arrivalConfirmedAt&&!run.completedAt)return <main className="quest-player q-status-screen"><h1>{t("Xác nhận điểm bắt đầu", "Confirm the starting point")}</h1><p>{t("Hãy đến điểm hẹn và đối chiếu địa chỉ trước khi mở thử thách.", "Reach the meeting point and check its address before opening challenges.")}</p><a className="q-primary" href={`#/quest/${id}/chi-duong`}>{t("Tìm điểm bắt đầu", "Find the starting point")}</a></main>
+ const totals=quest.checkpoints.filter(item=>run.completedCheckpointIds.includes(item.id)).reduce((sum,item)=>({xp:sum.xp+item.reward.xp,coins:sum.coins+item.reward.coins}),{xp:0,coins:0})
+ const result=phase==='results'||!checkpoint
+ const act=async(type:'continue-story'|'advance'|'pause'|'resume')=>{if(await dispatch({type,questId:id,checkpointId:checkpoint?.id})){setAnswer('');setDialog(null)}}
+ async function submit(event:FormEvent){event.preventDefault();if(!checkpoint||busy)return;if(await dispatch({type:'complete-checkpoint',questId:id,checkpointId:checkpoint.id,answer:answer.trim()}))setAnswer('')}
+ async function leave(){if(phase==='results'||await dispatch({type:'pause',questId:id})){setExited(true);setDialog(null)}}
+ function saveCard(){
+  downloadLocalFile('dana-quest-hanh-trinh.svg',interpolate("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"900\" height=\"600\" viewBox=\"0 0 900 600\"><rect width=\"900\" height=\"600\" rx=\"36\" fill=\"#19152f\"/><text x=\"60\" y=\"100\" fill=\"#70deb0\" font-size=\"28\" font-family=\"sans-serif\">DANA QUEST</text><text x=\"60\" y=\"200\" fill=\"#fff\" font-size=\"42\" font-family=\"sans-serif\">${0}</text><text x=\"60\" y=\"300\" fill=\"#c6b6e8\" font-size=\"30\" font-family=\"sans-serif\">${1} / ${2} thử thách đã giải đúng</text><text x=\"60\" y=\"420\" fill=\"#f3d36e\" font-size=\"46\" font-family=\"sans-serif\">${3} XP · ${4} xu</text><text x=\"60\" y=\"520\" fill=\"#a99bbf\" font-size=\"20\" font-family=\"sans-serif\">Thẻ hành trình cá nhân.</text></svg>",[displayText(quest!.title).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'),solved,quest!.checkpoints.length,totals.xp,totals.coins]),'image/svg+xml');setCardNotice(t("Đã tạo thẻ để tải về. Đây là thẻ tiến độ, không phải ảnh chụp màn hình."))
+ }
+ if(exited)return <main className="quest-player due-exit" aria-labelledby="q-exit-title"><section className="due-exit-card"><span className="due-exit-emblem" aria-hidden="true">⚑</span><h1 id="q-exit-title">{t("Hẹn bạn ở hành trình tiếp theo")}</h1><p>{t("Tiến độ quest đã được giữ lại. Bạn có thể tiếp tục trong Quest của bạn.")}</p><div className="due-exit-actions"><a className="q-primary" href="#/kham-pha">{t("Trở lại Khám phá")}</a><button className="due-text-button" onClick={()=>setExited(false)}>{t("Quay lại quest đang tạm dừng")}</button></div></section></main>
+ return <main className="quest-player due-player" style={{'--q-reading-size':`${fontSize}px`} as CSSProperties} aria-labelledby="q-screen-title">
+  <div className="q-play-surface" inert={!!dialog||!!navigation.destination} aria-hidden={!!dialog||!!navigation.destination}>
+  <header className="q-hud"><button type="button" className="q-icon-button" aria-label={t("Mở menu quest")} disabled={busy} onClick={()=>setDialog('menu')}><PlayerIcon kind="menu"/></button><button className="q-hud-progress" aria-label={t("Xem các điểm dừng")} onClick={()=>setDialog('journey')}><span aria-hidden="true">⌖ </span>{Math.min(index+1,quest.checkpoints.length)}/{quest.checkpoints.length}</button><span className="due-play-mode">{t("Tự do")}<small>{t("Không đếm giờ")}</small></span><span className="q-hud-score">{t("ϟ") + " "}{totals.xp}<small lang="en">XP</small></span><button type="button" className="q-icon-button" aria-label={t("Mở trợ giúp")} onClick={()=>setDialog('help')}><PlayerIcon kind="help"/></button></header>
+  <div className="q-play-layout"><aside className="quest-journey-rail" aria-label={t("Tiến độ hành trình")}><p className="journey-eyebrow">{t("HÀNH TRÌNH CỦA BẠN")}</p><h2>{displayText(quest.title)}</h2><ol>{quest.checkpoints.map((item,number)=><li key={item.id} aria-current={number===index?'step':undefined}><span>{run.completedCheckpointIds.includes(item.id)?'✓':number+1}</span><div><strong>{item.title}</strong><small>{run.completedCheckpointIds.includes(item.id)?t("Đã giải đúng"):number===index?t("Đang khám phá"):t("Chưa mở")}</small></div></li>)}</ol><button className="q-secondary" onClick={()=>setDialog('guide')}>{t("Xem bản đồ")}</button><button className="due-text-button" onClick={()=>setDialog('help')}>{t("Hướng dẫn và trợ giúp")}</button></aside><section className="q-center"><div ref={scroll} className="q-scroll">
+   <div className="q-phase-row"><span className="q-phase-tag">{run.paused?t("Tạm dừng"):result?t("Tổng kết"):phase==='story'?interpolate("Câu chuyện ${0}",[index+1]):phase==='feedback'?t("Trở lại câu chuyện"):interpolate("Thử thách ${0} (${1})",[index+1,checkpoint?challengeNames[checkpoint.challenge.type]:''])}</span><button type="button" className="q-icon-button" aria-label={t("Báo sự cố tại bước này")} onClick={()=>setDialog('report')}><PlayerIcon kind="flag"/></button></div>
+   {run.paused?<section className="q-pause"><h1 ref={title} tabIndex={-1} id="q-screen-title">{t("Hành trình đang tạm dừng")}</h1><p>{t("Những thử thách đã giải đúng vẫn được giữ lại. Tiếp tục khi bạn sẵn sàng.")}</p></section>
+   :result?<section className="q-results"><div className="q-result-seal" aria-hidden="true"><PlayerIcon kind="check"/></div><h1 ref={title} tabIndex={-1} id="q-screen-title">{t("Hành trình đã hoàn thành")}</h1><p>{displayText(quest.title)}</p>{quest.ending&&<p className="q-story">{quest.ending}</p>}{quest.nextQuestId&&<a className="q-secondary" href={`#/quest/${quest.nextQuestId}`}>{t("Khám phá hành trình tiếp theo", "Discover the next journey")}</a>}<p>{t("Bạn đã giải đúng") + " "}{solved}/{quest.checkpoints.length} {" " + t("thử thách.")}</p><div className="q-result-totals"><strong lang="en">{totals.xp} XP</strong><strong>{totals.coins} xu</strong></div><p className="q-muted">{t("Xu kiếm được có thể dùng trong Cửa hàng. Quà đã đổi được lưu trong Tài khoản → Ví quà.")}</p><button className="q-secondary" onClick={()=>setDialog('recap')}>{t("Đọc lại câu chuyện")}</button><button className="q-secondary" onClick={()=>setDialog('card')}>{t("Lưu thẻ hành trình")}</button></section>
+   :phase==='feedback'?<section className="q-feedback"><div className="q-result-seal" aria-hidden="true"><PlayerIcon kind="check"/></div><h1 ref={title} tabIndex={-1} id="q-screen-title">{t("Bạn đã giải đúng!")}</h1><p>{checkpoint.title}</p><div className="q-saved-reward">{t("Đã ghi nhận") + " "}{checkpoint.reward.xp} {" " + t("XP và") + " "}{checkpoint.reward.coins} xu.</div><p className="q-story">{checkpoint.feedback||checkpoint.story}</p><p className="q-muted">{t("Kết quả đã lưu. Tải lại trang không cộng thưởng thêm lần nữa.")}</p></section>
+   :<><h1 ref={title} tabIndex={-1} id="q-screen-title">{checkpoint.title}</h1>{phase==='story'?<><button className="due-artwork-button due-story-art" aria-label={t("Phóng to minh họa")} onClick={()=>setDialog('image')}><QuestCover id={id} credit/><span className="due-expand-label">{t("⛶ Xem lớn")}</span></button><p className="q-story">{checkpoint.story}</p><div className="q-place-label">{displayText(checkpoint.placeLabel)}</div><p className="q-instruction">{checkpoint.instruction}</p><button className="due-guide-card" onClick={()=>setDialog('guide')}><span aria-hidden="true">⌖</span><span><strong>{t("Chỉ đường cho tôi")}</strong><small>{t("Xem bản đồ điểm bắt đầu")}</small></span><b>›</b></button><button className="due-text-button" onClick={()=>setDialog('memory')}>{t("Lưu ảnh kỷ niệm (tùy chọn)")}</button></>:<form id="quest-challenge" onSubmit={event=>void submit(event)}><p className="q-instruction">{checkpoint.instruction}</p><ChallengeInput challenge={checkpoint.challenge} answer={answer} setAnswer={setAnswer} disabled={busy}/><div className="q-help-row"><span>{t("Bạn đang cần gợi ý?")}</span><button className="q-help-button" type="button" onClick={()=>setDialog('challenge-help')}>{t("Trợ giúp")}</button></div></form>}</>}
+   {error&&<p className="q-error" role="alert">{t(error)}</p>}
+  </div><footer className="q-actions">
+   {!run.paused&&!result&&<button className="due-back-story" aria-label={t("Đọc lại câu chuyện hiện tại")} onClick={()=>setDialog('story')}>‹</button>}
+   {run.paused?<button className="q-primary" disabled={busy} onClick={()=>void act('resume')}>{busy?t("Đang lưu…"):t("Tiếp tục quest")}</button>:result?<><a className="q-primary" href="#/kham-pha">{t("Trở lại Khám phá")}</a><a className="q-footer-link" href="#/quest-cua-toi">{t("Xem Quest của bạn")}</a></>:phase==='feedback'?<button className="q-primary" disabled={busy} onClick={()=>void act('advance')}>{busy?t("Đang lưu…"):run.completedAt?t("Xem tổng kết"):t("Tiếp tục câu chuyện")}</button>:phase==='story'?<button className="q-primary" disabled={busy} onClick={()=>void act('continue-story')}>{busy?t("Đang lưu…"):t("Tiếp tục đến thử thách")}</button>:<button type="submit" form="quest-challenge" className="q-primary" disabled={busy||!challengeAnswerReady(checkpoint.challenge,answer)}>{busy?t("Đang kiểm tra…"):t("Kiểm tra đáp án")}</button>}
+  </footer></section></div></div>
+  {navigation.destination&&<PlayerDialog title={t("Lưu và rời hành trình?")} onClose={navigation.cancel}><p>{t("Tiến độ đã hoàn thành sẽ được giữ lại. Câu trả lời đang nhập vẫn ở đây nếu bạn tiếp tục chơi.")}</p>{error&&<p role="alert">{t(error)}</p>}<button className="q-primary" disabled={busy||navigation.saving} onClick={()=>void navigation.confirm()}>{navigation.saving?t("Đang lưu…"):t("Lưu và chuyển trang")}</button><button className="due-text-button" disabled={navigation.saving} onClick={navigation.cancel}>{t("Tiếp tục chơi")}</button></PlayerDialog>}
+  {dialog&&!navigation.destination&&<PlayerDialog key={dialog} title={dialogTitles[dialog]} variant={dialog==='menu'?'menu':['help','faq','report'].includes(dialog)?'support':dialog==='image'?'image':'sheet'} onClose={()=>{if(!busy)setDialog(null)}}>
+   {dialog==='menu'?<><p className="due-menu-heading">{t("Tùy chỉnh")}</p><div className="due-menu-group"><label className="q-font-control">{t("Cỡ chữ nội dung (")}{fontSize}px)<input type="range" min="24" max="40" step="8" value={fontSize} onChange={event=>setFontSize(Number(event.target.value))}/></label><p className="q-muted">{t("Quest hiện chưa có nhạc nền và giọng đọc.")}</p></div><p className="due-menu-heading">{t("Hành trình")}</p><div className="due-menu-group"><button className="q-menu-item" onClick={()=>setDialog('journey')}>{t("⌖ Xem các điểm dừng") + " "}<span>›</span></button><button className="q-menu-item" onClick={()=>setDialog('recap')}>{t("▤ Đọc lại từ đầu") + " "}<span>›</span></button>{!run.paused&&!result&&<button className="q-menu-item" aria-label={t("Tạm dừng quest")} disabled={busy} onClick={()=>void act('pause')}>{t("Ⅱ Tạm dừng quest") + " "}<span>›</span></button>}<button className="q-menu-item" onClick={()=>setDialog('guide')}>{t("⌖ Xem chỉ đường đến điểm bắt đầu") + " "}<span>›</span></button></div><p className="due-menu-heading">{t("Hỗ trợ")}</p><div className="due-menu-group"><button className="q-menu-item" onClick={()=>setDialog('memory')}>{t("▣ Ảnh kỷ niệm") + " "}<span>›</span></button><button className="q-menu-item" onClick={()=>setDialog('card')}>{t("▧ Lưu thẻ hành trình") + " "}<span>›</span></button><button className="q-menu-item" onClick={()=>setDialog('faq')}>{t("? Câu hỏi thường gặp") + " "}<span>›</span></button><button className="q-menu-item" onClick={()=>setDialog('report')}>{t("⚑ Báo sự cố") + " "}<span>›</span></button></div><button className="q-menu-item q-danger due-quit-button" onClick={()=>setDialog('leave')}>{t("↪ Rời màn chơi")}</button></>
+   :dialog==='help'||dialog==='faq'||dialog==='report'?<DueSupport questId={id} checkpointId={checkpoint?.id} initial={dialog==='faq'?'faq':dialog==='report'?'report':'home'}/>
+   :dialog==='challenge-help'?<div className="due-challenge-help"><button className="q-menu-item" aria-label={t("Xem gợi ý quan sát")} onClick={()=>setDialog('hint-confirm')}>{t("♧ Xem gợi ý quan sát") + " "}<small>{t("Không trừ xu")}</small></button><button className="q-menu-item" onClick={()=>setDialog('story')}>{t("▤ Đọc lại câu chuyện") + " "}<span>›</span></button><button className="q-menu-item" onClick={()=>setDialog('report')}>{t("⚑ Báo sự cố") + " "}<span>›</span></button><p className="q-muted">{t("Chỉ giải đúng mới mở phần tiếp theo. Mức thưởng không đổi.")}</p></div>
+   :dialog==='hint-confirm'?<div className="due-hint"><span aria-hidden="true">♧</span><p>{t("Gợi ý giúp bạn biết nên quan sát ở đâu. Không mở đáp án, không trừ XP hoặc xu.")}</p><button className="due-purple" onClick={()=>setDialog('hint')}>{t("Đọc gợi ý")}</button><button className="due-text-button" onClick={()=>setDialog('challenge-help')}>{t("Không, quay lại")}</button></div>
+   :dialog==='hint'?<><p>{checkpoint?.hint||(index===0?t("Chỉ tìm phần số nhà trong địa chỉ, không phải mã bưu chính hay số điện thoại. Quan sát biển tên hoặc dòng địa chỉ chính thức trên cổng."):t("Đối chiếu dấu mốc hình thành với hành trình 50 năm được nhắc tới trong câu chuyện. Phân biệt mốc khởi đầu với các lần đổi tên về sau."))}</p><p className="q-muted">{t("Bạn vẫn cần tự nhập hoặc chọn đáp án rồi kiểm tra.")}</p><details className="due-source-details"><summary>{t("Nguồn tham khảo nội dung")}</summary><div className="q-source-links">{(checkpoint?.sourceUrls||quest.checkpoints[0].sourceUrls).map((url,number)=><a key={url} href={url} target="_blank" rel="noreferrer">{t("Nguồn tham khảo") + " "}{number+1}</a>)}</div></details></>
+   :dialog==='leave'?<><p>{t("Tiến độ đã giải đúng được giữ lại để tiếp tục sau. Không nhận thêm thưởng khi mở lại.")}</p>{error&&<p role="alert">{t(error)}</p>}<button className="q-primary" disabled={busy} onClick={()=>void leave()}>{busy?t("Đang lưu…"):t("Lưu và rời màn chơi")}</button><button className="due-text-button" disabled={busy} onClick={()=>setDialog(null)}>{t("Tiếp tục chơi")}</button></>
+   :dialog==='story'?<><QuestCover id={id} credit/><h3>{checkpoint?.title||quest.title}</h3><p className="q-story">{checkpoint?.story||quest.summary}</p><p className="q-instruction">{checkpoint?.instruction||quest.safetyNote}</p><button className="q-primary" onClick={()=>setDialog(null)}>{t("Quay lại bước đang chơi")}</button></>
+   :dialog==='image'?<><div className="due-zoom-controls"><button className="q-secondary" disabled={imageScale<=1} onClick={()=>setImageScale(value=>value-.5)}>{t("Thu nhỏ")}</button><span>{Math.round(imageScale*100)}%</span><button className="q-secondary" disabled={imageScale>=3} onClick={()=>setImageScale(value=>value+.5)}>{t("Phóng to")}</button></div><div className="due-zoom-viewport" tabIndex={0} aria-label={t("Minh họa phóng to (cuộn để xem)")}><div style={{width:`${imageScale*100}%`}}><QuestCover id={id} credit/></div></div><p className="q-muted">{t("Cuộn trong hình để xem phần đã phóng to. Đối chiếu biển tên và địa chỉ thực tế trước khi xác nhận đã đến.")}</p></>
+   :dialog==='guide'?<><Suspense fallback={<p role="status">{t("Đang mở bản đồ…")}</p>}><DueMap questId={id}/></Suspense><p>{displayText(quest.area)}</p><p className="q-muted">{t("Các thử thách thuộc cùng khu vực điểm đến. Chỉ theo lối đi được phép.")}</p><a className="q-menu-item" href={`#/quest/${id}/chi-duong`}>{t("Mở màn chỉ đường và vị trí thiết bị")}</a></>
+   :dialog==='journey'?<><ol className="due-journey-list">{quest.checkpoints.map((item,number)=><li key={item.id}><span>{run.completedCheckpointIds.includes(item.id)?'✓':number+1}</span><div><strong>{item.title}</strong><small>{run.completedCheckpointIds.includes(item.id)?t("Đã giải đúng"):number===index?t("Đang khám phá"):t("Chưa mở")}</small></div></li>)}</ol><p className="q-muted">{totals.xp} {" " + t("XP và") + " "}{totals.coins} {" " + t("xu đã ghi nhận. Thử thách mở theo thứ tự.")}</p></>
+   :dialog==='memory'?<DueMemory/>
+   :dialog==='card'?<><div className="due-progress-card"><span lang="en">Dana Quest</span><h3>{displayText(quest.title)}</h3><p>{solved}/{quest.checkpoints.length} {" " + t("thử thách đã giải đúng")}</p><strong>{totals.xp} XP · {totals.coins} xu</strong></div><p>{t("Thẻ tiến độ tải về thiết bị. Không phải voucher hoặc ảnh chụp màn hình.")}</p><button className="due-purple" onClick={saveCard}>{t("Tải thẻ hành trình")}</button>{cardNotice&&<p role="status">{cardNotice}</p>}</>
+   :<div className="q-recap">{quest.checkpoints.filter((_,number)=>number<=index).map(item=><section key={item.id}><h3>{item.title}</h3><p>{item.story}</p></section>)}<p className="q-muted">{t("Xem lại câu chuyện không xóa tiến độ hoặc nhận lại thưởng.")}</p></div>}
+  </PlayerDialog>}
+ </main>
 }
-
-export default function QuestPlayPage({ id }: { id: string }) {
-  const quest = getQuest(id)
-  const { state, error, dispatch } = useQuestProgress()
-  const [answer, setAnswer] = useState('')
-  if (!quest) return <main className="quest-page"><h1>Không tìm thấy quest</h1><a href="#/kham-pha">← Bản đồ</a></main>
-  const progress = state.quests[id]
-  if (!progress) {
-    return <main className="quest-page quest-experience"><h1>Quest chưa bắt đầu</h1><p>Hãy xem thông tin và bắt đầu quest trước khi mở nhiệm vụ.</p><a className="primary-button quest-start" href={`#/quest/${id}`}>Mở thông tin quest</a></main>
-  }
-  const index = progress.completedCheckpointIds.length
-  const checkpoint = quest.checkpoints[index]
-  const totals = questRewardTotal(state)
-
-  if (!checkpoint) return <main className="quest-page quest-experience quest-finished">
-    <p className="eyebrow">HOÀN THÀNH</p><h1>{quest.title}</h1><p>Bạn đã giải xong cả hai nhiệm vụ của quest mẫu.</p>
-    <div className="quest-meta"><span>★ {totals.xp} XP</span><span>● {totals.coins} xu quest</span></div>
-    <a className="primary-button quest-start" href="#/kham-pha">Trở lại bản đồ</a>
-  </main>
-
-  const submit = () => {
-    if (dispatch({ type: 'complete-checkpoint', questId: id, checkpointId: checkpoint.id, answer })) setAnswer('')
-  }
-  return <main className="quest-page quest-experience">
-    <nav className="quest-nav"><a href={`#/quest/${id}`}>← Thông tin quest</a><span>{index + 1}/{quest.checkpoints.length}</span></nav>
-    <progress max={quest.checkpoints.length} value={index} aria-label={`Đã hoàn thành ${index} trên ${quest.checkpoints.length} nhiệm vụ`} />
-    <section className="quest-panel checkpoint-card">
-      <p className="eyebrow">NHIỆM VỤ {index + 1}</p><h1>{checkpoint.title}</h1><p className="checkpoint-story">{checkpoint.story}</p>
-      <div className="checkpoint-place">⌖ {checkpoint.placeLabel}</div><p>{checkpoint.instruction}</p>
-      <ChallengeInput challenge={checkpoint.challenge} answer={answer} setAnswer={setAnswer} />
-      {error && <p className="error" role="alert">{error}</p>}
-      <button type="button" className="primary-button quest-start" onClick={submit} disabled={!answer}>Kiểm tra đáp án</button>
-    </section>
-  </main>
-}
-

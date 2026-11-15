@@ -1,39 +1,68 @@
-import GameIcon from './GameIcon'
+import './ExperienceTokens.css'
+import NotFoundPage from './NotFoundPage'
+import { t } from './i18n/locale'
+import { LocaleProvider, useLocale } from './i18n/LocaleProvider'
+import './App.css'
+import {getQuest} from './data/quests'
+import QuestGuestPage from './QuestGuestPage'
+import MainNavigation from './MainNavigation'
+import WorkspaceNavigation from './WorkspaceNavigation'
+import DiscoveryPage from './DiscoveryPage'
+import OnboardingPage from './OnboardingPage'
+import BookingPage from './BookingPage'
+import InformationPage from './InformationPage'
+import { rememberPageReturn } from './lib/onboarding'
 import CelebrationPage from './CelebrationPage'
-import DestinationDetails from './DestinationDetails'
+const DestinationDetails=lazy(()=>import('./DestinationDetails'))
 import CameraPage from './CameraPage'
 import WelcomePage from './WelcomePage'
 import AvatarPage from './AvatarPage'
 import Notifications from './Notifications'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import DestinationPage from './DestinationPage'
-import AlbumPage from './AlbumPage'
+const AlbumPage=lazy(()=>import('./AlbumPage'))
 import ShopPage from './ShopPage'
 import AccountPage from './AccountPage'
 import AuthPage from './AuthPage'
 import ActiveMissionIndicator from './ActiveMissionIndicator'
-import QuestDetailsPage from './QuestDetailsPage'
-import QuestPlayPage from './QuestPlayPage'
-import EventsPage from './EventsPage'
-import EventDetailsPage from './EventDetailsPage'
-import { scheduleEventReminders } from './lib/eventReminders'
+import PageTools from './PageTools'
+const QuestDetailsPage=lazy(()=>import('./QuestDetailsPage'))
+const QuestPlayPage=lazy(()=>import('./QuestPlayPage'))
+const CreatorPage = lazy(() => import('./CreatorPage'))
+const EventsPage = lazy(() => import('./EventsPage'))
+const EventDetailsPage = lazy(() => import('./EventDetailsPage'))
+const JourneyRecapPage = lazy(() => import('./JourneyRecapPage'))
+import EventProvider from './EventProvider'
 
 const Explore = lazy(() => import('./Explore'))
 const NavigationPage = lazy(() => import('./NavigationPage'))
 const QuestNavigationPage = lazy(() => import('./QuestNavigationPage'))
+const DueStartPage = lazy(() => import('./DueStartPage'))
 import { AuthProvider, useAuth } from './AuthContext'
-import './App.css'
-import './GameVisual.css'
-import './MapCompact.css'
 import { canNavigateFrom } from './lib/navigationGuard'
-import './MobileLayout.css'
-import './TravelVisual.css'
-
+import './mobile/Mobile.css'
+import { useDeviceMode } from './lib/deviceMode'
+import DeviceModeModal from './mobile/DeviceModeModal'
+import MobileBottomNav from './mobile/MobileBottomNav'
+import StreakChip from './StreakChip'
 function AppRouter() {
+  useLocale()
   const auth = useAuth()
+  const { mode: deviceMode, isExplicit, setMode: setDeviceMode } = useDeviceMode(auth.user?.id)
+  const [showDeviceModal, setShowDeviceModal] = useState(false)
+  const isTest = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test'
+  const isModalOpen = showDeviceModal || (!isExplicit && !isTest)
+  useEffect(() => {
+    const handleOpenDeviceModal = () => setShowDeviceModal(true)
+    window.addEventListener('dana-open-device-modal', handleOpenDeviceModal)
+    return () => window.removeEventListener('dana-open-device-modal', handleOpenDeviceModal)
+  }, [])
+  const [loginPrompt,setLoginPrompt]=useState(false),[loginMode,setLoginMode]=useState<'login'|'register'>('login'),[dismissedQuest,setDismissedQuest]=useState('')
+  const loginOpener=useRef<HTMLElement|null>(null)
+  const [homeAuthMode,setHomeAuthMode]=useState<'login'|'register'>(window.location.hash==='#/dang-ky'?'register':'login')
+  useEffect(()=>{const open=()=>{if(auth.status!== 'authenticated'){if(['','#/','#/dang-nhap','#/dang-ky'].includes(window.location.hash)){document.getElementById('home-login')?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});return}loginOpener.current=document.activeElement as HTMLElement;setLoginMode('login');setLoginPrompt(true)}};window.addEventListener('dana-request-login',open);return()=>window.removeEventListener('dana-request-login',open)},[auth.status])
   const [hash, setHash] = useState(window.location.hash)
   const shell = useRef<HTMLDivElement>(null)
-  useEffect(() => { scheduleEventReminders() }, [])
   useEffect(() => {
     const navigate = () => { if (canNavigateFrom(hash)) { setHash(window.location.hash); window.scrollTo(0, 0) } }
     window.addEventListener('hashchange', navigate)
@@ -42,67 +71,106 @@ function AppRouter() {
   const normalized = hash.replace(/\/+$/, '')
   const route = !normalized || normalized === '#' ? '#/' : normalized
   useEffect(() => { const page = shell.current?.querySelector(':scope > main'); if (page instanceof HTMLElement) page.scrollTop = 0 }, [route])
-  const isMap = ['#/kham-pha', '#/explore', '#/map'].includes(route)
-  const publicRoute = route === '#/' || route === '#/dang-nhap' || route === '#/dang-ky'
+  const isMap = route === '#/map'
+  const journeyRoute = route.startsWith('#/bat-dau/') || ['#/kich-hoat', '#/nhap-ma', '#/dieu-khoan', '#/quyen-rieng-tu'].includes(route)
+  const publicRoute = route.startsWith('#/nha-sang-tao/') || route==='#/quest-cua-toi' || route.startsWith('#/su-kien/') || route.startsWith('#/tai-khoan') || journeyRoute || ['#/', '#/dang-nhap', '#/dang-ky', '#/kham-pha', '#/explore', '#/map', '#/tim-kiem', '#/su-kien'].includes(route) || /^#\/(quest|dia-diem)\/[^/]+$/.test(route)
   const authRoute = route === '#/dang-nhap' || route === '#/dang-ky'
   useEffect(() => {
+    if(authRoute){setHomeAuthMode(route==='#/dang-ky'?'register':'login');window.history.replaceState(window.history.state,'','#/');setHash('#/');return}
     if (auth.status === 'checking') return
     if (!publicRoute && auth.status !== 'authenticated') {
       if (window.location.hash !== '#/dang-nhap') window.location.hash = '#/dang-nhap'
-    } else if ((authRoute || route === '#/') && auth.status === 'authenticated') {
-      window.location.hash = auth.user?.avatarId ? '#/kham-pha' : '#/chon-nhan-vat'
     }
-  }, [auth.status, auth.user?.avatarId, authRoute, publicRoute, route])
+  }, [auth.status, auth.user?.avatarId, authRoute, publicRoute, route, hash])
+  const guestQuest=route==='#/quest-cua-toi'&&auth.status!=='authenticated'&&auth.status!=='checking'
+  const showLogin=auth.status!=='authenticated'&&auth.status!=='checking'&&(loginPrompt||guestQuest&&dismissedQuest!==route)
+  const closeLogin=()=>{setLoginPrompt(false);setDismissedQuest(route);if(authRoute)window.location.hash='#/';requestAnimationFrame(()=>{if(loginOpener.current?.isConnected)loginOpener.current.focus();else shell.current?.querySelector<HTMLElement>('.landing-login,.q-briefing-start,.ev-save a,.discovery-empty button')?.focus()})}
   const blocked = !publicRoute && auth.status !== 'authenticated'
-  const page = route === '#/' && (auth.status === 'checking' || auth.status === 'authenticated')
-    ? <main className="auth-loading"><p role="status">Đang mở hành trình của bạn…</p></main>
+  const page = route === '#/' || authRoute
+    ? <WelcomePage initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):homeAuthMode}/>
     : blocked
-    ? auth.status === 'checking' ? <main className="auth-loading"><p role="status">Đang kiểm tra phiên tài khoản…</p></main> : <AuthPage />
-    : route === '#/dang-nhap' ? <AuthPage initialMode="login" />
-    : route === '#/dang-ky' ? <AuthPage initialMode="register" />
+    ? <main className="auth-loading"><p role="status">{auth.status==='checking'?t("Đang kiểm tra phiên tài khoản…"):t("Đang mở trang đăng nhập…","Opening sign-in…")}</p></main>
+    : route === '#/bat-dau/thanh-pho' ? <OnboardingPage key="city" step="city" />
+    : route === '#/bat-dau/ke-hoach' ? <OnboardingPage key="plans" step="plans" />
+    : route === '#/bat-dau/gioi-thieu' ? <OnboardingPage key="intro" step="intro" />
+    : route === '#/kich-hoat' ? <BookingPage key="activation" />
+    : route === '#/nhap-ma' ? <BookingPage key="code" entry />
+    : route === '#/dieu-khoan' || route === '#/quyen-rieng-tu' ? <InformationPage privacy={route === '#/quyen-rieng-tu'} />
     : isMap ? <Explore />
-    : route === '#/tai-khoan' ? <AccountPage user={auth.user!} onLogout={auth.logout} />
+    : ['#/kham-pha', '#/explore'].includes(route) ? <DiscoveryPage key="explore" />
+    : route === '#/tim-kiem' ? <DiscoveryPage key="search" mode="search" />
+    : route==='#/quest-cua-toi'&&auth.status==='checking' ? <main className="auth-loading"><p role="status">{t("Đang kiểm tra tài khoản…")}</p></main>
+    : guestQuest ? <QuestGuestPage/>
+    : route === '#/quest-cua-toi' ? <DiscoveryPage key="joined" mode="joined" activatedEnabled />
+    : route.startsWith('#/tai-khoan') ? <AccountPage key={route} user={auth.user} onLogout={auth.logout} view={route.split('/')[2]||''} />
     : route === '#/chon-nhan-vat' || route === '#/nhan-vat' ? <AvatarPage editing={route === '#/nhan-vat'} initialAvatarId={auth.user?.avatarId} onAvatarConfirmed={auth.saveAvatar} />
+    : route === '#/recap' ? <JourneyRecapPage />
     : route === '#/album' ? <AlbumPage />
     : route === '#/cua-hang' ? <ShopPage />
     : route === '#/su-kien' ? <EventsPage />
     : route.startsWith('#/su-kien/') ? <EventDetailsPage key={route} id={route.slice('#/su-kien/'.length)} />
-    : /^#\/quest\/[^/]+\/chi-duong$/.test(route) ? <QuestNavigationPage key={route} id={route.split('/')[2]} />
+    : /^#\/quest\/[^/]+\/dan-duong$/.test(route) ? <QuestNavigationPage key={route} id={route.split('/')[2]} />
+    : /^#\/quest\/[^/]+\/chi-duong$/.test(route) ? <DueStartPage key={route} id={route.split('/')[2]} />
     : /^#\/quest\/[^/]+\/choi$/.test(route) ? <QuestPlayPage key={route} id={route.split('/')[2]} />
+    : route.startsWith('#/nha-sang-tao/') ? <CreatorPage key={route} id={route.split('/')[2].split('?')[0]} from={new URLSearchParams(route.split('?')[1]||'').get('tu')||undefined}/>
     : route.startsWith('#/quest/') ? <QuestDetailsPage key={route} id={route.slice('#/quest/'.length)} />
+    : route.startsWith('#/chi-duong/')&&getQuest(route.slice('#/chi-duong/'.length)) ? <QuestDetailsPage id={route.slice('#/chi-duong/'.length)}/>
     : route.startsWith('#/chi-duong/') ? <NavigationPage key={route} id={route.slice('#/chi-duong/'.length)} />
     : route.startsWith('#/hoan-thanh/') ? <CelebrationPage key={route} id={route.split('/')[2]} missionId={route.split('/')[3]} />
     : route.startsWith('#/may-anh/') ? <CameraPage key={route} id={route.split('/')[2]} missionId={route.split('/')[3]} />
+    : route.startsWith('#/nhiem-vu/')&&getQuest(route.slice('#/nhiem-vu/'.length)) ? <QuestDetailsPage id={route.slice('#/nhiem-vu/'.length)}/>
     : route.startsWith('#/nhiem-vu/') ? <DestinationPage key={route} id={route.slice('#/nhiem-vu/'.length)} />
     : route.startsWith('#/dia-diem/') ? <DestinationDetails key={route} id={route.slice('#/dia-diem/'.length)} />
-    : route !== '#/' ? (
-      <main className="quest-page">
-        <h1>Không tìm thấy trang</h1>
-        <p>Liên kết này không hợp lệ. Bạn có thể quay về trang chủ hoặc chọn điểm đến trên bản đồ.</p>
-        <nav className="quest-nav" aria-label="Quay lại khám phá">
-          <a href="#/">Về trang chủ</a>
-          <a href="#/kham-pha">Mở bản đồ</a>
-        </nav>
-      </main>
-    ) : <WelcomePage />
-  const onboarding = route === '#/' || authRoute || route === '#/chon-nhan-vat' || route === '#/nhan-vat' || route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
-  return <div ref={shell} className={`app-shell ${onboarding ? 'onboarding-shell' : ''} ${route === '#/tai-khoan' ? 'account-shell' : ''}`}>
-    <Suspense fallback={<main className="auth-loading"><p role="status">Đang mở bản đồ…</p></main>}>{page}</Suspense><Notifications />{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}
-    <nav className="bottom-nav" aria-label="Điều hướng chính">
-      <a href="#/kham-pha" aria-label="Bản đồ" aria-current={isMap || /#\/(dia-diem|nhiem-vu|chi-duong|quest)\//.test(route) ? 'page' : undefined}><GameIcon kind="map"/>Bản đồ</a>
-      <a href="#/su-kien" aria-label="Sự kiện" aria-current={route.startsWith('#/su-kien') ? 'page' : undefined}><span aria-hidden="true">◷</span>Sự kiện</a>
-      <a href="#/album" aria-label="Album" aria-current={route === '#/album' ? 'page' : undefined}><GameIcon kind="album"/>Thư viện</a>
-      <a href="#/cua-hang" aria-label="Đổi quà" aria-current={route === '#/cua-hang' ? 'page' : undefined}><GameIcon kind="gift"/>Phần thưởng</a>
-      <a href="#/tai-khoan" aria-label="Tài khoản" aria-current={route === '#/tai-khoan' ? 'page' : undefined}><GameIcon kind="person"/>Tài khoản</a>    </nav>
-  </div>
+    : route !== '#/' ? <NotFoundPage/>  : <WelcomePage initialMode={homeAuthMode}/>
+  const workspace = route.startsWith('#/tai-khoan') || ['#/album','#/cua-hang'].includes(route)
+  const onboarding = /^#\/quest\/[^/]+\/chi-duong$/.test(route) || /^#\/quest\/[^/]+\/choi$/.test(route) || journeyRoute || route === '#/' || authRoute || route === '#/chon-nhan-vat' || route === '#/nhan-vat' || route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
+  const interceptClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if(auth.status==='authenticated'||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return
+    const link=(event.target as Element).closest<HTMLAnchorElement>('a[href]')
+    if(!link||link.target==='_blank'||link.hasAttribute('download'))return
+    const target=new URL(link.href,window.location.href)
+    if(target.origin!==window.location.origin||target.pathname!==window.location.pathname||!['#/dang-nhap','#/dang-ky'].includes(target.hash))return
+    event.preventDefault();if(route==='#/'){setHomeAuthMode(target.hash==='#/dang-ky'?'register':'login');document.getElementById('home-login')?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});return}loginOpener.current=link;setLoginMode(target.hash==='#/dang-ky'?'register':'login');setLoginPrompt(true)
+  }
+  const renderedPage = <Suspense fallback={<main className="auth-loading"><p role="status">{t("Đang tải trang…")}</p></main>}>{page}</Suspense>
+
+  const isMobile = deviceMode === 'mobile'
+  const isHome = route === '#/' || authRoute
+  const isFullscreen = route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
+  const isQuestImmersive = (route.startsWith('#/quest/') && (route.includes('/choi') || route.includes('/chi-duong') || route.includes('/dan-duong'))) || route.startsWith('#/chi-duong/') || isFullscreen
+  const showMobileHeader = isMobile && !isHome && !isQuestImmersive
+  const showMobileNav = isMobile && !isHome && !onboarding && !isQuestImmersive && !isFullscreen
+
+  return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${isMobile ? 'device-mobile-shell device-mobile' : ''} ${isHome ? 'home-shell' : ''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
+    {showMobileHeader && (
+      <header className="device-mobile-header" role="banner">
+        <div className="device-mobile-brand-group">
+          <a href="#/kham-pha" className="device-mobile-logo" aria-label="Dana Quest">
+            <span>DANA QUEST</span>
+          </a>
+        </div>
+        <div className="device-mobile-header-actions">
+          {auth.user && <StreakChip />}
+          <button
+            type="button"
+            className="device-mobile-mode-btn"
+            onClick={() => setShowDeviceModal(true)}
+            aria-label={t('Đổi giao diện Web/Điện thoại', 'Switch Web/Mobile layout')}
+            title={t('Đổi giao diện Web / Điện thoại', 'Switch Web / Mobile layout')}
+          >
+            <span aria-hidden="true">📱</span>
+            <span>Mobile</span>
+          </button>
+        </div>
+      </header>
+    )}
+    {!isMobile && <PageTools route={route}>{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}</PageTools>}
+    {workspace && !isMobile && <WorkspaceNavigation route={route}/>}
+    {renderedPage}<Notifications />
+    {isMobile ? (showMobileNav && <MobileBottomNav route={route} />) : <MainNavigation route={route} />}
+  </div>{showLogin&&<AuthPage embedded initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):loginMode} onClose={closeLogin} onAuthenticated={user=>{setLoginPrompt(false);setDismissedQuest(route);if(!user.avatarId){rememberPageReturn(route);window.location.hash='#/chon-nhan-vat'}}}/>}{isModalOpen && <DeviceModeModal open={isModalOpen} currentMode={deviceMode} onSelect={chosen => { setDeviceMode(chosen); setShowDeviceModal(false) }} onClose={() => setShowDeviceModal(false)} />}</EventProvider>
 }
 
 export default function App() {
-  return <AuthProvider><AppRouter /></AuthProvider>
+  return <AuthProvider><LocaleProvider><AppRouter /></LocaleProvider></AuthProvider>
 }
-
-
-
-
-
-

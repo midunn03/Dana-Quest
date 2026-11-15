@@ -1,3 +1,4 @@
+import { t, localized } from '../i18n/locale'
 // Bộ vẽ nhân vật pixel theo cấu hình.
 // Nhân vật được ghép từ các lớp (thân, đầu, mặt, tóc) trên lưới 16×24 ô. Mỗi bộ phận
 // là một lớp riêng nên sau này có thể thay từng lớp bằng ảnh pixel do admin tải lên.
@@ -30,27 +31,27 @@ export interface AvatarLook {
   pantsColor: number
 }
 
-export const genderLabels: Record<Gender, string> = { m: 'Nam', f: 'Nữ' }
-export const headLabels: Record<HeadShape, string> = { tron: 'Tròn', vuong: 'Vuông', to: 'To', det: 'Dẹt', xoan: 'Trái xoan' }
-export const hairLabels: Record<HairStyle, string> = { den: 'Đen thẳng', xu: 'Xù', haimai: '2 mái', mullet: 'Mullet' }
-export const sleeveLabels: Record<SleeveKind, string> = { ngan: 'Tay ngắn', dai: 'Tay dài', coc: 'Cộc tay' }
-export const pantsLabels: Record<PantsKind, string> = { dai: 'Quần dài', ngan: 'Quần ngắn' }
+export const genderLabels: Record<Gender, string> = localized({ m: 'Nam', f: "Nữ" })
+export const headLabels: Record<HeadShape, string> = localized({ tron: "Tròn", vuong: "Vuông", to: 'To', det: "Dẹt", xoan: "Trái xoan" })
+export const hairLabels: Record<HairStyle, string> = localized({ den: "Đen thẳng", xu: "Xù", haimai: "2 mái", mullet: 'Mullet' })
+export const sleeveLabels: Record<SleeveKind, string> = localized({ ngan: "Tay ngắn", dai: "Tay dài", coc: "Cộc tay" })
+export const pantsLabels: Record<PantsKind, string> = localized({ dai: "Quần dài", ngan: "Quần ngắn" })
 
 export const skinTones = [
-  { name: 'Sáng', color: '#f6d3b3' }, { name: 'Be', color: '#eeb990' }, { name: 'Nâu nhạt', color: '#d9a06f' },
-  { name: 'Nâu', color: '#b97750' }, { name: 'Nâu đậm', color: '#8a5a3c' },
+  { name: t("Sáng"), color: '#f6d3b3' }, { name: 'Be', color: '#eeb990' }, { name: t("Nâu nhạt"), color: '#d9a06f' },
+  { name: t("Nâu"), color: '#b97750' }, { name: t("Nâu đậm"), color: '#8a5a3c' },
 ] as const
 export const hairColors = [
-  { name: 'Đen', color: '#23232b' }, { name: 'Nâu', color: '#5a3a22' }, { name: 'Vàng', color: '#c9a24a' },
-  { name: 'Đỏ', color: '#a8442e' }, { name: 'Tím', color: '#6a5acd' },
+  { name: t("Đen"), color: '#23232b' }, { name: t("Nâu"), color: '#5a3a22' }, { name: t("Vàng"), color: '#c9a24a' },
+  { name: t("Đỏ"), color: '#a8442e' }, { name: t("Tím"), color: '#6a5acd' },
 ] as const
 export const shirtColors = [
-  { name: 'Xanh biển', color: '#2385bd' }, { name: 'Cam', color: '#d87743' }, { name: 'Xanh lá', color: '#458764' },
-  { name: 'Tím', color: '#8575b0' }, { name: 'Hồng', color: '#e2506a' }, { name: 'Trắng', color: '#f2f0e6' },
+  { name: t("Xanh biển"), color: '#2385bd' }, { name: 'Cam', color: '#d87743' }, { name: t("Xanh lá"), color: '#458764' },
+  { name: t("Tím"), color: '#8575b0' }, { name: t("Hồng"), color: '#e2506a' }, { name: t("Trắng"), color: '#f2f0e6' },
 ] as const
 export const pantsColors = [
-  { name: 'Xanh jean', color: '#476477' }, { name: 'Đen', color: '#2f3a4a' }, { name: 'Nâu', color: '#8b6b4a' },
-  { name: 'Xanh rêu', color: '#3d6b57' }, { name: 'Tím than', color: '#5b4f8a' },
+  { name: 'Xanh jean', color: '#476477' }, { name: t("Đen"), color: '#2f3a4a' }, { name: t("Nâu"), color: '#8b6b4a' },
+  { name: t("Xanh rêu"), color: '#3d6b57' }, { name: t("Tím than"), color: '#5b4f8a' },
 ] as const
 
 export const defaultLook: AvatarLook = { gender: 'm', head: 'tron', hair: 'den', sleeve: 'ngan', pants: 'dai', skin: 1, hairColor: 0, shirt: 0, pantsColor: 0 }

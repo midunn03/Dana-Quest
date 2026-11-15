@@ -1,0 +1,23 @@
+import { interpolate } from './i18n/locale'
+import { t } from './i18n/locale'
+import type {QuestChallenge} from './data/quests'
+function readArray(answer:string):unknown[]{try{const value=JSON.parse(answer);return Array.isArray(value)?value:[]}catch{return []}}
+export default function ChallengeInput({challenge,answer,setAnswer,disabled}:{challenge:QuestChallenge;answer:string;setAnswer:(value:string)=>void;disabled:boolean}){
+ if(challenge.type==='single-choice')return <fieldset className="q-choices" disabled={disabled}><legend>{challenge.prompt}</legend>{challenge.options.map(option=><label key={option.id} className={answer===option.id?'selected':''}><input type="radio" name="quest-answer" value={option.id} checked={answer===option.id} onChange={()=>setAnswer(option.id)}/><span>{option.label}</span></label>)}</fieldset>
+ if(challenge.type==='multi-select'){
+  const selected=readArray(answer).filter((value):value is string=>typeof value==='string')
+  return <fieldset className="q-choices q-multi" disabled={disabled}><legend>{challenge.prompt}</legend><p className="q-muted">{t("Có thể chọn nhiều đáp án.")}</p>{challenge.options.map(option=><label key={option.id} className={selected.includes(option.id)?'selected':''}><input type="checkbox" checked={selected.includes(option.id)} onChange={e=>setAnswer(JSON.stringify(e.target.checked?[...selected,option.id]:selected.filter(id=>id!==option.id)))}/><span>{option.label}</span></label>)}</fieldset>
+ }
+ if(challenge.type==='ordering'){
+  const selected=readArray(answer).filter((value):value is string=>typeof value==='string'&&challenge.items.some(item=>item.id===value))
+  const move=(index:number,delta:number)=>{const next=[...selected];[next[index],next[index+delta]]=[next[index+delta],next[index]];setAnswer(JSON.stringify(next))}
+  return <fieldset className="q-ordering" disabled={disabled}><legend>{challenge.prompt}</legend><p className="q-muted">{t("Chạm từng mảnh theo thứ tự. Dùng nút lên/xuống để điều chỉnh.")}</p><div className="q-order-pool">{challenge.items.filter(item=>!selected.includes(item.id)).map(item=><button type="button" key={item.id} onClick={()=>setAnswer(JSON.stringify([...selected,item.id]))}>{t("Thêm") + " "}{item.label}</button>)}</div><ol aria-label={t("Thứ tự bạn đã chọn")}>{selected.map((id,index)=>{const label=challenge.items.find(item=>item.id===id)!.label;return <li key={id}><span>{index+1}</span><strong>{label}</strong><button type="button" disabled={index===0} aria-label={interpolate("Đưa ${0} lên",[label])} onClick={()=>move(index,-1)}>↑</button><button type="button" disabled={index===selected.length-1} aria-label={interpolate("Đưa ${0} xuống",[label])} onClick={()=>move(index,1)}>↓</button><button type="button" aria-label={interpolate("Bỏ ${0}",[label])} onClick={()=>setAnswer(JSON.stringify(selected.filter(item=>item!==id)))}>{t("×")}</button></li>})}</ol><p role="status">{t("Đã xếp") + " "}{selected.length}/{challenge.items.length} {" " + t("mảnh.")}</p><button type="button" className="q-secondary" onClick={()=>setAnswer('')}>{t("Xếp lại từ đầu")}</button></fieldset>
+ }
+ if(challenge.type==='matching'){
+  const pairs=readArray(answer).filter((value):value is [string,string]=>Array.isArray(value)&&value.length===2&&value.every(item=>typeof item==='string')),values=new Map(pairs)
+  return <fieldset className="q-matching" disabled={disabled}><legend>{challenge.prompt}</legend><p className="q-muted">{t("Chọn một ý tương ứng cho mỗi thẻ. Mỗi ý chỉ dùng một lần.")}</p>{challenge.pairs.map(pair=><div key={pair.id}><label htmlFor={`pair-${pair.id}`}>{pair.label}</label><select id={`pair-${pair.id}`} value={values.get(pair.id)||''} onChange={e=>{values.set(pair.id,e.target.value);setAnswer(JSON.stringify(challenge.pairs.map(item=>[item.id,values.get(item.id)||''])))}}><option value="">{t("Chọn ý để ghép")}</option>{challenge.options.map(option=><option key={option.id} value={option.id} disabled={pairs.some(([key,value])=>key!==pair.id&&value===option.id)}>{option.label}</option>)}</select></div>)}</fieldset>
+ }
+ if(challenge.type==='observation')return <label className="q-observation"><input type="checkbox" disabled={disabled} checked={answer==='confirmed'} onChange={event=>setAnswer(event.target.checked?'confirmed':'')}/>{challenge.confirmationLabel}</label>
+ if(challenge.type==='photo')return <p role="status">{t("Thử thách ảnh này chưa được cấu hình.")}</p>
+ return <label className="q-text-answer">{challenge.prompt}<input disabled={disabled} value={answer} onChange={event=>setAnswer(event.target.value)} placeholder={challenge.placeholder} autoComplete="off"/></label>
+}

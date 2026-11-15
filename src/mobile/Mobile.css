@@ -1,0 +1,1199 @@
+/* ==========================================================================
+   DANA QUEST — GIAI ĐOẠN C: GIAO DIỆN DI ĐỘNG (MOBILE SHELL & DEVICE MODE)
+   Các quy tắc CSS sử dụng tiền tố .device-mobile-* và .device-mode-*
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Device Selection Modal (.device-mode-*)
+   -------------------------------------------------------------------------- */
+.device-mode-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.76);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: deviceModeFadeIn 0.25s ease-out;
+}
+
+@keyframes deviceModeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.device-mode-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--px-surface, #ffffff);
+  border: 3px solid var(--px-ink, #0f172a);
+  box-shadow: 8px 8px 0 var(--px-ink, #0f172a);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: deviceModeSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes deviceModeSlideUp {
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.device-mode-brand {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--px-primary, #216447);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.device-mode-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--px-ink, #0f172a);
+  margin: 0 0 6px;
+  line-height: 1.35;
+}
+
+.device-mode-header p {
+  font-size: 14px;
+  color: var(--px-ink-muted, #475569);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.device-mode-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.device-mode-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px;
+  border: 2px solid var(--px-border, #cbd5e1);
+  background: var(--px-surface-soft, #f8fafc);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  min-height: 52px;
+  box-sizing: border-box;
+}
+
+.device-mode-option:hover {
+  border-color: var(--px-primary, #216447);
+  background: var(--px-surface, #ffffff);
+}
+
+.device-mode-option.active {
+  border-color: var(--px-primary, #216447);
+  border-width: 3px;
+  background: rgba(33, 100, 71, 0.08);
+}
+
+.device-mode-icon-circle {
+  font-size: 24px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.device-mode-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.device-mode-option-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.device-mode-option-title strong {
+  font-size: 15px;
+  color: var(--px-ink, #0f172a);
+}
+
+.device-mode-rec-tag {
+  font-size: 11px;
+  font-weight: 700;
+  background: #10b981;
+  color: #ffffff;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+}
+
+.device-mode-info p {
+  font-size: 13px;
+  color: var(--px-ink-muted, #475569);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.device-mode-radio-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--px-border, #94a3b8);
+  flex-shrink: 0;
+  margin-top: 4px;
+  position: relative;
+}
+
+.device-mode-option.active .device-mode-radio-mark {
+  border-color: var(--px-primary, #216447);
+}
+
+.device-mode-option.active .device-mode-radio-mark::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--px-primary, #216447);
+}
+
+.device-mode-confirm-btn {
+  width: 100%;
+  height: 48px;
+  border: 2px solid var(--px-ink, #0f172a);
+  box-shadow: 3px 3px 0 var(--px-ink, #0f172a);
+  background: var(--px-primary, #216447);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
+}
+
+.device-mode-confirm-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--px-ink, #0f172a);
+}
+
+
+/* --------------------------------------------------------------------------
+   2. Khung Bọc Giao Diện Di Động (.device-mobile-shell)
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow: hidden !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: var(--px-page, #f7f5ec) !important;
+  box-sizing: border-box !important;
+}
+
+/* Khi test trên máy tính màn hình rộng (> 768px): gom khung gọn như màn hình điện thoại */
+@media (min-width: 769px) {
+  .app-shell.device-mobile-shell {
+    max-width: 440px !important;
+    margin: 0 auto !important;
+    border-left: 3px solid var(--px-ink, #0f172a) !important;
+    border-right: 3px solid var(--px-ink, #0f172a) !important;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28) !important;
+  }
+}
+
+/* Khi trên điện thoại thật (<= 768px): tràn viền hoàn hảo */
+@media (max-width: 768px) {
+  .app-shell.device-mobile-shell {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Header di động trên cùng */
+.device-mobile-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 0 14px;
+  padding-top: max(4px, env(safe-area-inset-top, 0px));
+  background: var(--px-surface, #ffffff);
+  border-bottom: 2px solid var(--px-ink, #0f172a);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.device-mobile-logo {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--px-primary, #216447);
+  letter-spacing: 0.8px;
+}
+
+.device-mobile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.device-mobile-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  height: 32px;
+  border: 2px solid var(--px-ink, #0f172a);
+  background: var(--px-surface-soft, #f8fafc);
+  color: var(--px-ink, #0f172a);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Thanh Điều Hướng Đáy Di Động (.device-mobile-nav)
+   -------------------------------------------------------------------------- */
+.device-mobile-nav {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 58px;
+  background: var(--px-surface, #ffffff);
+  border-top: 2px solid var(--px-ink, #0f172a);
+  padding-bottom: max(6px, env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  z-index: 120;
+  box-sizing: border-box;
+}
+
+.device-mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 0;
+  text-decoration: none;
+  color: var(--px-ink-muted, #64748b);
+  touch-action: manipulation;
+  transition: color 0.15s ease;
+  user-select: none;
+}
+
+.device-mobile-nav-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device-mobile-nav-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.device-mobile-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.device-mobile-nav-item.active {
+  color: var(--px-primary, #216447);
+  font-weight: 800;
+}
+
+.device-mobile-nav-item.active .device-mobile-nav-icon svg {
+  stroke-width: 2.6;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. Đệm đáy chống che khuất (Bottom Nav Padding)
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell > main:not(.pixel-home),
+.app-shell.device-mobile-shell > .discovery-page,
+.app-shell.device-mobile-shell > .ap-page,
+.app-shell.device-mobile-shell > .library-page,
+.app-shell.device-mobile-shell > .shop-screen,
+.app-shell.device-mobile-shell > .events-page {
+  padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.app-shell.device-mobile-shell > main.pixel-home {
+  padding-bottom: 0 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Tối ưu Trang Bản Đồ (Explore / Atlas) trên Điện thoại: BẢN ĐỒ CHIẾM 80%
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell > .atlas-page,
+.device-mobile-shell .atlas-page,
+.device-mobile .atlas-page {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: relative !important;
+}
+
+/* Phần Bản đồ chiếm 80% diện tích màn hình */
+.app-shell.device-mobile-shell .atlas-map-area,
+.device-mobile-shell .atlas-map-area,
+.device-mobile .atlas-map-area {
+  order: 1 !important;
+  flex: 1 1 80% !important;
+  height: 80% !important;
+  min-height: 75vh !important;
+  position: relative !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.device-mobile-shell .atlas-map-area > .atlas-map,
+.device-mobile .atlas-map-area > .atlas-map {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Thanh Sidebar/Drawer đáy thu gọn chiếm 20% còn lại */
+.app-shell.device-mobile-shell .atlas-sidebar,
+.device-mobile-shell .atlas-sidebar,
+.device-mobile .atlas-sidebar {
+  order: 2 !important;
+  flex: 0 0 20% !important;
+  height: 20% !important;
+  max-height: 22vh !important;
+  min-height: 110px !important;
+  border-right: none !important;
+  border-top: 2px solid var(--px-ink, #0f172a) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 12px calc(65px + env(safe-area-inset-bottom, 0px)) !important;
+  background: var(--px-surface, #ffffff) !important;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08) !important;
+  z-index: 100 !important;
+}
+
+/* Ẩn header văn bản rườm rà (h1 BẢN ĐỒ HÀNH TRÌNH, p Chọn điểm hẹn) */
+.device-mobile-shell .atlas-sidebar header,
+.device-mobile .atlas-sidebar header {
+  display: none !important;
+}
+
+/* Ô tìm kiếm nổi gọn gàng trên bản đồ */
+.device-mobile-shell .atlas-search,
+.device-mobile .atlas-search {
+  margin: 4px 0 8px !important;
+}
+
+.device-mobile-shell .atlas-search input,
+.device-mobile .atlas-search input {
+  height: 40px !important;
+  min-height: 40px !important;
+  font-size: 13px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+}
+
+/* Bộ lọc dạng chip gọn nhẹ */
+.device-mobile-shell .atlas-filters,
+.device-mobile .atlas-filters {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  gap: 6px !important;
+  margin: 0 0 8px !important;
+  padding-bottom: 2px !important;
+  scrollbar-width: none !important;
+}
+
+.device-mobile-shell .atlas-filters button,
+.device-mobile .atlas-filters button {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  border-radius: 6px !important;
+}
+
+.device-mobile-shell .atlas-filters button[aria-pressed=true],
+.device-mobile .atlas-filters button[aria-pressed=true] {
+  background: var(--px-primary, #216447) !important;
+  color: #ffffff !important;
+}
+
+.device-mobile-shell .atlas-location,
+.device-mobile .atlas-location {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+  margin: 4px 0 8px !important;
+  padding: 4px 8px !important;
+  border: 1px dashed var(--px-border, #cbd5e1) !important;
+  border-radius: 6px !important;
+}
+
+.device-mobile-shell .atlas-location button,
+.device-mobile .atlas-location button {
+  min-height: 32px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.device-mobile-shell .atlas-list-heading,
+.device-mobile .atlas-list-heading {
+  padding: 2px 4px 6px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.device-mobile-shell .atlas-list > button,
+.device-mobile .atlas-list > button {
+  padding: 8px 6px !important;
+  gap: 8px !important;
+  border-bottom: 1px solid var(--px-border, #f1f5f9) !important;
+}
+
+.device-mobile-shell .atlas-list strong,
+.device-mobile .atlas-list strong {
+  font-size: 13px !important;
+}
+
+.device-mobile-shell .atlas-list small,
+.device-mobile .atlas-list small {
+  font-size: 11px !important;
+}
+
+/* Thẻ thông tin địa điểm được chọn (.atlas-selection) - Gọn ở đáy, để lộ 80% bản đồ */
+.app-shell.device-mobile-shell .atlas-selection,
+.device-mobile-shell .atlas-selection,
+.device-mobile .atlas-selection {
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 10px !important;
+  right: 10px !important;
+  z-index: 1000 !important;
+  max-width: none !important;
+  max-height: 155px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+  background: var(--px-surface, #ffffff) !important;
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  overflow-y: auto !important;
+}
+
+.device-mobile-shell .atlas-selection h2,
+.device-mobile .atlas-selection h2 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin: 2px 24px 4px 0 !important;
+  line-height: 1.35 !important;
+}
+
+.device-mobile-shell .atlas-selection p,
+.device-mobile .atlas-selection p {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  margin: 0 0 8px !important;
+  color: var(--px-ink-muted, #475569) !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.device-mobile-shell .atlas-selection a,
+.device-mobile .atlas-selection a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 14px !important;
+  min-height: 36px !important;
+  background: var(--px-primary, #216447) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   5b. Tối ưu Màn hình Chơi Quest & Thử thách (.quest-player) trên Điện thoại
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .quest-player,
+.device-mobile .quest-player {
+  padding: 10px 14px 24px !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-y: auto !important;
+}
+
+.device-mobile-shell .quest-player header,
+.device-mobile .quest-player header {
+  padding: 6px 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.device-mobile-shell .quest-player h1,
+.device-mobile .quest-player h1,
+.device-mobile-shell .quest-player h2,
+.device-mobile .quest-player h2 {
+  font-size: 18px !important;
+  line-height: 1.35 !important;
+}
+
+.device-mobile-shell .quest-player .q-challenge,
+.device-mobile .quest-player .q-challenge,
+.device-mobile-shell .quest-player .due-card,
+.device-mobile .quest-player .due-card {
+  padding: 12px !important;
+  margin: 8px 0 !important;
+  border-width: 2px !important;
+  border-radius: 8px !important;
+}
+
+.device-mobile-shell .quest-player .q-primary,
+.device-mobile .quest-player .q-primary {
+  min-height: 48px !important;
+  height: 48px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  margin-top: 10px !important;
+}
+
+.device-mobile-shell .quest-player input,
+.device-mobile .quest-player input {
+  min-height: 44px !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. Tối ưu Trang Khám phá & Nhiệm vụ (.discovery-page) trên Điện thoại
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .discovery-page {
+  padding: 12px 14px calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.app-shell.device-mobile-shell .discovery-header {
+  margin-bottom: 14px !important;
+}
+
+.app-shell.device-mobile-shell .discovery-title-row {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  margin-bottom: 14px !important;
+}
+
+.app-shell.device-mobile-shell .discovery-title-row h1 {
+  font-size: 20px !important;
+  margin: 0 0 6px !important;
+}
+
+.app-shell.device-mobile-shell .discovery-search {
+  min-height: 48px !important;
+  margin-bottom: 16px !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+}
+
+.app-shell.device-mobile-shell .discovery-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.app-shell.device-mobile-shell .discovery-card {
+  width: 100% !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  box-sizing: border-box !important;
+  padding: 14px !important;
+  background: var(--px-surface, #ffffff) !important;
+}
+
+.app-shell.device-mobile-shell .discovery-card h3 {
+  font-size: 16px !important;
+  margin: 6px 0 !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. Tối ưu Trang Chỉ Đường & Điều Hướng (.navigation-screen)
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .navigation-screen {
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.app-shell.device-mobile-shell .route-instruction {
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  right: 10px !important;
+  z-index: 1000 !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  background: var(--px-surface, #ffffff) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+}
+
+.app-shell.device-mobile-shell .route-tools {
+  position: absolute !important;
+  bottom: 240px !important;
+  right: 12px !important;
+  z-index: 900 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.app-shell.device-mobile-shell .route-tool {
+  min-height: 44px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 2px 2px 0 var(--px-ink, #0f172a) !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.app-shell.device-mobile-shell .live-route-sheet {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  border-top: 3px solid var(--px-ink, #0f172a) !important;
+  border-radius: 16px 16px 0 0 !important;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.18) !important;
+  background: var(--px-surface, #ffffff) !important;
+  max-height: 65% !important;
+  z-index: 950 !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. Tối ưu Trang Tài Khoản & Cài Đặt (.ap-page)
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .ap-page {
+  padding: 12px 14px calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.app-shell.device-mobile-shell .ap-profile-header {
+  margin-bottom: 14px !important;
+}
+
+.app-shell.device-mobile-shell .ap-profile-header h1 {
+  font-size: 20px !important;
+}
+
+.app-shell.device-mobile-shell .ap-profile-frame {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.app-shell.device-mobile-shell .ap-card {
+  padding: 14px !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  border-radius: 8px !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+}
+
+.app-shell.device-mobile-shell .ap-stats-strip {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 6px !important;
+  text-align: center !important;
+  padding: 10px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+}
+
+.app-shell.device-mobile-shell .ap-stats-strip span {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  font-size: 11px !important;
+}
+
+.app-shell.device-mobile-shell .ap-stats-strip strong {
+  font-size: 18px !important;
+  color: var(--px-primary, #216447) !important;
+}
+
+.app-shell.device-mobile-shell .ap-quick-links {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 6px !important;
+  text-align: center !important;
+}
+
+.app-shell.device-mobile-shell .ap-quick-links a {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 8px 4px !important;
+  font-size: 11px !important;
+  min-height: 52px !important;
+}
+
+.app-shell.device-mobile-shell .badge-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+}
+
+.app-shell.device-mobile-shell .recap-stat-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 8px !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. Tối ưu Trang Chủ (.pixel-home) trên Điện thoại
+   -------------------------------------------------------------------------- */
+/* Triệt tiêu hoàn toàn Double Scrollbar trên điện thoại & simulator */
+.app-shell.device-mobile-shell > main.pixel-home,
+.device-mobile .pixel-home {
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  scrollbar-gutter: auto !important;
+  padding: 0 !important;
+}
+
+/* Header di động trang chủ: Căn chỉnh logo, nút chế độ, nút đăng nhập */
+.device-mobile-shell .home-header,
+.device-mobile .home-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 150 !important;
+  background: var(--px-page, #f7f5ec) !important;
+  border-bottom: 2px solid var(--px-ink, #0f172a) !important;
+  width: 100% !important;
+}
+
+.device-mobile-shell .home-header-inner,
+.device-mobile .home-header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 8px 12px !important;
+  gap: 8px !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 48px !important;
+}
+
+.device-mobile-shell .home-brand,
+.device-mobile .home-brand {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+.device-mobile-shell .home-brand img,
+.device-mobile .home-brand img,
+.device-mobile-shell .home-brand .brand-logo,
+.device-mobile .home-brand .brand-logo {
+  width: 88px !important;
+  height: auto !important;
+  max-height: 34px !important;
+  object-fit: contain !important;
+}
+
+/* Ẩn hoàn toàn thanh điều hướng desktop ngang bị ép ký tự */
+.device-mobile-shell .home-header nav:not(.is-open),
+.device-mobile .home-header nav:not(.is-open) {
+  display: none !important;
+}
+
+/* Khi mở menu hamburger trên mobile */
+.device-mobile-shell .home-header nav.is-open,
+.device-mobile .home-header nav.is-open {
+  display: flex !important;
+  flex-direction: column !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 100% !important;
+  padding: 12px 14px !important;
+  background: var(--px-surface, #ffffff) !important;
+  border-bottom: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16) !important;
+  z-index: 200 !important;
+  gap: 6px !important;
+}
+
+.device-mobile-shell .home-header nav.is-open button,
+.device-mobile .home-header nav.is-open button {
+  width: 100% !important;
+  text-align: left !important;
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--px-border, #cbd5e1) !important;
+  border-radius: 4px !important;
+  background: var(--px-surface-soft, #f8fafc) !important;
+  color: var(--px-ink, #0f172a) !important;
+  min-height: 44px !important;
+  cursor: pointer !important;
+}
+
+.device-mobile-shell .home-header nav.is-open button[aria-current=true],
+.device-mobile .home-header nav.is-open button[aria-current=true] {
+  background: var(--px-primary, #216447) !important;
+  color: #ffffff !important;
+  border-color: var(--px-ink, #0f172a) !important;
+}
+
+/* Hành động bên phải header */
+.device-mobile-shell .home-header-actions,
+.device-mobile .home-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+}
+
+.device-mobile-shell .home-language,
+.device-mobile .home-language {
+  display: inline-flex !important;
+  gap: 2px !important;
+}
+
+.device-mobile-shell .home-language button,
+.device-mobile .home-language button {
+  min-width: 28px !important;
+  min-height: 34px !important;
+  padding: 2px 4px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--px-ink, #0f172a) !important;
+}
+
+.home-mode-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 2px solid var(--px-ink, #0f172a);
+  background: var(--px-surface-soft, #f8fafc);
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+  touch-action: manipulation;
+}
+
+/* Tuyệt đối chống ép ký tự đứng ở nút Đăng nhập / Vào chơi */
+.device-mobile-shell .home-header .home-button,
+.device-mobile .home-header .home-button,
+.device-mobile-shell .pixel-home .home-button,
+.device-mobile .pixel-home .home-button {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  flex-shrink: 0 !important;
+}
+
+.device-mobile-shell .home-header .home-button,
+.device-mobile .home-header .home-button {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  border-width: 2px !important;
+  box-shadow: 2px 2px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-menu,
+.device-mobile .home-menu {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  padding: 0 !important;
+  font-size: 18px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  background: var(--px-surface-soft, #f8fafc) !important;
+  color: var(--px-ink, #0f172a) !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+/* Vùng chứa nội dung trang chủ */
+.device-mobile-shell .home-container,
+.device-mobile .home-container {
+  width: calc(100% - 24px) !important;
+  max-width: 100% !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+}
+
+.device-mobile-shell .home-hero,
+.device-mobile .home-hero {
+  padding: 0 0 24px !important;
+}
+
+.device-mobile-shell .home-hero-grid,
+.device-mobile .home-hero-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  padding: 16px 0 !important;
+}
+
+.device-mobile-shell .home-hero-copy,
+.device-mobile .home-hero-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.device-mobile-shell .pixel-home h1,
+.device-mobile .pixel-home h1 {
+  font-size: 22px !important;
+  line-height: 1.35 !important;
+  margin: 12px 0 8px !important;
+  font-weight: 700 !important;
+}
+
+.device-mobile-shell .home-hero-copy > p,
+.device-mobile .home-hero-copy > p {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: var(--px-ink-muted, #475569) !important;
+  margin: 0 0 12px !important;
+}
+
+.device-mobile-shell .home-text-link,
+.device-mobile .home-text-link {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 8px 0 !important;
+  min-height: 40px !important;
+  color: var(--px-primary, #216447) !important;
+}
+
+.device-mobile-shell .home-art-frame,
+.device-mobile .home-art-frame {
+  margin-top: 14px !important;
+  border-width: 3px !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.device-mobile-shell .home-art-frame svg,
+.device-mobile .home-art-frame svg {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+.device-mobile-shell .home-art-tag,
+.device-mobile .home-art-tag {
+  font-size: 12px !important;
+  padding: 6px 10px !important;
+  bottom: 8px !important;
+  left: 8px !important;
+}
+
+.device-mobile-shell .home-login-anchor,
+.device-mobile .home-login-anchor {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+.device-mobile-shell .home-section,
+.device-mobile .home-section {
+  padding-block: 40px !important;
+}
+
+.device-mobile-shell .home-steps,
+.device-mobile .home-steps {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.device-mobile-shell .home-steps article,
+.device-mobile .home-steps article {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 14px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  background: var(--px-surface, #ffffff) !important;
+  box-shadow: 2px 2px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-step-number,
+.device-mobile .home-step-number {
+  width: 44px !important;
+  height: 44px !important;
+  font-size: 16px !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.device-mobile-shell .home-quest-grid,
+.device-mobile .home-quest-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.device-mobile-shell .home-quest-card,
+.device-mobile .home-quest-card {
+  display: flex !important;
+  flex-direction: column !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 3px 3px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-quest-art,
+.device-mobile .home-quest-art {
+  max-height: 160px !important;
+  border-bottom: 2px solid var(--px-ink, #0f172a) !important;
+  border-right: none !important;
+}
+
+.device-mobile-shell .home-quest-info,
+.device-mobile .home-quest-info {
+  padding: 14px !important;
+}
+
+.device-mobile-shell .home-reward-grid,
+.device-mobile .home-reward-grid,
+.device-mobile-shell .home-faq-grid,
+.device-mobile .home-faq-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+}
+
+.device-mobile-shell .home-reward-art,
+.device-mobile .home-reward-art {
+  padding: 16px !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+}
+
+.device-mobile-shell .home-footer,
+.device-mobile .home-footer {
+  padding: 24px 0 !important;
+}
+
+.device-mobile-shell .home-footer-top,
+.device-mobile .home-footer-top,
+.device-mobile-shell .home-footer-bottom,
+.device-mobile .home-footer-bottom {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+}
+
+/* Thanh cuộn mảnh, gọn gàng chuẩn di động */
+.device-mobile-shell *::-webkit-scrollbar,
+.device-mobile *::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+.device-mobile-shell *::-webkit-scrollbar-track,
+.device-mobile *::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.device-mobile-shell *::-webkit-scrollbar-thumb,
+.device-mobile *::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.25) !important;
+  border-radius: 4px !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   10. Form & Bàn Phím Ảo (Virtual Keyboard & Touch Inputs)
+   -------------------------------------------------------------------------- */
+.device-mobile input,
+.device-mobile textarea,
+.device-mobile select {
+  font-size: 16px !important; /* Ngăn chặn hoàn toàn iOS Safari tự phóng to */
+  scroll-margin-bottom: 120px;
+  min-height: 44px;
+}
+
+.device-mobile button,
+.device-mobile a {
+  touch-action: manipulation;
+}

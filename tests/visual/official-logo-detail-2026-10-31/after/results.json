@@ -1,0 +1,230 @@
+[
+  {
+    "name": "home",
+    "width": 390,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "logos": [
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 112,
+        "height": 91.171875
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 176,
+        "height": 143.265625
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 128,
+        "height": 104.1875
+      }
+    ],
+    "logoValid": true,
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 390,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 112,
+    "actionHeight": 0,
+    "scrollHeight": 641,
+    "navToken": "calc(112px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "logos": [
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 112,
+        "height": 91.171875
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 176,
+        "height": 143.265625
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 128,
+        "height": 104.1875
+      }
+    ],
+    "logoValid": true,
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "language": "vi",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "vi",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "logos": [
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 128,
+        "height": 104.1875
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 176,
+        "height": 143.265625
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 128,
+        "height": 104.1875
+      }
+    ],
+    "logoValid": true,
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "language": "en",
+    "overflow": false,
+    "navVisible": true,
+    "navHeight": 80,
+    "actionHeight": 0,
+    "scrollHeight": 729,
+    "navToken": "calc(80px + 0px)",
+    "ink": "rgb(30, 48, 42)",
+    "errors": [],
+    "lang": "en",
+    "controls": [
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      },
+      {
+        "selector": "home-button",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(33, 100, 71)"
+      }
+    ],
+    "logos": [
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 128,
+        "height": 104.1875
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 176,
+        "height": 143.265625
+      },
+      {
+        "src": "http://127.0.0.1:5174/brand/dana-quest-logo.png",
+        "loaded": true,
+        "width": 128,
+        "height": 104.1875
+      }
+    ],
+    "logoValid": true,
+    "actionHover": {
+      "normal": "rgb(33, 100, 71)",
+      "hover": "rgb(25, 77, 55)",
+      "changed": true
+    }
+  }
+]

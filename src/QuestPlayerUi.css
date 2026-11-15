@@ -1,0 +1,17 @@
+.q-icon-button { display:grid; place-items:center; width:44px; height:44px; min-width:44px; padding:10px; border:4px solid transparent; border-radius:0; background:transparent; color:var(--px-ink); cursor:pointer; }
+.q-icon-button svg { width:23px; height:23px; }
+.q-artwork { margin:0 0 var(--px-space-6); overflow:hidden; border:1px solid var(--px-ink); border-radius:0; background:var(--px-page); }
+.q-artwork svg { display:block; width:100%; height:auto; }
+.q-artwork figcaption { padding:10px var(--px-space-4); color:var(--px-ink); font-size:var(--px-text-sm); }
+.q-muted { color:var(--px-ink); font-size:var(--text-sm); line-height:1.75; }
+.q-dialog-backdrop { position:absolute; inset:0; z-index:80; background:color-mix(in srgb, var(--px-ink) 74%, transparent); display:flex; align-items:flex-end; justify-content:center; padding:var(--px-space-4); }
+.q-dialog { width:min(100%,560px); max-height:calc(100% - 24px); overflow-y:auto; padding:22px; border:var(--px-border); border-radius:0; background:var(--px-page); box-shadow:var(--px-shadow-low); }
+.q-dialog header { display:flex; align-items:center; justify-content:space-between; gap:var(--px-space-3); margin-bottom:var(--px-space-6); }
+.q-dialog h2 { margin:0; color:var(--px-ink); font-size:var(--text-md); }
+.q-dialog p { color:var(--px-ink); line-height:1.8; }
+.q-dialog h3 { color:var(--px-ink); font-size:var(--text-sm); }
+.q-dialog .q-primary, .q-dialog .q-secondary { margin-top:18px;box-shadow:var(--px-shadow-low);}
+@media(min-width:900px) {
+.q-dialog-backdrop { align-items:center; }
+.q-dialog { padding:28px; }
+}

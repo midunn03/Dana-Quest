@@ -1,0 +1,55 @@
+/* ---------- Streak Feature Styles (.streak-*) ---------- */
+
+.streak-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff8eb;
+  border: 1px solid #f09a3e;
+  color: #a45309;
+  font-size: var(--px-text-sm, 13px);
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  min-height: 36px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.streak-chip-flame {
+  font-size: 15px;
+}
+
+.streak-chip-inactive {
+  background: var(--px-surface, #f5f5f5);
+  border-color: #ccc;
+  color: #777;
+  filter: grayscale(1);
+}
+
+.streak-milestone-banner {
+  margin: var(--px-space-4, 12px) 0;
+  padding: 12px 14px;
+  background: #fff7ed;
+  border: 2px solid #ea580c;
+  border-radius: 8px;
+  color: #9a3412;
+}
+
+.streak-milestone-banner strong {
+  display: block;
+  font-size: var(--px-text-base, 15px);
+  margin-bottom: 4px;
+}
+
+.streak-milestone-banner p {
+  margin: 0;
+  font-size: var(--px-text-sm, 13px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streak-chip,
+  .streak-milestone-banner {
+    transition: none;
+  }
+}

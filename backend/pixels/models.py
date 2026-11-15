@@ -75,6 +75,7 @@ def shrink_upload(field_file, side, max_bytes, keep_alpha=True):
 CATEGORIES = [
     ('landmark', 'Kiến trúc / biểu tượng'), ('museum', 'Bảo tàng'), ('park', 'Công viên'), ('beach', 'Biển'),
     ('pagoda', 'Chùa'), ('nature', 'Thiên nhiên'), ('heritage', 'Di tích'),
+    ('food', 'Ẩm thực / Đặc sản'),
 ]
 CROWD_HOURS = list(range(6, 24))  # biểu đồ giờ đông đúc: 6:00 → 23:00
 
@@ -229,3 +230,44 @@ class PlacePhoto(models.Model):
     def save(self, *args, **kwargs):
         shrink_upload(self.image, PHOTO_SIDE, PHOTO_BYTES)
         super().save(*args, **kwargs)
+
+
+TRANSIT_TYPES = [
+    ('bike', 'Xe đạp công cộng (Bike)'),
+    ('bus', 'Điểm xe buýt (Bus)'),
+]
+
+
+class TransitStation(models.Model):
+    """Trạm xe đạp công cộng hoặc điểm dừng xe buýt xanh tại Đà Nẵng."""
+
+    station_id = models.CharField('Mã trạm', max_length=60, unique=True, help_text='Mã định danh duy nhất (vd: tngo-bao-tang-cham)')
+    name = models.CharField('Tên trạm', max_length=150)
+    transit_type = models.CharField('Loại phương tiện', max_length=10, choices=TRANSIT_TYPES, default='bike')
+    latitude = models.FloatField('Vĩ độ')
+    longitude = models.FloatField('Kinh độ')
+    address = models.CharField('Địa chỉ', max_length=255, blank=True)
+    operator = models.CharField('Đơn vị vận hành', max_length=100, blank=True, help_text='Vd: TNGo (Tập đoàn Trí Nam), DanaBus (Datram)')
+    source_url = models.URLField('Nguồn xác minh', max_length=500, blank=True, help_text='Link nguồn chính thức để kiểm chứng trạm')
+    verified = models.BooleanField('Đã xác minh', default=False, help_text='Chỉ trạm đã xác minh thực tế mới hiển thị và tính thưởng cho người chơi.')
+    last_checked = models.DateField('Ngày kiểm tra', null=True, blank=True)
+    bonus_coins = models.PositiveIntegerField('Xu thưởng', default=5)
+    is_active = models.BooleanField('Đang hoạt động', default=True)
+    created_at = models.DateTimeField('Ngày tạo', auto_now_add=True)
+    updated_at = models.DateTimeField('Cập nhật', auto_now=True)
+
+    class Meta:
+        verbose_name = 'trạm di chuyển xanh'
+        verbose_name_plural = 'các trạm di chuyển xanh'
+        ordering = ['transit_type', 'name']
+
+    def __str__(self):
+        status = 'Xác minh' if self.verified else 'Chưa xác minh'
+        return f'{self.name} [{self.get_transit_type_display()}] ({status})'
+
+    def clean(self):
+        super().clean()
+        if self.latitude is not None and not (-90 <= self.latitude <= 90):
+            raise ValidationError('Vĩ độ không hợp lệ.')
+        if self.longitude is not None and not (-180 <= self.longitude <= 180):
+            raise ValidationError('Kinh độ không hợp lệ.')

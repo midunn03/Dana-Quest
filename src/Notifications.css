@@ -1,0 +1,7 @@
+
+.notifications { position:fixed; top:12px; right:12px; left:12px; z-index:2000; pointer-events:none; display:grid; gap:var(--px-space-2); justify-items:end; }
+
+.notifications .toast{background:var(--px-surface);color:var(--px-ink);border:4px solid var(--px-ink);border-left:4px solid var(--px-accent);box-shadow:var(--px-shadow-low);animation:feedback-enter var(--px-duration) ease-out}
+.notifications .toast button{color:var(--px-ink);min-width:44px;min-height:44px}
+@media(prefers-reduced-motion:reduce){.notifications .toast{animation:none}}
+.app-shell > .notifications { position:absolute; }

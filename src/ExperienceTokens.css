@@ -1,0 +1,23 @@
+:root {
+ /* Approved v2.2 palette. UI consumers use roles; legacy art aliases stay here. */
+ --px-ink:#1E302A; --px-muted:#52665C; --px-page:#F7F5EC; --px-surface:#FFFFFF;
+ --px-action:#216447; --px-action-hover:#194D37; --px-action-ink:#FFFFFF;
+ --px-surface-soft:#E4F0E5; --px-surface-hover:#E4F0E5; --px-selected:#E4F0E5;
+ --px-info:#28657C; --px-focus:#1F6080; --px-reward:#D5A13A; --px-reward-hover:#B78326;
+ --px-warning:#A83732; --px-success:#216447; --px-success-soft:#E4F0E5;
+ --px-play-canvas:#152D25; --px-play-ink:#F5F6EF; --px-accent:var(--px-info);
+ --px-navy:var(--px-ink); --px-yellow:var(--px-reward); --px-orange:var(--px-reward-hover); --px-green:var(--px-success); --px-sky:var(--px-info); --px-sky-light:var(--px-surface-soft); --px-coral:var(--px-warning); --px-cream:var(--px-page); --px-white:var(--px-surface);
+ --font-vi:'Tiny5',monospace; --font-en:'Game Paused','Pixelify Sans','Tiny5',monospace; --font-ui:var(--font-vi);
+ --px-font:var(--font-ui); --px-font-body:var(--font-ui); --px-font-display:var(--font-ui); --px-font-label:var(--font-ui);
+ --px-space-1:4px; --px-space-2:8px; --px-space-3:12px; --px-space-4:16px; --px-space-6:24px; --px-space-8:32px; --px-space-12:48px; --px-space-16:64px;
+ --text-sm:24px; --text-md:32px; --text-lg:40px; --text-xl:48px; --text-2xl:64px; --text-3xl:80px; --text-4xl:96px; --text-5xl:112px; --text-6xl:144px; --text-7xl:176px;
+ --px-text-sm:var(--text-sm); --px-text-base:var(--text-sm); --px-text-lg:var(--text-md); --px-text-xl:var(--text-lg); --px-text-display:var(--text-3xl);
+ --px-border:4px solid var(--px-ink); --px-radius:0px; --px-shadow-low:0 4px 0 var(--px-ink); --px-shadow-mid:0 8px 0 var(--px-ink); --px-shadow-high:0 12px 0 var(--px-ink);
+ --px-duration:160ms; --px-ease:cubic-bezier(.2,.8,.2,1);
+ --px-page-width:1600px; --px-home-width:1280px; --px-form-width:1040px; --px-page-gutter:clamp(20px,3vw,48px); --px-nav-height:calc(80px + env(safe-area-inset-bottom,0px));
+ --px-space-5:20px; --px-space-9:36px; --px-space-10:40px; --px-space-11:44px; --px-space-14:56px; --px-space-18:72px; --px-cover-compact-width:96px;
+}
+html[lang="vi"], [lang="vi"] { --font-ui:var(--font-vi); }
+html[lang="en"], [lang="en"], .font-en { --font-ui:var(--font-en); }
+@media(max-width:600px) { :root { --px-text-display:var(--text-xl); } }
+@media(max-width:767px) { :root { --px-nav-height:calc(112px + env(safe-area-inset-bottom,0px)); } }

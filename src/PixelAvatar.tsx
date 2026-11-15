@@ -1,3 +1,4 @@
+import './PixelAvatar.css'
 import type { Avatar } from './lib/avatar'
 import { GRID_H, GRID_W, renderLook } from './lib/pixelAvatar'
 // Existing IDs and class names preserve saved characters and map integrations.

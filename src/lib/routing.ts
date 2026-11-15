@@ -1,22 +1,24 @@
-﻿import { distanceMeters, type LocationSample } from './location'
+import { localeTag } from '../i18n/locale'
+import { interpolate, t } from '../i18n/locale'
+import { distanceMeters, type LocationSample } from './location'
 export type Point = [number, number]
 export interface RouteStep { distance: number; name: string; maneuver: { type: string; modifier?: string; location: Point; exit?: number }; geometry: { coordinates: Point[] } }
 export interface WalkingRoute { distance: number; duration: number; geometry: { coordinates: Point[] }; legs: { steps: RouteStep[] }[] }
 export interface RouteProgress { remaining: number; toTurn: number; next: RouteStep; offRoute: number; points: Point[] }
 export const toLatLng = ([lng, lat]: Point): Point => [lat, lng]
-export function formatMeters(value: number) { return value < 1000 ? `${Math.max(0, Math.round(value))} m` : `${(value / 1000).toLocaleString('vi-VN', { maximumFractionDigits: 1 })} km` }
+export function formatMeters(value: number) { return value < 1000 ? `${Math.max(0, Math.round(value))} m` : `${(value / 1000).toLocaleString(localeTag(), { maximumFractionDigits: 1 })} km` }
 export function turnText(step: RouteStep) {
   const { type, modifier, exit } = step.maneuver
-  const street = step.name ? ` vào ${step.name}` : ''
-  if (type === 'arrive') return 'Đến điểm đến'
-  if (type.includes('roundabout') || type === 'rotary') return `Vào vòng xuyến${exit ? `, ra lối thứ ${exit}` : ''}${street}`
-  if (modifier?.includes('uturn')) return `Quay đầu${street}`
-  if (modifier?.includes('left')) return `${modifier === 'slight left' ? 'Chếch trái' : modifier === 'sharp left' ? 'Rẽ ngoặt trái' : 'Rẽ trái'}${street}`
-  if (modifier?.includes('right')) return `${modifier === 'slight right' ? 'Chếch phải' : modifier === 'sharp right' ? 'Rẽ ngoặt phải' : 'Rẽ phải'}${street}`
-  return `Đi thẳng${step.name ? ` trên ${step.name}` : ''}`
+  const street = step.name ? ` ${interpolate("vào ${0}",[step.name])}` : ''
+  if (type === 'arrive') return t("Đến điểm đến")
+  if (type.includes('roundabout') || type === 'rotary') return interpolate("Vào vòng xuyến${0}${1}",[exit ? interpolate(", ra lối thứ ${0}",[exit]) : '',street])
+  if (modifier?.includes('uturn')) return interpolate("Quay đầu${0}",[street])
+  if (modifier?.includes('left')) return `${modifier === 'slight left' ? t("Chếch trái") : modifier === 'sharp left' ? t("Rẽ ngoặt trái") : t("Rẽ trái")}${street}`
+  if (modifier?.includes('right')) return `${modifier === 'slight right' ? t("Chếch phải") : modifier === 'sharp right' ? t("Rẽ ngoặt phải") : t("Rẽ phải")}${street}`
+  return interpolate("Đi thẳng${0}",[step.name ? ` ${interpolate("trên ${0}",[step.name])}` : ''])
 }
 export function turnIcon(step?: RouteStep) { return step?.maneuver.type === 'arrive' ? '⚑' : step?.maneuver.modifier?.includes('uturn') ? '↶' : step?.maneuver.modifier?.includes('left') ? '↰' : step?.maneuver.modifier?.includes('right') ? '↱' : '↑' }
-export function nextTurnText(step: RouteStep) { const text = turnText(step); return text[0].toLocaleLowerCase('vi-VN') + text.slice(1) }
+export function nextTurnText(step: RouteStep) { const text = turnText(step); return text[0].toLocaleLowerCase(localeTag()) + text.slice(1) }
 export function routeProgress(route: WalkingRoute, sample: LocationSample): RouteProgress {
   const points = route.geometry.coordinates.map(toLatLng)
   const cumulative = [0]
@@ -46,4 +48,25 @@ export function routeProgress(route: WalkingRoute, sample: LocationSample): Rout
 }
 export function validRoute(route: WalkingRoute) {
   return Number.isFinite(route?.distance) && route.distance >= 0 && Number.isFinite(route.duration) && route.duration >= 0 && route.geometry?.coordinates?.length >= 2 && route.geometry.coordinates.every(p => p.length === 2 && p.every(Number.isFinite) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90) && route.legs?.length > 0 && route.legs.every(leg => leg.steps?.length > 0 && leg.steps.every(step => step.maneuver?.location?.length === 2 && step.maneuver.location.every(Number.isFinite)))
+}
+
+
+// ---- Hướng đi, giờ đến và gợi ý khi lệch tuyến ----
+const toRad = (degrees: number) => degrees * Math.PI / 180
+/** Góc hướng đi từ a tới b, tính theo độ (0 = Bắc, 90 = Đông), trong khoảng 0–360. */
+export function bearing(a: Point, b: Point): number {
+  const dLng = toRad(b[1] - a[1])
+  const y = Math.sin(dLng) * Math.cos(toRad(b[0]))
+  const x = Math.cos(toRad(a[0])) * Math.sin(toRad(b[0])) - Math.sin(toRad(a[0])) * Math.cos(toRad(b[0])) * Math.cos(dLng)
+  return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360
+}
+const COMPASS = ['Bắc', 'Đông Bắc', 'Đông', 'Đông Nam', 'Nam', 'Tây Nam', 'Tây', 'Tây Bắc']
+export const directionName = (degrees: number) => COMPASS[Math.round((((degrees % 360) + 360) % 360) / 45) % 8]
+/** Hướng nhân vật đang đi, suy ra từ hai vị trí GPS liên tiếp; di chuyển dưới `minMeters` thì coi như đứng yên (trả về null). */
+export function headingBetween(previous: Point, current: Point, minMeters = 5): number | null {
+  return distanceMeters(previous, current) < minMeters ? null : bearing(previous, current)
+}
+/** Giờ dự kiến đến nơi, dạng 09:08 (giờ Việt Nam). */
+export function arrivalClock(now: number, secondsLeft: number): string {
+  return new Date(now + Math.max(0, secondsLeft) * 1000).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' })
 }

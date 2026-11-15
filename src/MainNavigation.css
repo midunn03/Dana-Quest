@@ -1,0 +1,11 @@
+.quest-main-nav {position:relative;z-index:35;flex:0 0 var(--px-nav-height);height:var(--px-nav-height);min-height:var(--px-nav-height);width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--px-space-2);margin-top:auto;padding:var(--px-space-2) var(--px-space-3) calc(var(--px-space-2) + env(safe-area-inset-bottom,0px));border-top:var(--px-border);background:var(--px-surface)}
+.quest-main-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--px-space-1);min-width:0;min-height:44px;padding:0 var(--px-space-1);color:var(--px-ink);font-size:var(--px-text-sm);line-height:1.4;font-weight:400;text-decoration:none;text-align:center}
+.quest-main-nav a:hover{background:var(--px-surface-hover)}
+.quest-main-nav a[aria-current='page']{background:var(--px-action);font-weight:400;color:var(--px-action-ink);}
+.quest-main-nav a[aria-current='page']:hover{background:var(--px-action-hover)}
+.app-shell:has(>.page-tools)>.quest-main-nav { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.app-shell:has(>.page-tools)>.quest-main-nav .nav-search { display:none; }
+.quest-main-nav .nav-icon{display:grid;place-items:center;width:32px;height:28px}
+.quest-main-nav svg{width:24px;height:24px}
+.app-shell:has(>main.quest-player)>.quest-main-nav, .app-shell:has(>main.due-start)>.quest-main-nav, .app-shell:has(>main.camera-page)>.quest-main-nav, .app-shell:has(>main.onboarding)>.quest-main-nav{display:none}
+@media(min-width:768px){.workspace-shell>.quest-main-nav{grid-column:1 / -1;grid-row:3}.quest-main-nav{padding-inline:var(--px-page-gutter);border-top:0;border-bottom:var(--px-border)}.quest-main-nav a{flex-direction:row;gap:var(--px-space-2);font-size:var(--px-text-base)}}

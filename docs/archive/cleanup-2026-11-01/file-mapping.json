@@ -1,0 +1,1345 @@
+{
+  "date": "2026-11-01",
+  "scope": "Reference images and documents only; duplicate deletion requires identical SHA256 canonical survivor",
+  "entries": [
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/001.png",
+      "to": "docs/references/visual-source/questo/001.png",
+      "sha256": "b0e1fa23186e78fcee0c4663fdf5922c93d5a6db53d29a4f544545a86670706c",
+      "bytes": 250805
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/002.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/002.png",
+      "sha256": "1ff083df94a9dc99e34b1325d47e9e6fe88afa8016b2e326818f686dd1f05ab7",
+      "bytes": 2785276
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/003.png",
+      "to": "docs/references/visual-source/questo/003.png",
+      "sha256": "872aecda3979226827ce870e4e35ac5a5db10c98d8f9007f467a680a85e4216f",
+      "bytes": 310393
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/004.png",
+      "to": "docs/references/visual-source/questo/004.png",
+      "sha256": "f4888db29f93867c65939dfb1458118f88369bf9fb4138bdb4d9c73e1dc67468",
+      "bytes": 219335
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/005.png",
+      "to": "docs/references/visual-source/questo/005.png",
+      "sha256": "5109608b210cb128a9f9d2b58a7b22d22031446f8cb6dea562c42feb5050d868",
+      "bytes": 828224
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/006.png",
+      "to": "docs/references/visual-source/questo/006.png",
+      "sha256": "2688e13dbd39ebf85391698de7413e295cc0175e8cc97e76078cea2e8bd2435f",
+      "bytes": 254321
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/007.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/007.png",
+      "sha256": "5bd15d2f91651ad4f53489a1f0df7bfa131eba7dad3c3ea297ab9821964624f1",
+      "bytes": 543145
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/008.png",
+      "to": "docs/references/visual-source/questo/008.png",
+      "sha256": "202a2dc672e271cb08a00928328dbfce590540e2a588831eecccc74939cdff2b",
+      "bytes": 2005724
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/009.png",
+      "to": "docs/references/visual-source/questo/009.png",
+      "sha256": "fcb58650cc6d0404f851746c6d538b06d9762026b9673ac816d75f3f492504b6",
+      "bytes": 227448
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/010.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/010.png",
+      "sha256": "4e50326a518d17d44b8d83cf6ac2036456f28cb4a0743a08a6b6fd3b83424fdc",
+      "bytes": 408802
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/011.png",
+      "to": "docs/references/visual-source/questo/011.png",
+      "sha256": "47b7c984fed7e508eec38d2303060275304f5be02c0335e75bd8bf8703727170",
+      "bytes": 1445194
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/012.png",
+      "to": "docs/references/visual-source/questo/012.png",
+      "sha256": "3f8ebdffce18d6befb74d1f4bcd1660eb13950e0d0e0fe3547e751280e044117",
+      "bytes": 246437
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/013.png",
+      "to": "docs/references/visual-source/questo/013.png",
+      "sha256": "02e45c20a5125e36d87c82a1b7d8e15e1fa8b62f27e3d6203c01a4b8f8a08461",
+      "bytes": 169373
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/014.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/014.png",
+      "sha256": "96e2e6b77043be4ed5e8063e21dc37e22212913b0101158e249fc295ea3b3acd",
+      "bytes": 840046
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/015.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/014.png",
+      "sha256": "96e2e6b77043be4ed5e8063e21dc37e22212913b0101158e249fc295ea3b3acd",
+      "bytes": 840046
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/016.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/016.png",
+      "sha256": "10302b7e4443aa8f3338d819c2089c72c4e05535b4544705c723c8dab9206877",
+      "bytes": 3918407
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/017.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/017.png",
+      "sha256": "4bcaa5681d393e633d6e6d49ae94156740b4c9ffed7e8fce03a22a4d41d55714",
+      "bytes": 1166732
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/018.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/018.png",
+      "sha256": "a3cd87d92c9c174630faaf625122aa7ea377ee820a89430791ccd711144ce614",
+      "bytes": 1376382
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/019.png",
+      "to": "docs/references/visual-source/questo/019.png",
+      "sha256": "14ca55b8b230e609698a55d7e75d18ba0b73909d1945a0c8d43435edb9d83751",
+      "bytes": 923383
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/020.png",
+      "to": "docs/references/visual-source/questo/020.png",
+      "sha256": "7da9af1e65fde36afc1a6efb12a729fc5f1e9da3b2e4715b7d570b38dbf9f2a2",
+      "bytes": 105031
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/021.png",
+      "to": "docs/references/visual-source/questo/021.png",
+      "sha256": "b8bc5f1c4410a030a8254592388a817e80071240f42039f1ddcaa54edbeca03d",
+      "bytes": 629682
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/022.png",
+      "to": "docs/references/visual-source/questo/022.png",
+      "sha256": "8ba031a4e3a82c83c00b672db37d3d089051bf707cd96f7dc5779a7d73b2872b",
+      "bytes": 434636
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/023.png",
+      "to": "docs/references/visual-source/questo/023.png",
+      "sha256": "21628977d069022a4a376ca1283026a6343cdf9bc441076343281927da1e2b2a",
+      "bytes": 253711
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/024.png",
+      "to": "docs/references/visual-source/questo/024.png",
+      "sha256": "062c787d45f21b405ab3ce52d405832ca28782792644639492f59e58345e8d94",
+      "bytes": 1662707
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/025.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/025.png",
+      "sha256": "7ed1f1a2da4ff8056d731dd013f062328f95d9d292c9e9c0f700594deb847d90",
+      "bytes": 286923
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/026.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/026.png",
+      "sha256": "2e8f6c3e9966919d18f64033fd613e28fe4a9ef70fc406d1d94e9c211b0e16a7",
+      "bytes": 346465
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/027.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/027.png",
+      "sha256": "7c9c9e81f59fcc0412e5a92167bb6c9c340bdf902a670488c1cdf6f685226660",
+      "bytes": 821383
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/028.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/028.png",
+      "sha256": "2cc7ab812532ca3171591bebb0358dd48f6ed542f15bcde4707fa1dc72076968",
+      "bytes": 642646
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/029.png",
+      "to": "docs/references/visual-source/questo/029.png",
+      "sha256": "d9cdee3f30d4c4a4c981f051193734491f2dae46a61cdaef5cdb685082f27fe9",
+      "bytes": 751103
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/030.png",
+      "to": "docs/references/visual-source/questo/030.png",
+      "sha256": "fa7549c8696c71efdd102a13adac7938eb3d421e08a1170d059386ed5c8ee3f8",
+      "bytes": 1918842
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/031.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/031.png",
+      "sha256": "be0169b621855a52ff08f6465a28fb27a0a1b6ee845d046df8d75abf95cdceef",
+      "bytes": 819216
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/032.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/032.png",
+      "sha256": "cc717dfdeb0c00691a5c9af818449b252c11b0a395064e3eac176f94c1272cf8",
+      "bytes": 891126
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/033.png",
+      "to": "docs/references/visual-source/questo/033.png",
+      "sha256": "1786c0e7db7d985db3555f89f879c42652ca94e5770cc877e183b6093f80d7a1",
+      "bytes": 653124
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/034.png",
+      "to": "docs/references/visual-source/questo/034.png",
+      "sha256": "af500f968dd01a23fa35018e7e16103540f82c7a672685a73f85164a8bd023dc",
+      "bytes": 1734083
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/035.png",
+      "to": "docs/references/visual-source/questo/035.png",
+      "sha256": "5eeaad4e9cce6c835bd6fe7b854653cbfd560f501240fa81710719f9809b5b59",
+      "bytes": 2617208
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/036.png",
+      "to": "docs/references/visual-source/questo/036.png",
+      "sha256": "cdb54ce8ae3b7a4db27098cb5f7a7ce97cb0b9956b57813d8041a912cf776afc",
+      "bytes": 253899
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/037.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/037.png",
+      "sha256": "5dffd2592c850d72648acb812883352cac295bca78c60f4822b0f5c86470e477",
+      "bytes": 1079651
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/038.png",
+      "to": "docs/references/visual-source/questo/038.png",
+      "sha256": "7cc41de90d299847a366e0798c716ae0e43004136fa211d65b748a31eca5d41b",
+      "bytes": 1100532
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/039.png",
+      "to": "docs/references/visual-source/questo/039.png",
+      "sha256": "3fb56a841416581be394610d860be6980531b742e2d3558d00a7d9dfada85af3",
+      "bytes": 358862
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/040.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/040.png",
+      "sha256": "90ac5e2930dbfee28f244df23561a8ad9d4c6826db6a7d4cb07615aab44cc11e",
+      "bytes": 1208084
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/041.png",
+      "to": "docs/references/visual-source/questo/041.png",
+      "sha256": "fa38043792b88f76e2707a3d7c710c0ec0d199269db88955bb1382de3bbd2f8d",
+      "bytes": 234414
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/042.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/042.png",
+      "sha256": "6133978dc141b3c276090a1a2420df533cfbccd9ee9ec97ce476d718c92a59b5",
+      "bytes": 307845
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/043.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/043.png",
+      "sha256": "1854f6d44dd57de6500a6f870da6516ce969d51ec8dea54e6bae82564c250f8e",
+      "bytes": 270437
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/044.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/044.png",
+      "sha256": "b2bd36f4be65c0285c0cecb4651a00f95dcd0899c2a76766db9aa3809244cdee",
+      "bytes": 1264682
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/045.png",
+      "to": "docs/references/visual-source/questo/045.png",
+      "sha256": "59f167bfd2bf91886b3a12270b09b8d8e57a5b39024b0df092cec9e2be5bcc80",
+      "bytes": 2307422
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/046.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/046.png",
+      "sha256": "e5f0d62957905307e61c1d219230ef6dd2f5061afb2e13d5d008c60e81e05c9d",
+      "bytes": 1108224
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/047.png",
+      "to": "docs/references/visual-source/questo/047.png",
+      "sha256": "ad3fe6f31ec9dd329c7e07d5e156d959d6b3b68fbf234028dad9ae34a2a4d629",
+      "bytes": 223061
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/048.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/048.png",
+      "sha256": "1eaed6d7a58e00380427ccc7fc4a665882936905672b071d9881c9e353539542",
+      "bytes": 1206030
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/049.png",
+      "to": "docs/references/visual-source/questo/049.png",
+      "sha256": "93c231abaaf9790fd31b98ffa93a96e02380d8122ef48b4a1a8f8a34da279ff5",
+      "bytes": 682997
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/050.png",
+      "to": "docs/references/visual-source/questo/050.png",
+      "sha256": "1e1c44d5ec88101604312cfd3f8977da04619b2b8ac6b83347da87f551640931",
+      "bytes": 234558
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/051.png",
+      "to": "docs/references/visual-source/questo/047.png",
+      "sha256": "ad3fe6f31ec9dd329c7e07d5e156d959d6b3b68fbf234028dad9ae34a2a4d629",
+      "bytes": 223061
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/052.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/052.png",
+      "sha256": "463ccdb7dd0c41f66a0b8839988afd3e4ecaed4a68da7f2f0c0c3135c640bc00",
+      "bytes": 351853
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/053.png",
+      "to": "docs/references/visual-source/questo/053.png",
+      "sha256": "ac89601ffb9522ccd361d3c75d6b45fffdd6efd14fc01488a9b55abd07a4f100",
+      "bytes": 231933
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/054.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/054.png",
+      "sha256": "705ae30ec8f4943d8350b4901ace798ae09ade8bcd3b82f4ee223f7c7f88c07c",
+      "bytes": 534177
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/055.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/055.png",
+      "sha256": "dffef1306a84697ab1923baf73d4937c67cd5ab10f11c86897a01df7464909f0",
+      "bytes": 390241
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/056.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/056.png",
+      "sha256": "a963832ee4999a4a2576a1e6588dc2e2f7ee33ad395c5e82efb9f3017bb35e8e",
+      "bytes": 247628
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/057.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/057.png",
+      "sha256": "fd38be264e04a8d37586c60bf0773694c528f8d5dc80b3b31854f227a943cfbf",
+      "bytes": 141644
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/058.png",
+      "to": "docs/references/visual-source/questo/058.png",
+      "sha256": "de8710a087f51f543d7dd828f34741e521e5dc8de530a6caf94ef5cbe8146dff",
+      "bytes": 169767
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/059.png",
+      "to": "docs/references/visual-source/questo/059.png",
+      "sha256": "870e0d732a78ad73a4b1cc71fa392dddb08c43758f36b4a1fde2bedcd55e077a",
+      "bytes": 2144941
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/060.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/060.png",
+      "sha256": "06c421a145e432d4f37710346102bc8b8d54f2aafb1f7c98a863300218fdd701",
+      "bytes": 127920
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/061.png",
+      "to": "docs/references/visual-source/questo/059.png",
+      "sha256": "870e0d732a78ad73a4b1cc71fa392dddb08c43758f36b4a1fde2bedcd55e077a",
+      "bytes": 2144941
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/062.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/062.png",
+      "sha256": "f3efd66bb7c74473b924037ad779681ba7cba16532bcfbff3e40c5e7b3996fb4",
+      "bytes": 210531
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/063.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/063.png",
+      "sha256": "a44b080810b0fe0a76bfe3c00870f86aece7a7f525c595b82c162e4727f10f75",
+      "bytes": 451780
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/064.png",
+      "to": "docs/references/visual-source/questo/064.png",
+      "sha256": "79dd18bc30d63817234096ff05727c2a3aafb7b93b6dbf51d8d422a3ae15ac50",
+      "bytes": 266500
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/065.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/065.png",
+      "sha256": "92e97b178068d00a426e4d172f494b82717b8446220f7ab2d230b1204caf82ce",
+      "bytes": 3617171
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/066.png",
+      "to": "docs/references/visual-source/questo/066.png",
+      "sha256": "fc2c6c30a67186f9fe20a3fb3da3baa7dc64f4f697d361b4fa2e4e7301bb1f51",
+      "bytes": 2870322
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/067.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/067.png",
+      "sha256": "906637d11f6a43b5d8fe2190b5c5f77d64e1f42e128096754dbd3a8ea34c7d3e",
+      "bytes": 530654
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/068.png",
+      "to": "docs/references/visual-source/questo/068.png",
+      "sha256": "a8fc9602144b44e467e07d066dc74577576c63b2168d04e3a14fdb86602e543a",
+      "bytes": 131454
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/069.png",
+      "to": "docs/references/visual-source/questo/064.png",
+      "sha256": "79dd18bc30d63817234096ff05727c2a3aafb7b93b6dbf51d8d422a3ae15ac50",
+      "bytes": 266500
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/070.png",
+      "to": "docs/references/visual-source/questo/066.png",
+      "sha256": "fc2c6c30a67186f9fe20a3fb3da3baa7dc64f4f697d361b4fa2e4e7301bb1f51",
+      "bytes": 2870322
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/071.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/071.png",
+      "sha256": "65d5a052f71fec5acb3fa977f66cd47ec4a12e3e069bdaf0156fad3e6aa83c3a",
+      "bytes": 3614268
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/072.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/072.png",
+      "sha256": "a4244367b644aee41913fa82a93b26b8a3cae775630ff12a2d81f4c1329b1ca7",
+      "bytes": 219784
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/073.png",
+      "to": "docs/references/visual-source/questo/073.png",
+      "sha256": "33c997d38c82aeda7fbe291ffc09aca15611f42861d7cfd4080dc496f6e05ab1",
+      "bytes": 1231924
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/074.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/074.png",
+      "sha256": "3fd38baa3eaba6130050ea6dc2bd8b9be60bd0b4057708f18441c7c2e9cb99fe",
+      "bytes": 147770
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/075.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/075.png",
+      "sha256": "acdfe7b9ca14d365e51b48450d1011689fa8ec2f20e7bfcf309b85faa3b85d11",
+      "bytes": 289946
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/076.png",
+      "to": "docs/references/visual-source/questo/076.png",
+      "sha256": "4e1616cafd84d953a8a3fcf86a54b8e17c6c03a4843c0df15ef01d267bac580d",
+      "bytes": 1251380
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/077.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/077.png",
+      "sha256": "a3b0be139d88968b50a37f533e1ba747853f23ef97010998bac258ac47c0027e",
+      "bytes": 104769
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/078.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/078.png",
+      "sha256": "9b0754ef7189e56db2f2f2e91d4f354c60feb3758b9f8d7528bf3ed6f7e6b5c5",
+      "bytes": 252785
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/079.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/079.png",
+      "sha256": "bb2b434cf30097bba16c17664d9321612d9c6a25f0d5323f026172cc5e986af4",
+      "bytes": 575785
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/080.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/079.png",
+      "sha256": "bb2b434cf30097bba16c17664d9321612d9c6a25f0d5323f026172cc5e986af4",
+      "bytes": 575785
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/081.png",
+      "to": "docs/references/visual-source/questo/081.png",
+      "sha256": "cc90e323894b6eeaf9cba9873c6b842f138328bd2443cd5786c0207ec9a17667",
+      "bytes": 212130
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/082.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/082.png",
+      "sha256": "7e798ef86ec456f64674d34a3bf1fdff3b0338c3a2d162ca0c264466daa4cc4e",
+      "bytes": 7127990
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/083.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/083.png",
+      "sha256": "adeee0ae55139db7b51540c6a769e6b3821d30d80160f0d35b2e804bbd71d473",
+      "bytes": 203963
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/084.png",
+      "to": "docs/references/visual-source/questo/084.png",
+      "sha256": "44f23d41bd4e468672a120532fa05cf8bf89ad7a34dc4ed056550c2765cdf40c",
+      "bytes": 257552
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/085.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/085.png",
+      "sha256": "c44ae3f9019da6fd1bf5d0d7f36e771e180d1b6f2cdf58629d8f8899ee042600",
+      "bytes": 3053233
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/086.png",
+      "to": "docs/references/visual-source/questo/086.png",
+      "sha256": "d7382094002ca60f769aef4e9c8258e0bc18bf524c783a88e2571bc1d3c49c2c",
+      "bytes": 308715
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/087.png",
+      "to": "docs/references/visual-source/questo/087.png",
+      "sha256": "cb9ea8238dfd682d001f65d4daeb85a0c77ff09e21fb1ad075eaf6d64e74da2e",
+      "bytes": 1001611
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/088.png",
+      "to": "docs/references/visual-source/questo/088.png",
+      "sha256": "2fb40101d7917523287675e01022ce1dba556add0afed81cd3396489e04c9657",
+      "bytes": 232293
+    },
+    {
+      "kind": "move",
+      "from": "reference-review-20261026/questo/089.png",
+      "to": "docs/references/visual-source/questo/089.png",
+      "sha256": "7a55c4594984cf3b030d66ed23b3bf1d8c73209e093c8220d8eb64d96386dc57",
+      "bytes": 233143
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/090.png",
+      "to": "docs/references/visual-source/questo/084.png",
+      "sha256": "44f23d41bd4e468672a120532fa05cf8bf89ad7a34dc4ed056550c2765cdf40c",
+      "bytes": 257552
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/091.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/091.png",
+      "sha256": "5aad53a690dca70a76fb416d0b9085d366e80dadceb21cf83cf80a49c4cb0260",
+      "bytes": 1350932
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo/092.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/092.png",
+      "sha256": "d34636726f734afc5a98ca0b901a2065b5bb2971fc2baf55b12da2c5b3d153fa",
+      "bytes": 927095
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/brand/001.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/brand/001.png",
+      "sha256": "47421807063de6e41d4bc3faa87d25c36f1446d74f4063696715726a33ac7a4e",
+      "bytes": 1308814
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/brand/002.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/brand/002.png",
+      "sha256": "df1209700b8f7c9d3f6839d3096706804a26782d6a7754f55bee292fa498dc41",
+      "bytes": 2126211
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/brand/003.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/brand/003.png",
+      "sha256": "ed6ab99c272ae4f1086d753a3e6612936bc9fa5727445e9e46abea650ebdecb3",
+      "bytes": 108697
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6735.PNG",
+      "to": "docs/references/visual-source/questo/059.png",
+      "sha256": "870e0d732a78ad73a4b1cc71fa392dddb08c43758f36b4a1fde2bedcd55e077a",
+      "bytes": 2144941
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6735(1).PNG",
+      "to": "docs/references/visual-source/questo/059.png",
+      "sha256": "870e0d732a78ad73a4b1cc71fa392dddb08c43758f36b4a1fde2bedcd55e077a",
+      "bytes": 2144941
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6736.PNG",
+      "to": "docs/references/visual-source/questo/066.png",
+      "sha256": "fc2c6c30a67186f9fe20a3fb3da3baa7dc64f4f697d361b4fa2e4e7301bb1f51",
+      "bytes": 2870322
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6736(1).PNG",
+      "to": "docs/references/visual-source/questo/066.png",
+      "sha256": "fc2c6c30a67186f9fe20a3fb3da3baa7dc64f4f697d361b4fa2e4e7301bb1f51",
+      "bytes": 2870322
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6737.PNG",
+      "to": "docs/references/visual-source/questo/047.png",
+      "sha256": "ad3fe6f31ec9dd329c7e07d5e156d959d6b3b68fbf234028dad9ae34a2a4d629",
+      "bytes": 223061
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6737(1).PNG",
+      "to": "docs/references/visual-source/questo/047.png",
+      "sha256": "ad3fe6f31ec9dd329c7e07d5e156d959d6b3b68fbf234028dad9ae34a2a4d629",
+      "bytes": 223061
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6738.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/079.png",
+      "sha256": "bb2b434cf30097bba16c17664d9321612d9c6a25f0d5323f026172cc5e986af4",
+      "bytes": 575785
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6738(1).PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/079.png",
+      "sha256": "bb2b434cf30097bba16c17664d9321612d9c6a25f0d5323f026172cc5e986af4",
+      "bytes": 575785
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6739.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/010.png",
+      "sha256": "4e50326a518d17d44b8d83cf6ac2036456f28cb4a0743a08a6b6fd3b83424fdc",
+      "bytes": 408802
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6740.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/007.png",
+      "sha256": "5bd15d2f91651ad4f53489a1f0df7bfa131eba7dad3c3ea297ab9821964624f1",
+      "bytes": 543145
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6741.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/078.png",
+      "sha256": "9b0754ef7189e56db2f2f2e91d4f354c60feb3758b9f8d7528bf3ed6f7e6b5c5",
+      "bytes": 252785
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6742.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/042.png",
+      "sha256": "6133978dc141b3c276090a1a2420df533cfbccd9ee9ec97ce476d718c92a59b5",
+      "bytes": 307845
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6743.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/056.png",
+      "sha256": "a963832ee4999a4a2576a1e6588dc2e2f7ee33ad395c5e82efb9f3017bb35e8e",
+      "bytes": 247628
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6744.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/072.png",
+      "sha256": "a4244367b644aee41913fa82a93b26b8a3cae775630ff12a2d81f4c1329b1ca7",
+      "bytes": 219784
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6745.PNG",
+      "to": "docs/references/visual-source/questo/058.png",
+      "sha256": "de8710a087f51f543d7dd828f34741e521e5dc8de530a6caf94ef5cbe8146dff",
+      "bytes": 169767
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Account page/IMG_6746.PNG",
+      "to": "docs/references/visual-source/questo/081.png",
+      "sha256": "cc90e323894b6eeaf9cba9873c6b842f138328bd2443cd5786c0207ec9a17667",
+      "bytes": 212130
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Crew page khi đã đăng nhập/IMG_6757.PNG",
+      "to": "docs/references/visual-source/questo/001.png",
+      "sha256": "b0e1fa23186e78fcee0c4663fdf5922c93d5a6db53d29a4f544545a86670706c",
+      "bytes": 250805
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Crew page khi đã đăng nhập/IMG_6758.PNG",
+      "to": "docs/references/visual-source/questo/023.png",
+      "sha256": "21628977d069022a4a376ca1283026a6343cdf9bc441076343281927da1e2b2a",
+      "bytes": 253711
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Crew page khi đã đăng nhập/IMG_6759.PNG",
+      "to": "docs/references/visual-source/questo/022.png",
+      "sha256": "8ba031a4e3a82c83c00b672db37d3d089051bf707cd96f7dc5779a7d73b2872b",
+      "bytes": 434636
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Crew page khi đã đăng nhập/IMG_6760.PNG",
+      "to": "docs/references/visual-source/questo/020.png",
+      "sha256": "7da9af1e65fde36afc1a6efb12a729fc5f1e9da3b2e4715b7d570b38dbf9f2a2",
+      "bytes": 105031
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Crew page khi đã đăng nhập/IMG_6761.PNG",
+      "to": "docs/references/visual-source/questo/003.png",
+      "sha256": "872aecda3979226827ce870e4e35ac5a5db10c98d8f9007f467a680a85e4216f",
+      "bytes": 310393
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Crew page khi đã đăng nhập/IMG_6762.PNG",
+      "to": "docs/references/visual-source/questo/004.png",
+      "sha256": "f4888db29f93867c65939dfb1458118f88369bf9fb4138bdb4d9c73e1dc67468",
+      "bytes": 219335
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Crew page khi đã đăng nhập/IMG_6763.PNG",
+      "to": "docs/references/visual-source/questo/013.png",
+      "sha256": "02e45c20a5125e36d87c82a1b7d8e15e1fa8b62f27e3d6203c01a4b8f8a08461",
+      "bytes": 169373
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6727.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/014.png",
+      "sha256": "96e2e6b77043be4ed5e8063e21dc37e22212913b0101158e249fc295ea3b3acd",
+      "bytes": 840046
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6727(1).PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/014.png",
+      "sha256": "96e2e6b77043be4ed5e8063e21dc37e22212913b0101158e249fc295ea3b3acd",
+      "bytes": 840046
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6728.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/002.png",
+      "sha256": "1ff083df94a9dc99e34b1325d47e9e6fe88afa8016b2e326818f686dd1f05ab7",
+      "bytes": 2785276
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6729.PNG",
+      "to": "docs/references/visual-source/questo/006.png",
+      "sha256": "2688e13dbd39ebf85391698de7413e295cc0175e8cc97e76078cea2e8bd2435f",
+      "bytes": 254321
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6730.PNG",
+      "to": "docs/references/visual-source/questo/035.png",
+      "sha256": "5eeaad4e9cce6c835bd6fe7b854653cbfd560f501240fa81710719f9809b5b59",
+      "bytes": 2617208
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6731.PNG",
+      "to": "docs/references/visual-source/questo/008.png",
+      "sha256": "202a2dc672e271cb08a00928328dbfce590540e2a588831eecccc74939cdff2b",
+      "bytes": 2005724
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6732.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/040.png",
+      "sha256": "90ac5e2930dbfee28f244df23561a8ad9d4c6826db6a7d4cb07615aab44cc11e",
+      "bytes": 1208084
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6764.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/037.png",
+      "sha256": "5dffd2592c850d72648acb812883352cac295bca78c60f4822b0f5c86470e477",
+      "bytes": 1079651
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6765.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/046.png",
+      "sha256": "e5f0d62957905307e61c1d219230ef6dd2f5061afb2e13d5d008c60e81e05c9d",
+      "bytes": 1108224
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Explore page/IMG_6766.PNG",
+      "to": "docs/references/visual-source/questo/011.png",
+      "sha256": "47b7c984fed7e508eec38d2303060275304f5be02c0335e75bd8bf8703727170",
+      "bytes": 1445194
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Login page/IMG_6803.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/082.png",
+      "sha256": "7e798ef86ec456f64674d34a3bf1fdff3b0338c3a2d162ca0c264466daa4cc4e",
+      "bytes": 7127990
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Login page/IMG_6804.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/092.png",
+      "sha256": "d34636726f734afc5a98ca0b901a2065b5bb2971fc2baf55b12da2c5b3d153fa",
+      "bytes": 927095
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Login page/IMG_6805.PNG",
+      "to": "docs/references/visual-source/questo/087.png",
+      "sha256": "cb9ea8238dfd682d001f65d4daeb85a0c77ff09e21fb1ad075eaf6d64e74da2e",
+      "bytes": 1001611
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Login page/IMG_6806.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/062.png",
+      "sha256": "f3efd66bb7c74473b924037ad779681ba7cba16532bcfbff3e40c5e7b3996fb4",
+      "bytes": 210531
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Login page/IMG_6807.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/091.png",
+      "sha256": "5aad53a690dca70a76fb416d0b9085d366e80dadceb21cf83cf80a49c4cb0260",
+      "bytes": 1350932
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Login page/IMG_6808.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/083.png",
+      "sha256": "adeee0ae55139db7b51540c6a769e6b3821d30d80160f0d35b2e804bbd71d473",
+      "bytes": 203963
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Login page/IMG_6809.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/085.png",
+      "sha256": "c44ae3f9019da6fd1bf5d0d7f36e771e180d1b6f2cdf58629d8f8899ee042600",
+      "bytes": 3053233
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6747.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/016.png",
+      "sha256": "10302b7e4443aa8f3338d819c2089c72c4e05535b4544705c723c8dab9206877",
+      "bytes": 3918407
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6748.PNG",
+      "to": "docs/references/visual-source/questo/021.png",
+      "sha256": "b8bc5f1c4410a030a8254592388a817e80071240f42039f1ddcaa54edbeca03d",
+      "bytes": 629682
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6749.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/027.png",
+      "sha256": "7c9c9e81f59fcc0412e5a92167bb6c9c340bdf902a670488c1cdf6f685226660",
+      "bytes": 821383
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6750.PNG",
+      "to": "docs/references/visual-source/questo/005.png",
+      "sha256": "5109608b210cb128a9f9d2b58a7b22d22031446f8cb6dea562c42feb5050d868",
+      "bytes": 828224
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6751.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/026.png",
+      "sha256": "2e8f6c3e9966919d18f64033fd613e28fe4a9ef70fc406d1d94e9c211b0e16a7",
+      "bytes": 346465
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6752.PNG",
+      "to": "docs/references/visual-source/questo/009.png",
+      "sha256": "fcb58650cc6d0404f851746c6d538b06d9762026b9673ac816d75f3f492504b6",
+      "bytes": 227448
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6753.PNG",
+      "to": "docs/references/visual-source/questo/012.png",
+      "sha256": "3f8ebdffce18d6befb74d1f4bcd1660eb13950e0d0e0fe3547e751280e044117",
+      "bytes": 246437
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6754.PNG",
+      "to": "docs/references/visual-source/questo/019.png",
+      "sha256": "14ca55b8b230e609698a55d7e75d18ba0b73909d1945a0c8d43435edb9d83751",
+      "bytes": 923383
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6755.PNG",
+      "to": "docs/references/visual-source/questo/024.png",
+      "sha256": "062c787d45f21b405ab3ce52d405832ca28782792644639492f59e58345e8d94",
+      "bytes": 1662707
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest detail page/IMG_6756.PNG",
+      "to": "docs/references/visual-source/questo/038.png",
+      "sha256": "7cc41de90d299847a366e0798c716ae0e43004136fa211d65b748a31eca5d41b",
+      "bytes": 1100532
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6767.PNG",
+      "to": "docs/references/visual-source/questo/036.png",
+      "sha256": "cdb54ce8ae3b7a4db27098cb5f7a7ce97cb0b9956b57813d8041a912cf776afc",
+      "bytes": 253899
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6768.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/043.png",
+      "sha256": "1854f6d44dd57de6500a6f870da6516ce969d51ec8dea54e6bae82564c250f8e",
+      "bytes": 270437
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6769.PNG",
+      "to": "docs/references/visual-source/questo/050.png",
+      "sha256": "1e1c44d5ec88101604312cfd3f8977da04619b2b8ac6b83347da87f551640931",
+      "bytes": 234558
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6770.PNG",
+      "to": "docs/references/visual-source/questo/073.png",
+      "sha256": "33c997d38c82aeda7fbe291ffc09aca15611f42861d7cfd4080dc496f6e05ab1",
+      "bytes": 1231924
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6771.PNG",
+      "to": "docs/references/visual-source/questo/033.png",
+      "sha256": "1786c0e7db7d985db3555f89f879c42652ca94e5770cc877e183b6093f80d7a1",
+      "bytes": 653124
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6772.PNG",
+      "to": "docs/references/visual-source/questo/034.png",
+      "sha256": "af500f968dd01a23fa35018e7e16103540f82c7a672685a73f85164a8bd023dc",
+      "bytes": 1734083
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6773.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/031.png",
+      "sha256": "be0169b621855a52ff08f6465a28fb27a0a1b6ee845d046df8d75abf95cdceef",
+      "bytes": 819216
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6774.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/028.png",
+      "sha256": "2cc7ab812532ca3171591bebb0358dd48f6ed542f15bcde4707fa1dc72076968",
+      "bytes": 642646
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6775.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/044.png",
+      "sha256": "b2bd36f4be65c0285c0cecb4651a00f95dcd0899c2a76766db9aa3809244cdee",
+      "bytes": 1264682
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6776.PNG",
+      "to": "docs/references/visual-source/questo/049.png",
+      "sha256": "93c231abaaf9790fd31b98ffa93a96e02380d8122ef48b4a1a8f8a34da279ff5",
+      "bytes": 682997
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6777.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/054.png",
+      "sha256": "705ae30ec8f4943d8350b4901ace798ae09ade8bcd3b82f4ee223f7c7f88c07c",
+      "bytes": 534177
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6778.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/032.png",
+      "sha256": "cc717dfdeb0c00691a5c9af818449b252c11b0a395064e3eac176f94c1272cf8",
+      "bytes": 891126
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6779.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/052.png",
+      "sha256": "463ccdb7dd0c41f66a0b8839988afd3e4ecaed4a68da7f2f0c0c3135c640bc00",
+      "bytes": 351853
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6780.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/067.png",
+      "sha256": "906637d11f6a43b5d8fe2190b5c5f77d64e1f42e128096754dbd3a8ea34c7d3e",
+      "bytes": 530654
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6781.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/074.png",
+      "sha256": "3fd38baa3eaba6130050ea6dc2bd8b9be60bd0b4057708f18441c7c2e9cb99fe",
+      "bytes": 147770
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6782.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/057.png",
+      "sha256": "fd38be264e04a8d37586c60bf0773694c528f8d5dc80b3b31854f227a943cfbf",
+      "bytes": 141644
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6783.PNG",
+      "to": "docs/references/visual-source/questo/068.png",
+      "sha256": "a8fc9602144b44e467e07d066dc74577576c63b2168d04e3a14fdb86602e543a",
+      "bytes": 131454
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6784.PNG",
+      "to": "docs/references/visual-source/questo/088.png",
+      "sha256": "2fb40101d7917523287675e01022ce1dba556add0afed81cd3396489e04c9657",
+      "bytes": 232293
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6785.PNG",
+      "to": "docs/references/visual-source/questo/089.png",
+      "sha256": "7a55c4594984cf3b030d66ed23b3bf1d8c73209e093c8220d8eb64d96386dc57",
+      "bytes": 233143
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6786.PNG",
+      "to": "docs/references/visual-source/questo/053.png",
+      "sha256": "ac89601ffb9522ccd361d3c75d6b45fffdd6efd14fc01488a9b55abd07a4f100",
+      "bytes": 231933
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6787.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/077.png",
+      "sha256": "a3b0be139d88968b50a37f533e1ba747853f23ef97010998bac258ac47c0027e",
+      "bytes": 104769
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6788.PNG",
+      "to": "docs/references/visual-source/questo/076.png",
+      "sha256": "4e1616cafd84d953a8a3fcf86a54b8e17c6c03a4843c0df15ef01d267bac580d",
+      "bytes": 1251380
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6789.PNG",
+      "to": "docs/references/visual-source/questo/086.png",
+      "sha256": "d7382094002ca60f769aef4e9c8258e0bc18bf524c783a88e2571bc1d3c49c2c",
+      "bytes": 308715
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6790.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/048.png",
+      "sha256": "1eaed6d7a58e00380427ccc7fc4a665882936905672b071d9881c9e353539542",
+      "bytes": 1206030
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6791.PNG",
+      "to": "docs/references/visual-source/questo/039.png",
+      "sha256": "3fb56a841416581be394610d860be6980531b742e2d3558d00a7d9dfada85af3",
+      "bytes": 358862
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6792.PNG",
+      "to": "docs/references/visual-source/questo/041.png",
+      "sha256": "fa38043792b88f76e2707a3d7c710c0ec0d199269db88955bb1382de3bbd2f8d",
+      "bytes": 234414
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6793.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/075.png",
+      "sha256": "acdfe7b9ca14d365e51b48450d1011689fa8ec2f20e7bfcf309b85faa3b85d11",
+      "bytes": 289946
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6794.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/065.png",
+      "sha256": "92e97b178068d00a426e4d172f494b82717b8446220f7ab2d230b1204caf82ce",
+      "bytes": 3617171
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6795.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/071.png",
+      "sha256": "65d5a052f71fec5acb3fa977f66cd47ec4a12e3e069bdaf0156fad3e6aa83c3a",
+      "bytes": 3614268
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6796.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/055.png",
+      "sha256": "dffef1306a84697ab1923baf73d4937c67cd5ab10f11c86897a01df7464909f0",
+      "bytes": 390241
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6797.PNG",
+      "to": "docs/references/visual-source/questo/029.png",
+      "sha256": "d9cdee3f30d4c4a4c981f051193734491f2dae46a61cdaef5cdb685082f27fe9",
+      "bytes": 751103
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6798.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/063.png",
+      "sha256": "a44b080810b0fe0a76bfe3c00870f86aece7a7f525c595b82c162e4727f10f75",
+      "bytes": 451780
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6799.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/017.png",
+      "sha256": "4bcaa5681d393e633d6e6d49ae94156740b4c9ffed7e8fce03a22a4d41d55714",
+      "bytes": 1166732
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6800.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/018.png",
+      "sha256": "a3cd87d92c9c174630faaf625122aa7ea377ee820a89430791ccd711144ce614",
+      "bytes": 1376382
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest khi chơi/IMG_6801.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/060.png",
+      "sha256": "06c421a145e432d4f37710346102bc8b8d54f2aafb1f7c98a863300218fdd701",
+      "bytes": 127920
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest page/IMG_6810.PNG",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo/025.png",
+      "sha256": "7ed1f1a2da4ff8056d731dd013f062328f95d9d292c9e9c0f700594deb847d90",
+      "bytes": 286923
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest page/IMG_6811.PNG",
+      "to": "docs/references/visual-source/questo/030.png",
+      "sha256": "fa7549c8696c71efdd102a13adac7938eb3d421e08a1170d059386ed5c8ee3f8",
+      "bytes": 1918842
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/Ảnh màn hình Questo-20261027T015120Z-1-001/Ảnh màn hình Questo/Quest page/IMG_6812.PNG",
+      "to": "docs/references/visual-source/questo/045.png",
+      "sha256": "59f167bfd2bf91886b3a12270b09b8d8e57a5b39024b0df092cec9e2be5bcc80",
+      "bytes": 2307422
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/brand-contact.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/brand-contact.png",
+      "sha256": "31c97cef13fd297699829ebe97cb2e81145c3719e66727a0859cf54f393ff8af",
+      "bytes": 115452
+    },
+    {
+      "kind": "duplicate",
+      "from": "reference-review-20261026/questo-contact.png",
+      "to": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/questo-contact.png",
+      "sha256": "232f49a3065f31d9bdee8440d7acc57094fea3487e06525ef590fda36f0d6ae6",
+      "bytes": 1941171
+    },
+    {
+      "kind": "move",
+      "from": "VISUAL-REVIEW.md",
+      "to": "docs/archive/reports/VISUAL-REVIEW-legacy.md",
+      "sha256": "da706a0aaf60076495b064584e48feb1b0987151b512e641cfefa93996bdf928",
+      "bytes": 3428,
+      "finalSha256": "89ffd027689e5b1fbb0f449b7aaf2427b8c078509f32bc2698fb3a76883cb245",
+      "note": "Historical warning added and Markdown links rebased; original source text retained in documents-before.json"
+    },
+    {
+      "kind": "move",
+      "from": "Gemini_Generated_Image_ah42htah42htah42 (1).png",
+      "to": "assets/concepts/Gemini_Generated_Image_ah42htah42htah42 (1).png",
+      "sha256": "d68fe23edd5fb72c8f7323a9ad48915cbd254a7114c1555cacd9d8bae5d8d9e2",
+      "bytes": 368938
+    },
+    {
+      "kind": "move",
+      "from": "assets/locations/dana-quest-15-pixel-locations-v1.zip",
+      "to": "docs/archive/source-packages/dana-quest-15-pixel-locations-v1.zip",
+      "sha256": "eaff8f238dd5e0ab82021269e9b543da7a1eb84ca52d37ab7f39e3387ba3c321",
+      "bytes": 18675124
+    },
+    {
+      "kind": "move",
+      "from": "ảnh pixel/cầu sông hàn.png",
+      "to": "assets/locations/source-pixel/cầu sông hàn.png",
+      "sha256": "59f233bf7a8f2eb2314aa379e3079554b6bcf33d582d4d09e8e524e909cc1ddf",
+      "bytes": 5364127
+    },
+    {
+      "kind": "move",
+      "from": "ảnh pixel/cầu_sông_hàn-removebg-preview.png",
+      "to": "assets/locations/source-pixel/cầu_sông_hàn-removebg-preview.png",
+      "sha256": "e40a6877d5b39e09da6f28dfbcd536257859b1d8f3ac2b4a064f65d6f573b8fd",
+      "bytes": 220038
+    },
+    {
+      "kind": "move",
+      "from": "Dana-Quest-Documentation-v2.2/Dana-Quest-Documentation/references/source-archives/Ảnh màn hình Questo-20261026T133523Z-1-001.zip",
+      "to": "docs/archive/source-packages/Ảnh màn hình Questo-20261026T133523Z-1-001.zip",
+      "sha256": "607e2d48298691d300b4f6bdf94800609b3c6820dc6663ffe400b831d2c2c44d",
+      "bytes": 86566990
+    }
+  ]
+}

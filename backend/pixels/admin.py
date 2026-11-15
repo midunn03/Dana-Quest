@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import CROWD_HOURS, Place, PlacePhoto, PlaceSprite, make_slug
+from .models import CROWD_HOURS, Place, PlacePhoto, PlaceSprite, make_slug, TransitStation
 
 
 class PlaceForm(forms.ModelForm):
@@ -113,3 +113,20 @@ class PlaceAdmin(admin.ModelAdmin):
         if not sprite:
             return '— (chưa có)'
         return f'{sprite.label} (dán mặt đất)' if sprite.is_ground else sprite.label
+
+
+
+@admin.register(TransitStation)
+class TransitStationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'station_id', 'transit_type', 'verified', 'is_active', 'bonus_coins', 'operator', 'last_checked')
+    list_filter = ('verified', 'transit_type', 'is_active', 'operator')
+    search_fields = ('name', 'station_id', 'address', 'operator')
+    actions = ['mark_verified', 'mark_unverified']
+
+    @admin.action(description='Đánh dấu ĐÃ XÁC MINH các trạm đã chọn')
+    def mark_verified(self, request, queryset):
+        queryset.update(verified=True)
+
+    @admin.action(description='Đánh dấu CHƯA XÁC MINH các trạm đã chọn')
+    def mark_unverified(self, request, queryset):
+        queryset.update(verified=False)
