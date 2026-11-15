@@ -45,6 +45,8 @@ const DueStartPage = lazy(() => import('./DueStartPage'))
 import { AuthProvider, useAuth } from './AuthContext'
 import { canNavigateFrom } from './lib/navigationGuard'
 import './mobile/Mobile.css'
+// [UX-FLOW] Tối ưu giao diện bản đồ và ngân sách chiều cao điện thoại (Giai đoạn 3)
+import './mobile/MobileMap.css'
 import { useDeviceMode } from './lib/deviceMode'
 import DeviceModeModal from './mobile/DeviceModeModal'
 import MobileBottomNav from './mobile/MobileBottomNav'
@@ -149,7 +151,7 @@ function AppRouter() {
 
   return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${isMobile ? 'device-mobile-shell device-mobile' : ''} ${isHome ? 'home-shell' : ''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
     {showMobileHeader && (
-      <header className="device-mobile-header" role="banner">
+      <header className={`device-mobile-header ${isMap && isUxFlagEnabled('MOBILE_MAP_FIRST') ? 'device-mobile-header--floating-map' : ''}`} role="banner">
         <div className="device-mobile-brand-group">
           <a href="#/kham-pha" className="device-mobile-logo" aria-label="Dana Quest">
             <span>DANA QUEST</span>

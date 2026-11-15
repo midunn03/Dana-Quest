@@ -71,3 +71,30 @@ Tài liệu ghi lại toàn bộ thay đổi luồng người dùng, tối ưu t
 | `src/Explore.css` | Chỉnh sửa | Style cho nút "🌐 Toàn thành phố" (`.atlas-city-fit-btn`), vòng tròn 1 km (`.atlas-one-km-circle`), và chip chỉ báo điểm ngoài khung nhìn (`.atlas-offscreen-chip`) | `MAP_ONE_KM` |
 | `tests/stage2-map-one-km.test.tsx` | Tạo mới | 4 test case kiểm tra: (1) Mở bản đồ 1km quanh GPS, (2) Mở 1km quanh Cầu Rồng khi từ chối GPS, (3) Nút Toàn thành phố hoạt động, (4) Khi cờ MAP_ONE_KM tắt quay về toàn cảnh cũ | `MAP_ONE_KM` |
 
+---
+
+## GIAI ĐOẠN 3: Tối ưu thiết kế giao diện điện thoại & Ngân sách bản đồ >= 70%
+
+### 1. Số đo ngân sách chiều cao bản đồ thực tế
+
+Áp dụng ngân sách layout cho mobile: Header nổi (`0px` layout height), Bottom nav (`54px` + safe-area), Bottom sheet trạng thái nghỉ (`72px` peek height).
+
+| Kích thước màn hình | Chiều cao khung nhìn | Chiều cao bản đồ nhìn thấy | Tỷ lệ diện tích bản đồ | Yêu cầu kỹ thuật | Đạt chuẩn |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **360 × 640** (máy nhỏ) | 640 px | 514 px | **80.3%** | $\ge 60\%$ | **ĐẠT** |
+| **375 × 667** (iPhone SE) | 667 px | 541 px | **81.1%** | $\ge 70\%$ | **ĐẠT** |
+| **390 × 844** (iPhone 12/13/14) | 844 px | 718 px | **85.0%** | $\ge 70\%$ | **ĐẠT** |
+| **412 × 915** (Pixel / Galaxy) | 915 px | 789 px | **86.2%** | $\ge 70\%$ | **ĐẠT** |
+| **768 × 1024** (iPad portrait) | 1024 px | 898 px | **87.7%** | $\ge 70\%$ | **ĐẠT** |
+| **844 × 390** (Landscape ngang) | 390 px | 292 px (nav 44px, peek 54px) | **74.8%** | $\ge 70\%$ | **ĐẠT** |
+
+### 2. Các thay đổi đã thực hiện trong Giai đoạn 3
+
+| Tệp | Hành động | Mô tả thay đổi | Cờ liên quan |
+| :--- | :---: | :--- | :--- |
+| `src/mobile/MobileMap.css` | Tạo mới | Quy tắc CSS chuyên biệt cho mobile map: header nổi `position: absolute`, bản đồ full-bleed 100%, bottom sheet 3 mức (peek ~72px, half ~45vh, full ~85vh), nút vị trí tròn 48px, thanh điều hướng <= 56px, hỗ trợ xoay ngang landscape (nav icon) | `MOBILE_MAP_FIRST` |
+| `src/App.tsx` | Chỉnh sửa | Import `MobileMap.css`; gắn class `device-mobile-header--floating-map` trên route bản đồ khi mobile để header không đẩy bản đồ xuống; giữ nguyên StreakChip nổi theo yêu cầu người dùng | `MOBILE_MAP_FIRST` |
+| `src/Explore.tsx` | Chỉnh sửa | Tích hợp thanh kéo grabber và gesture pointer 3 nấc (peek/half/full); nút "Vị trí của tôi" nổi tròn 48px; tính khoảng cách GPS trên thẻ chọn điểm gọn <= 140px | `MOBILE_MAP_FIRST` |
+| `tests/stage3-mobile-map.test.tsx` | Tạo mới | 7 test case tự động kiểm tra: tỷ lệ bản đồ trên 6 kích thước màn hình, gesture kéo 3 nấc bottom sheet, nút vị trí tròn 48px, thẻ chọn điểm, hiển thị StreakChip nổi, và bố cục desktop không bị ảnh hưởng | `MOBILE_MAP_FIRST` |
+
+

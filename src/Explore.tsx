@@ -204,8 +204,78 @@ export default function Explore(){
    return best
  }, [entries, zoom, mapBounds, sample])
 
+  // [UX-FLOW] Ngân sách chiều cao giao diện mobile: Bottom sheet 3 mức (peek ~72px, half ~45vh, full ~85vh)
+  const [sheetSnap, setSheetSnap] = useState<'peek' | 'half' | 'full'>('peek')
+  const [isSheetDragging, setIsSheetDragging] = useState(false)
+  const dragStartY = useRef(0)
+  const dragStartSnap = useRef<'peek' | 'half' | 'full'>('peek')
+
+  const onGrabberPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    dragStartY.current = e.clientY
+    dragStartSnap.current = sheetSnap
+    setIsSheetDragging(true)
+    try {
+      ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+    } catch {}
+  }
+
+  const onGrabberPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isSheetDragging) return
+    setIsSheetDragging(false)
+    try {
+      ;(e.target as HTMLElement).releasePointerCapture(e.pointerId)
+    } catch {}
+    const deltaY = e.clientY - dragStartY.current
+    if (deltaY < -40) {
+      if (dragStartSnap.current === 'peek') setSheetSnap('half')
+      else if (dragStartSnap.current === 'half') setSheetSnap('full')
+    } else if (deltaY > 40) {
+      if (dragStartSnap.current === 'full') setSheetSnap('half')
+      else if (dragStartSnap.current === 'half') setSheetSnap('peek')
+    } else {
+      setSheetSnap(curr => (curr === 'peek' ? 'half' : 'peek'))
+    }
+  }
+
+  const selectedDistance = useMemo(() => {
+    if (!selected || !sample) return null
+    return distanceMeters([sample.latitude, sample.longitude], selected.position)
+  }, [selected, sample])
+
+
  return <main className="explore-page atlas-page">
-  <aside className="atlas-sidebar" aria-label={t('Danh sách trên bản đồ','Map places')}>
+  <aside
+    className={`atlas-sidebar ${isUxFlagEnabled('MOBILE_MAP_FIRST') ? `atlas-sidebar--snap-${sheetSnap}` : ''}`}
+    data-snap={sheetSnap}
+    aria-label={t('Danh sách trên bản đồ','Map places')}
+  >
+   {/* [UX-FLOW] Thanh kéo Bottom Sheet 3 mức trên điện thoại */}
+   {isUxFlagEnabled('MOBILE_MAP_FIRST') && (
+     <div
+       className="atlas-sheet-grabber"
+       onPointerDown={onGrabberPointerDown}
+       onPointerUp={onGrabberPointerUp}
+       role="button"
+       tabIndex={0}
+       aria-label={t('Kéo mở danh sách địa điểm', 'Drag places list')}
+       title={t('Chạm hoặc kéo để mở danh sách', 'Tap or drag to expand list')}
+     >
+       <span className="atlas-sheet-handle" aria-hidden="true" />
+       <div className="atlas-sheet-peek-row">
+         <span className="atlas-sheet-peek-title">
+           <strong>{entries.length}</strong> {t('điểm quanh bạn', 'places near you')}
+         </span>
+         {sample && (
+           <span className="atlas-sheet-peek-acc" title={t('Độ chính xác GPS', 'GPS accuracy')}>
+             ±{Math.ceil(sample.accuracy)}m
+           </span>
+         )}
+         <span className="atlas-sheet-chevron" aria-hidden="true">
+           {sheetSnap === 'peek' ? '▲' : '▼'}
+         </span>
+       </div>
+     </div>
+   )}
    <header>
     <a href="#/kham-pha">← {t('Khám phá','Discover')}</a>
     <a href="#/huong-dan" style={{ marginLeft: 'auto', textDecoration: 'underline', fontSize: '13px', color: 'var(--px-ink)' }}>? {t('Hướng dẫn','Guide')}</a>
@@ -269,7 +339,33 @@ export default function Explore(){
    {isUxFlagEnabled('COACH_MARKS') && <CoachMarks />}
    {loading&&<p className="atlas-map-status" role="status">{t('Đang tải bản đồ…','Loading map…')}</p>}
    {tileError&&<div className="atlas-map-status" role="alert">{t('Nền bản đồ chưa tải đầy đủ. Danh sách vẫn dùng được.','Map tiles are unavailable. The list remains available.')} <button onClick={()=>{setTileError(false);setLoading(true);setAttempt(n=>n+1)}}>{t('Thử lại','Retry')}</button></div>}
-   {selected&&<article className="atlas-selection"><button className="atlas-selection-close" aria-label={t('Đóng','Close')} onClick={()=>setSelected(null)}>×</button><small>{selected.kind==='quest'?t('Hành trình khám phá','Exploration quest'):t('Sự kiện sắp tới','Upcoming event')}</small><h2>{selected.title}</h2><p>{selected.subtitle}</p><a href={selected.href}>{t('Xem chi tiết','View details')} →</a></article>}
+    {/* [UX-FLOW] Nút "Vị trí của tôi" nổi tròn 48px trên điện thoại */}
+    {isUxFlagEnabled('MOBILE_MAP_FIRST') && (
+      <button
+        type="button"
+        className="atlas-floating-locate-btn"
+        onClick={locate}
+        disabled={locating}
+        aria-label={t('Vị trí của tôi', 'My location')}
+        title={t('Vị trí của tôi', 'My location')}
+      >
+        <span aria-hidden="true">{locating ? '⏳' : '◎'}</span>
+      </button>
+    )}
+    {selected && (
+      <article className="atlas-selection">
+        <button className="atlas-selection-close" aria-label={t('Đóng','Close')} onClick={()=>setSelected(null)}>×</button>
+        <div className="atlas-selection-meta">
+          <small>{selected.kind==='quest'?t('Hành trình khám phá','Exploration quest'):t('Sự kiện sắp tới','Upcoming event')}</small>
+          {selectedDistance !== null && (
+            <span className="atlas-selection-dist">📍 {formatMeters(selectedDistance)}</span>
+          )}
+        </div>
+        <h2>{selected.title}</h2>
+        <p>{selected.subtitle}</p>
+        <a href={selected.href} className="atlas-selection-link">{t('Xem chi tiết','View details')} →</a>
+      </article>
+    )}
   </section>
  </main>
 }
