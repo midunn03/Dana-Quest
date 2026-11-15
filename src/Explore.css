@@ -84,3 +84,74 @@
 .qd-transit-row strong {
   color: #0f5132;
 }
+
+/* [UX-FLOW] MAP_ONE_KM Controls: Nút toàn thành phố và Chip điểm gần nhất ngoài màn hình */
+.atlas-city-fit-btn {
+  position: absolute;
+  top: 80px;
+  right: 12px;
+  z-index: 500;
+  background: var(--px-surface, #ffffff);
+  border: 2px solid var(--px-ink, #1E302A);
+  box-shadow: var(--px-shadow-low, 0 3px 0 var(--px-ink, #1E302A));
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--px-ink, #1E302A);
+  transition: transform 0.1s ease;
+}
+
+.atlas-city-fit-btn:hover {
+  background: var(--px-surface-soft, #E4F0E5);
+  transform: translate(-1px, -1px);
+}
+
+.atlas-offscreen-chip {
+  position: absolute;
+  bottom: 24px;
+  right: 20px;
+  z-index: 600;
+  background: #152D25;
+  color: #F5F6EF;
+  border: 2px solid #FFE8A3;
+  box-shadow: 0 4px 0 #1E302A;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  animation: chip-slide-in 0.2s ease-out;
+  max-width: calc(100% - 40px);
+}
+
+.atlas-offscreen-chip:hover {
+  background: #1e3d33;
+}
+
+@keyframes chip-slide-in {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 767px) {
+  .atlas-city-fit-btn {
+    top: 70px;
+    right: 10px;
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+  .atlas-offscreen-chip {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    justify-content: space-between;
+  }
+}

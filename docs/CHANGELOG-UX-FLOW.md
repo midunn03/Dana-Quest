@@ -51,3 +51,23 @@ Tài liệu ghi lại toàn bộ thay đổi luồng người dùng, tối ưu t
 | `src/Explore.tsx` | Chỉnh sửa | Tích hợp StartHub overlay, CoachMarks, liên kết hướng dẫn | `START_HUB`, `COACH_MARKS` |
 | `src/AccountExperience.tsx` | Chỉnh sửa | Thêm lối vào nhanh trang `#/huong-dan` | - |
 | `tests/stage1-ux-flow.test.tsx` | Tạo mới | 8 test case tự động kiểm tra toàn bộ luồng Giai đoạn 1 | - |
+
+---
+
+## GIAI ĐOẠN 2: Bản đồ 1 km quanh GPS & Báo cáo 15 địa điểm
+
+### 1. Báo cáo kiểm tra 15 địa điểm kiểu B trên bản đồ
+- **Kiểm tra code:** `src/lib/mapEntries.ts` lấy danh sách điểm từ `quests` (`questCatalog.json`).
+- **Đối chiếu:** `questCatalog.json` gồm **16 bản ghi**, trong đó:
+  - 1 quest trường DUE (`due-dau-an-50-nam`).
+  - **15 bản ghi còn lại** tương ứng 1-đối-1 chính xác với toàn bộ 15 địa điểm kiểu B trong `destinations.json` (Cầu Rồng, Chợ Hàn, Bán đảo Sơn Trà, Ngũ Hành Sơn, Bảo tàng Điêu khắc Chăm, Cầu Sông Hàn, Bãi biển Mỹ Khê, Chùa Linh Ứng Sơn Trà, Rạn Nam Ô, Cung Văn hóa Thiếu nhi, Công viên APEC, Bảo tàng Mỹ thuật, Làng đá Non Nước, Bãi Rạng, Đỉnh Bàn Cờ).
+- **Kết luận:** Cả 15 địa điểm kiểu B **đều đã xuất hiện đầy đủ trên bản đồ** thông qua các marker tương ứng. Khi người dùng bấm vào marker hoặc thẻ địa điểm, hệ thống điều hướng đến trang chi tiết của địa điểm đó.
+
+### 2. Các thay đổi đã thực hiện trong Giai đoạn 2
+
+| Tệp | Hành động | Mô tả thay đổi | Cờ liên quan |
+| :--- | :---: | :--- | :--- |
+| `src/Explore.tsx` | Chỉnh sửa | Mặc định khởi tạo bản đồ ở mức zoom 15 căn giữa vị trí GPS người chơi (hoặc Cầu Rồng `[16.0601, 108.2236]` nếu không có GPS); tự động tính bounding box bán kính 1000m để fitBounds; vẽ vòng tròn đi bộ bán kính 1 km màu xanh `#216447`; thêm nút "🌐 Toàn thành phố" để phóng tầm nhìn toàn Đà Nẵng; thêm chip chỉ báo điểm quest/địa điểm gần nhất ngoài khung nhìn (khoảng cách <= 2.5 km) | `MAP_ONE_KM` |
+| `src/Explore.css` | Chỉnh sửa | Style cho nút "🌐 Toàn thành phố" (`.atlas-city-fit-btn`), vòng tròn 1 km (`.atlas-one-km-circle`), và chip chỉ báo điểm ngoài khung nhìn (`.atlas-offscreen-chip`) | `MAP_ONE_KM` |
+| `tests/stage2-map-one-km.test.tsx` | Tạo mới | 4 test case kiểm tra: (1) Mở bản đồ 1km quanh GPS, (2) Mở 1km quanh Cầu Rồng khi từ chối GPS, (3) Nút Toàn thành phố hoạt động, (4) Khi cờ MAP_ONE_KM tắt quay về toàn cảnh cũ | `MAP_ONE_KM` |
+
