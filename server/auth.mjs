@@ -6,6 +6,7 @@ import { createWallet } from './wallet.mjs'
 import { createAccountData } from './account-data.mjs'
 import { createActivationStore } from './activation-store.mjs'
 import { createQuestRuns } from './quest-runs.mjs'
+import { createTransitClaims } from './transit.mjs'
 import {loadPresentationEvents} from './presentation-events.mjs'
 import { createAccountFeatures } from './account-features.mjs'
 import { createQuestCommunity, isCommunityQuest } from './quest-community.mjs'
@@ -53,8 +54,10 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
   const eventCatalog=(owner,now=eventClock())=>[...cityEventCatalog,...loadPresentationEvents(resolve(dirname(file),'presentation-events.json'),owner,now,presentationEnabled)]
   const accountFeatures = createAccountFeatures(resolve(dirname(file), 'account-features'), eventClock,eventCatalog,async owner=>{const state=await questRuns.read(owner);return !Object.values(state.quests).some(run=>!run.completedAt&&!run.paused)})
   const community = createQuestCommunity(resolve(dirname(file),'quest-community.json'))
+  const transit = createTransitClaims(resolve(dirname(file), 'transits'))
   const wallet = createWallet(resolve(dirname(file), 'wallets'), {
     readGame: owner => game.read(owner), readQuests: owner => questRuns.read(owner),
+    readTransitClaims: owner => transit.read(owner),
     readSourceBackup: async owner => {
       const read = async folder => { try { return JSON.parse(await readFile(resolve(dirname(file), folder, owner + '.json'), 'utf8')) } catch { return null } }
       return { game: await read('players'), quests: await read('quest-runs') }
@@ -135,6 +138,11 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
           const value=await accountFeatures.read(session.userId)
           return send(200,{events:value.events??{decisions:{},lastShown:0},enabled:value.preferences.inApp,serverNow:eventClock(),catalog:eventCatalog(session.userId)})
         }
+      }
+      if (path === '/api/auth/transit/claims' || path === '/api/transit/claims') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        if (req.method === 'GET') return send(200, await transit.read(session.userId))
       }
       if (path === '/api/auth/wallet') {
         if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
@@ -218,7 +226,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         if(deleting.has(user.id))throw fail(409,'Tài khoản đang được xóa.')
         deleting.add(user.id)
         try{
-          await Promise.all([wallet.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id)])
+          await Promise.all([wallet.remove(user.id),transit.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id)])
           await mutate(users=>{const index=users.findIndex(item=>item.id===user.id);if(index>=0)users.splice(index,1);return user})
           for(const [id,value] of sessions)if(value.userId===user.id)sessions.delete(id)
           setCookie(res,'',secure,0);return send(200,{ok:true})
@@ -229,6 +237,19 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         if (!session) throw fail(401, 'Hãy đăng nhập trước khi kích hoạt mã.')
         if (!attempts.consume(`codes:${session.userId}`,10,60000)) throw fail(429, 'Bạn đã thử quá nhiều mã. Hãy chờ một phút rồi thử lại.')
         return send(200, await codes.redeem(input.code, session.userId))
+      }
+      if ((path === '/api/auth/transit/claim' || path === '/api/transit/claim') && req.method === 'POST') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        const claim = await transit.claim(session.userId, input)
+        const updated = await wallet.read(session.userId)
+        return send(200, {
+          success: true,
+          claim,
+          bonusCoins: claim.amount,
+          balance: updated.balance,
+          message: `Nhận thưởng thành công (+${claim.amount} Xu Dana).`
+        })
       }
       if (path === '/api/auth/wallet' && req.method === 'POST') return send(200, await wallet.redeem(session.userId, input.rewardId))
       if (path === '/api/auth/game' && req.method === 'POST') {
