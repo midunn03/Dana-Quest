@@ -8,7 +8,7 @@ const fail=(code,status=409)=>Object.assign(new Error(code),{status,code})
 const blocked=(receipts=[],reason='SOURCE_INVALID')=>({version:1,status:'reconciliation-required',reason,balance:null,entries:[],receipts})
 // The local API runs as one Node process. Every reconciliation/debit uses this
 // queue and an atomic rename; never run several server writers on this directory.
-export function createWallet(directory,{readGame,readQuests,readSourceBackup=async()=>null,readTransitClaims=async()=>null}) {
+export function createWallet(directory,{readGame,readQuests,readSourceBackup=async()=>null,readTransitClaims=async()=>null,readStreakClaims=async()=>null}) {
  let queue=Promise.resolve()
  const filename=owner=>{if(typeof owner!=='string'||!/^[-\w]{1,80}$/.test(owner))throw fail('WALLET_OWNER',400);return join(directory,`${owner}.json`)}
  const serial=action=>{const task=queue.then(action);queue=task.catch(()=>{});return task}
@@ -36,6 +36,16 @@ export function createWallet(directory,{readGame,readQuests,readSourceBackup=asy
     try{
      const transit=await readTransitClaims(owner)
      for(const claim of transit?.claims??[]){
+      if(claim&&typeof claim.source==='string'&&Number.isSafeInteger(claim.amount)&&claim.amount>0){
+       add(claim.source,claim.amount,claim.claimedAt)
+      }
+     }
+    }catch{}
+   }
+   if(readStreakClaims){
+    try{
+     const streak=await readStreakClaims(owner)
+     for(const claim of streak?.claims??[]){
       if(claim&&typeof claim.source==='string'&&Number.isSafeInteger(claim.amount)&&claim.amount>0){
        add(claim.source,claim.amount,claim.claimedAt)
       }

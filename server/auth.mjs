@@ -7,6 +7,7 @@ import { createAccountData } from './account-data.mjs'
 import { createActivationStore } from './activation-store.mjs'
 import { createQuestRuns } from './quest-runs.mjs'
 import { createTransitClaims } from './transit.mjs'
+import { createStreakStore } from './streak.mjs'
 import {loadPresentationEvents} from './presentation-events.mjs'
 import { createAccountFeatures } from './account-features.mjs'
 import { createQuestCommunity, isCommunityQuest } from './quest-community.mjs'
@@ -55,9 +56,11 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
   const accountFeatures = createAccountFeatures(resolve(dirname(file), 'account-features'), eventClock,eventCatalog,async owner=>{const state=await questRuns.read(owner);return !Object.values(state.quests).some(run=>!run.completedAt&&!run.paused)})
   const community = createQuestCommunity(resolve(dirname(file),'quest-community.json'))
   const transit = createTransitClaims(resolve(dirname(file), 'transits'))
+  const streak = createStreakStore(resolve(dirname(file), 'streaks'))
   const wallet = createWallet(resolve(dirname(file), 'wallets'), {
     readGame: owner => game.read(owner), readQuests: owner => questRuns.read(owner),
     readTransitClaims: owner => transit.read(owner),
+    readStreakClaims: owner => streak.read(owner),
     readSourceBackup: async owner => {
       const read = async folder => { try { return JSON.parse(await readFile(resolve(dirname(file), folder, owner + '.json'), 'utf8')) } catch { return null } }
       return { game: await read('players'), quests: await read('quest-runs') }
@@ -144,6 +147,11 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
         if (req.method === 'GET') return send(200, await transit.read(session.userId))
       }
+      if (path === '/api/auth/streak' || path === '/api/streak') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        if (req.method === 'GET') return send(200, await streak.read(session.userId))
+      }
       if (path === '/api/auth/wallet') {
         if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
         if (req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
@@ -226,17 +234,33 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         if(deleting.has(user.id))throw fail(409,'Tài khoản đang được xóa.')
         deleting.add(user.id)
         try{
-          await Promise.all([wallet.remove(user.id),transit.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id)])
+          await Promise.all([wallet.remove(user.id),transit.remove(user.id),streak.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id)])
           await mutate(users=>{const index=users.findIndex(item=>item.id===user.id);if(index>=0)users.splice(index,1);return user})
           for(const [id,value] of sessions)if(value.userId===user.id)sessions.delete(id)
           setCookie(res,'',secure,0);return send(200,{ok:true})
         }finally{deleting.delete(user.id)}
       }
-      if (path === '/api/auth/quest-runs' && req.method === 'POST') return send(200, await questRuns.update(session.userId, input))
+      if (path === '/api/auth/quest-runs' && req.method === 'POST') {
+        const result = await questRuns.update(session.userId, input)
+        if (input && (input.type === 'checkpoint' || input.type === 'start')) {
+          await streak.recordActivity(session.userId).catch(() => {})
+        }
+        return send(200, result)
+      }
       if (path === '/api/auth/quest-codes/redeem' && req.method === 'POST') {
         if (!session) throw fail(401, 'Hãy đăng nhập trước khi kích hoạt mã.')
         if (!attempts.consume(`codes:${session.userId}`,10,60000)) throw fail(429, 'Bạn đã thử quá nhiều mã. Hãy chờ một phút rồi thử lại.')
         return send(200, await codes.redeem(input.code, session.userId))
+      }
+      if ((path === '/api/auth/streak/activity' || path === '/api/streak/activity') && req.method === 'POST') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        const activity = await streak.recordActivity(session.userId, input?.timestamp)
+        const updated = await wallet.read(session.userId)
+        return send(200, {
+          ...activity,
+          balance: updated.balance,
+        })
       }
       if ((path === '/api/auth/transit/claim' || path === '/api/transit/claim') && req.method === 'POST') {
         if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
@@ -258,7 +282,11 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
           const current = await game.read(session.userId)
           return send(200, { ...current, state: { ...current.state, redemptions: value.receipts.map(({ rewardId, redeemedAt }) => ({ rewardId, redeemedAt })) } })
         }
-        return send(200, await game.update(session.userId, input))
+        const updated = await game.update(session.userId, input)
+        if (input.kind === 'action' && input.action?.type === 'complete') {
+          await streak.recordActivity(session.userId).catch(() => {})
+        }
+        return send(200, updated)
       }
       if (path === '/api/auth/profile/avatar' && req.method === 'PATCH') {
         if (!session) throw fail(401, 'Chưa đăng nhập.')

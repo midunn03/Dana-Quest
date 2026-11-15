@@ -154,3 +154,20 @@ class GameIntegrityTests(TestCase):
     def test_oversized_json_integer_is_corrupt_not_an_uncaught_server_error(self):
         state=valid_state();state['destinations']['cau-rong']['startedAt']=10**400
         self.assertFalse(rules.is_healthy(state))
+
+
+class StreakMilestoneTests(TestCase):
+    def test_streak_milestone_creation_and_api(self):
+        from .models import StreakMilestone
+        StreakMilestone.objects.create(days=3, bonus_coins=15, bonus_xp=20, message='Moc 3 ngay', is_active=True)
+        StreakMilestone.objects.create(days=7, bonus_coins=35, bonus_xp=50, message='Moc 7 ngay', is_active=True)
+        StreakMilestone.objects.create(days=14, bonus_coins=80, bonus_xp=100, message='Moc 14 ngay', is_active=False)
+
+        response = self.client.get('/api/game/streak/milestones')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn('milestones', data)
+        self.assertEqual(len(data['milestones']), 2)
+        self.assertEqual(data['milestones'][0]['days'], 3)
+        self.assertEqual(data['milestones'][0]['bonusCoins'], 15)
+        self.assertEqual(data['milestones'][1]['days'], 7)

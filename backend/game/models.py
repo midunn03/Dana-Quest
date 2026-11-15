@@ -69,3 +69,21 @@ class GamePhoto(models.Model):
 
     def __str__(self):
         return f'{self.user.username} · {self.key}'
+
+
+class StreakMilestone(models.Model):
+    """Cấu hình mốc thưởng chuỗi ngày (Streak) khám phá."""
+
+    days = models.PositiveIntegerField('Số ngày mốc', unique=True, help_text='Ví dụ: 3, 7, 14, 30 ngày')
+    bonus_coins = models.PositiveIntegerField('Xu thưởng', default=10)
+    bonus_xp = models.PositiveIntegerField('XP thưởng', default=20)
+    message = models.CharField('Thông báo chúc mừng', max_length=200, blank=True)
+    is_active = models.BooleanField('Kích hoạt', default=True)
+
+    class Meta:
+        ordering = ['days']
+        verbose_name = 'mốc thưởng streak'
+        verbose_name_plural = 'các mốc thưởng streak'
+
+    def __str__(self):
+        return f'Mốc {self.days} ngày (+{self.bonus_coins} xu)'

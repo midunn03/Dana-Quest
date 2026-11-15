@@ -18,7 +18,7 @@ const contentTypes = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascr
 
 function proxyDjango(request, response, next) {
   const pathname = new URL(request.url ?? '/', 'http://localhost').pathname
-  if (!pathname.startsWith('/api/pixel') && !pathname.startsWith('/media') && !pathname.startsWith('/api/events')) {
+  if (!pathname.startsWith('/api/pixel') && !pathname.startsWith('/media') && !pathname.startsWith('/api/events') && !pathname.startsWith('/api/game')) {
     return next()
   }
   const headers = { ...request.headers, host: `${djangoHost}:${djangoPort}` }

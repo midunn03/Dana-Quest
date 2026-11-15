@@ -3,7 +3,7 @@ import base64
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState
+from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState, StreakMilestone
 
 
 @admin.register(GameState)
@@ -73,3 +73,10 @@ class QuestActivationCodeAdmin(SnapshotAdmin):
     list_display = ('quest_id', 'user', 'expires_at', 'redeemed_at', 'revoked')
     list_filter = ('revoked',)
     search_fields = ('quest_id', 'user__username')
+
+
+@admin.register(StreakMilestone)
+class StreakMilestoneAdmin(admin.ModelAdmin):
+    list_display = ('days', 'bonus_coins', 'bonus_xp', 'message', 'is_active')
+    list_editable = ('bonus_coins', 'bonus_xp', 'is_active')
+    ordering = ('days',)

@@ -130,3 +130,19 @@ def game(request):
     except rules.GameError as error:
         return fail(error.status, error.message)
     return JsonResponse({'revision': row.revision, 'state': row.state})
+
+
+@require_http_methods(['GET'])
+def streak_milestones(request):
+    """GET /api/game/streak/milestones — tra ve danh sach cac moc thuong streak dang kich hoat."""
+    from .models import StreakMilestone
+    milestones = [
+        {
+            'days': m.days,
+            'bonusCoins': m.bonus_coins,
+            'bonusXp': m.bonus_xp,
+            'message': m.message,
+        }
+        for m in StreakMilestone.objects.filter(is_active=True).order_by('days')
+    ]
+    return JsonResponse({'milestones': milestones})
