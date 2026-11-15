@@ -43,7 +43,8 @@ import { canNavigateFrom } from './lib/navigationGuard'
 import './mobile/Mobile.css'
 import { useDeviceMode } from './lib/deviceMode'
 import DeviceModeModal from './mobile/DeviceModeModal'
-import MobileShell from './mobile/MobileShell'
+import MobileBottomNav from './mobile/MobileBottomNav'
+import StreakChip from './StreakChip'
 function AppRouter() {
   useLocale()
   const auth = useAuth()
@@ -128,20 +129,37 @@ function AppRouter() {
   }
   const renderedPage = <Suspense fallback={<main className="auth-loading"><p role="status">{t("Đang tải trang…")}</p></main>}>{page}</Suspense>
 
-  if (deviceMode === 'mobile') {
-    return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className="device-mobile-root">
-      <MobileShell route={route} user={auth.user} onOpenDeviceSelector={() => setShowDeviceModal(true)}>
-        {renderedPage}
-        <Notifications />
-      </MobileShell>
-    </div>{showLogin&&<AuthPage embedded initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):loginMode} onClose={closeLogin} onAuthenticated={user=>{setLoginPrompt(false);setDismissedQuest(route);if(!user.avatarId){rememberPageReturn(route);window.location.hash='#/chon-nhan-vat'}}}/>}{isModalOpen && <DeviceModeModal open={isModalOpen} currentMode={deviceMode} onSelect={chosen => { setDeviceMode(chosen); setShowDeviceModal(false) }} onClose={() => setShowDeviceModal(false)} />}</EventProvider>
-  }
+  const isMobile = deviceMode === 'mobile'
+  const isHome = route === '#/' || authRoute
+  const isFullscreen = route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
 
-  return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${route==='#/'||authRoute?'home-shell':''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
-    <PageTools route={route}>{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}</PageTools>
-    {workspace && <WorkspaceNavigation route={route}/>}
+  return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${isMobile ? 'device-mobile-shell device-mobile' : ''} ${isHome ? 'home-shell' : ''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
+    {isMobile && !isHome && !isFullscreen && (
+      <header className="device-mobile-header" role="banner">
+        <div className="device-mobile-brand-group">
+          <a href="#/kham-pha" className="device-mobile-logo" aria-label="Dana Quest">
+            <span>DANA QUEST</span>
+          </a>
+        </div>
+        <div className="device-mobile-header-actions">
+          {auth.user && <StreakChip />}
+          <button
+            type="button"
+            className="device-mobile-mode-btn"
+            onClick={() => setShowDeviceModal(true)}
+            aria-label={t('Đổi giao diện Web/Điện thoại', 'Switch Web/Mobile layout')}
+            title={t('Đổi giao diện Web / Điện thoại', 'Switch Web / Mobile layout')}
+          >
+            <span aria-hidden="true">📱</span>
+            <span>Mobile</span>
+          </button>
+        </div>
+      </header>
+    )}
+    {!isMobile && <PageTools route={route}>{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}</PageTools>}
+    {workspace && !isMobile && <WorkspaceNavigation route={route}/>}
     {renderedPage}<Notifications />
-    <MainNavigation route={route} />
+    {isMobile ? (!isFullscreen && <MobileBottomNav route={route} />) : <MainNavigation route={route} />}
   </div>{showLogin&&<AuthPage embedded initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):loginMode} onClose={closeLogin} onAuthenticated={user=>{setLoginPrompt(false);setDismissedQuest(route);if(!user.avatarId){rememberPageReturn(route);window.location.hash='#/chon-nhan-vat'}}}/>}{isModalOpen && <DeviceModeModal open={isModalOpen} currentMode={deviceMode} onSelect={chosen => { setDeviceMode(chosen); setShowDeviceModal(false) }} onClose={() => setShowDeviceModal(false)} />}</EventProvider>
 }
 

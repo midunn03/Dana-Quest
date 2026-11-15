@@ -10,7 +10,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(15, 23, 42, 0.72);
+  background: rgba(15, 23, 42, 0.76);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   display: flex;
@@ -27,20 +27,20 @@
 
 .device-mode-card {
   width: 100%;
-  max-width: 480px;
+  max-width: 460px;
   background: var(--px-surface, #ffffff);
-  border: 1px solid var(--px-border, #e2e8f0);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border: 3px solid var(--px-ink, #0f172a);
+  box-shadow: 8px 8px 0 var(--px-ink, #0f172a);
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   animation: deviceModeSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
 }
 
 @keyframes deviceModeSlideUp {
-  from { transform: translateY(24px) scale(0.97); opacity: 0; }
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
@@ -59,11 +59,12 @@
   font-weight: 700;
   color: var(--px-ink, #0f172a);
   margin: 0 0 6px;
+  line-height: 1.35;
 }
 
 .device-mode-header p {
   font-size: 14px;
-  color: var(--px-ink-muted, #64748b);
+  color: var(--px-ink-muted, #475569);
   margin: 0;
   line-height: 1.5;
 }
@@ -78,14 +79,14 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  padding: 16px;
-  border: 2px solid var(--px-border, #e2e8f0);
-  border-radius: 14px;
+  padding: 14px;
+  border: 2px solid var(--px-border, #cbd5e1);
   background: var(--px-surface-soft, #f8fafc);
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
   min-height: 52px;
+  box-sizing: border-box;
 }
 
 .device-mode-option:hover {
@@ -95,12 +96,12 @@
 
 .device-mode-option.active {
   border-color: var(--px-primary, #216447);
-  background: rgba(33, 100, 71, 0.06);
-  box-shadow: 0 4px 12px rgba(33, 100, 71, 0.12);
+  border-width: 3px;
+  background: rgba(33, 100, 71, 0.08);
 }
 
 .device-mode-icon-circle {
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1;
   flex-shrink: 0;
   margin-top: 2px;
@@ -115,12 +116,12 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 4px;
 }
 
 .device-mode-option-title strong {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--px-ink, #0f172a);
 }
 
@@ -129,14 +130,14 @@
   font-weight: 700;
   background: #10b981;
   color: #ffffff;
-  padding: 2px 8px;
-  border-radius: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
   letter-spacing: 0.3px;
 }
 
 .device-mode-info p {
   font-size: 13px;
-  color: var(--px-ink-muted, #64748b);
+  color: var(--px-ink-muted, #475569);
   margin: 0;
   line-height: 1.45;
 }
@@ -145,11 +146,10 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid var(--px-border, #cbd5e1);
+  border: 2px solid var(--px-border, #94a3b8);
   flex-shrink: 0;
   margin-top: 4px;
   position: relative;
-  transition: border-color 0.2s ease;
 }
 
 .device-mode-option.active .device-mode-radio-mark {
@@ -167,62 +167,66 @@
 .device-mode-confirm-btn {
   width: 100%;
   height: 48px;
-  border-radius: 12px;
-  border: none;
+  border: 2px solid var(--px-ink, #0f172a);
+  box-shadow: 3px 3px 0 var(--px-ink, #0f172a);
   background: var(--px-primary, #216447);
   color: #ffffff;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease, transform 0.1s ease;
-}
-
-.device-mode-confirm-btn:hover {
-  background: #174b35;
+  transition: transform 0.1s ease;
 }
 
 .device-mode-confirm-btn:active {
-  transform: scale(0.98);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--px-ink, #0f172a);
 }
 
 
 /* --------------------------------------------------------------------------
-   2. Mobile Shell Container (.device-mobile-shell)
+   2. Khung Bọc Giao Diện Di Động (.device-mobile-shell)
    -------------------------------------------------------------------------- */
-.device-mobile-shell {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  max-width: 430px;
-  min-width: 360px;
-  height: 100vh;
-  height: 100dvh;
-  margin: 0 auto;
-  background: var(--px-page, #f7f5ec);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
-  border-left: 1px solid var(--px-border, #e2e8f0);
-  border-right: 1px solid var(--px-border, #e2e8f0);
-  overflow: hidden;
-  box-sizing: border-box;
+.app-shell.device-mobile-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow: hidden !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: var(--px-page, #f7f5ec) !important;
+  box-sizing: border-box !important;
 }
 
-/* Khi trên màn hình điện thoại thật hoặc devtools mobile view */
-@media (max-width: 768px) {
-  .device-mobile-shell {
-    max-width: 100%;
-    min-width: 100%;
-    height: 100dvh;
-    border: none;
-    box-shadow: none;
-    margin: 0;
+/* Khi test trên máy tính màn hình rộng (> 768px): gom khung gọn như màn hình điện thoại */
+@media (min-width: 769px) {
+  .app-shell.device-mobile-shell {
+    max-width: 440px !important;
+    margin: 0 auto !important;
+    border-left: 3px solid var(--px-ink, #0f172a) !important;
+    border-right: 3px solid var(--px-ink, #0f172a) !important;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28) !important;
   }
 }
 
-/* Header di động */
+/* Khi trên điện thoại thật (<= 768px): tràn viền hoàn hảo */
+@media (max-width: 768px) {
+  .app-shell.device-mobile-shell {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Header di động trên cùng */
 .device-mobile-header {
   flex-shrink: 0;
   display: flex;
@@ -230,10 +234,11 @@
   justify-content: space-between;
   height: 52px;
   padding: 0 14px;
-  padding-top: env(safe-area-inset-top, 0px);
+  padding-top: max(4px, env(safe-area-inset-top, 0px));
   background: var(--px-surface, #ffffff);
-  border-bottom: 1px solid var(--px-border, #e2e8f0);
+  border-bottom: 2px solid var(--px-ink, #0f172a);
   z-index: 100;
+  box-sizing: border-box;
 }
 
 .device-mobile-logo {
@@ -247,52 +252,22 @@
 .device-mobile-header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .device-mobile-mode-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
+  padding: 3px 8px;
   height: 32px;
-  border-radius: 16px;
-  border: 1px solid var(--px-border, #cbd5e1);
+  border: 2px solid var(--px-ink, #0f172a);
   background: var(--px-surface-soft, #f8fafc);
   color: var(--px-ink, #0f172a);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   touch-action: manipulation;
-}
-
-.device-mobile-mode-btn:hover {
-  background: var(--px-surface, #ffffff);
-  border-color: var(--px-primary, #216447);
-}
-
-/* Phần nội dung cuộn được */
-.device-mobile-content {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  font-size: 16px; /* Cỡ chữ tối thiểu 16px chống iOS auto-zoom */
-}
-
-/* Trường hợp mở bản đồ (toàn màn hình) */
-.device-mobile-shell.device-mobile-map-active .device-mobile-content {
-  overflow: hidden;
-}
-
-.device-mobile-shell.device-mobile-map-active .explore-page,
-.device-mobile-shell.device-mobile-map-active .navigation-screen {
-  height: 100% !important;
-  width: 100% !important;
 }
 
 
@@ -304,12 +279,13 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 60px;
+  height: 58px;
   background: var(--px-surface, #ffffff);
-  border-top: 1px solid var(--px-border, #e2e8f0);
+  border-top: 2px solid var(--px-ink, #0f172a);
   padding-bottom: max(6px, env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
   z-index: 120;
+  box-sizing: border-box;
 }
 
 .device-mobile-nav-item {
@@ -320,7 +296,7 @@
   gap: 2px;
   flex: 1;
   min-width: 44px;
-  min-height: 48px;
+  min-height: 44px;
   padding: 4px 0;
   text-decoration: none;
   color: var(--px-ink-muted, #64748b);
@@ -344,176 +320,368 @@
 
 .device-mobile-nav-label {
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
 }
 
 .device-mobile-nav-item.active {
   color: var(--px-primary, #216447);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .device-mobile-nav-item.active .device-mobile-nav-icon svg {
-  stroke-width: 2.4;
+  stroke-width: 2.6;
 }
 
 
 /* --------------------------------------------------------------------------
-   4. Bottom Sheet Di Động (.device-mobile-bottom-sheet)
+   4. Đệm đáy chống che khuất (Bottom Nav Padding)
    -------------------------------------------------------------------------- */
-.device-mobile-bottom-sheet {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 110;
-  background: var(--px-surface, #ffffff);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: height 0.24s cubic-bezier(0.16, 1, 0.3, 1);
-  touch-action: pan-y;
-}
-
-.device-mobile-bottom-sheet.dragging {
-  transition: none;
-}
-
-.device-mobile-sheet-grabber {
-  width: 100%;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: grab;
-  touch-action: none;
-  flex-shrink: 0;
-}
-
-.device-mobile-sheet-handle {
-  width: 48px;
-  height: 5px;
-  border-radius: 3px;
-  background: #cbd5e1;
-}
-
-.device-mobile-sheet-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px 10px;
-  border-bottom: 1px solid var(--px-border, #e2e8f0);
-  flex-shrink: 0;
-}
-
-.device-mobile-sheet-header h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--px-ink, #0f172a);
-}
-
-.device-mobile-sheet-close {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: var(--px-surface-soft, #f1f5f9);
-  color: var(--px-ink, #0f172a);
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  touch-action: manipulation;
-}
-
-.device-mobile-sheet-content {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 14px 16px 24px;
+.app-shell.device-mobile-shell > main,
+.app-shell.device-mobile-shell > .discovery-page,
+.app-shell.device-mobile-shell > .ap-page,
+.app-shell.device-mobile-shell > .library-page,
+.app-shell.device-mobile-shell > .shop-screen,
+.app-shell.device-mobile-shell > .events-page {
+  padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
 }
 
 
 /* --------------------------------------------------------------------------
-   5. Xử lý bàn phím ảo & Xoay màn hình (Virtual Keyboard & Orientation)
+   5. Tối ưu Trang Bản Đồ (Explore / Atlas) trên Điện thoại
    -------------------------------------------------------------------------- */
-.device-mobile-content input,
-.device-mobile-content textarea,
-.device-mobile-content select {
-  font-size: 16px !important; /* Không tự phóng to trên iOS Safari */
-  scroll-margin-bottom: 120px; /* Bàn phím ảo không che input */
-  min-height: 44px;
-}
-
-@media (orientation: landscape) and (max-height: 500px) {
-  .device-mobile-shell {
-    height: 100vh;
-  }
-  .device-mobile-nav {
-    height: 48px;
-    padding-bottom: 2px;
-  }
-  .device-mobile-header {
-    height: 42px;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   6. Tích hợp Trang Atlas, Navigation & Account trong Mobile Shell
-   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell > .atlas-page,
 .device-mobile-shell .atlas-page {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  grid-template-rows: minmax(240px, 46%) minmax(0, 1fr) !important;
+  display: flex !important;
+  flex-direction: column !important;
   height: 100% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
 }
 
+.app-shell.device-mobile-shell .atlas-map-area,
 .device-mobile-shell .atlas-map-area {
-  grid-row: 1 !important;
+  flex: 1 1 50% !important;
+  min-height: 250px !important;
   position: relative !important;
 }
 
+.app-shell.device-mobile-shell .atlas-sidebar,
 .device-mobile-shell .atlas-sidebar {
-  grid-row: 2 !important;
-  border-right: 0 !important;
-  border-top: 1px solid var(--px-ink, #0f172a) !important;
+  flex: 1 1 50% !important;
+  border-right: none !important;
+  border-top: 2px solid var(--px-ink, #0f172a) !important;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch;
+  padding: 10px 14px calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+  background: var(--px-surface, #ffffff);
 }
 
-.device-mobile-shell .navigation-screen {
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.app-shell.device-mobile-shell .atlas-sidebar header {
+  padding: 8px 0 6px !important;
 }
 
-.device-mobile-shell .route-tools {
-  bottom: 220px;
+.app-shell.device-mobile-shell .atlas-sidebar h1 {
+  font-size: 18px !important;
+  margin: 4px 0 !important;
 }
 
-.device-mobile-shell .route-tool {
-  min-height: 44px;
-  padding: 8px 14px;
+.app-shell.device-mobile-shell .atlas-search {
+  margin: 6px 0 10px !important;
 }
 
-.device-mobile-shell .ap-profile-frame {
+.app-shell.device-mobile-shell .atlas-search input {
+  min-height: 44px !important;
+  font-size: 15px !important;
+}
+
+.app-shell.device-mobile-shell .atlas-filters {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 6px !important;
+  margin: 0 0 10px !important;
+}
+
+.app-shell.device-mobile-shell .atlas-filters button {
+  min-height: 42px !important;
+  font-size: 13px !important;
+}
+
+.app-shell.device-mobile-shell .atlas-selection {
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 10px !important;
+  right: 10px !important;
+  z-index: 1000 !important;
+  max-width: none !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  background: var(--px-surface, #ffffff) !important;
+  border-radius: 8px !important;
+  padding: 14px !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. Tối ưu Trang Khám phá & Nhiệm vụ (.discovery-page) trên Điện thoại
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .discovery-page {
+  padding: 12px 14px calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.app-shell.device-mobile-shell .discovery-header {
+  margin-bottom: 14px !important;
+}
+
+.app-shell.device-mobile-shell .discovery-title-row {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  margin-bottom: 14px !important;
+}
+
+.app-shell.device-mobile-shell .discovery-title-row h1 {
+  font-size: 20px !important;
+  margin: 0 0 6px !important;
+}
+
+.app-shell.device-mobile-shell .discovery-search {
+  min-height: 48px !important;
+  margin-bottom: 16px !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+}
+
+.app-shell.device-mobile-shell .discovery-grid {
   display: flex !important;
   flex-direction: column !important;
   gap: 16px !important;
 }
 
-.device-mobile-shell .badge-grid {
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+.app-shell.device-mobile-shell .discovery-card {
+  width: 100% !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  box-sizing: border-box !important;
+  padding: 14px !important;
+  background: var(--px-surface, #ffffff) !important;
 }
 
-.device-mobile-shell .recap-action-bar button {
+.app-shell.device-mobile-shell .discovery-card h3 {
+  font-size: 16px !important;
+  margin: 6px 0 !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. Tối ưu Trang Chỉ Đường & Điều Hướng (.navigation-screen)
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .navigation-screen {
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.app-shell.device-mobile-shell .route-instruction {
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  right: 10px !important;
+  z-index: 1000 !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  background: var(--px-surface, #ffffff) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+}
+
+.app-shell.device-mobile-shell .route-tools {
+  position: absolute !important;
+  bottom: 240px !important;
+  right: 12px !important;
+  z-index: 900 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.app-shell.device-mobile-shell .route-tool {
+  min-height: 44px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 2px 2px 0 var(--px-ink, #0f172a) !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.app-shell.device-mobile-shell .live-route-sheet {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  border-top: 3px solid var(--px-ink, #0f172a) !important;
+  border-radius: 16px 16px 0 0 !important;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.18) !important;
+  background: var(--px-surface, #ffffff) !important;
+  max-height: 65% !important;
+  z-index: 950 !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. Tối ưu Trang Tài Khoản & Cài Đặt (.ap-page)
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .ap-page {
+  padding: 12px 14px calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.app-shell.device-mobile-shell .ap-profile-header {
+  margin-bottom: 14px !important;
+}
+
+.app-shell.device-mobile-shell .ap-profile-header h1 {
+  font-size: 20px !important;
+}
+
+.app-shell.device-mobile-shell .ap-profile-frame {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.app-shell.device-mobile-shell .ap-card {
+  padding: 14px !important;
+  border: 3px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  border-radius: 8px !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+}
+
+.app-shell.device-mobile-shell .ap-stats-strip {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 6px !important;
+  text-align: center !important;
+  padding: 10px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+}
+
+.app-shell.device-mobile-shell .ap-stats-strip span {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  font-size: 11px !important;
+}
+
+.app-shell.device-mobile-shell .ap-stats-strip strong {
+  font-size: 18px !important;
+  color: var(--px-primary, #216447) !important;
+}
+
+.app-shell.device-mobile-shell .ap-quick-links {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 6px !important;
+  text-align: center !important;
+}
+
+.app-shell.device-mobile-shell .ap-quick-links a {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 8px 4px !important;
+  font-size: 11px !important;
+  min-height: 52px !important;
+}
+
+.app-shell.device-mobile-shell .badge-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+}
+
+.app-shell.device-mobile-shell .recap-stat-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 8px !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. Tối ưu Trang Chủ (.pixel-home) trên Điện thoại
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .pixel-home {
+  padding: 0 !important;
+}
+
+.app-shell.device-mobile-shell .home-container {
+  width: calc(100% - 24px) !important;
+  margin-inline: auto !important;
+}
+
+.app-shell.device-mobile-shell .home-header-inner {
+  padding: 8px 12px !important;
+  gap: 8px !important;
+}
+
+.app-shell.device-mobile-shell .home-hero-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  padding: 18px 0 !important;
+}
+
+.app-shell.device-mobile-shell .pixel-home h1 {
+  font-size: 20px !important;
+  margin: 10px 0 0 !important;
+  line-height: 1.35 !important;
+}
+
+.app-shell.device-mobile-shell .home-steps {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.app-shell.device-mobile-shell .home-quest-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.app-shell.device-mobile-shell .home-reward-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+}
+
+.app-shell.device-mobile-shell .home-faq-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   10. Form & Bàn Phím Ảo (Virtual Keyboard & Touch Inputs)
+   -------------------------------------------------------------------------- */
+.device-mobile input,
+.device-mobile textarea,
+.device-mobile select {
+  font-size: 16px !important; /* Ngăn chặn hoàn toàn iOS Safari tự phóng to */
+  scroll-margin-bottom: 120px;
   min-height: 44px;
 }
 
+.device-mobile button,
+.device-mobile a {
+  touch-action: manipulation;
+}
