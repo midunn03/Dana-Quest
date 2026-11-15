@@ -2,6 +2,12 @@ from django.conf import settings
 from django.db import models
 
 
+class ApiRateBucket(models.Model):
+    key = models.CharField(max_length=64, primary_key=True)
+    count = models.PositiveIntegerField(default=0)
+    expires_ms = models.BigIntegerField(db_index=True)
+
+
 class Profile(models.Model):
     """Thông tin thêm của người chơi.
 

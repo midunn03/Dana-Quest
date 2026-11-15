@@ -1,0 +1,5531 @@
+[
+  {
+    "vi": "Vuốt ngang để xem ảnh",
+    "files": [
+      "AdminGallery.tsx",
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh trước",
+    "files": [
+      "AdminGallery.tsx",
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh tiếp theo",
+    "files": [
+      "AdminGallery.tsx",
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa xóa được ảnh.",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Về tài khoản",
+    "files": [
+      "AlbumPage.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thư viện kỷ niệm",
+    "files": [
+      "AlbumPage.tsx",
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Những nơi có câu chuyện đang chờ bạn.",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh đại diện của từng quest",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thư viện dùng cùng hình bìa với các quest để bạn nhận ra điểm đến. Đây không phải ảnh người chơi đã chụp hay bằng chứng bạn đã ghé thăm.",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lọc thư viện",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tất cả",
+    "files": [
+      "AlbumPage.tsx",
+      "DueSupport.tsx",
+      "EventsPage.tsx",
+      "Explore.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã bắt đầu",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hoàn thành",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tải tiến độ…",
+    "files": [
+      "AlbumPage.tsx",
+      "DueStartPage.tsx",
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã hoàn thành",
+    "files": [
+      "AlbumPage.tsx",
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang khám phá",
+    "files": [
+      "AlbumPage.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa bắt đầu",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "thử thách",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có hành trình trong mục này",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bắt đầu một quest để lưu dấu hành trình của bạn.",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem tất cả quest",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh cũ của tài khoản",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang kiểm tra ảnh cũ…",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không còn ảnh cũ trong tài khoản.",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xóa vĩnh viễn ảnh cũ của tôi",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xóa vĩnh viễn ảnh cũ?",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xóa vĩnh viễn ảnh cũ",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang xóa…",
+    "files": [
+      "AlbumPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang mở hành trình của bạn…",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Đang kiểm tra phiên tài khoản…",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Đang kiểm tra tài khoản…",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy trang",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Liên kết này không hợp lệ. Bạn có thể quay về trang chủ hoặc chọn điểm đến trên bản đồ.",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Quay lại khám phá",
+    "files": [
+      "App.tsx",
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Về trang chủ",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Mở bản đồ",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tải trang…",
+    "files": [
+      "App.tsx"
+    ]
+  },
+  {
+    "vi": "Không kiểm tra được phiên đăng nhập.",
+    "files": [
+      "AuthContext.tsx"
+    ]
+  },
+  {
+    "vi": "Hãy đăng nhập trước.",
+    "files": [
+      "AuthContext.tsx"
+    ]
+  },
+  {
+    "vi": "XÓA TÀI KHOẢN",
+    "files": [
+      "AuthContext.tsx"
+    ]
+  },
+  {
+    "vi": "Phiên tài khoản đã thay đổi. Hãy thử lại.",
+    "files": [
+      "AuthContext.tsx"
+    ]
+  },
+  {
+    "vi": "Không thể thực hiện thao tác lúc này.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng đăng nhập",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quay lại",
+    "files": [
+      "AuthPage.tsx",
+      "AvatarPage.tsx",
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập hoặc tạo tài khoản",
+    "files": [
+      "AuthPage.tsx",
+      "QuestGuestPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tạo tài khoản",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập",
+    "files": [
+      "AuthPage.tsx",
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục những quest của bạn, lưu lại kỷ niệm và khám phá các phần thưởng.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ cần tên người dùng và mật khẩu để bắt đầu hành trình.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập bằng tên người dùng hoặc email đã liên kết với tài khoản của bạn.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Dịch vụ tài khoản chưa sẵn sàng.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Vui lòng thử lại sau khi dịch vụ được kết nối.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không kết nối được dịch vụ tài khoản.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục với tài khoản",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tên người dùng",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tên đăng nhập hoặc Email",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tên người dùng bạn muốn chọn",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tên người dùng hoặc email",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mật khẩu",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Từ 6 ký tự trở lên",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ẩn mật khẩu",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hiện mật khẩu",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ẩn",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hiện",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mật khẩu có ít nhất 6 ký tự.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang kết nối…",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có tài khoản?",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã có tài khoản?",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng ký",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập ngay",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã có mã quest?",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhấn để kích hoạt mã Dana Quest của bạn.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn có thể bổ sung email và số điện thoại trong Tài khoản sau khi đăng ký.",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thông tin sử dụng",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Điều khoản",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quyền riêng tư",
+    "files": [
+      "AuthPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa lưu được nhân vật. Hãy kiểm tra kết nối và thử lại. Lựa chọn trước vẫn được giữ.",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tài khoản",
+    "files": [
+      "AvatarPage.tsx",
+      "MainNavigation.tsx",
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Tùy chỉnh nhân vật",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Một người bạn đồng hành mang dấu ấn của bạn.",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hình ảnh nhân vật",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhân vật của bạn",
+    "files": [
+      "AvatarPage.tsx",
+      "PlayerCard.tsx"
+    ]
+  },
+  {
+    "vi": "Hình ảnh thay đổi ngay khi bạn chọn.",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tạo ngẫu nhiên",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Các tùy chọn nhân vật",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Giới tính",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đầu",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tóc",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Áo",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quần",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Màu da",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Màu tóc",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Màu áo",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Màu quần",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang lưu…",
+    "files": [
+      "AvatarPage.tsx",
+      "CreatorPage.tsx",
+      "DueStartPage.tsx",
+      "EventSave.tsx",
+      "QuestDetailsPage.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu nhân vật",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xác nhận nhân vật",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đổi nhân vật không làm mất tiến độ, ảnh hay xu của bạn.",
+    "files": [
+      "AvatarPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng kích hoạt",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "×",
+    "files": [
+      "BookingPage.tsx",
+      "CameraPage.tsx",
+      "CelebrationPage.tsx",
+      "ChallengeInput.tsx",
+      "DestinationSheet.tsx",
+      "EventNotice.tsx",
+      "Notifications.tsx"
+    ]
+  },
+  {
+    "vi": "Mã hành trình Dana Quest",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kích hoạt quest của bạn",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã kích hoạt quest chưa?",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhập mã do Dana Quest cấp. Mỗi mã được gắn với một tài khoản.",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nếu bạn đã nhận mã từ Dana Quest, hãy chọn cách tiếp tục bên dưới.",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi đã kích hoạt rồi",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập bằng đúng tài khoản đã nhận quest.",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi có mã Dana Quest",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhập mã để gắn quest vào tài khoản.",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hãy đăng nhập hoặc tạo tài khoản trước để mã được lưu đúng người nhận.",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập để nhập mã",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã kích hoạt quest",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục khám phá",
+    "files": [
+      "BookingPage.tsx",
+      "CelebrationPage.tsx",
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem quest đã kích hoạt",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mã Dana Quest",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhập mã bạn đã nhận",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang kiểm tra mã…",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kích hoạt quest",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không có mã? Khám phá các quest",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ nhận mã do Dana Quest phát hành. Mã từ nền tảng đặt vé bên ngoài chưa được kết nối.",
+    "files": [
+      "BookingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa được phép dùng camera. Bạn có thể cho phép camera trong trình duyệt hoặc chọn ảnh từ thiết bị bên dưới.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy webcam. Hãy kết nối camera hoặc chọn ảnh từ thiết bị bên dưới.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Không mở được webcam. Camera có thể đang được ứng dụng khác sử dụng hoặc bị hệ thống chặn. Bạn vẫn có thể tải ảnh lên.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Không mở được camera. Hãy thử lại hoặc chọn ảnh từ thiết bị bên dưới.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Camera yêu cầu HTTPS hoặc localhost và trình duyệt hỗ trợ webcam. Bạn có thể chọn ảnh từ thiết bị.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Camera yêu cầu",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Không thể xử lý ảnh.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Không chụp được ảnh.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Không chụp được ảnh. Hãy thử lại hoặc tải ảnh lên.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Minh họa khung chụp · camera chưa bật",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Mở webcam",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Hình ảnh trực tiếp từ webcam",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Camera đang bật. Ảnh chỉ được lưu sau khi bạn xác nhận.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Đang chờ camera. Nếu trình duyệt hỏi, hãy chọn quyền bạn muốn cấp.",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Chụp ảnh",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Tắt camera",
+    "files": [
+      "CameraCapture.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng máy ảnh",
+    "files": [
+      "CameraPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chụp ảnh nhiệm vụ",
+    "files": [
+      "CameraPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đọc nhiệm vụ…",
+    "files": [
+      "CameraPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn nhiệm vụ chụp ảnh trước",
+    "files": [
+      "CameraPage.tsx"
+    ]
+  },
+  {
+    "vi": "Về nhiệm vụ",
+    "files": [
+      "CameraPage.tsx"
+    ]
+  },
+  {
+    "vi": "Dữ liệu tiến độ đã lưu bị hỏng. Bạn có thể đặt lại tiến độ để chơi tiếp — một bản sao dữ liệu hỏng được giữ lại, ảnh đã lưu không bị xóa.",
+    "files": [
+      "CameraPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đặt lại tiến độ",
+    "files": [
+      "CameraPage.tsx",
+      "DestinationPage.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đặt lại tiến độ?",
+    "files": [
+      "CameraPage.tsx",
+      "DestinationPage.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Toàn bộ tiến độ nhiệm vụ, xu và voucher đã đổi sẽ bị xóa và bắt đầu lại từ đầu. Ảnh trong album được giữ lại. Bạn có chắc chắn?",
+    "files": [
+      "CameraPage.tsx",
+      "DestinationPage.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đặt lại",
+    "files": [
+      "CameraPage.tsx",
+      "DestinationPage.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đặt lại…",
+    "files": [
+      "CameraPage.tsx",
+      "DestinationPage.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đọc tiến độ…",
+    "files": [
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hoàn thành nhiệm vụ!",
+    "files": [
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhiệm vụ chưa hoàn thành",
+    "files": [
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục hành trình",
+    "files": [
+      "CelebrationPage.tsx",
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Minh họa phần thưởng · không cộng xu",
+    "files": [
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xu demo đã được ghi nhận một lần.",
+    "files": [
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hoàn thành nhiệm vụ để nhận xu demo.",
+    "files": [
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem kỷ niệm của bạn →",
+    "files": [
+      "CelebrationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Có thể chọn nhiều đáp án.",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Chạm từng mảnh theo thứ tự. Dùng nút lên/xuống để điều chỉnh.",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Thêm",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Thứ tự bạn đã chọn",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Đã xếp",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "mảnh.",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Xếp lại từ đầu",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn một ý tương ứng cho mỗi thẻ. Mỗi ý chỉ dùng một lần.",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn ý để ghép",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Thử thách ảnh này chưa được cấu hình.",
+    "files": [
+      "ChallengeInput.tsx"
+    ]
+  },
+  {
+    "vi": "Hủy",
+    "files": [
+      "ConfirmDialog.tsx"
+    ]
+  },
+  {
+    "vi": "Đang xử lý…",
+    "files": [
+      "ConfirmDialog.tsx"
+    ]
+  },
+  {
+    "vi": "Đà Nẵng",
+    "files": [
+      "CreatorPage.tsx",
+      "DiscoveryPage.tsx",
+      "OnboardingPage.tsx",
+      "QuestGuestPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy nhà sáng tạo",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Về Khám phá",
+    "files": [
+      "CreatorPage.tsx",
+      "QuestDetailsPage.tsx",
+      "QuestNavigationPage.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Về quest",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhà sáng tạo",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Dana Quest (hộ chiếu khám phá)",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chia sẻ hồ sơ nhà sáng tạo",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa xếp hạng",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có XP hoặc cấp độ cá nhân được công bố",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhóm phát triển các hành trình khám phá và giải câu đố tại Đà Nẵng.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đây là hồ sơ dự án tạm thời cho các quest Dana Quest. Thông tin tác giả cá nhân và hình ảnh chính thức chưa được chủ dự án cung cấp. Hồ sơ này không đại diện cho Questo hoặc Trường Đại học Kinh tế.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chúng tôi đang hoàn thiện bản mẫu, ưu tiên chỉ dẫn rõ ràng, trải nghiệm chơi an toàn và phản hồi trung thực từ người chơi.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thu gọn",
+    "files": [
+      "CreatorPage.tsx",
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đọc thêm",
+    "files": [
+      "CreatorPage.tsx",
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đà Nẵng (ngày tham gia chưa công bố)",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "người theo dõi",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa công bố",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "đang theo dõi",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang theo dõi",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Theo dõi",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hộ chiếu (trọn hành trình)",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quốc gia",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thành phố",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quest đã chơi",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Km đã đi",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thông tin trải nghiệm cá nhân của nhà sáng tạo chưa được xác minh.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kệ thành tích",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cấp",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa xác minh",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Các mốc được thể hiện theo mẫu; chưa cấp thành tích cho hồ sơ dự án.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quest đã tạo (",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": ", Việt Nam",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hiểu thành phố của bạn? Đề xuất một quest",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gửi ý tưởng cho nhóm phát triển. Chưa có công cụ tự tạo hoặc xuất bản quest.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khoảnh khắc đáng nhớ",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có khoảnh khắc được nhà sáng tạo công khai.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nơi đã đến",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có lịch sử ghé thăm được công bố.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Huy hiệu",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có huy hiệu đã được xác minh.",
+    "files": [
+      "CreatorPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy điểm đến",
+    "files": [
+      "DestinationDetails.tsx",
+      "DestinationPage.tsx",
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "← Bản đồ",
+    "files": [
+      "DestinationDetails.tsx",
+      "DestinationPage.tsx",
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ban ngày",
+    "files": [
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "Hoàng hôn",
+    "files": [
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "Đêm bên thành phố",
+    "files": [
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "· Hình minh họa",
+    "files": [
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn ảnh minh họa",
+    "files": [
+      "DestinationGallery.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đọc tiến độ đã lưu…",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Album ảnh",
+    "files": [
+      "DestinationPage.tsx",
+      "QuestLinks.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh:",
+    "files": [
+      "DestinationPage.tsx",
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiện ích hành trình",
+    "files": [
+      "DestinationPage.tsx",
+      "QuestLinks.tsx"
+    ]
+  },
+  {
+    "vi": "Dữ liệu tiến độ đã lưu bị hỏng nên không thể tiếp tục. Bạn có thể đặt lại tiến độ để chơi tiếp — một bản sao dữ liệu hỏng được giữ lại để khôi phục thủ công, ảnh đã lưu không bị xóa.",
+    "files": [
+      "DestinationPage.tsx",
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kiểm tra đến nơi · thông tin địa điểm",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiến độ lưu trên trình duyệt này. Mỗi nhiệm vụ hoàn thành nhận 10 Green Coins demo một lần. Chưa có xác minh AI.",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhiệm vụ của bạn",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn số lượng nhiệm vụ",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn tự chọn điểm đến, không cần theo thứ tự. Hệ thống tự giao nhiệm vụ từ bộ 10 nhiệm vụ.",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã giao",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "nhiệm vụ. Cần hoàn thành",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "nhiệm vụ (80%, làm tròn lên).",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiến độ nhiệm vụ",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "nhiệm vụ đã xong.",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã hoàn thành điểm đến!",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hủy hành trình này",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình đã có nhiệm vụ hoàn thành nên không thể hủy, tránh làm mất xu và tiến độ.",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Số lượng nhiệm vụ",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cần hoàn thành",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "nhiệm vụ. Danh sách được giao và tiến độ sẽ giữ nguyên khi tải lại trang.",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhận",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "nhiệm vụ",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã hoàn thành · Đã nhận 10 xu demo",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem phần thưởng đã nhận →",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chụp ảnh toàn màn hình",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ghi nhận nhiệm vụ có mặt",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi xác nhận đã hoàn thành",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có vị trí của bạn. Hãy mở mục “Kiểm tra đến nơi · thông tin địa điểm” ở trên và bấm “Dùng vị trí của tôi”.",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn chưa ở đủ gần điểm đến để ghi nhận. Mở mục “Kiểm tra đến nơi” ở trên để xem khoảng cách và cập nhật vị trí.",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hủy hành trình này?",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hủy hành trình",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang hủy…",
+    "files": [
+      "DestinationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kéo để điều chỉnh thẻ. Phím mũi tên lên để mở hết, xuống để thu lại.",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng thông tin điểm đến",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Tổng quan",
+    "files": [
+      "DestinationSheet.tsx",
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gợi ý hoạt động",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Giờ mở cửa",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Địa chỉ",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Mẹo nhỏ",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có thông tin giờ mở cửa",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Đang mở cửa",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đóng cửa",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Cập nhật từ Google Places",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Đang cập nhật thông tin mới nhất…",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Thời gian đông đúc",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Biểu đồ thời gian đông đúc chưa có dữ liệu",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có dữ liệu thời gian thực",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Google Places hiện chưa cung cấp dữ liệu giờ đông qua API. Biểu đồ sẽ tự cập nhật khi hệ thống có nguồn dữ liệu hợp lệ.",
+    "files": [
+      "DestinationSheet.tsx"
+    ]
+  },
+  {
+    "vi": "Bắt đầu khám phá",
+    "files": [
+      "DestinationSheet.tsx",
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tham gia",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình đã gắn vào tài khoản bằng mã Dana Quest.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã kích hoạt",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quest của bạn",
+    "files": [
+      "DiscoveryPage.tsx",
+      "QuestGuestPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm kiếm",
+    "files": [
+      "DiscoveryPage.tsx",
+      "MainNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Khám phá Đà Nẵng",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Những hành trình bạn đã bắt đầu, ở cùng một nơi.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đi bộ, giải câu đố và khám phá câu chuyện thành phố.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ",
+    "files": [
+      "DiscoveryPage.tsx",
+      "DueStartPage.tsx",
+      "QuestLinks.tsx"
+    ]
+  },
+  {
+    "vi": "Thành phố quen, câu chuyện mới",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn một quest, đến điểm hẹn và bắt đầu khám phá theo cách của bạn.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm quest hoặc địa điểm",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thư viện ảnh",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cửa hàng đổi xu",
+    "files": [
+      "DiscoveryPage.tsx",
+      "ShopPage.tsx",
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Nhập mã quest",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tải các quest đã tham gia…",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình đã tham gia",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kết quả tìm kiếm",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Các quest dành cho bạn",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "năm dấu ấn",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quest mẫu",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiến độ quest mẫu lưu theo tài khoản.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiến độ quest mẫu lưu trên thiết bị này.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy quest phù hợp.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình đầu tiên đang chờ bạn",
+    "files": [
+      "DiscoveryPage.tsx",
+      "QuestGuestPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thử tên địa điểm khác hoặc tìm không dấu.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quest sẽ xuất hiện ở đây sau khi bạn bắt đầu tham gia.",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xóa tìm kiếm",
+    "files": [
+      "DiscoveryPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khám phá các quest",
+    "files": [
+      "DiscoveryPage.tsx",
+      "QuestGuestPage.tsx"
+    ]
+  },
+  {
+    "vi": "Điểm bắt đầu",
+    "files": [
+      "DueMap.tsx",
+      "QuestPreviewMap.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí thiết bị",
+    "files": [
+      "DueMap.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ điểm bắt đầu",
+    "files": [
+      "DueMap.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa tải được nền bản đồ. Hãy dùng địa chỉ và dấu hiệu nhận diện bên dưới.",
+    "files": [
+      "DueMap.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tìm tuyến đi bộ…",
+    "files": [
+      "DueMap.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn vẫn có thể đối chiếu địa chỉ.",
+    "files": [
+      "DueMap.tsx"
+    ]
+  },
+  {
+    "vi": "Tuyến đi bộ còn",
+    "files": [
+      "DueMap.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn ảnh JPEG, PNG hoặc WebP, tối đa 10 MB.",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu một khoảnh khắc",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh kỷ niệm là tùy chọn. Ảnh này chỉ xem trước và tải về thiết bị; không gửi lên máy chủ và không tính thưởng.",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Chụp hoặc chọn ảnh",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh kỷ niệm đang xem trước",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Tải ảnh về thiết bị",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Bỏ ảnh đang xem",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Trên điện thoại, trình duyệt có thể mở camera hoặc thư viện. Bạn có thể đóng bảng để tiếp tục chơi mà không chọn ảnh.",
+    "files": [
+      "DueMemory.tsx"
+    ]
+  },
+  {
+    "vi": "Thử lấy lại vị trí",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã sao chép địa chỉ.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn có thể chọn và sao chép địa chỉ hiển thị bên trên.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quay lại giới thiệu quest",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trợ giúp điểm bắt đầu",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm điểm bắt đầu",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Điểm hẹn quest",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã tự xác nhận đến điểm bắt đầu",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang ở gần (hãy đối chiếu biển tên)",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khoảng cách đường thẳng từ thiết bị",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đối chiếu địa chỉ hoặc bật vị trí để tìm đường",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem điểm bắt đầu",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhận diện",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem lớn dấu hiệu nhận diện",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "⛶ Xem lớn",
+    "files": [
+      "DueStartPage.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "71 Ngũ Hành Sơn, Đà Nẵng",
+    "files": [
+      "DueStartPage.tsx",
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sao chép địa chỉ",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trước khi lên đường",
+    "files": [
+      "DueStartPage.tsx",
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Pin đủ cho hành trình (nên từ 50%).",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bật kết nối mạng để lưu tiến độ.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quan sát biển tên địa điểm ở khu vực công cộng.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không đứng giữa lối ra vào, không nhìn màn hình khi qua đường.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang dùng vị trí thiết bị",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bật vị trí để tìm đường",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí chỉ hỗ trợ chỉ đường. Bạn cần tự đối chiếu điểm bắt đầu trước khi xác nhận.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hình trên là minh họa. Ảnh cổng DUE thực tế chưa được bổ sung.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đọc giới thiệu để bắt đầu",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bắt đầu quest",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xác nhận đã đến",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy điểm bắt đầu?",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã nhìn thấy điểm bắt đầu?",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cần tìm đúng cổng trường?",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đối chiếu biển tên địa điểm và địa chỉ bên trên. Đây là tự xác nhận bằng quan sát của bạn, không phải xác minh GPS hoặc ảnh.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ xác nhận khi bạn đang ở đúng điểm, tại khu vực công cộng an toàn.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi đã đến đúng điểm này",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi vẫn chưa tìm thấy",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đối chiếu tên “",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "” và địa chỉ hiển thị ở điểm bắt đầu. Không đi vào khu vực hạn chế.",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem dấu hiệu nhận diện",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem trên bản đồ",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem hướng dẫn và báo sự cố",
+    "files": [
+      "DueStartPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ đường",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Thử thách",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Nội dung và ngôn ngữ",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Lỗi ứng dụng",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Khác",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Bắt đầu",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi bắt đầu quest DUE như thế nào?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Đọc giới thiệu và lưu ý an toàn, tìm cổng trường ở 71 Ngũ Hành Sơn. Đối chiếu biển tên rồi chọn Xác nhận đã đến. Sau khi lưu xác nhận, chọn Bắt đầu quest.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "GPS không hoạt động thì làm sao?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn vẫn có thể xem bản đồ điểm bắt đầu và đối chiếu địa chỉ. Chọn Không tìm thấy điểm bắt đầu để xem hướng dẫn. Nút xác nhận là tự xác nhận bằng mắt; hệ thống không gọi đó là GPS đã xác minh.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Chơi quest",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi có bị giới hạn thời gian không?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Quest chơi một mình, không đếm ngược. Bạn có thể tạm dừng trong menu và tiếp tục sau.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Có thể bỏ qua hoặc xem đáp án không?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Quest yêu cầu giải đúng lần lượt các thử thách. Bạn có thể xem gợi ý hướng quan sát mà không bị trừ xu. Không có bỏ qua hoặc tự đánh dấu đúng.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Tải lại trang có mất kết quả hay cộng thưởng lần nữa không?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Khi đăng nhập, kết quả được lưu theo tài khoản sau mỗi thao tác thành công. Tải lại giữ bước đã lưu. Mỗi thử thách chỉ nhận thưởng một lần.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Kỹ thuật",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Mất mạng trong lúc gửi đáp án thì sao?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Nếu chưa nhận được xác nhận lưu, giữ màn hiện tại và thử lại khi có mạng. Không coi lỗi mạng là đáp án sai. Máy chủ chống ghi thưởng lặp khi gửi lại.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh kỷ niệm được lưu ở đâu?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Trong mẫu này bạn xem trước và tải ảnh về thiết bị. Ảnh không tự gửi đến máy chủ, không tạo thưởng và không phải minh chứng hoàn thành thử thách.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Báo cáo lỗi có được gửi tự động không?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có kênh nhận báo cáo trực tuyến. Bạn có thể tải tệp báo cáo để gửi thủ công cho người quản lý dự án. Tệp không tự gửi đi.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Đã tạo tệp báo cáo để tải về. Chưa gửi đến bên nào.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "‹ Quay lại trợ giúp",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Chúng tôi có thể giúp gì?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn phần bạn đang cần hỗ trợ.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Câu hỏi thường gặp",
+    "files": [
+      "DueSupport.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm hướng dẫn chơi quest",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Báo sự cố",
+    "files": [
+      "DueSupport.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ghi lại điều đang gặp phải",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Bản mẫu chưa có trò chuyện hỗ trợ trực tuyến.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Hướng dẫn tìm điểm bắt đầu và chơi quest.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm câu hỏi",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm câu hỏi và câu trả lời…",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Nhóm câu hỏi",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có câu hỏi phù hợp. Thử từ khóa khác hoặc báo sự cố.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Vẫn cần trợ giúp? Ghi báo cáo sự cố",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Điều gì đang gặp lỗi?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn nhóm sự cố",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Mô tả điều bạn gặp (không ghi mật khẩu hoặc thông tin riêng)",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang ở màn nào, đã bấm gì và điều gì xảy ra?",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Tệp chỉ tải về thiết bị để bạn gửi thủ công, chưa gửi tự động.",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Tải báo cáo sự cố",
+    "files": [
+      "DueSupport.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập giả lập lúc 07:00. Thông báo đủ điều kiện xuất hiện.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Cầu Rồng phun lửa (demo 09:30)",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Phòng thử thông báo",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Lịch giả lập Cầu Rồng lúc 09:30. Không thay lịch thật, không lưu tài khoản và không gửi thông báo hệ thống.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Giả lập đang chơi quest (hoãn thông báo)",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Đã đọc lời nhắc. Không nhắc lại lần tổ chức này.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Đã lưu. Sẽ nhắc một lần từ 09:00 đến trước 09:30.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Để sau một giờ kể từ mốc hiện tại; dừng lời mời từ 09:00.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Đang chơi quest: thông báo được hoãn.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Sự kiện đã bắt đầu. Không gửi thông báo hết hạn.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Không có thông báo cần hiện ở mốc này.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Đã đặt lại bản demo lúc 07:00.",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Thử lại từ đầu",
+    "files": [
+      "EventDemo.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy sự kiện",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Về Sự kiện",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "‹ Tất cả sự kiện",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cầu Rồng",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh minh họa Đà Nẵng",
+    "files": [
+      "EventDetailsPage.tsx",
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã kết thúc",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang diễn ra",
+    "files": [
+      "EventDetailsPage.tsx",
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lịch dự kiến",
+    "files": [
+      "EventDetailsPage.tsx",
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sắp diễn ra",
+    "files": [
+      "EventDetailsPage.tsx",
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trước khi bạn đến",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thông tin từ đơn vị tổ chức",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lịch và điều kiện tham gia có thể thay đổi. Kiểm tra nguồn trước khi khởi hành.",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem nguồn chính thức ↗",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cuộc hẹn của bạn",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thời gian",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Địa điểm",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chi phí",
+    "files": [
+      "EventDetailsPage.tsx",
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có lịch giờ chính xác nên chưa gửi lời nhắc tự động.",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu kế hoạch cá nhân và nhắc trước 30 phút khi bạn đang dùng website. Không phải đặt vé.",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở bản đồ và chỉ đường ↗",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khám phá địa điểm trong Dana Quest",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã sao chép liên kết.",
+    "files": [
+      "EventDetailsPage.tsx",
+      "QuestDetailUi.tsx"
+    ]
+  },
+  {
+    "vi": "Chia sẻ sự kiện",
+    "files": [
+      "EventDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thông báo sự kiện",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng lời nhắc",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng và để sau một giờ",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Sự kiện bạn đã lưu",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Có hẹn với Đà Nẵng",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "(còn",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "phút)",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Chắc chắn sẽ tham gia",
+    "files": [
+      "EventNotice.tsx",
+      "EventSave.tsx"
+    ]
+  },
+  {
+    "vi": "Để sau đi",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Xem sự kiện",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Đã hiểu",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng hoặc để sau: nhắc lại sau một giờ, trước mốc 30 phút.",
+    "files": [
+      "EventNotice.tsx"
+    ]
+  },
+  {
+    "vi": "Dịch vụ sự kiện chưa sẵn sàng. Hãy tải lại hoặc thử lại sau.",
+    "files": [
+      "EventProvider.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa tải được lịch nhắc.",
+    "files": [
+      "EventProvider.tsx"
+    ]
+  },
+  {
+    "vi": "Hãy đăng nhập để lưu sự kiện và nhận lời nhắc.",
+    "files": [
+      "EventProvider.tsx"
+    ]
+  },
+  {
+    "vi": "Cuộc hẹn sắp bắt đầu",
+    "files": [
+      "EventProvider.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập để lưu sự kiện",
+    "files": [
+      "EventSave.tsx"
+    ]
+  },
+  {
+    "vi": "Đã lưu (bấm để bỏ lưu)",
+    "files": [
+      "EventSave.tsx"
+    ]
+  },
+  {
+    "vi": "Miễn phí",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ra phố, gặp những điều thú vị.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sự kiện Đà Nẵng",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cài đặt thông báo sự kiện",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thành phố luôn có một cuộc hẹn.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn điều bạn muốn trải nghiệm. Lưu sự kiện để nhận lời nhắc trước khi bắt đầu.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lọc thời gian sự kiện",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sắp tới",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hôm nay",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã lưu",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm và lọc sự kiện",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm sự kiện",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tên sự kiện hoặc địa điểm",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thu gọn bộ lọc",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bộ lọc sự kiện",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "(đang lọc)",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ngày",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khu vực",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mọi khu vực",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hoạt động",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mọi hoạt động",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kiểm tra nguồn",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thử lại",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tải sự kiện đã lưu…",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "cuộc hẹn dành cho bạn",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Giờ Đà Nẵng (GMT+7)",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cầu Rồng bên sông Hàn",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem chi tiết",
+    "files": [
+      "EventsPage.tsx",
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có cuộc hẹn nào ở đây",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có sự kiện phù hợp",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn “Chắc chắn sẽ tham gia” ở sự kiện bạn thích.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thử ngày khác hoặc bỏ bớt bộ lọc để khám phá thêm.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem tất cả sự kiện",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lên kế hoạch, rồi ra phố thôi.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sự kiện có giờ cụ thể được nhắc trong ba giờ trước khi bắt đầu. Chọn tham gia để nhận lời nhắc trước 30 phút.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang tắt thông báo trong ứng dụng. Sự kiện vẫn được lưu; có thể bật lại trong cài đặt tài khoản.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lịch dự kiến hoặc chưa có giờ chi tiết chỉ được lưu, chưa nhắc tự động. Lịch tổ chức có thể thay đổi, hãy kiểm tra nguồn trước khi đi.",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng bản demo",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thử cơ chế nhắc (Cầu Rồng 9:30)",
+    "files": [
+      "EventsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không thể dùng định vị. Hãy mở ứng dụng bằng HTTPS hoặc localhost và kiểm tra hỗ trợ định vị của thiết bị.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí chưa đủ chính xác hoặc đã cũ. Hãy thử lại ở nơi có tín hiệu GPS tốt hơn.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ chưa sẵn sàng. Hãy thử lại sau khi bản đồ tải xong.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn chưa cho phép truy cập vị trí. Hãy cấp quyền định vị trong cài đặt trình duyệt rồi thử lại.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa lấy được vị trí kịp thời. Hãy bật GPS, kiểm tra kết nối rồi thử lại.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Không thể xác định vị trí hiện tại của thiết bị. Hãy thử lại.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Trình duyệt này chưa hỗ trợ tìm kiếm bằng giọng nói. Bạn vẫn có thể nhập câu tìm kiếm.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa nghe rõ. Hãy thử nói lại hoặc nhập bằng bàn phím.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Phóng to",
+    "files": [
+      "Explore.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thu nhỏ",
+    "files": [
+      "Explore.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "[DANA QUEST] Không khởi tạo được bản đồ:",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Khám phá bản đồ",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm kiếm địa điểm",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "VD: bảo tàng gần tôi",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm kiếm điểm đến",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Đang nghe…",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm bằng giọng nói",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Đang xác định vị trí của tôi",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Đưa bản đồ về vị trí của tôi",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí của tôi",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Không thể khởi tạo bản đồ trên trình duyệt này.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Không tải được nền bản đồ OpenStreetMap hoặc chỉ tải được một phần. Hãy kiểm tra kết nối mạng.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn vẫn có thể chọn một điểm đến từ tùy chọn dưới đây.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Thử tải lại bản đồ",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tải nền bản đồ…",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ các điểm đến Đà Nẵng",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Sự kiện",
+    "files": [
+      "Explore.tsx",
+      "MainNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có sự kiện sắp tới.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "ĐANG DIỄN RA",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy địa điểm phù hợp.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Tối đa 6 địa điểm trong 3 km quanh vị trí thiết bị, có tính đến sai số định vị.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Đang chờ quyền định vị và vị trí thiết bị…",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có địa điểm phù hợp trong 3 km quanh bạn.",
+    "files": [
+      "Explore.tsx"
+    ]
+  },
+  {
+    "vi": "‹ Quay lại đăng nhập",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thông tin quyền riêng tư",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thông tin sử dụng bản thử nghiệm",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tài khoản, thông tin hồ sơ, tiến độ và ảnh nhiệm vụ được lưu bởi dịch vụ Dana Quest. Mật khẩu được xử lý ở máy chủ, không lưu dưới dạng văn bản trong trình duyệt.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lựa chọn kế hoạch khám phá và một số dữ liệu thử nghiệm được lưu trên trình duyệt này. Chúng chưa được đồng bộ thành hồ sơ sở thích giữa các thiết bị.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí chỉ được yêu cầu khi bạn sử dụng các tính năng cần định vị. Bạn có thể từ chối và xem địa điểm thủ công. Khi mở bản đồ, dịch vụ bản đồ bên ngoài có thể nhận yêu cầu tải ảnh nền bản đồ.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh chỉ được gửi khi bạn chủ động dùng tính năng lưu ảnh nhiệm vụ. Bạn có thể quản lý ảnh trong Thư viện và sửa thông tin liên hệ trong Tài khoản.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Dana Quest hiện là bản thử nghiệm khám phá Đà Nẵng. Thông tin sử dụng này mô tả các chức năng đang có; chính sách phát hành thương mại chưa được công bố.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hãy quan sát và di chuyển ở khu vực được phép, tuân thủ nội quy địa điểm. Không sử dụng game khi đang điều khiển phương tiện.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mã quest do Dana Quest phát hành gắn một hành trình hiện có vào tài khoản. Game chưa liên kết việc mua mã với Tripadvisor, Viator hoặc nền tảng đặt vé bên ngoài.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xu và phần thưởng đang là dữ liệu thử nghiệm. Không được hiểu là tiền hoặc voucher có giá trị sử dụng thực tế.",
+    "files": [
+      "InformationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cài DANA QUEST",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "DANA QUEST đã ở chế độ ứng dụng",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "Cài DANA QUEST trên điện thoại",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang dùng bản toàn màn hình.",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "Trong Safari, chọn Chia sẻ rồi “Thêm vào Màn hình chính”.",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "Cài trực tiếp từ trình duyệt, không cần App Store hoặc Google Play.",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "Mở menu trình duyệt và chọn “Cài đặt ứng dụng” hoặc “Thêm vào màn hình chính”.",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "Cài ứng dụng",
+    "files": [
+      "InstallAppCard.tsx"
+    ]
+  },
+  {
+    "vi": "Kiểm tra vị trí",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Đang cập nhật vị trí của bạn…",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Đang xác định vị trí của bạn…",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã đến nơi!",
+    "files": [
+      "LocationCheck.tsx",
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khoảng cách đến điểm này",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Cho phép dùng vị trí để DANA QUEST tự báo khi bạn đến gần và mở nhiệm vụ có mặt.",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đo lại — vẫn hiển thị vị trí đo được trước đó.",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Đang kiểm tra…",
+    "files": [
+      "LocationCheck.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cập nhật khoảng cách",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Dùng vị trí của tôi",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Cập nhật lúc",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "· độ chính xác khoảng",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí đã cũ. Hãy cập nhật lại khoảng cách.",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Tín hiệu vị trí chưa đủ chính xác. Hãy thử lại ở nơi thoáng hơn.",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang ở đủ gần để thực hiện nhiệm vụ tại địa điểm.",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí chỉ được dùng để tính khoảng cách và xác nhận bạn đã đến điểm khám phá.",
+    "files": [
+      "LocationCheck.tsx"
+    ]
+  },
+  {
+    "vi": "Khám phá",
+    "files": [
+      "MainNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Điều hướng chính",
+    "files": [
+      "MainNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí của bạn",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gần chỗ rẽ · vị trí ước tính",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang xác định vị trí…",
+    "files": [
+      "NavigationPage.tsx",
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Vị trí còn lệch nhiều. Đang lấy GPS tốt hơn…",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tính đường đi bộ…",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tính lại đường đi…",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ vị trí của bạn và điểm đến",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quay lại chi tiết",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở rộng hoặc thu gọn hướng dẫn",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đến",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khoảng",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "phút · Tuyến đi bộ ngắn nhất",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thử lấy vị trí",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không tải được nền bản đồ.",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đến điểm bắt đầu để mở nhiệm vụ",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem nhiệm vụ",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Rời khỏi hành trình?",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn có muốn rời khỏi hành trình hiện tại và quay về trang trước không?",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Rời khỏi hành trình",
+    "files": [
+      "NavigationPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gợi ý địa điểm",
+    "files": [
+      "NearbyDrawer.tsx"
+    ]
+  },
+  {
+    "vi": "NỔI BẬT TRONG KHU VỰC",
+    "files": [
+      "NearbyDrawer.tsx"
+    ]
+  },
+  {
+    "vi": "Thông báo",
+    "files": [
+      "Notifications.tsx",
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng thông báo",
+    "files": [
+      "Notifications.tsx"
+    ]
+  },
+  {
+    "vi": "Đang khám phá một nơi mới",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mang về nhiều hơn những bức ảnh.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang lên kế hoạch cho chuyến đi",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chuẩn bị hành trình trước khi lên đường.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ở nhà và muốn một cuối tuần thú vị",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm câu chuyện mới ngay trong thành phố quen.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trình duyệt chưa hỗ trợ định vị. Bạn vẫn có thể chọn Đà Nẵng.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang ở gần Đà Nẵng. Sẵn sàng khám phá!",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang ở ngoài khu vực Đà Nẵng. Hiện Dana Quest có nội dung tại Đà Nẵng; bạn vẫn có thể xem trước hành trình.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn chưa cho phép vị trí. Hãy chọn Đà Nẵng thủ công hoặc cấp quyền trong trình duyệt.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa xác định được vị trí. Bạn vẫn có thể chọn Đà Nẵng thủ công.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm hành trình của bạn",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn muốn khám phá Đà Nẵng, đúng không?",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cùng tìm những quest đang chờ bạn tại thành phố này.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tìm thành phố",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "quest và hành trình khám phá",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hiện chỉ có nội dung Đà Nẵng. Thử tìm “Đà Nẵng” hoặc “Da Nang”.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Dùng vị trí chính xác của tôi",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn có thể xem trước quest mà không cần cấp quyền vị trí.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đúng, khám phá Đà Nẵng",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã có mã đặt chỗ hoặc lời mời?",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kế hoạch của bạn",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hiện tại, bạn đang…",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mục đích trải nghiệm",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lựa chọn được nhớ trên trình duyệt này. Bạn có thể bỏ qua.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục",
+    "files": [
+      "OnboardingPage.tsx",
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Bỏ qua, đưa tôi đến các quest",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lối đi dẫn vào Công viên APEC tại Đà Nẵng",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Câu chuyện ở lại sau mỗi câu đố.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Một quest là câu chuyện bạn tự bước vào. Những con phố thật, địa điểm thật và thử thách để bạn khám phá ngay tại chỗ.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn hành trình, quan sát những điều nhỏ và lưu lại kỷ niệm theo cách của bạn.",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh: Quang Nguyen Vinh (Pexels)",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem các quest của tôi",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quay lại lựa chọn của tôi",
+    "files": [
+      "OnboardingPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tải ảnh về máy",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Không đọc được ảnh đã lưu. Hãy tải lại trang.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Đang kiểm tra chất lượng ảnh ngay trên thiết bị…",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Không lưu được ảnh.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Đã lưu ảnh vào album.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Không lưu được ảnh. Hãy thử lại.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Kiểm tra ảnh miễn phí trên thiết bị: phát hiện ảnh quá tối, quá sáng, quá nhỏ hoặc thiếu chi tiết. Công cụ không nhận diện chính xác địa danh.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh bạn đã lưu cho nhiệm vụ",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Xem trước ảnh",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh xem trước — chưa lưu",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh xem trước trước khi lưu",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu ảnh",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Bỏ ảnh này",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn ảnh từ thiết bị",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "JPG, PNG, WebP · Tối đa 10 MB. Lưu 1 ảnh/nhiệm vụ; ảnh mới thay ảnh cũ trước khi hoàn thành. Ảnh được thu nhỏ để tiết kiệm bộ nhớ.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Đang xử lý và lưu ảnh…",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Đã lưu ảnh. Chưa tự động hoàn thành nhiệm vụ.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có ảnh được lưu.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "✓ Ảnh đạt kiểm tra",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh chưa đạt",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Cần bạn kiểm tra",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Kiểm tra tự động chỉ mang tính gợi ý — ví dụ ảnh chụp ban đêm thường bị đánh giá là \"quá tối\" dù hoàn toàn hợp lệ. Nếu bạn đã xem ảnh và thấy phù hợp với nhiệm vụ, hãy tick bên dưới để tiếp tục.",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi đã tự kiểm tra ảnh và vẫn muốn dùng ảnh này",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Xác nhận ảnh và hoàn thành",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi đã kiểm tra · Hoàn thành",
+    "files": [
+      "PhotoMission.tsx"
+    ]
+  },
+  {
+    "vi": "NHÀ KHÁM PHÁ",
+    "files": [
+      "PlayerCard.tsx"
+    ]
+  },
+  {
+    "vi": "Chào bạn, sẵn sàng khám phá?",
+    "files": [
+      "PlayerCard.tsx"
+    ]
+  },
+  {
+    "vi": "Đổi nhân vật",
+    "files": [
+      "PlayerCard.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn nhân vật",
+    "files": [
+      "PlayerCard.tsx"
+    ]
+  },
+  {
+    "vi": "Minh họa điểm đến",
+    "files": [
+      "QuestCover.tsx",
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không tìm thấy quest",
+    "files": [
+      "QuestDetailsPage.tsx",
+      "QuestNavigationPage.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập để chơi quest",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bắt đầu khám phá →",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tùy chỉnh nhân vật để bắt đầu",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đến điểm bắt đầu",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chia sẻ quest",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh địa điểm chưa được bổ sung",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mời bạn khám phá quest",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bỏ yêu thích quest",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu quest yêu thích",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bản mẫu (đang thử nghiệm)",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thời gian tự sắp xếp",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn 5 đến 10 nhiệm vụ",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quãng đường chưa đo",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ ›",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Một chuyến đi ngắn, một câu chuyện đáng nhớ.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn 5 đến 10 nhiệm vụ và hoàn thành ít nhất 80% để đạt mục tiêu. Các nhiệm vụ chụp ảnh và tự xác nhận giữ nguyên như trước.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quan sát những dấu hiệu tại địa điểm, giải câu đố và lần lượt mở các chương. Tiến độ lưu theo tài khoản; có thể dừng và quay lại tiếp tục.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mời bạn chơi thử quest này",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Miễn phí trong giai đoạn thử nghiệm. Chơi trọn hành trình rồi cho chúng tôi biết điều gì đã tốt và điều gì cần cải thiện.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bắt đầu tại",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khám phá theo nhịp của bạn",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Phiên chơi cá nhân. Có thể chia sẻ liên kết cho bạn bè; chưa hỗ trợ phòng chơi nhóm hoặc thi đấu.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Người chơi thử",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "1 người",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Theo luật solo hiện tại",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chuẩn bị chơi thử",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chúng tôi mong bạn",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trải nghiệm từ đầu đến cuối.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Góp ý rõ những phần dễ hiểu hoặc còn khó sử dụng.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đánh giá trung thực sau khi hoàn thành.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chia sẻ liên kết nếu bạn bè cũng muốn khám phá.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Vì sao quest đang thử nghiệm?",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chúng tôi đang hoàn thiện chỉ dẫn, câu chữ và nhịp trải nghiệm. Góp ý của bạn giúp điều chỉnh bản mẫu trước khi phát hành chính thức.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gửi góp ý hoặc báo lỗi",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh từ người chơi",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Từ những người đã đi qua hành trình.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có ảnh được công khai",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh trong Album vẫn là của riêng bạn. Chưa có cơ chế duyệt ảnh công khai cho quest này.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở Album của tôi",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn sẽ trải nghiệm",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khép lại hành trình của bạn",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hoàn thành ít nhất 80% số nhiệm vụ đã chọn. Giữ nguyên luật xu và đổi thưởng của hành trình địa điểm.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hoàn thành các câu trả lời đúng để nhận XP và xu một lần cho từng thử thách.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đánh giá",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tải đánh giá…",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "đánh giá",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mới",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa có đánh giá",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hãy là một trong những người đầu tiên trải nghiệm và kể lại hành trình của bạn.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã lưu đánh giá công khai của bạn.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cập nhật đánh giá của bạn",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chia sẻ trải nghiệm của bạn",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Điểm đánh giá",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nội dung đánh giá",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Điều gì khiến bạn nhớ nhất?",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tên hiển thị và nội dung đánh giá sẽ được công khai. Không ghi thông tin cá nhân nhạy cảm.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu đánh giá",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hoàn thành quest để gửi đánh giá. Góp ý trong quá trình chơi vẫn có thể gửi qua mục Báo lỗi.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thông tin hành trình",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kết thúc tại",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đối chiếu chỉ dẫn ở điểm cuối. Chưa công bố tọa độ riêng.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thời gian chơi",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Khi địa điểm cho phép tiếp cận",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ngôn ngữ",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếng Việt",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sạc đầy điện thoại hoặc mang theo pin dự phòng.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mang đủ nước, mũ và đồ che nắng khi ra ngoài.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn thời tiết phù hợp và tuân thủ giờ tiếp cận của địa điểm.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gặp nhà sáng tạo",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hồ sơ nhóm phát triển (tạm thời)",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "hành trình đã tạo",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "(chưa có đánh giá)",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn chọn số nhiệm vụ phù hợp. Hoàn thành ít nhất 80% mục tiêu; chức năng cũ không thay đổi.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không đếm ngược thời gian, không bỏ qua thử thách. Giải đúng để mở câu chuyện tiếp theo.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không nhìn màn hình khi băng qua đường.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tôi đã đọc hướng dẫn và lưu ý an toàn.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xu và đổi thưởng áp dụng theo luật nhiệm vụ địa điểm hiện có.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "XP và xu quest mẫu được ghi nhận một lần cho mỗi thử thách giải đúng.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nhiệm vụ và tiến độ",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chơi miễn phí",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Vé vào địa điểm (nếu có) trả riêng",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Giúp hoàn thiện bản mẫu",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đọc lưu ý trước khi chơi",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ hành trình",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang mở bản đồ…",
+    "files": [
+      "QuestDetailsPage.tsx",
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mời bạn khám phá",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chia sẻ liên kết quest để bạn bè tự bắt đầu hành trình. Mỗi người chơi một phiên riêng; chưa có chơi nhóm hoặc thi đấu.",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sao chép liên kết quest",
+    "files": [
+      "QuestDetailsPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chia sẻ",
+    "files": [
+      "QuestDetailUi.tsx"
+    ]
+  },
+  {
+    "vi": "Những hành trình đã tham gia, ở cùng một nơi.",
+    "files": [
+      "QuestGuestPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đăng nhập để xem các quest đã tham gia, tiếp tục hành trình và lưu tiến độ của bạn.",
+    "files": [
+      "QuestGuestPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cửa hàng demo",
+    "files": [
+      "QuestLinks.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đọc xu…",
+    "files": [
+      "QuestLinks.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa đọc được số xu",
+    "files": [
+      "QuestLinks.tsx"
+    ]
+  },
+  {
+    "vi": "DẤU ẤN 50 NĂM",
+    "files": [
+      "QuestPlayerUi.tsx"
+    ]
+  },
+  {
+    "vi": "Minh họa hành trình DUE",
+    "files": [
+      "QuestPlayerUi.tsx"
+    ]
+  },
+  {
+    "vi": "Đóng bảng",
+    "files": [
+      "QuestPlayerUi.tsx"
+    ]
+  },
+  {
+    "vi": "Nhập đáp án",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn một đáp án",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Sắp xếp thứ tự",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ghép cặp",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn nhiều đáp án",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quan sát",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trợ giúp thử thách",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở gợi ý này?",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gợi ý quan sát",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Rời màn chơi?",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Câu chuyện đã mở",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Câu chuyện hiện tại",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hình ảnh hành trình",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đường đến điểm bắt đầu",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Các điểm dừng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ảnh kỷ niệm",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thẻ hành trình của bạn",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang tải hành trình của bạn…",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa mở được hành trình",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thử tải lại",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Về thông tin quest",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quest chưa bắt đầu",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở thông tin quest",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã tạo thẻ để tải về. Đây là thẻ tiến độ, không phải ảnh chụp màn hình.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hẹn bạn ở hành trình tiếp theo",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiến độ quest đã được giữ lại. Bạn có thể tiếp tục trong Quest của bạn.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trở lại Khám phá",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quay lại quest đang tạm dừng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở menu quest",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem các điểm dừng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tự do",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không đếm giờ",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "ϟ",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở trợ giúp",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiến độ hành trình",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "HÀNH TRÌNH CỦA BẠN",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã giải đúng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa mở",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem bản đồ",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hướng dẫn và trợ giúp",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tạm dừng",
+    "files": [
+      "QuestPlayPage.tsx",
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Tổng kết",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trở lại câu chuyện",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Báo sự cố tại bước này",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình đang tạm dừng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Những thử thách đã giải đúng vẫn được giữ lại. Tiếp tục khi bạn sẵn sàng.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình đã hoàn thành",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã giải đúng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "thử thách.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Phần thưởng quest mẫu, tách biệt với xu đổi quà của nhiệm vụ địa điểm.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đọc lại câu chuyện",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu thẻ hành trình",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã giải đúng!",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã ghi nhận",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "XP và",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kết quả đã lưu. Tải lại trang không cộng thưởng thêm lần nữa.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Phóng to minh họa",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ đường cho tôi",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem bản đồ điểm bắt đầu",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu ảnh kỷ niệm (tùy chọn)",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đang cần gợi ý?",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Trợ giúp",
+    "files": [
+      "QuestPlayPage.tsx",
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Đọc lại câu chuyện hiện tại",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục quest",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem Quest của bạn",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem tổng kết",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục câu chuyện",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục đến thử thách",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Kiểm tra đáp án",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tùy chỉnh",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cỡ chữ nội dung (",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quest hiện chưa có nhạc nền và giọng đọc.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "⌖ Xem các điểm dừng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "▤ Đọc lại từ đầu",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tạm dừng quest",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ⅱ Tạm dừng quest",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "⌖ Xem chỉ đường đến điểm bắt đầu",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Hỗ trợ",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "▣ Ảnh kỷ niệm",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "▧ Lưu thẻ hành trình",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "? Câu hỏi thường gặp",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "⚑ Báo sự cố",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "↪ Rời màn chơi",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem gợi ý quan sát",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "♧ Xem gợi ý quan sát",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không trừ xu",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "▤ Đọc lại câu chuyện",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ giải đúng mới mở phần tiếp theo. Mức thưởng không đổi.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Gợi ý giúp bạn biết nên quan sát ở đâu. Không mở đáp án, không trừ XP hoặc xu.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đọc gợi ý",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không, quay lại",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ tìm phần số nhà trong địa chỉ, không phải mã bưu chính hay số điện thoại. Quan sát biển tên hoặc dòng địa chỉ chính thức trên cổng.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đối chiếu dấu mốc hình thành với hành trình 50 năm được nhắc tới trong câu chuyện. Phân biệt mốc khởi đầu với các lần đổi tên về sau.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn vẫn cần tự nhập hoặc chọn đáp án rồi kiểm tra.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nguồn tham khảo nội dung",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Nguồn tham khảo",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiến độ đã giải đúng được giữ lại để tiếp tục sau. Không nhận thêm thưởng khi mở lại.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lưu và rời màn chơi",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục chơi",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quay lại bước đang chơi",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Minh họa phóng to (cuộn để xem)",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cuộn trong hình để xem phần đã phóng to. Đối chiếu biển tên và địa chỉ thực tế trước khi xác nhận đã đến.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Các thử thách thuộc cùng khu vực điểm đến. Chỉ theo lối đi được phép.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mở màn chỉ đường và vị trí thiết bị",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "xu quest đã ghi nhận. Thử thách mở theo thứ tự.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "thử thách đã giải đúng",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thẻ tiến độ tải về thiết bị. Không phải voucher hoặc ảnh chụp màn hình.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Tải thẻ hành trình",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem lại câu chuyện không xóa tiến độ hoặc nhận lại thưởng.",
+    "files": [
+      "QuestPlayPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bản đồ điểm bắt đầu quest",
+    "files": [
+      "QuestPreviewMap.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa tải được nền bản đồ. Bạn vẫn có thể dùng địa chỉ và danh sách bên dưới.",
+    "files": [
+      "QuestPreviewMap.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ hiển thị các tọa độ đã có. Chưa có đủ dữ liệu để vẽ tuyến đi bộ hoặc tính quãng đường toàn quest.",
+    "files": [
+      "QuestPreviewMap.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉ đường tới điểm bắt đầu ↗",
+    "files": [
+      "QuestPreviewMap.tsx"
+    ]
+  },
+  {
+    "vi": "Kỷ niệm",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đồ uống",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Ẩm thực",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Di chuyển",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Giải trí",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Quà lưu niệm",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "KHÔNG GIAN CỦA BẠN",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn một món quà cho hành trình khám phá.",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đọc…",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lịch sử",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đọc xu quest…",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa đọc được xu quest",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xu nhận từ các quest được lưu riêng, hiện chưa dùng đổi voucher.",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xem hành trình của tôi →",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Voucher mẫu · không có giá trị thanh toán thực.",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lọc quà đổi xu",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Thời hạn",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Không áp dụng · voucher demo",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Điều kiện",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã đổi · demo",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đổi",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Cần thêm",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Green Coins hoạt động thế nào?",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Mỗi nhiệm vụ hoàn thành nhận",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "xu demo đúng một lần. Mỗi voucher chỉ đổi một lần. Không mua bán, giao hàng hoặc nhận quà thực.",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đã nhận:",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "· Đã dùng:",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Lịch sử đổi quà",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Chưa đổi voucher nào.",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "· Voucher demo đã đổi; không có mã sử dụng thực.",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xác nhận đổi phần thưởng?",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Xác nhận đổi",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Đang đổi…",
+    "files": [
+      "ShopPage.tsx"
+    ]
+  },
+  {
+    "vi": "Bước ra phố.",
+    "files": [
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Mang về một câu chuyện.",
+    "files": [
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Khám phá Đà Nẵng qua những câu đố và hành trình ngay trên những con phố.",
+    "files": [
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Chọn quest của bạn. Khám phá theo nhịp của riêng mình.",
+    "files": [
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Bạn đã có mã quest hoặc lời mời?",
+    "files": [
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Tiếp tục ảnh nền",
+    "files": [
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Tạm dừng ảnh nền",
+    "files": [
+      "WelcomePage.tsx"
+    ]
+  },
+  {
+    "vi": "Chỉnh sửa hồ sơ",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Nhân vật",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Nhật ký khám phá",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Ví xu",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Cài đặt",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Không gian tài khoản",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Không gian của bạn",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  },
+  {
+    "vi": "Hành trình, kỷ niệm và tài khoản ở cùng một nơi.",
+    "files": [
+      "WorkspaceNavigation.tsx"
+    ]
+  }
+]

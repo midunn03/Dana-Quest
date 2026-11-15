@@ -1,0 +1,488 @@
+{
+  "checked": 35,
+  "results": [
+    {
+      "width": 320,
+      "height": 568,
+      "stage": "welcome",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": null,
+      "scrollable": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "stage": "choice",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 320,
+        "bottom": 568,
+        "width": 320
+      },
+      "scrollable": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "stage": "form",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 320,
+        "bottom": 568,
+        "width": 320
+      },
+      "scrollable": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "stage": "error",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 320,
+        "bottom": 568,
+        "width": 320
+      },
+      "scrollable": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "stage": "register",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 320,
+        "bottom": 568,
+        "width": 320
+      },
+      "scrollable": true
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stage": "welcome",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": null,
+      "scrollable": false
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stage": "choice",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 207.859375,
+        "right": 360,
+        "bottom": 800,
+        "width": 360
+      },
+      "scrollable": false
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stage": "form",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 360,
+        "bottom": 800,
+        "width": 360
+      },
+      "scrollable": true
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stage": "error",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 360,
+        "bottom": 800,
+        "width": 360
+      },
+      "scrollable": true
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stage": "register",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 360,
+        "bottom": 800,
+        "width": 360
+      },
+      "scrollable": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": "welcome",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": null,
+      "scrollable": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": "choice",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 253.203125,
+        "right": 390,
+        "bottom": 844,
+        "width": 390
+      },
+      "scrollable": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": "form",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 31.25,
+        "right": 390,
+        "bottom": 844,
+        "width": 390
+      },
+      "scrollable": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": "error",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 390,
+        "bottom": 844,
+        "width": 390
+      },
+      "scrollable": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": "register",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 31.25,
+        "right": 390,
+        "bottom": 844,
+        "width": 390
+      },
+      "scrollable": false
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "stage": "welcome",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": null,
+      "scrollable": false
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "stage": "choice",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 258,
+        "right": 430,
+        "bottom": 860,
+        "width": 430
+      },
+      "scrollable": false
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "stage": "form",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 47.25,
+        "right": 430,
+        "bottom": 860,
+        "width": 430
+      },
+      "scrollable": false
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "stage": "error",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 24,
+        "right": 430,
+        "bottom": 860,
+        "width": 430
+      },
+      "scrollable": true
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "stage": "register",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 0,
+        "y": 47.25,
+        "right": 430,
+        "bottom": 860,
+        "width": 430
+      },
+      "scrollable": false
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stage": "welcome",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": null,
+      "scrollable": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stage": "choice",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 162,
+        "y": 32,
+        "right": 682,
+        "bottom": 358,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stage": "form",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 162,
+        "y": 32,
+        "right": 682,
+        "bottom": 358,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stage": "error",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 162,
+        "y": 32,
+        "right": 682,
+        "bottom": 358,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stage": "register",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 162,
+        "y": 32,
+        "right": 682,
+        "bottom": 358,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "stage": "welcome",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": null,
+      "scrollable": false
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "stage": "choice",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 380,
+        "y": 86.921875,
+        "right": 900,
+        "bottom": 633.078125,
+        "width": 520
+      },
+      "scrollable": false
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "stage": "form",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 380,
+        "y": 32,
+        "right": 900,
+        "bottom": 688,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "stage": "error",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 380,
+        "y": 32,
+        "right": 900,
+        "bottom": 688,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "stage": "register",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 380,
+        "y": 32,
+        "right": 900,
+        "bottom": 688,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "stage": "welcome",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": null,
+      "scrollable": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "stage": "choice",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 460,
+        "y": 176.921875,
+        "right": 980,
+        "bottom": 723.078125,
+        "width": 520
+      },
+      "scrollable": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "stage": "form",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 460,
+        "y": 39.421875,
+        "right": 980,
+        "bottom": 860.578125,
+        "width": 520
+      },
+      "scrollable": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "stage": "error",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 460,
+        "y": 32,
+        "right": 980,
+        "bottom": 868,
+        "width": 520
+      },
+      "scrollable": true
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "stage": "register",
+      "mainOverflow": false,
+      "panelOverflow": false,
+      "panel": {
+        "x": 460,
+        "y": 52.609375,
+        "right": 980,
+        "bottom": 847.375,
+        "width": 520
+      },
+      "scrollable": false
+    }
+  ]
+}

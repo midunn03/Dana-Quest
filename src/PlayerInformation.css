@@ -1,0 +1,9 @@
+
+.player-information{font-size:var(--text-sm);line-height:1.8}
+.player-information-lead{font-size:var(--text-sm);color:var(--px-ink)}
+.player-information section{padding:17px 0;border-bottom:1px solid var(--px-ink)}
+.player-information section h2{font-size:var(--text-sm);line-height:1.5;margin:0 0 10px;color:var(--px-ink)}
+.player-information section p{margin:0;line-height:1.8;color:var(--px-ink)}
+.player-information nav{display:flex;flex-wrap:wrap;gap:10px var(--px-space-5);padding:var(--px-space-6) 0}
+.player-information nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--px-ink);font-weight:400;text-underline-offset:4px}
+.information-page .player-information section h2{margin-top:0}

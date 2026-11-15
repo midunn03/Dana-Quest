@@ -1,0 +1,8 @@
+
+.app-shell :is(button, summary):not(.leaflet-marker-icon) { min-height:44px; }
+.app-shell .primary-button { border-radius:0; min-height:44px; font-size:var(--text-sm);box-shadow:var(--px-shadow-low);}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline:4px solid var(--px-focus); outline-offset:3px; }
+.app-shell .photo-credit { position:absolute; bottom:8px; right:10px; max-width:calc(100% - 20px); padding:var(--px-space-1) 7px; border-radius:0; background:var(--px-page); color:var(--px-ink); font-size:var(--text-sm); line-height:1.5; }
+.app-shell .back-link:focus-visible {
+  outline:4px solid var(--px-focus); outline-offset:2px;
+}

@@ -1,0 +1,11 @@
+import './VoucherWallet.css'
+import {useLocale} from './i18n/LocaleProvider'
+import {rewards} from './data/rewards'
+import RewardArt from './RewardArt'
+import {useWallet} from './lib/useWallet'
+import {walletMessage} from './lib/wallet'
+export default function VoucherWallet({english:providedEnglish}:{english?:boolean}){
+ const {locale}=useLocale(),english=providedEnglish??locale==='en'
+ const {wallet,loading,error}=useWallet()
+ return <section className="reward-history" id="voucher-cua-toi"><h2>{english?'My vouchers':'Voucher của tôi'}</h2><p>{loading?(english?'Loading…':'Đang đọc…'):wallet.balance===null?'—':`${wallet.balance} ${english?'Dana Coins':'Xu Dana'}`}</p>{error&&<p role="alert">{walletMessage(error,english)}</p>}{wallet.status==='reconciliation-required'&&<p role="alert">{walletMessage('WALLET_RECONCILIATION',english)}</p>}{!loading&&!wallet.receipts.length&&<p>{english?'No vouchers collected yet.':'Bạn chưa đổi voucher nào.'}</p>}{wallet.receipts.map(item=>{const reward=rewards.find(r=>r.id===item.rewardId);return <article className="reward-card" key={item.id??item.rewardId}><div className="reward-picture"><RewardArt id={item.rewardId}/></div><div><h3>{english?reward?.nameEn:reward?.name}</h3><p>{english?reward?.benefitEn:reward?.benefit}</p><p>{new Date(item.redeemedAt).toLocaleString(english?'en-GB':'vi-VN')} · {english?'Collected':'Đã nhận'}</p><p>{english?'Digital keepsake only. No commercial partner, payment value, admission or booking.':'Vật phẩm kỷ niệm trong ứng dụng. Chưa có đối tác thương mại; không có giá trị thanh toán, vé vào cổng hoặc đặt chỗ.'}</p></div></article>})}<details><summary>{english?'Coin history':'Lịch sử Xu Dana'}</summary>{wallet.entries.length===0?<p>{english?'No verified transactions.':'Chưa có giao dịch được xác nhận.'}</p>:wallet.entries.map(entry=><div key={entry.source}><strong>{entry.amount>0?'+':''}{entry.amount} {english?'Dana Coins':'Xu Dana'}</strong><p>{entry.source.startsWith('redeem:')?(english?'Voucher collected':'Đổi voucher'):entry.source.startsWith('quest:')?(english?'Quest checkpoint completed':'Hoàn thành checkpoint quest'):(english?'Mission completed':'Hoàn thành nhiệm vụ')} · {entry.at?new Date(entry.at).toLocaleString(english?'en-GB':'vi-VN'):(english?'Historical record; date unavailable':'Dữ liệu cũ; chưa có thời điểm')}</p></div>)}</details></section>
+}

@@ -1,0 +1,174 @@
+[
+  [
+    "Đã sửa",
+    "src/AccountExperience.tsx"
+  ],
+  [
+    "Đã sửa",
+    "src/AccountReference.css"
+  ],
+  [
+    "Đã sửa",
+    "src/App.css"
+  ],
+  [
+    "Đã sửa",
+    "src/App.tsx"
+  ],
+  [
+    "Đã sửa",
+    "src/Auth.css"
+  ],
+  [
+    "Đã sửa",
+    "src/AuthPage.tsx"
+  ],
+  [
+    "Đã sửa",
+    "src/AvatarCustomize.css"
+  ],
+  [
+    "Đã sửa",
+    "src/CoinShop.css"
+  ],
+  [
+    "Đã sửa",
+    "src/ConfirmDialog.css"
+  ],
+  [
+    "Đã sửa",
+    "src/ConfirmDialog.tsx"
+  ],
+  [
+    "Đã sửa",
+    "src/Discovery.css"
+  ],
+  [
+    "Đã sửa",
+    "src/DueExperience.css"
+  ],
+  [
+    "Đã sửa",
+    "src/Events.css"
+  ],
+  [
+    "Đã sửa",
+    "src/ExperienceTokens.css"
+  ],
+  [
+    "Đã sửa",
+    "src/Explore.css"
+  ],
+  [
+    "Đã sửa",
+    "src/GameVisual.css"
+  ],
+  [
+    "Đã sửa",
+    "src/index.css"
+  ],
+  [
+    "Đã sửa",
+    "src/JourneyOnboarding.css"
+  ],
+  [
+    "Đã sửa",
+    "src/LoginExperience.css"
+  ],
+  [
+    "Đã sửa",
+    "src/MapCompact.css"
+  ],
+  [
+    "Đã sửa",
+    "src/MobileLayout.css"
+  ],
+  [
+    "Đã sửa",
+    "src/NavigationPage.css"
+  ],
+  [
+    "Đã sửa",
+    "src/NearbyDrawer.css"
+  ],
+  [
+    "Đã sửa",
+    "src/Notifications.tsx"
+  ],
+  [
+    "Đã sửa",
+    "src/Onboarding.css"
+  ],
+  [
+    "Đã bỏ",
+    "src/pixel.css"
+  ],
+  [
+    "Đã sửa",
+    "src/Quest.css"
+  ],
+  [
+    "Đã sửa",
+    "src/QuestDetail.css"
+  ],
+  [
+    "Đã sửa",
+    "src/QuestLibrary.css"
+  ],
+  [
+    "Đã sửa",
+    "src/QuestPlayer.css"
+  ],
+  [
+    "Đã sửa",
+    "src/QuestPlayerUi.tsx"
+  ],
+  [
+    "Đã sửa",
+    "src/TravelVisual.css"
+  ],
+  [
+    "Đã sửa",
+    "src/WelcomePage.tsx"
+  ],
+  [
+    "Đã sửa",
+    "src/Workspace.css"
+  ],
+  [
+    "Đã sửa",
+    "src/i18n/LocaleProvider.tsx"
+  ],
+  [
+    "Đã sửa",
+    "index.html"
+  ],
+  [
+    "Đã sửa",
+    "public/manifest.webmanifest"
+  ],
+  [
+    "Mới",
+    "src/CoastalScene.tsx"
+  ],
+  [
+    "Mới",
+    "src/HomePage.css"
+  ],
+  [
+    "Mới",
+    "src/lib/pageMetadata.ts"
+  ],
+  [
+    "Mới",
+    "src/ui/PixelIcons.tsx"
+  ],
+  [
+    "Mới",
+    "src/ui/PixelUI.css"
+  ],
+  [
+    "Mới",
+    "src/ui/PixelUI.tsx"
+  ]
+]

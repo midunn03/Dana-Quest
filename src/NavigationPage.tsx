@@ -1,4 +1,7 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import './ui/MapControls.css'
+import { interpolate } from './i18n/locale'
+import { t } from './i18n/locale'
+import { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { useCallback, useMemo } from 'react'
 import L from 'leaflet'
@@ -80,7 +83,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     const root = createRoot(avatarElement)
     const renderAvatar = () => root.render(<PixelAvatar avatar={readAvatar() ?? avatars[0]} />)
     renderAvatar(); window.addEventListener('dana-avatar-changed', renderAvatar)
-    const player = L.marker(place.position, { title: 'Vị trí của bạn', zIndexOffset: 2000, icon: L.divIcon({ className: 'navigation-player-marker', html: avatarElement, iconSize: [40, 50], iconAnchor: [20, 50] }) })
+    const player = L.marker(place.position, { title: t("Vị trí của bạn"), zIndexOffset: 2000, icon: L.divIcon({ className: 'navigation-player-marker', html: avatarElement, iconSize: [40, 50], iconAnchor: [20, 50] }) })
     playerRef.current = player
     const resizePlayer = () => {
       const element = player.getElement()
@@ -126,15 +129,15 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     const map = mapRef.current
     if (map && navigation.route) map.fitBounds(navigation.route.geometry.coordinates.map(toLatLng), routeViewport(map))
   }, [navigation.route])
-  if (!place) return <main className="screen-page"><h1>Không tìm thấy điểm đến</h1><a href="#/kham-pha">← Bản đồ</a></main>
+  if (!place) return <main className="screen-page"><h1>{t("Không tìm thấy điểm đến")}</h1><a href="#/map">{t("← Bản đồ")}</a></main>
   const arrived = !!sample && hasArrived(sample, place.position)
   const progress = navigation.usable ? navigation.progress : null
-  const instruction = arrived ? 'Bạn đã đến nơi!' : progress ? progress.toTurn <= 12 ? navigation.precise ? turnText(progress.next) : 'Gần chỗ rẽ · vị trí ước tính' : `Đi thẳng ${formatMeters(progress.toTurn)}` : !sample ? locationError || 'Đang xác định vị trí…' : !navigation.usable ? 'Vị trí còn lệch nhiều. Đang lấy GPS tốt hơn…' : navigation.busy ? 'Đang tính đường đi bộ…' : navigation.error || 'Đang tính lại đường đi…'
+  const instruction = arrived ? t("Bạn đã đến nơi!") : progress ? progress.toTurn <= 12 ? navigation.precise ? turnText(progress.next) : t("Gần chỗ rẽ · vị trí ước tính") : interpolate("Đi thẳng ${0}",[formatMeters(progress.toTurn)]) : !sample ? locationError || t("Đang xác định vị trí…") : !navigation.usable ? t("Vị trí còn lệch nhiều. Đang lấy GPS tốt hơn…") : navigation.busy ? t("Đang tính đường đi bộ…") : navigation.error || t("Đang tính lại đường đi…")
   return <main className="navigation-screen">
-    <div className="route-map" ref={container} role="region" aria-label="Bản đồ vị trí của bạn và điểm đến" />
-    <div className="route-instruction"><a ref={backLink} href={place.backHref} aria-label="Quay lại chi tiết" onClick={event => { event.preventDefault(); setPendingLeave(place.backHref) }}>←</a><b aria-hidden="true">{turnIcon(progress?.next)}</b><div aria-live="polite"><strong>{instruction}</strong><small>{!arrived && progress ? progress.toTurn > 12 ? `Sau đó ${nextTurnText(progress.next)}` : navigation.precise ? `Tiếp tục ${formatMeters(progress.next.distance)}` : turnText(progress.next) : `Đến ${place.name}`}</small></div></div>
-    <section ref={panel} className={`route-sheet live-route-sheet ${expanded ? 'expanded' : ''} ${height !== null ? 'dragging' : ''}`} style={height !== null ? { height } : undefined} aria-label={`Hướng dẫn đến ${place.name}`}>
-      <button type="button" className="route-sheet-handle" aria-label="Mở rộng hoặc thu gọn hướng dẫn" aria-expanded={expanded} aria-controls="route-sheet-content"
+    <div className="route-map" ref={container} role="region" aria-label={t("Bản đồ vị trí của bạn và điểm đến")} />
+    <div className="route-instruction"><a ref={backLink} href={place.backHref} aria-label={t("Quay lại chi tiết")} onClick={event => { event.preventDefault(); setPendingLeave(place.backHref) }}>←</a><b aria-hidden="true">{turnIcon(progress?.next)}</b><div aria-live="polite"><strong>{instruction}</strong><small>{!arrived && progress ? progress.toTurn > 12 ? interpolate("Sau đó ${0}",[nextTurnText(progress.next)]) : navigation.precise ? interpolate("Tiếp tục ${0}",[formatMeters(progress.next.distance)]) : turnText(progress.next) : interpolate("Đến ${0}",[place.name])}</small></div></div>
+    <section ref={panel} className={`route-sheet live-route-sheet ${expanded ? 'expanded' : ''} ${height !== null ? 'dragging' : ''}`} style={height !== null ? { height } : undefined} aria-label={interpolate("Hướng dẫn đến ${0}",[place.name])}>
+      <button type="button" className="route-sheet-handle" aria-label={t("Mở rộng hoặc thu gọn hướng dẫn")} aria-expanded={expanded} aria-controls="route-sheet-content"
         onClick={() => { if (!moved.current) setExpanded(value => !value) }}
         onKeyDown={event => { if (event.key === 'ArrowUp' || event.key === 'ArrowDown') { event.preventDefault(); setExpanded(event.key === 'ArrowUp') } }}
         onPointerDown={event => {
@@ -147,17 +150,17 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
         onPointerUp={event => { const start = drag.current; if (!start || start.pointer !== event.pointerId) return; if (moved.current) setExpanded(start.y > event.clientY); drag.current = null; setHeight(null) }}
         onPointerCancel={() => { drag.current = null; moved.current = true; setHeight(null) }}><span aria-hidden="true" /></button>
       <div id="route-sheet-content" className="route-sheet-content">
-        <h1>Đến {place.name}</h1>
-        <h2 className="route-distance" aria-live="polite">{arrived ? 'Bạn đã đến nơi!' : progress ? `Còn ${formatMeters(progress.remaining)} đi bộ` : instruction}</h2>
-        {progress && <p>Khoảng {Math.max(1, Math.round(navigation.route!.duration * progress.remaining / Math.max(1, navigation.route!.distance) / 60))} phút · Tuyến đi bộ ngắn nhất</p>}
-        {locationError && <p role="status" className="error">{locationError}</p>}
-        {!sample && locationError && <button type="button" onClick={retryLocation}>Thử lấy vị trí</button>}
-        {error && <p role="alert" className="error">Không tải được nền bản đồ.</p>}
+        <h1>{t("Đến") + " "}{place.name}</h1>
+        <h2 className="route-distance" aria-live="polite">{arrived ? t("Bạn đã đến nơi!") : progress ? interpolate("Còn ${0} đi bộ",[formatMeters(progress.remaining)]) : instruction}</h2>
+        {progress && <p>{t("Khoảng") + " "}{Math.max(1, Math.round(navigation.route!.duration * progress.remaining / Math.max(1, navigation.route!.distance) / 60))} {" " + t("phút · Tuyến đi bộ ngắn nhất")}</p>}
+        {locationError && <p role="status" className="error">{t(locationError)}</p>}
+        {!sample && locationError && <button type="button" onClick={retryLocation}>{t("Thử lấy vị trí")}</button>}
+        {error && <p role="alert" className="error">{t("Không tải được nền bản đồ.")}</p>}
         {place.requireArrival && !arrived
-          ? <button type="button" className="blue-button" disabled>Đến điểm bắt đầu để mở nhiệm vụ</button>
-          : <a className="blue-button" href={place.continueHref} onClick={() => { allowLeave.current = true }}>{place.continueLabel ?? 'Xem nhiệm vụ'} →</a>}
+          ? <button type="button" className="blue-button" disabled>{t("Đến điểm bắt đầu để mở nhiệm vụ")}</button>
+          : <a className="blue-button" href={place.continueHref} onClick={() => { allowLeave.current = true }}>{place.continueLabel ?? t("Xem nhiệm vụ")} →</a>}
       </div>
     </section>
-    <ConfirmDialog open={pendingLeave !== null} title="Rời khỏi hành trình?" message="Bạn có muốn rời khỏi hành trình hiện tại và quay về trang trước không?" confirmLabel="Rời khỏi hành trình" cancelLabel="Tiếp tục hành trình" onCancel={cancelLeave} onConfirm={() => { if (pendingLeave !== null) { allowLeave.current = true; window.location.hash = pendingLeave; setPendingLeave(null) } }} />
+    <ConfirmDialog open={pendingLeave !== null} title={t("Rời khỏi hành trình?")} message={t("Bạn có muốn rời khỏi hành trình hiện tại và quay về trang trước không?")} confirmLabel={t("Rời khỏi hành trình")} cancelLabel={t("Tiếp tục hành trình")} onCancel={cancelLeave} onConfirm={() => { if (pendingLeave !== null) { allowLeave.current = true; window.location.hash = pendingLeave; setPendingLeave(null) } }} />
   </main>
 }

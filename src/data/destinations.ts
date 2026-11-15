@@ -1,3 +1,4 @@
+import { localized } from '../i18n/locale'
 import destinationRecords from './destinations.json'
 import historicRecords from './historicalDestinations.json'
 
@@ -32,10 +33,10 @@ export interface Destination {
 type DestinationRecord = Omit<Destination, 'position'> & { position: number[] }
 
 function normalizeDestinations(records: DestinationRecord[]): Destination[] {
-  return records.map(record => ({
+  return localized(records.map(record => ({
   ...record,
   position: record.position as [number, number],
-  }))
+  })))
 }
 
 // Active records feed the map; historic records only keep older progress readable.
@@ -43,13 +44,13 @@ export const destinations = normalizeDestinations(destinationRecords as unknown 
 export const historicalDestinations = normalizeDestinations(historicRecords as unknown as DestinationRecord[])
 export const getDestination = (id: string) => destinations.find(place => place.id === id) ?? historicalDestinations.find(place => place.id === id)
 
-export const categoryLabels: Record<DestinationCategory, string> = {
-  landmark: 'Kiến trúc',
-  museum: 'Bảo tàng',
-  park: 'Công viên',
-  beach: 'Biển',
-  pagoda: 'Chùa',
-  nature: 'Thiên nhiên',
-  heritage: 'Di tích',
-  legacy: 'Lưu trữ',
-}
+export const categoryLabels: Record<DestinationCategory, string> = localized({
+  landmark: "Kiến trúc",
+  museum: "Bảo tàng",
+  park: "Công viên",
+  beach: "Biển",
+  pagoda: "Chùa",
+  nature: "Thiên nhiên",
+  heritage: "Di tích",
+  legacy: "Lưu trữ",
+})

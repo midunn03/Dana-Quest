@@ -5,10 +5,12 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 
 from .models import VN_TZ, Event
+from accounts.ownership import public_owner_checked
 
 SOON_MINUTES = 60
 
 
+@public_owner_checked
 @require_GET
 def feed(request):
     """Sự kiện đang diễn ra và sắp diễn ra (mặc định 30 ngày tới, tính theo giờ Việt Nam).

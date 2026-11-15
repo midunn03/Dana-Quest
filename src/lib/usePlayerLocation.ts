@@ -1,4 +1,5 @@
-﻿import { useCallback, useEffect, useRef, useState } from 'react'
+import { interpolate, t } from '../i18n/locale'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { isFresh, type LocationSample } from './location'
 import { notifyLocationPermissionNeeded } from './locationPermission'
 
@@ -19,7 +20,7 @@ export function usePlayerLocation() {
     if (previous && isFresh(previous) && (value.timestamp < previous.timestamp || (previous.accuracy <= NAVIGATION_MAX_ACCURACY && value.accuracy > NAVIGATION_MAX_ACCURACY))) return false
     latest.current = value
     setSample(value)
-    setError(value.accuracy > NAVIGATION_MAX_ACCURACY ? `Vị trí tạm có sai số khoảng ±${Math.ceil(value.accuracy)} m. Đang lấy GPS chính xác hơn.` : '')
+    setError(value.accuracy > NAVIGATION_MAX_ACCURACY ? interpolate("Vị trí tạm có sai số khoảng ±${0} m. Đang lấy GPS chính xác hơn.",[Math.ceil(value.accuracy)]) : '')
     return true
   }, [])
   useEffect(() => {
@@ -30,16 +31,16 @@ export function usePlayerLocation() {
     let lastQuick = -Infinity
     let quickDeadline = 0
     const geo = navigator.geolocation
-    if (!geo) { queueMicrotask(() => setError('Trình duyệt không hỗ trợ định vị.')); return }
+    if (!geo) { queueMicrotask(() => setError(t("Trình duyệt không hỗ trợ định vị."))); return }
     const success = (position: GeolocationPosition) => { if (active) { denied = false; updatePosition(position) } }
     const failure = (cause: GeolocationPositionError) => {
       if (!active) return
       if (cause.code === 1) {
         denied = true; latest.current = null; setSample(null)
-        setError('Bạn chưa cho phép định vị. Hãy bật quyền vị trí cho website rồi thử lại.')
+        setError(t("Bạn chưa cho phép định vị. Hãy bật quyền vị trí cho website rồi thử lại."))
         notifyLocationPermissionNeeded()
       } else if (!latest.current || !isFresh(latest.current)) {
-        setError(cause.code === 3 ? 'Chưa nhận được vị trí thiết bị. Đang thử lại; hãy bật dịch vụ vị trí.' : 'Chưa lấy được vị trí thiết bị. Hãy bật dịch vụ vị trí; hệ thống đang thử lại.')
+        setError(cause.code === 3 ? t("Chưa nhận được vị trí thiết bị. Đang thử lại; hãy bật dịch vụ vị trí.") : t("Chưa lấy được vị trí thiết bị. Hãy bật dịch vụ vị trí; hệ thống đang thử lại."))
       }
     }
     const quick = () => {
@@ -47,13 +48,13 @@ export function usePlayerLocation() {
       lastQuick = Date.now()
       quickPending = true
       const generation = ++quickGeneration
-      quickDeadline = window.setTimeout(() => { quickPending = false; if (active && !latest.current && !denied) setError('Chưa nhận được vị trí. Hãy cho phép truy cập vị trí và bật dịch vụ vị trí trên thiết bị.') }, 6500)
+      quickDeadline = window.setTimeout(() => { quickPending = false; if (active && !latest.current && !denied) setError(t("Chưa nhận được vị trí. Hãy cho phép truy cập vị trí và bật dịch vụ vị trí trên thiết bị.")) }, 6500)
       geo.getCurrentPosition(position => { if (!active || generation !== quickGeneration) return; window.clearTimeout(quickDeadline); quickPending = false; success(position) }, cause => { if (!active || generation !== quickGeneration) return; window.clearTimeout(quickDeadline); quickPending = false; failure(cause) }, QUICK_LOCATION_OPTIONS)
     }
     const watch = geo.watchPosition(success, failure, LIVE_LOCATION_OPTIONS)
     quick()
     const timer = window.setInterval(() => {
-      if (latest.current && !isFresh(latest.current)) { latest.current = null; setSample(null); setError('Vị trí đã cũ. Đang lấy lại vị trí thiết bị…') }
+      if (latest.current && !isFresh(latest.current)) { latest.current = null; setSample(null); setError(t("Vị trí đã cũ. Đang lấy lại vị trí thiết bị…")) }
       if (!latest.current || latest.current.accuracy > NAVIGATION_MAX_ACCURACY) quick()
     }, 5000)
     return () => { active = false; geo.clearWatch(watch); window.clearInterval(timer); window.clearTimeout(quickDeadline) }

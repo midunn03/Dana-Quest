@@ -50,6 +50,9 @@ it('redeems vouchers only with enough coins and only once', () => {
   const state = assigned(10)
   expect(() => applyGameAction(state, { type: 'redeem', rewardId: 'postcard' }, [])).toThrow('Chưa đủ')
   expect(() => applyGameAction(state, { type: 'redeem', rewardId: 'no-such-reward' }, [])).toThrow('Không tìm thấy voucher')
+  for (const rewardId of ['constructor','toString','__proto__']) {
+    expect(() => applyGameAction(state,{type:'redeem',rewardId},[])).toThrow('Không tìm thấy voucher')
+  }
   let rich = state
   for (const missionId of state.destinations['cau-rong'].selected.slice(0, 8)) {
     const photos = missionId.endsWith('photo') ? [{ id: `cau-rong:${missionId}`, destinationId: 'cau-rong', missionId, createdAt: Date.now() }] : []

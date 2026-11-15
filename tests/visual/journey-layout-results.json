@@ -1,0 +1,299 @@
+{
+  "checked": 42,
+  "results": [
+    {
+      "width": 360,
+      "height": 800,
+      "route": "bat-dau/thanh-pho",
+      "overflow": false,
+      "scroll": 800
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "bat-dau/ke-hoach",
+      "overflow": false,
+      "scroll": 826
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "bat-dau/gioi-thieu",
+      "overflow": false,
+      "scroll": 800
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "kich-hoat",
+      "overflow": false,
+      "scroll": 800
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "nhap-ma",
+      "overflow": false,
+      "scroll": 800
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "nhan-vat",
+      "overflow": false,
+      "scroll": 1739
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "bat-dau/thanh-pho",
+      "overflow": false,
+      "scroll": 844
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "bat-dau/ke-hoach",
+      "overflow": false,
+      "scroll": 844
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "bat-dau/gioi-thieu",
+      "overflow": false,
+      "scroll": 844
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "kich-hoat",
+      "overflow": false,
+      "scroll": 844
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "nhap-ma",
+      "overflow": false,
+      "scroll": 844
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "nhan-vat",
+      "overflow": false,
+      "scroll": 1685
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "bat-dau/thanh-pho",
+      "overflow": false,
+      "scroll": 860
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "bat-dau/ke-hoach",
+      "overflow": false,
+      "scroll": 860
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "bat-dau/gioi-thieu",
+      "overflow": false,
+      "scroll": 860
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "kich-hoat",
+      "overflow": false,
+      "scroll": 860
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "nhap-ma",
+      "overflow": false,
+      "scroll": 860
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "nhan-vat",
+      "overflow": false,
+      "scroll": 1577
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "bat-dau/thanh-pho",
+      "overflow": false,
+      "scroll": 779
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "bat-dau/ke-hoach",
+      "overflow": false,
+      "scroll": 771
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "bat-dau/gioi-thieu",
+      "overflow": false,
+      "scroll": 844
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "kich-hoat",
+      "overflow": false,
+      "scroll": 390
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "nhap-ma",
+      "overflow": false,
+      "scroll": 390
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "nhan-vat",
+      "overflow": false,
+      "scroll": 1214
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "bat-dau/thanh-pho",
+      "overflow": false,
+      "scroll": 779
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "bat-dau/ke-hoach",
+      "overflow": false,
+      "scroll": 771
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "bat-dau/gioi-thieu",
+      "overflow": false,
+      "scroll": 844
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "kich-hoat",
+      "overflow": false,
+      "scroll": 720
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "nhap-ma",
+      "overflow": false,
+      "scroll": 720
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "nhan-vat",
+      "overflow": false,
+      "scroll": 1214
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "bat-dau/thanh-pho",
+      "overflow": false,
+      "scroll": 900
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "bat-dau/ke-hoach",
+      "overflow": false,
+      "scroll": 900
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "bat-dau/gioi-thieu",
+      "overflow": false,
+      "scroll": 900
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "kich-hoat",
+      "overflow": false,
+      "scroll": 900
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "nhap-ma",
+      "overflow": false,
+      "scroll": 900
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "nhan-vat",
+      "overflow": false,
+      "scroll": 1214
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "bat-dau/thanh-pho",
+      "overflow": false,
+      "scroll": 1080
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "bat-dau/ke-hoach",
+      "overflow": false,
+      "scroll": 1080
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "bat-dau/gioi-thieu",
+      "overflow": false,
+      "scroll": 1080
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "kich-hoat",
+      "overflow": false,
+      "scroll": 1080
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "nhap-ma",
+      "overflow": false,
+      "scroll": 1080
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "nhan-vat",
+      "overflow": false,
+      "scroll": 1214
+    }
+  ]
+}

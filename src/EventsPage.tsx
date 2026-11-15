@@ -1,24 +1,26 @@
+import './Events.css'
+import { t } from './i18n/locale'
 import { useState } from 'react'
-import { cityEvents, nextEventOccurrence } from './data/events'
-import { disableEventReminders, enableEventReminders, remindersEnabled } from './lib/eventReminders'
-
-export default function EventsPage() {
-  const [enabled, setEnabled] = useState(remindersEnabled)
-  const [error, setError] = useState('')
-  async function toggleReminders() {
-    setError('')
-    if (enabled) { disableEventReminders(); setEnabled(false); return }
-    try { await enableEventReminders(); setEnabled(true) }
-    catch (cause) { setError(cause instanceof Error ? cause.message : 'Không bật được thông báo.') }
-  }
-  return <main className="screen-page events-screen">
-    <header className="screen-heading"><a href="#/kham-pha" aria-label="Về bản đồ">‹</a><h1>Sự kiện sắp tới</h1></header>
-    <section className="reminder-card"><div><strong>Nhắc sự kiện nổi bật</strong><p>Thông báo khi app đang mở hoặc PWA đang hoạt động. Lịch có thể thay đổi; hãy kiểm tra nguồn trước khi đi.</p></div><button type="button" aria-pressed={enabled} onClick={() => void toggleReminders()}>{enabled ? 'Đang bật' : 'Bật nhắc'}</button></section>
-    {error && <p className="error" role="alert">{error}</p>}
-    <div className="event-list">{cityEvents.map(event => {
-      const next = nextEventOccurrence(event)
-      return <a className="event-card" href={`#/su-kien/${event.id}`} key={event.id}><span className="event-status">{event.status === 'confirmed' ? 'Đã công bố' : 'Dự kiến'}</span><h2>{event.title}</h2><p>{event.summary}</p><div><span>◷ {next ? next.toLocaleString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : event.scheduleLabel}</span><span>⌖ {event.location}</span></div></a>
-    })}</div>
-  </main>
+import { cityEvents } from './data/events'
+import { formatEventTime, useEvents } from './lib/eventContext'
+import EventSave from './EventSave'
+import { occurrenceFor } from '../shared/event-policy.mjs'
+export default function EventsPage(){
+ const {catalog=cityEvents,now,decisions,enabled,error,loading,refresh}=useEvents(),[tab,setTab]=useState('all'),[query,setQuery]=useState(''),[area,setArea]=useState(''),[category,setCategory]=useState(''),[price,setPrice]=useState(''),[date,setDate]=useState(''),[filters,setFilters]=useState(false)
+ const items=catalog.flatMap(event=>{const occurrence=occurrenceFor(event,now);return occurrence?[{event,occurrence}]:[]}).sort((a,b)=>a.occurrence.start-b.occurrence.start)
+ const day=(time:number)=>new Date(time+7*3600000).toISOString().slice(0,10)
+ const visible=items.filter(({event,occurrence})=>{
+  const live=occurrence.start<=now
+  return (tab==='all'||tab==='live'&&live||tab==='today'&&day(occurrence.start)<=day(now)&&day(occurrence.end)>=day(now)||tab==='saved'&&decisions[occurrence.key]?.choice==='attend')&&(!query||`${event.title} ${event.location}`.toLocaleLowerCase('vi').includes(query.toLocaleLowerCase('vi')))&&(!area||event.area===area)&&(!category||event.category===category)&&(!price||(price==='free'?event.price===t("Miễn phí"):event.price!==t("Miễn phí")))&&(!date||day(occurrence.start)<=date&&day(occurrence.end)>=date)
+ })
+ return <main className="ev-page events-index"><div className="ev-frame"><header className="ev-heading"><div><p>{t("Ra phố, gặp những điều thú vị.")}</p><h1>{t("Sự kiện Đà Nẵng")}</h1></div><a className="ev-settings" href="#/tai-khoan/notifications" aria-label={t("Cài đặt thông báo sự kiện")}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM9 21h6"/></svg></a></header>
+ <div className="ev-intro"><h2>{t("Thành phố luôn có một cuộc hẹn.")}</h2><p>{t("Chọn điều bạn muốn trải nghiệm. Lưu sự kiện để nhận lời nhắc trước khi bắt đầu.")}</p></div>
+ <nav className="ev-tabs" aria-label={t("Lọc thời gian sự kiện")}>{[['all',t("Sắp tới")],['live',t("Đang diễn ra")],['today',t("Hôm nay")],['saved',t("Đã lưu")]].map(([value,label])=><button key={value} aria-pressed={tab===value} onClick={()=>setTab(value)}>{label}{value==='saved'&&<span>{items.filter(item=>decisions[item.occurrence.key]?.choice==='attend').length}</span>}</button>)}</nav>
+ <section className="ev-filters" data-expanded={filters} aria-label={t("Tìm và lọc sự kiện")}><label className="ev-search">{t("Tìm sự kiện")}<input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder={t("Tên sự kiện hoặc địa điểm")}/></label><button className="ev-filter-toggle ev-secondary" aria-expanded={filters} onClick={()=>setFilters(!filters)}>{filters?t("Thu gọn bộ lọc"):t("Bộ lọc sự kiện")}{(date||area||category||price)?t("(đang lọc)"):''}</button><label className="ev-filter-extra">{t("Ngày")}<input type="date" value={date} onChange={e=>setDate(e.target.value)}/></label><label className="ev-filter-extra">{t("Khu vực")}<select value={area} onChange={e=>setArea(e.target.value)}><option value="">{t("Mọi khu vực")}</option>{[...new Set(catalog.map(x=>x.area))].map(x=><option key={x}>{x}</option>)}</select></label><label className="ev-filter-extra">{t("Hoạt động")}<select value={category} onChange={e=>setCategory(e.target.value)}><option value="">{t("Mọi hoạt động")}</option>{[...new Set(catalog.map(x=>x.category))].map(x=><option key={x}>{x}</option>)}</select></label><label className="ev-filter-extra">{t("Chi phí")}<select value={price} onChange={e=>setPrice(e.target.value)}><option value="">{t("Tất cả")}</option><option value="free">{t("Miễn phí")}</option><option value="check">{t("Kiểm tra nguồn")}</option></select></label></section>
+ {error&&<p className="ev-alert" role="alert">{t(error)} <button onClick={refresh}>{t("Thử lại")}</button></p>}{loading&&<p role="status">{t("Đang tải sự kiện đã lưu…")}</p>}
+ <div className="ev-results"><p>{visible.length} {" " + t("cuộc hẹn dành cho bạn")}</p><span>{t("Giờ Đà Nẵng (GMT+7)")}</span></div>
+ <div className="ev-grid">{visible.map(({event,occurrence})=><article className="ev-card" key={occurrence.key}><a className="ev-card-photo" href={`#/su-kien/${event.id}`}><img src={`${import.meta.env.BASE_URL}photos/${event.image}.jpg`} alt={event.destinationId?t("Cầu Rồng bên sông Hàn"):t("Ảnh minh họa Đà Nẵng")} loading="lazy"/><span className="ev-badge">{occurrence.start<=now?t("Đang diễn ra"):event.status==='expected'?t("Lịch dự kiến"):t("Sắp diễn ra")}</span><span className="ev-price">{event.price}</span></a><div className="ev-card-content"><small>{event.category} ({event.area})</small><h2><a href={`#/su-kien/${event.id}`}>{event.title}</a></h2><p className="ev-date">{event.allDay?event.scheduleLabel:formatEventTime(occurrence.start)}</p><p>{event.location}</p><p className="ev-summary">{event.summary}</p><div className="ev-card-bottom"><a className="ev-text-link" href={`#/su-kien/${event.id}`}>{t("Xem chi tiết")}</a><EventSave event={event} occurrence={occurrence}/></div></div></article>)}</div>
+ {!visible.length&&<section className="ev-empty"><h2>{tab==='saved'?t("Chưa có cuộc hẹn nào ở đây"):t("Chưa có sự kiện phù hợp")}</h2><p>{tab==='saved'?t("Chọn “Chắc chắn sẽ tham gia” ở sự kiện bạn thích."):t("Thử ngày khác hoặc bỏ bớt bộ lọc để khám phá thêm.")}</p><button className="ev-secondary" onClick={()=>{setTab('all');setQuery('');setArea('');setCategory('');setPrice('');setDate('')}}>{t("Xem tất cả sự kiện")}</button></section>}
+ <aside className="ev-footnote"><h2>{t("Lên kế hoạch, rồi ra phố thôi.")}</h2><p>{enabled?t("Sự kiện có giờ cụ thể được nhắc trong ba giờ trước khi bắt đầu. Chọn tham gia để nhận lời nhắc trước 30 phút."):t("Bạn đang tắt thông báo trong ứng dụng. Sự kiện vẫn được lưu; có thể bật lại trong cài đặt tài khoản.")} {" " + t("Lịch dự kiến hoặc chưa có giờ chi tiết chỉ được lưu, chưa nhắc tự động. Lịch tổ chức có thể thay đổi, hãy kiểm tra nguồn trước khi đi.")}</p></aside>
+ </div></main>
 }
-

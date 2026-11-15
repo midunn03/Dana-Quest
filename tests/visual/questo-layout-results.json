@@ -1,0 +1,1160 @@
+{
+  "checked": 35,
+  "results": [
+    {
+      "width": 360,
+      "height": 800,
+      "route": "#/kham-pha",
+      "overflow": false,
+      "navY": 706,
+      "mainY": 0,
+      "mainBottom": 706,
+      "navBottom": 790,
+      "links": [
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.609375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        }
+      ],
+      "cards": "320px"
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "#/tim-kiem",
+      "overflow": false,
+      "navY": 706,
+      "mainY": 0,
+      "mainBottom": 706,
+      "navBottom": 790,
+      "links": [
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.609375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        }
+      ],
+      "cards": "320px"
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "#/quest-cua-toi",
+      "overflow": false,
+      "navY": 706,
+      "mainY": 0,
+      "mainBottom": 706,
+      "navBottom": 790,
+      "links": [
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.609375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        }
+      ],
+      "cards": "320px"
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "#/tai-khoan",
+      "overflow": false,
+      "navY": 706,
+      "mainY": 0,
+      "mainBottom": 706,
+      "navBottom": 790,
+      "links": [
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.609375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "route": "#/su-kien",
+      "overflow": false,
+      "navY": 706,
+      "mainY": 0,
+      "mainBottom": 706,
+      "navBottom": 790,
+      "links": [
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.609375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        },
+        {
+          "width": 57.59375,
+          "height": 66
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "#/kham-pha",
+      "overflow": false,
+      "navY": 750,
+      "mainY": 0,
+      "mainBottom": 750,
+      "navBottom": 834,
+      "links": [
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.609375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        }
+      ],
+      "cards": "350px"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "#/tim-kiem",
+      "overflow": false,
+      "navY": 750,
+      "mainY": 0,
+      "mainBottom": 750,
+      "navBottom": 834,
+      "links": [
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.609375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        }
+      ],
+      "cards": "350px"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "#/quest-cua-toi",
+      "overflow": false,
+      "navY": 750,
+      "mainY": 0,
+      "mainBottom": 750,
+      "navBottom": 834,
+      "links": [
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.609375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        }
+      ],
+      "cards": "350px"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "#/tai-khoan",
+      "overflow": false,
+      "navY": 750,
+      "mainY": 0,
+      "mainBottom": 750,
+      "navBottom": 834,
+      "links": [
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.609375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "route": "#/su-kien",
+      "overflow": false,
+      "navY": 750,
+      "mainY": 0,
+      "mainBottom": 750,
+      "navBottom": 834,
+      "links": [
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.609375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        },
+        {
+          "width": 63.59375,
+          "height": 66
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "#/kham-pha",
+      "overflow": false,
+      "navY": 766,
+      "mainY": 0,
+      "mainBottom": 766,
+      "navBottom": 850,
+      "links": [
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.609375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        }
+      ],
+      "cards": "390px"
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "#/tim-kiem",
+      "overflow": false,
+      "navY": 766,
+      "mainY": 0,
+      "mainBottom": 766,
+      "navBottom": 850,
+      "links": [
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.609375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        }
+      ],
+      "cards": "390px"
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "#/quest-cua-toi",
+      "overflow": false,
+      "navY": 766,
+      "mainY": 0,
+      "mainBottom": 766,
+      "navBottom": 850,
+      "links": [
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.609375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        }
+      ],
+      "cards": "390px"
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "#/tai-khoan",
+      "overflow": false,
+      "navY": 766,
+      "mainY": 0,
+      "mainBottom": 766,
+      "navBottom": 850,
+      "links": [
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.609375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 430,
+      "height": 860,
+      "route": "#/su-kien",
+      "overflow": false,
+      "navY": 766,
+      "mainY": 0,
+      "mainBottom": 766,
+      "navBottom": 850,
+      "links": [
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.609375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        },
+        {
+          "width": 71.59375,
+          "height": 66
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "#/kham-pha",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 390,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        }
+      ],
+      "cards": "378px 378px"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "#/tim-kiem",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 390,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        }
+      ],
+      "cards": "378px 378px"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "#/quest-cua-toi",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 390,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        }
+      ],
+      "cards": "378px 378px"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "#/tai-khoan",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 390,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "route": "#/su-kien",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 390,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        },
+        {
+          "width": 149.59375,
+          "height": 63
+        },
+        {
+          "width": 149.609375,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "#/kham-pha",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 720,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "#/tim-kiem",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 720,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "#/quest-cua-toi",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 720,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "#/tai-khoan",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 720,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "route": "#/su-kien",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 720,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "#/kham-pha",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 900,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "#/tim-kiem",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 900,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "#/quest-cua-toi",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 900,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "#/tai-khoan",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 900,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "#/su-kien",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 900,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "#/kham-pha",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 1080,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "#/tim-kiem",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 1080,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "#/quest-cua-toi",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 1080,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "364px 364px 364px"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "#/tai-khoan",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 1080,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "#/su-kien",
+      "overflow": false,
+      "navY": 0,
+      "mainY": 88,
+      "mainBottom": 1080,
+      "navBottom": 88,
+      "links": [
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        },
+        {
+          "width": 160.40625,
+          "height": 63
+        },
+        {
+          "width": 160.390625,
+          "height": 63
+        }
+      ],
+      "cards": "none"
+    }
+  ]
+}

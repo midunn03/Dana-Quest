@@ -1,0 +1,2 @@
+.not-found-page{padding:var(--px-space-8);max-width:var(--px-form-width);margin-inline:auto;color:var(--px-ink)}
+.not-found-page h1{font-size:var(--text-2xl);line-height:1.5}.not-found-page p{margin-block:var(--px-space-6)}.not-found-page .quest-nav{display:flex;flex-wrap:wrap;gap:var(--px-space-4)}.not-found-page a{min-height:44px;display:inline-flex;align-items:center;color:var(--px-accent)}

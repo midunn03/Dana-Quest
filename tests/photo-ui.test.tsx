@@ -7,12 +7,14 @@ import userEvent from '@testing-library/user-event'
 import DestinationPage from '../src/DestinationPage'
 import AlbumPage from '../src/AlbumPage'
 import { loadProgress, saveAction } from '../src/lib/storage'
-import { savePhoto, preparePhoto } from '../src/lib/photos'
+import { savePhoto, preparePhoto, loadPhotos } from '../src/lib/photos'
 import { coinBalance } from '../src/lib/progress'
+
+vi.mock('../src/AuthContext',()=>({useAuth:()=>({user:null})}))
 
 afterEach(() => { cleanup(); vi.unstubAllGlobals() })
 
-it('blocks completion without a photo, performs a free local check and preserves a saved photo in album', async () => {
+it('blocks completion without a photo, performs a free local check and keeps the legacy photo private while library displays quest covers', async () => {
   const createObjectURL = vi.fn(() => 'blob:test-photo')
   const revokeObjectURL = vi.fn()
   vi.stubGlobal('URL', { createObjectURL, revokeObjectURL })
@@ -31,18 +33,16 @@ it('blocks completion without a photo, performs a free local check and preserves
   await waitFor(() => expect(enabled.disabled).toBe(false))
   await waitFor(() => expect(screen.getByRole('img', { name: 'Ảnh bạn đã lưu cho nhiệm vụ' }).getAttribute('src')).toBe('blob:test-photo'))
   await user.click(enabled)
-  await screen.findByText('Đã hoàn thành · Đã nhận 10 xu demo')
+  await screen.findByText('Đã hoàn thành · Đã nhận 10 Xu Dana')
   expect(coinBalance(await loadProgress())).toBe(10)
   nextView.unmount()
   render(<AlbumPage />)
-  await screen.findByRole('img', { name: 'Ảnh tại Chợ Hàn' })
-  expect(screen.getByText('Tải ảnh về máy').getAttribute('download')).toContain('cho-han')
-  await user.click(screen.getByRole('button', { name: 'Xóa ảnh tại Chợ Hàn' }))
-  expect(screen.getByRole('alertdialog').textContent).toContain('xóa vĩnh viễn')
-  await user.click(screen.getByRole('button', { name: 'Hủy' }))
-  expect(screen.queryByRole('alertdialog')).toBeNull()
-  expect(screen.getByRole('img', { name: 'Ảnh tại Chợ Hàn' })).toBeTruthy()
+  expect(screen.getByRole('heading',{name:'Thư viện kỷ niệm'})).toBeTruthy()
+  expect(screen.queryByRole('img',{name:'Ảnh tại Chợ Hàn'})).toBeNull()
+  expect(screen.getAllByRole('link',{name:/Cầu Rồng/}).some(link=>link.getAttribute('href')==='#/quest/cau-rong')).toBe(true)
+  expect((await loadPhotos()).some(photo=>photo.id==='cho-han:overview-photo')).toBe(true)
   expect(revokeObjectURL).toHaveBeenCalled()
+
 })
 
 it('rejects unsupported file types and oversized images before storing', async () => {

@@ -1,0 +1,905 @@
+0|Swipe to browse photos
+1|Previous photo
+2|Next photo
+3|Could not delete the photo.
+4|Back to account
+5|Memory gallery
+6|Places with stories waiting for you.
+7|Quest cover images
+8|The gallery uses quest covers to help you recognize destinations. These are not player photos or proof of a visit.
+9|Filter gallery
+10|All
+11|Started
+12|Complete
+13|Loading progress…
+14|Completed
+15|Exploring
+16|Not started
+17|challenges
+18|No journeys in this section yet
+19|Start a quest to record your journey.
+20|View all quests
+21|Previous account photos
+22|Checking previous photos…
+23|There are no previous photos in your account.
+24|Permanently delete my previous photos
+25|Permanently delete previous photos?
+26|Permanently delete previous photos
+27|Deleting…
+28|Opening your journey…
+29|Checking your account session…
+30|Checking account…
+31|Page not found
+32|This link is invalid. Return home or choose a destination on the map.
+33|Back to Explore
+34|Home
+35|Open map
+36|Loading page…
+37|Could not check your sign-in session.
+38|Please sign in first.
+39|XÓA TÀI KHOẢN
+40|Your account session changed. Please try again.
+41|This action is unavailable right now.
+42|Close sign in
+43|Back
+44|Sign in or create an account
+45|Create account
+46|Sign in
+47|Continue your quests, save memories and discover rewards.
+48|Choose a username and password to start your journey.
+49|Sign in with your username or the email linked to your account.
+50|The account service is not ready.
+51|Please try again once the service is connected.
+52|Could not connect to the account service.
+53|Continue with an account
+54|Username
+55|Username or email
+56|Choose a username
+57|Username or email
+58|Password
+59|At least 6 characters
+60|Hide password
+61|Show password
+62|Hide
+63|Show
+64|Your password must contain at least 6 characters.
+65|Connecting…
+66|New here?
+67|Already have an account?
+68|Sign up
+69|Sign in now
+70|Already have a quest code?
+71|Activate your Dana Quest code.
+72|You can add your email and phone number in Account after signing up.
+73|App information
+74|Terms
+75|Privacy
+76|Could not save your character. Check your connection and try again. Your previous selection is kept.
+77|Account
+78|Customize character
+79|A travel companion with your personal touch.
+80|Character preview
+81|Your character
+82|Your preview updates as you choose.
+83|Randomize
+84|Character options
+85|Gender
+86|Head
+87|Hair
+88|Shirt
+89|Trousers
+90|Skin colour
+91|Hair colour
+92|Shirt colour
+93|Trouser colour
+94|Saving…
+95|Save character
+96|Confirm character
+97|Changing characters keeps your progress, photos and coins.
+98|Close activation
+99|×
+100|Dana Quest journey code
+101|Activate your quest
+102|Have you activated your quest?
+103|Enter a code issued by Dana Quest. Each code belongs to one account.
+104|If you have a Dana Quest code, choose how to continue below.
+105|I have already activated it
+106|Sign in with the account that received the quest.
+107|I have a Dana Quest code
+108|Enter your code to link the quest to your account.
+109|Sign in or create an account first so the code is saved for the right person.
+110|Sign in to enter a code
+111|Quest activated
+112|Continue exploring
+113|View activated quests
+114|Dana Quest code
+115|Enter the code you received
+116|Checking code…
+117|Activate quest
+118|No code? Explore quests
+119|Only use codes issued by Dana Quest. External booking codes are not connected.
+120|Camera access was denied. Allow access in your browser or choose a photo from your device below.
+121|No webcam found. Connect a camera or choose a photo from your device below.
+122|Could not open the webcam. Another app or your system may be blocking it. You can still upload a photo.
+123|Could not open the camera. Try again or choose a photo from your device below.
+124|The camera requires HTTPS or localhost and a compatible browser. You can choose a photo from your device.
+125|Camera requires
+126|Could not process the photo.
+127|Could not take the photo.
+128|Could not take the photo. Try again or upload one.
+129|Illustrated viewfinder · camera off
+130|Open webcam
+131|Live webcam preview
+132|Camera is on. Your photo is saved only after you confirm.
+133|Waiting for the camera. Choose your preferred permission if the browser asks.
+134|Take photo
+135|Turn off camera
+136|Close camera
+137|Take mission photo
+138|Loading mission…
+139|Choose a photo mission first
+140|Back to mission
+141|Saved progress is damaged. You can reset it to continue. A recovery copy is kept and saved photos are preserved.
+142|Reset progress
+143|Reset progress?
+144|All mission progress, coins and redeemed vouchers will be reset. Album photos are kept. Are you sure?
+145|Reset
+146|Resetting…
+147|Loading progress…
+148|Mission complete!
+149|Mission not complete
+150|Continue journey
+151|Reward illustration · no coins awarded
+152|Your coins have been recorded once.
+153|Complete the mission to receive coins.
+154|View your memories →
+155|You may select more than one answer.
+156|Tap each piece in order. Use the up and down buttons to adjust.
+157|Add
+158|Your chosen order
+159|Arranged
+160|pieces.
+161|Start over
+162|Match one option to each card. Each option can be used once.
+163|Choose a match
+164|This photo challenge has not been configured.
+165|Cancel
+166|Processing…
+167|Đà Nẵng
+168|Creator not found
+169|Back to Explore
+170|Back to quest
+171|Creator
+172|Dana Quest (explorer passport)
+173|Share creator profile
+174|Not ranked
+175|Personal XP and level have not been published
+176|The team behind exploration and puzzle journeys in Đà Nẵng.
+177|This is the provisional project profile for Dana Quest journeys. Personal author details and official photos have not been supplied. This profile does not represent Questo or the University of Economics.
+178|We are developing the experience with clear directions, safe play and honest feedback from players.
+179|Show less
+180|Read more
+181|Đà Nẵng (join date not published)
+182|followers
+183|Not published
+184|following
+185|Following
+186|Follow
+187|Passport (whole journey)
+188|Country
+189|City
+190|Quests played
+191|Distance walked
+192|The creator's personal travel information has not been verified.
+193|Achievements
+194|Level
+195|Unverified
+196|These milestones are examples. No achievements have been awarded to this project profile.
+197|Quests created (
+198|, Vietnam
+199|Know your city? Suggest a quest
+200|Send an idea to the team. Self-service quest creation and publishing are not available yet.
+201|Memorable moments
+202|The creator has not shared any moments yet.
+203|Places visited
+204|No visit history has been published.
+205|Badges
+206|No verified badges yet.
+207|Destination not found
+208|← Map
+209|Daytime
+210|Sunset
+211|City at night
+212|· Illustration
+213|Choose illustration
+214|Loading saved progress…
+215|Photo album
+216|Photo:
+217|Journey tools
+218|Saved progress is damaged and cannot continue. Reset to play again. A recovery copy and your saved photos are kept.
+219|Check arrival · destination information
+220|Progress is saved in this browser. Each completed mission awards 10 coins once. AI verification is not available.
+221|Your missions
+222|Choose mission count
+223|Choose destinations in any order. Missions are assigned from a set of 10.
+224|Assigned
+225|missions. Complete
+226|missions (80%, rounded up).
+227|Mission progress
+228|missions complete.
+229|Destination complete!
+230|Cancel this journey
+231|This journey has completed missions and cannot be cancelled, to preserve your coins and progress.
+232|Mission count
+233|Complete
+234|missions. Assignments and progress are kept when you reload.
+235|Get
+236|missions
+237|Completed · 10 coins received
+238|View received reward →
+239|Full-screen photo
+240|Record arrival mission
+241|I confirm I have finished
+242|Your location is unavailable. Open “Check arrival · destination information” above and choose “Use my location”.
+243|You are not close enough to record arrival. Open “Check arrival” above to view the distance and update your location.
+244|Cancel this journey?
+245|Cancel journey
+246|Cancelling…
+247|Drag to resize. Press up to expand and down to collapse.
+248|Close destination information
+249|Overview
+250|Things to do
+251|Opening hours
+252|Address
+253|Tips
+254|Opening hours unavailable
+255|Open now
+256|Closed now
+257|Updated from Google Places
+258|Updating latest information…
+259|Popular times
+260|No popular-times data available
+261|Live data unavailable
+262|Google Places does not currently provide popular-times data through its API. This chart will update when a valid source becomes available.
+263|Start exploring
+264|Joined
+265|This journey is linked to your account through a Dana Quest code.
+266|Activated
+267|Your quests
+268|Search
+269|Explore Đà Nẵng
+270|All the journeys you have started, together in one place.
+271|Walk, solve puzzles and discover the city's stories.
+272|Map
+273|A familiar city, a new story
+274|Choose a quest, find the meeting point and explore your way.
+275|Find a quest or place
+276|Photo gallery
+277|Coin shop
+278|Enter quest code
+279|Loading your quests…
+280|Joined journeys
+281|Search results
+282|Quests for you
+283|five milestones
+284|Sample quest
+285|Sample quest progress is saved to your account.
+286|Sample quest progress is saved on this device.
+287|No matching quests found.
+288|Your first journey awaits
+289|Try another place name, with or without accents.
+290|Quests appear here after you join them.
+291|Clear search
+292|Explore quests
+293|Starting point
+294|Device location
+295|Starting point map
+296|Could not load the map. Use the address and landmarks below.
+297|Finding a walking route…
+298|You can still check the address.
+299|Walking distance remaining
+300|Choose JPEG, PNG or WebP, up to 10 MB.
+301|Save a moment
+302|A memory photo is optional. Preview it and download it to your device. It is not uploaded or rewarded.
+303|Take or choose photo
+304|Memory photo preview
+305|Download photo
+306|Remove preview
+307|On phones, your browser may open the camera or photo library. Close this panel to keep playing without selecting a photo.
+308|Retry location
+309|Address copied.
+310|You can select and copy the address above.
+311|Back to quest introduction
+312|Starting point help
+313|Find the starting point
+314|Quest meeting point
+315|You confirmed arrival at the starting point
+316|You are nearby (check the sign)
+317|Straight-line distance from your device
+318|Check the address or enable location for directions
+319|View starting point
+320|Landmarks
+321|Enlarge landmark image
+322|⛶ Enlarge
+323|71 Ngũ Hành Sơn, Đà Nẵng
+324|Copy address
+325|Before you set off
+326|Have enough battery for your journey (50% recommended).
+327|Connect to the internet to save progress.
+328|Check the venue sign from a public area.
+329|Keep entrances clear and put your phone away when crossing roads.
+330|Using device location
+331|Enable location for directions
+332|Location helps with directions. Check the starting point yourself before confirming.
+333|The image above is an illustration. A real photo of the DUE gate has not been added.
+334|Read the introduction to begin
+335|Start quest
+336|Confirm arrival
+337|Cannot find the starting point?
+338|Can you see the starting point?
+339|Need to find the correct campus gate?
+340|Check the venue sign and address above. This is your own visual confirmation, not GPS or photo verification.
+341|Confirm only when you are at the right place in a safe public area.
+342|I am at this exact point
+343|I have not found it yet
+344|Check the name “
+345|” and the starting point address. Do not enter restricted areas.
+346|View landmarks
+347|View on map
+348|Help and issue reports
+349|Directions
+350|Challenges
+351|Content and language
+352|App error
+353|Other
+354|Getting started
+355|How do I start the DUE quest?
+356|Read the introduction and safety notes, then find the campus gate at 71 Ngũ Hành Sơn. Check its sign and confirm arrival. Once saved, choose Start quest.
+357|What if GPS does not work?
+358|Use the starting point map and address. Choose Cannot find the starting point for help. Arrival is your own visual confirmation, not verified GPS.
+359|Playing a quest
+360|Is there a time limit?
+361|This is a solo quest without a countdown. Pause from the menu and continue later.
+362|Can I skip a challenge or reveal answers?
+363|Solve challenges correctly in order. Hints guide your observations without costing coins. Skipping and marking yourself correct are unavailable.
+364|Will reloading lose results or award rewards again?
+365|When signed in, successful actions are saved to your account. Reloading restores the saved step. Each challenge awards its reward once.
+366|Technical help
+367|What if I lose connection while submitting an answer?
+368|If saving has not been confirmed, stay here and retry when connected. Network failures do not count as wrong answers. The server prevents duplicate rewards.
+369|Where are memory photos saved?
+370|Preview photos and download them to your device. They are not automatically uploaded, rewarded or used as proof of completion.
+371|Are issue reports sent automatically?
+372|An online reporting channel is not connected. Download a report file and send it manually to the project administrator. Nothing is sent automatically.
+373|Report file created for download. It has not been sent anywhere.
+374|‹ Back to help
+375|How can we help?
+376|Choose what you need help with.
+377|Frequently asked questions
+378|Find quest instructions
+379|Report a problem
+380|Describe what happened
+381|Live support chat is not available yet.
+382|Help with finding the starting point and playing quests.
+383|Search questions
+384|Search questions and answers…
+385|Question categories
+386|No matching questions. Try another keyword or report a problem.
+387|Still need help? Write an issue report
+388|What went wrong?
+389|Choose issue category
+390|Describe the issue (do not include passwords or private information)
+391|Which screen were you on, what did you tap and what happened?
+392|The file downloads to your device for you to send manually. It is not sent automatically.
+393|Download issue report
+394|Simulated sign-in at 07:00. Eligible notices appear.
+395|Dragon Bridge fire show (demo 09:30)
+396|Notification test room
+397|Simulated Dragon Bridge event at 09:30. Real schedules and accounts are unchanged; no system notifications are sent.
+398|Simulate playing a quest (defer notifications)
+399|Reminder read. It will not repeat for this occurrence.
+400|Saved. One reminder will appear between 09:00 and 09:30.
+401|Snoozed for one hour from now; invitations stop at 09:00.
+402|Playing a quest: notification deferred.
+403|The event has started. Expired notifications are not sent.
+404|No notification is due at this time.
+405|Demo reset to 07:00.
+406|Start over
+407|Event not found
+408|Back to Events
+409|‹ All events
+410|Cầu Rồng
+411|Đà Nẵng illustration
+412|Ended
+413|Happening now
+414|Expected schedule
+415|Upcoming
+416|Before you go
+417|Information from the organizer
+418|Schedules and entry conditions can change. Check the source before setting off.
+419|View official source ↗
+420|Your plans
+421|Time
+422|Place
+423|Cost
+424|No exact time is available, so automatic reminders are disabled.
+425|Save your plan and receive a reminder 30 minutes before the event while using the website. This does not book a ticket.
+426|Open map and directions ↗
+427|Explore this place in Dana Quest
+428|Link copied.
+429|Share event
+430|Event notification
+431|Close reminder
+432|Close and snooze for one hour
+433|An event you saved
+434|A date with Đà Nẵng
+435|(in
+436|minutes)
+437|I'll be there
+438|Later
+439|View event
+440|Got it
+441|Close or snooze: remind again in one hour, before the final 30 minutes.
+442|The event service is not ready. Reload or try again later.
+443|Could not load your reminders.
+444|Sign in to save events and receive reminders.
+445|Your event starts soon
+446|Sign in to save event
+447|Saved (tap to unsave)
+448|Free
+449|Step outside and find something wonderful.
+450|Đà Nẵng events
+451|Event notification settings
+452|The city always has something planned.
+453|Choose what you want to experience. Save an event for a reminder before it starts.
+454|Filter events by time
+455|Upcoming
+456|Today
+457|Saved
+458|Search and filter events
+459|Find events
+460|Event or place name
+461|Collapse filters
+462|Event filters
+463|(filtered)
+464|Date
+465|Area
+466|All areas
+467|Activity
+468|All activities
+469|Check source
+470|Retry
+471|Loading saved events…
+472|events for you
+473|Đà Nẵng time (GMT+7)
+474|Dragon Bridge by the Hàn River
+475|View details
+476|No events here yet
+477|No matching events
+478|Choose “I'll be there” on an event you like.
+479|Try another date or remove filters to find more.
+480|View all events
+481|Make a plan, then head outside.
+482|Events with an exact time may invite you within three hours of starting. Join an event for a reminder 30 minutes before it starts.
+483|In-app notifications are off. Your events are still saved; turn notifications on in account settings.
+484|Events without an exact confirmed time can be saved but have no automatic reminders. Check the source before you go.
+485|Close demo
+486|Test reminders (Dragon Bridge at 9:30)
+487|Location is unavailable. Open the app using HTTPS or localhost and check your device's location support.
+488|The location is old or not accurate enough. Try again where GPS reception is better.
+489|The map is not ready. Try again once it has loaded.
+490|Location permission was denied. Enable it in browser settings and try again.
+491|Location timed out. Enable GPS, check your connection and retry.
+492|Could not determine your device's current location. Please retry.
+493|Voice search is not supported in this browser. You can type your search.
+494|We could not hear clearly. Speak again or type your search.
+495|Zoom in
+496|Zoom out
+497|[DANA QUEST] Could not initialize map:
+498|Explore map
+499|Find a place
+500|For example: museums near me
+501|Find destinations
+502|Listening…
+503|Voice search
+504|Finding my location
+505|Center map on my location
+506|My location
+507|Could not initialize the map in this browser.
+508|The OpenStreetMap background did not load completely. Check your connection.
+509|You can still select a destination below.
+510|Reload map
+511|Loading map…
+512|Map of Đà Nẵng destinations
+513|Events
+514|No upcoming events.
+515|HAPPENING NOW
+516|No matching places found.
+517|Up to 6 places within 3 km of your device, allowing for location accuracy.
+518|Waiting for location permission and device position…
+519|No matching places within 3 km of you.
+520|‹ Back to sign in
+521|Privacy information
+522|App usage information
+523|The Dana Quest service stores accounts, profiles, progress and mission photos. Passwords are handled on the server and are not stored as plain text in your browser.
+524|Exploration plans and some prototype data are stored in this browser. Preferences are not synchronized across devices yet.
+525|Location is requested only when you use a feature that needs it. You may decline and browse places manually. External map services can receive requests for background tiles.
+526|Photos are sent only when you choose to save a mission photo. Manage photos in the gallery and contact information in Account.
+527|Dana Quest is an exploration app for Đà Nẵng. This information describes available features; commercial release policies have not been published.
+528|Observe and move only in permitted areas, follow venue rules and never play while driving.
+529|Dana Quest codes link existing journeys to accounts. Code purchases are not connected to Tripadvisor, Viator or external booking services.
+530|Coins and rewards are prototype data. They are not money or vouchers with real redemption value.
+531|Install DANA QUEST
+532|DANA QUEST is already in app mode
+533|Install DANA QUEST on your phone
+534|You are using full-screen mode.
+535|In Safari, choose Share, then “Add to Home Screen”.
+536|Install from your browser without the App Store or Google Play.
+537|Open your browser menu and choose “Install app” or “Add to Home Screen”.
+538|Install app
+539|Check location
+540|Updating your location…
+541|Finding your location…
+542|You have arrived!
+543|Distance to this point
+544|Allow location so DANA QUEST can tell you when you are nearby and unlock the arrival mission.
+545|Measuring again — your previous location is still shown.
+546|Checking…
+547|Update distance
+548|Use my location
+549|Updated at
+550|· accuracy approximately
+551|This location is old. Update the distance again.
+552|Location accuracy is low. Try again in a more open area.
+553|You are close enough to complete the mission at this place.
+554|Your location is used to calculate distance and confirm arrival at an exploration point.
+555|Explore
+556|Main navigation
+557|Your location
+558|Near a turn · estimated position
+559|Finding location…
+560|Location accuracy is low. Obtaining a better GPS fix…
+561|Calculating walking route…
+562|Recalculating route…
+563|Map of your location and destination
+564|Back to details
+565|Expand or collapse directions
+566|Arrive
+567|About
+568|minutes · Shortest walking route
+569|Try location
+570|Could not load map tiles.
+571|Reach the starting point to unlock missions
+572|View missions
+573|Leave this journey?
+574|Would you like to leave this journey and return to the previous page?
+575|Leave journey
+576|Suggested places
+577|FEATURED NEARBY
+578|Notifications
+579|Close notification
+580|Exploring somewhere new
+581|Bring home more than photographs.
+582|Planning a trip
+583|Prepare your journey before you set off.
+584|At home and ready for a great weekend
+585|Find a new story in a familiar city.
+586|Your browser does not support location. You can still choose Đà Nẵng.
+587|You are near Đà Nẵng. Ready to explore!
+588|You are outside Đà Nẵng. Our content is currently based here; you can still preview journeys.
+589|Location permission was denied. Choose Đà Nẵng manually or enable permission in your browser.
+590|Could not find your location. You can still choose Đà Nẵng manually.
+591|Find your journey
+592|Ready to explore Đà Nẵng?
+593|Let's find the quests waiting for you in this city.
+594|Find a city
+595|quests and exploration journeys
+596|Only Đà Nẵng is available for now. Try “Đà Nẵng” or “Da Nang”.
+597|Use my precise location
+598|Preview quests without granting location permission.
+599|Yes, explore Đà Nẵng
+600|Already have a booking code or invitation?
+601|Your plans
+602|Right now, you are…
+603|Purpose of your experience
+604|Your choice is remembered in this browser. You can skip this step.
+605|Continue
+606|Skip, take me to quests
+607|Entrance path to APEC Park in Đà Nẵng
+608|The story stays after every puzzle.
+609|A quest is a story you step into. Real streets, real places and challenges to discover right where you are.
+610|Choose a journey, notice the small things and keep memories your way.
+611|Photo: Quang Nguyen Vinh (Pexels)
+612|View my quests
+613|Back to my choices
+614|Download photo
+615|Could not read your saved photo. Reload the page.
+616|Checking photo quality on your device…
+617|Could not save photo.
+618|Photo saved to album.
+619|Could not save photo. Please retry.
+620|Free on-device photo checks identify images that are too dark, bright, small or lacking detail. The tool does not accurately recognize landmarks.
+621|Your saved mission photo
+622|Photo preview
+623|Photo preview — not saved
+624|Preview before saving
+625|Save photo
+626|Discard photo
+627|Choose a photo from your device
+628|JPG, PNG, WebP · Up to 10 MB. One photo per mission; a new photo replaces the previous one before completion. Photos are resized to save space.
+629|Processing and saving photo…
+630|Photo saved. The mission is not automatically completed.
+631|No saved photo yet.
+632|✓ Photo check passed
+633|Photo check failed
+634|Please check this photo
+635|Automatic checks are suggestions. For example, a valid night photo may be considered too dark. If your photo meets the mission, tick the box below to continue.
+636|I have checked the photo and want to use it
+637|Confirm photo and complete
+638|I checked it · Complete
+639|EXPLORER
+640|Hello, ready to explore?
+641|Change character
+642|Choose character
+643|Destination illustration
+644|Quest not found
+645|Sign in to play
+646|Start exploring →
+647|Customize your character to begin
+648|Reach the starting point
+649|Share quest
+650|Location photo not yet available
+651|Invite a friend to explore
+652|Remove favourite quest
+653|Save favourite quest
+654|Prototype (in testing)
+655|At your own pace
+656|Choose 5 to 10 missions
+657|Distance not measured
+658|Map ›
+659|A short trip, a memorable story.
+660|Choose 5 to 10 missions and complete at least 80% to reach the goal. Photo and self-confirmation missions keep their existing rules.
+661|Observe the place, solve puzzles and unlock chapters in order. Progress is saved to your account so you can pause and return.
+662|Try this quest
+663|Free during testing. Play the full journey and tell us what worked and what needs improvement.
+664|Start at
+665|Explore at your own pace
+666|A solo session. Share the link with friends; group rooms and competition are not available yet.
+667|Playtester
+668|1 player
+669|Using current solo rules
+670|Get ready to play
+671|We would love you to
+672|Experience the journey from start to finish.
+673|Tell us which parts are clear and which are difficult to use.
+674|Leave an honest review when finished.
+675|Share the link with friends who want to explore.
+676|Why is this quest in testing?
+677|We are improving directions, wording and the pace of the experience. Your feedback helps us prepare for release.
+678|Send feedback or report a problem
+679|Player photos
+680|From people who have taken the journey.
+681|No public photos yet
+682|Your album photos remain private. Public photo review is not available for this quest yet.
+683|Open my album
+684|What you will experience
+685|Complete your journey
+686|Complete at least 80% of your chosen missions. Destination coin and reward rules still apply.
+687|Solve each challenge correctly to receive its XP and coins once.
+688|Reviews
+689|Loading reviews…
+690|reviews
+691|New
+692|No reviews yet
+693|Be among the first to explore and share your journey.
+694|Your public review has been saved.
+695|Update your review
+696|Share your experience
+697|Rating
+698|Your review
+699|What will you remember most?
+700|Your display name and review are public. Do not include sensitive personal information.
+701|Save review
+702|Complete the quest to leave a review. You can report problems while playing.
+703|Journey information
+704|Finish at
+705|Check the directions at the final point. Separate coordinates have not been published.
+706|Playing time
+707|When the place is accessible
+708|Language
+709|Vietnamese
+710|Charge your phone or bring a power bank.
+711|Bring water, a hat and sun protection.
+712|Choose suitable weather and follow venue opening times.
+713|Meet the creator
+714|Development team profile (provisional)
+715|journeys created
+716|(no reviews yet)
+717|Choose your mission count. Complete at least 80% of the goal using the existing rules.
+718|No countdown and no skipping challenges. Solve each one to unlock the next story.
+719|Put your phone away when crossing roads.
+720|I have read the instructions and safety notes.
+721|Coins and redemptions follow the existing destination mission rules.
+722|Quest XP and coins are recorded once for each correctly solved challenge.
+723|Missions and progress
+724|Play free
+725|Venue entry fees, if any, are separate
+726|Help improve the experience
+727|Read before playing
+728|Journey map
+729|Opening map…
+730|Invite a friend
+731|Share a quest link so friends can start their own journey. Each person plays separately; group play and competitions are not available yet.
+732|Copy quest link
+733|Share
+734|All your joined journeys in one place.
+735|Sign in to view your joined quests, continue your journey and save progress.
+736|Reward shop
+737|Loading coins…
+738|Could not load coin balance
+739|FIFTY YEARS OF MEMORIES
+740|DUE journey illustration
+741|Close panel
+742|Enter answer
+743|Choose one answer
+744|Arrange in order
+745|Match pairs
+746|Choose multiple answers
+747|Observe
+748|Photo
+749|Challenge help
+750|Open this hint?
+751|Observation hint
+752|Leave the game?
+753|Unlocked story
+754|Current story
+755|Journey images
+756|Route to starting point
+757|Stops
+758|Memory photo
+759|Your journey card
+760|Loading your journey…
+761|Could not open the journey
+762|Retry loading
+763|Back to quest information
+764|Quest not started
+765|Open quest information
+766|Progress card created for download. This is a progress card, not a screenshot.
+767|See you on your next journey
+768|Your quest progress has been kept. Continue from Your quests.
+769|Back to Explore
+770|Return to paused quest
+771|Open quest menu
+772|View stops
+773|Free pace
+774|No timer
+775|ϟ
+776|Open help
+777|Journey progress
+778|YOUR JOURNEY
+779|Solved correctly
+780|Locked
+781|View map
+782|Instructions and help
+783|Pause
+784|Summary
+785|Back to story
+786|Report a problem at this step
+787|Journey paused
+788|Your solved challenges are saved. Continue when you are ready.
+789|Journey complete
+790|You solved
+791|challenges.
+792|Quest rewards, separate from destination reward coins.
+793|Read the story again
+794|Save journey card
+795|Correct answer!
+796|Recorded
+797|XP and
+798|Your result is saved. Reloading does not award it again.
+799|Enlarge illustration
+800|Get directions
+801|View starting point map
+802|Save a memory photo (optional)
+803|Need a hint?
+804|Help
+805|Read the current story again
+806|Continue quest
+807|View your quests
+808|View summary
+809|Continue story
+810|Continue to challenge
+811|Check answer
+812|Customize
+813|Text size (
+814|This quest has no background music or narration yet.
+815|Journey
+816|⌖ View stops
+817|▤ Read from the beginning
+818|Pause quest
+819|Ⅱ Pause quest
+820|⌖ Directions to the starting point
+821|Support
+822|▣ Memory photo
+823|▧ Save journey card
+824|? Frequently asked questions
+825|⚑ Report a problem
+826|↪ Leave game
+827|View observation hint
+828|♧ View observation hint
+829|No coin cost
+830|▤ Read story again
+831|Solve correctly to unlock the next part. Rewards stay the same.
+832|Hints guide your observations. They do not reveal answers or cost XP or coins.
+833|Read hint
+834|No, go back
+835|Look only for the street number, not the postcode or phone number. Check the sign or the official address at the gate.
+836|Compare the founding milestone with the fifty-year journey in the story. Distinguish its beginning from later name changes.
+837|You still need to enter or choose an answer and check it.
+838|Content sources
+839|Sources
+840|Your solved progress is saved for later. Reopening does not award more rewards.
+841|Save and leave
+842|Keep playing
+843|Back to current step
+844|Enlarged illustration (scroll to view)
+845|Scroll inside the image to explore it. Check the real sign and address before confirming arrival.
+846|All challenges are in the destination area. Use only permitted paths.
+847|Open directions and device location
+848|quest coins recorded. Challenges unlock in order.
+849|challenges solved correctly
+850|Download a progress card to your device. This is not a voucher or screenshot.
+851|Download journey card
+852|Rereading stories does not erase progress or award rewards again.
+853|Quest starting point map
+854|Could not load map tiles. You can still use the address and list below.
+855|Only known coordinates are shown. There is not enough data to draw a complete walking route or calculate the whole quest distance.
+856|Directions to starting point ↗
+857|Memories
+858|Drinks
+859|Food
+860|Transport
+861|Entertainment
+862|Souvenirs
+863|YOUR SPACE
+864|Choose a gift for your exploration journey.
+865|Loading…
+866|History
+867|Loading quest coins…
+868|Could not load quest coins
+869|Quest coins are saved separately and cannot currently redeem vouchers.
+870|View my journey →
+871|Sample voucher · no real payment value.
+872|Filter coin rewards
+873|Validity
+874|Not applicable · sample voucher
+875|Conditions
+876|Redeemed · sample
+877|Redeem
+878|Need more
+879|How do Dana Coins work?
+880|Each completed mission awards
+881|coins once. Each voucher can be redeemed once. Purchases, delivery and physical gifts are not available.
+882|Earned:
+883|· Spent:
+884|Redemption history
+885|No redeemed vouchers yet.
+886|· Sample voucher redeemed; there is no real redemption code.
+887|Confirm reward redemption?
+888|Confirm redemption
+889|Redeeming…
+890|Step outside.
+891|Bring home a story.
+892|Explore Đà Nẵng through puzzles and journeys along its streets.
+893|Choose your quest. Explore at your own pace.
+894|Already have a quest code or invitation?
+895|Resume background slideshow
+896|Pause background slideshow
+897|Edit profile
+898|Character
+899|Explorer journal
+900|Coin wallet
+901|Settings
+902|Account space
+903|Your space
+904|Journeys, memories and your account, all in one place.

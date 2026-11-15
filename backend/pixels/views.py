@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 
 from .models import Place, PlaceSprite
+from accounts.ownership import public_owner_checked
 
 
 def place_payload(place, position):
@@ -16,6 +17,7 @@ def place_payload(place, position):
     }
 
 
+@public_owner_checked
 @require_GET
 def places(request):
     """Dữ liệu địa điểm cho giao diện.

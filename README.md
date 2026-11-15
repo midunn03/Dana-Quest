@@ -1,5 +1,7 @@
 ﻿# DANA QUEST
 
+> Điểm vào tài liệu: [DOC-INDEX](docs/DOC-INDEX.md), [DESIGN.md](DESIGN.md), [nguồn ảnh chính](docs/references/VISUAL-SOURCES.md). Các báo cáo trong docs/archive là lịch sử; đọc TASKS và mã hiện tại để xác định trạng thái mới nhất.
+
 Ứng dụng Vite + React + TypeScript với giao diện tiếng Việt, bản đồ khám phá, quest theo địa điểm, dẫn đường đi bộ và lịch sự kiện Đà Nẵng.
 
 ## Quest demo DUE

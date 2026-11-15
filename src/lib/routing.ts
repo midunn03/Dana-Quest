@@ -1,22 +1,24 @@
-﻿import { distanceMeters, type LocationSample } from './location'
+import { localeTag } from '../i18n/locale'
+import { interpolate, t } from '../i18n/locale'
+import { distanceMeters, type LocationSample } from './location'
 export type Point = [number, number]
 export interface RouteStep { distance: number; name: string; maneuver: { type: string; modifier?: string; location: Point; exit?: number }; geometry: { coordinates: Point[] } }
 export interface WalkingRoute { distance: number; duration: number; geometry: { coordinates: Point[] }; legs: { steps: RouteStep[] }[] }
 export interface RouteProgress { remaining: number; toTurn: number; next: RouteStep; offRoute: number; points: Point[] }
 export const toLatLng = ([lng, lat]: Point): Point => [lat, lng]
-export function formatMeters(value: number) { return value < 1000 ? `${Math.max(0, Math.round(value))} m` : `${(value / 1000).toLocaleString('vi-VN', { maximumFractionDigits: 1 })} km` }
+export function formatMeters(value: number) { return value < 1000 ? `${Math.max(0, Math.round(value))} m` : `${(value / 1000).toLocaleString(localeTag(), { maximumFractionDigits: 1 })} km` }
 export function turnText(step: RouteStep) {
   const { type, modifier, exit } = step.maneuver
-  const street = step.name ? ` vào ${step.name}` : ''
-  if (type === 'arrive') return 'Đến điểm đến'
-  if (type.includes('roundabout') || type === 'rotary') return `Vào vòng xuyến${exit ? `, ra lối thứ ${exit}` : ''}${street}`
-  if (modifier?.includes('uturn')) return `Quay đầu${street}`
-  if (modifier?.includes('left')) return `${modifier === 'slight left' ? 'Chếch trái' : modifier === 'sharp left' ? 'Rẽ ngoặt trái' : 'Rẽ trái'}${street}`
-  if (modifier?.includes('right')) return `${modifier === 'slight right' ? 'Chếch phải' : modifier === 'sharp right' ? 'Rẽ ngoặt phải' : 'Rẽ phải'}${street}`
-  return `Đi thẳng${step.name ? ` trên ${step.name}` : ''}`
+  const street = step.name ? ` ${interpolate("vào ${0}",[step.name])}` : ''
+  if (type === 'arrive') return t("Đến điểm đến")
+  if (type.includes('roundabout') || type === 'rotary') return interpolate("Vào vòng xuyến${0}${1}",[exit ? interpolate(", ra lối thứ ${0}",[exit]) : '',street])
+  if (modifier?.includes('uturn')) return interpolate("Quay đầu${0}",[street])
+  if (modifier?.includes('left')) return `${modifier === 'slight left' ? t("Chếch trái") : modifier === 'sharp left' ? t("Rẽ ngoặt trái") : t("Rẽ trái")}${street}`
+  if (modifier?.includes('right')) return `${modifier === 'slight right' ? t("Chếch phải") : modifier === 'sharp right' ? t("Rẽ ngoặt phải") : t("Rẽ phải")}${street}`
+  return interpolate("Đi thẳng${0}",[step.name ? ` ${interpolate("trên ${0}",[step.name])}` : ''])
 }
 export function turnIcon(step?: RouteStep) { return step?.maneuver.type === 'arrive' ? '⚑' : step?.maneuver.modifier?.includes('uturn') ? '↶' : step?.maneuver.modifier?.includes('left') ? '↰' : step?.maneuver.modifier?.includes('right') ? '↱' : '↑' }
-export function nextTurnText(step: RouteStep) { const text = turnText(step); return text[0].toLocaleLowerCase('vi-VN') + text.slice(1) }
+export function nextTurnText(step: RouteStep) { const text = turnText(step); return text[0].toLocaleLowerCase(localeTag()) + text.slice(1) }
 export function routeProgress(route: WalkingRoute, sample: LocationSample): RouteProgress {
   const points = route.geometry.coordinates.map(toLatLng)
   const cumulative = [0]

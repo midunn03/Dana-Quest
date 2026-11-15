@@ -3,7 +3,7 @@ import base64
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import GamePhoto, GameState
+from .models import GamePhoto, GameState, GameStateBackup, QuestActivationCode, QuestRunState
 
 
 @admin.register(GameState)
@@ -26,9 +26,9 @@ class GameStateAdmin(admin.ModelAdmin):
 
 @admin.register(GamePhoto)
 class GamePhotoAdmin(admin.ModelAdmin):
-    list_display = ('user', 'destination_id', 'mission_id', 'thumb')
-    list_filter = ('destination_id',)
-    readonly_fields = ('user', 'key', 'destination_id', 'mission_id', 'created_ms', 'thumb')
+    list_display = ('user', 'destination_id', 'mission_id', 'quarantined', 'thumb')
+    list_filter = ('destination_id', 'quarantined')
+    readonly_fields = ('user', 'key', 'destination_id', 'mission_id', 'created_ms', 'quarantined', 'thumb')
     exclude = ('data',)
 
     @admin.display(description='Ảnh')
@@ -39,3 +39,37 @@ class GamePhotoAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+
+class SnapshotAdmin(admin.ModelAdmin):
+    """View runtime-owned records without bypassing API progression guards."""
+    def get_readonly_fields(self, request, obj=None):
+        return tuple(field.name for field in self.model._meta.fields)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(QuestRunState)
+class QuestRunStateAdmin(SnapshotAdmin):
+    list_display = ('user', 'updated')
+    search_fields = ('user__username',)
+
+
+@admin.register(GameStateBackup)
+class GameStateBackupAdmin(SnapshotAdmin):
+    list_display = ('user', 'revision', 'created')
+    search_fields = ('user__username',)
+
+
+@admin.register(QuestActivationCode)
+class QuestActivationCodeAdmin(SnapshotAdmin):
+    list_display = ('quest_id', 'user', 'expires_at', 'redeemed_at', 'revoked')
+    list_filter = ('revoked',)
+    search_fields = ('quest_id', 'user__username')
