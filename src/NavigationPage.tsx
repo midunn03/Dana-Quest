@@ -666,7 +666,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
       <div className="delay-nudge-overlay" role="dialog" aria-modal="true" aria-labelledby="delay-nudge-title">
         <div className="delay-nudge-modal">
           <div className="delay-nudge-badge">⚡ TIẾP TỤC HÀNH TRÌNH NÀO!</div>
-          <h2 id="delay-nudge-title" className="delay-nudge-title">BẠN ĐANG DỪNG LẠI À? 🏃💨</h2>
+          <h3 id="delay-nudge-title" className="delay-nudge-title">BẠN ĐANG DỪNG LẠI À? 🏃💨</h3>
           <p className="delay-nudge-body">
             Bạn đã dừng chân nghỉ một lát rồi đó! Chỉ còn <strong>{progress ? formatMeters(progress.remaining) : 'một đoạn ngắn'}</strong> nữa là tới <strong>{place.name}</strong> để ẵm trọn <strong>10 Green Coins</strong> và mở khóa nhiệm vụ khám phá!
           </p>

@@ -1,10 +1,10 @@
 import { interpolate } from './i18n/locale'
 import { t } from './i18n/locale'
 import { useRef, useState } from 'react'
-import type { PlacePhoto } from './data/destinations'
+import type { AdminPhoto } from './lib/placeContent'
 
 /** Bộ ảnh do admin tự tải lên cho địa điểm (vuốt ngang hoặc bấm mũi tên). */
-export default function AdminGallery({ name, photos }: { name: string; photos: PlacePhoto[] }) {
+export default function AdminGallery({ name, photos }: { name: string; photos: AdminPhoto[] }) {
   const track = useRef<HTMLDivElement>(null)
   const [index, setIndex] = useState(0)
   if (photos.length === 0) return null
