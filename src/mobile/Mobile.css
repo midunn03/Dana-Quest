@@ -361,77 +361,260 @@
 
 
 /* --------------------------------------------------------------------------
-   5. Tối ưu Trang Bản Đồ (Explore / Atlas) trên Điện thoại
+   5. Tối ưu Trang Bản Đồ (Explore / Atlas) trên Điện thoại: BẢN ĐỒ CHIẾM 80%
    -------------------------------------------------------------------------- */
 .app-shell.device-mobile-shell > .atlas-page,
-.device-mobile-shell .atlas-page {
+.device-mobile-shell .atlas-page,
+.device-mobile .atlas-page {
   display: flex !important;
   flex-direction: column !important;
   height: 100% !important;
+  max-height: 100% !important;
   overflow: hidden !important;
   padding: 0 !important;
-}
-
-.app-shell.device-mobile-shell .atlas-map-area,
-.device-mobile-shell .atlas-map-area {
-  flex: 1 1 50% !important;
-  min-height: 250px !important;
   position: relative !important;
 }
 
+/* Phần Bản đồ chiếm 80% diện tích màn hình */
+.app-shell.device-mobile-shell .atlas-map-area,
+.device-mobile-shell .atlas-map-area,
+.device-mobile .atlas-map-area {
+  order: 1 !important;
+  flex: 1 1 80% !important;
+  height: 80% !important;
+  min-height: 75vh !important;
+  position: relative !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.device-mobile-shell .atlas-map-area > .atlas-map,
+.device-mobile .atlas-map-area > .atlas-map {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Thanh Sidebar/Drawer đáy thu gọn chiếm 20% còn lại */
 .app-shell.device-mobile-shell .atlas-sidebar,
-.device-mobile-shell .atlas-sidebar {
-  flex: 1 1 50% !important;
+.device-mobile-shell .atlas-sidebar,
+.device-mobile .atlas-sidebar {
+  order: 2 !important;
+  flex: 0 0 20% !important;
+  height: 20% !important;
+  max-height: 22vh !important;
+  min-height: 110px !important;
   border-right: none !important;
   border-top: 2px solid var(--px-ink, #0f172a) !important;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch;
-  padding: 10px 14px calc(75px + env(safe-area-inset-bottom, 0px)) !important;
-  background: var(--px-surface, #ffffff);
+  padding: 8px 12px calc(65px + env(safe-area-inset-bottom, 0px)) !important;
+  background: var(--px-surface, #ffffff) !important;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08) !important;
+  z-index: 100 !important;
 }
 
-.app-shell.device-mobile-shell .atlas-sidebar header {
-  padding: 8px 0 6px !important;
+/* Ẩn header văn bản rườm rà (h1 BẢN ĐỒ HÀNH TRÌNH, p Chọn điểm hẹn) */
+.device-mobile-shell .atlas-sidebar header,
+.device-mobile .atlas-sidebar header {
+  display: none !important;
 }
 
-.app-shell.device-mobile-shell .atlas-sidebar h1 {
-  font-size: 18px !important;
-  margin: 4px 0 !important;
+/* Ô tìm kiếm nổi gọn gàng trên bản đồ */
+.device-mobile-shell .atlas-search,
+.device-mobile .atlas-search {
+  margin: 4px 0 8px !important;
 }
 
-.app-shell.device-mobile-shell .atlas-search {
-  margin: 6px 0 10px !important;
+.device-mobile-shell .atlas-search input,
+.device-mobile .atlas-search input {
+  height: 40px !important;
+  min-height: 40px !important;
+  font-size: 13px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
 }
 
-.app-shell.device-mobile-shell .atlas-search input {
-  min-height: 44px !important;
-  font-size: 15px !important;
-}
-
-.app-shell.device-mobile-shell .atlas-filters {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
+/* Bộ lọc dạng chip gọn nhẹ */
+.device-mobile-shell .atlas-filters,
+.device-mobile .atlas-filters {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
   gap: 6px !important;
-  margin: 0 0 10px !important;
+  margin: 0 0 8px !important;
+  padding-bottom: 2px !important;
+  scrollbar-width: none !important;
 }
 
-.app-shell.device-mobile-shell .atlas-filters button {
-  min-height: 42px !important;
+.device-mobile-shell .atlas-filters button,
+.device-mobile .atlas-filters button {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  border-radius: 6px !important;
+}
+
+.device-mobile-shell .atlas-filters button[aria-pressed=true],
+.device-mobile .atlas-filters button[aria-pressed=true] {
+  background: var(--px-primary, #216447) !important;
+  color: #ffffff !important;
+}
+
+.device-mobile-shell .atlas-location,
+.device-mobile .atlas-location {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+  margin: 4px 0 8px !important;
+  padding: 4px 8px !important;
+  border: 1px dashed var(--px-border, #cbd5e1) !important;
+  border-radius: 6px !important;
+}
+
+.device-mobile-shell .atlas-location button,
+.device-mobile .atlas-location button {
+  min-height: 32px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.device-mobile-shell .atlas-list-heading,
+.device-mobile .atlas-list-heading {
+  padding: 2px 4px 6px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.device-mobile-shell .atlas-list > button,
+.device-mobile .atlas-list > button {
+  padding: 8px 6px !important;
+  gap: 8px !important;
+  border-bottom: 1px solid var(--px-border, #f1f5f9) !important;
+}
+
+.device-mobile-shell .atlas-list strong,
+.device-mobile .atlas-list strong {
   font-size: 13px !important;
 }
 
-.app-shell.device-mobile-shell .atlas-selection {
+.device-mobile-shell .atlas-list small,
+.device-mobile .atlas-list small {
+  font-size: 11px !important;
+}
+
+/* Thẻ thông tin địa điểm được chọn (.atlas-selection) - Gọn ở đáy, để lộ 80% bản đồ */
+.app-shell.device-mobile-shell .atlas-selection,
+.device-mobile-shell .atlas-selection,
+.device-mobile .atlas-selection {
   position: absolute !important;
   bottom: 12px !important;
   left: 10px !important;
   right: 10px !important;
   z-index: 1000 !important;
   max-width: none !important;
-  border: 3px solid var(--px-ink, #0f172a) !important;
-  box-shadow: 4px 4px 0 var(--px-ink, #0f172a) !important;
+  max-height: 155px !important;
+  border: 2px solid var(--px-ink, #0f172a) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
   background: var(--px-surface, #ffffff) !important;
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  overflow-y: auto !important;
+}
+
+.device-mobile-shell .atlas-selection h2,
+.device-mobile .atlas-selection h2 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin: 2px 24px 4px 0 !important;
+  line-height: 1.35 !important;
+}
+
+.device-mobile-shell .atlas-selection p,
+.device-mobile .atlas-selection p {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  margin: 0 0 8px !important;
+  color: var(--px-ink-muted, #475569) !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.device-mobile-shell .atlas-selection a,
+.device-mobile .atlas-selection a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 14px !important;
+  min-height: 36px !important;
+  background: var(--px-primary, #216447) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   5b. Tối ưu Màn hình Chơi Quest & Thử thách (.quest-player) trên Điện thoại
+   -------------------------------------------------------------------------- */
+.app-shell.device-mobile-shell .quest-player,
+.device-mobile .quest-player {
+  padding: 10px 14px 24px !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-y: auto !important;
+}
+
+.device-mobile-shell .quest-player header,
+.device-mobile .quest-player header {
+  padding: 6px 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.device-mobile-shell .quest-player h1,
+.device-mobile .quest-player h1,
+.device-mobile-shell .quest-player h2,
+.device-mobile .quest-player h2 {
+  font-size: 18px !important;
+  line-height: 1.35 !important;
+}
+
+.device-mobile-shell .quest-player .q-challenge,
+.device-mobile .quest-player .q-challenge,
+.device-mobile-shell .quest-player .due-card,
+.device-mobile .quest-player .due-card {
+  padding: 12px !important;
+  margin: 8px 0 !important;
+  border-width: 2px !important;
   border-radius: 8px !important;
-  padding: 14px !important;
+}
+
+.device-mobile-shell .quest-player .q-primary,
+.device-mobile .quest-player .q-primary {
+  min-height: 48px !important;
+  height: 48px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  margin-top: 10px !important;
+}
+
+.device-mobile-shell .quest-player input,
+.device-mobile .quest-player input {
+  min-height: 44px !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
 }
 
 

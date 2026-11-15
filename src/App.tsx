@@ -137,10 +137,12 @@ function AppRouter() {
   const isMobile = deviceMode === 'mobile'
   const isHome = route === '#/' || authRoute
   const isFullscreen = route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
-  const showMobileNav = isMobile && !isHome && !onboarding && !isFullscreen
+  const isQuestImmersive = (route.startsWith('#/quest/') && (route.includes('/choi') || route.includes('/chi-duong') || route.includes('/dan-duong'))) || route.startsWith('#/chi-duong/') || isFullscreen
+  const showMobileHeader = isMobile && !isHome && !isQuestImmersive
+  const showMobileNav = isMobile && !isHome && !onboarding && !isQuestImmersive && !isFullscreen
 
   return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${isMobile ? 'device-mobile-shell device-mobile' : ''} ${isHome ? 'home-shell' : ''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
-    {isMobile && !isHome && !isFullscreen && (
+    {showMobileHeader && (
       <header className="device-mobile-header" role="banner">
         <div className="device-mobile-brand-group">
           <a href="#/kham-pha" className="device-mobile-logo" aria-label="Dana Quest">
