@@ -196,6 +196,14 @@
   cursor: pointer; white-space: nowrap; box-shadow: 0 2px 6px rgba(32, 135, 78, 0.3);
 }
 .eco-transit-claim-btn:active { transform: scale(0.96); }
+.eco-transit-claim-btn:disabled {
+  background: #a3c2b2;
+  color: #f0fdf4;
+  cursor: not-allowed;
+  opacity: 0.85;
+  box-shadow: none;
+  transform: none;
+}
 .transit-pin {
   width: 32px; height: 32px; border-radius: 50%;
   display: grid; place-items: center; font-size: 18px;

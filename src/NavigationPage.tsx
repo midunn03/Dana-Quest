@@ -77,6 +77,8 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
   const lastMoveTimestamp = useRef(0)
   const lastPosCheck = useRef<Point | null>(null)
   const snoozeUntil = useRef(0)
+  const stationDwellStart = useRef<{ stationId: string; entryTime: number } | null>(null)
+  const [dwellSeconds, setDwellSeconds] = useState(0)
 
   const destination = getDestination(id)
   const place: NavigationTarget | undefined = useMemo(() => target ?? (destination ? {
@@ -321,6 +323,31 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     return getNearbyGreenTransit([activeSample.latitude, activeSample.longitude], 350)
   }, [activeSample, transitUpdateTick])
 
+  // Đếm thời gian lưu lại khu vực trạm (tối thiểu 60s để chống gian lận)
+  useEffect(() => {
+    if (!activeSample || simulating || !nearbyTransit.length) {
+      stationDwellStart.current = null
+      setDwellSeconds(0)
+      return
+    }
+    const nearest = nearbyTransit[0]
+    if (nearest.distance <= 80 && !nearest.claimed) {
+      if (!stationDwellStart.current || stationDwellStart.current.stationId !== nearest.station.id) {
+        stationDwellStart.current = { stationId: nearest.station.id, entryTime: Date.now() }
+      }
+      const timer = window.setInterval(() => {
+        if (stationDwellStart.current) {
+          const secs = Math.floor((Date.now() - stationDwellStart.current.entryTime) / 1000)
+          setDwellSeconds(secs)
+        }
+      }, 1000)
+      return () => window.clearInterval(timer)
+    } else {
+      stationDwellStart.current = null
+      setDwellSeconds(0)
+    }
+  }, [activeSample, simulating, nearbyTransit])
+
   // Marker các trạm xe đạp TNGo / xe bus trên bản đồ
   useEffect(() => {
     const map = mapRef.current
@@ -441,8 +468,13 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
 
   const minutes = progress ? Math.max(1, Math.round(navigation.route!.duration * progress.remaining / Math.max(1, navigation.route!.distance) / 60)) : 0
 
-  const handleClaimTransit = (item: NearbyTransitResult) => {
-    claimTransitReward(item.station)
+  const handleClaimTransit = async (item: NearbyTransitResult) => {
+    await claimTransitReward({
+      station: item.station,
+      sample: activeSample,
+      dwellSeconds,
+      simulating,
+    })
     setTransitUpdateTick(v => v + 1)
   }
 
@@ -611,29 +643,48 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
         )}
 
         {/* Gợi ý trạm xe đạp TNGo / xe bus Danabus */}
-        {nearbyTransit.length > 0 && !nearbyTransit[0].claimed && !arrived && (
-          <div className="eco-transit-banner">
-            <div className="eco-transit-icon">
-              {nearbyTransit[0].station.type === 'bike' ? '🚲' : '🚌'}
-            </div>
-            <div className="eco-transit-body">
-              <div className="eco-transit-title">
-                <strong>{nearbyTransit[0].station.type === 'bike' ? 'Trạm xe đạp TNGo' : 'Điểm xe buýt DanaBus'} gần bạn</strong>
-                <span className="eco-tag">+{nearbyTransit[0].station.bonusCoins} Xu Xanh</span>
+        {nearbyTransit.length > 0 && !nearbyTransit[0].claimed && !arrived && (() => {
+          const item = nearbyTransit[0]
+          const isSim = simulating
+          const poorGps = !activeSample || (activeSample.accuracy ?? 0) > 50
+          const tooFar = item.distance > 80
+          const needDwell = dwellSeconds < 60
+          const canClaim = !isSim && !poorGps && !tooFar && !needDwell
+          const buttonLabel = isSim
+            ? t('Mô phỏng (không nhận xu)')
+            : poorGps
+            ? t('GPS yếu (> 50m)')
+            : tooFar
+            ? interpolate('Chưa tới trạm (${0}m)', [Math.round(item.distance)])
+            : needDwell
+            ? interpolate('Ở lại trạm (${0}s)', [60 - dwellSeconds])
+            : interpolate('Tôi đã đến trạm (+${0} xu)', [item.station.bonusCoins])
+
+          return (
+            <div className="eco-transit-banner">
+              <div className="eco-transit-icon">
+                {item.station.type === 'bike' ? '🚲' : '🚌'}
               </div>
-              <p className="eco-transit-desc">
-                Cách {Math.round(nearbyTransit[0].distance)}m ({nearbyTransit[0].station.name}). Trải nghiệm di chuyển xanh để nhận thưởng!
-              </p>
+              <div className="eco-transit-body">
+                <div className="eco-transit-title">
+                  <strong>{item.station.type === 'bike' ? t('Trạm xe đạp TNGo') : t('Điểm xe buýt DanaBus')} {t('gần bạn')}</strong>
+                  <span className="eco-tag">+{item.station.bonusCoins} {t('Xu')}</span>
+                </div>
+                <p className="eco-transit-desc">
+                  {interpolate('Cách ${0}m (${1}). Ở lại trạm 60s để nhận thưởng!', [Math.round(item.distance), item.station.name])}
+                </p>
+              </div>
+              <button
+                type="button"
+                className="eco-transit-claim-btn"
+                disabled={!canClaim}
+                onClick={() => void handleClaimTransit(item)}
+              >
+                {buttonLabel}
+              </button>
             </div>
-            <button
-              type="button"
-              className="eco-transit-claim-btn"
-              onClick={() => handleClaimTransit(nearbyTransit[0])}
-            >
-              Thuê xe (+5 xu)
-            </button>
-          </div>
-        )}
+          )
+        })()}
 
         {progress && (
           <div className="route-summary">
