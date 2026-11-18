@@ -17,14 +17,17 @@ export default function NextStepChip({ currentRoute }: NextStepChipProps) {
     return null
   }
 
-  // Không hiện trên màn hình chơi immersive, camera, chúc mừng hoặc đăng nhập
+  // Không hiện trên màn hình chơi immersive, camera, chúc mừng, đăng nhập hoặc đang tìm điểm / chỉ đường
   const isHiddenRoute =
     currentRoute === '#/' ||
     currentRoute === '#/dang-nhap' ||
     currentRoute === '#/dang-ky' ||
     currentRoute.startsWith('#/may-anh/') ||
     currentRoute.startsWith('#/hoan-thanh/') ||
-    currentRoute.includes('/choi')
+    currentRoute.includes('/choi') ||
+    currentRoute.includes('/chi-duong') ||
+    currentRoute.includes('/dan-duong') ||
+    currentRoute.startsWith('#/chi-duong/')
 
   if (isHiddenRoute) return null
 

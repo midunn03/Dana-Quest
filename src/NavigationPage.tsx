@@ -103,19 +103,25 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
   }, [activeSample])
 
   const navigation = useWalkingRoute(id, activeSample, place?.position)
-  const currentHref = target ? `#/quest/${id}/chi-duong` : `#/chi-duong/${id}`
+  const currentHref = target ? `#/quest/${id}/dan-duong` : `#/chi-duong/${id}`
+  const arrivedRef = useRef(false)
 
-  // Guard rời khỏi trang
+  // Guard rời khỏi trang (không chặn nếu đã đến nơi và bấm tiếp tục vào nhiệm vụ/quest)
   useEffect(() => {
     const guard = (event: Event) => {
       const targetHash = (event as CustomEvent<{ hash: string }>).detail.hash
-      if (allowLeave.current || targetHash === currentHref) return
+      const isContinueTarget = arrivedRef.current && (
+        targetHash === place?.continueHref ||
+        targetHash === `#/quest/${id}/choi` ||
+        targetHash === `#/nhiem-vu/${id}`
+      )
+      if (allowLeave.current || targetHash === currentHref || isContinueTarget) return
       event.preventDefault()
       setPendingLeave(targetHash || '#/')
     }
     window.addEventListener('dana-before-navigation', guard)
     return () => window.removeEventListener('dana-before-navigation', guard)
-  }, [currentHref])
+  }, [currentHref, id, place?.continueHref])
 
   // Khởi tạo bản đồ Leaflet
   useEffect(() => {
@@ -434,6 +440,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
 
   // Điều kiện đến nơi
   const arrived = (!!activeSample && hasArrived(activeSample, place.position)) || (simulating && simProgress >= 0.98)
+  arrivedRef.current = arrived
   const arrivalFeedback = getArrivalFeedback(activeSample, place.position)
 
   const here: Point | null = activeSample ? [activeSample.latitude, activeSample.longitude] : null
@@ -588,6 +595,30 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
         </button>
       )}
     </div>
+
+    {/* [UX-FLOW] Thẻ nổi xác nhận khi mô phỏng chạy đến 100% */}
+    {simulating && arrived && (
+      <div className="arrival-action-banner" role="region" aria-label={t('Đã mô phỏng đến điểm đích')}>
+        <strong>🎉 {t('Đã mô phỏng đến nơi!')}</strong>
+        <p>{interpolate('Bạn đã tới khu vực ${0}. Chọn bước tiếp theo để vào chơi.', [place.name])}</p>
+        <div className="arrival-action-buttons">
+          <a
+            className="arrival-action-primary"
+            href={place.continueHref}
+            onClick={() => { allowLeave.current = true }}
+          >
+            {place.continueLabel ?? t('Xem nhiệm vụ')} →
+          </a>
+          <button
+            type="button"
+            className="arrival-action-secondary"
+            onClick={toggleSimulation}
+          >
+            {t('Dừng mô phỏng')}
+          </button>
+        </div>
+      </div>
+    )}
 
     {/* Bottom Sheet thông tin hành trình */}
     <section
