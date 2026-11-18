@@ -5,6 +5,9 @@ import { readAvatar, resolveAvatar, saveAvatar } from './lib/avatar'
 import { defaultLook, genders, genderLabels, heads, headLabels, hairs, hairLabels, sleeves, sleeveLabels, pantsKinds, pantsLabels, skinTones, hairColors, shirtColors, pantsColors, lookToCode, randomLook, type AvatarLook } from './lib/pixelAvatar'
 import PixelAvatar from './PixelAvatar'
 import { takeCodeReturn, takePageReturn } from './lib/onboarding'
+// [UX-FLOW] Tích hợp cờ vào nhanh
+import { isUxFlagEnabled } from './lib/uxFlags'
+
 export default function AvatarPage({ initialAvatarId, onAvatarConfirmed, editing = false }: { initialAvatarId?: string | null; onAvatarConfirmed?: (id: string) => Promise<void>; editing?: boolean }) {
   const selected = resolveAvatar(initialAvatarId) ?? readAvatar()
   const [look, setLook] = useState<AvatarLook>(() => ({ ...(selected?.look ?? defaultLook) }))
@@ -12,6 +15,7 @@ export default function AvatarPage({ initialAvatarId, onAvatarConfirmed, editing
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
   function change(patch: Partial<AvatarLook>) { setLook(prev => ({ ...prev, ...patch })) }
+  
   async function confirm() {
     if (saving) return
     setSaving(true)
@@ -24,6 +28,22 @@ export default function AvatarPage({ initialAvatarId, onAvatarConfirmed, editing
     catch { setError(t("Chưa lưu được nhân vật. Hãy kiểm tra kết nối và thử lại. Lựa chọn trước vẫn được giữ.")) }
     finally { setSaving(false) }
   }
+
+  // [UX-FLOW] Nút vào chơi ngay 1 chạm với nhân vật gợi ý
+  async function fastStartWithSuggested() {
+    if (saving) return
+    setSaving(true)
+    setError('')
+    try {
+      const suggestedLook = current.id ? current.id : lookToCode(randomLook())
+      if (onAvatarConfirmed) await onAvatarConfirmed(suggestedLook)
+      else saveAvatar(suggestedLook)
+      window.location.hash = takePageReturn() ?? takeCodeReturn() ?? '#/map'
+    }
+    catch { setError(t("Chưa lưu được nhân vật. Hãy kiểm tra kết nối và thử lại.")) }
+    finally { setSaving(false) }
+  }
+
   return <main className="onboarding avatar-screen custom-avatar-screen"><section className="avatar-custom-frame" aria-labelledby="avatar-title">
     <header className="avatar-custom-heading"><a href={editing?'#/tai-khoan':'#/dang-nhap'} className="avatar-custom-back">‹ {editing?t("Tài khoản"):t("Quay lại")}</a><h1 id="avatar-title">{t("Tùy chỉnh nhân vật")}</h1><p>{t("Một người bạn đồng hành mang dấu ấn của bạn.")}</p></header>
     <div className="avatar-custom-grid"><section className="avatar-custom-preview" aria-label={t("Hình ảnh nhân vật")}><div className="avatar-custom-stage"><PixelAvatar avatar={current}/></div><h2>{t("Nhân vật của bạn")}</h2><p>{t("Hình ảnh thay đổi ngay khi bạn chọn.")}</p><button type="button" disabled={saving} onClick={()=>setLook(randomLook())}>{t("Tạo ngẫu nhiên")}</button></section>
@@ -38,7 +58,23 @@ export default function AvatarPage({ initialAvatarId, onAvatarConfirmed, editing
       <Swatches label={t("Màu áo")} value={look.shirt} colors={shirtColors} onPick={shirt=>change({shirt})}/>
       <Swatches label={t("Màu quần")} value={look.pantsColor} colors={pantsColors} onPick={pantsColor=>change({pantsColor})}/>
     </fieldset></div>
-    <footer className="avatar-custom-footer">{error&&<p role="alert" className="login-error">{t(error)}</p>}<button className="journey-primary" disabled={saving} onClick={()=>void confirm()}>{saving?t("Đang lưu…"):editing?t("Lưu nhân vật"):t("Xác nhận nhân vật")}</button><p>{t("Đổi nhân vật không làm mất tiến độ, ảnh hay xu của bạn.")}</p></footer>
+    <footer className="avatar-custom-footer">
+      {error&&<p role="alert" className="login-error">{t(error)}</p>}
+      <button className="journey-primary" disabled={saving} onClick={()=>void confirm()}>{saving?t("Đang lưu…"):editing?t("Lưu nhân vật"):t("Xác nhận nhân vật")}</button>
+      {/* [UX-FLOW] 1-tap shortcut for new players */}
+      {!editing && isUxFlagEnabled('FAST_START') && (
+        <button
+          type="button"
+          className="journey-text-link avatar-quick-start-btn"
+          disabled={saving}
+          onClick={() => void fastStartWithSuggested()}
+          style={{ marginTop: '8px', cursor: 'pointer', fontWeight: 'bold' }}
+        >
+          {t("Dùng nhân vật gợi ý, chỉnh sau → Vào chơi ngay")}
+        </button>
+      )}
+      <p>{t("Đổi nhân vật không làm mất tiến độ, ảnh hay xu của bạn.")}</p>
+    </footer>
   </section></main>
 }
 

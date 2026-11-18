@@ -1,0 +1,219 @@
+/* [UX-FLOW] Styles for StartHub (Trung tâm xuất phát) */
+
+.start-hub {
+  background: var(--px-surface, #ffffff);
+  border: var(--px-border, 4px solid var(--px-ink, #1E302A));
+  box-shadow: var(--px-shadow-low, 0 4px 0 var(--px-ink, #1E302A));
+  margin-bottom: var(--px-space-4, 16px);
+  padding: var(--px-space-4, 16px);
+  font-family: var(--px-font, inherit);
+  color: var(--px-ink, #1E302A);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Biến thể Overlay nổi trên bản đồ */
+.start-hub-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 1000;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: var(--px-shadow-mid, 0 8px 0 var(--px-ink, #1E302A));
+  background: #FFFDF7;
+}
+
+.start-hub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.start-hub-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  border: 2px solid var(--px-ink, #1E302A);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.start-hub-badge.recommend-badge {
+  background: #FFE8A3;
+  color: var(--px-ink, #1E302A);
+}
+
+.start-hub-badge.resume-badge {
+  background: #A7F3D0;
+  color: #064E3B;
+}
+
+.start-hub-distance {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--px-info, #28657C);
+  background: var(--px-surface-soft, #E4F0E5);
+  padding: 3px 6px;
+  border: 1px solid var(--px-ink, #1E302A);
+}
+
+.start-hub-toggle {
+  background: none;
+  border: 2px solid var(--px-ink, #1E302A);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  color: var(--px-ink, #1E302A);
+}
+
+.start-hub-hero {
+  margin-bottom: 12px;
+}
+
+.start-hub-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.start-hub-title {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.start-hub-meta-tag {
+  font-size: 12px;
+  color: var(--px-muted, #52665C);
+  background: #F1F5F9;
+  padding: 2px 6px;
+  border: 1px solid #CBD5E1;
+}
+
+.start-hub-summary {
+  margin: 0;
+  font-size: 14px;
+  color: var(--px-muted, #52665C);
+  line-height: 1.35;
+}
+
+/* 3 bước đơn giản */
+.start-hub-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  background: var(--px-surface-soft, #E4F0E5);
+  border: 2px dashed var(--px-action, #216447);
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+
+.start-step-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.start-step-num {
+  font-weight: bold;
+  color: var(--px-action, #216447);
+  font-size: 14px;
+}
+
+.start-step-arrow {
+  color: var(--px-muted, #52665C);
+  font-size: 12px;
+}
+
+/* Thanh nút bấm */
+.start-hub-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.start-hub-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--px-action, #216447);
+  color: #ffffff !important;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px 16px;
+  border: 2px solid var(--px-ink, #1E302A);
+  box-shadow: 2px 2px 0 var(--px-ink, #1E302A);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.start-hub-primary-btn:hover {
+  background: var(--px-action-hover, #194D37);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--px-ink, #1E302A);
+}
+
+.start-hub-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--px-surface, #ffffff);
+  color: var(--px-ink, #1E302A) !important;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 2px solid var(--px-ink, #1E302A);
+  cursor: pointer;
+}
+
+.start-hub-help-link {
+  font-size: 13px;
+  color: var(--px-info, #28657C);
+  text-decoration: underline;
+  margin-left: auto;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .start-hub {
+    padding: 10px 12px;
+  }
+  .start-hub-steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .start-step-arrow {
+    display: none;
+  }
+  .start-hub-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .start-hub-primary-btn,
+  .start-hub-secondary-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .start-hub-help-link {
+    margin: 4px auto 0 auto;
+  }
+}

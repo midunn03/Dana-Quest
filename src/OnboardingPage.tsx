@@ -8,6 +8,8 @@ import { searchText } from './lib/filters'
 import { distanceMeters } from './lib/location'
 import { readTravelPlan, saveTravelPlan, type TravelPlan } from './lib/onboarding'
 import './OnboardingPage.css'
+// [UX-FLOW] Tích hợp cờ vào nhanh
+import { isUxFlagEnabled } from './lib/uxFlags'
 
 const plans: { id: TravelPlan; title: string; description: string; symbol: string }[] = localized([
   { id:'visiting',title:"Đang khám phá một nơi mới",description:"Mang về nhiều hơn những bức ảnh.",symbol:'pin' },
@@ -42,8 +44,28 @@ export default function OnboardingPage({ step }: { step:'city'|'plans'|'intro' }
       {available?<button className="journey-city-result" onClick={()=>setQuery(t("Đà Nẵng"))}><JourneyIcon kind="pin"/><span><strong>{t("Đà Nẵng")}</strong><small>{destinations.length+quests.length} {" " + t("quest và hành trình khám phá")}</small></span></button>:<p role="status" className="journey-notice">{t("Hiện chỉ có nội dung Đà Nẵng. Thử tìm “Đà Nẵng” hoặc “Da Nang”.")}</p>}
       <button type="button" className="journey-underlink" disabled={locating} onClick={locate}><JourneyIcon kind="pin"/>{locating?t("Đang xác định vị trí…"):t("Dùng vị trí chính xác của tôi")}</button>
       {notice && <p role="status" className="journey-notice">{t(notice)}</p>}<p className="journey-small">{t("Bạn có thể xem trước quest mà không cần cấp quyền vị trí.")}</p></div>
-      <footer className="journey-footer"><button className="journey-primary" disabled={!available} onClick={()=>{window.location.hash='#/bat-dau/ke-hoach'}}>{t("Đúng, khám phá Đà Nẵng")}</button><a className="journey-text-link" href="#/kich-hoat">{t("Bạn đã có mã đặt chỗ hoặc lời mời?")}</a></footer></>
-    :step==='plans'?<><div className="journey-body"><p className="journey-eyebrow">{t("Kế hoạch của bạn")}</p><h1 id="journey-title">{t("Hiện tại, bạn đang…")}</h1><div className="journey-plan-options" role="radiogroup" aria-label={t("Mục đích trải nghiệm")}>{plans.map(item=><label key={item.id} className={`journey-plan ${plan===item.id?'selected':''}`}><span className="journey-option-icon"><JourneyIcon kind={item.symbol}/></span><span><strong>{item.title}</strong><small>{item.description}</small></span><input type="radio" name="travel-plan" value={item.id} checked={plan===item.id} onChange={()=>setPlan(item.id)}/></label>)}</div>{error&&<p role="alert" className="journey-notice">{t(error)}</p>}<p className="journey-small">{t("Lựa chọn được nhớ trên trình duyệt này. Bạn có thể bỏ qua.")}</p></div><footer className="journey-footer"><button className="journey-primary" disabled={!plan} onClick={continuePlans}>{t("Tiếp tục")}</button><a className="journey-text-link" href="#/kham-pha">{t("Bỏ qua, đưa tôi đến các quest")}</a></footer></>
-    :<><div className="journey-body journey-intro-body"><img className="journey-intro-photo" src={`${import.meta.env.BASE_URL}photos/cong-vien-apec.jpg`} alt={t("Lối đi dẫn vào Công viên APEC tại Đà Nẵng")}/><h1 id="journey-title">{t("Câu chuyện ở lại sau mỗi câu đố.")}</h1><p className="journey-description">{t("Một quest là câu chuyện bạn tự bước vào. Những con phố thật, địa điểm thật và thử thách để bạn khám phá ngay tại chỗ.")}</p><p className="journey-highlight">{t("Chọn hành trình, quan sát những điều nhỏ và lưu lại kỷ niệm theo cách của bạn.")}</p><small className="journey-small">{t("Ảnh: Quang Nguyen Vinh (Pexels)")}</small></div><footer className="journey-footer"><button className="journey-primary" onClick={()=>{window.location.hash='#/kham-pha'}}>{t("Xem các quest của tôi")}</button><a className="journey-text-link" href="#/bat-dau/ke-hoach">{t("Quay lại lựa chọn của tôi")}</a></footer></>}
+      <footer className="journey-footer">
+        <button className="journey-primary" disabled={!available} onClick={()=>{window.location.hash='#/bat-dau/ke-hoach'}}>{t("Đúng, khám phá Đà Nẵng")}</button>
+        {isUxFlagEnabled('FAST_START') && (
+          <a className="journey-text-link journey-skip-all" href="#/map">{t("Bỏ qua tất cả → Vào chơi ngay")}</a>
+        )}
+        <a className="journey-text-link" href="#/kich-hoat">{t("Bạn đã có mã đặt chỗ hoặc lời mời?")}</a>
+      </footer></>
+    :step==='plans'?<><div className="journey-body"><p className="journey-eyebrow">{t("Kế hoạch của bạn")}</p><h1 id="journey-title">{t("Hiện tại, bạn đang…")}</h1><div className="journey-plan-options" role="radiogroup" aria-label={t("Mục đích trải nghiệm")}>{plans.map(item=><label key={item.id} className={`journey-plan ${plan===item.id?'selected':''}`}><span className="journey-option-icon"><JourneyIcon kind={item.symbol}/></span><span><strong>{item.title}</strong><small>{item.description}</small></span><input type="radio" name="travel-plan" value={item.id} checked={plan===item.id} onChange={()=>setPlan(item.id)}/></label>)}</div>{error&&<p role="alert" className="journey-notice">{t(error)}</p>}<p className="journey-small">{t("Lựa chọn được nhớ trên trình duyệt này. Bạn có thể bỏ qua.")}</p></div>
+      <footer className="journey-footer">
+        <button className="journey-primary" disabled={!plan} onClick={continuePlans}>{t("Tiếp tục")}</button>
+        {isUxFlagEnabled('FAST_START') && (
+          <a className="journey-text-link journey-skip-all" href="#/map">{t("Bỏ qua tất cả → Vào chơi ngay")}</a>
+        )}
+        <a className="journey-text-link" href="#/kham-pha">{t("Bỏ qua, đưa tôi đến các quest")}</a>
+      </footer></>
+    :<><div className="journey-body journey-intro-body"><img className="journey-intro-photo" src={`${import.meta.env.BASE_URL}photos/cong-vien-apec.jpg`} alt={t("Lối đi dẫn vào Công viên APEC tại Đà Nẵng")}/><h1 id="journey-title">{t("Câu chuyện ở lại sau mỗi câu đố.")}</h1><p className="journey-description">{t("Một quest là câu chuyện bạn tự bước vào. Những con phố thật, địa điểm thật và thử thách để bạn khám phá ngay tại chỗ.")}</p><p className="journey-highlight">{t("Chọn hành trình, quan sát những điều nhỏ và lưu lại kỷ niệm theo cách của bạn.")}</p><small className="journey-small">{t("Ảnh: Quang Nguyen Vinh (Pexels)")}</small></div>
+      <footer className="journey-footer">
+        <button className="journey-primary" onClick={()=>{window.location.hash='#/kham-pha'}}>{t("Xem các quest của tôi")}</button>
+        {isUxFlagEnabled('FAST_START') && (
+          <a className="journey-text-link journey-skip-all" href="#/map">{t("Bỏ qua tất cả → Vào chơi ngay")}</a>
+        )}
+        <a className="journey-text-link" href="#/bat-dau/ke-hoach">{t("Quay lại lựa chọn của tôi")}</a>
+      </footer></>}
   </section></main>
 }

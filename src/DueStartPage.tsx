@@ -12,6 +12,8 @@ import { displayText } from './lib/questDisplay'
 import DueMap from './DueMap'
 import DueSupport from './DueSupport'
 import './DueStartPage.css'
+// [UX-FLOW] Tích hợp cờ tính năng vào thẳng màn chơi khi đã đến nơi
+import { isUxFlagEnabled } from './lib/uxFlags'
 
 function DeviceLocation({onChange}:{onChange:(value:{sample:LocationSample|null;error:string})=>void}){
  const {sample,error,retry}=usePlayerLocation()
@@ -31,7 +33,20 @@ export default function DueStartPage({id='due-dau-an-50-nam'}:{id?:string}){
  const confirmed=!!run?.arrivalConfirmedAt
  const distance=location.sample?distanceMeters([location.sample.latitude,location.sample.longitude],quest.startPosition):null
  const near=location.sample&&hasArrived(location.sample,quest.startPosition)
- async function confirm(){if(await dispatch({type:'confirm-arrival',questId:quest.id}))setDialog(null)}
+ 
+ async function confirm(){
+   if(await dispatch({type:'confirm-arrival',questId:quest.id})){
+     setDialog(null)
+   }
+ }
+
+ // [UX-FLOW] Vào thẳng màn chơi 1 chạm khi bấm "Tôi đã đến nơi"
+ async function directPlay(){
+   if(await dispatch({type:'confirm-arrival',questId:quest.id})){
+     window.location.hash = `#/quest/${quest.id}/choi`
+   }
+ }
+
  async function copy(){try{await navigator.clipboard.writeText(quest.area);setCopyNotice(t("Đã sao chép địa chỉ."))}catch{setCopyNotice(t("Bạn có thể chọn và sao chép địa chỉ hiển thị bên trên."))}}
  return <main className="due-start" aria-labelledby="due-start-title">
   <div className="due-start-surface" inert={!!dialog||!!navigation.destination} aria-hidden={!!dialog||!!navigation.destination}>
@@ -43,7 +58,27 @@ export default function DueStartPage({id='due-dau-an-50-nam'}:{id?:string}){
    {copyNotice&&<p role="status">{copyNotice}</p>}
   </section><section className="due-start-side"><details className="due-before" open><summary>{t("Trước khi lên đường")}</summary><ul><li>{t("Pin đủ cho hành trình (nên từ 50%).")}</li><li>{t("Bật kết nối mạng để lưu tiến độ.")}</li><li>{t("Quan sát biển tên địa điểm ở khu vực công cộng.")}</li><li>{t("Không đứng giữa lối ra vào, không nhìn màn hình khi qua đường.")}</li></ul></details><div className="due-location-controls"><button className="due-secondary" onClick={()=>setLocating(true)} disabled={locating}>{locating?t("Đang dùng vị trí thiết bị"):t("Bật vị trí để tìm đường")}</button><p>{t("Vị trí chỉ hỗ trợ chỉ đường. Bạn cần tự đối chiếu điểm bắt đầu trước khi xác nhận.")}</p><a className="q-menu-item" href={`#/quest/${id}/dan-duong`}>{t("Mở chỉ đường từng chặng →")}</a>{locating&&<DeviceLocation onChange={setLocation}/>}<p role="status">{location.error}</p></div><p className="due-asset-note">{t("Hình trên là minh họa. Ảnh cổng DUE thực tế chưa được bổ sung.")}</p></section></div>
   </div>
-  <footer className="due-start-actions">{error&&<p role="alert" className="q-error">{t(error)}</p>}{!run&&!loading?<a className="q-primary" href={`#/quest/${quest.id}`}>{t("Đọc giới thiệu để bắt đầu")}</a>:confirmed?<a className="q-primary" href={`#/quest/${quest.id}/choi`}>{t("Bắt đầu quest")}</a>:<button className="q-primary" disabled={busy||loading||!ready} onClick={()=>setDialog('arrival')}>{loading?t("Đang tải tiến độ…"):t("Xác nhận đã đến")}</button>}<button className="due-secondary" onClick={()=>setDialog('lost')}>{t("Không tìm thấy điểm bắt đầu?")}</button></footer>
+  <footer className="due-start-actions">
+   {error&&<p role="alert" className="q-error">{t(error)}</p>}
+   {!run&&!loading ? (
+     <a className="q-primary" href={`#/quest/${quest.id}`}>{t("Đọc giới thiệu để bắt đầu")}</a>
+   ) : confirmed ? (
+     <a className="q-primary" href={`#/quest/${quest.id}/choi`}>{t("Bắt đầu quest")}</a>
+   ) : (
+     <>
+       {/* [UX-FLOW] 1-tap: Tôi đã đến nơi -> vào thẳng màn chơi không qua hộp thoại */}
+       {isUxFlagEnabled('ARRIVED_DIRECT_PLAY') && (
+         <button className="q-primary due-direct-play-btn" disabled={busy||loading||!ready} onClick={() => void directPlay()}>
+           {t("Tôi đã đến nơi (Vào chơi ngay) ↗")}
+         </button>
+       )}
+       <button className={isUxFlagEnabled('ARRIVED_DIRECT_PLAY') ? "due-secondary" : "q-primary"} disabled={busy||loading||!ready} onClick={()=>setDialog('arrival')}>
+         {loading?t("Đang tải tiến độ…"):t("Xác nhận đã đến")}
+       </button>
+     </>
+   )}
+   <button className="due-secondary" onClick={()=>setDialog('lost')}>{t("Không tìm thấy điểm bắt đầu?")}</button>
+  </footer>
   </div>
   {navigation.destination&&<PlayerDialog title={t("Lưu và rời hành trình?")} onClose={navigation.cancel}><p>{t("Bạn có thể quay lại điểm bắt đầu từ Quest của bạn. Chỉ chuyển trang sau khi tiến độ đã được lưu.")}</p>{error&&<p role="alert">{t(error)}</p>}<button className="q-primary" disabled={busy||navigation.saving} onClick={()=>void navigation.confirm()}>{navigation.saving?t("Đang lưu…"):t("Lưu và chuyển trang")}</button><button className="due-text-button" disabled={navigation.saving} onClick={navigation.cancel}>{t("Ở lại")}</button></PlayerDialog>}
   {dialog&&!navigation.destination&&<PlayerDialog title={dialog==='arrival'?t("Bạn đã nhìn thấy điểm bắt đầu?"):dialog==='lost'?t("Cần tìm đúng cổng trường?"):t("Trợ giúp điểm bắt đầu")} onClose={()=>{if(!busy)setDialog(null)}}>

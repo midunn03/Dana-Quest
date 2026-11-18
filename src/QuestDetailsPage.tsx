@@ -20,20 +20,70 @@ import {QuestArtwork,PlayerDialog} from './QuestPlayerUi'
 import {creatorId,useQuestCommunity} from './lib/useQuestCommunity'
 import {DetailIcon,DetailSection,ShareQuest} from './QuestDetailUi'
 import './QuestDetail.css'
+// [UX-FLOW] Tích hợp cờ tính năng, GPS và modal an toàn 1 chạm
+import { isUxFlagEnabled } from './lib/uxFlags'
+import { usePlayerLocation } from './lib/usePlayerLocation'
+import { distanceMeters } from './lib/location'
+
 const RouteMap=lazy(()=>import('./QuestPreviewMap'))
 export default function QuestDetailsPage({id}:{id:string}){
  const custom=usePlaceData().content[id],place=getDestination(id),legacy=!!place&&!getQuest(id),quest=presentQuest(id,custom),legacyData=useProgress(),auth=useAuth(),{state,dispatch,loading,busy,error,ready}=useQuestProgress(),community=useQuestCommunity(id)
  const startPosition: [number, number] | undefined = place?.position ?? quest?.checkpoints[0]?.position
+ const { sample } = usePlayerLocation()
+ const isNearStart = sample && startPosition ? distanceMeters([sample.latitude, sample.longitude], startPosition) < 50 : false
  const nearestTransit = useMemo(() => {
    if (!startPosition) return null
    const list = getNearbyGreenTransit(startPosition, 1500)
    return list[0] ?? null
  }, [startPosition])
  const [acknowledged,setAcknowledged]=useState(false),[expanded,setExpanded]=useState(false),[map,setMap]=useState(false),[invite,setInvite]=useState(false),[rating,setRating]=useState(5),[comment,setComment]=useState(''),[reviewNotice,setReviewNotice]=useState('')
+ const [safetyModalOpen, setSafetyModalOpen] = useState(false)
+
  if(!quest)return <main className="quest-page"><h1>{t("Không tìm thấy quest")}</h1><a href="#/kham-pha">{t("Về Khám phá")}</a></main>
  const progress=state.quests[id],placeProgress=legacyData.state.destinations[id],completed=legacy?!!placeProgress&&isDestinationComplete(placeProgress):!!progress?.completedAt,title=quest.title.replace(/\s+[—–-]\s+(.+)$/,' ($1)'),startLabel=quest.checkpoints[0].placeLabel,endLabel=quest.checkpoints.at(-1)!.placeLabel
- async function start(){if(auth.status!=='authenticated'){requestLogin();return}if(legacy){window.location.hash=`#/chi-duong/${id}`;return}if(!auth.user?.avatarId){window.location.hash='#/chon-nhan-vat';return}if(await dispatch({type:'start',questId:id}))window.location.hash=`#/quest/${id}/${progress?'choi':'chi-duong'}`}
- const startButton=<>{auth.status!=='authenticated'?<a className="qd-primary q-briefing-start" href="#/dang-nhap" onClick={event=>{event.preventDefault();requestLogin()}}>{t("Đăng nhập để chơi quest")}</a>:legacy?<a className="qd-primary q-briefing-start" href={`#/chi-duong/${id}`}>{t("Bắt đầu khám phá →")}</a>:<button className="qd-primary q-briefing-start" disabled={loading||busy||!ready||(!progress&&!acknowledged)} onClick={()=>void start()}>{loading?t("Đang tải tiến độ…"):busy?t("Đang lưu…"):!auth.user?.avatarId?t("Tùy chỉnh nhân vật để bắt đầu"):progress?interpolate("Tiếp tục quest (${0}/${1})",[progress.completedCheckpointIds.length,quest.checkpoints.length]):t("Đến điểm bắt đầu")}</button>}</>
+ 
+ async function executeStart(){
+   if(auth.status!=='authenticated'){requestLogin();return}
+   if(legacy){window.location.hash=`#/chi-duong/${id}`;return}
+   if(!auth.user?.avatarId){window.location.hash='#/chon-nhan-vat';return}
+   if(await dispatch({type:'start',questId:id})){
+     // [UX-FLOW] Nếu người chơi đã ở trong bán kính bắt đầu (< 50m) và bật ARRIVED_DIRECT_PLAY: vào thẳng màn chơi!
+     if(isNearStart && isUxFlagEnabled('ARRIVED_DIRECT_PLAY')){
+       await dispatch({type:'confirm-arrival', questId: id})
+       window.location.hash = `#/quest/${id}/choi`
+       return
+     }
+     window.location.hash=`#/quest/${id}/${progress?'choi':'chi-duong'}`
+   }
+ }
+
+ function onStartClicked(){
+   if(auth.status!=='authenticated'){requestLogin();return}
+   // [UX-FLOW] Hộp thoại an toàn 1 chạm thay vì bắt kéo xuống tick hộp ở cuối trang
+   if(isUxFlagEnabled('SAFETY_MODAL_FAST_START') && !progress && !acknowledged && !legacy){
+     setSafetyModalOpen(true)
+     return
+   }
+   void executeStart()
+ }
+
+ // [UX-FLOW] Xác định trạng thái disabled của nút bắt đầu
+ const isStartDisabled = loading || busy || !ready || (!progress && !acknowledged && !isUxFlagEnabled('SAFETY_MODAL_FAST_START'))
+
+ const startButtonCopy = loading
+   ? t("Đang tải tiến độ…")
+   : busy
+   ? t("Đang lưu…")
+   : !auth.user?.avatarId
+   ? t("Tùy chỉnh nhân vật để bắt đầu")
+   : progress
+   ? interpolate("Tiếp tục quest (${0}/${1})",[progress.completedCheckpointIds.length,quest.checkpoints.length])
+   : isNearStart && isUxFlagEnabled('ARRIVED_DIRECT_PLAY')
+   ? t("Bắt đầu chơi ngay (Đang ở điểm hẹn)")
+   : t("Đến điểm bắt đầu")
+
+ const startButton=<>{auth.status!=='authenticated'?<a className="qd-primary q-briefing-start" href="#/dang-nhap" onClick={event=>{event.preventDefault();requestLogin()}}>{t("Đăng nhập để chơi quest")}</a>:legacy?<a className="qd-primary q-briefing-start" href={`#/chi-duong/${id}`}>{t("Bắt đầu khám phá →")}</a>:<button className="qd-primary q-briefing-start" disabled={isStartDisabled} onClick={onStartClicked}>{startButtonCopy}</button>}</>
+
  return <main className="qd-page" aria-labelledby="briefing-title"><div className="qd-frame"><div className="qd-scroll-header"><a href="#/kham-pha" className="qd-round" aria-label={t("Về Khám phá")}><DetailIcon kind="back"/></a><strong>{title}</strong><ShareQuest className="qd-round" label={t("Chia sẻ quest")}/></div>
  <div className="qd-hero">{place?(custom?custom.photos[0]?<img className="qd-cover-photo" src={custom.photos[0].url} alt={custom.photos[0].caption||place.name}/>:<div className="qd-cover-empty">{t("Ảnh địa điểm chưa được bổ sung")}</div>:place.photo?<img className="qd-cover-photo" src={`${import.meta.env.BASE_URL}${place.photo.replace(/^\//,'')}`} alt={place.name}/>:<LandmarkArt id={id}/>):<QuestArtwork/>}{place&&<small className="qd-cover-credit">{custom?.photos[0]?.credit||(!custom&&place.photoCredit)||t("Minh họa điểm đến")}</small>}<div className="qd-hero-tools"><button className="qd-round" aria-label={t("Mời bạn khám phá quest")} onClick={()=>setInvite(true)}><DetailIcon kind="invite"/></button><button className={`qd-round ${community.favorite?'is-favorite':''}`} aria-label={community.favorite?t("Bỏ yêu thích quest"):t("Lưu quest yêu thích")} aria-pressed={community.favorite} disabled={community.busy} onClick={()=>void community.act({action:'favorite',questId:id,enabled:!community.favorite})}><DetailIcon kind="heart"/></button></div><span className="qd-beta">{t("Bản mẫu (đang thử nghiệm)")}</span></div>
  <div className="qd-layout"><article className="qd-content"><h1 id="briefing-title">{title}</h1><GoldenHourBanner destinationId={id}/><div className="qd-meta"><span>◷ {legacy?t("Thời gian tự sắp xếp"):interpolate("${0} phút",[quest.estimatedMinutes])}</span><span>{legacy?(placeProgress?.started?interpolate("${0} nhiệm vụ đã chọn",[placeProgress.selected.length]):t("Chọn 5 đến 10 nhiệm vụ")):interpolate("${0} thử thách",[quest.checkpoints.length])}</span><span>{t("Quãng đường chưa đo")}</span><button onClick={()=>setMap(true)}><DetailIcon kind="map"/> {" " + t("Bản đồ ›")}</button></div>
@@ -48,5 +98,30 @@ export default function QuestDetailsPage({id}:{id:string}){
  <DetailSection title={t("Gặp nhà sáng tạo")}><a className="qd-box qd-creator-link" href={`#/nha-sang-tao/${creatorId}?tu=${id}`}><span className="qd-creator-avatar"><DetailIcon kind="person"/></span><div><h3 lang="en">Dana Quest</h3><p>{t("Hồ sơ nhóm phát triển (tạm thời)")}</p><small>{publishedExperienceCount()} {" " + t("hành trình đã tạo") + " "}{community.data.creatorRating!=null?`(${community.data.creatorRating.toFixed(1)}/5)`:t("(chưa có đánh giá)")}</small></div><span aria-hidden="true">›</span></a></DetailSection>
  {custom&&custom.photos.length>1&&<AdminGallery name={place?.name||title} photos={custom.photos.slice(1)}/>}<section id="quest-preparation" className="qd-box qd-preparation"><h2>{t("Trước khi lên đường")}</h2><p>{legacy?t("Bạn chọn số nhiệm vụ phù hợp. Hoàn thành ít nhất 80% mục tiêu; chức năng cũ không thay đổi."):t("Không đếm ngược thời gian, không bỏ qua thử thách. Giải đúng để mở câu chuyện tiếp theo.")}</p><p>{displayText(quest.safetyNote)} {" " + t("Không nhìn màn hình khi băng qua đường.")}</p>{!legacy&&!progress&&<label className="qd-ack"><input id="quest-ack" type="checkbox" checked={acknowledged} onChange={event=>setAcknowledged(event.target.checked)}/>{t("Tôi đã đọc hướng dẫn và lưu ý an toàn.")}</label>}<p>{legacy?t("Xu và đổi thưởng áp dụng theo luật nhiệm vụ địa điểm hiện có."):t("XP và Xu Dana được ghi nhận một lần cho mỗi thử thách giải đúng.","XP and Dana Coins are recorded once for each correctly solved challenge.")}</p>{legacy&&<a className="qd-text" href={`#/nhiem-vu/${id}`}>{t("Nhiệm vụ và tiến độ") + " "}{placeProgress?.started?interpolate("(mục tiêu ${0})",[requiredCount(placeProgress.selected.length)]):''}</a>}</section>{(error||community.error)&&<p role="alert" className="qd-error">{t(error||community.error)}</p>}
  </article><aside className="qd-play-panel"><div><strong>{t("Chơi miễn phí")}</strong><p>{legacy?t("Vé vào địa điểm (nếu có) trả riêng"):t("Giúp hoàn thiện bản mẫu")}</p></div>{startButton}<a className="qd-text qd-desktop-link" href="#quest-preparation" onClick={event=>{event.preventDefault();document.getElementById('quest-preparation')?.scrollIntoView?.({behavior:'smooth'})}}>{t("Đọc lưu ý trước khi chơi")}</a></aside></div>
- </div>{map&&<PlayerDialog title={t("Bản đồ hành trình")} onClose={()=>setMap(false)}><Suspense fallback={<p>{t("Đang mở bản đồ…")}</p>}><RouteMap quest={quest}/></Suspense></PlayerDialog>}{invite&&<PlayerDialog title={t("Mời bạn khám phá")} onClose={()=>setInvite(false)}><p>{t("Chia sẻ liên kết quest để bạn bè tự bắt đầu hành trình. Mỗi người chơi một phiên riêng; chưa có chơi nhóm hoặc thi đấu.")}</p><ShareQuest className="qd-text" label={t("Sao chép liên kết quest")}/></PlayerDialog>}</main>
+ </div>
+ {/* [UX-FLOW] Hộp thoại an toàn 1 chạm khi SAFETY_MODAL_FAST_START bật */}
+ {safetyModalOpen && (
+   <PlayerDialog title={t("Lưu ý an toàn khi chơi")} onClose={() => setSafetyModalOpen(false)}>
+     <div className="qd-safety-modal-body">
+       <p>{displayText(quest.safetyNote)}</p>
+       <ul style={{ margin: '12px 0', paddingLeft: '20px', lineHeight: '1.5' }}>
+         <li>{t("Không nhìn màn hình khi băng qua đường hoặc di chuyển.")}</li>
+         <li>{t("Bảo quản kỹ tư trang, điện thoại cá nhân.")}</li>
+         <li>{t("Chỉ hoạt động tại các khu vực công cộng được phép.")}</li>
+       </ul>
+       <button
+         className="qd-primary"
+         style={{ width: '100%', marginTop: '16px' }}
+         onClick={() => {
+           setAcknowledged(true)
+           setSafetyModalOpen(false)
+           void executeStart()
+         }}
+       >
+         {t("Tôi đã hiểu, đi thôi! ↗")}
+       </button>
+     </div>
+   </PlayerDialog>
+ )}
+ {map&&<PlayerDialog title={t("Bản đồ hành trình")} onClose={()=>setMap(false)}><Suspense fallback={<p>{t("Đang mở bản đồ…")}</p>}><RouteMap quest={quest}/></Suspense></PlayerDialog>}{invite&&<PlayerDialog title={t("Mời bạn khám phá")} onClose={()=>setInvite(false)}><p>{t("Chia sẻ liên kết quest để bạn bè tự bắt đầu hành trình. Mỗi người chơi một phiên riêng; chưa có chơi nhóm hoặc thi đấu.")}</p><ShareQuest className="qd-text" label={t("Sao chép liên kết quest")}/></PlayerDialog>}</main>
 }

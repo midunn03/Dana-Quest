@@ -20,6 +20,10 @@ import AvatarPage from './AvatarPage'
 import Notifications from './Notifications'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import DestinationPage from './DestinationPage'
+// [UX-FLOW] Tích hợp trang Trợ giúp, NextStepChip và cờ tính năng
+import HelpPage from './HelpPage'
+import NextStepChip from './NextStepChip'
+import { isUxFlagEnabled } from './lib/uxFlags'
 const AlbumPage=lazy(()=>import('./AlbumPage'))
 import ShopPage from './ShopPage'
 import AccountPage from './AccountPage'
@@ -41,6 +45,8 @@ const DueStartPage = lazy(() => import('./DueStartPage'))
 import { AuthProvider, useAuth } from './AuthContext'
 import { canNavigateFrom } from './lib/navigationGuard'
 import './mobile/Mobile.css'
+// [UX-FLOW] Tối ưu giao diện bản đồ và ngân sách chiều cao điện thoại (Giai đoạn 3)
+import './mobile/MobileMap.css'
 import { useDeviceMode } from './lib/deviceMode'
 import DeviceModeModal from './mobile/DeviceModeModal'
 import MobileBottomNav from './mobile/MobileBottomNav'
@@ -73,7 +79,8 @@ function AppRouter() {
   useEffect(() => { const page = shell.current?.querySelector(':scope > main'); if (page instanceof HTMLElement) page.scrollTop = 0 }, [route])
   const isMap = route === '#/map'
   const journeyRoute = route.startsWith('#/bat-dau/') || ['#/kich-hoat', '#/nhap-ma', '#/dieu-khoan', '#/quyen-rieng-tu'].includes(route)
-  const publicRoute = route.startsWith('#/nha-sang-tao/') || route==='#/quest-cua-toi' || route.startsWith('#/su-kien/') || route.startsWith('#/tai-khoan') || journeyRoute || ['#/', '#/dang-nhap', '#/dang-ky', '#/kham-pha', '#/explore', '#/map', '#/tim-kiem', '#/su-kien'].includes(route) || /^#\/(quest|dia-diem)\/[^/]+$/.test(route)
+  // [UX-FLOW] Cho phép truy cập công khai #/huong-dan
+  const publicRoute = route.startsWith('#/nha-sang-tao/') || route==='#/quest-cua-toi' || route.startsWith('#/su-kien/') || route.startsWith('#/tai-khoan') || route === '#/huong-dan' || journeyRoute || ['#/', '#/dang-nhap', '#/dang-ky', '#/kham-pha', '#/explore', '#/map', '#/tim-kiem', '#/su-kien', '#/huong-dan'].includes(route) || /^#\/(quest|dia-diem)\/[^/]+$/.test(route)
   const authRoute = route === '#/dang-nhap' || route === '#/dang-ky'
   useEffect(() => {
     if(authRoute){setHomeAuthMode(route==='#/dang-ky'?'register':'login');window.history.replaceState(window.history.state,'','#/');setHash('#/');return}
@@ -90,6 +97,7 @@ function AppRouter() {
     ? <WelcomePage initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):homeAuthMode}/>
     : blocked
     ? <main className="auth-loading"><p role="status">{auth.status==='checking'?t("Đang kiểm tra phiên tài khoản…"):t("Đang mở trang đăng nhập…","Opening sign-in…")}</p></main>
+    : route === '#/huong-dan' ? <HelpPage />
     : route === '#/bat-dau/thanh-pho' ? <OnboardingPage key="city" step="city" />
     : route === '#/bat-dau/ke-hoach' ? <OnboardingPage key="plans" step="plans" />
     : route === '#/bat-dau/gioi-thieu' ? <OnboardingPage key="intro" step="intro" />
@@ -143,7 +151,7 @@ function AppRouter() {
 
   return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${isMobile ? 'device-mobile-shell device-mobile' : ''} ${isHome ? 'home-shell' : ''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
     {showMobileHeader && (
-      <header className="device-mobile-header" role="banner">
+      <header className={`device-mobile-header ${isMap && isUxFlagEnabled('MOBILE_MAP_FIRST') ? 'device-mobile-header--floating-map' : ''}`} role="banner">
         <div className="device-mobile-brand-group">
           <a href="#/kham-pha" className="device-mobile-logo" aria-label="Dana Quest">
             <span>DANA QUEST</span>
@@ -167,6 +175,8 @@ function AppRouter() {
     {!isMobile && <PageTools route={route}>{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}</PageTools>}
     {workspace && !isMobile && <WorkspaceNavigation route={route}/>}
     {renderedPage}<Notifications />
+    {/* [UX-FLOW] Chip nổi bước tiếp theo */}
+    {isUxFlagEnabled('NEXT_STEP_CHIP') && <NextStepChip currentRoute={route} />}
     {isMobile ? (showMobileNav && <MobileBottomNav route={route} />) : <MainNavigation route={route} />}
   </div>{showLogin&&<AuthPage embedded initialMode={authRoute?(route==='#/dang-ky'?'register':'login'):loginMode} onClose={closeLogin} onAuthenticated={user=>{setLoginPrompt(false);setDismissedQuest(route);if(!user.avatarId){rememberPageReturn(route);window.location.hash='#/chon-nhan-vat'}}}/>}{isModalOpen && <DeviceModeModal open={isModalOpen} currentMode={deviceMode} onSelect={chosen => { setDeviceMode(chosen); setShowDeviceModal(false) }} onClose={() => setShowDeviceModal(false)} />}</EventProvider>
 }
