@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react'
 import { t } from '../i18n/locale'
 import MobileBottomNav from './MobileBottomNav'
-import StreakChip from '../StreakChip'
+import MobileAccountBadge from './MobileAccountBadge'
 import type { AuthUser } from '../lib/auth'
 
 export interface MobileShellProps {
@@ -39,7 +39,7 @@ export default function MobileShell({
           </div>
 
           <div className="device-mobile-header-actions">
-            {user && <StreakChip />}
+            <MobileAccountBadge route={route} user={user} />
             {onOpenDeviceSelector && (
               <button
                 type="button"

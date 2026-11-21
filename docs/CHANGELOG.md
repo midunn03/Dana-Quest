@@ -5,6 +5,27 @@ Dự án chưa có hệ version (package.json vẫn 0.0.0), nên nhãn release l
 không bịa số version. Nguồn từng mục là các file bàn giao/audit trong `docs/` — không tự suy thêm.
 
 ## [Unreleased]
+
+## [2026-11-22]
+
+### Added
+- Triển khai hệ thống Gói trả phí hàng tháng (`src/lib/premium.ts`, `src/PremiumPricingModal.tsx`): Gói Plus (`30.000đ/tháng`, mở khóa `cau-rong`, x2 xu) và Gói Pro (`50.000đ/tháng`, mở khóa thêm `cau-vang-ba-na-hills`, `ngu-hanh-son`, x2 xu, 2 voucher nhóm 4 người).
+- Hỗ trợ mã khuyến mãi nội bộ `DN100` (giảm 100% về `0đ`, cho phép tái sử dụng sau khi hủy gói; giữ bí mật tuyệt đối trên giao diện web).
+- Thêm `src/mobile/MobileAccountBadge.tsx` hiển thị `Avatar + Tên + Tag PLUS / ✦ PRO / FREE` trên header giao diện Điện thoại.
+- Bổ sung nút `☰` (`WorkspaceMenuButton`) bên trái tiêu đề Tài khoản trên điện thoại mở Drawer đủ 13 trang con thuộc 4 nhóm (`getAccountWorkspaceGroups()`).
+- Bổ sung luồng chỉ đường trực tiếp từ Bản đồ `#/chi-duong/:id?tu=map` kèm Pop-up Thông tin địa điểm khi tới nơi (`<= 50m`).
+
+### Changed
+- Đồng bộ `src/mobile/MobileBottomNav.tsx` khớp đúng 4 mục điều hướng của thanh menu Web (`Khám phá`, `Sự kiện`, `Quest`, `Cửa hàng đổi xu`) và bỏ `StreakChip` khỏi header điện thoại.
+- Căn gọn hàng đầu Tài khoản trên mobile để `[☰] Tài khoản` và cụm `[🔥 ngày] [🎫 xu ›] [⚙]` nằm cùng một hàng (kể cả ở `360px`).
+- Cập nhật `NextStepChip` hiển thị `"🔒 Mở khóa để tiếp tục: <Tên quest>"` khi quest trả phí đang chơi dở bị khóa do hủy gói, và cập nhật hướng dẫn `.qd-testing` trong `src/QuestDetailsPage.tsx`.
+- Tăng `testTimeout: 15000` trong `vitest.config.ts` và bỏ theo dõi `backend/db.sqlite3*` trong `.gitignore`.
+
+### Fixed
+- Khôi phục chuỗi chiều cao flex (`min-height: 0`) và thanh cuộn dọc `6px` cho toàn bộ màn chơi quest (`QuestPlayPage`, `PlayerDialog`, `DueStartPage`, `DestinationPage`, `CelebrationPage`).
+- Bảo toàn các voucher có `source === 'code'` khi gọi `cancelPremiumPlan` (chỉ thu hồi `source === 'pro_plan'`).
+- Sửa các lỗi TypeScript, lint & React purity: safe guard `if (!quest)` và `navigateToHash` trong `src/DueStartPage.tsx`, chuyển `arrivedRef.current = arrived` vào `useEffect` ở `src/NavigationPage.tsx`, bỏ `Date.now()` khỏi render ở `src/AccountSettings.tsx`, sửa `svgPolyline` `useMemo` ở `src/JourneyRecapPage.tsx`, và bọc đầy đủ chuỗi `t(vi, en)` trong `AccountUi.tsx` / `AccountExperience.tsx`.
+
 ### Changed
 - Đang chuẩn bị: tái cấu trúc lớp giao diện (gom token, tách CSS theo màn, dọn CSS chết, dàn lại bố cục) — chi tiết tại `TASKS.md`. Chưa thực hiện.
 

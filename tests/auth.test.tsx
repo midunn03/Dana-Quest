@@ -21,7 +21,7 @@ it.each(['bien', null])('restores a session on the public home and offers the co
   vi.stubGlobal('fetch', vi.fn(() => new Promise<Response>(resolve => { resolveSession = resolve })))
   window.location.hash = '#/'
   render(<App />)
-  expect(screen.getByRole('heading', { name: 'Khám phá Đà Nẵng, nhận quà cực chất' })).toBeTruthy()
+  expect(screen.getByRole('heading', { name: 'Đà Nẵng giấu điều gì?' })).toBeTruthy()
   resolveSession(response(200, { user: { id: 'returning', name: 'Minh', avatarId } }))
   await screen.findByRole('heading', { name: 'Chào mừng trở lại, Minh!' })
   expect(window.location.hash).toBe('#/')

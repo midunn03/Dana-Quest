@@ -1,0 +1,35 @@
+Công cụ: image_gen tích hợp.
+
+Redraw the supplied Dana Quest business-model image into a MUCH SIMPLER, SHORTER, SUCCINCT infographic. The user explicitly rejected the previous dense version. Preserve the white background, navy title, thin blue orthogonal arrows, simple flat icons and center smartphone identity. Landscape approximately 3:2. Huge whitespace, large readable type, NO paragraphs, NO explanatory card bodies, NO tier section headings. At most about 100 Vietnamese words in the whole diagram. All wording below is exact; do not add more descriptions.
+
+Title only: "MÔ HÌNH KINH DOANH DANA QUEST".
+CENTER: compact attractive Dana Quest phone icon, label "DANA QUEST" and "(Freemium)".
+LEFT UPPER actor small people/suitcase icon, label "ĐƠN VỊ PHÂN PHỐI".
+LEFT LOWER actor small building icon, label "KHÁCH HÀNG TỔ CHỨC".
+RIGHT MIDDLE actor blue people icon, label "NGƯỜI CHƠI".
+BOTTOM LEFT small megaphone/gift icon, label "QUẢNG BÁ & ƯU ĐÃI*".
+BOTTOM RIGHT prominent green BUS icon, label "ĐỐI TÁC XE BUÝT*".
+BOTTOM CENTER a single compact pale mint infrastructure box with heading "HẠ TẦNG CNTT", containing ONLY three short lines:
+"Bản đồ: Leaflet + OpenStreetMap"
+"GPS thiết bị • Chỉ đường: Valhalla"
+"Máy chủ • lưu trữ"
+
+Clear main business arrows, solid blue, two parallel lanes for each pair, unmistakable ONE arrowhead per line:
+Distributor -> center "Giới thiệu khách".
+Center -> distributor "Hoa hồng".
+Organizational client -> center "Phí thiết kế".
+Center -> organizational client "Quest riêng".
+Players -> center "Thanh toán quest".
+Center -> players "Trải nghiệm".
+
+Secondary dashed blue exchanges, shorter and thinner, use one bidirectional link for each pair, no tangled separate lines:
+Center <-> marketing/benefits node, label "Quảng bá / ưu đãi".
+Center <-> BUS node, label "Vé ưu đãi / giới thiệu khách".
+BUS -> PLAYERS, a separate outer right loop, label "Di chuyển".
+Infrastructure -> center, short muted grey connector, label "Hỗ trợ vận hành".
+
+Footer just two short lines:
+"* Hợp tác dự kiến; Green Coin chưa đổi vé thật."
+"Công cụ miễn phí có điều kiện; máy chủ tính riêng."
+
+Do NOT add subtitles, three-layer labels, long clauses, role descriptions, costs paragraphs, or tiny technical details. Flat icons outside/above short node labels, minimal pale blue backplates optional. Visual simplicity is the MAIN objective. Keep the business model legible at a glance like the user's original sparse diagram, rather than a dense presentation slide. Route each connection around icons and away from text, do not let the technology block dominate. The bus must remain a distinct visible green bus.

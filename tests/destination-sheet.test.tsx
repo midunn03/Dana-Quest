@@ -52,7 +52,8 @@ it.each(destinations)('opens the shared sheet and journey action for $name', asy
   expect(panel.querySelector('.eyebrow')).toBeNull()
   expect(panel.querySelector('.sheet-handle')).not.toBeNull()
   expect(panel.querySelector('.sheet-thumbnail')).not.toBeNull()
-  expect(panel.querySelectorAll('.gallery-slide')).toHaveLength(3)
+  expect(panel.querySelectorAll('.gallery-slide')).toHaveLength(place.photo ? 1 : 3)
+  if(place.photo)expect(panel.querySelector('.admin-photo')?.getAttribute('src')).toContain(place.photo)
   expect(panel.querySelectorAll('.visit-section')[0].textContent).toContain(place.description)
   expect(panel.querySelectorAll('.visit-section')[1].textContent).toContain(place.suggestedActivities[0])
   expect(panel.querySelector('.destination-sources')).toBeNull()
@@ -93,7 +94,7 @@ it('opens full height after a short upward swipe on the illustration and keeps f
 
 
 it('keeps horizontal gallery swipes separate from sheet expansion and shows three illustrations', async () => {
-  const { panel } = await setup()
+  const { panel } = await setup({...destinations[0],photo:undefined})
   const track = panel.querySelector('.gallery-track') as HTMLDivElement
   expect(track.querySelectorAll('.gallery-slide')).toHaveLength(3)
   fireEvent.pointerDown(track, { pointerId:1, button:0, clientX:300, clientY:400 })

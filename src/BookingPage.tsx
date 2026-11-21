@@ -6,6 +6,7 @@ import { LoginBackdrop } from './WelcomePage'
 import { JourneyIcon } from './OnboardingPage'
 import { rememberCodeReturn } from './lib/onboarding'
 import { redeemQuestCode, type ActivatedQuest } from './lib/activation'
+import { getRequiredPlanForQuest, grantPremiumPlan, isPaidQuest } from './lib/premium'
 import { getDestination } from './data/destinations'
 import { getQuest } from './data/quests'
 
@@ -15,7 +16,7 @@ export default function BookingPage({ entry=false }: { entry?:boolean }) {
   const [busy,setBusy]=useState(false)
   const [error,setError]=useState('')
   const [result,setResult]=useState<ActivatedQuest|null>(null)
-  async function submit(event:FormEvent) {event.preventDefault();if(busy)return;setBusy(true);setError('');try{setResult(await redeemQuestCode(code.trim()))}catch(cause){setError((cause as Error).message)}finally{setBusy(false)}}
+  async function submit(event:FormEvent) {event.preventDefault();if(busy)return;setBusy(true);setError('');try{const activated=await redeemQuestCode(code.trim());if(isPaidQuest(activated.questId))grantPremiumPlan(getRequiredPlanForQuest(activated.questId)==='pro'?'pro':'plus',auth.user?.id,activated.questId,'code');setResult(activated)}catch(cause){setError((cause as Error).message)}finally{setBusy(false)}}
   const login=()=>rememberCodeReturn()
   const resultTitle=(result ? getQuest(result.questId)?.title||getDestination(result.questId)?.name||'' : '').replace(/\s+[—–-]\s+(.+)$/, ' ($1)')
   return <main className="login-experience booking-experience"><LoginBackdrop decorative/><div className="login-scrim" aria-hidden="true"/><section className="login-sheet booking-sheet" aria-labelledby="booking-title">

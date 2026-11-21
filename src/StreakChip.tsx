@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react'
 import { fetchStreak, getCachedStreak, type StreakData } from './lib/streak'
 import { t, interpolate } from './i18n/locale'
 import './Streak.css'
+import {useOptionalAuth} from './AuthContext'
+import {getSyncAccountId} from './lib/accountSync'
 
 export default function StreakChip() {
+  const owner=useOptionalAuth()?.user?.id??getSyncAccountId()
   const [streak, setStreak] = useState<StreakData | null>(() => getCachedStreak())
   const [milestoneNotice, setMilestoneNotice] = useState<string | null>(null)
 
   useEffect(() => {
     let alive = true
+    setStreak(getCachedStreak())
     fetchStreak().then((data) => {
       if (alive && data) setStreak(data)
     })
@@ -35,7 +39,7 @@ export default function StreakChip() {
       window.removeEventListener('dana-streak-updated', onUpdate)
       window.removeEventListener('dana-streak-milestone', onMilestone)
     }
-  }, [])
+  }, [owner])
 
   const count = streak?.currentStreak ?? 0
   const active = count > 0

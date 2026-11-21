@@ -28,8 +28,8 @@ const AlbumPage=lazy(()=>import('./AlbumPage'))
 import ShopPage from './ShopPage'
 import AccountPage from './AccountPage'
 import AuthPage from './AuthPage'
-import ActiveMissionIndicator from './ActiveMissionIndicator'
-import PageTools from './PageTools'
+
+import PageTools, { HeaderQuickToggles } from './PageTools'
 const QuestDetailsPage=lazy(()=>import('./QuestDetailsPage'))
 const QuestPlayPage=lazy(()=>import('./QuestPlayPage'))
 const CreatorPage = lazy(() => import('./CreatorPage'))
@@ -47,10 +47,58 @@ import { canNavigateFrom } from './lib/navigationGuard'
 import './mobile/Mobile.css'
 // [UX-FLOW] Tối ưu giao diện bản đồ và ngân sách chiều cao điện thoại (Giai đoạn 3)
 import './mobile/MobileMap.css'
+import './mobile/MobileBrand.css'
+import PixelLogo from './PixelLogo'
 import { useDeviceMode } from './lib/deviceMode'
 import DeviceModeModal from './mobile/DeviceModeModal'
 import MobileBottomNav from './mobile/MobileBottomNav'
-import StreakChip from './StreakChip'
+import MobileAccountBadge from './mobile/MobileAccountBadge'
+import SitePopup from './SitePopup'
+import PremiumPricingModal from './PremiumPricingModal'
+import './GameBrand.css'
+import './GameLayoutPolish.css'
+import { useProgress } from './lib/useProgress'
+import { useQuestProgress } from './lib/useQuestProgress'
+import { accountStats } from './lib/accountStats'
+import { resolveAvatar } from './lib/avatar'
+import PixelAvatar from './PixelAvatar'
+import { usePremiumAccess } from './lib/premium'
+
+function HeaderAccountBadge({ route }: { route: string }) {
+  const { user } = useAuth()
+  const { activePlanId } = usePremiumAccess(user?.id)
+  const legacy = useProgress()
+  const questProgress = useQuestProgress()
+  const stats = accountStats(legacy.state, questProgress.state)
+  const avatar = resolveAvatar(user?.avatarId)
+  const name = user?.name || t('Khách', 'Guest')
+  const isActive = route.startsWith('#/tai-khoan')
+  return (
+    <a
+      className={`header-account-badge ${isActive ? 'is-active' : ''}`}
+      href="#/tai-khoan"
+      aria-current={isActive ? 'page' : undefined}
+      title={t('Tài khoản', 'Account')}
+    >
+      <span className="header-account-avatar">
+        {avatar && <PixelAvatar avatar={avatar} />}
+      </span>
+      <span className="header-account-info">
+        <strong className="header-account-name">{name}</strong>
+        <small className="header-account-meta">
+          <span className="header-account-xp" lang="en">{stats.xp} EXP</span>
+          <span aria-hidden="true">·</span>
+          <span className="header-account-tier" lang="en">{stats.tier}</span>
+          {activePlanId !== 'free' && (
+            <span className={`header-account-plan is-${activePlanId}`} lang="en">
+              {activePlanId === 'pro' ? '✦ PRO' : 'PLUS'}
+            </span>
+          )}
+        </small>
+      </span>
+    </a>
+  )
+}
 function AppRouter() {
   useLocale()
   const auth = useAuth()
@@ -80,7 +128,7 @@ function AppRouter() {
   const isMap = route === '#/map'
   const journeyRoute = route.startsWith('#/bat-dau/') || ['#/kich-hoat', '#/nhap-ma', '#/dieu-khoan', '#/quyen-rieng-tu'].includes(route)
   // [UX-FLOW] Cho phép truy cập công khai #/huong-dan
-  const publicRoute = route.startsWith('#/nha-sang-tao/') || route==='#/quest-cua-toi' || route.startsWith('#/su-kien/') || route.startsWith('#/tai-khoan') || route === '#/huong-dan' || journeyRoute || ['#/', '#/dang-nhap', '#/dang-ky', '#/kham-pha', '#/explore', '#/map', '#/tim-kiem', '#/su-kien', '#/huong-dan'].includes(route) || /^#\/(quest|dia-diem)\/[^/]+$/.test(route)
+  const publicRoute = route.startsWith('#/nha-sang-tao/') || route==='#/quest-cua-toi' || route.startsWith('#/su-kien/') || route.startsWith('#/chi-duong/') || route.startsWith('#/tai-khoan') || route === '#/huong-dan' || journeyRoute || ['#/', '#/dang-nhap', '#/dang-ky', '#/kham-pha', '#/explore', '#/map', '#/tim-kiem', '#/su-kien', '#/huong-dan'].includes(route) || /^#\/(quest|dia-diem)\/[^/]+$/.test(route)
   const authRoute = route === '#/dang-nhap' || route === '#/dang-ky'
   useEffect(() => {
     if(authRoute){setHomeAuthMode(route==='#/dang-ky'?'register':'login');window.history.replaceState(window.history.state,'','#/');setHash('#/');return}
@@ -122,8 +170,8 @@ function AppRouter() {
     : /^#\/quest\/[^/]+\/choi$/.test(route) ? <QuestPlayPage key={route} id={route.split('/')[2]} />
     : route.startsWith('#/nha-sang-tao/') ? <CreatorPage key={route} id={route.split('/')[2].split('?')[0]} from={new URLSearchParams(route.split('?')[1]||'').get('tu')||undefined}/>
     : route.startsWith('#/quest/') ? <QuestDetailsPage key={route} id={route.slice('#/quest/'.length)} />
-    : route.startsWith('#/chi-duong/')&&getQuest(route.slice('#/chi-duong/'.length)) ? <QuestDetailsPage id={route.slice('#/chi-duong/'.length)}/>
-    : route.startsWith('#/chi-duong/') ? <NavigationPage key={route} id={route.slice('#/chi-duong/'.length)} />
+    : route.startsWith('#/chi-duong/') ? <NavigationPage key={route} id={route.slice('#/chi-duong/'.length).split('?')[0]} fromMap={new URLSearchParams(route.split('?')[1] || '').get('tu') === 'map'} />
+    // Direct navigation for map directions (with optional ?tu=map arrival flow)
     : route.startsWith('#/hoan-thanh/') ? <CelebrationPage key={route} id={route.split('/')[2]} missionId={route.split('/')[3]} />
     : route.startsWith('#/may-anh/') ? <CameraPage key={route} id={route.split('/')[2]} missionId={route.split('/')[3]} />
     : route.startsWith('#/nhiem-vu/')&&getQuest(route.slice('#/nhiem-vu/'.length)) ? <QuestDetailsPage id={route.slice('#/nhiem-vu/'.length)}/>
@@ -149,16 +197,16 @@ function AppRouter() {
   const showMobileHeader = isMobile && !isHome && !isQuestImmersive
   const showMobileNav = isMobile && !isHome && !onboarding && !isQuestImmersive && !isFullscreen
 
-  return <EventProvider route={showLogin?'#/dang-nhap':route}><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${isMobile ? 'device-mobile-shell device-mobile' : ''} ${isHome ? 'home-shell' : ''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
+  return <EventProvider route={showLogin?'#/dang-nhap':route}><SitePopup user={auth.user} onLogout={auth.logout}/><PremiumPricingModal /><div onClickCapture={interceptClick} inert={showLogin} ref={shell} className={`app-shell ${isMobile ? 'device-mobile-shell device-mobile' : ''} ${isHome ? 'home-shell' : ''} ${onboarding ? 'onboarding-shell' : ''} ${route.startsWith('#/tai-khoan') ? 'account-shell' : ''} ${workspace ? 'workspace-shell' : ''}`}>
     {showMobileHeader && (
       <header className={`device-mobile-header ${isMap && isUxFlagEnabled('MOBILE_MAP_FIRST') ? 'device-mobile-header--floating-map' : ''}`} role="banner">
         <div className="device-mobile-brand-group">
           <a href="#/kham-pha" className="device-mobile-logo" aria-label="Dana Quest">
-            <span>DANA QUEST</span>
+            <PixelLogo/>
           </a>
         </div>
         <div className="device-mobile-header-actions">
-          {auth.user && <StreakChip />}
+          <MobileAccountBadge route={route} user={auth.user} /><HeaderQuickToggles compact hideDevice className="device-mobile-lang-wrap" />
           <button
             type="button"
             className="device-mobile-mode-btn"
@@ -172,7 +220,7 @@ function AppRouter() {
         </div>
       </header>
     )}
-    {!isMobile && <PageTools route={route}>{auth.status === 'authenticated' && !onboarding && <ActiveMissionIndicator />}</PageTools>}
+    {!isMobile && <PageTools route={route}>{!onboarding && <HeaderAccountBadge route={route} />}</PageTools>}
     {workspace && !isMobile && <WorkspaceNavigation route={route}/>}
     {renderedPage}<Notifications />
     {/* [UX-FLOW] Chip nổi bước tiếp theo */}

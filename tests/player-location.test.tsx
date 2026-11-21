@@ -49,7 +49,7 @@ it('keeps quest list and visible markers aligned, displays the avatar and only r
  expect(document.querySelectorAll('.atlas-pin')).toHaveLength(quests.length)
  expect(document.querySelectorAll('.atlas-pin.hidden-pin')).toHaveLength(0)
  const flyTo=vi.spyOn(L.Map.prototype,'flyTo').mockImplementation(function(this:L.Map,point,zoom){return this.setView(point,zoom)})
- fireEvent.click(screen.getByRole('button',{name:'◎ Vị trí của tôi'}))
+ fireEvent.click(screen.getByRole('button',{name:'Vị trí của tôi',exact:true}))
  location.refresh(16.065,108.23)
  expect(flyTo).toHaveBeenLastCalledWith([16.065,108.23],16,{animate:true,duration:.7})
  expect(document.querySelectorAll('.player-location-marker')).toHaveLength(1)
@@ -57,7 +57,7 @@ it('keeps quest list and visible markers aligned, displays the avatar and only r
  const matches=mapEntries('quests','cau rong',Date.now()).length
  await waitFor(()=>expect(document.querySelectorAll('.atlas-pin')).toHaveLength(matches))
  expect(document.querySelectorAll('.atlas-list>button')).toHaveLength(matches)
- fireEvent.click(screen.getByRole('button',{name:/Sự kiện sắp tới/}))
+ fireEvent.click(screen.getByRole('button',{name:'◆ Sự kiện',exact:true}))
  await waitFor(()=>expect(document.querySelectorAll('.atlas-pin')).toHaveLength(document.querySelectorAll('.atlas-list>button').length))
  view.unmount()
 })

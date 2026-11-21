@@ -95,3 +95,7 @@ Kiểm tra màn liên quan bằng VI/EN ở 390/768/1280 px và desktop rộng; 
 ## Ranh giới của lần cập nhật này
 
 Chỉ thêm thư viện tham khảo và đường dẫn tài liệu thiết kế. Không sửa CSS, font, logo runtime, logic, API, dữ liệu người dùng; không cài package hoặc bật dịch vụ ngoài. Các thay đổi hình ảnh/tính năng sau này cần yêu cầu riêng theo phạm vi tương ứng.
+
+## Bản đồ — cập nhật 18/11/2026
+
+Theo yêu cầu mới của chủ dự án: bộ lọc ngang trên vùng bản đồ, kết quả có ảnh ở thanh bên trái trên desktop và bảng kéo ba mức trên mobile. Riêng phần điều khiển/kết quả bản đồ dùng chữ khoảng 14–18px để tăng khả năng đọc và mật độ; giữ pixel font và màu Dana Quest. Nguồn kiểu là `src/MapResults.css`; màn dẫn đường dùng `src/NavigationPage.css`. Ảnh địa điểm hiển thị ảnh thật khi có nguồn, dự phòng bằng minh họa khi ảnh không có hoặc tải thất bại. [Báo cáo và ảnh kiểm tra](docs/reports/map-2026-11-18/README.md).

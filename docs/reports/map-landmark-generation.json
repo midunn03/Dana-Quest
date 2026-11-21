@@ -1,0 +1,114 @@
+{
+  "tool": "Built-in imagegen",
+  "reference": "public/art/map/due-gate-pixel-v2.png",
+  "basePrompt": "Create ONE production game map landmark sprite matching the provided approved DUE sprite's detailed 16-bit pixel artwork: elevated frontal three-quarter top-down view, intricate square pixel clusters, stepped shading, navy shadow edges, warm highlights, saturated yet natural Dana Quest blue/mint/gold palette. Complete recognizable subject isolated on TRUE TRANSPARENT background. NO text, letters, UI, pin, badge, white sticker border, rectangular background, sky or terrain tile. Small grounded base only where essential. Wide compact composition, subject fills canvas, minimal padding. Not flat vector, not emoji, not photoreal. Save PNG locally for use in website map. Subject: ",
+  "subjects": [
+    [
+      "bao-tang-da-nang",
+      "Da Nang city museum: elegant pale cream French colonial civic building, symmetrical two-story facade, terracotta hipped tiled roof, arched tall windows, central entrance, modest palms and low planting at its base. Architectural landmark miniature."
+    ],
+    [
+      "bao-tang-dieu-khac-cham",
+      "Da Nang Museum of Cham Sculpture: ochre yellow low colonial pavilion, red terracotta tiled roofs, decorative Cham-inspired curved gable and arched window details, a small sandstone Cham sculpture near front entrance, tropical shrub at base. Recognizable historic museum miniature."
+    ],
+    [
+      "cong-vien-apec",
+      "Da Nang APEC sculpture park iconic huge white flying-kite wave canopy: sweeping open lattice ribbon roof billowing upward, many delicate white ribs, supported by slim white columns above a low curved podium, small green landscaping. The striking white aerodynamic lattice canopy is hero."
+    ],
+    [
+      "cau-tinh-yeu",
+      "Da Nang Love Bridge short pedestrian riverside pier with timber deck, dark decorative railings and three tall black lamp posts topped with vivid red glowing heart lantern clusters. Small flowering planters, deck projects diagonally with depth. Not a suspension bridge."
+    ],
+    [
+      "bai-bien-my-khe",
+      "My Khe beach miniature: curved sliver of pale golden sand with turquoise surf at its edge, two graceful coconut palms, small blue beach umbrella and empty reclining chair. Organic beach silhouette, no rectangular terrain tile, no people, no horizon."
+    ],
+    [
+      "cong-vien-bien-dong",
+      "East Sea Park Da Nang: small coastal promenade plaza, three graceful white pigeons flying above a sculptural cream pedestal, two palms and neatly trimmed green shrubs, small edge of blue surf. Organic isolated park landmark silhouette."
+    ],
+    [
+      "bien-man-thai-sup",
+      "Man Thai Da Nang beach SUP landmark: three vivid teal, coral and yellow stand-up paddle boards with paddles beside a Vietnamese round woven basket fishing boat, small curved strip of golden sand and turquoise wave edge. No people. Organic isolated silhouette."
+    ],
+    [
+      "chua-linh-ung-bai-but",
+      "Linh Ung Bai But Da Nang: tall serene white Lady Buddha Guanyin statue standing on ornate lotus pedestal, visible robe folds, small traditional green-roof pagoda pavilion at base with lush small shrubs. Statue is the main recognizable vertical landmark."
+    ],
+    [
+      "dinh-ban-co",
+      "Ban Co peak Son Tra: small seated white-bearded sage in pale traditional robe at a red stone Chinese chess table with visible black and red chess pieces, perched on a rocky green mountain lookout. Stylized wise statue, not realistic person, compact organic base."
+    ],
+    [
+      "hai-van-quan",
+      "Hai Van Quan ancient mountain pass gate: weathered reddish brown brick fortified arched gateway, thick stone and brick ramparts, small tiled watch house and mossy gray rock at base. Historic Vietnamese gate, no text or signage, architectural miniature."
+    ],
+    [
+      "ngu-hanh-son",
+      "Marble Mountains Da Nang: cluster of five dramatic gray limestone pinnacles with emerald tropical vegetation, stone steps winding up front, a small old pagoda tucked against a cliff and dark cave opening. Compact natural mountain landmark silhouette, no terrain tile."
+    ],
+    [
+      "cau-vang-ba-na-hills",
+      "Golden Bridge Ba Na Hills Da Nang: gently curving gold pedestrian bridge cradled by TWO enormous weathered mossy gray stone hands rising underneath, railings and paving detailed, a few small green plants at base. Entire two hands and bridge visible, isolated transparent, no clouds or landscape."
+    ],
+    [
+      "bai-bien-nam-o",
+      "Nam O reef beach Da Nang: cluster of rugged dark gray coastal boulders covered in vivid velvety green moss, turquoise sea foam threading between rocks, tiny sliver of golden sand and a traditional round basket fishing boat. Organic isolated landmark miniature without rectangular sea tile."
+    ]
+  ],
+  "assets": [
+    {
+      "id": "cong-vien-apec",
+      "file": "cong-vien-apec-pixel-v2.png"
+    },
+    {
+      "id": "bao-tang-da-nang",
+      "file": "bao-tang-da-nang-pixel-v2.png"
+    },
+    {
+      "id": "cau-tinh-yeu",
+      "file": "cau-tinh-yeu-pixel-v2.png"
+    },
+    {
+      "id": "bao-tang-dieu-khac-cham",
+      "file": "bao-tang-dieu-khac-cham-pixel-v2.png"
+    },
+    {
+      "id": "cong-vien-bien-dong",
+      "file": "cong-vien-bien-dong-pixel-v2.png"
+    },
+    {
+      "id": "bien-man-thai-sup",
+      "file": "bien-man-thai-sup-pixel-v2.png"
+    },
+    {
+      "id": "bai-bien-my-khe",
+      "file": "bai-bien-my-khe-pixel-v2.png"
+    },
+    {
+      "id": "chua-linh-ung-bai-but",
+      "file": "chua-linh-ung-bai-but-pixel-v2.png"
+    },
+    {
+      "id": "hai-van-quan",
+      "file": "hai-van-quan-pixel-v2.png"
+    },
+    {
+      "id": "dinh-ban-co",
+      "file": "dinh-ban-co-pixel-v2.png"
+    },
+    {
+      "id": "bai-bien-nam-o",
+      "file": "bai-bien-nam-o-pixel-v2.png"
+    },
+    {
+      "id": "cau-vang-ba-na-hills",
+      "file": "cau-vang-ba-na-hills-pixel-v2.png"
+    },
+    {
+      "id": "ngu-hanh-son",
+      "file": "ngu-hanh-son-pixel-v2.png"
+    }
+  ],
+  "editPrompt": "Remove backdrop, gradient glow and halo; preserve foreground, clean transparent alpha silhouette."
+}

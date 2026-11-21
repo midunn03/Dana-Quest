@@ -212,31 +212,31 @@
 
 /* 4. Tìm kiếm & Bộ lọc trong sheet hoặc nổi */
 .device-mobile-shell .atlas-sidebar header {
-  display: none !important;
+  display: none;
 }
 
 .device-mobile-shell .atlas-search {
-  margin: 6px 0 !important;
+  margin: 6px 0;
   flex-shrink: 0;
 }
 
 .device-mobile-shell .atlas-search input {
-  height: 44px !important;
-  min-height: 44px !important;
-  font-size: 16px !important;
-  border: 1.5px solid var(--px-ink, #0f172a) !important;
-  border-radius: 8px !important;
-  padding: 8px 12px !important;
+  height: 44px;
+  min-height: 44px;
+  font-size: 16px;
+  border: 1.5px solid var(--px-ink, #0f172a);
+  border-radius: 8px;
+  padding: 8px 12px;
 }
 
 .device-mobile-shell .atlas-filters {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  gap: 8px !important;
-  margin: 4px 0 8px !important;
-  padding-bottom: 2px !important;
-  scrollbar-width: none !important;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 8px;
+  margin: 4px 0 8px;
+  padding-bottom: 2px;
+  scrollbar-width: none;
   flex-shrink: 0;
 }
 .device-mobile-shell .atlas-filters::-webkit-scrollbar {
@@ -244,29 +244,29 @@
 }
 
 .device-mobile-shell .atlas-filters button {
-  flex-shrink: 0 !important;
-  min-height: 36px !important;
-  height: 36px !important;
-  padding: 4px 12px !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  border: 1.5px solid var(--px-ink, #0f172a) !important;
-  border-radius: 18px !important;
-  white-space: nowrap !important;
+  flex-shrink: 0;
+  min-height: 36px;
+  height: 36px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1.5px solid var(--px-ink, #0f172a);
+  border-radius: 18px;
+  white-space: nowrap;
 }
 
 .device-mobile-shell .atlas-filters button[aria-pressed="true"] {
-  background: var(--px-primary, #216447) !important;
-  color: #ffffff !important;
+  background: var(--px-primary, #216447);
+  color: #ffffff;
 }
 
 .device-mobile-shell .atlas-location {
-  display: none !important;
+  display: none;
 }
 
 .device-mobile-shell .atlas-list-heading {
-  padding: 4px 2px 6px !important;
-  font-size: 12px !important;
+  padding: 4px 2px 6px;
+  font-size: 12px;
   flex-shrink: 0;
 }
 
@@ -277,9 +277,9 @@
 }
 
 .device-mobile-shell .atlas-list > button {
-  min-height: 48px !important;
-  padding: 10px 8px !important;
-  border-bottom: 1px solid #f1f5f9 !important;
+  min-height: 48px;
+  padding: 10px 8px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 /* 5. Nút "Vị trí của tôi" nổi tròn 48px */
@@ -315,20 +315,20 @@
 
 /* 6. Thẻ chi tiết khi chọn điểm (gọn <= 140px) */
 .device-mobile-shell .atlas-selection {
-  position: absolute !important;
-  bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
-  left: 12px !important;
-  right: 12px !important;
-  max-height: 138px !important;
-  padding: 10px 14px !important;
-  border: 1.5px solid var(--px-ink, #0f172a) !important;
-  border-radius: 12px !important;
-  background: var(--px-surface, #ffffff) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
-  z-index: 110 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
+  position: absolute;
+  bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  left: 12px;
+  right: 12px;
+  max-height: 138px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--px-ink, #0f172a);
+  border-radius: 12px;
+  background: var(--px-surface, #ffffff);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .device-mobile-shell .atlas-selection-meta {
@@ -346,37 +346,37 @@
 }
 
 .device-mobile-shell .atlas-selection h2 {
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  margin: 2px 24px 2px 0 !important;
-  line-height: 1.3 !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 2px 24px 2px 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .device-mobile-shell .atlas-selection p {
-  font-size: 12px !important;
-  line-height: 1.3 !important;
-  margin: 0 0 6px !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
+  font-size: 12px;
+  line-height: 1.3;
+  margin: 0 0 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .device-mobile-shell .atlas-selection a {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: 44px !important;
-  min-width: 44px !important;
-  padding: 6px 14px !important;
-  background: var(--px-primary, #216447) !important;
-  color: #ffffff !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  border-radius: 8px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px 14px;
+  background: var(--px-primary, #216447);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
 }
 
 /* 7. Thanh điều hướng dưới Mobile: <= 56px + safe-area */
@@ -397,13 +397,13 @@
 
   .device-mobile-shell .atlas-sidebar.atlas-sidebar--snap-peek,
   .device-mobile-shell .atlas-sidebar[data-snap="peek"] {
-    height: 54px !important;
-    min-height: 54px !important;
-    max-height: 54px !important;
+    height: 54px;
+    min-height: 54px;
+    max-height: 54px;
   }
 
   .device-mobile-shell .atlas-floating-locate-btn {
-    bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
   }
 }
 

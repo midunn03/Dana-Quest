@@ -14,7 +14,7 @@ afterEach(()=>{setLocale('vi');cleanup();questStatus.error='';questStatus.loadin
 it('provides five destinations in the requested order and tracks selected pages', () => {
   render(<MainNavigation route="#/tim-kiem" />)
   const links = screen.getAllByRole('link')
-  expect(links.map(link => link.getAttribute('href'))).toEqual(['#/kham-pha', '#/su-kien', '#/tim-kiem', '#/quest-cua-toi', '#/tai-khoan'])
+  expect(links.map(link => link.getAttribute('href'))).toEqual(['#/kham-pha', '#/su-kien', '#/tim-kiem', '#/quest-cua-toi', '#/cua-hang'])
   expect(screen.getByRole('link', { name: 'Tìm kiếm' }).getAttribute('aria-current')).toBe('page')
 })
 
@@ -44,9 +44,9 @@ it('shows a quest sync failure instead of silently hiding the DUE run',()=>{
 
 it('translates every quest card action when using English',()=>{
  setLocale('en');const view=render(<DiscoveryPage/> )
- expect(screen.getAllByText('View quest').length).toBeGreaterThan(0)
- expect(screen.queryByText('Xem quest')).toBeNull()
+ expect(screen.getAllByText('Story · Puzzle').length).toBeGreaterThan(0)
+ expect(screen.queryByText('Cốt truyện · Giải đố')).toBeNull()
  setLocale('vi');view.rerender(<DiscoveryPage/> )
- expect(screen.getAllByText('Xem quest').length).toBeGreaterThan(0)
- expect(screen.queryByText('View quest')).toBeNull()
+ expect(screen.getAllByText('Cốt truyện · Giải đố').length).toBeGreaterThan(0)
+ expect(screen.queryByText('Story · Puzzle')).toBeNull()
 })

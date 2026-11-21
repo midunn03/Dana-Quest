@@ -1,0 +1,35 @@
+Tạo bằng công cụ image_gen tích hợp.
+
+Prompt tạo:
+Create a NEW Vietnamese business-model diagram for DANA QUEST, using the attached HEAL diagram ONLY as a reference for clean academic structure: white background, flat pictogram actors, carefully routed thin orthogonal arrows, separately labelled value flows and payment flows. Do NOT include HEAL, medical icons, or a separate premium platform. Also match the previous Dana Quest visual style: dark indigo heading, royal blue arrows, restrained pale blue icon panels. High-resolution landscape 3:2 infographic, generous whitespace, large perfectly legible Vietnamese typography, professionally typeset, no crossed or overlapping connectors, no editor handles. Title: "MÔ HÌNH KINH DOANH DANA QUEST". Subtitle: "Mô hình đề xuất".
+
+Composition and precise relationships:
+A central smartphone or attractive compact platform illustration labelled "DANA QUEST" and "(Freemium)". The app screen shows a map, orange location pin and small adventure character, not dense text.
+Three equally clear CORE actor nodes surrounding the central platform:
+1. Left-middle blue people icon: "NGƯỜI CHƠI" smaller "Du khách • người địa phương".
+2. Top-center suitcase/travel guide icon: "ĐƠN VỊ PHÂN PHỐI" smaller "Lữ hành • lưu trú • hướng dẫn viên".
+3. Right-middle building/people icon: "KHÁCH HÀNG TỔ CHỨC" smaller "Điểm tham quan • trường học • doanh nghiệp".
+
+Exactly six solid directed arrows in separate parallel lanes, with unmistakable arrowheads and labels:
+- Players -> Dana Quest: "Thanh toán quyền chơi".
+- Dana Quest -> Players: "Quest • câu chuyện • thử thách".
+- Distributor -> Dana Quest: "Giới thiệu khách • phân phối quest".
+- Dana Quest -> Distributor: "Chiết khấu / hoa hồng theo thỏa thuận".
+- Organizational clients -> Dana Quest: "Đặt thiết kế • thanh toán".
+- Dana Quest -> Organizational clients: "Thiết kế & triển khai quest riêng".
+
+Bottom third is a clearly separated future-cooperation zone (subtle dotted horizontal divider, label "HỢP TÁC DỰ KIẾN"), with TWO distinct smaller actor nodes, not one:
+4. Bottom-left megaphone icon: "ĐƠN VỊ QUẢNG BÁ / TÀI TRỢ".
+5. Bottom-right gift/voucher icon: "ĐỐI TÁC ƯU ĐÃI".
+Exactly four dashed directed arrows connecting these actors to the central platform, separate lanes, minimal readable line labels:
+- Advertising/sponsor node -> Dana Quest: "Phí quảng bá / tài trợ".
+- Dana Quest -> Advertising/sponsor node: "Quyền lợi truyền thông".
+- Benefits partner -> Dana Quest: "Voucher • điều kiện sử dụng".
+- Dana Quest -> Benefits partner: "Giới thiệu khách • phối hợp đối soát".
+These are proposed partnerships, no claim of actual contracts. Do not add commission flowing from benefit partners unless a real purchase exists; omit it in this drawing. Do not include buses, transport redemption, real monetary coin exchange, or arbitrary prices. Do not include OpenStreetMap as a trading partner node, since this diagram prioritizes commercial exchanges; tiny footer may note "Hạ tầng hỗ trợ: bản đồ • chỉ đường • lưu trữ" without arrows.
+
+Footer legend: "Nét liền: mô hình cốt lõi đề xuất    Nét đứt: hợp tác dự kiến". A second footer sentence: "Green Coin là điểm trong game, chưa quy đổi thành dịch vụ thực tế."
+Avoid the orange BỔ SUNG badges from earlier drafts; this should be a clean finished diagram suitable to insert into a university report. Make clear correct arrow directions the highest priority. All actors and relationships must fit with ample readable labels; use orthogonal outer loops for reverse directions rather than crisscrossing lines.
+
+Prompt chỉnh mũi tên:
+Edit ONLY the bottom dashed connections in this Vietnamese Dana Quest business model image; preserve every other element, text, typography, composition and all solid arrows exactly. The current four vertical dashed lines incorrectly end at the 'HỢP TÁC DỰ KIẾN' divider capsule. Make each dashed connector actually attach to the central DANA QUEST platform label above it. Move the 'HỢP TÁC DỰ KIẾN' caption to a small label at the far left of the dotted horizontal separator so it does not interrupt any line. Draw exactly FOUR dashed connectors, each with ONE arrowhead ONLY, and correct directions: (1) bottom-left sponsor box -> central DANA QUEST platform, label 'Phí quảng bá / tài trợ', arrowhead at platform; (2) central platform -> bottom-left sponsor box, label 'Quyền lợi truyền thông', arrowhead ONLY at sponsor box, absolutely no arrowhead near the platform or along a bend; (3) bottom-right benefits box -> central platform, label 'Voucher • điều kiện sử dụng', arrowhead at platform; (4) central platform -> bottom-right benefits box, label 'Giới thiệu khách • phối hợp đối soát', arrowhead ONLY at benefits box, no arrowhead at central platform. Use orthogonal parallel routes, attach to separate points on left and right edges of the central platform label so arrows are readable and don't cover text. There must NOT be any arrows pointing into the divider caption. Main aim: precise correct one-way exchange arrows, not double-headed arrows. Preserve the rest of the successful diagram.

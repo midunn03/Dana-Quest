@@ -14,6 +14,7 @@ import { createGreenMobilityStore } from './green-mobility.mjs'
 import {loadPresentationEvents} from './presentation-events.mjs'
 import { createAccountFeatures } from './account-features.mjs'
 import { createQuestCommunity, isCommunityQuest } from './quest-community.mjs'
+import { createGroupStore } from './groups.mjs'
 import { readFileSync } from 'node:fs'
 import { clientAddress } from './auth-rate-limit.mjs'
 import { createPersistentLimiter } from './api-rate-limit.mjs'
@@ -58,6 +59,12 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
   const eventCatalog=(owner,now=eventClock())=>[...cityEventCatalog,...loadPresentationEvents(resolve(dirname(file),'presentation-events.json'),owner,now,presentationEnabled)]
   const accountFeatures = createAccountFeatures(resolve(dirname(file), 'account-features'), eventClock,eventCatalog,async owner=>{const state=await questRuns.read(owner);return !Object.values(state.quests).some(run=>!run.completedAt&&!run.paused)})
   const community = createQuestCommunity(resolve(dirname(file),'quest-community.json'))
+  const groups = createGroupStore(resolve(dirname(file),'groups.json'),{readMember:async owner=>{
+    const user=(await load()).find(user=>user.id===owner)
+    if(!user||deleting.has(owner))return null
+    const profile=await accountFeatures.read(owner),progress=(await game.read(owner)).state
+    return {displayName:profile.profile.displayName||user.name,avatarId:user.avatarId||'',score:Object.values(progress.destinations).reduce((sum,run)=>sum+run.completed.length*10,0)}
+  }})
   const transit = createTransitClaims(resolve(dirname(file), 'transits'))
   const streak = createStreakStore(resolve(dirname(file), 'streaks'))
   const badges = createBadgeStore(resolve(dirname(file), 'badges'), {
@@ -122,6 +129,11 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
       const session = sessions.get(key)
       if (session && !attempts.consume(`api-user:${session.userId}`,120,60000)) throw fail(429,'Bạn thao tác quá nhanh. Vui lòng thử lại sau.')
       if(session&&deleting.has(session.userId))throw fail(409,'Tài khoản đang được xóa. Vui lòng chờ.')
+      if(path.startsWith('/api/auth/groups/')){
+        if(!session)throw fail(401,'Hãy đăng nhập để quản lý nhóm.')
+        if(req.headers['x-dana-user']!==session.userId)throw fail(409,'Tài khoản đã thay đổi. Hãy tải lại trang.')
+        if(path==='/api/auth/groups/my'&&req.method==='GET')return send(200,await groups.list(session.userId))
+      }
       if(path==='/api/auth/quest-community'&&req.method==='GET'){
         const id=new URL(req.url,origin).searchParams.get('questId')
         if(!isCommunityQuest(id))throw fail(404,'Không tìm thấy quest.')
@@ -220,12 +232,13 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
       let body = ''
       for await (const chunk of req) {
         body += chunk
-        if (Buffer.byteLength(body) > (path === '/api/auth/game' ? 4500000 : path==='/api/auth/account'?1450000:8192)) throw fail(413, 'Dữ liệu quá lớn.')
+        if (Buffer.byteLength(body) > (path === '/api/auth/game' ? 4500000 : path==='/api/auth/account'?1450000:path==='/api/auth/journey/track'?256000:8192)) throw fail(413, 'Dữ liệu quá lớn.')
       }
       let input
       try { input = JSON.parse(body) } catch { throw fail(400, 'Dữ liệu không hợp lệ.') }
       if (!input || typeof input !== 'object') throw fail(400, 'Dữ liệu không hợp lệ.')
       if(session&&deleting.has(session.userId))throw fail(409,'Tài khoản đang được xóa. Vui lòng chờ.')
+      if(path.startsWith('/api/auth/groups/')&&req.method==='POST')return send(200,await groups.update(session.userId,path.slice('/api/auth/groups/'.length),input))
       if(path==='/api/auth/quest-social'&&req.method==='POST'){
         if(input.action==='review'){
           const runs=await questRuns.read(session.userId)
@@ -266,7 +279,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         if(deleting.has(user.id))throw fail(409,'Tài khoản đang được xóa.')
         deleting.add(user.id)
         try{
-          await Promise.all([wallet.remove(user.id),transit.remove(user.id),streak.remove(user.id),badges.remove(user.id),goldenHours.remove(user.id),greenMobility.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id)])
+          await Promise.all([wallet.remove(user.id),transit.remove(user.id),streak.remove(user.id),badges.remove(user.id),goldenHours.remove(user.id),greenMobility.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id),groups.removeOwner(user.id)])
           await mutate(users=>{const index=users.findIndex(item=>item.id===user.id);if(index>=0)users.splice(index,1);return user})
           for(const [id,value] of sessions)if(value.userId===user.id)sessions.delete(id)
           setCookie(res,'',secure,0);return send(200,{ok:true})
@@ -274,7 +287,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
       }
       if (path === '/api/auth/quest-runs' && req.method === 'POST') {
         const result = await questRuns.update(session.userId, input)
-        if (input && (input.type === 'checkpoint' || input.type === 'start')) {
+        if (input && (input.type === 'complete-checkpoint' || input.type === 'start')) {
           await streak.recordActivity(session.userId).catch(() => {})
         }
         return send(200, result)
@@ -287,7 +300,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
       if ((path === '/api/auth/streak/activity' || path === '/api/streak/activity') && req.method === 'POST') {
         if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
         if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
-        const activity = await streak.recordActivity(session.userId, input?.timestamp)
+        const activity = await streak.recordActivity(session.userId)
         const updated = await wallet.read(session.userId)
         return send(200, {
           ...activity,
@@ -297,7 +310,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
       if ((path === '/api/auth/transit/claim' || path === '/api/transit/claim') && req.method === 'POST') {
         if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
         if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
-        const claim = await transit.claim(session.userId, input)
+        const claim = await transit.claim(session.userId, {...input, now: Date.now()})
         const updated = await wallet.read(session.userId)
         return send(200, {
           success: true,

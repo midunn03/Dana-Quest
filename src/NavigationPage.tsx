@@ -16,6 +16,15 @@ import { arrivalClock, bearing, directionName, formatMeters, headingBetween, tur
 import { getNearbyGreenTransit, claimTransitReward, type NearbyTransitResult } from './lib/ecoTransit'
 import './NavigationPage.css'
 import ConfirmDialog from './ConfirmDialog'
+import { getQuest } from './data/quests'
+import { useOptionalAuth } from './AuthContext'
+import { requestLogin } from './lib/authPrompt'
+import { useQuestProgress } from './lib/useQuestProgress'
+import { getQuestPricing, isPaidQuest, openPremiumModal, usePremiumAccess } from './lib/premium'
+
+function currentArrivalClock(seconds: number): string {
+  return arrivalClock(Date.now(), seconds)
+}
 
 function routeViewport(map: L.Map): L.FitBoundsOptions {
   const { x: width, y: height } = map.getSize()
@@ -33,7 +42,7 @@ export interface NavigationTarget {
   requireArrival?: boolean
 }
 
-export default function NavigationPage({ id, target }: { id: string; target?: NavigationTarget }) {
+export default function NavigationPage({ id, target, fromMap = false }: { id: string; target?: NavigationTarget; fromMap?: boolean }) {
   const container = useRef<HTMLDivElement>(null)
   const panel = useRef<HTMLElement>(null)
   const mapRef = useRef<L.Map | null>(null)
@@ -68,6 +77,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
   const [simPaused, setSimPaused] = useState(false)
   const [simSpeed, setSimSpeed] = useState<number>(3) // 1x, 3x, 6x
   const [simProgress, setSimProgress] = useState(0) // 0 -> 1
+  const simProgressRef = useRef(0)
   const [simSample, setSimSample] = useState<LocationSample | null>(null)
 
   // ---------- Phương tiện xanh & Delay Nudge ----------
@@ -80,14 +90,33 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
   const stationDwellStart = useRef<{ stationId: string; entryTime: number } | null>(null)
   const [dwellSeconds, setDwellSeconds] = useState(0)
 
+  const auth = useOptionalAuth()
+  const { hasAccess: hasQuestAccess } = usePremiumAccess(auth?.user?.id)
+  const { dispatch: questDispatch, busy: questBusy, error: questError } = useQuestProgress()
+  const [arrivalModalDismissed, setArrivalModalDismissed] = useState(false)
+  const quest = getQuest(id)
   const destination = getDestination(id)
-  const place: NavigationTarget | undefined = useMemo(() => target ?? (destination ? {
+  const place: NavigationTarget | undefined = useMemo(() => target ?? (fromMap && (destination || quest) ? {
+    id,
+    name: destination?.name ?? quest!.area,
+    position: destination?.position ?? quest!.startPosition,
+    backHref: '#/map',
+    continueHref: quest ? `#/quest/${quest.id}` : `#/nhiem-vu/${id}`,
+    continueLabel: quest ? t('Bắt đầu ngay') : t('Xem nhiệm vụ'),
+  } : destination ? {
     id: destination.id,
     name: destination.name,
     position: destination.position,
     backHref: `#/dia-diem/${destination.id}`,
     continueHref: `#/nhiem-vu/${destination.id}`,
-  } : undefined), [destination, target])
+  } : quest ? {
+    id: quest.id,
+    name: quest.area,
+    position: quest.startPosition,
+    backHref: `#/quest/${quest.id}`,
+    continueHref: `#/quest/${quest.id}`,
+    continueLabel: t('Bắt đầu ngay'),
+  } : undefined), [destination, quest, target, fromMap, id])
 
   const { sample, error: locationError, retry: retryLocation } = usePlayerLocation()
 
@@ -103,7 +132,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
   }, [activeSample])
 
   const navigation = useWalkingRoute(id, activeSample, place?.position)
-  const currentHref = target ? `#/quest/${id}/dan-duong` : `#/chi-duong/${id}`
+  const currentHref = target ? `#/quest/${id}/dan-duong` : fromMap ? `#/chi-duong/${id}?tu=map` : `#/chi-duong/${id}`
   const arrivedRef = useRef(false)
 
   // Guard rời khỏi trang (không chặn nếu đã đến nơi và bấm tiếp tục vào nhiệm vụ/quest)
@@ -271,28 +300,27 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     if (coords.length < 2) return
 
     const timer = window.setInterval(() => {
-      setSimProgress(prev => {
-        const step = 0.015 * simSpeed
-        const next = prev + step
-        if (next >= 1) {
-          window.clearInterval(timer)
-          setSimSample({ latitude: place.position[0], longitude: place.position[1], accuracy: 10, timestamp: Date.now() })
-          window.dispatchEvent(new CustomEvent('dana-toast', { detail: '🎉 ' + t('Đã mô phỏng đến đích! Bạn có thể thực hiện nhiệm vụ ngay.') }))
-          navigator.vibrate?.([100, 50, 150])
-          return 1
-        }
+      const step = 0.015 * simSpeed
+      const next = Math.min(1, simProgressRef.current + step)
+      simProgressRef.current = next
+      setSimProgress(next)
+      if (next >= 1) {
+        window.clearInterval(timer)
+        setSimSample({ latitude: place.position[0], longitude: place.position[1], accuracy: 10, timestamp: Date.now() })
+        window.dispatchEvent(new CustomEvent('dana-toast', { detail: '🎉 ' + t('Đã mô phỏng đến đích! Bạn có thể thực hiện nhiệm vụ ngay.') }))
+        navigator.vibrate?.([100, 50, 150])
+        return
+      }
 
-        const floatIdx = next * (coords.length - 1)
-        const idx = Math.floor(floatIdx)
-        const frac = floatIdx - idx
-        const p1 = coords[idx]
-        const p2 = coords[Math.min(coords.length - 1, idx + 1)]
-        const lat = p1[0] + (p2[0] - p1[0]) * frac
-        const lng = p1[1] + (p2[1] - p1[1]) * frac
+      const floatIdx = next * (coords.length - 1)
+      const idx = Math.floor(floatIdx)
+      const frac = floatIdx - idx
+      const p1 = coords[idx]
+      const p2 = coords[Math.min(coords.length - 1, idx + 1)]
+      const lat = p1[0] + (p2[0] - p1[0]) * frac
+      const lng = p1[1] + (p2[1] - p1[1]) * frac
 
-        setSimSample({ latitude: lat, longitude: lng, accuracy: 8, timestamp: Date.now() })
-        return next
-      })
+      setSimSample({ latitude: lat, longitude: lng, accuracy: 8, timestamp: Date.now() })
     }, 700)
 
     return () => window.clearInterval(timer)
@@ -302,6 +330,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     if (simulating) {
       setSimulating(false)
       setSimSample(null)
+      simProgressRef.current = 0
       setSimProgress(0)
       window.dispatchEvent(new CustomEvent('dana-toast', { detail: t('Đã dừng chế độ mô phỏng, quay lại vị trí thực tế.') }))
     } else {
@@ -312,6 +341,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
       const coords = navigation.route.geometry.coordinates.map(toLatLng)
       setSimulating(true)
       setSimPaused(false)
+      simProgressRef.current = 0
       setSimProgress(0)
       if (coords.length > 0) {
         setSimSample({ latitude: coords[0][0], longitude: coords[0][1], accuracy: 8, timestamp: Date.now() })
@@ -366,8 +396,8 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
       const icon = L.divIcon({
         className: 'custom-transit-marker',
         html: `<div class="transit-pin ${station.type}" title="${station.name}"><span>${station.type === 'bike' ? '🚲' : '🚌'}</span></div>`,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16],
+        iconSize: [48, 48],
+        iconAnchor: [24, 24],
       })
       const marker = L.marker(station.position, { icon }).addTo(map)
       marker.bindTooltip(`<b>${station.name}</b><br/>${interpolate('Cách bạn ${0}m · ${1}', [String(Math.round(distance)), claimed ? t('Đã nhận thưởng') : `+${station.bonusCoins} Green Coins`])}`, { direction: 'top' })
@@ -436,11 +466,46 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     }
   }, [simulating, simProgress])
 
+  const arrived = place ? ((!!activeSample && hasArrived(activeSample, place.position)) || (simulating && simProgress >= 0.98)) : false
+  useEffect(() => {
+    arrivedRef.current = arrived
+    if (!arrived) setArrivalModalDismissed(false)
+  }, [arrived])
+
+  const lockedPaidQuest = !!quest && isPaidQuest(quest.id) && !hasQuestAccess(quest.id)
+  const lockedPricing = quest ? getQuestPricing(quest.id) : null
+
+  async function handleStartAfterArrival() {
+    if (!place) return
+    if (quest) {
+      if (isPaidQuest(quest.id) && !hasQuestAccess(quest.id)) {
+        openPremiumModal({ questId: quest.id, reason: 'arrival', onUnlocked: () => setArrivalModalDismissed(false) })
+        return
+      }
+      if (auth && auth.status !== 'authenticated' && auth.status !== 'unconfigured') {
+        requestLogin()
+        return
+      }
+      if (auth?.status === 'authenticated' && !auth.user?.avatarId) {
+        allowLeave.current = true
+        window.location.hash = '#/chon-nhan-vat'
+        return
+      }
+      const started = await questDispatch({ type: 'start', questId: quest.id })
+      if (!started) return
+      const confirmed = await questDispatch({ type: 'confirm-arrival', questId: quest.id })
+      if (!confirmed) return
+      allowLeave.current = true
+      window.location.hash = `#/quest/${quest.id}/choi`
+      return
+    }
+    allowLeave.current = true
+    window.location.hash = place.continueHref
+  }
+
   if (!place) return <main className="screen-page"><h1>{t('Không tìm thấy điểm đến')}</h1><a href="#/map">{t('← Bản đồ')}</a></main>
 
   // Điều kiện đến nơi
-  const arrived = (!!activeSample && hasArrived(activeSample, place.position)) || (simulating && simProgress >= 0.98)
-  arrivedRef.current = arrived
   const arrivalFeedback = getArrivalFeedback(activeSample, place.position)
 
   const here: Point | null = activeSample ? [activeSample.latitude, activeSample.longitude] : null
@@ -490,7 +555,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
 
     {/* Bảng chỉ dẫn kiểu Google Maps */}
     <div className="route-instruction">
-      <a ref={backLink} href={place.backHref} aria-label={t('Quay lại chi tiết')} onClick={event => { event.preventDefault(); setPendingLeave(place.backHref) }}>←</a>
+      <a ref={backLink} className="dq-back-btn" href={place.backHref} aria-label={t('Quay lại chi tiết')} onClick={event => { event.preventDefault(); setPendingLeave(place.backHref) }}>← {t('Quay lại')}</a>
       <b aria-hidden="true">{lost ? '⤺' : turnIcon(progress?.next)}</b>
       <div aria-live="polite">
         <strong>{instruction}</strong>
@@ -501,25 +566,25 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
 
     {/* Thanh điều khiển Mô Phỏng Demo */}
     {simulating && (
-      <div className="sim-control-bar" role="toolbar" aria-label="Thanh điều khiển mô phỏng di chuyển">
+      <div className="sim-control-bar" role="toolbar" aria-label={t('Thanh điều khiển mô phỏng di chuyển', 'Movement simulation controls')}>
         <div className="sim-badge">
           <span className="pulse-dot" />
-          <span>MÔ PHỎNG ({Math.round(simProgress * 100)}%)</span>
+          <span>{t('MÔ PHỎNG', 'SIMULATION')} ({Math.round(simProgress * 100)}%)</span>
         </div>
         <div className="sim-actions">
           <button
             type="button"
             className="sim-action-btn"
             onClick={() => setSimPaused(p => !p)}
-            title={simPaused ? 'Tiếp tục chạy' : 'Tạm dừng'}
+            title={simPaused ? t('Tiếp tục chạy', 'Resume') : t('Tạm dừng', 'Pause')}
           >
-            {simPaused ? '▶ Tiếp tục' : '⏸ Dừng'}
+            {simPaused ? t('▶ Tiếp tục', '▶ Resume') : t('⏸ Dừng', '⏸ Pause')}
           </button>
           <button
             type="button"
             className={`sim-action-btn ${simSpeed === 1 ? 'active-speed' : ''}`}
             onClick={() => setSimSpeed(1)}
-            title="Tốc độ đi bộ thật"
+            title={t('Tốc độ đi bộ thật', 'Walking speed')}
           >
             1x
           </button>
@@ -527,7 +592,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
             type="button"
             className={`sim-action-btn ${simSpeed === 3 ? 'active-speed' : ''}`}
             onClick={() => setSimSpeed(3)}
-            title="Tốc độ chạy bộ"
+            title={t('Tốc độ chạy bộ', 'Jogging speed')}
           >
             3x
           </button>
@@ -535,7 +600,7 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
             type="button"
             className={`sim-action-btn ${simSpeed === 6 ? 'active-speed' : ''}`}
             onClick={() => setSimSpeed(6)}
-            title="Tốc độ xe đạp"
+            title={t('Tốc độ xe đạp', 'Cycling speed')}
           >
             6x
           </button>
@@ -543,9 +608,9 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
             type="button"
             className="sim-action-btn exit-sim"
             onClick={toggleSimulation}
-            title="Thoát chế độ mô phỏng"
+            title={t('Thoát chế độ mô phỏng', 'Exit simulation')}
           >
-            ✕ Thoát
+            {t('✕ Thoát', '✕ Exit')}
           </button>
         </div>
       </div>
@@ -559,9 +624,9 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
         type="button"
         className={`route-tool sim-btn ${simulating ? 'active' : ''}`}
         onClick={toggleSimulation}
-        aria-label="Bật hoặc tắt chế độ mô phỏng đi bộ demo"
+        aria-label={t('Bật hoặc tắt chế độ mô phỏng đi bộ demo', 'Toggle walking simulation demo')}
       >
-        🎮 {simulating ? 'Đang mô phỏng' : 'Mô phỏng demo'}
+        🎮 {simulating ? t('Đang mô phỏng', 'Simulating') : t('Mô phỏng demo', 'Demo simulation')}
       </button>
 
       {!follow && (
@@ -597,25 +662,70 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     </div>
 
     {/* [UX-FLOW] Thẻ nổi xác nhận khi mô phỏng chạy đến 100% */}
-    {simulating && arrived && (
-      <div className="arrival-action-banner" role="region" aria-label={t('Đã mô phỏng đến điểm đích')}>
-        <strong>🎉 {t('Đã mô phỏng đến nơi!')}</strong>
-        <p>{interpolate('Bạn đã tới khu vực ${0}. Chọn bước tiếp theo để vào chơi.', [place.name])}</p>
-        <div className="arrival-action-buttons">
-          <a
-            className="arrival-action-primary"
-            href={place.continueHref}
-            onClick={() => { allowLeave.current = true }}
-          >
-            {place.continueLabel ?? t('Xem nhiệm vụ')} →
-          </a>
+    {arrived && !arrivalModalDismissed && (fromMap || simulating || lockedPaidQuest) && (
+      <div
+        className="nav-arrival-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="nav-arrival-title"
+      >
+        <div className={`nav-arrival-modal ${lockedPaidQuest ? 'is-premium' : ''}`}>
           <button
             type="button"
-            className="arrival-action-secondary"
-            onClick={toggleSimulation}
+            className="nav-arrival-close"
+            aria-label={t('Đóng thông báo', 'Close arrival notification')}
+            onClick={() => setArrivalModalDismissed(true)}
           >
-            {t('Dừng mô phỏng')}
+            ×
           </button>
+
+          {lockedPaidQuest ? (
+            <>
+              <span className="nav-arrival-badge is-premium">
+                ✦ {lockedPricing?.tierId === 'pro' ? t('GÓI PRO · GIẢM 45%', 'PRO PLAN · 45% OFF') : t('GÓI PLUS · GIẢM 40%', 'PLUS PLAN · 40% OFF')}
+              </span>
+              <h2 id="nav-arrival-title" className="nav-arrival-title">
+                {t(`Bạn đã đến ${place.name}!`, `You have arrived at ${place.name}!`)}
+              </h2>
+              <p className="nav-arrival-desc">
+                {lockedPricing?.tierId === 'pro' ? t(`Hành trình ${quest?.title || place.name} nằm trong Gói Pro. Kích hoạt Gói Pro hàng tháng ngay để giải mã thử thách tại đây, nhận EXP, Xu Dana và Thẻ hành trình cá nhân!`, `${quest?.title || place.name} is included in Dana Quest Pro. Unlock Pro monthly to play challenges, earn EXP, Dana Coins, and your custom PNG card!`) : t('Ánh đèn rồng trên sông Hàn đang cất giữ bản phác thảo thất lạc từ người vẽ đèn. Mở khóa hành trình Đánh thức Long Mạch với Gói Plus hoặc Pro để giải mã câu chuyện giữa lòng Đà Nẵng, nhận EXP, Xu Dana và Thẻ hành trình cá nhân!', 'Dragon Bridge holds a lost sketch by the lantern painter. Unlock Awakening the Dragon Vein with Plus or Pro to play and earn EXP, Dana Coins, and your PNG Journey Card!')}
+              </p>
+              <div className="nav-arrival-price-row">
+                <span className="nav-arrival-price-old">{lockedPricing?.originalCurrencyLabel || '50.000đ/tháng'}</span>
+                <strong className="nav-arrival-price-new">{lockedPricing?.currencyLabel || '30.000đ/tháng'}</strong>
+                <span className="nav-arrival-price-save">{lockedPricing?.tierId === 'pro' ? t('Ưu đãi ra mắt -45%', 'Launch -45%') : t('Ưu đãi ra mắt -40%', 'Launch -40%')}</span>
+              </div>
+              <button
+                type="button"
+                className="nav-arrival-cta is-premium"
+                onClick={() => openPremiumModal({ questId: id, reason: 'arrival', onUnlocked: () => setArrivalModalDismissed(false) })}
+              >
+                {t('Mua ngay để trải nghiệm →', 'Buy Now to Experience →')}
+              </button>
+            </>
+          ) : (
+            <>
+              <span className="nav-arrival-badge">
+                🎉 {t('Đã đến điểm hẹn', 'Arrived at starting point')}
+              </span>
+              <h2 id="nav-arrival-title" className="nav-arrival-title">
+                {t('Bạn đã đến nơi!', 'You have arrived!')}
+              </h2>
+              <p className="nav-arrival-desc">
+                {t('Sẵn sàng khám phá câu chuyện nơi đây chưa?', 'Are you ready to uncover the story here?')}
+              </p>
+              <p className="nav-arrival-place">{place.name}</p>
+              {questError && <p role="alert" className="error">{t(questError)}</p>}
+              <button
+                type="button"
+                className="nav-arrival-cta"
+                disabled={questBusy}
+                onClick={() => void handleStartAfterArrival()}
+              >
+                {questBusy ? t('Đang mở hành trình…', 'Opening journey…') : t('Bắt đầu ngay →', 'Start Now →')}
+              </button>
+            </>
+          )}
         </div>
       </div>
     )}
@@ -720,21 +830,44 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
         {progress && (
           <div className="route-summary">
             <strong>{minutes} {t('phút')}</strong>
-            <span>{t('Đến lúc')} {arrivalClock(Date.now(), minutes * 60)} · {t('Tuyến đi bộ ngắn nhất')}</span>
+            <span>{t('Đến lúc')} {currentArrivalClock(minutes * 60)} · {t('Tuyến đi bộ ngắn nhất')}</span>
             <button type="button" className="route-exit" aria-label={t('Thoát khỏi hành trình')} onClick={() => setPendingLeave(place.backHref)}>
               {t('Thoát')}
             </button>
           </div>
         )}
 
-        {locationError && !simulating && <p role="status" className="error">{t(locationError)}</p>}
+        {locationError && !simulating && Boolean(activeSample) && <p role="status" className="error">{t(locationError)}</p>}
         {!activeSample && locationError && !simulating && <button type="button" onClick={retryLocation}>{t('Thử lấy vị trí')}</button>}
         {error && <p role="alert" className="error">{t('Không tải được nền bản đồ.')}</p>}
 
         {place.requireArrival && !arrived ? (
           <button type="button" className="blue-button" disabled>
-            {simulating ? 'Đang chạy mô phỏng đến điểm bắt đầu...' : t('Đến điểm bắt đầu để mở nhiệm vụ')}
+            {simulating ? t('Đang chạy mô phỏng đến điểm bắt đầu...', 'Simulating walk to starting point...') : t('Đến điểm bắt đầu để mở nhiệm vụ')}
           </button>
+        ) : fromMap ? (
+          !arrived ? (
+            <button type="button" className="blue-button" disabled>
+              {simulating ? t('Đang di chuyển đến điểm hẹn…') : t('Di chuyển đến điểm hẹn để bắt đầu')}
+            </button>
+          ) : lockedPaidQuest ? (
+            <button
+              type="button"
+              className="blue-button is-premium-cta"
+              onClick={() => openPremiumModal({ questId: id, reason: 'arrival', onUnlocked: () => setArrivalModalDismissed(false) })}
+            >
+              {t('Mua ngay để trải nghiệm →', 'Buy Now to Experience →')}
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="blue-button"
+              disabled={questBusy}
+              onClick={() => void handleStartAfterArrival()}
+            >
+              {questBusy ? t('Đang mở…') : t('Bắt đầu ngay →', 'Start Now →')}
+            </button>
+          )
         ) : (
           <a className="blue-button" href={place.continueHref} onClick={() => { allowLeave.current = true }}>
             {place.continueLabel ?? t('Xem nhiệm vụ')} →
@@ -747,15 +880,15 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
     {showDelayNudge && !arrived && (
       <div className="delay-nudge-overlay" role="dialog" aria-modal="true" aria-labelledby="delay-nudge-title">
         <div className="delay-nudge-modal">
-          <div className="delay-nudge-badge">⚡ TIẾP TỤC HÀNH TRÌNH NÀO!</div>
-          <h3 id="delay-nudge-title" className="delay-nudge-title">BẠN ĐANG DỪNG LẠI À? 🏃💨</h3>
+          <div className="delay-nudge-badge">{t('⚡ TIẾP TỤC HÀNH TRÌNH NÀO!', '⚡ KEEP GOING!')}</div>
+          <h3 id="delay-nudge-title" className="delay-nudge-title">{t('BẠN ĐANG DỪNG LẠI À? 🏃💨', 'TAKING A BREAK? 🏃💨')}</h3>
           <p className="delay-nudge-body">
-            Bạn đã dừng chân nghỉ một lát rồi đó! Chỉ còn <strong>{progress ? formatMeters(progress.remaining) : 'một đoạn ngắn'}</strong> nữa là tới <strong>{place.name}</strong> để ẵm trọn <strong>10 Green Coins</strong> và mở khóa nhiệm vụ khám phá!
+            {t('Bạn đã dừng chân nghỉ một lát rồi đó! Chỉ còn', 'You have paused for a moment! Only')} <strong>{progress ? formatMeters(progress.remaining) : t('một đoạn ngắn', 'a short distance')}</strong> {t('nữa là tới', 'left to reach')} <strong>{place.name}</strong> {t('để ẵm trọn', 'to earn')} <strong>10 Green Coins</strong> {t('và mở khóa nhiệm vụ khám phá!', 'and unlock the exploration mission!')}
           </p>
 
           {nearbyTransit.length > 0 && (
             <div className="delay-nudge-eco-hint">
-              🚲 Nếu thấy mỏi chân, hãy ghé ngay <strong>{nearbyTransit[0].station.name}</strong> cách bạn {Math.round(nearbyTransit[0].distance)}m để thuê xe đạp TNGo nhé!
+              🚲 {t('Nếu thấy mỏi chân, hãy ghé ngay', 'If your feet are tired, stop by')} <strong>{nearbyTransit[0].station.name}</strong> {t('cách bạn', 'just')} {Math.round(nearbyTransit[0].distance)}m {t('để thuê xe đạp TNGo nhé!', 'away to rent a TNGo bike!')}
             </div>
           )}
 
@@ -766,10 +899,10 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
               onClick={() => {
                 setShowDelayNudge(false)
                 lastMoveTimestamp.current = Date.now()
-                window.dispatchEvent(new CustomEvent('dana-toast', { detail: '🔥 Tuyệt vời! Cố lên, điểm đến ngay trước mắt rồi!' }))
+                window.dispatchEvent(new CustomEvent('dana-toast', { detail: t('🔥 Tuyệt vời! Cố lên, điểm đến ngay trước mắt rồi!', '🔥 Awesome! Keep going, the destination is right ahead!') }))
               }}
             >
-              🚀 Tôi đang đi tiếp đây! (Tiến lên)
+              {t('🚀 Tôi đang đi tiếp đây! (Tiến lên)', '🚀 I am moving again! (Onward)')}
             </button>
             <button
               type="button"
@@ -777,10 +910,10 @@ export default function NavigationPage({ id, target }: { id: string; target?: Na
               onClick={() => {
                 setShowDelayNudge(false)
                 snoozeUntil.current = Date.now() + 120_000 // Nghỉ 2 phút
-                window.dispatchEvent(new CustomEvent('dana-toast', { detail: 'Đã tạm hoãn nhắc nhở trong 2 phút.' }))
+                window.dispatchEvent(new CustomEvent('dana-toast', { detail: t('Đã tạm hoãn nhắc nhở trong 2 phút.', 'Reminders snoozed for 2 minutes.') }))
               }}
             >
-              Tạm dừng chân nghỉ 2 phút
+              {t('Tạm dừng chân nghỉ 2 phút', 'Pause reminders for 2 minutes')}
             </button>
           </div>
         </div>

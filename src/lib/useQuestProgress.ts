@@ -21,6 +21,8 @@ export function useQuestProgress() {
   const owner=getSyncAccountId()
   const [initial]=useState(()=>owner?{state:newQuestState(),error:''}:localProgress())
   const [state,setState]=useState(initial.state)
+  const stateRef=useRef(state)
+  stateRef.current=state
   const [error,setError]=useState(initial.error)
   const [loadedOwner,setLoadedOwner]=useState<string|null|undefined>(owner?undefined:null)
   const [ready,setReady]=useState(!owner&&!initial.error)
@@ -33,7 +35,7 @@ export function useQuestProgress() {
       if(submitting.current)return
       const requestGeneration=++generation.current
       const result=owner?accountRequest(owner).then(state=>({state,error:''})):Promise.resolve(localProgress())
-      void result.then(value=>{if(alive&&requestGeneration===generation.current&&getSyncAccountId()===owner){setState(value.state);setError(value.error);setReady(!value.error);setLoadedOwner(owner)}}).catch(cause=>{if(alive&&requestGeneration===generation.current&&getSyncAccountId()===owner){setError((cause as Error).message);setReady(false);setLoadedOwner(owner)}})
+      void result.then(value=>{if(alive&&requestGeneration===generation.current&&getSyncAccountId()===owner){stateRef.current=value.state;setState(value.state);setError(value.error);setReady(!value.error);setLoadedOwner(owner)}}).catch(cause=>{if(alive&&requestGeneration===generation.current&&getSyncAccountId()===owner){setError((cause as Error).message);setReady(false);setLoadedOwner(owner)}})
     }
     load();window.addEventListener('focus',load)
     return ()=>{alive=false;window.removeEventListener('focus',load)}
@@ -43,10 +45,10 @@ export function useQuestProgress() {
     submitting.current=true;setBusy(true)
     generation.current++
     try {
-      const next=owner?await accountRequest(owner,action):updateQuestProgress(state,action)
-      if(!owner&&next!==state)localStorage.setItem(STORAGE_KEY,JSON.stringify(next))
+      const next=owner?await accountRequest(owner,action):updateQuestProgress(stateRef.current,action)
+      if(!owner&&next!==stateRef.current)localStorage.setItem(STORAGE_KEY,JSON.stringify(next))
       if(getSyncAccountId()!==owner)throw new Error(t("Tài khoản đã thay đổi. Hãy tải lại trang."))
-      setState(next);setError('');return true
+      stateRef.current=next;setState(next);setError('');return true
     }catch(cause){setError(cause instanceof Error?cause.message:t("Không lưu được tiến trình quest."));return false}
     finally{submitting.current=false;setBusy(false)}
   }

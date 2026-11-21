@@ -18,13 +18,12 @@ afterEach(() => { cleanup(); progress.quests = {}; progress.destinations = {}; s
 const questId = 'due-dau-an-50-nam'
 const run = (): QuestRunProgress => ({ startedAt: 1, completedCheckpointIds: [], completedAtByCheckpoint: {} })
 
-it('offers search in the page header using the existing search route', () => {
+it('offers search dropdown in the page header', () => {
   const { rerender } = render(<PageTools route="#/su-kien" />)
-  const search = within(screen.getByRole('banner')).getByRole('link', { name: 'Tìm kiếm' })
-  expect(search.getAttribute('href')).toBe('#/tim-kiem')
-  expect(search.hasAttribute('aria-current')).toBe(false)
+  const search = within(screen.getByRole('banner')).getByRole('searchbox')
+  expect(search.getAttribute('placeholder')).toBe('Tìm quest hoặc địa điểm')
   rerender(<PageTools route="#/tim-kiem" />)
-  expect(search.getAttribute('aria-current')).toBe('page')
+  expect(within(screen.getByRole('banner')).getByRole('searchbox')).toBeTruthy()
 })
 
 it('shows an informative card and preserves directions/play links', () => {

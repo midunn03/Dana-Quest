@@ -32,7 +32,7 @@ export function evaluateGpsTrack(points, { isSimulated = false } = {}) {
   }
 
   // 1. Lọc điểm kém chính xác (accuracy > 40m)
-  const filtered = points.filter((p) => p && typeof p.lat === 'number' && typeof p.lng === 'number' && (p.accuracy == null || p.accuracy <= 40))
+  const filtered = points.filter((p) => p && Number.isFinite(p.lat) && Number.isFinite(p.lng) && Math.abs(p.lat) <= 90 && Math.abs(p.lng) <= 180 && Number.isFinite(p.timestamp) && (p.accuracy == null || (Number.isFinite(p.accuracy) && p.accuracy > 0 && p.accuracy <= 40)))
 
   let totalMeters = 0
   let walkMeters = 0
@@ -61,9 +61,6 @@ export function evaluateGpsTrack(points, { isSimulated = false } = {}) {
       } else {
         transitMeters += dist
       }
-    } else {
-      totalMeters += dist
-      walkMeters += dist
     }
   }
 
@@ -139,6 +136,15 @@ export function createGreenMobilityStore(directory, { dailyCap = DAILY_GREEN_MOB
         }
 
         const state = await load(owner)
+        // GPS timestamps identify already submitted portions, including retries
+        // after a reload. Keep the watermark independently of the capped history.
+        const recordedThrough = Math.max(state.recordedThrough ?? -Infinity, ...state.sessions.map(session => session.recordedThrough ?? -Infinity))
+        const freshPoints = Array.isArray(points) ? points.filter(point => point && Number.isFinite(point.timestamp) && point.timestamp > recordedThrough) : []
+        // Retain the shared boundary point so a growing track does not lose
+        // the first new segment after the previous submission.
+        const anchor = Array.isArray(points) ? points.findLast(point => point && point.timestamp === recordedThrough) : undefined
+        if (anchor) freshPoints.unshift(anchor)
+        Object.assign(evaluation, evaluateGpsTrack(freshPoints, { isSimulated }))
         const today = getVietnamDateKey()
         const todayStats = state.dailyStats[today] || { earnedCoins: 0, totalMeters: 0 }
 
@@ -151,10 +157,10 @@ export function createGreenMobilityStore(directory, { dailyCap = DAILY_GREEN_MOB
         const awardableCoins = Math.min(rawCoins, Math.max(0, dailyCap - todayStats.earnedCoins))
         const now = Date.now()
 
+        todayStats.totalMeters += evaluation.totalMeters
+        state.dailyStats[today] = todayStats
         if (awardableCoins > 0) {
           todayStats.earnedCoins += awardableCoins
-          todayStats.totalMeters += evaluation.totalMeters
-          state.dailyStats[today] = todayStats
 
           const claimSource = `green-mobility:${today}:${state.claims.length + 1}`
           state.claims.push({
@@ -175,7 +181,10 @@ export function createGreenMobilityStore(directory, { dailyCap = DAILY_GREEN_MOB
           coinsAwarded: awardableCoins,
           destinationIds,
           pointCount: points?.length ?? 0,
+          recordedThrough: Math.max(recordedThrough, ...freshPoints.map(point => point.timestamp)),
         }
+
+        if (Number.isFinite(sessionRecord.recordedThrough)) state.recordedThrough = sessionRecord.recordedThrough
 
         state.sessions.push(sessionRecord)
         if (state.sessions.length > 50) state.sessions = state.sessions.slice(-50)

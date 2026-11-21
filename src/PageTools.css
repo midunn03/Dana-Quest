@@ -1,15 +1,333 @@
 .page-tools {
   flex:0 0 auto;
-  display:grid;
-  grid-template-columns:minmax(0,1fr);
+  display:flex;
   align-items:center;
-  gap:var(--px-space-3);
-  padding:var(--px-space-3) var(--px-page-gutter);
+  justify-content:space-between;
+  gap:16px;
+  min-height:58px;
+  padding:8px var(--px-page-gutter);
   background:var(--px-surface);
-  border-bottom:2px solid var(--px-ink);
+  border-bottom:1.5px solid #aacdd3;
+}
+.page-tools-left {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex:1;
+  min-width:0;
+}
+.page-tools-brand {
+  display:inline-flex;
+  align-items:center;
+  flex-shrink:0;
+  text-decoration:none;
+}
+.page-tools-brand img {
+  height:40px;
+  width:auto;
+  display:block;
+  object-fit:contain;
 }
 .page-tools:has(>.active-mission-indicator) {
-  grid-template-columns:minmax(0,1fr) minmax(0,420px);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,420px);
+}
+.page-tools-actions {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;
+}
+.page-tools-lang {
+  display:inline-flex;
+  align-items:center;
+  gap:2px;
+  padding:3px;
+  border-radius:999px;
+  background:#e1f1f5;
+  border:1.5px solid #a6cbd5;
+}
+.page-tools-actions .page-tools-lang button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:auto;
+  min-width:36px;
+  height:auto;
+  min-height:34px;
+  padding:4px 10px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:#244d64;
+  font-size:13px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.02em;
+  cursor:pointer;
+  transition:background-color .15s ease,color .15s ease;
+}
+.page-tools-actions .page-tools-lang button:hover:not([aria-pressed="true"]) {
+  background:#d2eaf1;
+  color:#153b55;
+}
+.page-tools-actions .page-tools-lang button[aria-pressed="true"] {
+  background:#fffef8;
+  color:#1b6e4f;
+  box-shadow:0 1px 3px #153b5524;
+}
+.page-tools-actions .page-tools-device-btn {
+  display:inline-grid;
+  place-items:center;
+  width:42px;
+  min-width:42px;
+  height:42px;
+  min-height:42px;
+  padding:0;
+  border-radius:999px;
+  border:1.5px solid #a6cbd5;
+  background:#e1f1f5;
+  color:#153b55;
+  cursor:pointer;
+  flex-shrink:0;
+  transition:background-color .15s ease,border-color .15s ease,transform .12s ease;
+}
+.page-tools-actions .page-tools-device-btn:hover {
+  background:#dcf4e7;
+  border-color:#217c5b;
+  color:#153b55;
+  transform:translateY(-1px);
+}
+.page-tools-actions.is-compact {
+  gap:6px;
+  margin-left:auto;
+}
+.page-tools-actions.is-compact .page-tools-lang {
+  padding:2px;
+}
+.page-tools-actions.is-compact .page-tools-lang button {
+  min-width:30px;
+  min-height:28px;
+  padding:4px 7px;
+  font-size:12px;
+}
+.page-tools-actions.is-compact .page-tools-device-btn {
+  width:34px;
+  min-width:34px;
+  height:34px;
+  min-height:34px;
+}
+.page-tools-actions.is-compact .page-tools-device-btn svg {
+  width:18px;
+  height:18px;
+}
+.device-mobile-header--floating-map .page-tools-lang {
+  background:rgba(255,255,255,0.92);
+  border-color:#153b55;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+.app-shell.device-mobile-shell .device-mobile-header.device-mobile-header--floating-map {
+  top:env(safe-area-inset-top, 0px) !important;
+  bottom:auto !important;
+  height:52px !important;
+  min-height:52px !important;
+  max-height:52px !important;
+  padding:6px 12px !important;
+  background:transparent !important;
+  border-bottom:0 !important;
+  box-shadow:none !important;
+}
+.app-shell.device-mobile-shell .device-mobile-header.device-mobile-header--floating-map .device-mobile-brand-group {
+  display:inline-flex;
+  align-items:center;
+  height:40px;
+}
+.app-shell.device-mobile-shell .device-mobile-header.device-mobile-header--floating-map .device-mobile-logo {
+  display:inline-flex !important;
+  align-items:center !important;
+  height:38px !important;
+  padding:2px 8px !important;
+}
+.app-shell.device-mobile-shell .device-mobile-header.device-mobile-header--floating-map .device-mobile-logo img {
+  width:52px !important;
+  height:34px !important;
+}
+.device-mobile-shell .atlas-sidebar-header-row .page-tools-actions,
+.device-mobile-shell .avatar-custom-heading .page-tools-actions {
+  display:none;
+}
+.device-mobile-header-actions .page-tools-actions.is-compact,
+.due-start-top-actions .page-tools-actions.is-compact {
+  margin-left:0;
+}
+.header-account-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  flex-shrink:0;
+  min-height:42px;
+  padding:4px 14px 4px 8px;
+  background:#fffef8;
+  border:1.5px solid #28796b;
+  border-radius:999px;
+  color:#153b55;
+  text-decoration:none;
+  box-shadow:0 2px 0 #28796b26;
+  transition:background-color .15s ease,transform .12s ease;
+}
+.header-account-badge:hover,
+.header-account-badge.is-active {
+  background:#dcf4e7;
+  border-color:#1b6e4f;
+  transform:translateY(-1px);
+}
+.header-account-avatar {
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:linear-gradient(145deg,#d6eff9,#e5f5da);
+  border:1.5px solid #8bbecb;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.header-account-avatar .pixel-avatar,
+.header-account-avatar svg {
+  width:28px !important;
+  height:28px !important;
+}
+.header-account-info {
+  display:flex;
+  flex-direction:column;
+  line-height:1.2;
+  text-align:left;
+}
+.header-account-name {
+  font-size:14px;
+  font-weight:800;
+  color:#153b55;
+  max-width:160px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.header-account-meta {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+  font-weight:700;
+  color:#217c5b;
+}
+.header-account-tier {
+  padding:0 5px;
+  border-radius:4px;
+  background:#fff1bf;
+  color:#8a5a0a;
+  border:1px solid #e2bc5c;
+}
+.header-account-plan,
+.home-user-plan,
+.device-mobile-plan-chip {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:1px 7px;
+  border-radius:999px;
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:0.03em;
+  line-height:1.3;
+  text-decoration:none;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.header-account-plan.is-plus,
+.home-user-plan.is-plus,
+.device-mobile-plan-chip.is-plus {
+  background:linear-gradient(135deg,#ffe27a,#ffc43d);
+  border:1px solid #d1901b;
+  color:#123850;
+}
+.header-account-plan.is-pro,
+.home-user-plan.is-pro,
+.device-mobile-plan-chip.is-pro {
+  background:linear-gradient(135deg,#165e45,#1f7b5c);
+  border:1px solid #0f4733;
+  color:#ffffff;
+}
+.device-mobile-header--floating-map .device-mobile-plan-chip {
+  box-shadow:0 2px 8px rgba(0,0,0,0.12);
+}
+.device-mobile-plan-chip.is-free {
+  background:#eef6f8;
+  border:1px solid #a6cbd5;
+  color:#244d64;
+}
+.device-mobile-account-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+  max-width:176px;
+  padding:2px 7px 2px 3px;
+  border-radius:999px;
+  background:#fffef8;
+  border:1.5px solid #28796b;
+  color:#153b55;
+  text-decoration:none;
+  flex-shrink:1;
+  transition:background-color .15s ease,border-color .15s ease,transform .12s ease;
+}
+.device-mobile-account-badge:hover,
+.device-mobile-account-badge.is-active {
+  background:#dcf4e7;
+  border-color:#1b6e4f;
+}
+.device-mobile-account-avatar {
+  display:grid;
+  place-items:center;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:linear-gradient(145deg,#d6eff9,#e5f5da);
+  border:1px solid #8bbecb;
+  overflow:hidden;
+  flex-shrink:0;
+  font-size:13px;
+  line-height:1;
+}
+.device-mobile-account-avatar .pixel-avatar,
+.device-mobile-account-avatar svg {
+  width:22px !important;
+  height:22px !important;
+}
+.device-mobile-account-meta {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  min-width:0;
+}
+.device-mobile-account-name {
+  font-size:12px;
+  font-weight:800;
+  color:#153b55;
+  max-width:68px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.device-mobile-account-meta .device-mobile-plan-chip {
+  font-size:9.5px;
+  padding:1px 5px;
+}
+.device-mobile-header--floating-map .device-mobile-account-badge {
+  background:rgba(255,254,248,0.95);
+  border-color:#153b55;
+  box-shadow:0 2px 8px rgba(0,0,0,0.12);
 }
 .page-tools-search {
   display:flex;
@@ -30,6 +348,8 @@
 .page-tools-search-arrow { margin-left:auto; }
 .page-tools-search:hover, .page-tools-search[aria-current="page"] { background:var(--px-surface-hover); }
 .page-tools-search:focus-visible { outline:4px solid var(--px-focus); outline-offset:3px; }
+.page-tools.is-hidden-map,
+.app-shell:has(>main.atlas-results-layout)>.page-tools,
 .app-shell:has(>main.quest-player)>.page-tools,
 .app-shell:has(>main.due-start)>.page-tools,
 .app-shell:has(>main.camera-page)>.page-tools,

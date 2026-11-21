@@ -60,7 +60,7 @@ Tài liệu ghi lại toàn bộ thay đổi luồng người dùng, tối ưu t
 - **Kiểm tra code:** `src/lib/mapEntries.ts` lấy danh sách điểm từ `quests` (`questCatalog.json`).
 - **Đối chiếu:** `questCatalog.json` gồm **16 bản ghi**, trong đó:
   - 1 quest trường DUE (`due-dau-an-50-nam`).
-  - **15 bản ghi còn lại** tương ứng 1-đối-1 chính xác với toàn bộ 15 địa điểm kiểu B trong `destinations.json` (Cầu Rồng, Chợ Hàn, Bán đảo Sơn Trà, Ngũ Hành Sơn, Bảo tàng Điêu khắc Chăm, Cầu Sông Hàn, Bãi biển Mỹ Khê, Chùa Linh Ứng Sơn Trà, Rạn Nam Ô, Cung Văn hóa Thiếu nhi, Công viên APEC, Bảo tàng Mỹ thuật, Làng đá Non Nước, Bãi Rạng, Đỉnh Bàn Cờ).
+  - **15 bản ghi còn lại** tương ứng 1-đối-1 chính xác với toàn bộ 15 địa điểm active trong `src/data/destinations.json` (Cầu Rồng, Cầu Sông Hàn, Bảo tàng Đà Nẵng, Bảo tàng Điêu khắc Chăm, Công viên APEC, Cầu Tình Yêu, Bãi biển Mỹ Khê, Công viên Biển Đông, Bãi biển Mân Thái (SUP), Chùa Linh Ứng Bãi Bụt, Đỉnh Bàn Cờ, Hải Vân Quan, Danh thắng Ngũ Hành Sơn, Cầu Vàng trong Bà Nà Hills, Bãi biển Nam Ô; Chợ Hàn chỉ giữ trong `historicalDestinations.json` để bảo toàn tiến độ cũ).
 - **Kết luận:** Cả 15 địa điểm kiểu B **đều đã xuất hiện đầy đủ trên bản đồ** thông qua các marker tương ứng. Khi người dùng bấm vào marker hoặc thẻ địa điểm, hệ thống điều hướng đến trang chi tiết của địa điểm đó.
 
 ### 2. Các thay đổi đã thực hiện trong Giai đoạn 2
@@ -96,5 +96,21 @@ Tài liệu ghi lại toàn bộ thay đổi luồng người dùng, tối ưu t
 | `src/App.tsx` | Chỉnh sửa | Import `MobileMap.css`; gắn class `device-mobile-header--floating-map` trên route bản đồ khi mobile để header không đẩy bản đồ xuống; giữ nguyên StreakChip nổi theo yêu cầu người dùng | `MOBILE_MAP_FIRST` |
 | `src/Explore.tsx` | Chỉnh sửa | Tích hợp thanh kéo grabber và gesture pointer 3 nấc (peek/half/full); nút "Vị trí của tôi" nổi tròn 48px; tính khoảng cách GPS trên thẻ chọn điểm gọn <= 140px | `MOBILE_MAP_FIRST` |
 | `tests/stage3-mobile-map.test.tsx` | Tạo mới | 7 test case tự động kiểm tra: tỷ lệ bản đồ trên 6 kích thước màn hình, gesture kéo 3 nấc bottom sheet, nút vị trí tròn 48px, thẻ chọn điểm, hiển thị StreakChip nổi, và bố cục desktop không bị ảnh hưởng | `MOBILE_MAP_FIRST` |
+
+---
+
+## GIAI ĐOẠN 4: Gói trả phí Plus/Pro, Chỉ đường ?tu=map, Đồng bộ Mobile Shell & Rà soát 4 giai đoạn (22/11/2026)
+
+Hoàn thiện hệ thống gói trả phí hàng tháng, đồng bộ giao diện Điện thoại với Web, mở rộng Drawer Tài khoản 13 mục, khôi phục thanh cuộn màn chơi quest, và thực hiện rà soát & sửa lỗi toàn hệ thống qua 4 giai đoạn (loại bỏ lỗi TypeScript, lint, hooks/impure render, i18n, state hủy gói).
+
+| File / Hạng mục | Thao tác | Mô tả chi tiết | Ghi chú / Quy tắc |
+| --- | --- | --- | --- |
+| `src/lib/premium.ts`, `src/PremiumPricingModal.tsx`, `src/QuestDetailsPage.tsx`, `src/AccountSettings.tsx` | Chỉnh sửa | Triển khai Gói Plus (`30.000đ/tháng`, mở khóa `cau-rong`) và Gói Pro (`50.000đ/tháng`, mở khóa `cau-vang-ba-na-hills`, `ngu-hanh-son`, 2 voucher nhóm); hỗ trợ mã nội bộ `DN100` giảm 100% và tái sử dụng sau hủy gói; `cancelPremiumPlan` giữ lại voucher `source === 'code'` | Tuyệt đối không công khai mã `DN100` trên UI web; ổn định `[startLat, startLng]` `useMemo` & copy `.qd-testing` |
+| `src/NavigationPage.tsx`, `src/DueStartPage.tsx`, `src/NextStepChip.tsx` | Chỉnh sửa | Luồng chỉ đường `#/chi-duong/:id?tu=map` + Pop-up Thông tin địa điểm khi tới điểm; sửa safe guard `if (!quest)` và chuyển `navigateToHash` trong `DueStartPage`; cập nhật `arrivedRef` trong `useEffect`; `NextStepChip` hiển thị `"🔒 Mở khóa để tiếp tục: <Tên quest>"` nếu quest trả phí bị khóa lại | Không gọi navigation hay gán ref trực tiếp trong render |
+| `src/mobile/MobileAccountBadge.tsx`, `src/mobile/MobileBottomNav.tsx`, `src/mobile/MobileShell.tsx`, `src/App.tsx` | Tạo mới & Chỉnh sửa | Đồng bộ 4 tab `MobileBottomNav` giống hệt Web (`Khám phá`, `Sự kiện`, `Quest`, `Cửa hàng đổi xu`); bỏ `StreakChip` khỏi header mobile và thay bằng `.device-mobile-account-badge` (`Avatar + Tên + Tag PLUS / ✦ PRO / FREE`) | Bảo toàn tính năng & logic backend |
+| `src/WorkspaceNavigation.tsx`, `src/AccountUi.tsx`, `src/AccountExperience.tsx`, `src/JourneyRecapPage.tsx` | Chỉnh sửa | Export `getAccountWorkspaceGroups()` (4 nhóm / 13 route); thêm nút `☰` (`WorkspaceMenuButton`) bên trái tiêu đề Tài khoản để mở Drawer; bọc các chuỗi tiếng Việt còn sót bằng `t(vi, en)`; bỏ `Date.now()` khỏi render và sửa `svgPolyline` `useMemo` | Đảm bảo i18n VI/EN & React purity |
+| `src/PageTools.css`, `src/GameLayoutPolish.css` | Chỉnh sửa | Căn 1 hàng cho tiêu đề `[☰] Tài khoản` và `[🔥 ngày] [🎫 xu ›] [⚙]` (thu gọn badge `xu` trên `360px`); khôi phục chuỗi chiều cao flex + thanh cuộn dọc `6px` cho `QuestPlayPage` (`.q-scroll`, `.quest-journey-rail`), `PlayerDialog` (`.q-dialog`), `DueStartPage`, `DestinationPage`, `CelebrationPage` | Kiểm tra ở khung `360px` & `.device-mobile-shell` |
+| `tests/flow.test.tsx`, `tests/premium-and-map-flow.test.tsx`, `tests/device-mode.test.tsx`, `tests/eco-transit.test.ts`, `vitest.config.ts`, `.gitignore` | Chỉnh sửa | Cập nhật selector mua Gói Plus; thêm test `cancelPremiumPlan` giữ voucher `source === 'code'`; kiểm tra `MobileBottomNav`, `MobileAccountBadge` & Drawer 13 mục; đặt `testTimeout: 15000`; thêm `backend/db.sqlite3*` vào `.gitignore` | Xác nhận `tsc -b`, `oxlint` (0 error) & 6 suite Vitest cốt lõi (34/34 test PASS) |
+
 
 

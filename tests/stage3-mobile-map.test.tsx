@@ -117,7 +117,7 @@ describe('Giai đoạn 3: Tối ưu giao diện điện thoại & Ngân sách b�
     render(<Explore />)
     await screen.findByRole('region', { name: 'Bản đồ Đà Nẵng' })
 
-    const floatingBtn = document.querySelector('.atlas-floating-locate-btn') as HTMLButtonElement
+    const floatingBtn = document.querySelector('.atlas-map-locate') as HTMLButtonElement
     expect(floatingBtn).toBeTruthy()
     expect(floatingBtn.getAttribute('aria-label')).toBe('Vị trí của tôi')
 
@@ -145,13 +145,17 @@ describe('Giai đoạn 3: Tối ưu giao diện điện thoại & Ngân sách b�
     expect(document.querySelector('.atlas-selection')).toBeNull()
   })
 
-  it('giữ StreakChip hiển thị trên header di động theo đúng yêu cầu', async () => {
+  it('hiển thị thông tin tài khoản cơ bản (avatar + tên + tag gói) thay cho StreakChip trên header di động', async () => {
     render(<App />)
     await waitFor(() => {
       const header = document.querySelector('.device-mobile-header')
       expect(header).toBeTruthy()
       expect(header?.classList.contains('device-mobile-header--floating-map')).toBe(true)
-      expect(header?.querySelector('.streak-chip')).toBeTruthy()
+      expect(header?.querySelector('.streak-chip')).toBeNull()
+      const badge = header?.querySelector('.device-mobile-account-badge')
+      expect(badge).toBeTruthy()
+      expect(badge?.querySelector('.device-mobile-account-avatar')).toBeTruthy()
+      expect(badge?.querySelector('.device-mobile-plan-chip')).toBeTruthy()
     })
   })
 

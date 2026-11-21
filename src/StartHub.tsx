@@ -19,13 +19,10 @@ export interface StartHubProps {
 
 export default function StartHub({ variant = 'inline', onSelectQuest, onDismiss: _onDismiss }: StartHubProps) {
   const [collapsed, setCollapsed] = useState(false)
-  const { state: questState } = useQuestProgress()
-  const { state: destState } = useProgress()
+  const { state: questState, loading: questLoading } = useQuestProgress()
+  const { state: destState, loading: destLoading } = useProgress()
   const { sample } = usePlayerLocation()
 
-  if (!isUxFlagEnabled('START_HUB')) {
-    return null
-  }
 
   // 1. Kiểm tra xem người chơi có quest đang dở không
   const activeQuestEntry = Object.entries(questState.quests)
@@ -61,6 +58,10 @@ export default function StartHub({ variant = 'inline', onSelectQuest, onDismiss:
     // Mặc định: Cầu Rồng hoặc DUE
     return quests.find(q => q.id === 'cau-rong') || quests[0]
   }, [activeQuest, activeDest, sample])
+
+  if (questLoading || destLoading || !isUxFlagEnabled('START_HUB')) {
+    return null
+  }
 
   // Khoảng cách tới quest gợi ý
   const distToRecommended = sample && recommendedQuest

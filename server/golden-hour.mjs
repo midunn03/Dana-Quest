@@ -151,8 +151,11 @@ export function createGoldenHourStore(directory, { challenges = DEFAULT_GOLDEN_H
         if (isSimulated) {
           throw Object.assign(new Error('Khong the nhan thuong gio vang khi dang mo phong GPS.'), { status: 400, code: 'SIMULATION_BLOCKED' })
         }
-        if (typeof accuracy !== 'number' || accuracy > 50) {
+        if (!Number.isFinite(accuracy) || accuracy <= 0 || accuracy > 50) {
           throw Object.assign(new Error('Do chinh xac GPS phai <= 50m.'), { status: 400, code: 'ACCURACY_INSUFFICIENT' })
+        }
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude) || Math.abs(latitude) > 90 || Math.abs(longitude) > 180) {
+          throw Object.assign(new Error('Toa do GPS khong hop le.'), { status: 400, code: 'INVALID_COORDINATES' })
         }
 
         const challenge = challenges.find((c) => c.id === challengeId || c.destinationId === challengeId)

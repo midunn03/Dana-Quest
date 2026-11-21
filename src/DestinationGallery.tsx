@@ -3,6 +3,7 @@ import { t } from './i18n/locale'
 import { useRef, useState } from 'react'
 import type { Destination } from './data/destinations'
 import LandmarkArt from './LandmarkArt'
+import AdminGallery from './AdminGallery'
 
 const scenes = [
   { key: 'day', label: t("Ban ngày") },
@@ -25,6 +26,7 @@ export default function DestinationGallery({ place }: { place: Destination }) {
     setDragging(false)
     if (moved && track.current?.clientWidth) goTo(Math.round(track.current.scrollLeft / track.current.clientWidth))
   }
+  if(place.photo)return <AdminGallery name={place.name} photos={[{url:`${import.meta.env.BASE_URL}${place.photo.replace(/^\//,'')}`,caption:place.name,credit:''}]}/>
   return <section className="destination-gallery" aria-label={interpolate("Bộ ảnh minh họa ${0}",[place.name])}>
     <div className="gallery-frame">
       <div className={`gallery-track ${dragging ? 'is-dragging' : ''}`} ref={track} tabIndex={0} aria-label={t("Vuốt ngang để xem ảnh")}
@@ -45,7 +47,7 @@ export default function DestinationGallery({ place }: { place: Destination }) {
         onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); goTo(index + (event.key === 'ArrowRight' ? 1 : -1)) } }}
         onScroll={event => { const el = event.currentTarget; if (el.clientWidth) setIndex(Math.max(0, Math.min(2, Math.round(el.scrollLeft / el.clientWidth)))) }}>
         {scenes.map((scene, position) => <figure className="gallery-slide" key={scene.key} role="img" aria-label={interpolate("${0} – ${1} (minh họa ${2}/3)",[place.name,scene.label,position + 1])}>
-          <LandmarkArt id={place.id} scene={scene.key}/><figcaption>{scene.label} {" " + t("· Hình minh họa")}</figcaption>
+          <LandmarkArt id={place.id} scene={scene.key}/><figcaption>{scene.label}</figcaption>
         </figure>)}
       </div>
       <span className="gallery-counter" aria-live="polite">{index + 1}/3</span>

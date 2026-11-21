@@ -23,7 +23,7 @@
 :where(.booking-experience) .journey-footer { display:grid; gap:10px; padding:34px 0 calc(var(--px-space-5) + env(safe-area-inset-bottom,0px)); margin-top:auto; }
 :where(.booking-experience) .journey-primary { display:flex; width:100%; align-items:center; justify-content:center; min-height:58px; padding:14px 18px; border:var(--px-border); border-radius:0; color:var(--px-action-ink); background:var(--px-action); box-shadow:var(--px-shadow-low); text-decoration:none; font:inherit; font-size:var(--text-sm); font-weight:400; cursor:pointer; }
 :is(:where(.booking-experience) .journey-primary):hover:not(:disabled){background:var(--px-action-hover);color:var(--px-action-ink)}
-:where(.booking-experience) .journey-primary:disabled { opacity:.45; box-shadow:none; cursor:default; }
+:where(.booking-experience) .journey-primary:disabled { opacity:.65; box-shadow:none; cursor:default; }
 :where(.booking-experience) .journey-text-link { display:inline-flex; justify-content:center; align-items:center; min-height:44px; padding:var(--px-space-2); color:var(--px-ink); text-underline-offset:4px; text-align:center; font-size:var(--text-sm); line-height:1.5; }
 :where(.booking-experience) .journey-plan-options { display:grid; gap:14px; margin-top:26px; }
 :where(.booking-experience) .journey-plan { display:flex; align-items:center; gap:14px; padding:18px; border:2px solid var(--px-ink); border-radius:0; background:var(--px-page); cursor:pointer; }

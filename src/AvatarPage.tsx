@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { readAvatar, resolveAvatar, saveAvatar } from './lib/avatar'
 import { defaultLook, genders, genderLabels, heads, headLabels, hairs, hairLabels, sleeves, sleeveLabels, pantsKinds, pantsLabels, skinTones, hairColors, shirtColors, pantsColors, lookToCode, randomLook, type AvatarLook } from './lib/pixelAvatar'
 import PixelAvatar from './PixelAvatar'
+import { HeaderQuickToggles } from './PageTools'
 import { takeCodeReturn, takePageReturn } from './lib/onboarding'
 // [UX-FLOW] Tích hợp cờ vào nhanh
 import { isUxFlagEnabled } from './lib/uxFlags'
@@ -45,7 +46,7 @@ export default function AvatarPage({ initialAvatarId, onAvatarConfirmed, editing
   }
 
   return <main className="onboarding avatar-screen custom-avatar-screen"><section className="avatar-custom-frame" aria-labelledby="avatar-title">
-    <header className="avatar-custom-heading"><a href={editing?'#/tai-khoan':'#/dang-nhap'} className="avatar-custom-back">‹ {editing?t("Tài khoản"):t("Quay lại")}</a><h1 id="avatar-title">{t("Tùy chỉnh nhân vật")}</h1><p>{t("Một người bạn đồng hành mang dấu ấn của bạn.")}</p></header>
+    <header className="avatar-custom-heading"><a href={editing?'#/tai-khoan':'#/dang-nhap'} className="avatar-custom-back dq-back-btn" aria-label={editing?t("Về Tài khoản"):t("Quay lại")}>← {t("Quay lại")}</a><div className="avatar-custom-heading-copy"><h1 id="avatar-title">{t("Tùy chỉnh nhân vật")}</h1><p>{t("Một người bạn đồng hành mang dấu ấn của bạn.")}</p></div><HeaderQuickToggles compact /></header>
     <div className="avatar-custom-grid"><section className="avatar-custom-preview" aria-label={t("Hình ảnh nhân vật")}><div className="avatar-custom-stage"><PixelAvatar avatar={current}/></div><h2>{t("Nhân vật của bạn")}</h2><p>{t("Hình ảnh thay đổi ngay khi bạn chọn.")}</p><button type="button" disabled={saving} onClick={()=>setLook(randomLook())}>{t("Tạo ngẫu nhiên")}</button></section>
     <fieldset className="avatar-custom-controls" disabled={saving}><legend className="sr-only">{t("Các tùy chọn nhân vật")}</legend>
       <Choice label={t("Giới tính")} value={look.gender} options={genders} names={genderLabels} onPick={gender=>change({gender})}/>

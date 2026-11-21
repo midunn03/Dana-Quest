@@ -47,7 +47,8 @@ export function routeProgress(route: WalkingRoute, sample: LocationSample): Rout
   return { remaining: Math.max(0, (total - position.along) * factor), toTurn: Math.max(0, (next.at - position.along) * factor), next: next.step, offRoute: position.distance, points: [position.point, ...points.slice(position.segment).filter((point, index) => index > 0 || distanceMeters(position.point, point) > .1)] }
 }
 export function validRoute(route: WalkingRoute) {
-  return Number.isFinite(route?.distance) && route.distance >= 0 && Number.isFinite(route.duration) && route.duration >= 0 && route.geometry?.coordinates?.length >= 2 && route.geometry.coordinates.every(p => p.length === 2 && p.every(Number.isFinite) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90) && route.legs?.length > 0 && route.legs.every(leg => leg.steps?.length > 0 && leg.steps.every(step => step.maneuver?.location?.length === 2 && step.maneuver.location.every(Number.isFinite)))
+  const point = (value: unknown): value is Point => Array.isArray(value) && value.length === 2 && value.every(Number.isFinite) && Math.abs(value[0]) <= 180 && Math.abs(value[1]) <= 90
+  return Number.isFinite(route?.distance) && route.distance >= 0 && Number.isFinite(route.duration) && route.duration >= 0 && Array.isArray(route.geometry?.coordinates) && route.geometry.coordinates.length >= 2 && route.geometry.coordinates.every(point) && Array.isArray(route.legs) && route.legs.length > 0 && route.legs.every(leg => Array.isArray(leg?.steps) && leg.steps.length > 0 && leg.steps.every(step => point(step?.maneuver?.location) && typeof step.maneuver.type === 'string' && (step.maneuver.modifier === undefined || typeof step.maneuver.modifier === 'string')))
 }
 
 

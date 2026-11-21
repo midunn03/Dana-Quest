@@ -66,3 +66,25 @@ it('aborts an outstanding request when leaving navigation', async () => {
   act(() => hook.unmount())
   expect(signal!.aborted).toBe(true)
 })
+
+it('discards the old route and immediately requests the new target when the destination changes',async()=>{
+ const fetcher=vi.fn(async(_url?:string)=>({ok:true,json:async()=>({route:walkingFixture})}))
+ vi.stubGlobal('fetch',fetcher)
+ const sample=gps(16.08,108.24)
+ const hook=renderHook(({id,target}:{id:string;target:[number,number]})=>useWalkingRoute(id,sample,target),{initialProps:{id:'first',target:[16.06,108.22]}})
+ await waitFor(()=>expect(hook.result.current.route).toBeTruthy())
+ fetcher.mockImplementationOnce(()=>new Promise(()=>{}))
+ hook.rerender({id:'second',target:[16.07,108.23]})
+ await waitFor(()=>expect(fetcher).toHaveBeenCalledTimes(2))
+ expect(hook.result.current.route).toBeNull()
+ expect(hook.result.current.initialRoute).toBeNull()
+ expect(String(fetcher.mock.calls[1][0])).toContain('dlat=16.07')
+})
+it('never uses a stale GPS sample to provide turn guidance',async()=>{
+ const fetcher=vi.fn(async(_url?:string)=>({ok:true,json:async()=>({route:walkingFixture})}))
+ vi.stubGlobal('fetch',fetcher)
+ const sample={...gps(16.08,108.24),timestamp:Date.now()-120000}
+ const hook=renderHook(()=>useWalkingRoute('cau-rong',sample))
+ expect(hook.result.current.usable).toBe(false)
+ expect(fetcher).not.toHaveBeenCalled()
+})

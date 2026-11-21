@@ -12,19 +12,28 @@ import { useQuestProgress } from './lib/useQuestProgress'
 import { isDestinationComplete } from './lib/rules'
 import LandmarkArt from './LandmarkArt'
 import { NavigationIcon } from './MainNavigation'
-// [UX-FLOW] Tích hợp StartHub, cờ tính năng và định vị GPS
+// [UX-FLOW] Tích hợp StartHub, ActiveMissionIndicator, cờ tính năng và định vị GPS
 import StartHub from './StartHub'
+import ActiveMissionIndicator from './ActiveMissionIndicator'
 import { isUxFlagEnabled } from './lib/uxFlags'
 import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
+import { useOptionalAuth } from './AuthContext'
+import { getQuestPricing, isPaidQuest, usePremiumAccess } from './lib/premium'
 
 type Mode = 'explore' | 'search' | 'joined'
-type Card = { id: string; title: string; area: string; description: string; href: string; photo?: string; status?: string; sample?: boolean; kind?: 'quest' | 'destination'; position?: [number, number] }
+type Card = { id: string; title: string; area: string; teaser: string; description: string; href: string; photo?: string; status?: string; sample?: boolean; kind?: 'quest' | 'destination'; position?: [number, number]; isPaid?: boolean; priceBadge?: { label: string; tone: 'free' | 'paid' | 'unlocked' } }
 const displayText = (text: string) => text.replace(/\s+[—–-]\s+(.+)$/, ' ($1)')
+const storyTeaser = (text: string) => {
+  const cleaned = text.replace(/^(?:Truyện hư cấu dẫn dắt khám phá|A fictional exploration story|Story-guided exploration):\s*/i, '').trim()
+  return cleaned ? cleaned.charAt(0).toUpperCase() + cleaned.slice(1) : text
+}
 
 export default function DiscoveryPage({ mode = 'explore', activatedEnabled = false }: { mode?: Mode; activatedEnabled?: boolean }) {
   const [query, setQuery] = useState('')
-  const [filterKind, setFilterKind] = useState<'all' | 'quest' | 'destination'>('all')
+  const [filterKind, setFilterKind] = useState<'all' | 'quest' | 'destination' | 'free' | 'paid'>('all')
+  const auth = useOptionalAuth()
+  const { hasAccess: hasQuestAccess } = usePremiumAccess(auth?.user?.id)
   const { state, loading, error } = useProgress()
   const { state: questState, loading: questLoading, error: questError } = useQuestProgress()
   const { sample } = usePlayerLocation()
@@ -39,27 +48,34 @@ export default function DiscoveryPage({ mode = 'explore', activatedEnabled = fal
     return ()=>{alive=false}
   },[joined,activatedEnabled])
   const cards: Card[] = [
-    ...quests.filter(quest => !joined || questState.quests[quest.id]).map(quest => {
+    ...quests.filter(quest => !joined || Boolean(questState.quests[quest.id]) || (isPaidQuest(quest.id) && hasQuestAccess(quest.id))).map(quest => {
       const run = questState.quests[quest.id]
-      return { photo:getDestination(quest.id)?.photo, id: quest.id, title: displayText(quest.title), area: getDestination(quest.id)?.name??displayText(quest.area), description: interpolate("${0} thử thách (${1} phút)",[quest.checkpoints.length,quest.estimatedMinutes]), href: `#/quest/${quest.id}`, sample: quest.id==='due-dau-an-50-nam', status: run ? (run.completedAt ? t("Đã hoàn thành") : t("Đang tham gia")) : undefined, kind: 'quest' as const, position: quest.startPosition }
+      const pricing = getQuestPricing(quest.id)
+      const unlocked = hasQuestAccess(quest.id)
+      const status = run
+        ? (run.completedAt ? t("Đã hoàn thành") : t("Đang tham gia"))
+        : (pricing.isPaid && unlocked ? t("✓ Đã mở khóa", "✓ Unlocked") : undefined)
+      return { photo:getDestination(quest.id)?.photo, id: quest.id, title: displayText(quest.title), area: getDestination(quest.id)?.name??displayText(quest.area), teaser: storyTeaser(quest.summary), description: interpolate("${0} thử thách (${1} phút)",[quest.checkpoints.length,quest.estimatedMinutes]), href: `#/quest/${quest.id}`, sample: quest.id==='due-dau-an-50-nam', status, kind: 'quest' as const, position: quest.startPosition, isPaid: pricing.isPaid, priceBadge: pricing.isPaid ? { label: unlocked ? t("✓ Đã mở khóa", "✓ Unlocked") : `★ ${pricing.currencyLabel}`, tone: (unlocked ? 'unlocked' : 'paid') as 'unlocked' | 'paid' } : { label: t("Miễn phí", "Free"), tone: 'free' as const } }
     }),
     ...(joined ? Object.keys(state.destinations).map(getDestination).filter(place => !!place && state.destinations[place.id]?.started) : destinations).flatMap(place => {
       if (!place) return []
       const progress = state.destinations[place.id]
-      return [{ id: place.id, title: place.name, area: t("Đà Nẵng"), description: place.highlightReason, photo: place.photo, href: quests.some(q=>q.id===place.id)?`#/quest/${place.id}`:joined ? `#/nhiem-vu/${place.id}` : `#/dia-diem/${place.id}`, status: progress?.started ? (isDestinationComplete(progress) ? t("Đã hoàn thành") : interpolate("Đang tham gia (${0}/${1})",[progress.completed.length,progress.selected.length])) : undefined, kind: 'destination' as const, position: place.position }]
+      return [{ id: place.id, title: place.name, area: t("Đà Nẵng"), teaser: place.highlightReason, description: t("5–10 nhiệm vụ tự chọn", "5–10 selectable missions"), photo: place.photo, href: quests.some(q=>q.id===place.id)?`#/quest/${place.id}`:joined ? `#/nhiem-vu/${place.id}` : `#/dia-diem/${place.id}`, status: progress?.started ? (isDestinationComplete(progress) ? t("Đã hoàn thành") : interpolate("Đang tham gia (${0}/${1})",[progress.completed.length,progress.selected.length])) : undefined, kind: 'destination' as const, position: place.position }]
     }),
   ]
   const activatedCards: Card[]=activated.flatMap(item=>{
     const quest=quests.find(quest=>quest.id===item.questId)
     const place=getDestination(item.questId)
     if(!quest&&!place)return []
-    return [{id:item.questId,title:displayText(quest?.title||place!.name),area:t("Đà Nẵng"),description:t("Hành trình đã gắn vào tài khoản bằng mã Dana Quest."),href:quest?`#/quest/${item.questId}`:`#/dia-diem/${item.questId}`,photo:place?.photo,status:t("Đã kích hoạt"),sample:!!quest, kind: (quest ? 'quest' : 'destination') as 'quest' | 'destination', position: quest ? quest.startPosition : place?.position}]
+    return [{id:item.questId,title:displayText(quest?.title||place!.name),area:t("Đà Nẵng"),teaser:quest?storyTeaser(quest.summary):place!.highlightReason,description:t("Hành trình đã kích hoạt bằng mã"),href:quest?`#/quest/${item.questId}`:`#/dia-diem/${item.questId}`,photo:place?.photo,status:t("Đã kích hoạt"),sample:!!quest, kind: (quest ? 'quest' : 'destination') as 'quest' | 'destination', position: quest ? quest.startPosition : place?.position}]
   })
   const allCards=[...cards,...activatedCards].filter((card,index,list)=>list.findIndex(item=>item.id===card.id)===index)
   // [UX-FLOW] Lọc theo loại và từ khóa tìm kiếm
   const matchesQuery = allCards.filter(card => {
-    if (filterKind !== 'all' && card.kind !== filterKind) return false
-    return searchText(`${card.title} ${card.area} ${card.description}`).includes(searchText(query))
+    if (filterKind === 'free' && card.isPaid) return false
+    if (filterKind === 'paid' && !card.isPaid) return false
+    if ((filterKind === 'quest' || filterKind === 'destination') && card.kind !== filterKind) return false
+    return searchText(`${card.title} ${card.area} ${card.teaser} ${card.description}`).includes(searchText(query))
   })
   // [UX-FLOW] Sắp xếp theo khoảng cách nếu có GPS
   const filtered = sample
@@ -73,14 +89,19 @@ export default function DiscoveryPage({ mode = 'explore', activatedEnabled = fal
     : matchesQuery
 
   const title = joined ? t("Quest của bạn") : mode === 'search' ? t("Tìm kiếm") : t("Khám phá Đà Nẵng")
+  const joinedLoading = joined && (loading || questLoading || activationLoading)
   return <main className="discovery-page" aria-labelledby="discovery-title">
-    <header className="discovery-header"><span className="city-pill"><NavigationIcon kind="explore" />{t("Đà Nẵng")}</span><a className="map-toggle" href="#/map"><NavigationIcon kind="explore" />{t("Bản đồ")}</a></header>
-    <div className="discovery-title-row"><div><h1 id="discovery-title">{title}</h1><p>{joined ? t("Những hành trình bạn đã bắt đầu, ở cùng một nơi.") : t("Đi bộ, giải câu đố và khám phá câu chuyện thành phố.")}</p></div>
+    <div className="discovery-title-row"><div><h1 id="discovery-title">{title}</h1><p>{joined ? t("Những hành trình bạn đã bắt đầu, ở cùng một nơi.") : t("Đi bộ, giải câu đố và khám phá câu chuyện thành phố.")}</p></div><a className="map-toggle" href="#/map"><NavigationIcon kind="explore" />{t("Bản đồ")}</a>
     </div>
-    {/* [UX-FLOW] StartHub hiển thị nổi bật ở đỉnh trang Khám phá */}
-    {mode === 'explore' && <StartHub variant="inline" />}
+    {/* [UX-FLOW] Thông báo và gợi ý các quest đang thực hiện nằm ở trang Quest của tôi */}
+    {joined && !joinedLoading && (
+      <div className="discovery-active-quests">
+        <ActiveMissionIndicator />
+        <StartHub variant="inline" />
+      </div>
+    )}
     {mode === 'explore' && <aside className="discovery-intro"><span className="intro-symbol" aria-hidden="true">✦</span><div><h2>{t("Thành phố quen, câu chuyện mới")}</h2><p>{t("Chọn một quest, đến điểm hẹn và bắt đầu khám phá theo cách của bạn.")}</p></div></aside>}
-    <label className="discovery-search"><NavigationIcon kind="search" /><span className="sr-only">{t("Tìm quest hoặc địa điểm")}</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t("Tìm quest hoặc địa điểm")} autoFocus={mode === 'search'} /></label>
+    {mode === 'search' && <label className="discovery-search"><NavigationIcon kind="search" /><span className="sr-only">{t("Tìm quest hoặc địa điểm")}</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t("Tìm quest hoặc địa điểm")} autoFocus /></label>}
     {/* [UX-FLOW] Bộ lọc nhanh 3 nút phân biệt 2 kiểu chơi */}
     {isUxFlagEnabled('GAME_MODE_BADGES') && !joined && (
       <div className="discovery-mode-filters" role="group" aria-label={t("Lọc kiểu chơi")}>
@@ -88,32 +109,38 @@ export default function DiscoveryPage({ mode = 'explore', activatedEnabled = fal
           {t("Tất cả")}
         </button>
         <button type="button" className={`discovery-filter-btn ${filterKind === 'quest' ? 'is-active' : ''}`} onClick={() => setFilterKind('quest')}>
-          ✦ {t("Quest cốt truyện")}
+          ✦ {t("Quest cốt truyện", "Story quests")}
         </button>
         <button type="button" className={`discovery-filter-btn ${filterKind === 'destination' ? 'is-active' : ''}`} onClick={() => setFilterKind('destination')}>
-          ◆ {t("Địa điểm")}
+          ◆ {t("Địa điểm", "Place")}
+        </button>
+        <button type="button" className={`discovery-filter-btn ${filterKind === 'free' ? 'is-active' : ''}`} onClick={() => setFilterKind('free')}>
+          {t("Miễn phí", "Free")}
+        </button>
+        <button type="button" className={`discovery-filter-btn is-paid-filter ${filterKind === 'paid' ? 'is-active' : ''}`} onClick={() => setFilterKind('paid')}>
+          ★ {t("Trả phí", "Paid")}
         </button>
       </div>
     )}
     {joined && <div className="discovery-utilities"><a href="#/album">{t("Thư viện ảnh")}</a><a href="#/cua-hang">{t("Cửa hàng đổi xu")}</a><a href="#/nhap-ma">{t("Nhập mã quest")}</a></div>}
-    {(loading||questLoading||activationLoading) && joined && <p role="status">{t("Đang tải các quest đã tham gia…")}</p>}
+    {joinedLoading && <p role="status">{t("Đang tải các quest đã tham gia…")}</p>}
     {error && <p role="alert" className="notice error">{t(error)}</p>}
     {questError && <p role="alert" className="notice error">{t(questError)}</p>}
     {activationError && <p role="alert" className="notice error">{t(activationError)}</p>}
-    <div className="discovery-section-heading"><h2>{joined ? t("Hành trình đã tham gia") : query ? t("Kết quả tìm kiếm") : t("Các quest dành cho bạn")}</h2><span lang="en">{filtered.length} quest</span></div>
+    {!joinedLoading && <><div className="discovery-section-heading"><h2>{joined ? t("Hành trình đã tham gia") : query ? t("Kết quả tìm kiếm") : t("Các quest dành cho bạn")}</h2><span lang="en">{filtered.length} quest</span></div>
     <div className="discovery-grid quest-cover-grid">{filtered.map(card => <QuestCoverCard className="discovery-card" key={card.id} href={card.href} cover={
-      <div className={`discovery-card-image ${card.sample ? 'sample-cover' : ''}`}>{card.photo ? <img src={`${import.meta.env.BASE_URL}${card.photo.replace(/^\//, '')}`} alt="" loading="lazy" /> : card.sample ? <svg viewBox="0 0 480 300" aria-hidden="true"><path fill="#173e48" d="M0 0h480v300H0z"/><circle cx="430" cy="50" r="140" fill="#285965"/><path fill="none" stroke="#e6bc67" strokeWidth="2" d="M30 260h420M345 95v115m-30-100h60m-46-13h32M90 250h300"/><text x="36" y="62" fill="#f5dfad" fontSize="22" fontWeight="400">{t("MẬT THƯ")}</text><text x="32" y="205" fill="#f5dfad" fontSize="140" fontWeight="400">✦</text><text x="245" y="212" fill="#f5dfad" fontSize="22">{t("Ký ức thành phố")}</text></svg> : <LandmarkArt id={card.id} />}</div>} bodyClassName="discovery-card-body">
+      <div className={`discovery-card-image ${card.sample ? 'sample-cover' : ''}`}>{card.id==='due-dau-an-50-nam'?<img src={`${import.meta.env.BASE_URL}art/home/due-campus-hd.png`} alt={t('Cổng Trường Đại học Kinh tế – Đại học Đà Nẵng')} loading="lazy" width="1200" height="675"/>:card.photo ? <img src={`${import.meta.env.BASE_URL}${card.photo.replace(/^\//, '')}`} alt="" loading="lazy" /> : card.sample ? <svg viewBox="0 0 480 300" aria-hidden="true"><path fill="#173e48" d="M0 0h480v300H0z"/><circle cx="430" cy="50" r="140" fill="#285965"/><path fill="none" stroke="#e6bc67" strokeWidth="2" d="M30 260h420M345 95v115m-30-100h60m-46-13h32M90 250h300"/><text x="36" y="62" fill="#f5dfad" fontSize="22" fontWeight="400">{t("MẬT THƯ")}</text><text x="32" y="205" fill="#f5dfad" fontSize="140" fontWeight="400">✦</text><text x="245" y="212" fill="#f5dfad" fontSize="22">{t("Ký ức thành phố")}</text></svg> : <LandmarkArt id={card.id} />}</div>} bodyClassName="discovery-card-body">
       <div className="card-top-row">
         <span className="card-location">{card.area}</span>
         {/* [UX-FLOW] Badge phân biệt rõ 2 kiểu chơi */}
         {isUxFlagEnabled('GAME_MODE_BADGES') && card.kind && (
           <span className={`game-mode-badge mode-${card.kind}`}>
-            {card.kind === 'quest' ? t("Cốt truyện · Giải đố") : t("Địa điểm · 5–10 nhiệm vụ")}
+            {card.kind === 'quest' ? t("Cốt truyện · Giải đố", "Story · Puzzle") : t("Địa điểm · 5–10 nhiệm vụ", "Place · 5–10 missions")}
           </span>
         )}
       </div>
-      <h3>{card.title}</h3><p>{card.description}</p><div className="card-bottom"><span className={card.status ? 'quest-status' : ''}>{card.status || t('Xem quest')}</span><span aria-hidden="true">↗</span></div>
-    </QuestCoverCard>)}</div>
-    {!filtered.length && !(joined && (loading || error || questLoading || questError || activationLoading || activationError)) && <section className="discovery-empty"><NavigationIcon kind={joined ? 'quests' : 'search'} /><h2>{query ? t("Không tìm thấy quest phù hợp.") : t("Hành trình đầu tiên đang chờ bạn")}</h2><p>{query ? t("Thử tên địa điểm khác hoặc tìm không dấu.") : t("Quest sẽ xuất hiện ở đây sau khi bạn bắt đầu tham gia.")}</p>{query ? <button onClick={() => setQuery('')}>{t("Xóa tìm kiếm")}</button> : <a href="#/kham-pha">{t("Khám phá các quest")}</a>}</section>}
+      <h3>{card.title}</h3><p className="discovery-card-teaser">{card.teaser}</p><div className="card-bottom"><span className="card-meta">{card.description}</span>{card.priceBadge && <span className={`dq-price-badge is-${card.priceBadge.tone}`}>{card.priceBadge.label}</span>}{card.status && <span className="quest-status">{card.status}</span>}</div>
+    </QuestCoverCard>)}</div></>}
+    {!filtered.length && !joinedLoading && !(joined && (error || questError || activationError)) && <section className="discovery-empty"><NavigationIcon kind={joined ? 'quests' : 'search'} /><h2>{query ? t("Không tìm thấy quest phù hợp.") : t("Hành trình đầu tiên đang chờ bạn")}</h2><p>{query ? t("Thử tên địa điểm khác hoặc tìm không dấu.") : t("Quest sẽ xuất hiện ở đây sau khi bạn bắt đầu tham gia.")}</p>{query ? <button onClick={() => setQuery('')}>{t("Xóa tìm kiếm")}</button> : <a href="#/kham-pha">{t("Khám phá các quest")}</a>}</section>}
   </main>
 }

@@ -21,15 +21,20 @@ export function useWalkingRoute(id: string, sample: LocationSample | null, targe
   const originAccuracy = useRef(Infinity)
   const fails = useRef(0)
   const [tick, setTick] = useState(0)
+  const position = target ?? getDestination(id)?.position
+  const targetLat = position?.[0], targetLng = position?.[1]
   useEffect(() => { const timer = window.setInterval(() => setTick(value => value + 1), 5000); return () => window.clearInterval(timer) }, [])
   const request = useRef<{ controller: AbortController | null; last: number; generation: number }>({ controller: null, last: -Infinity, generation: 0 })
   useEffect(() => {
     const state = request.current
+    state.controller?.abort(); state.controller = null; state.generation++; state.last = -Infinity
+    current.current = null; originAccuracy.current = Infinity; fails.current = 0
+    setRoute(null); setInitialRoute(null); setBusy(false); setError(''); setReroutes(0)
     return () => { state.controller?.abort(); state.controller = null; state.generation++ }
-  }, [id])
+  }, [id, targetLat, targetLng])
   useEffect(() => {
     const state = request.current
-    const position = target ?? getDestination(id)?.position
+    const position: [number, number] | undefined = targetLat !== undefined && targetLng !== undefined ? [targetLat, targetLng] : undefined
     if (!sample || !isFresh(sample) || sample.accuracy > NAVIGATION_MAX_ACCURACY || !position || hasArrived(sample, position)) return
     const progress = current.current ? routeProgress(current.current, sample) : null
     const refined = originAccuracy.current > 50 && sample.accuracy <= 50
@@ -55,14 +60,14 @@ export function useWalkingRoute(id: string, sample: LocationSample | null, targe
       })
       .catch(cause => { if (generation === state.generation && !controller.signal.aborted) { fails.current++; setError(cause instanceof Error ? cause.message : t('Chưa tính được đường đi.')) } })
       .finally(() => { if (generation === state.generation) { state.controller = null; setBusy(false) } })
-  }, [id, sample, target, tick])
+  }, [id, sample, targetLat, targetLng, tick])
   const progress = route && sample ? routeProgress(route, sample) : null
   const onRoute = !!progress && !!sample && progress.offRoute <= offRouteLimit(sample.accuracy)
-  const usable = !!sample && sample.accuracy <= NAVIGATION_MAX_ACCURACY
+  const usable = !!sample && isFresh(sample) && sample.accuracy <= NAVIGATION_MAX_ACCURACY
   // Đã có tuyến nhưng người chơi đang ở ngoài tuyến: giữ điểm gần nhất trên tuyến cũ để vẽ đường chấm chỉ lối quay về.
   const deviation = progress && !onRoute && usable ? { meters: progress.offRoute, snapped: progress.points[0] as Point } : null
   return {
-    route, initialRoute, progress: onRoute ? progress : null, deviation, busy, error, reroutes,
-    usable, precise: !!sample && sample.accuracy <= 50,
+    route, initialRoute, progress: onRoute && usable ? progress : null, deviation, busy, error, reroutes,
+    usable, precise: usable && sample.accuracy <= 50,
   }
 }
