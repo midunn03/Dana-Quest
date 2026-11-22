@@ -72,7 +72,7 @@
  .atlas-results-layout .atlas-result-copy small {font-size:14px;line-height:1.35}
  .atlas-result-action {font-size:14px;color:var(--px-action);display:block;margin-top:8px}
  .atlas-results-layout .atlas-top-controls {top:12px;left:12px;right:12px;flex-wrap:nowrap}
- .device-mobile-shell .atlas-results-layout .atlas-top-controls {top:54px}
+ .device-mobile-shell .atlas-results-layout .atlas-top-controls {top:10px}
  .atlas-results-layout .atlas-city-fit-btn {top:112px}
  .atlas-results-layout .atlas-map-status {top:162px;left:12px;font-size:13px}
  .atlas-results-layout .atlas-map-locate {bottom:84px;right:12px}

@@ -1320,7 +1320,7 @@
  gap:12px;
 }
 @media (min-width: 820px) {
- .app-shell:not(.home-shell) .reward-history .partner-available-list {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .reward-history .partner-available-list {
   grid-template-columns:repeat(2, minmax(0, 1fr));
  }
 }
@@ -1661,6 +1661,9 @@
  box-shadow:0 8px 20px rgba(31, 123, 92, 0.18), inset 3px 0 0 #1f7b5c !important;
 }
 .app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo {
+ display:flex !important;
+ align-items:stretch !important;
+ position:relative !important;
  flex:none !important;
  width:90px !important;
  height:96px !important;
@@ -1669,9 +1672,17 @@
  border:1px solid #d0e3e9 !important;
  background:#dceef2 !important;
 }
-.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo :is(.quest-cover, .quest-cover > img, .quest-cover > .landmark-art, .q-artwork, .q-artwork svg) {
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo .quest-cover,
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo .quest-cover > img,
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo .quest-cover > .landmark-art,
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo .q-artwork,
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo .q-artwork > img,
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo .q-artwork svg,
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo img,
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo svg {
  width:100% !important;
  height:100% !important;
+ min-height:100% !important;
  max-width:100% !important;
  margin:0 !important;
  border:0 !important;
@@ -1914,7 +1925,155 @@
  box-shadow:0 4px 14px rgba(21, 121, 86, 0.3) !important;
 }
 .app-shell.device-mobile-shell .atlas-results-layout .atlas-top-controls {
+ top:10px !important;
+ left:10px !important;
+ right:10px !important;
+ flex-wrap:nowrap !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-city-fit-btn {
+ top:auto !important;
+ bottom:254px !important;
+ right:12px !important;
+ left:auto !important;
+ padding:5px 10px !important;
+ min-height:34px !important;
+ font-size:12px !important;
+ z-index:525 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-map-status {
  top:54px !important;
+ left:10px !important;
+ right:10px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay {
+ top:54px !important;
+ left:10px !important;
+ right:10px !important;
+ width:auto !important;
+ max-width:calc(100% - 20px) !important;
+ max-height:178px !important;
+ border-radius:12px !important;
+ overflow:hidden !important;
+ z-index:510 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-header {
+ padding:6px 10px !important;
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-badge,
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-distance {
+ font-size:10.5px !important;
+ padding:2px 7px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-toggle {
+ flex:0 0 24px !important;
+ width:24px !important;
+ height:24px !important;
+ min-height:24px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-body {
+ padding:8px 10px !important;
+ gap:6px !important;
+ max-height:138px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-title {
+ font-size:14px !important;
+ margin:0 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-meta-tag {
+ font-size:10.5px !important;
+ padding:2px 7px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-summary {
+ font-size:12px !important;
+ line-height:1.35 !important;
+ margin:0 !important;
+ display:-webkit-box !important;
+ -webkit-line-clamp:1 !important;
+ -webkit-box-orient:vertical !important;
+ overflow:hidden !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay .start-hub-actions {
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay :is(.start-hub-primary-btn, .start-hub-secondary-btn, .start-hub-help-link) {
+ min-height:32px !important;
+ padding:4px 10px !important;
+ font-size:12px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .start-hub-overlay.is-collapsed {
+ max-height:none !important;
+ overflow:hidden !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-offscreen-chip {
+ left:10px !important;
+ right:64px !important;
+ bottom:152px !important;
+ width:auto !important;
+ max-width:calc(100% - 74px) !important;
+ white-space:nowrap !important;
+ padding:5px 10px !important;
+ font-size:12px !important;
+ z-index:515 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-offscreen-chip strong {
+ min-width:0 !important;
+ overflow:hidden !important;
+ text-overflow:ellipsis !important;
+ white-space:nowrap !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-offscreen-chip small {
+ flex-shrink:0 !important;
+ white-space:nowrap !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-viewport-filter {
+ left:10px !important;
+ bottom:114px !important;
+ min-height:32px !important;
+ padding:4px 10px !important;
+ font-size:12px !important;
+ border-radius:10px !important;
+ gap:6px !important;
+ max-width:calc(100% - 76px) !important;
+ z-index:510 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-viewport-filter input {
+ width:14px !important;
+ height:14px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-map-locate {
+ right:12px !important;
+ bottom:206px !important;
+ z-index:520 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .leaflet-bottom {
+ bottom:112px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-selection {
+ left:10px !important;
+ right:10px !important;
+ bottom:114px !important;
+ width:auto !important;
+ max-width:none !important;
+ max-height:220px !important;
+ overflow-y:auto !important;
+ z-index:540 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-sidebar {
+ z-index:650 !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-sidebar .atlas-sheet-grabber {
+ display:flex !important;
+ flex-direction:column !important;
+ align-items:center !important;
+ flex:0 0 auto !important;
+ padding:6px 4px 4px !important;
+ min-height:42px !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-sidebar .atlas-sidebar-top {
+ padding:0 0 8px !important;
+ border-bottom:0 !important;
+ background:transparent !important;
 }
 
 /* StartHub Floating Overlay Card */
@@ -2446,7 +2605,7 @@
  gap:26px !important;
 }
 @media (min-width: 900px) {
- .app-shell:not(.home-shell) .qd-page .qd-layout {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .qd-page .qd-layout {
   grid-template-columns:minmax(0, 1.65fr) minmax(300px, 370px) !important;
   padding:28px !important;
  }
@@ -2507,7 +2666,7 @@
  gap:14px !important;
 }
 @media (min-width: 900px) {
- .app-shell:not(.home-shell) .qd-page .qd-play-panel {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .qd-page .qd-play-panel {
   top:76px !important;
  }
 }
@@ -2697,7 +2856,7 @@
  background:rgba(255, 254, 249, 0.98) !important;
 }
 @media (min-width: 1000px) {
- .app-shell:not(.home-shell) .navigation-screen .live-route-sheet {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .navigation-screen .live-route-sheet {
   border-radius:0 !important;
   border-right:1.5px solid #b5d6df !important;
   border-top:0 !important;
@@ -3440,7 +3599,7 @@
  gap:26px !important;
 }
 @media (min-width: 900px) {
- .app-shell:not(.home-shell) .ev-detail-page .ev-detail-layout {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .ev-detail-page .ev-detail-layout {
   grid-template-columns:minmax(0, 1.6fr) minmax(300px, 370px) !important;
   padding:28px !important;
  }
@@ -3490,7 +3649,7 @@
  gap:12px !important;
 }
 @media (min-width: 900px) {
- .app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .ev-detail-page .ev-detail-panel {
   position:sticky;
   top:76px;
  }
@@ -3596,53 +3755,155 @@
  min-width:0 !important;
 }
 .app-shell.device-mobile-shell .discovery-page {
- padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+ padding:10px 12px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell .discovery-page > * {
+ flex-shrink:0 !important;
+}
+.app-shell.device-mobile-shell .discovery-title-row {
+ margin-bottom:10px !important;
+}
+.app-shell.device-mobile-shell .discovery-title-row h1 {
+ font-size:22px !important;
+ margin:0 0 2px !important;
+}
+.app-shell.device-mobile-shell .discovery-title-row p {
+ font-size:13px !important;
+ line-height:1.4 !important;
+}
+.app-shell.device-mobile-shell .discovery-intro {
+ padding:10px 12px !important;
+ margin-bottom:10px !important;
+}
+.app-shell.device-mobile-shell .discovery-intro h2 {
+ font-size:15px !important;
+ margin-bottom:2px !important;
+}
+.app-shell.device-mobile-shell .discovery-intro p {
+ font-size:12.5px !important;
+ line-height:1.4 !important;
+}
+.app-shell.device-mobile-shell .discovery-search {
+ min-height:42px !important;
+ margin-bottom:10px !important;
 }
 .app-shell.device-mobile-shell .discovery-grid.quest-cover-grid {
  display:grid !important;
  grid-template-columns:minmax(0, 1fr) !important;
- gap:14px !important;
+ gap:12px !important;
 }
 .app-shell.device-mobile-shell .discovery-card {
  padding:0 !important;
  border:1.5px solid #b5d6df !important;
- border-radius:16px !important;
- box-shadow:0 8px 20px rgba(18, 56, 80, 0.1) !important;
+ border-radius:14px !important;
+ box-shadow:0 6px 16px rgba(18, 56, 80, 0.09) !important;
  background:#fffef9 !important;
 }
 .app-shell.device-mobile-shell .discovery-card-image {
- height:172px !important;
+ height:146px !important;
 }
 .app-shell.device-mobile-shell .discovery-mode-filters {
- flex-wrap:nowrap !important;
- overflow-x:auto !important;
- padding-bottom:4px;
- scrollbar-width:none;
+ flex-shrink:0 !important;
+ flex-wrap:wrap !important;
+ overflow-x:visible !important;
+ gap:6px !important;
+ margin:0 0 12px !important;
+ padding-bottom:0 !important;
 }
-.app-shell.device-mobile-shell .discovery-mode-filters::-webkit-scrollbar {
- display:none;
+.app-shell.device-mobile-shell .discovery-filter-btn {
+ min-height:34px !important;
+ padding:5px 10px !important;
+ font-size:12px !important;
+}
+.app-shell.device-mobile-shell .discovery-section-heading {
+ margin:0 0 10px !important;
 }
 .app-shell.device-mobile-shell .discovery-active-quests {
  gap:10px !important;
 }
 .app-shell.device-mobile-shell > main.ev-page {
- padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+ padding:10px 12px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-intro {
+ padding:10px 12px !important;
+ margin-bottom:10px !important;
+ border-radius:12px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-intro h2 {
+ font-size:17px !important;
+ line-height:1.25 !important;
+ margin-bottom:2px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-intro p {
+ font-size:12.5px !important;
+ line-height:1.4 !important;
+ display:-webkit-box;
+ -webkit-line-clamp:2;
+ -webkit-box-orient:vertical;
+ overflow:hidden;
+}
+.app-shell.device-mobile-shell .events-index .ev-tabs {
+ flex-wrap:wrap !important;
+ overflow-x:visible !important;
+ gap:6px !important;
+ margin-bottom:10px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-tabs button {
+ min-height:32px !important;
+ padding:4px 10px !important;
+ font-size:12px !important;
 }
 .app-shell.device-mobile-shell .events-index .ev-heading {
- flex-direction:column !important;
- align-items:flex-start !important;
- gap:10px !important;
+ flex-direction:row !important;
+ flex-wrap:wrap !important;
+ align-items:center !important;
+ justify-content:space-between !important;
+ gap:6px !important;
+ margin:0 0 10px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-heading h2 {
+ font-size:15px !important;
 }
 .app-shell.device-mobile-shell .events-index .ev-grid {
  grid-template-columns:minmax(0, 1fr) !important;
- gap:16px !important;
+ gap:12px !important;
 }
 .app-shell.device-mobile-shell .events-index .ev-filters {
  grid-template-columns:minmax(0, 1fr) !important;
- padding:12px !important;
+ padding:10px !important;
+ gap:8px !important;
+ margin-bottom:10px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-filters label {
+ font-size:11px !important;
+ gap:3px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-filters :is(input, select) {
+ min-height:36px !important;
+ padding:6px 10px !important;
+ font-size:13.5px !important;
 }
 .app-shell.device-mobile-shell .events-index .ev-filter-toggle {
  display:inline-flex !important;
+ min-height:32px !important;
+ padding:4px 10px !important;
+ font-size:12px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-card-photo {
+ height:120px !important;
+ max-height:120px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-card-body {
+ padding:12px !important;
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-card h2 {
+ font-size:17px !important;
+ line-height:1.3 !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-card p {
+ font-size:13px !important;
+ line-height:1.4 !important;
 }
 .app-shell.device-mobile-shell .events-index .ev-filters[data-expanded=false] .ev-filter-extra {
  display:none !important;
@@ -4000,15 +4261,63 @@ body:has(.device-mobile-shell) .auth-modal-layer .login-sheet {
  border-radius:20px !important;
 }
 body:has(.device-mobile-shell) .ev-notice-position {
- top:68px !important;
+ top:60px !important;
  left:50% !important;
  right:auto !important;
  transform:translateX(-50%) !important;
- width:min(calc(100vw - 24px), 408px) !important;
+ width:min(calc(100vw - 24px), 392px) !important;
 }
 body:has(.device-mobile-shell) .ev-notice {
  width:100% !important;
  max-width:100% !important;
+ border-radius:14px !important;
+ box-shadow:0 10px 26px rgba(18, 56, 80, 0.24) !important;
+}
+body:has(.device-mobile-shell) .ev-notice > img {
+ display:none !important;
+}
+body:has(.device-mobile-shell) .ev-notice-content {
+ padding:10px 12px !important;
+}
+body:has(.device-mobile-shell) .ev-notice-close {
+ top:8px !important;
+ right:8px !important;
+ width:28px !important;
+ height:28px !important;
+ min-height:28px !important;
+ font-size:16px !important;
+ border-radius:7px !important;
+}
+body:has(.device-mobile-shell) .ev-notice-content > small:first-of-type {
+ font-size:11px !important;
+ font-weight:700 !important;
+ color:#1f7b5c !important;
+ line-height:1.2 !important;
+ padding-right:34px !important;
+}
+body:has(.device-mobile-shell) .ev-notice-title {
+ font-size:14.5px !important;
+ line-height:1.25 !important;
+ margin:2px 34px 3px 0 !important;
+}
+body:has(.device-mobile-shell) .ev-notice p {
+ font-size:12px !important;
+ line-height:1.3 !important;
+ margin:0 0 8px !important;
+}
+body:has(.device-mobile-shell) .ev-notice-actions {
+ gap:6px !important;
+ margin:0 !important;
+}
+body:has(.device-mobile-shell) .ev-notice-actions :is(.ev-primary, .ev-secondary) {
+ min-height:34px !important;
+ height:34px !important;
+ padding:0 10px !important;
+ font-size:12px !important;
+ border-radius:8px !important;
+}
+body:has(.device-mobile-shell) .ev-notice-actions ~ small {
+ display:none !important;
 }
 body:has(.device-mobile-shell) .notifications {
  left:50% !important;
@@ -4017,6 +4326,9 @@ body:has(.device-mobile-shell) .notifications {
  transform:translateX(-50%) !important;
  width:min(calc(100vw - 24px), 400px) !important;
  align-items:center !important;
+}
+body:has(.device-mobile-shell .next-step-chip-container) .notifications {
+ bottom:126px !important;
 }
 body:has(.device-mobile-shell) .toast-banner {
  max-width:100% !important;
@@ -4743,4 +5055,586 @@ body:has(.device-mobile-shell) .toast-banner {
 .app-shell:not(.home-shell) :is(.q-scroll, .q-dialog, main.due-start, main.quest-page.arrival-screen, main.celebration-screen, main.quest-player)::-webkit-scrollbar-thumb {
  background:rgba(21, 59, 85, 0.34) !important;
  border-radius:999px !important;
+}
+
+/* 20. High-Specificity Mobile Compaction Overrides (.device-mobile-shell:not(.home-shell)) */
+.app-shell.device-mobile-shell:not(.home-shell) > main.atlas-results-layout {
+ display:block !important;
+ position:relative !important;
+ height:100% !important;
+ overflow:hidden !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-map-area {
+ position:absolute !important;
+ inset:0 0 98px 0 !important;
+ width:100% !important;
+ height:auto !important;
+ min-height:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-top-controls {
+ top:10px !important;
+ left:10px !important;
+ right:10px !important;
+ gap:5px !important;
+ padding:2px 2px 4px !important;
+ flex-wrap:nowrap !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-mode-filters button,
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-category-filters button,
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-transit-chip {
+ min-height:30px !important;
+ height:30px !important;
+ padding:0 9px !important;
+ font-size:11px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-category-filters button:not(:first-child) {
+ display:none !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-city-fit-btn {
+ position:absolute !important;
+ top:auto !important;
+ bottom:134px !important;
+ right:10px !important;
+ left:auto !important;
+ width:auto !important;
+ height:auto !important;
+ min-height:30px !important;
+ max-height:34px !important;
+ padding:4px 10px !important;
+ font-size:11.5px !important;
+ border-radius:999px !important;
+ z-index:525 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-map-locate {
+ position:absolute !important;
+ top:auto !important;
+ bottom:88px !important;
+ right:10px !important;
+ left:auto !important;
+ width:38px !important;
+ height:38px !important;
+ min-height:38px !important;
+ font-size:18px !important;
+ z-index:520 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-location-feedback {
+ top:auto !important;
+ left:10px !important;
+ right:58px !important;
+ bottom:78px !important;
+ max-width:none !important;
+ padding:6px 10px !important;
+ font-size:11.5px !important;
+ line-height:1.35 !important;
+ border-radius:10px !important;
+ z-index:530 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout:has(.atlas-selection) :is(.atlas-map-locate, .atlas-city-fit-btn, .atlas-offscreen-chip, .atlas-location-feedback) {
+ opacity:0 !important;
+ pointer-events:none !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar {
+ position:absolute !important;
+ left:0 !important;
+ right:0 !important;
+ bottom:0 !important;
+ flex:none !important;
+ overflow:hidden !important;
+ display:flex !important;
+ flex-direction:column !important;
+ padding:0 10px 4px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar[data-snap="peek"] {
+ height:100px !important;
+ min-height:100px !important;
+ max-height:100px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar > :is(.atlas-sheet-grabber, .atlas-sidebar-top, .atlas-list-heading) {
+ flex-shrink:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar .atlas-sheet-grabber {
+ padding:4px 2px 2px !important;
+ min-height:30px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar .atlas-sheet-handle {
+ margin-bottom:2px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar .atlas-sidebar-top {
+ padding:2px 0 4px !important;
+ gap:4px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar .atlas-search {
+ min-height:36px !important;
+ height:36px !important;
+ padding:0 10px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar .atlas-search input {
+ min-height:34px !important;
+ height:34px !important;
+ font-size:13.5px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar .atlas-list-heading {
+ padding:2px 2px 4px !important;
+ margin:0 !important;
+ font-size:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar .atlas-list-heading span {
+ padding:2px 8px !important;
+ font-size:11px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar > .atlas-list {
+ flex:1 1 0 !important;
+ min-height:0 !important;
+ overflow-y:auto !important;
+ padding:2px 2px 10px !important;
+ gap:8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-list > button {
+ min-height:84px !important;
+ padding:8px !important;
+ gap:10px !important;
+ grid-template-columns:74px minmax(0, 1fr) !important;
+ border-radius:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo {
+ width:74px !important;
+ height:78px !important;
+ border-radius:8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy strong {
+ font-size:14.5px !important;
+ margin-bottom:1px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small {
+ font-size:11.5px !important;
+ margin-top:1px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .leaflet-bottom {
+ bottom:4px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .leaflet-control-zoom a {
+ width:34px !important;
+ height:32px !important;
+ line-height:31px !important;
+ font-size:16px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-viewport-filter {
+ position:absolute !important;
+ top:auto !important;
+ left:10px !important;
+ right:auto !important;
+ bottom:8px !important;
+ width:auto !important;
+ height:auto !important;
+ min-height:28px !important;
+ max-height:32px !important;
+ padding:3px 9px !important;
+ font-size:11px !important;
+ gap:5px !important;
+ border-radius:999px !important;
+ max-width:calc(100% - 68px) !important;
+ z-index:510 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-viewport-filter input {
+ width:13px !important;
+ height:13px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-offscreen-chip {
+ position:absolute !important;
+ top:auto !important;
+ left:10px !important;
+ right:58px !important;
+ bottom:42px !important;
+ width:auto !important;
+ height:auto !important;
+ min-height:28px !important;
+ max-width:calc(100% - 68px) !important;
+ padding:4px 10px !important;
+ font-size:11.5px !important;
+ white-space:nowrap !important;
+ z-index:515 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay {
+ position:absolute !important;
+ top:58px !important;
+ bottom:auto !important;
+ left:10px !important;
+ right:10px !important;
+ width:auto !important;
+ height:auto !important;
+ max-width:calc(100% - 20px) !important;
+ max-height:146px !important;
+ border-radius:12px !important;
+ overflow:hidden !important;
+ z-index:510 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-header {
+ padding:5px 9px !important;
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-badge,
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-distance {
+ font-size:10px !important;
+ padding:2px 7px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-toggle {
+ flex:0 0 24px !important;
+ width:24px !important;
+ height:24px !important;
+ min-height:24px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-body {
+ padding:6px 10px 8px !important;
+ gap:4px !important;
+ max-height:110px !important;
+ overflow:hidden !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-title {
+ font-size:13.5px !important;
+ line-height:1.25 !important;
+ margin:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-meta-tag {
+ font-size:10px !important;
+ padding:1px 6px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-summary,
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-progress {
+ font-size:11.5px !important;
+ line-height:1.3 !important;
+ margin:0 !important;
+ display:-webkit-box !important;
+ -webkit-line-clamp:1 !important;
+ -webkit-box-orient:vertical !important;
+ overflow:hidden !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-actions {
+ gap:6px !important;
+ margin-top:2px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay :is(.start-hub-primary-btn, .start-hub-secondary-btn, .start-hub-help-link) {
+ min-height:28px !important;
+ height:28px !important;
+ padding:0 10px !important;
+ font-size:11.5px !important;
+ border-radius:8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-selection {
+ top:auto !important;
+ left:10px !important;
+ right:10px !important;
+ bottom:8px !important;
+ width:auto !important;
+ max-width:none !important;
+ max-height:190px !important;
+ padding:10px 12px !important;
+ overflow-y:auto !important;
+ z-index:540 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-selection-thumb img,
+.app-shell.device-mobile-shell:not(.home-shell) .atlas-results-layout .atlas-selection-thumb .q-artwork > img {
+ width:100% !important;
+ height:100% !important;
+ min-height:100% !important;
+ object-fit:cover !important;
+ aspect-ratio:auto !important;
+}
+
+/* Discovery / Quest Page Mobile Compaction */
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-page {
+ padding:8px 12px calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+ gap:8px !important;
+ overflow-y:auto !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-page > * {
+ flex-shrink:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-title-row {
+ margin:0 !important;
+ gap:8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-title-row h1 {
+ font-size:20px !important;
+ line-height:1.25 !important;
+ margin:0 0 2px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-title-row p {
+ font-size:12.5px !important;
+ line-height:1.35 !important;
+ margin:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-title-row .map-toggle {
+ min-height:34px !important;
+ padding:4px 10px !important;
+ font-size:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-intro {
+ padding:8px 10px !important;
+ margin:0 !important;
+ gap:8px !important;
+ border-radius:10px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-intro h2 {
+ font-size:14px !important;
+ line-height:1.25 !important;
+ margin:0 0 2px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-intro p {
+ font-size:12px !important;
+ line-height:1.35 !important;
+ margin:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-mode-filters {
+ display:flex !important;
+ flex-wrap:wrap !important;
+ flex-shrink:0 !important;
+ align-items:center !important;
+ height:auto !important;
+ min-height:0 !important;
+ max-height:none !important;
+ overflow:visible !important;
+ gap:6px !important;
+ margin:0 !important;
+ padding:2px 0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-mode-filters .discovery-filter-btn {
+ display:inline-flex !important;
+ align-items:center !important;
+ justify-content:center !important;
+ flex:0 0 auto !important;
+ height:auto !important;
+ min-height:32px !important;
+ padding:4px 10px !important;
+ font-size:12px !important;
+ line-height:1.2 !important;
+ border-radius:999px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-section-heading {
+ margin:2px 0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-section-heading h2 {
+ font-size:15px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-card-image {
+ height:128px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-card-body {
+ padding:10px 12px !important;
+ gap:5px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-card h3 {
+ font-size:16px !important;
+ margin:2px 0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-card p {
+ font-size:12.5px !important;
+ line-height:1.4 !important;
+ margin:0 !important;
+ display:-webkit-box !important;
+ -webkit-line-clamp:2 !important;
+ -webkit-box-orient:vertical !important;
+ overflow:hidden !important;
+}
+
+/* Events Page Mobile Compaction */
+.app-shell.device-mobile-shell:not(.home-shell) > main.events-index {
+ padding:8px 12px calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-frame {
+ gap:8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-top {
+ margin-bottom:6px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-top h1 {
+ font-size:20px !important;
+ line-height:1.25 !important;
+ margin:0 0 2px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-top p {
+ font-size:12.5px !important;
+ line-height:1.35 !important;
+ margin:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-intro {
+ padding:8px 10px !important;
+ margin:0 0 8px !important;
+ border-radius:10px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-intro h2 {
+ font-size:14.5px !important;
+ line-height:1.25 !important;
+ margin:0 0 2px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-intro p {
+ font-size:12px !important;
+ line-height:1.35 !important;
+ margin:0 !important;
+ display:-webkit-box !important;
+ -webkit-line-clamp:2 !important;
+ -webkit-box-orient:vertical !important;
+ overflow:hidden !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-tabs {
+ display:flex !important;
+ flex-wrap:wrap !important;
+ overflow:visible !important;
+ gap:5px !important;
+ margin:0 0 8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-tabs button {
+ min-height:30px !important;
+ height:30px !important;
+ padding:0 9px !important;
+ font-size:11.5px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-filters {
+ padding:8px 10px !important;
+ gap:6px !important;
+ margin:0 0 8px !important;
+ border-radius:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-filters label {
+ font-size:10.5px !important;
+ gap:2px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-filters :is(input, select) {
+ min-height:34px !important;
+ height:34px !important;
+ padding:4px 10px !important;
+ font-size:13px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-filter-toggle {
+ min-height:28px !important;
+ height:28px !important;
+ padding:0 10px !important;
+ font-size:11.5px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-heading {
+ margin:0 0 8px !important;
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-heading h2 {
+ font-size:14.5px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-heading span {
+ font-size:11px !important;
+ padding:2px 8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-grid {
+ gap:10px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-card-photo {
+ height:108px !important;
+ max-height:108px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-card-body {
+ padding:10px 12px !important;
+ gap:5px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-card h2 {
+ font-size:15.5px !important;
+ line-height:1.25 !important;
+ margin:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .events-index .ev-card p {
+ font-size:12px !important;
+ line-height:1.35 !important;
+ margin:0 !important;
+}
+
+/* Unified Compact Mobile Boxes Across Discovery Utilities, Shop, Quest Details & Account */
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-utilities {
+ display:flex !important;
+ flex-wrap:wrap !important;
+ gap:6px !important;
+ margin:0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-utilities a {
+ min-height:32px !important;
+ height:32px !important;
+ padding:0 11px !important;
+ font-size:12px !important;
+ font-weight:700 !important;
+ border-radius:999px !important;
+ border:1.5px solid #76be9f !important;
+ background:#eef9f4 !important;
+ white-space:nowrap !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-active-quests :is(.active-mission-indicator, .start-hub) {
+ padding:10px 12px !important;
+ border-radius:12px !important;
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-active-quests .start-hub-title {
+ font-size:16px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .discovery-active-quests .start-hub-steps {
+ gap:4px !important;
+ font-size:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen {
+ padding:10px 12px calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .wallet-strip {
+ padding:10px 12px !important;
+ border-radius:12px !important;
+ margin-bottom:10px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .reward-list {
+ gap:8px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .reward-card {
+ border-radius:12px !important;
+ gap:6px !important;
+ padding-bottom:10px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .reward-card-media {
+ height:92px !important;
+ padding:6px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .reward-info {
+ padding:6px 10px 0 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .reward-card h3 {
+ font-size:13.5px !important;
+ line-height:1.25 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .reward-card p {
+ font-size:11.5px !important;
+ line-height:1.35 !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .shop-screen .reward-card > button {
+ min-height:34px !important;
+ padding:4px 10px !important;
+ font-size:12px !important;
+ margin:0 10px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .qd-page .qd-layout {
+ padding:10px 12px !important;
+ gap:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .qd-page .qd-hero {
+ max-height:184px !important;
+ border-radius:14px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .qd-page .qd-meta > :is(span, button) {
+ min-height:30px !important;
+ padding:3px 10px !important;
+ font-size:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .qd-page .qd-play-panel {
+ padding:14px !important;
+ gap:10px !important;
+ border-radius:14px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) :is(.ap-card, .badge-summary-card, .badge-theme-section, .badge-item-card, .leader-actions-card, .leader-group-card, .partner-voucher-card) {
+ padding:12px !important;
+ border-radius:12px !important;
+}
+.app-shell.device-mobile-shell:not(.home-shell) .ap-quick-links a {
+ min-height:36px !important;
+ padding:6px 10px !important;
+ font-size:12.5px !important;
+ border-radius:10px !important;
 }
