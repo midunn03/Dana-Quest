@@ -1,0 +1,117 @@
+/* Explicit phone mode only. Desktop selectors and device preference logic stay intact. */
+.home-mobile-search,.home-mobile-dock { display: none; }
+.app-shell.device-mobile-shell > main.home-brand-refresh { padding-bottom: calc(82px + env(safe-area-inset-bottom,0px)) !important; }
+.device-mobile-shell .home-brand-refresh .home-header { background: #f0fbf9f5; backdrop-filter: blur(12px); }
+.device-mobile-shell .home-brand-refresh .home-header-inner {
+ display: grid !important; grid-template-columns: 64px minmax(0,1fr) !important;
+ max-width: 600px !important; min-height: 124px !important; height: auto !important;
+ margin-inline: auto !important; padding: 8px 16px 12px !important; gap: 8px 12px !important;
+ position: relative;
+}
+.device-mobile-shell .home-brand-refresh .home-header .home-brand { margin: 0 !important; grid-column: 1; grid-row: 1; }
+.device-mobile-shell .home-brand-refresh .home-header .home-brand img { width: 60px !important; height: 48px !important; object-fit: contain; }
+.device-mobile-shell .home-brand-refresh .home-header-actions { grid-column: 2; grid-row: 1; justify-self: end; width: auto !important; margin: 0 !important; gap: 8px !important; }
+.device-mobile-shell .home-brand-refresh .home-header .home-language { position: absolute; bottom: 12px; right: 16px; gap: 2px !important; }
+.device-mobile-shell .home-brand-refresh .home-header .home-language button { min-width: 40px !important; min-height: 44px !important; font-size: 14px !important; }
+.device-mobile-shell .home-brand-refresh .home-header :is(.home-menu,.home-mode-toggle-btn) { width: 44px !important; height: 44px !important; min-width: 44px !important; }
+.device-mobile-shell .home-brand-refresh .home-header .home-button { height: 44px !important; min-height: 44px !important; padding: 8px 12px !important; font-size: 15px !important; flex: 0 0 auto; }
+.device-mobile-shell .home-brand-refresh .home-user { max-width: 92px; font-size: 13px; }
+.device-mobile-shell .home-brand-refresh .home-mobile-search { display: flex; align-items: center; gap: 8px; grid-column: 1/-1; grid-row: 2; margin-right: 90px; min-width: 0; min-height: 44px; padding: 8px 10px; color: #244d64; background: #e2f1f5; border: 1px solid #9ac6d1; font-size: 15px; text-decoration: none; }
+.device-mobile-shell .home-brand-refresh .home-mobile-search svg { width: 20px; height: 20px; flex-shrink: 0; }
+.device-mobile-shell .home-brand-refresh .home-mobile-search span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.device-mobile-shell .home-brand-refresh .home-header nav:not(.is-open) { display: none !important; }
+.device-mobile-shell .home-brand-refresh .home-header nav.is-open { display: grid !important; grid-template-columns: 1fr 1fr; top: 100% !important; left: 0; right: 0; padding: 12px 16px; background: #f0fbf9; gap: 8px !important; border-bottom: 2px solid #a6cbd5; }
+.device-mobile-shell .home-brand-refresh .home-header nav.is-open button { min-height: 44px !important; font-size: 16px !important; }
+.device-mobile-shell .home-brand-refresh .home-container,
+.device-mobile-shell .home-brand-refresh .home-hero { width: calc(100% - 32px) !important; max-width: 568px !important; margin-inline: auto !important; }
+.device-mobile-shell .home-brand-refresh .home-hero { display: flex !important; flex-direction: column; gap: 20px; padding: 24px 0 !important; }
+.device-mobile-shell .home-brand-refresh .home-pixel-intro { display: flex !important; flex-direction: column; gap: 20px; width: 100%; padding: 0; }
+.device-mobile-shell .home-brand-refresh .home-hero-heading { width: 100% !important; margin: 0 !important; }
+.device-mobile-shell .home-brand-refresh .home-hero-copy { display: flex !important; flex-direction: column !important; align-items: flex-start; gap: 14px !important; }
+.device-mobile-shell .home-brand-refresh .home-hero-copy h1 { font-size: clamp(34px,8.5vw,44px) !important; line-height: 1.12 !important; max-width: none !important; margin: 0 !important; }
+.device-mobile-shell .home-brand-refresh .home-hero-copy > p { font-size: 18px !important; line-height: 1.6 !important; padding: 0 !important; margin: 0 !important; }
+.device-mobile-shell .home-brand-refresh .home-button { min-height: 48px; font-size: 17px; touch-action: manipulation; }
+.device-mobile-shell .home-brand-refresh .home-destination-hero { width: 100%; margin: 0 !important; height: auto !important; min-height: 0 !important; align-self: stretch; }
+.device-mobile-shell .home-brand-refresh .home-destination-hero img { width: 100%; height: auto; object-fit: contain; }
+.device-mobile-shell .home-brand-refresh .home-destination-hero figcaption { font-size: 14px; padding: 10px; }
+.device-mobile-shell .home-brand-refresh .home-hero-account,.device-mobile-shell .home-brand-refresh .home-login-anchor { width: 100% !important; max-width: none !important; margin: 0 !important; }
+.device-mobile-shell .home-brand-refresh .auth-inline .login-sheet { padding: 20px 16px; box-shadow: 4px 4px 0 #bddbdc; }
+.device-mobile-shell .home-brand-refresh .login-sheet fieldset { display: grid; grid-template-columns: minmax(0,1fr); gap: 8px; }
+.device-mobile-shell .home-brand-refresh .login-sheet fieldset > * { grid-column: 1 !important; grid-row: auto !important; }
+.device-mobile-shell .home-brand-refresh .login-sheet label { font-size: 16px; }
+.device-mobile-shell .home-brand-refresh .login-sheet input { min-height: 48px; font-size: 17px; }
+.device-mobile-shell .home-brand-refresh .login-sheet-description { font-size: 16px; line-height: 1.5; }
+.device-mobile-shell .home-brand-refresh .login-inline-tabs button { min-height: 46px; font-size: 16px; }
+.device-mobile-shell .home-brand-refresh .login-account-note > div { display: block; }
+.device-mobile-shell .home-brand-refresh .login-account-caption { font-size: 14px; }
+.device-mobile-shell .home-brand-refresh .home-guest-link a { font-size: 16px; min-height: 44px; }
+.device-mobile-shell .home-brand-refresh .home-section { padding-block: 26px !important; scroll-margin-top: 140px; }
+.device-mobile-shell .home-brand-refresh .home-entry { padding-block: 8px 20px !important; }
+.device-mobile-shell .home-brand-refresh .home-entry-copy { grid-template-columns: 60px minmax(0,1fr); gap: 8px 12px; padding: 18px 14px; }
+.device-mobile-shell .home-brand-refresh .home-entry-copy .home-adventure-element { width: 60px; height: 60px; }
+.device-mobile-shell .home-brand-refresh .home-entry-copy h2 { font-size: 26px; }
+.device-mobile-shell .home-brand-refresh .home-entry-copy p { grid-column: 1/-1; font-size: 17px; }
+.device-mobile-shell .home-brand-refresh .home-story-tiles { display: grid; grid-template-columns: 1fr; gap: 12px; padding-bottom: 16px !important; }
+.device-mobile-shell .home-brand-refresh .home-story-tiles p { font-size: 17px; }
+.device-mobile-shell .home-brand-refresh .home-section-heading h2 { font-size: 32px; line-height: 1.2; }
+.device-mobile-shell .home-brand-refresh .home-steps { display: grid !important; grid-template-columns: 1fr !important; gap: 16px !important; }
+.device-mobile-shell .home-brand-refresh .home-steps article:nth-child(n) { display: grid !important; grid-template-columns: 90px minmax(0,1fr) !important; gap: 8px 14px !important; padding: 18px 14px !important; }
+.device-mobile-shell .home-brand-refresh .home-steps article > .home-adventure-element { width: 90px; height: 90px; grid-column: 1; grid-row: 1/3; margin: 0; }
+.device-mobile-shell .home-brand-refresh .home-steps article h3 { font-size: 22px; margin: 0; }
+.device-mobile-shell .home-brand-refresh .home-steps article p { grid-column: 2; font-size: 17px; margin: 0; }
+.device-mobile-shell .home-brand-refresh .home-heading-row { display: flex; flex-direction: column; align-items: start; gap: 8px; }
+.device-mobile-shell .home-brand-refresh .home-quest-slides { height: 690px; margin-inline: -16px; }
+.device-mobile-shell .home-brand-refresh .home-quest-slides .home-quest-slide:nth-child(n) { display: flex !important; flex-direction: column !important; width: 84%; max-width: 440px; height: 640px; padding: 0 !important; }
+.device-mobile-shell .home-brand-refresh .home-quest-slides .home-quest-art { height: 210px !important; min-height: 0 !important; flex: 0 0 210px; border: 0; border-bottom: 2px solid #a4cdd9; }
+.device-mobile-shell .home-brand-refresh .home-quest-slides .home-quest-info { padding: 18px !important; }
+.device-mobile-shell .home-brand-refresh .home-quest-slides .home-quest-info h3 { font-size: 26px; }
+.device-mobile-shell .home-brand-refresh .home-quest-slides .home-quest-info p { font-size: 18px; line-height: 1.6; }
+.device-mobile-shell .home-brand-refresh .home-quest-slides .home-quest-meta { font-size: 16px; gap: 12px; }
+.device-mobile-shell .home-brand-refresh .home-quest-controls { gap: 14px; }
+.device-mobile-shell .home-brand-refresh .home-quest-controls button { width: 48px; height: 48px; }
+.device-mobile-shell .home-brand-refresh .home-quest-controls > span { min-width: 0; flex: 1; font-size: 18px; }
+.device-mobile-shell .home-brand-refresh .home-reward-grid,.device-mobile-shell .home-brand-refresh .home-faq-grid { display: grid !important; grid-template-columns: minmax(0,1fr) !important; gap: 24px !important; }
+.device-mobile-shell .home-brand-refresh .home-reward-art { width: 100%; min-height: 310px !important; padding: 22px 18px !important; grid-template-columns: 84px minmax(0,1fr); gap: 14px; }
+.device-mobile-shell .home-brand-refresh .home-big-star { width: 80px; height: 80px; }
+.device-mobile-shell .home-brand-refresh .home-big-star svg { width: 58px; height: 58px; }
+.device-mobile-shell .home-brand-refresh .home-reward-title { font-size: 25px; }
+.device-mobile-shell .home-brand-refresh .home-reward-chips { grid-column: 1 / -1; grid-row: 3; justify-content: center; justify-self: stretch; width: 100%; }
+.device-mobile-shell .home-brand-refresh .home-reward-grid h2,.device-mobile-shell .home-brand-refresh .home-faq-grid h2 { font-size: 32px; }
+.device-mobile-shell .home-brand-refresh .home-reward-grid p,.device-mobile-shell .home-brand-refresh .home-faq-grid p { font-size: 18px; }
+.device-mobile-shell .home-brand-refresh .home-faq-photo { margin: 20px 0 0; }
+.device-mobile-shell .home-brand-refresh .home-faq-photo img { width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; }
+.device-mobile-shell .home-brand-refresh .home-faq-grid .px-accordion summary { font-size: 18px; min-height: 64px; }
+.device-mobile-shell .home-brand-refresh .home-final-cta { display: grid; grid-template-columns: minmax(0,1fr) 80px; gap: 18px; padding-block: 28px !important; }
+.device-mobile-shell .home-brand-refresh .home-final-cta h2 { grid-column: 1/-1; grid-row: 1; font-size: 34px; }
+.device-mobile-shell .home-brand-refresh .home-final-cta > .home-button { grid-column: 1; grid-row: 2; justify-self: start; }
+.device-mobile-shell .home-brand-refresh .home-final-cta .home-cta-pack { grid-column: 2; grid-row: 2; width: 80px; height: 80px; }
+.device-mobile-shell .home-brand-refresh .home-footer { padding: 24px 0 !important; }
+.device-mobile-shell .home-brand-refresh .home-footer-top,.device-mobile-shell .home-brand-refresh .home-footer-bottom { gap: 18px; align-items: start; }
+.device-mobile-shell .home-brand-refresh .home-footer-top p { font-size: 17px; }
+.device-mobile-shell .home-brand-refresh .home-footer nav { flex-wrap: wrap; }
+.device-mobile-shell .home-brand-refresh .home-footer nav a { min-height: 44px; display: inline-flex; align-items: center; font-size: 15px; }
+.device-mobile-shell .home-brand-refresh .home-mobile-dock { display: block; }
+.device-mobile-shell .home-brand-refresh .home-mobile-dock .quest-main-nav { position: fixed; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); min-height: 68px; padding: 6px 8px calc(6px + env(safe-area-inset-bottom,0px)); z-index: 150; background: #effafff5; border-top: 2px solid #aacdd3; }
+.device-mobile-shell .home-brand-refresh .home-mobile-dock .quest-main-nav a { min-width: 0; min-height: 48px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; font-size: 12px; color: #244d64; }
+.device-mobile-shell .home-brand-refresh .home-mobile-dock .quest-main-nav .nav-search { display: flex; }
+.device-mobile-shell .home-brand-refresh .home-mobile-dock .nav-icon svg { width: 22px; height: 22px; }
+.device-mobile-shell .home-brand-refresh :is(button,a) { touch-action: manipulation; }
+@media(min-width:480px) { .device-mobile-shell .home-brand-refresh .home-story-tiles { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+.device-mobile-shell .home-brand-refresh .home-header .home-brand img { max-height: 48px !important; }
+.device-mobile-shell .home-brand-refresh .home-hero-bottom { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; padding: 14px 16px; font-size: 15px; overflow: hidden; }
+.device-mobile-shell .home-brand-refresh .home-faq-section { overflow: hidden; }
+.device-mobile-shell .home-brand-refresh .home-faq-photo { width: 100%; transform: none !important; animation: none !important; }
+.device-mobile-shell .home-brand-refresh .home-header nav.is-open { max-height: min(340px,55dvh); overflow-y: auto; }
+/* Keep each mobile guide card's icon/title together, with full-width copy below. */
+.device-mobile-shell .home-brand-refresh .home-steps article:nth-child(n) { grid-template-columns: 64px minmax(0,1fr) !important; grid-template-rows: auto auto; align-items: center !important; gap: 12px 16px !important; }
+.device-mobile-shell .home-brand-refresh .home-steps article > .home-adventure-element { grid-column: 1 !important; grid-row: 1 !important; width: 64px; height: 64px; align-self: center; }
+.device-mobile-shell .home-brand-refresh .home-steps article h3 { grid-column: 2 !important; grid-row: 1 !important; align-self: center !important; font-size: 22px; line-height: 1.3; text-align: left; }
+.device-mobile-shell .home-brand-refresh .home-steps article p { grid-column: 1/-1 !important; grid-row: 2 !important; align-self: start !important; font-size: 18px; line-height: 1.6; }
+.device-mobile-shell .home-brand-refresh .login-sheet .login-password input,
+.device-mobile-shell .home-brand-refresh .login-sheet #login-username { min-height: 52px !important; }
+.device-mobile-shell .home-brand-refresh .login-sheet .login-account-caption { width: 100%; max-width: none; margin: 8px auto 0; text-align: center; font-size: 15px; line-height: 1.5; }
+.device-mobile-shell .home-brand-refresh .home-header nav.is-open button { font-size: 18px !important; }
+.device-mobile-shell .home-brand-refresh .home-header .home-language button { font-size: 16px !important; }
+.device-mobile-shell .home-brand-refresh .home-header .home-button { font-size: 16px !important; }
+.device-mobile-shell .home-brand-refresh .home-mobile-search { font-size: 16px; }
+.device-mobile-shell .home-brand-refresh .home-mobile-dock .quest-main-nav a { font-size: 14px; font-weight: 600; }

@@ -20,12 +20,12 @@ export const coinBalance = (state: ProgressState) => earnedCoins(state) - state.
 export function readState(value: unknown): ProgressState {
   if (value === undefined) return newState()
   const state = value as ProgressState
-  if (state?.version !== 1 || !state.destinations || typeof state.destinations !== 'object') throw new CorruptStateError(t("Dữ liệu lưu không hợp lệ. Chưa ghi đè dữ liệu cũ."))
+  if (state?.version !== 1 || !state.destinations || typeof state.destinations !== 'object' || Array.isArray(state.destinations)) throw new CorruptStateError(t("Dữ liệu lưu không hợp lệ. Chưa ghi đè dữ liệu cũ."))
   for (const [id, progress] of Object.entries(state.destinations)) {
     const place = getDestination(id)
     const ids = place ? getMissions(place).map(item => item.id) : []
     const completedAt = progress?.completedAt
-    const invalidCompletedAt = completedAt !== undefined && (completedAt === null || typeof completedAt !== 'object' || Array.isArray(completedAt) || Object.entries(completedAt).some(([missionId, timestamp]) => !progress.completed.includes(missionId) || !Number.isFinite(timestamp)))
+    const invalidCompletedAt = completedAt !== undefined && (completedAt === null || typeof completedAt !== 'object' || Array.isArray(completedAt) || !Array.isArray(progress.completed) || Object.entries(completedAt).some(([missionId, timestamp]) => !progress.completed.includes(missionId) || !Number.isFinite(timestamp)))
     if (!progress || typeof progress.started !== 'boolean' || !Array.isArray(progress.selected) || !Array.isArray(progress.completed) ||
       new Set(progress.selected).size !== progress.selected.length || new Set(progress.completed).size !== progress.completed.length ||
       progress.selected.some(item => !ids.includes(item)) || progress.completed.some(item => !progress.selected.includes(item)) ||

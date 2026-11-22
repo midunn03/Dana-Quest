@@ -1,0 +1,42 @@
+.site-popup { width: min(940px,calc(100% - 40px)); max-height: calc(100dvh - 48px); padding: 0; border: 2px solid #8bbecb; border-radius: 12px; background: #f6fcf8; color: #153b55; box-shadow: 0 24px 80px #0c344959; overflow: auto; }
+.site-popup::backdrop { background: #0c2e4b80; backdrop-filter: blur(7px); }
+.site-popup-heading { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 24px; background: #edf9f5f5; border-bottom: 1px solid #bddbdc; }
+.site-popup-heading span { font-size: 13px; font-weight: 800; letter-spacing: .1em; color: #217c5b; }
+.site-popup-heading h2 { font-size: 25px; line-height: 1.25; margin: 4px 0 0; }
+.site-popup-heading button { flex-shrink: 0; width: 42px; height: 42px; font-size: 26px; line-height: 1; border: 1.5px solid #a6cbd5; border-radius: 8px; background: #fffef5; color: #153b55; cursor: pointer; display: grid; place-items: center; }
+.site-popup-heading button:hover { background: #dcf4e7; border-color: #28796b; }
+.site-popup-heading button:focus { outline: none; }
+.site-popup-heading button:focus-visible { outline: 3px solid #168ac4; outline-offset: 2px; }
+.site-popup-body { padding: 24px; }
+.site-popup .site-popup-body > main { height: auto; min-height: 0; max-height: none; width: 100%; overflow: visible; padding: 0; margin: 0; background: transparent; }
+.site-popup :is(.journey-frame,.help-content,.ap-frame,.ap-content,.booking-sheet) { width: 100%; max-width: none; margin: 0; box-shadow: none; }
+.site-popup .booking-experience { display: block; position: static; }
+.site-popup .booking-experience > :is(.login-backdrop,.login-scrim) { display: none; }
+.site-popup .booking-sheet { padding: 0; border: 0; }
+.site-popup .login-sheet-top { height: 44px; margin: 0 0 8px; }
+.site-popup .login-sheet-top .login-sheet-close { display: grid; place-items: center; width: 44px; height: 44px; top: 0; right: 0; font-size: 26px; text-decoration: none; }
+.site-popup .journey-frame { border: 0; padding: 0; }
+.site-popup .ap-subpage { padding: 0; }
+.site-popup .booking-option { min-width: 0; gap: 14px; }
+.site-popup :is(input,textarea,select) { max-width: 100%; }
+@media(max-width:600px) {
+ .site-popup { width: calc(100% - 20px); max-height: calc(100dvh - 24px); border-radius: 10px; }
+ .site-popup-heading { padding: 14px 16px; }
+ .site-popup-heading h2 { font-size: 22px; }
+ .site-popup-body { padding: 18px 16px; }
+ .site-popup .help-grid-two { grid-template-columns: minmax(0,1fr); }
+}
+.site-popup .booking-experience > .login-landing { display:none; }
+.site-popup .site-popup-body > .booking-experience { position:relative; inset:auto; display:block; }
+/* Respect explicit phone mode even when its preview is opened on a wide laptop. */
+body:has(.app-shell.device-mobile-shell) .site-popup { width:min(420px,calc(100% - 20px)); max-height:calc(100dvh - 24px); }
+body:has(.app-shell.device-mobile-shell) .site-popup-heading { padding:14px 16px; }
+body:has(.app-shell.device-mobile-shell) .site-popup-heading h2 { font-size:22px; }
+body:has(.app-shell.device-mobile-shell) .site-popup-body { padding:18px 16px; }
+body:has(.app-shell.device-mobile-shell) .site-popup :is(.help-grid-two,.ap-settings-grid) { grid-template-columns:minmax(0,1fr); }
+body:has(.app-shell.device-mobile-shell) .site-popup .booking-option { grid-template-columns:32px minmax(0,1fr) 18px; gap:10px; padding:14px 10px; }
+body:has(.app-shell.device-mobile-shell) .site-popup .booking-option strong { font-size:17px; }
+body:has(.app-shell.device-mobile-shell) .site-popup .booking-option small { font-size:14px; }
+body:has(.app-shell.device-mobile-shell) .site-popup h1 { font-size:26px; }
+.site-popup .booking-sheet { display:flex; flex-direction:column; }
+.site-popup .login-sheet-top { display:none !important; }

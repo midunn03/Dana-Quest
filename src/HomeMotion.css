@@ -1,0 +1,39 @@
+.pixel-home .home-motion {
+  --illos-accent: #227a61;
+  --illos-ground: #fbf6e9;
+  --illos-ink: #203b31;
+  --illos-if-surface: #f5efdf;
+  --illos-if-raised: #fffdf6;
+  --illos-if-line: #d1d6c4;
+  --illos-if-bar: #cbd6bf;
+  --illos-if-muted: #6d7c68;
+  width: 100%;
+  aspect-ratio: 720 / 460;
+  overflow: hidden;
+  pointer-events: none;
+}
+.pixel-home .home-motion svg { display: block; width: 100%; height: auto; }
+.pixel-home .home-steps .home-motion { grid-column: 1 / -1; margin: 0 0 18px; border-radius: 16px; background: #fbf6e9; }
+.pixel-home .home-faq-motion { max-width: 340px; margin-top: 26px; }
+.pixel-home .home-motion[data-motion="static"] svg * { animation: none !important; }
+.pixel-home .home-button { transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease; }
+.pixel-home .home-button > span { display: inline-block; transition: transform 160ms ease; }
+.pixel-home .home-button:active { transform: translateY(2px) scale(.98); }
+.pixel-home .home-quest-art > svg { transition: transform 250ms cubic-bezier(.23,1,.32,1); }
+.pixel-home .home-language button { transition: background-color 160ms ease, color 160ms ease; }
+.pixel-home .home-header nav button { transition: color 160ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .pixel-home .home-button:hover > span { transform: translate(2px,-2px); }
+  .pixel-home .home-quest-card:hover .home-quest-art > svg { transform: scale(1.025); }
+}
+@media (max-width: 600px) {
+  .pixel-home .home-steps .home-motion { max-width: 300px; margin: 0 auto 18px; }
+  .pixel-home .home-faq-motion { max-width: 280px; margin: 20px auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pixel-home .home-motion svg * { animation: none !important; }
+  .pixel-home .home-button, .pixel-home .home-button > span, .pixel-home .home-quest-art > svg,
+  .pixel-home .home-language button, .pixel-home .home-header nav button { transition: none; }
+  .pixel-home .home-button:active, .pixel-home .home-button:hover > span,
+  .pixel-home .home-quest-card:hover .home-quest-art > svg { transform: none; }
+}

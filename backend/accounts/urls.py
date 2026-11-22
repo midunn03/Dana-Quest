@@ -17,4 +17,8 @@ urlpatterns = [
     path('quest-runs', quest_views.quest_runs),
     path('quest-codes', quest_views.quest_codes),
     path('quest-codes/redeem', quest_views.redeem_code),
+    path('groups/my', game_views.my_groups),
+    path('groups/create', game_views.create_group),
+    path('groups/join', game_views.join_group),
+    path('groups/leave', game_views.leave_group),
 ]

@@ -6,6 +6,7 @@ import { t, interpolate } from '../i18n/locale'
 
 const STORAGE_KEY = 'dana_claimed_eco_transit_v2'
 const LEGACY_STORAGE_KEY = 'dana_claimed_eco_transit'
+const storageKey = () => {const owner=getSyncAccountId();return owner?`${STORAGE_KEY}:${owner}`:STORAGE_KEY}
 
 export interface NearbyTransitResult {
   station: GreenTransitStation
@@ -41,10 +42,10 @@ interface StoredClaimRecord {
 
 function readStoredClaims(): StoredClaimRecord[] {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(storageKey())
     if (raw) {
       const parsed = JSON.parse(raw)
-      if (Array.isArray(parsed)) return parsed
+      if (Array.isArray(parsed)) return parsed.filter(record=>record&&typeof record.stationId==='string'&&typeof record.dateKey==='string')
     }
   } catch {}
   return []
@@ -52,7 +53,7 @@ function readStoredClaims(): StoredClaimRecord[] {
 
 function writeStoredClaims(claims: StoredClaimRecord[]) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(claims))
+    localStorage.setItem(storageKey(), JSON.stringify(claims))
   } catch {}
 }
 
@@ -94,7 +95,7 @@ export async function claimTransitReward(
     return { success: false, code: 'NO_GPS', message: msg }
   }
 
-  if (sample.accuracy > 50) {
+  if (!Number.isFinite(sample.accuracy) || sample.accuracy <= 0 || sample.accuracy > 50) {
     const msg = interpolate('Độ chính xác GPS (${0}m) chưa đủ (cần ≤ 50m).', [Math.round(sample.accuracy)])
     window.dispatchEvent(new CustomEvent('dana-toast', { detail: msg }))
     return { success: false, code: 'ACCURACY_TOO_LOW', message: msg }
@@ -147,6 +148,7 @@ export async function claimTransitReward(
     }
 
     const payload = await response.json()
+    if(getSyncAccountId()!==owner)return {success:false,code:'OWNER_CHANGED',message:t('Tài khoản đã thay đổi. Hãy tải lại trang.')}
     if (!response.ok) {
       const msg = payload.message || payload.error || t('Chưa nhận được thưởng di chuyển xanh.')
       window.dispatchEvent(new CustomEvent('dana-toast', { detail: msg }))

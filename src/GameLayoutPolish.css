@@ -1,0 +1,4746 @@
+/* Natural document flow: avoid narrow independently scrolling action columns. */
+.app-shell:not(.home-shell) > main.due-start { overflow-y:auto; }
+.app-shell .due-start .due-start-surface { display:flex; flex-direction:column; flex:0 0 auto; min-height:100%; width:100%; max-width:1360px; margin-inline:auto; padding:0 clamp(14px,2vw,24px) 16px; gap:0; }
+.app-shell .due-start .due-start-top { padding:8px 0; width:100%; }
+.app-shell .due-start .due-start-scroll { display:block; flex:none; overflow:visible; padding:0; }
+.app-shell .due-start .due-start-heading { width:100%; padding:0; margin:0 0 12px; }
+.app-shell .due-start .due-quest-name { margin:0 0 4px; }
+.app-shell .due-start h1 { margin:0; line-height:1.25; font-size:26px; }
+.app-shell .due-start .due-start-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,360px); align-items:start; gap:18px; width:100%; }
+.app-shell .due-start :is(.due-start-main,.due-start-side) { grid-column:auto; grid-row:auto; min-width:0; overflow:visible; padding:0; }
+.app-shell .due-start .due-distance { padding:10px 14px; gap:10px; border-radius:8px; }
+.app-shell .due-start .due-distance > span { width:36px; height:36px; border-radius:6px; }
+.app-shell .due-start .due-distance strong { font-size:19px; }
+.app-shell .due-start .due-view-tabs { margin:10px 0; border-radius:8px; }
+.app-shell .due-start .due-view-tabs button { padding:6px 14px; min-height:38px; border-radius:6px; }
+.app-shell .due-start .due-before { padding:0 16px; border-radius:8px; }
+.app-shell .due-start .due-before ul { gap:8px; padding-bottom:14px; }
+.app-shell .due-start .due-location-controls { margin-top:12px; }
+.app-shell .due-start .due-start-actions { display:flex; flex-wrap:wrap; flex:none; align-items:stretch; justify-content:stretch; gap:12px; width:100%; max-width:none; height:auto; min-height:0; overflow:visible; margin:16px 0 0; padding:12px 16px; border:1.5px solid #a5cad2; border-radius:8px; background:#fffef8e6; }
+.app-shell .due-start .due-start-actions > :is(a,button) { flex:1 1 240px; height:auto; min-height:46px; padding:10px 16px; line-height:1.4; }
+.app-shell .due-start .due-start-actions > .q-error { flex-basis:100%; }
+.app-shell .due-start .due-artwork-button .quest-cover > :is(img,.landmark-art),.app-shell .due-start .due-artwork-button .q-due-photo img { width:100%; height:clamp(220px,34dvh,350px); object-fit:cover; }
+.app-shell .due-start .due-address { padding:12px 14px; font-size:15px; border-top:1.5px solid #c5dfe3; background:#fffef9; }
+.app-shell .due-start .due-address > div { flex:1; min-width:0; overflow-wrap:anywhere; }
+.app-shell .due-start .due-address button { width:38px; height:38px; border:1.5px solid #8bbecb; border-radius:6px; background:#eef9f4; color:#185545; }
+
+/* Compact map helper, with every link and the existing collapse control retained. */
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay { width:280px; max-width:calc(100% - 32px); padding:12px; margin:0; max-height:calc(100% - 145px); overflow:auto; }
+.app-shell .atlas-results-layout .start-hub-overlay .start-hub-header { flex-wrap:nowrap; align-items:flex-start; gap:6px; margin-bottom:8px; }
+.app-shell .atlas-results-layout .start-hub-overlay .start-hub-badge { font-size:11px; line-height:1.4; padding:4px 6px; letter-spacing:0; }
+.app-shell .atlas-results-layout .start-hub-overlay .start-hub-toggle { flex:0 0 32px; min-height:32px; padding:4px; }
+.app-shell .atlas-results-layout .start-hub-overlay .start-hub-title { font-size:20px; line-height:1.3; margin:0 0 6px; }
+.app-shell .atlas-results-layout .start-hub-overlay :is(.start-hub-summary,.start-hub-description) { font-size:14px; line-height:1.5; margin:8px 0 12px; }
+.app-shell .atlas-results-layout .start-hub-overlay :is(.start-hub-meta-tag,.start-hub-distance) { font-size:12px; }
+.app-shell .atlas-results-layout .start-hub-overlay .start-hub-actions { display:flex; flex-direction:row; flex-wrap:wrap; gap:8px; }
+.app-shell .atlas-results-layout .start-hub-overlay :is(.start-hub-primary-btn,.start-hub-secondary-btn) { width:auto; min-height:40px; padding:8px 10px; font-size:14px; }
+.app-shell .atlas-results-layout .start-hub-overlay .start-hub-help-link { min-height:28px; font-size:13px; margin:0; }
+.app-shell .atlas-results-layout .start-hub-overlay.is-collapsed .start-hub-header { margin:0; }
+
+/* Reading layouts: readable line lengths and actions allowed to grow with text. */
+.app-shell .qd-page .qd-layout { gap:24px; padding:24px; align-items:start; }
+.app-shell .qd-page .qd-content { min-width:0; }
+.app-shell .qd-page .qd-content > h1 { margin-top:0; margin-bottom:16px; }
+.app-shell .qd-page .qd-section { margin:24px 0; }
+.app-shell .qd-page .qd-play-panel { padding:20px; gap:14px; border-width:2px; }
+@media(min-width:900px) {
+ .app-shell:not(.device-mobile-shell) .qd-page .qd-hero { margin-top:10px; }
+ .app-shell:not(.device-mobile-shell) .qd-page .qd-hero :is(.quest-cover>img,.quest-cover>.landmark-art,.q-artwork svg,.q-due-photo img) { height:clamp(240px,32dvh,320px); }
+}
+.app-shell .quest-player.due-player .q-play-layout { max-width:1320px; gap:20px; padding:16px 20px; }
+.app-shell .quest-player.due-player .quest-journey-rail { width:250px; padding:18px; }
+.app-shell .quest-player.due-player .quest-journey-rail h2 { font-size:23px; line-height:1.35; margin:10px 0 18px; }
+.app-shell .quest-player.due-player .q-center { flex:1; min-width:0; }
+.app-shell .quest-player.due-player .q-scroll { padding:22px clamp(18px,3vw,36px); }
+.app-shell .quest-player.due-player h1 { margin:6px 0 18px; line-height:1.35; }
+.app-shell .quest-player.due-player :is(.q-story,.q-instruction) { line-height:1.7; margin-bottom:20px; }
+.app-shell .quest-player.due-player .due-story-art { width:100%; margin:0 0 20px; }
+.app-shell .quest-player.due-player .q-actions { flex:0 0 auto; height:auto; min-height:72px; padding:12px 20px; }
+.app-shell .quest-player.due-player .q-actions > :is(button,a) { height:auto; min-height:46px; white-space:normal; }
+
+@media(max-width:899px) {
+ .app-shell .due-start .due-start-grid { grid-template-columns:minmax(0,1fr); gap:18px; }
+ .app-shell .due-start .due-start-actions > :is(a,button) { flex:1 1 240px; }
+ .app-shell .quest-player.due-player .q-play-layout { padding:0; }
+ .app-shell .qd-page .qd-layout { padding:20px 16px; }
+}
+.app-shell.device-mobile-shell .due-start .due-start-grid { grid-template-columns:minmax(0,1fr); gap:18px; }
+.app-shell.device-mobile-shell .due-start .due-start-surface { padding:0 16px 16px; }
+.app-shell.device-mobile-shell .due-start h1 { font-size:26px; }
+.app-shell.device-mobile-shell .due-start .due-start-actions > :is(a,button) { flex:1 1 100%; }
+.app-shell.device-mobile-shell .quest-player.due-player .q-play-layout { padding:0; }
+.app-shell.device-mobile-shell .quest-player.due-player .q-scroll { padding:18px 16px 24px; }
+
+/* Unified, prominent back buttons across all non-home screens & SitePopup modals */
+:is(.app-shell:not(.home-shell),.site-popup) :is(.dq-back-btn,.due-back-btn,.due-start-top>a,.qd-back,.qd-scroll-back,.ev-back,.atlas-back,.ap-back,.ap-sub-header>a,.library-page header>a,.help-back-link,.avatar-custom-back,.route-back,.due-support-back,.journey-progress>a,.back-link,.site-popup .journey-underlink) {
+ display:inline-flex !important; align-items:center !important; justify-content:center !important; gap:6px !important;
+ width:auto !important; min-width:42px !important; height:auto !important; min-height:40px !important;
+ padding:6px 14px !important; font-size:15px !important; font-weight:700 !important; line-height:1.3 !important;
+ color:#153b55 !important; background:#fffef8 !important; border:2px solid #28796b !important; border-radius:8px !important;
+ box-shadow:0 2px 0 #28796b33 !important; text-decoration:none !important; cursor:pointer !important; white-space:nowrap !important; flex-shrink:0 !important;
+ transition:background-color .15s ease,transform .12s ease !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) :is(.dq-back-btn,.due-back-btn,.due-start-top>a,.qd-back,.qd-scroll-back,.ev-back,.atlas-back,.ap-back,.ap-sub-header>a,.library-page header>a,.help-back-link,.avatar-custom-back,.route-back,.due-support-back,.journey-progress>a,.back-link,.site-popup .journey-underlink):hover {
+ background:#dcf4e7 !important; color:#13543b !important; transform:translateY(-1px);
+}
+
+/* Compact EventsPage layout & EventDemo showcase panel */
+.app-shell:not(.home-shell) > main.events-index { padding:16px var(--px-page-gutter) 28px !important; }
+.app-shell:not(.home-shell) .events-index .ev-heading { margin-bottom:12px !important; gap:12px; flex-wrap:wrap; }
+.app-shell:not(.home-shell) .events-index .ev-heading p { margin-bottom:2px; font-size:14px; }
+.app-shell:not(.home-shell) .events-index .ev-heading h1 { font-size:clamp(24px,2.5vw,32px) !important; line-height:1.2; }
+.app-shell:not(.home-shell) .events-index .ev-heading-actions { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.app-shell:not(.home-shell) .events-index .ev-demo-trigger { min-height:42px; padding:8px 16px; font-size:15px; font-weight:800; border-radius:8px; }
+.app-shell:not(.home-shell) .events-index .ev-settings { width:42px; height:42px; border:2px solid #28796b; border-radius:8px; background:#fffef8; color:#185545; box-shadow:0 2px 0 #28796b33; }
+.app-shell:not(.home-shell) .events-index .ev-intro { padding:12px 18px !important; margin-bottom:12px !important; border:1.5px solid #a5cad2; border-radius:8px !important; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.app-shell:not(.home-shell) .events-index .ev-intro h2 { font-size:19px !important; margin-bottom:4px !important; max-width:none; }
+.app-shell:not(.home-shell) .events-index .ev-intro p { font-size:15px !important; line-height:1.45; max-width:none; }
+.app-shell:not(.home-shell) .events-index .ev-tabs { gap:8px; padding:2px 0 8px; margin-bottom:10px; }
+.app-shell:not(.home-shell) .events-index .ev-tabs button { min-height:38px; padding:6px 14px; border:1.5px solid #8bbecb; border-radius:8px; font-size:14px; font-weight:700; color:#244d64; background:#fffef8; }
+.app-shell:not(.home-shell) .events-index .ev-tabs button[aria-pressed=true] { background:#217c5b; border-color:#185e44; color:#ffffff; box-shadow:0 2px 0 #144d38; }
+.app-shell:not(.home-shell) .events-index .ev-filters { gap:10px; padding-bottom:14px; }
+.app-shell:not(.home-shell) .events-index .ev-results { margin:12px 0 10px; }
+.app-shell:not(.home-shell) .events-index .ev-demo { margin:0 0 16px; padding:16px 18px; border:2px solid #217c5b; border-radius:10px; background:#f4fbf7; box-shadow:0 6px 20px #153b551a; }
+.app-shell:not(.home-shell) .events-index .ev-demo h2 { font-size:20px; margin-bottom:4px; color:#153b55; }
+.app-shell:not(.home-shell) .events-index .ev-demo > p { font-size:14px; margin-bottom:10px; }
+.app-shell:not(.home-shell) .events-index .ev-demo-times { gap:6px; margin-bottom:10px; }
+.app-shell:not(.home-shell) .events-index .ev-demo-times button { min-height:36px; padding:6px 12px; border:1.5px solid #8bbecb; border-radius:6px; font-size:14px; font-weight:700; }
+.app-shell:not(.home-shell) .events-index .ev-demo-times button[aria-pressed=true] { background:#ffc43d; border-color:#b87f1e; color:#153b55; }
+.app-shell:not(.home-shell) .events-index .ev-demo .ev-notice { max-width:520px; border:2px solid #217c5b; border-radius:10px; box-shadow:0 8px 24px #153b5524; margin-bottom:12px; }
+
+/* Active quests section inside Quest của tôi (#/quest-cua-toi) */
+.app-shell:not(.home-shell) .discovery-active-quests { display:grid; gap:12px; margin-bottom:16px; }
+.app-shell:not(.home-shell) .discovery-active-quests > .active-mission-indicator + .start-hub { display:none; }
+
+/* Prominent leave game button inside QuestPlayPage menu */
+.app-shell:not(.home-shell) .q-menu-item.q-danger.due-quit-button {
+ background:linear-gradient(180deg, #df4c43, #bf3129) !important;
+ color:#ffffff !important;
+ border:2px solid #8f221d !important;
+ font-weight:800 !important;
+ box-shadow:0 3px 0 #7a1c17 !important;
+ border-radius:8px !important;
+ justify-content:center;
+}
+.app-shell:not(.home-shell) .q-menu-item.q-danger.due-quit-button:hover:not(:disabled) {
+ background:linear-gradient(180deg, #cc3c34, #a8251e) !important;
+ transform:translateY(-1px);
+}
+
+/* DiscoveryPage title row & prominent Map toggle */
+.app-shell:not(.home-shell) .discovery-title-row { align-items:center; gap:16px; margin-bottom:16px; }
+.app-shell:not(.home-shell) .map-toggle {
+ background:linear-gradient(180deg, #25966a, #1b7351);
+ color:#ffffff !important;
+ border:2px solid #145c40;
+ border-radius:8px;
+ padding:8px 18px;
+ min-height:44px;
+ font-size:16px;
+ font-weight:800;
+ box-shadow:0 3px 0 #114c34;
+ transition:transform .12s ease,filter .12s ease;
+}
+.app-shell:not(.home-shell) .map-toggle:hover { transform:translateY(-1px); filter:brightness(1.05); }
+
+/* Unified Account, Settings, Toggles, FAQ & Popups alignment + typography */
+.app-shell:not(.home-shell) .workspace-navigation a {
+ text-transform:none !important;
+ font-size:15px !important;
+ font-weight:700;
+ border-radius:8px;
+ padding:10px 12px;
+ color:#244d64;
+}
+.app-shell:not(.home-shell) .workspace-navigation a[aria-current] {
+ background:#dcf4e7;
+ color:#1b6e4f;
+ box-shadow:inset 3px 0 0 #217c5b;
+}
+:is(.app-shell:not(.home-shell),.site-popup) :is(.ap-page,.ap-subpage) :where(h1,h2,h3,p,label,strong,small,summary,button,a,span):not(.site-popup-heading span),
+.site-popup .site-popup-body :where(h1,h2,h3,p,label,strong,small,summary,button,a,span) {
+ text-transform:none !important;
+ letter-spacing:normal !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-sub-header {
+ display:flex !important;
+ align-items:center !important;
+ gap:14px !important;
+ width:100% !important;
+ margin:0 0 18px !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-sub-header h1 {
+ text-align:left !important;
+ font-size:24px !important;
+ font-weight:800 !important;
+ line-height:1.25 !important;
+ margin:0 !important;
+ color:#153b55 !important;
+}
+.site-popup .ap-sub-frame {
+ width:100% !important;
+ max-width:none !important;
+ margin:0 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-settings-body:has(>.ap-section) {
+ grid-template-columns:minmax(0, 1fr) !important;
+ width:100% !important;
+ max-width:820px;
+ gap:18px !important;
+}
+.site-popup .ap-settings-body:has(>.ap-section) {
+ max-width:none !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-section-title {
+ text-transform:none !important;
+ letter-spacing:0 !important;
+ font-size:16px !important;
+ font-weight:800 !important;
+ margin:0 0 8px 4px !important;
+ color:#153b55 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) :is(.ap-list,.ap-card,.ap-notice) {
+ border:1.5px solid #b5d6df !important;
+ border-radius:12px !important;
+ background:#fffef9 !important;
+ box-shadow:0 4px 14px #153b5510 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-list {
+ padding:0 18px !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-card,
+:is(.app-shell:not(.home-shell),.site-popup) .ap-notice {
+ padding:18px 20px !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-list :is(.ap-row+.ap-row,.ap-toggle-row+.ap-toggle-row) {
+ border-top:1px solid #d7eaee !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-list .ap-row {
+ min-height:58px !important;
+ padding:12px 4px !important;
+ text-transform:none !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-row-copy strong {
+ text-transform:none !important;
+ font-weight:700 !important;
+ color:#153b55 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-toggle-row {
+ padding:16px 4px !important;
+ gap:16px !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-toggle-row strong {
+ font-size:16px !important;
+ font-weight:800 !important;
+ color:#153b55 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-toggle-row small {
+ font-size:13.5px !important;
+ line-height:1.5 !important;
+ color:#4c6c7a !important;
+ margin-top:4px !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-toggle-row input[type="checkbox"] {
+ appearance:none !important;
+ width:50px !important;
+ height:28px !important;
+ min-height:28px !important;
+ border-radius:999px !important;
+ background:#cadde3 !important;
+ border:2px solid #7aa3b0 !important;
+ position:relative !important;
+ flex-shrink:0 !important;
+ cursor:pointer !important;
+ transition:background-color .18s ease, border-color .18s ease !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-toggle-row input[type="checkbox"]::after {
+ content:'' !important;
+ position:absolute !important;
+ top:2px !important;
+ left:2px !important;
+ width:20px !important;
+ height:20px !important;
+ border-radius:50% !important;
+ background:#ffffff !important;
+ box-shadow:0 2px 5px #153b5545 !important;
+ transition:transform .18s ease !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-toggle-row input[type="checkbox"]:checked {
+ background:#217c5b !important;
+ border-color:#155e43 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-toggle-row input[type="checkbox"]:checked::after {
+ left:2px !important;
+ transform:translateX(22px) !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-faq > h2 {
+ font-size:20px !important;
+ font-weight:800 !important;
+ margin-bottom:12px !important;
+ color:#153b55 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-faq > label {
+ font-size:14px !important;
+ font-weight:700 !important;
+ color:#2b5d6e !important;
+ margin-bottom:14px !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-faq input[type="search"] {
+ min-height:42px !important;
+ padding:6px 14px !important;
+ border:1.5px solid #8bbecb !important;
+ border-radius:10px !important;
+ background:#fffef8 !important;
+ font-size:15px !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-faq details {
+ padding:10px 14px !important;
+ margin-top:10px !important;
+ border:1px solid #cde4ea !important;
+ border-radius:10px !important;
+ background:#f4fbf8 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-faq summary {
+ font-size:16px !important;
+ font-weight:800 !important;
+ color:#153b55 !important;
+ line-height:1.45 !important;
+ padding:4px 0 !important;
+}
+:is(.app-shell:not(.home-shell),.site-popup) .ap-faq details p {
+ padding-top:8px !important;
+ font-size:14.5px !important;
+ line-height:1.6 !important;
+ color:#365768 !important;
+}
+.site-popup .help-page {
+ padding:0 !important;
+ max-width:none !important;
+}
+.site-popup .help-header {
+ margin-bottom:16px !important;
+ padding-bottom:12px !important;
+ border-bottom:1.5px solid #cde4ea !important;
+}
+.site-popup .help-card,
+.site-popup .journey-frame {
+ border:1.5px solid #b5d6df !important;
+ border-radius:12px !important;
+ background:#fffef9 !important;
+ box-shadow:0 4px 14px #153b5510 !important;
+}
+.site-popup .help-card.safety-card {
+ background:#fffbeb !important;
+ border-left:5px solid #d97706 !important;
+}
+.site-popup .help-badge {
+ border-radius:6px !important;
+ border-color:#8bbecb !important;
+}
+.site-popup .help-cta-btn,
+.site-popup .help-start-play-btn {
+ border-radius:8px !important;
+ border:2px solid #c98e27 !important;
+ background:linear-gradient(180deg, #ffe07d, #ffc43d) !important;
+ color:#153b55 !important;
+ box-shadow:inset 0 2px 0 #fff4c4, 0 3px 0 #b07a22 !important;
+}
+.site-popup .help-cta-btn.secondary {
+ background:#eef9f4 !important;
+ border-color:#28796b !important;
+ color:#185545 !important;
+ box-shadow:none !important;
+}
+.site-popup :is(.booking-option,.booking-code-form input,.journey-notice) {
+ border-radius:10px !important;
+ border-color:#9ec2cc !important;
+}
+.site-popup .booking-code-form input {
+ padding:10px 14px !important;
+ min-height:46px !important;
+ background:#fffef8 !important;
+}
+.confirm-dialog {
+ width:min(100%, 430px) !important;
+ padding:26px 24px !important;
+}
+.q-dialog :is(.q-menu-item,.q-secondary) {
+ border-radius:10px !important;
+}
+.app-shell:not(.home-shell) .ap-row.danger,
+.app-shell:not(.home-shell) .ap-row.danger .ap-row-icon { color:#b8322c !important; }
+
+/* AlbumPage user memory gallery & upload */
+.app-shell:not(.home-shell) .library-memories {
+ margin-bottom:22px;
+ padding:18px;
+ background:#fffef8f2;
+ border:2px solid #a5cad2;
+ border-radius:8px;
+ box-shadow:0 4px 14px #224c6310;
+}
+.app-shell:not(.home-shell) .library-memories-head h2 { margin:0 0 4px; font-size:20px; color:#153b55; }
+.app-shell:not(.home-shell) .library-memories-head p { margin:0 0 12px; font-size:14px; color:#506b7c; }
+.app-shell:not(.home-shell) .library-upload-bar {
+ display:grid;
+ grid-template-columns:minmax(180px, 1fr) minmax(180px, 1.4fr) auto;
+ gap:10px;
+ align-items:center;
+}
+.app-shell:not(.home-shell) .library-upload-bar.library-upload-bar--single {
+ grid-template-columns:minmax(180px, 1fr) auto;
+}
+.app-shell:not(.home-shell) .library-upload-bar :is(select,input) {
+ min-height:42px !important;
+ padding:6px 12px;
+ font-size:15px !important;
+}
+.app-shell:not(.home-shell) .library-upload-btn {
+ position:relative;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ gap:8px;
+ min-height:42px;
+ padding:8px 16px;
+ border-radius:8px;
+ background:linear-gradient(180deg, #ffe07d, #ffc43d);
+ border:2px solid #c98e27;
+ color:#153b55;
+ font-size:15px;
+ font-weight:800;
+ box-shadow:inset 0 2px 0 #fff4c4, 0 3px 0 #b07a22;
+ cursor:pointer;
+ white-space:nowrap;
+}
+.app-shell:not(.home-shell) .library-upload-btn input {
+ position:absolute;
+ inset:0;
+ opacity:0;
+ width:100%;
+ height:100%;
+ cursor:pointer;
+}
+.app-shell:not(.home-shell) .library-memory-error { margin:10px 0 0; color:#b8322c; font-size:14px; font-weight:700; }
+.app-shell:not(.home-shell) .library-memory-empty { margin:14px 0 0; font-size:14px; color:#506b7c; }
+.app-shell:not(.home-shell) .library-memory-grid {
+ display:grid;
+ grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+ gap:14px;
+ margin-top:16px;
+}
+.app-shell:not(.home-shell) .library-memory-card {
+ display:flex;
+ flex-direction:column;
+ overflow:hidden;
+ background:#fffef8;
+ border:2px solid #a5cad2;
+ border-radius:8px;
+ box-shadow:0 3px 10px #153b5514;
+}
+.app-shell:not(.home-shell) .library-memory-card img {
+ width:100%;
+ aspect-ratio:4/3;
+ object-fit:cover;
+ display:block;
+}
+.app-shell:not(.home-shell) .library-memory-body {
+ display:flex;
+ flex-direction:column;
+ gap:4px;
+ padding:12px;
+ flex:1;
+}
+.app-shell:not(.home-shell) .library-memory-body strong { font-size:15px; color:#153b55; }
+.app-shell:not(.home-shell) .library-memory-body p { margin:0; font-size:14px; color:#244d64; }
+.app-shell:not(.home-shell) .library-memory-body small { font-size:12px; color:#506b7c; }
+.app-shell:not(.home-shell) .library-memory-actions {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ margin-top:auto;
+ padding-top:8px;
+}
+.app-shell:not(.home-shell) .library-memory-actions a,
+.app-shell:not(.home-shell) .library-memory-actions button {
+ min-height:34px;
+ padding:4px 10px;
+ border-radius:6px;
+ font-size:13px;
+ font-weight:700;
+ text-decoration:none;
+ cursor:pointer;
+}
+.app-shell:not(.home-shell) .library-memory-actions a {
+ background:#eef9f4;
+ border:1.5px solid #28796b;
+ color:#185545;
+ display:inline-flex;
+ align-items:center;
+}
+.app-shell:not(.home-shell) .library-memory-actions button {
+ background:#fff5f5;
+ border:1.5px solid #d46b66;
+ color:#b8322c;
+}
+@media(max-width:767px) {
+ .app-shell:not(.home-shell) .library-upload-bar { grid-template-columns:minmax(0, 1fr); }
+}
+
+/* Journey card PNG preview inside QuestPlayPage dialog */
+.app-shell:not(.home-shell) .q-dialog:has(.due-journey-card-preview) {
+ width:min(100%, 680px);
+}
+.app-shell:not(.home-shell) .due-journey-card-preview {
+ display:block;
+ width:100%;
+ height:auto;
+ margin-bottom:14px;
+ border:2px solid #153b55;
+ border-radius:12px;
+ box-shadow:0 8px 24px #153b5530;
+}
+
+/* Album button cards & detail upload bar */
+.app-shell:not(.home-shell) .library-album-card {
+ width:100%;
+ padding:0;
+ text-align:left;
+ font:inherit;
+ cursor:pointer;
+}
+.app-shell:not(.home-shell) .library-album-card:hover {
+ border-color:#28796b;
+ transform:translateY(-2px);
+}
+.app-shell:not(.home-shell) .library-album-count {
+ display:inline-block;
+ margin-top:4px;
+ color:#217c5b !important;
+ font-weight:700;
+}
+.app-shell:not(.home-shell) .library-upload-bar--single {
+ grid-template-columns:minmax(220px, 1fr) auto;
+}
+
+/* 1. Keep Home header untouched; sync Home bottom nav to match internal pages + prominent "Quest của bạn" CTA */
+.app-shell.home-shell > .quest-main-nav {
+ --px-nav-height:54px;
+ flex:0 0 54px !important;
+ height:54px !important;
+ min-height:54px !important;
+ padding:4px clamp(14px, 2.5vw, 32px) calc(4px + env(safe-area-inset-bottom,0px)) !important;
+ background:#f0fafff2 !important;
+ border-top:2px solid #aacdd3 !important;
+ border-bottom:0 !important;
+}
+.app-shell.home-shell > .quest-main-nav a {
+ font-family:'Dana Home Sans', 'Segoe UI', system-ui, sans-serif !important;
+ font-size:15px !important;
+ font-weight:700 !important;
+ line-height:1.25 !important;
+ min-height:42px !important;
+ color:#244d64 !important;
+ border-radius:8px;
+}
+.app-shell.home-shell > .quest-main-nav a:hover {
+ background:#d7eee6 !important;
+}
+.app-shell.home-shell .home-return-actions {
+ display:flex;
+ flex-wrap:wrap;
+ align-items:stretch;
+ justify-content:center;
+ gap:12px;
+ margin-top:18px;
+ width:100%;
+}
+.app-shell.home-shell .home-return-actions > a {
+ flex:1 1 150px;
+ min-height:48px;
+ margin:0 !important;
+}
+.app-shell.home-shell .home-return-actions > a[href="#/quest-cua-toi"] {
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ padding:10px 18px;
+ border-radius:10px;
+ background:#eef9f4;
+ border:2px solid #28796b;
+ color:#185545;
+ font-size:16px;
+ font-weight:700;
+ text-decoration:none;
+ transition:background-color .15s ease,transform .12s ease;
+}
+.app-shell.home-shell .home-return-actions > a[href="#/quest-cua-toi"]:hover {
+ background:#dcf4e7;
+ transform:translateY(-1px);
+}
+
+/* 4. Unified search inputs across Map, Discovery & Events */
+.app-shell:not(.home-shell) :is(.atlas-search,.discovery-search) {
+ display:flex;
+ align-items:center;
+ gap:8px;
+ min-height:40px !important;
+ height:40px;
+ padding:0 12px !important;
+ background:#fffef9 !important;
+ border:1.5px solid #8bbecb !important;
+ border-radius:10px !important;
+ box-shadow:0 1px 4px #153b550d;
+}
+.app-shell:not(.home-shell) :is(.atlas-search,.discovery-search):focus-within {
+ border-color:#2289b5 !important;
+ box-shadow:0 0 0 3px #2289b526;
+}
+.app-shell:not(.home-shell) :is(.atlas-search,.discovery-search) input {
+ min-height:36px !important;
+ height:36px;
+ padding:4px 0 !important;
+ border:0 !important;
+ background:transparent !important;
+ font-size:15px !important;
+ outline:none;
+}
+.app-shell:not(.home-shell) .events-index .ev-search input {
+ min-height:40px !important;
+ height:40px;
+ padding:6px 12px !important;
+ background:#fffef9 !important;
+ border:1.5px solid #8bbecb !important;
+ border-radius:10px !important;
+ font-size:15px !important;
+}
+
+/* 5. Compact 4-column Discovery cards on desktop with full-bleed cover images & uniform card height */
+@media (min-width: 1080px) {
+ .app-shell:not(.home-shell) .discovery-grid.quest-cover-grid {
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:16px !important;
+ }
+}
+.app-shell:not(.home-shell) .discovery-card {
+ display:flex !important;
+ flex-direction:column !important;
+ height:100%;
+ border-radius:14px !important;
+ overflow:hidden;
+ border:1.5px solid #b5d6df !important;
+ box-shadow:0 6px 18px #153b5514 !important;
+ transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.app-shell:not(.home-shell) .discovery-card:hover {
+ transform:translateY(-3px);
+ border-color:#217c5b !important;
+ box-shadow:0 12px 26px #153b5524 !important;
+}
+.app-shell:not(.home-shell) :is(.quest-cover-card__cover,.quest-cover,.discovery-card-image) {
+ width:100% !important;
+ display:block;
+}
+.app-shell:not(.home-shell) .discovery-card-image {
+ width:100% !important;
+ height:158px !important;
+ max-height:none !important;
+ aspect-ratio:auto !important;
+ overflow:hidden;
+ background:#dceef4;
+}
+.app-shell:not(.home-shell) .discovery-card-image > :is(img, svg) {
+ width:100% !important;
+ height:100% !important;
+ aspect-ratio:auto !important;
+ object-fit:cover !important;
+ display:block !important;
+}
+.app-shell:not(.home-shell) .discovery-card-body {
+ display:flex !important;
+ flex-direction:column !important;
+ flex:1 1 auto;
+ gap:7px;
+ padding:14px 15px !important;
+}
+.app-shell:not(.home-shell) .discovery-card .card-top-row {
+ align-items:center;
+ gap:6px;
+ min-height:24px;
+ margin-bottom:0;
+}
+.app-shell:not(.home-shell) .discovery-card .card-location {
+ font-size:12px;
+ font-weight:700;
+ color:#2b5d6e;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+ min-width:0;
+}
+.app-shell:not(.home-shell) .discovery-card .game-mode-badge {
+ border-radius:6px;
+ border-color:#8bbecb;
+ font-size:10.5px;
+ padding:2px 7px;
+ flex-shrink:0;
+}
+.app-shell:not(.home-shell) .discovery-card h3 {
+ display:-webkit-box;
+ -webkit-box-orient:vertical;
+ -webkit-line-clamp:2;
+ overflow:hidden;
+ min-height:2.6em;
+ font-size:16.5px !important;
+ font-weight:800 !important;
+ line-height:1.3 !important;
+ color:#153b55;
+ margin:2px 0 0 !important;
+}
+.app-shell:not(.home-shell) .discovery-card p.discovery-card-teaser {
+ display:-webkit-box;
+ -webkit-box-orient:vertical;
+ -webkit-line-clamp:3;
+ overflow:hidden;
+ min-height:4.35em;
+ font-size:13.5px !important;
+ line-height:1.45 !important;
+ color:#365768 !important;
+ margin:0 !important;
+}
+
+/* 8. Prominent action buttons & interactive links */
+.app-shell:not(.home-shell) .discovery-utilities a {
+ border-radius:8px;
+ background:#eef9f4;
+ border:1.5px solid #28796b;
+ color:#185545;
+ font-weight:700;
+ transition:background-color .15s ease,transform .12s ease;
+}
+.app-shell:not(.home-shell) .discovery-utilities a:hover {
+ background:#dcf4e7;
+ transform:translateY(-1px);
+}
+.app-shell:not(.home-shell) .discovery-filter-btn {
+ border-radius:8px;
+ border:1.5px solid #8bbecb;
+ background:#fffef8;
+ color:#153b55;
+ font-weight:700;
+ box-shadow:0 2px 0 #153b551a;
+}
+.app-shell:not(.home-shell) .discovery-filter-btn.is-active {
+ background:#217c5b;
+ border-color:#185e44;
+ color:#ffffff;
+ box-shadow:0 2px 0 #144d38;
+}
+.app-shell:not(.home-shell) .reward-card > button:not(:disabled) {
+ background:linear-gradient(180deg, #ffe07d, #ffc43d);
+ border:2px solid #c98e27;
+ color:#153b55;
+ font-weight:800;
+ border-radius:8px;
+ box-shadow:inset 0 2px 0 #fff4c4, 0 3px 0 #b07a22;
+ padding:8px 18px;
+ min-height:42px;
+ cursor:pointer;
+}
+.app-shell:not(.home-shell) .reward-card > button:not(:disabled):hover {
+ filter:brightness(1.03);
+ transform:translateY(-1px);
+}
+.app-shell:not(.home-shell) .ap-quick-links a {
+ border-radius:8px;
+ border:1.5px solid #8bbecb;
+ background:#fffef8;
+ font-weight:700;
+ transition:background-color .15s ease,border-color .15s ease;
+}
+.app-shell:not(.home-shell) .ap-quick-links a:hover {
+ background:#dcf4e7;
+ border-color:#28796b;
+}
+.app-shell:not(.home-shell) .discovery-card .card-bottom {
+ margin-top:auto !important;
+ padding-top:10px;
+ border-top:1px solid #d7eaee;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ color:#1b7351;
+ font-size:12.5px;
+ font-weight:700;
+}
+.app-shell:not(.home-shell) .discovery-card .card-meta {
+ color:#486c7a;
+ font-weight:700;
+}
+.app-shell:not(.home-shell) .discovery-card .quest-status {
+ background:#e1f6ec;
+ color:#156247;
+ border:1px solid #8fd1b5;
+ padding:3px 9px;
+ border-radius:999px;
+ font-size:11.5px;
+ font-weight:700;
+ white-space:nowrap;
+}
+
+/* 9. Unified Popup / Modal / Dialog / Exit Card styling across the whole app */
+:is(.confirm-dialog,.q-dialog,.coach-marks-card,.ev-notice,.device-mode-card,.due-exit-card) {
+ font-family:'Dana Home Sans', 'Segoe UI', system-ui, sans-serif !important;
+ background:#fffef8f8 !important;
+ color:#153b55 !important;
+ border:2px solid #8bbecb !important;
+ border-radius:14px !important;
+ box-shadow:0 18px 48px #153b5530 !important;
+}
+:is(.confirm-dialog,.q-dialog,.coach-marks-card,.ev-notice,.device-mode-card,.due-exit-card) :where(h1,h2,h3,p,button,a,label,span,small,summary,strong) {
+ font-family:'Dana Home Sans', 'Segoe UI', system-ui, sans-serif !important;
+ text-transform:none !important;
+}
+.confirm-backdrop, .coach-marks-overlay, .device-mode-backdrop {
+ background:#12384b80 !important;
+ backdrop-filter:blur(5px);
+}
+.confirm-dialog h2, .q-dialog h2, .coach-marks-title, .device-mode-card h2, .due-exit-card h1 {
+ font-weight:800 !important;
+ color:#153b55 !important;
+ letter-spacing:-.02em !important;
+}
+.confirm-symbol {
+ width:54px !important;
+ height:54px !important;
+ border-radius:12px !important;
+ background:linear-gradient(145deg, #dff4fb, #dcf4e7) !important;
+ border:1.5px solid #8bbecb !important;
+ color:#217c5b !important;
+}
+.confirm-symbol.danger {
+ background:#fff1f0 !important;
+ border-color:#e5a5a0 !important;
+ color:#b8322c !important;
+}
+.confirm-actions button,
+.coach-marks-prev-btn,
+.q-dialog .due-text-button,
+.due-exit .due-text-button,
+.ev-notice-actions .ev-secondary {
+ min-height:44px;
+ padding:8px 16px !important;
+ border-radius:8px !important;
+ background:#eef9f4 !important;
+ border:2px solid #28796b !important;
+ color:#185545 !important;
+ font-size:15px !important;
+ font-weight:700 !important;
+ text-decoration:none !important;
+ cursor:pointer;
+ transition:background-color .15s ease,transform .12s ease;
+}
+.confirm-actions button:hover:not(:disabled),
+.coach-marks-prev-btn:hover:not(:disabled),
+.q-dialog .due-text-button:hover:not(:disabled),
+.due-exit .due-text-button:hover:not(:disabled),
+.ev-notice-actions .ev-secondary:hover:not(:disabled) {
+ background:#dcf4e7 !important;
+ transform:translateY(-1px);
+}
+.confirm-actions .confirm-action:not(.danger),
+.coach-marks-next-btn,
+.q-dialog .q-primary,
+.q-dialog .due-purple,
+.due-exit .q-primary,
+.ev-notice-actions .ev-primary,
+.device-mode-confirm-btn {
+ min-height:44px;
+ padding:8px 18px !important;
+ border-radius:8px !important;
+ background:linear-gradient(180deg, #ffe07d, #ffc43d) !important;
+ border:2px solid #c98e27 !important;
+ color:#153b55 !important;
+ font-size:16px !important;
+ font-weight:800 !important;
+ box-shadow:inset 0 2px 0 #fff4c4, 0 3px 0 #b07a22 !important;
+ text-decoration:none !important;
+ cursor:pointer;
+}
+.confirm-actions .confirm-action.danger {
+ background:linear-gradient(180deg, #df4c43, #bf3129) !important;
+ border:2px solid #8f221d !important;
+ color:#ffffff !important;
+ font-weight:800 !important;
+ box-shadow:0 3px 0 #7a1c17 !important;
+}
+.due-exit-emblem {
+ width:60px !important;
+ height:60px !important;
+ border-radius:12px !important;
+ background:linear-gradient(180deg, #ffe07d, #ffc43d) !important;
+ border:2px solid #c98e27 !important;
+ color:#153b55 !important;
+ font-size:26px !important;
+ box-shadow:0 3px 0 #b07a22 !important;
+}
+.q-dialog header {
+ padding-bottom:12px;
+ margin-bottom:16px !important;
+ border-bottom:1.5px solid #d2e7eb;
+}
+.q-dialog header .q-icon-button,
+.ev-notice-close {
+ border-radius:8px !important;
+ border:1.5px solid #a5cad2 !important;
+ background:#fffef8 !important;
+ color:#153b55 !important;
+}
+.coach-marks-step-count {
+ border-radius:999px !important;
+ background:#dcf4e7 !important;
+ border:1.5px solid #28796b !important;
+ color:#185545 !important;
+ padding:4px 10px !important;
+}
+.coach-marks-dot {
+ border-radius:50% !important;
+ border-color:#8bbecb !important;
+}
+.coach-marks-dot.is-active {
+ background:#217c5b !important;
+ border-color:#185e44 !important;
+}
+.ev-notice {
+ border-color:#28796b !important;
+}
+.ev-notice-title {
+ font-weight:800 !important;
+ font-size:18px !important;
+ color:#153b55 !important;
+}
+
+/* 10. System Ombre Active Quest Banner ("TIẾP TỤC QUEST") */
+.app-shell:not(.home-shell) .active-mission-indicator {
+ grid-template-columns:44px minmax(0, 1fr) auto 20px !important;
+ gap:14px !important;
+ padding:14px 18px !important;
+ border:2px solid #ffd24c !important;
+ border-radius:14px !important;
+ background:linear-gradient(118deg, #123850 0%, #19626a 52%, #239268 100%) !important;
+ box-shadow:0 10px 26px #1238502e, inset 0 1px 0 #ffffff2e !important;
+ color:#ffffff !important;
+ transition:transform .15s ease, box-shadow .15s ease, filter .15s ease !important;
+}
+.app-shell:not(.home-shell) .active-mission-indicator:hover {
+ background:linear-gradient(118deg, #15425e 0%, #1e737c 52%, #28a677 100%) !important;
+ transform:translateY(-2px);
+ box-shadow:0 14px 30px #1238503d, inset 0 1px 0 #ffffff40 !important;
+}
+.app-shell:not(.home-shell) .active-mission-indicator .active-mission-icon {
+ display:grid;
+ place-items:center;
+ width:42px;
+ height:42px;
+ border-radius:10px;
+ background:linear-gradient(180deg, #ffe388, #ffc238);
+ color:#153b55;
+ font-size:19px;
+ box-shadow:0 3px 10px #00000028;
+}
+.app-shell:not(.home-shell) .active-mission-indicator .active-mission-copy strong {
+ color:#ffe27a !important;
+ font-size:12px !important;
+ font-weight:800 !important;
+ letter-spacing:.08em;
+}
+.app-shell:not(.home-shell) .active-mission-indicator .active-mission-title {
+ color:#ffffff !important;
+ font-size:17px !important;
+ font-weight:800 !important;
+ line-height:1.35 !important;
+}
+.app-shell:not(.home-shell) .active-mission-indicator small {
+ min-width:52px !important;
+ min-height:34px !important;
+ padding:4px 12px !important;
+ border-radius:999px !important;
+ background:#fff9e4 !important;
+ color:#153b55 !important;
+ border:2px solid #ffd24c !important;
+ font-size:13.5px !important;
+ font-weight:800 !important;
+ box-shadow:0 2px 8px #0000001f;
+}
+.app-shell:not(.home-shell) .active-mission-indicator .active-mission-arrow {
+ color:#ffe27a !important;
+ font-size:19px !important;
+ font-weight:800 !important;
+}
+
+/* 11. Redesigned Location Album Grid & Cards (no forced uppercase, full-bleed cover, clean badges) */
+.app-shell:not(.home-shell) .library-grid.quest-cover-grid {
+ display:grid !important;
+ grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+ gap:18px !important;
+}
+@media (max-width: 1020px) {
+ .app-shell:not(.home-shell) .library-grid.quest-cover-grid {
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+ }
+}
+@media (max-width: 640px) {
+ .app-shell:not(.home-shell) .library-grid.quest-cover-grid {
+  grid-template-columns:minmax(0, 1fr) !important;
+ }
+}
+.app-shell:not(.home-shell) .library-album-card {
+ display:flex !important;
+ flex-direction:column !important;
+ align-items:stretch !important;
+ justify-content:flex-start !important;
+ text-align:left !important;
+ padding:0 !important;
+ border:1.5px solid #b5d6df !important;
+ border-radius:14px !important;
+ overflow:hidden !important;
+ background:#fffef9 !important;
+ box-shadow:0 6px 18px #153b5514 !important;
+ text-transform:none !important;
+ transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.app-shell:not(.home-shell) .library-album-card * {
+ text-transform:none !important;
+ letter-spacing:normal !important;
+}
+.app-shell:not(.home-shell) .library-album-card:hover {
+ transform:translateY(-3px);
+ border-color:#217c5b !important;
+ box-shadow:0 12px 26px #153b5524 !important;
+}
+.app-shell:not(.home-shell) .library-album-card .quest-cover-media {
+ position:relative;
+ width:100%;
+ height:176px;
+ overflow:hidden;
+ background:#dcedf3;
+}
+.app-shell:not(.home-shell) .library-album-card .quest-cover,
+.app-shell:not(.home-shell) .library-album-card .quest-cover > :is(img, .landmark-art, svg),
+.app-shell:not(.home-shell) .library-album-card .q-artwork,
+.app-shell:not(.home-shell) .library-album-card .q-artwork img {
+ width:100% !important;
+ height:100% !important;
+ aspect-ratio:auto !important;
+ object-fit:cover !important;
+ display:block !important;
+}
+.app-shell:not(.home-shell) .library-album-card .library-status-pill {
+ position:absolute;
+ top:10px;
+ left:10px;
+ padding:4px 10px;
+ border-radius:999px;
+ font-size:12px;
+ font-weight:700;
+ line-height:1.2;
+ box-shadow:0 2px 8px #00000022;
+}
+.app-shell:not(.home-shell) .library-album-card .library-status-pill.is-done {
+ background:#dff8ec;
+ color:#145f43;
+ border:1.5px solid #48b288;
+}
+.app-shell:not(.home-shell) .library-album-card .library-status-pill.is-active {
+ background:#fff4d2;
+ color:#7c4e00;
+ border:1.5px solid #e4a92a;
+}
+.app-shell:not(.home-shell) .library-album-card .library-status-pill.is-idle {
+ background:#ffffffea;
+ color:#234e63;
+ border:1px solid #9ec2cc;
+}
+.app-shell:not(.home-shell) .library-album-card .library-count-pill {
+ position:absolute;
+ bottom:10px;
+ right:10px;
+ padding:4px 10px;
+ border-radius:999px;
+ font-size:12px;
+ font-weight:700;
+ background:#123850d9;
+ color:#ffffff;
+ backdrop-filter:blur(4px);
+}
+.app-shell:not(.home-shell) .library-album-card .quest-cover-body {
+ display:flex;
+ flex-direction:column;
+ flex:1 1 auto;
+ padding:14px 16px 14px;
+ gap:6px;
+}
+.app-shell:not(.home-shell) .library-album-card .quest-cover-body h2 {
+ margin:0 !important;
+ font-size:17px !important;
+ font-weight:800 !important;
+ line-height:1.35 !important;
+ color:#153b55;
+}
+.app-shell:not(.home-shell) .library-album-card .quest-cover-body p {
+ margin:0 !important;
+ font-size:13.5px !important;
+ line-height:1.45 !important;
+ color:#4c6c7a;
+}
+.app-shell:not(.home-shell) .library-album-footer {
+ margin-top:auto;
+ padding-top:10px;
+ border-top:1px solid #dfeef3;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ width:100%;
+ color:#1b7351;
+ font-size:13.5px;
+ font-weight:700;
+}
+.app-shell:not(.home-shell) .library-album-footer span {
+ background:transparent !important;
+ padding:0 !important;
+ color:inherit !important;
+}
+
+/* 12. Compact Coin Shop (#/cua-hang) & Consistent Sibling Pages */
+.app-shell:not(.home-shell) .shop-screen {
+ padding:18px var(--px-page-gutter) 32px !important;
+}
+.app-shell:not(.home-shell) .shop-screen .screen-heading {
+ display:flex !important;
+ align-items:center !important;
+ gap:16px !important;
+ margin-bottom:14px !important;
+}
+.app-shell:not(.home-shell) .shop-screen .screen-heading h1 {
+ font-size:clamp(24px, 2.3vw, 30px) !important;
+ font-weight:800 !important;
+ text-align:left !important;
+ padding:0 !important;
+ margin:0 0 2px !important;
+ line-height:1.25 !important;
+ color:#153b55 !important;
+}
+.app-shell:not(.home-shell) .shop-screen .screen-heading p {
+ font-size:14.5px !important;
+ margin:0 !important;
+ color:#4c6c7a !important;
+}
+.app-shell:not(.home-shell) .shop-screen .wallet-strip {
+ padding:12px 18px !important;
+ border:1.5px solid #8bbecb !important;
+ border-radius:12px !important;
+ margin-bottom:10px !important;
+}
+.app-shell:not(.home-shell) .shop-screen .wallet-strip strong {
+ font-size:18px !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .shop-screen .wallet-strip a {
+ display:inline-flex;
+ align-items:center;
+ padding:6px 12px;
+ border-radius:8px;
+ background:#fffef9;
+ border:1.5px solid #28796b;
+ color:#185545 !important;
+ font-size:13.5px !important;
+ font-weight:700;
+ text-decoration:none;
+}
+.app-shell:not(.home-shell) .shop-screen .wallet-strip a:hover {
+ background:#dcf4e7;
+}
+.app-shell:not(.home-shell) .shop-screen .shop-note {
+ font-size:13.5px !important;
+ margin:0 0 10px !important;
+ color:#4c6c7a !important;
+}
+.app-shell:not(.home-shell) .shop-screen .shop-categories {
+ padding:4px 0 14px !important;
+ gap:8px !important;
+}
+.app-shell:not(.home-shell) .shop-screen .shop-categories button {
+ min-height:36px !important;
+ padding:6px 13px !important;
+ border:1.5px solid #8bbecb !important;
+ border-radius:8px !important;
+ background:#fffef9 !important;
+ color:#244d64 !important;
+ font-size:13.5px !important;
+ font-weight:700 !important;
+}
+.app-shell:not(.home-shell) .shop-screen .shop-categories button[aria-pressed=true] {
+ background:#217c5b !important;
+ border-color:#185e44 !important;
+ color:#ffffff !important;
+ box-shadow:0 2px 0 #144d38;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list {
+ display:grid !important;
+ grid-template-columns:minmax(0, 1fr) !important;
+ gap:14px !important;
+}
+@media (min-width: 480px) {
+ .app-shell:not(.home-shell) .shop-screen .reward-list {
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+ }
+}
+@media (min-width: 760px) {
+ .app-shell:not(.home-shell) .shop-screen .reward-list {
+  grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+ }
+}
+@media (min-width: 1120px) {
+ .app-shell:not(.home-shell) .shop-screen .reward-list {
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+ }
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-card {
+ padding:0 0 14px !important;
+ gap:0 !important;
+ border:1.5px solid #b5d6df !important;
+ border-radius:12px !important;
+ background:#fffef9 !important;
+ box-shadow:0 5px 14px #153b5512 !important;
+ height:100%;
+ overflow:hidden;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-picture {
+ width:100% !important;
+ height:114px !important;
+ padding:10px !important;
+ display:grid;
+ place-items:center;
+ background:#e6f4ef !important;
+ border-bottom:1px solid #d5eaec;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-picture .reward-art-image,
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-picture svg {
+ max-height:92px !important;
+ max-width:112px !important;
+ width:auto !important;
+ height:auto !important;
+ object-fit:contain;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-info {
+ padding:12px 14px 8px !important;
+ display:flex;
+ flex-direction:column;
+ gap:4px;
+ flex:1 1 auto;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-info h2 {
+ font-size:16px !important;
+ font-weight:800 !important;
+ line-height:1.3 !important;
+ margin:0 !important;
+ color:#153b55 !important;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-info p {
+ font-size:12.5px !important;
+ line-height:1.4 !important;
+ margin:0 !important;
+ color:#4c6c7a !important;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-info strong {
+ font-size:14.5px !important;
+ font-weight:800 !important;
+ color:#1b7351 !important;
+ margin:4px 0 2px !important;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-card > button {
+ margin:auto 14px 0 !important;
+ min-height:38px !important;
+ padding:6px 14px !important;
+ font-size:14px !important;
+ font-weight:800 !important;
+ border-radius:8px !important;
+ text-transform:none !important;
+}
+.app-shell:not(.home-shell) .shop-screen .reward-list .reward-card > span {
+ margin:auto 14px 0 !important;
+ min-height:38px;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:8px;
+ background:#e1f6ec;
+ color:#156247;
+ border:1.5px solid #8fd1b5;
+ font-size:13.5px;
+ font-weight:700;
+}
+
+/* Sibling pages cleanup: VoucherWallet (#/tai-khoan/wallet & Shop footer), Badges, Groups, Album tabs, Events cards */
+.app-shell:not(.home-shell) .reward-history {
+ margin-top:20px !important;
+ padding-top:16px !important;
+ border-top:1.5px solid #c5dfe6 !important;
+}
+.app-shell:not(.home-shell) .reward-history .reward-card {
+ display:flex !important;
+ flex-direction:row !important;
+ align-items:center !important;
+ gap:14px !important;
+ padding:12px 14px !important;
+ border:1.5px solid #b5d6df !important;
+ border-radius:12px !important;
+ background:#fffef9 !important;
+ margin-bottom:10px;
+}
+.app-shell:not(.home-shell) .reward-history .reward-picture {
+ width:72px !important;
+ height:72px !important;
+ padding:6px !important;
+ border-radius:8px;
+ background:#e6f4ef !important;
+ display:grid;
+ place-items:center;
+ flex-shrink:0;
+}
+.app-shell:not(.home-shell) .reward-history .reward-picture .reward-art-image {
+ max-width:58px !important;
+ max-height:58px !important;
+}
+.app-shell:not(.home-shell) .reward-history .partner-available-list {
+ display:grid;
+ grid-template-columns:minmax(0, 1fr);
+ gap:12px;
+}
+@media (min-width: 820px) {
+ .app-shell:not(.home-shell) .reward-history .partner-available-list {
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+ }
+}
+.app-shell:not(.home-shell) .partner-voucher-card {
+ border-radius:12px !important;
+ padding:14px 16px !important;
+}
+.app-shell:not(.home-shell) .library-page nav button {
+ min-height:38px !important;
+ padding:6px 14px !important;
+ border:1.5px solid #8bbecb !important;
+ border-radius:8px !important;
+ background:#fffef9 !important;
+ color:#244d64 !important;
+ font-size:13.5px !important;
+ font-weight:700 !important;
+}
+.app-shell:not(.home-shell) .library-page nav button[aria-pressed=true] {
+ background:#217c5b !important;
+ border-color:#185e44 !important;
+ color:#ffffff !important;
+}
+.app-shell:not(.home-shell) :is(.badge-summary-card,.badge-theme-section,.badge-item-card,.leader-actions-card,.leader-group-card) {
+ border:1.5px solid #b5d6df !important;
+ border-radius:12px !important;
+ background:#fffef9 !important;
+ box-shadow:0 4px 14px #153b5510 !important;
+}
+.app-shell:not(.home-shell) .leader-btn {
+ border-radius:8px !important;
+ background:#217c5b !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card {
+ border:1.5px solid #b5d6df !important;
+ border-radius:14px !important;
+ background:#fffef9 !important;
+ box-shadow:0 6px 18px #153b5514 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-photo {
+ aspect-ratio:16 / 10;
+ max-height:186px;
+}
+
+/* 13. Single-screen Avatar Customization Layout on Desktop */
+@media (min-width: 900px) {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) > main.onboarding.custom-avatar-screen {
+  padding:14px clamp(16px, 2.5vw, 32px) 16px !important;
+  display:flex !important;
+  flex-direction:column;
+  justify-content:center;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-frame {
+  width:min(100%, 1340px) !important;
+  margin:0 auto !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-heading {
+  display:flex !important;
+  align-items:center !important;
+  gap:16px !important;
+  margin:0 0 12px !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-heading h1 {
+  margin:0 !important;
+  font-size:24px !important;
+  line-height:1.2 !important;
+  color:#153b55 !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-heading p {
+  margin:2px 0 0 !important;
+  font-size:14px !important;
+  color:#4c6c7a !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-grid {
+  display:grid !important;
+  grid-template-columns:270px minmax(0, 1fr) !important;
+  gap:16px !important;
+  align-items:stretch !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-preview {
+  position:static !important;
+  padding:14px 16px !important;
+  border:1.5px solid #b5d6df !important;
+  border-radius:14px !important;
+  display:flex !important;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-stage {
+  width:100%;
+  min-height:190px !important;
+  border-radius:10px !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-stage .pixel-avatar {
+  width:146px !important;
+  height:182px !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-preview h2 {
+  margin:4px 0 0 !important;
+  font-size:16px !important;
+  font-weight:800 !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-preview p {
+  margin:0 0 6px !important;
+  font-size:13px !important;
+  color:#4c6c7a !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-preview button {
+  min-height:36px !important;
+  padding:6px 14px !important;
+  border-radius:8px !important;
+  background:#eef9f4 !important;
+  border:1.5px solid #28796b !important;
+  color:#185545 !important;
+  font-size:13.5px !important;
+  font-weight:700 !important;
+  text-transform:none !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls {
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:10px 20px !important;
+  padding:16px 20px !important;
+  border:1.5px solid #b5d6df !important;
+  border-radius:14px !important;
+  align-content:start;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls .creator-row {
+  gap:5px !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls .creator-label {
+  font-size:12.5px !important;
+  font-weight:800 !important;
+  text-transform:none !important;
+  letter-spacing:normal !important;
+  color:#2b5d6e !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls .creator-chips {
+  gap:6px !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls .creator-chips button:not(.creator-swatch) {
+  min-height:33px !important;
+  min-width:34px !important;
+  padding:4px 10px !important;
+  border-radius:8px !important;
+  border:1.5px solid #9ec3cf !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  text-transform:none !important;
+  box-shadow:none !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls .creator-chips button[aria-pressed='true']:not(.creator-swatch) {
+  background:#ffe07d !important;
+  border-color:#c98e27 !important;
+  color:#153b55 !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls .creator-chips .creator-swatch {
+  width:29px !important;
+  height:29px !important;
+  min-width:29px !important;
+  min-height:29px !important;
+  border-radius:8px !important;
+  border:2px solid #9ec3cf !important;
+  box-shadow:none !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-controls .creator-chips .creator-swatch[aria-pressed='true'] {
+  border:2.5px solid #153b55 !important;
+  box-shadow:0 0 0 2px #ffc43d !important;
+  transform:scale(1.08);
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-footer {
+  margin-top:12px !important;
+  padding-bottom:0 !important;
+  display:flex !important;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:8px 18px;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-footer .journey-primary {
+  width:auto !important;
+  min-width:220px;
+  min-height:42px !important;
+  padding:8px 24px !important;
+  margin:0 !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .avatar-custom-footer > p {
+  margin:0 !important;
+  font-size:13px !important;
+  color:#4c6c7a !important;
+ }
+}
+
+/* 14. Account EXP Progress Bar matching Homepage Segmented Green Pixel Bar */
+.app-shell:not(.home-shell) .ap-xp-progress.px-progress {
+ height:26px !important;
+ background:#e4f2f4 !important;
+ border:3px solid #163b30 !important;
+ border-radius:0 !important;
+ box-shadow:none !important;
+}
+.app-shell:not(.home-shell) .ap-xp-progress .px-progress__fill {
+ background:#195e42 !important;
+}
+.app-shell:not(.home-shell) .ap-xp-progress .px-progress__cells {
+ background:repeating-linear-gradient(90deg, transparent 0, transparent 12px, #ffffff 12px, #ffffff 16px) !important;
+}
+
+/* 15. Map & Sidebar UI Redesign (#/map) */
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar {
+ background:#edf7f5 !important;
+ border-right:1.5px solid #bddae2 !important;
+ display:flex !important;
+ flex-direction:column !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar-top {
+ background:#fffef9 !important;
+ padding:12px 14px !important;
+ border-bottom:1.5px solid #cfe4ea !important;
+ display:flex !important;
+ flex-direction:column !important;
+ gap:10px !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar-header-row {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar-header-row h1 {
+ margin:0 !important;
+ font-size:18px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ letter-spacing:0 !important;
+ text-transform:none !important;
+ line-height:1.25 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar-top .atlas-back.dq-back-btn {
+ min-height:36px !important;
+ padding:5px 12px !important;
+ font-size:14px !important;
+ margin:0 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-search {
+ margin:0 !important;
+ border-radius:999px !important;
+ border:1.5px solid #a9cfd9 !important;
+ background:#f2f9f8 !important;
+ min-height:40px !important;
+ padding:0 14px !important;
+ gap:8px !important;
+ box-shadow:inset 0 1px 2px rgba(18, 56, 80, 0.05) !important;
+ transition:border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-search:focus-within {
+ background:#ffffff !important;
+ border-color:#1f7b5c !important;
+ box-shadow:0 0 0 3px rgba(31, 123, 92, 0.16) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-search > span[aria-hidden] {
+ font-size:20px !important;
+ color:#1d6b6b !important;
+ line-height:1;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-search input {
+ min-height:38px !important;
+ padding:6px 0 !important;
+ font-size:14.5px !important;
+ color:#123850 !important;
+ outline:none !important;
+ box-shadow:none !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-search input::placeholder {
+ color:#678492;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-list-heading {
+ padding:10px 14px 6px !important;
+ display:flex !important;
+ align-items:center !important;
+ justify-content:space-between !important;
+ background:transparent !important;
+ border:0 !important;
+ font-size:13px !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-list-heading strong {
+ color:#153b55 !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-list-heading span {
+ display:inline-flex;
+ align-items:center;
+ gap:4px;
+ padding:3px 10px;
+ border-radius:999px;
+ background:#dcf4e7;
+ border:1px solid #a7dac3;
+ color:#145c43;
+ font-size:12px;
+ font-weight:800;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-list {
+ padding:4px 12px 24px !important;
+ display:flex !important;
+ flex-direction:column !important;
+ gap:10px !important;
+ flex:1 1 0 !important;
+ min-height:0 !important;
+ overflow-y:auto !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-list > button {
+ flex:0 0 auto !important;
+ height:auto !important;
+ min-height:112px !important;
+ display:grid !important;
+ grid-template-columns:90px minmax(0, 1fr) !important;
+ align-items:center !important;
+ gap:12px !important;
+ width:100% !important;
+ padding:10px !important;
+ background:#fffef9 !important;
+ border:1.5px solid #cde2e8 !important;
+ border-radius:14px !important;
+ box-shadow:0 3px 10px rgba(18, 56, 80, 0.06) !important;
+ text-align:left !important;
+ transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease, background-color .16s ease !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-list > button:hover {
+ transform:translateY(-2px);
+ border-color:#238768 !important;
+ background:#ffffff !important;
+ box-shadow:0 8px 18px rgba(18, 56, 80, 0.12) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-list > button:is(.selected, [aria-pressed="true"]) {
+ background:linear-gradient(180deg, #f3fbf8 0%, #fffef9 100%) !important;
+ border:2px solid #1f7b5c !important;
+ box-shadow:0 8px 20px rgba(31, 123, 92, 0.18), inset 3px 0 0 #1f7b5c !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo {
+ flex:none !important;
+ width:90px !important;
+ height:96px !important;
+ border-radius:10px !important;
+ overflow:hidden !important;
+ border:1px solid #d0e3e9 !important;
+ background:#dceef2 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo :is(.quest-cover, .quest-cover > img, .quest-cover > .landmark-art, .q-artwork, .q-artwork svg) {
+ width:100% !important;
+ height:100% !important;
+ max-width:100% !important;
+ margin:0 !important;
+ border:0 !important;
+ border-radius:0 !important;
+ aspect-ratio:auto !important;
+ object-fit:cover !important;
+ display:block !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy {
+ display:flex !important;
+ flex-direction:column !important;
+ gap:3px !important;
+ min-width:0 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-badges {
+ display:flex;
+ flex-wrap:wrap;
+ align-items:center;
+ gap:5px;
+ margin-bottom:2px;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small.atlas-result-category {
+ display:inline-flex !important;
+ width:fit-content;
+ margin:0 !important;
+ padding:2px 8px !important;
+ border-radius:999px !important;
+ background:#e2f5ee !important;
+ border:1px solid #b5e1d1 !important;
+ color:#155c44 !important;
+ font-size:10.5px !important;
+ font-weight:800 !important;
+ line-height:1.3 !important;
+ text-transform:none !important;
+ -webkit-line-clamp:unset !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small.atlas-result-status {
+ display:inline-flex !important;
+ width:fit-content;
+ margin:0 !important;
+ padding:2px 8px !important;
+ border-radius:999px !important;
+ font-size:10.5px !important;
+ font-weight:800 !important;
+ line-height:1.3 !important;
+ -webkit-line-clamp:unset !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small.atlas-result-status.is-active {
+ background:#fff2c6 !important;
+ border:1px solid #e6bf5a !important;
+ color:#734800 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small.atlas-result-status.is-done {
+ background:#d1f3e2 !important;
+ border:1px solid #87cfa9 !important;
+ color:#0f583c !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy strong {
+ margin:0 !important;
+ color:#123850 !important;
+ font-size:14.5px !important;
+ font-weight:800 !important;
+ line-height:1.25 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small.atlas-result-quest {
+ margin:0 !important;
+ color:#1a6d5a !important;
+ font-size:12.5px !important;
+ font-weight:700 !important;
+ line-height:1.3 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small.atlas-result-address {
+ margin:0 !important;
+ color:#587584 !important;
+ font-size:11.5px !important;
+ line-height:1.35 !important;
+ display:block !important;
+ -webkit-line-clamp:unset !important;
+ overflow:hidden !important;
+ text-overflow:ellipsis !important;
+ white-space:nowrap !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-footer {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ margin-top:4px;
+ padding-top:6px;
+ border-top:1px dashed #d6e7ed;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-copy small.atlas-result-meta {
+ margin:0 !important;
+ color:#4a6b7a !important;
+ font-size:11px !important;
+ font-weight:700 !important;
+ line-height:1.2 !important;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ -webkit-line-clamp:unset !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-result-action {
+ margin:0 !important;
+ color:#176953 !important;
+ font-size:11.5px !important;
+ font-weight:800 !important;
+ white-space:nowrap !important;
+ flex-shrink:0;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-empty {
+ background:#fffef9;
+ border:1.5px dashed #a9cfd9;
+ border-radius:14px;
+ padding:20px 16px !important;
+ text-align:center;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-empty button {
+ border-radius:999px !important;
+ min-height:38px !important;
+ padding:6px 16px !important;
+ font-size:13.5px !important;
+ font-weight:800 !important;
+ background:#eef8f4 !important;
+ border:1.5px solid #1f7b5c !important;
+ color:#155c44 !important;
+}
+
+/* Desktop Sidebar Grid Density */
+@media (min-width: 768px) {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) > .atlas-results-layout {
+  grid-template-columns:minmax(344px, 396px) minmax(0, 1fr) !important;
+ }
+}
+@media (max-width: 767px) {
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-sidebar-header-row {
+  display:none !important;
+ }
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-list > button {
+  grid-template-columns:76px minmax(0, 1fr) !important;
+  padding:8px !important;
+ }
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-result-photo {
+  width:76px !important;
+  height:80px !important;
+ }
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-sidebar-header-row {
+ display:none !important;
+}
+
+/* Top Floating Filter Bar */
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-top-controls {
+ top:12px !important;
+ left:14px !important;
+ right:14px !important;
+ gap:8px !important;
+ padding:2px 2px 6px !important;
+ align-items:center !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-mode-filters {
+ display:inline-flex !important;
+ align-items:center !important;
+ gap:3px !important;
+ padding:3px !important;
+ border-radius:999px !important;
+ background:rgba(255, 254, 249, 0.95) !important;
+ backdrop-filter:blur(8px);
+ border:1.5px solid #9dc5d1 !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.16) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-mode-filters button {
+ min-height:32px !important;
+ padding:0 12px !important;
+ border-radius:999px !important;
+ border:0 !important;
+ background:transparent !important;
+ color:#234e62 !important;
+ font-size:12.5px !important;
+ font-weight:800 !important;
+ box-shadow:none !important;
+ transition:background .15s ease, color .15s ease;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-mode-filters button:hover:not([aria-pressed="true"]) {
+ background:#e6f4f0 !important;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-mode-filters button[aria-pressed="true"] {
+ background:linear-gradient(115deg, #123850 0%, #1c6b6b 100%) !important;
+ color:#ffffff !important;
+ box-shadow:0 2px 8px rgba(18, 56, 80, 0.25) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-category-filters {
+ border-left:0 !important;
+ padding-left:0 !important;
+ gap:6px !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-category-filters button {
+ min-height:36px !important;
+ padding:0 12px !important;
+ border-radius:999px !important;
+ background:rgba(255, 254, 249, 0.94) !important;
+ backdrop-filter:blur(6px);
+ border:1.5px solid #a9cfd9 !important;
+ color:#194759 !important;
+ font-size:12.5px !important;
+ font-weight:700 !important;
+ box-shadow:0 4px 12px rgba(18, 56, 80, 0.12) !important;
+ transition:background-color .15s ease, border-color .15s ease, color .15s ease, transform .12s ease;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-category-filters button:hover:not([aria-pressed="true"]) {
+ background:#e4f6ef !important;
+ border-color:#238768 !important;
+ color:#123850 !important;
+ transform:translateY(-1px);
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-category-filters button[aria-pressed="true"] {
+ background:#1f7b5c !important;
+ border-color:#155c43 !important;
+ color:#ffffff !important;
+ box-shadow:0 4px 12px rgba(31, 123, 92, 0.28) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-transit-chip {
+ min-height:36px !important;
+ padding:0 13px !important;
+ border-radius:999px !important;
+ background:rgba(241, 252, 247, 0.96) !important;
+ backdrop-filter:blur(6px);
+ border:1.5px solid #76be9f !important;
+ color:#145b42 !important;
+ font-size:12.5px !important;
+ font-weight:800 !important;
+ box-shadow:0 4px 12px rgba(18, 56, 80, 0.12) !important;
+ transition:background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-transit-chip[aria-pressed="true"] {
+ background:#157956 !important;
+ border-color:#0f583e !important;
+ color:#ffffff !important;
+ box-shadow:0 4px 14px rgba(21, 121, 86, 0.3) !important;
+}
+.app-shell.device-mobile-shell .atlas-results-layout .atlas-top-controls {
+ top:54px !important;
+}
+
+/* StartHub Floating Overlay Card */
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay {
+ top:66px !important;
+ left:14px !important;
+ width:316px !important;
+ max-width:calc(100% - 28px) !important;
+ padding:0 !important;
+ border-radius:16px !important;
+ background:rgba(255, 254, 249, 0.97) !important;
+ backdrop-filter:blur(10px);
+ border:1.5px solid #8ebdc9 !important;
+ box-shadow:0 14px 32px rgba(18, 56, 80, 0.22) !important;
+ overflow:hidden !important;
+ z-index:510 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-header {
+ background:linear-gradient(115deg, #123850 0%, #19626a 58%, #239268 100%) !important;
+ padding:9px 12px !important;
+ margin:0 !important;
+ align-items:center !important;
+ gap:8px !important;
+ border-bottom:1px solid rgba(255, 255, 255, 0.15);
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-badge {
+ background:rgba(255, 212, 76, 0.18) !important;
+ border:1px solid rgba(255, 212, 76, 0.58) !important;
+ color:#ffe285 !important;
+ border-radius:999px !important;
+ padding:3px 10px !important;
+ font-size:11px !important;
+ font-weight:800 !important;
+ text-transform:none !important;
+ letter-spacing:0 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-distance {
+ background:rgba(255, 255, 255, 0.18) !important;
+ border:1px solid rgba(255, 255, 255, 0.35) !important;
+ color:#eefcf7 !important;
+ border-radius:999px !important;
+ padding:2px 8px !important;
+ font-size:11px !important;
+ font-weight:700 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-toggle {
+ flex:0 0 28px !important;
+ width:28px !important;
+ height:28px !important;
+ min-height:28px !important;
+ padding:0 !important;
+ border-radius:8px !important;
+ background:rgba(255, 255, 255, 0.16) !important;
+ border:1px solid rgba(255, 255, 255, 0.35) !important;
+ color:#ffffff !important;
+ display:grid !important;
+ place-items:center !important;
+ font-size:11px !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-toggle:hover {
+ background:rgba(255, 255, 255, 0.28) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-body {
+ padding:12px 14px 14px !important;
+ display:flex !important;
+ flex-direction:column !important;
+ gap:10px !important;
+ max-height:calc(100vh - 280px);
+ overflow-y:auto;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-title {
+ color:#123850 !important;
+ font-size:16px !important;
+ font-weight:800 !important;
+ line-height:1.3 !important;
+ margin:0 0 4px !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-progress {
+ margin:0 !important;
+ color:#466978 !important;
+ font-size:12.5px !important;
+ line-height:1.4 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-meta-tag {
+ background:#eaf6f2 !important;
+ border:1px solid #b6dfd0 !important;
+ color:#175c45 !important;
+ border-radius:999px !important;
+ padding:2px 8px !important;
+ font-size:11px !important;
+ font-weight:700 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-summary {
+ margin:4px 0 0 !important;
+ color:#4a6b7a !important;
+ font-size:12.5px !important;
+ line-height:1.45 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-actions {
+ display:flex !important;
+ flex-wrap:wrap !important;
+ gap:8px !important;
+ margin-top:2px;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-primary-btn {
+ flex:1 1 auto !important;
+ min-height:38px !important;
+ padding:7px 14px !important;
+ border-radius:10px !important;
+ background:linear-gradient(180deg, #ffda66 0%, #ffc233 100%) !important;
+ border:1.5px solid #d1901b !important;
+ color:#123850 !important;
+ font-size:13.5px !important;
+ font-weight:800 !important;
+ box-shadow:0 3px 0 #d1901b44 !important;
+ transform:none;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-primary-btn:hover {
+ background:linear-gradient(180deg, #ffe285 0%, #ffc947 100%) !important;
+ transform:translateY(-1px);
+ box-shadow:0 4px 10px rgba(209, 144, 27, 0.28) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-secondary-btn {
+ min-height:38px !important;
+ padding:7px 12px !important;
+ border-radius:10px !important;
+ background:#eef8f4 !important;
+ border:1.5px solid #96c8b9 !important;
+ color:#155943 !important;
+ font-size:13px !important;
+ font-weight:700 !important;
+ box-shadow:none !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .start-hub-overlay .start-hub-secondary-btn:hover {
+ background:#dcf4e7 !important;
+}
+
+/* Floating Map Buttons & Leaflet Zoom */
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-city-fit-btn {
+ top:66px !important;
+ right:14px !important;
+ min-height:38px !important;
+ padding:6px 14px !important;
+ border-radius:999px !important;
+ background:rgba(255, 254, 249, 0.95) !important;
+ backdrop-filter:blur(8px);
+ border:1.5px solid #9dc5d1 !important;
+ color:#123850 !important;
+ font-size:12.5px !important;
+ font-weight:800 !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.16) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-city-fit-btn:hover {
+ background:#dcf4e7 !important;
+ border-color:#1f7b5c !important;
+ color:#12543d !important;
+ transform:translateY(-1px);
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-viewport-filter {
+ border-radius:999px !important;
+ background:rgba(255, 254, 249, 0.95) !important;
+ backdrop-filter:blur(8px);
+ border:1.5px solid #9dc5d1 !important;
+ color:#153b55 !important;
+ min-height:40px !important;
+ padding:6px 14px !important;
+ font-size:12.5px !important;
+ font-weight:700 !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.16) !important;
+ cursor:pointer;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-viewport-filter input {
+ width:16px !important;
+ height:16px !important;
+ accent-color:#1f7b5c !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-map-locate {
+ right:14px !important;
+ bottom:118px !important;
+ width:42px !important;
+ height:42px !important;
+ min-height:42px !important;
+ border-radius:50% !important;
+ background:rgba(255, 254, 249, 0.96) !important;
+ backdrop-filter:blur(8px);
+ border:1.5px solid #9dc5d1 !important;
+ color:#123850 !important;
+ font-size:20px !important;
+ display:grid !important;
+ place-items:center !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.18) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-map-locate:hover {
+ background:#dcf4e7 !important;
+ border-color:#1f7b5c !important;
+ color:#155c44 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-offscreen-chip {
+ right:68px !important;
+ bottom:20px !important;
+ max-width:calc(100% - 300px) !important;
+ border-radius:999px !important;
+ background:rgba(18, 56, 80, 0.93) !important;
+ backdrop-filter:blur(8px);
+ border:1.5px solid #6ec2a8 !important;
+ color:#fffef9 !important;
+ padding:7px 14px !important;
+ box-shadow:0 8px 20px rgba(18, 56, 80, 0.24) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .leaflet-bar {
+ border:1.5px solid #9dc5d1 !important;
+ border-radius:12px !important;
+ overflow:hidden !important;
+ background:rgba(255, 254, 249, 0.96) !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.18) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .leaflet-control-zoom a {
+ width:38px !important;
+ height:36px !important;
+ line-height:35px !important;
+ font-size:18px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ background:transparent !important;
+ border-bottom:1px solid #d5e6eb !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .leaflet-control-zoom a:last-child {
+ border-bottom:0 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .leaflet-control-zoom a:hover {
+ background:#dcf4e7 !important;
+ color:#155c44 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-map-status {
+ border-radius:12px !important;
+ border:1.5px solid #9dc5d1 !important;
+ background:rgba(255, 254, 249, 0.96) !important;
+ box-shadow:0 8px 20px rgba(18, 56, 80, 0.16) !important;
+}
+
+/* Selected Place Floating Preview Card */
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection {
+ left:14px !important;
+ bottom:16px !important;
+ width:calc(100% - 28px);
+ max-width:386px !important;
+ padding:14px !important;
+ border-radius:16px !important;
+ background:rgba(255, 254, 249, 0.98) !important;
+ backdrop-filter:blur(10px);
+ border:1.5px solid #8ebdc9 !important;
+ box-shadow:0 14px 34px rgba(18, 56, 80, 0.24) !important;
+ z-index:520 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-close {
+ top:10px !important;
+ right:10px !important;
+ width:30px !important;
+ height:30px !important;
+ border-radius:50% !important;
+ background:#eef6f8 !important;
+ border:1px solid #b5d6df !important;
+ color:#234e62 !important;
+ font-size:16px !important;
+ display:grid !important;
+ place-items:center !important;
+ padding:0 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-close:hover {
+ background:#dceef2 !important;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-head {
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding-right:32px;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-thumb {
+ width:78px;
+ height:78px;
+ flex:0 0 78px;
+ border-radius:12px;
+ overflow:hidden;
+ border:1px solid #cde2e8;
+ background:#dceef2;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-thumb :is(.quest-cover, .quest-cover > img, .quest-cover > .landmark-art, .q-artwork, .q-artwork svg) {
+ width:100% !important;
+ height:100% !important;
+ margin:0 !important;
+ border:0 !important;
+ aspect-ratio:auto !important;
+ object-fit:cover !important;
+ display:block !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-info {
+ min-width:0;
+ flex:1;
+ display:flex;
+ flex-direction:column;
+ gap:3px;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-meta {
+ display:flex;
+ flex-wrap:wrap;
+ align-items:center;
+ gap:6px;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-meta small {
+ display:inline-flex;
+ padding:2px 8px;
+ border-radius:999px;
+ background:#e2f5ee;
+ border:1px solid #b5e1d1;
+ color:#155c44;
+ font-size:11px !important;
+ font-weight:800;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-dist {
+ display:inline-flex;
+ align-items:center;
+ font-size:11.5px;
+ font-weight:800;
+ color:#123850;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection h2 {
+ margin:0 !important;
+ font-size:17px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ line-height:1.25 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-quest {
+ color:#1a6d5a !important;
+ font-size:13px !important;
+ font-weight:700 !important;
+ line-height:1.3 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-steps {
+ color:#4d6e7d;
+ font-size:11.5px;
+ font-weight:700;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-address {
+ margin:10px 0 0 !important;
+ padding-top:8px;
+ border-top:1px dashed #d6e7ed;
+ color:#557482 !important;
+ font-size:12.5px !important;
+ line-height:1.4 !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-actions {
+ display:flex;
+ align-items:center;
+ gap:8px;
+ margin-top:10px;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-link {
+ flex:1 1 auto;
+ display:inline-flex !important;
+ align-items:center !important;
+ justify-content:center !important;
+ min-height:40px !important;
+ padding:8px 14px !important;
+ margin:0 !important;
+ border-radius:10px !important;
+ background:linear-gradient(180deg, #ffda66 0%, #ffc233 100%) !important;
+ border:1.5px solid #d1901b !important;
+ color:#123850 !important;
+ font-size:13.5px !important;
+ font-weight:800 !important;
+ text-decoration:none !important;
+ box-shadow:0 2px 0 #d1901b44;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-selection-link:hover {
+ background:linear-gradient(180deg, #ffe285 0%, #ffc947 100%) !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-directions-link {
+ display:inline-flex !important;
+ align-items:center !important;
+ justify-content:center !important;
+ min-height:40px !important;
+ padding:8px 14px !important;
+ margin:0 !important;
+ border-radius:10px !important;
+ background:#1f7b5c !important;
+ border:1.5px solid #155c43 !important;
+ color:#ffffff !important;
+ font-size:13.5px !important;
+ font-weight:700 !important;
+ text-decoration:none !important;
+}
+.app-shell:not(.home-shell) .atlas-results-layout .atlas-directions-link:hover {
+ background:#17644a !important;
+}
+@media (max-width: 767px) {
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-city-fit-btn {
+  top:106px !important;
+  right:12px !important;
+ }
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-viewport-filter {
+  left:12px !important;
+  bottom:82px !important;
+ }
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-map-locate {
+  right:12px !important;
+  bottom:84px !important;
+ }
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-offscreen-chip {
+  left:12px !important;
+  right:12px !important;
+  bottom:134px !important;
+  max-width:none !important;
+ }
+ .app-shell:not(.home-shell) .atlas-results-layout .atlas-selection {
+  left:12px !important;
+  right:12px !important;
+  bottom:76px !important;
+  max-width:none !important;
+ }
+}
+
+/* 16. Quest Details, Quest Player, DueStart, Navigation Arrival & Premium UI Redesign */
+.app-shell:not(.home-shell) .atlas-results-layout small.atlas-result-price,
+.app-shell:not(.home-shell) .dq-price-badge {
+ display:inline-flex !important;
+ align-items:center;
+ width:fit-content;
+ padding:2px 9px !important;
+ margin:0 !important;
+ border-radius:999px !important;
+ font-size:11px !important;
+ font-weight:800 !important;
+ line-height:1.35 !important;
+ white-space:nowrap;
+}
+.app-shell:not(.home-shell) :is(.atlas-result-price.is-free, .dq-price-badge.is-free) {
+ background:#edf7f4 !important;
+ border:1px solid #c3e2d7 !important;
+ color:#18614a !important;
+}
+.app-shell:not(.home-shell) :is(.atlas-result-price.is-paid, .dq-price-badge.is-paid) {
+ background:#fff2c6 !important;
+ border:1px solid #e6be5b !important;
+ color:#734800 !important;
+}
+.app-shell:not(.home-shell) :is(.atlas-result-price.is-unlocked, .dq-price-badge.is-unlocked) {
+ background:#d1f3e2 !important;
+ border:1px solid #82cca6 !important;
+ color:#0f583c !important;
+}
+
+/* Quest Details Page (#/quest/:id) */
+.app-shell:not(.home-shell) > main.qd-page {
+ background:transparent !important;
+ padding:0 clamp(14px, 2.5vw, 32px) 36px !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-frame {
+ max-width:1320px;
+ margin-inline:auto;
+}
+.app-shell:not(.home-shell) .qd-page .qd-scroll-header {
+ background:rgba(255, 254, 249, 0.94) !important;
+ backdrop-filter:blur(8px);
+ border:1.5px solid #c5dfe6 !important;
+ border-top:0 !important;
+ border-radius:0 0 18px 18px !important;
+ padding:10px 18px !important;
+ min-height:62px !important;
+ box-shadow:0 6px 20px rgba(18, 56, 80, 0.08);
+}
+.app-shell:not(.home-shell) .qd-page .qd-scroll-header strong {
+ color:#123850;
+ font-weight:800;
+ font-size:16px;
+}
+.app-shell:not(.home-shell) .qd-page .qd-round {
+ width:40px !important;
+ height:40px !important;
+ border-radius:50% !important;
+ border:1.5px solid #a9cfd9 !important;
+ background:rgba(255, 254, 249, 0.96) !important;
+ color:#123850 !important;
+ box-shadow:0 3px 10px rgba(18, 56, 80, 0.12) !important;
+ padding:8px !important;
+ transition:transform .12s ease, background-color .15s ease, border-color .15s ease;
+}
+.app-shell:not(.home-shell) .qd-page .qd-round:hover {
+ background:#dcf4e7 !important;
+ border-color:#1f7b5c !important;
+ transform:translateY(-1px);
+}
+.app-shell:not(.home-shell) .qd-page .qd-round.is-favorite {
+ background:#ffeaf0 !important;
+ border-color:#d84b6a !important;
+ color:#c42348 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-round.is-favorite svg {
+ fill:#c42348 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-hero {
+ margin-top:16px !important;
+ border-radius:20px !important;
+ border:1.5px solid #c5dfe6 !important;
+ box-shadow:0 12px 30px rgba(18, 56, 80, 0.14) !important;
+ background:#e6f3f6 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-hero .quest-cover > img {
+ object-position:center 72% !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-hero .qd-beta {
+ border-radius:999px !important;
+ background:rgba(255, 246, 212, 0.95) !important;
+ border:1.5px solid #e6be5b !important;
+ color:#6c4300 !important;
+ font-size:12px !important;
+ font-weight:800 !important;
+ padding:5px 12px !important;
+ box-shadow:0 4px 12px rgba(18, 56, 80, 0.15);
+}
+.app-shell:not(.home-shell) .qd-page .qd-layout {
+ margin-top:16px !important;
+ border-radius:22px !important;
+ border:1.5px solid #cfe4ea !important;
+ background:rgba(255, 254, 249, 0.94) !important;
+ box-shadow:0 12px 32px rgba(18, 56, 80, 0.08) !important;
+ padding:24px !important;
+ gap:26px !important;
+}
+@media (min-width: 900px) {
+ .app-shell:not(.home-shell) .qd-page .qd-layout {
+  grid-template-columns:minmax(0, 1.65fr) minmax(300px, 370px) !important;
+  padding:28px !important;
+ }
+}
+.app-shell:not(.home-shell) .qd-page .qd-meta {
+ background:transparent !important;
+ border:0 !important;
+ padding:0 0 8px !important;
+ box-shadow:none !important;
+ display:flex !important;
+ flex-wrap:wrap !important;
+ gap:8px !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-meta > span {
+ border-radius:999px !important;
+ border:1.5px solid #cde2e8 !important;
+ background:#f2f9f8 !important;
+ color:#153b55 !important;
+ min-height:36px !important;
+ padding:5px 13px !important;
+ font-size:13.5px !important;
+ font-weight:700 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-meta > button {
+ border-radius:999px !important;
+ border:1.5px solid #76be9f !important;
+ background:#e2f5ee !important;
+ color:#145c43 !important;
+ min-height:36px !important;
+ padding:5px 14px !important;
+ font-size:13.5px !important;
+ font-weight:800 !important;
+ cursor:pointer;
+}
+.app-shell:not(.home-shell) .qd-page .qd-meta > button:hover {
+ background:#cfeee1 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-trail i {
+ width:14px !important;
+ height:14px !important;
+ border-radius:50% !important;
+ border:3px solid #1f7b5c !important;
+ background:#dcf4e7 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-trail i:after {
+ display:none !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-trail path {
+ stroke:#95ccba !important;
+ stroke-width:2.5 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-play-panel {
+ border-radius:20px !important;
+ border:1.5px solid #9ec5d1 !important;
+ background:#fffef9 !important;
+ box-shadow:0 14px 32px rgba(18, 56, 80, 0.12) !important;
+ padding:22px !important;
+ gap:14px !important;
+}
+@media (min-width: 900px) {
+ .app-shell:not(.home-shell) .qd-page .qd-play-panel {
+  top:76px !important;
+ }
+}
+.app-shell:not(.home-shell) .qd-page .qd-play-panel.is-premium {
+ border:2px solid #dfa224 !important;
+ background:linear-gradient(180deg, #fff9ec 0%, #fffef9 48%) !important;
+ box-shadow:0 16px 34px rgba(209, 144, 27, 0.18) !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-summary {
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-pill {
+ display:inline-flex;
+ width:fit-content;
+ padding:4px 10px;
+ border-radius:999px;
+ background:linear-gradient(90deg, #ffda66 0%, #ffc233 100%);
+ color:#123850;
+ font-size:11.5px;
+ font-weight:800;
+}
+.app-shell:not(.home-shell) .qd-page .qd-unlocked-pill {
+ display:inline-flex;
+ width:fit-content;
+ margin-bottom:8px;
+ padding:4px 10px;
+ border-radius:999px;
+ background:#d1f3e2;
+ border:1px solid #7ec2a5;
+ color:#0f593d;
+ font-size:11.5px;
+ font-weight:800;
+}
+.app-shell:not(.home-shell) .qd-page .qd-play-panel strong {
+ display:block;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-price-row {
+ display:flex;
+ align-items:baseline;
+ gap:10px;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-price-row s {
+ color:#6c8896;
+ font-size:15px;
+ font-weight:700;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-price-row strong {
+ color:#123850;
+ font-size:28px !important;
+ font-weight:900;
+ line-height:1.1;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-benefits {
+ list-style:none;
+ margin:4px 0 0;
+ padding:0;
+ display:flex;
+ flex-direction:column;
+ gap:5px;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-benefits li {
+ font-size:13px;
+ color:#1f4b5e;
+ line-height:1.45;
+ font-weight:600;
+}
+.app-shell:not(.home-shell) .qd-page .qd-premium-note {
+ color:#587584;
+ font-size:11.5px !important;
+ line-height:1.4;
+ font-style:italic;
+}
+.app-shell:not(.home-shell) .qd-page .qd-directions-pill {
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ width:100%;
+ min-height:42px;
+ padding:8px 14px;
+ border-radius:12px;
+ background:#1f7b5c;
+ border:1.5px solid #155c43;
+ color:#ffffff !important;
+ font-size:14px;
+ font-weight:800;
+ text-decoration:none;
+}
+.app-shell:not(.home-shell) .qd-page .qd-directions-pill:hover {
+ background:#17644a;
+}
+.app-shell:not(.home-shell) .qd-page .qd-play-panel .q-briefing-start {
+ width:100% !important;
+ min-height:48px !important;
+ border-radius:12px !important;
+ background:linear-gradient(180deg, #ffda66 0%, #ffc233 100%) !important;
+ border:1.5px solid #d1901b !important;
+ color:#123850 !important;
+ font-size:15px !important;
+ font-weight:800 !important;
+ text-transform:none !important;
+ box-shadow:0 4px 12px rgba(209, 144, 27, 0.24) !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-play-panel .q-briefing-start:hover:not(:disabled) {
+ background:linear-gradient(180deg, #ffe285 0%, #ffc947 100%) !important;
+}
+.app-shell:not(.home-shell) .qd-page :is(.qd-testing, .qd-box, .qd-start-place, .qd-solo, .qd-testers, .qd-photo-empty, .qd-logistics, .qd-creator-link, .qd-preparation) {
+ border-radius:16px !important;
+ border:1.5px solid #cde2e8 !important;
+ background:#fffef9 !important;
+ box-shadow:0 4px 14px rgba(18, 56, 80, 0.05) !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-testing {
+ background:linear-gradient(180deg, #f3faf8 0%, #fffef9 100%) !important;
+ padding:20px !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-start-place {
+ background:#ffffff !important;
+ border-radius:12px !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-solo {
+ background:#eef8f4 !important;
+ border:1px solid #bde0d3 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-testers {
+ background:#f4faf9 !important;
+ border-radius:12px !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-photo-empty {
+ border:1.5px dashed #9ec5d1 !important;
+ background:#f7fbfc !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-creator-avatar {
+ border-radius:14px !important;
+ border:1.5px solid #d1901b !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-timeline li > span {
+ border-radius:50% !important;
+ border:1.5px solid #1f7b5c !important;
+ background:#e2f5ee !important;
+ color:#125c42 !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-timeline li:not(:last-child):before {
+ border-left:2.5px dashed #92cbb8 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-tips li {
+ border-radius:12px !important;
+ border:1.5px solid #cde2e8 !important;
+ background:#f4faf9 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-review-form :is(select, textarea) {
+ border-radius:12px !important;
+ border:1.5px solid #a9cfd9 !important;
+}
+.app-shell:not(.home-shell) .qd-page .qd-primary,
+.app-shell:not(.home-shell) .qd-page .qd-secondary {
+ border-radius:12px !important;
+ font-weight:800 !important;
+ text-transform:none !important;
+}
+
+/* DueStartPage, QuestPlayPage, NavigationPage & Dialog Rounding */
+.app-shell:not(.home-shell) .due-start :is(.due-distance, .due-view-tabs, .due-landmark-card, .due-before, .due-start-actions, .due-map-notice),
+.app-shell:not(.home-shell) .quest-player :is(.quest-journey-rail, .q-center, .q-phase-tag, .q-hud-progress, .q-hud-score, .due-play-mode, .q-choices label, .q-text-answer input, .due-guide-card, .q-saved-reward, .q-result-totals strong, .due-exit-card, .due-menu-group, .q-menu-item, .due-support-card, .due-faq-list details, .due-progress-card, .q-matching > div, .q-ordering li) {
+ border-radius:14px !important;
+}
+.app-shell:not(.home-shell) .quest-player .q-hud-progress,
+.app-shell:not(.home-shell) .quest-player .q-hud-score,
+.app-shell:not(.home-shell) .quest-player .due-play-mode,
+.app-shell:not(.home-shell) .quest-player .q-phase-tag {
+ border-radius:999px !important;
+ border:1.5px solid #a9cfd9 !important;
+ background:#ffffff !important;
+}
+.app-shell:not(.home-shell) .quest-player :is(.quest-journey-rail li > span, .due-journey-list li > span, .q-result-seal, .due-exit-emblem, .due-support-icon) {
+ border-radius:50% !important;
+}
+.app-shell:not(.home-shell) :is(.due-start, .quest-player) :is(.q-primary, .q-secondary, .due-secondary, .due-purple, .q-help-button, .q-order-pool button, .due-back-story, .due-expand-label) {
+ border-radius:12px !important;
+ text-transform:none !important;
+}
+.app-shell:not(.home-shell) .navigation-screen .live-route-sheet {
+ border-radius:20px 20px 0 0 !important;
+ border:1.5px solid #b5d6df !important;
+ background:rgba(255, 254, 249, 0.98) !important;
+}
+@media (min-width: 1000px) {
+ .app-shell:not(.home-shell) .navigation-screen .live-route-sheet {
+  border-radius:0 !important;
+  border-right:1.5px solid #b5d6df !important;
+  border-top:0 !important;
+ }
+}
+.app-shell:not(.home-shell) .navigation-screen .blue-button {
+ width:100%;
+ min-height:48px;
+ border-radius:12px !important;
+ background:linear-gradient(180deg, #ffda66 0%, #ffc233 100%) !important;
+ border:1.5px solid #d1901b !important;
+ color:#123850 !important;
+ font-weight:800 !important;
+ font-size:15px !important;
+ text-decoration:none;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ cursor:pointer;
+}
+.app-shell:not(.home-shell) .navigation-screen .blue-button:disabled {
+ background:#e6f1f4 !important;
+ border-color:#bcd6de !important;
+ color:#587584 !important;
+ cursor:not-allowed;
+}
+.app-shell:not(.home-shell) .navigation-screen .blue-button.is-premium-cta {
+ background:linear-gradient(180deg, #ffda66 0%, #ffc233 100%) !important;
+ border-color:#c98a12 !important;
+ color:#123850 !important;
+}
+
+/* Consistent Rounded Popups (PlayerDialog & ConfirmDialog) */
+:is(.app-shell:not(.home-shell), .site-popup) :is(.q-dialog-backdrop, .confirm-backdrop) {
+ background:rgba(12, 34, 50, 0.56) !important;
+ backdrop-filter:blur(5px);
+}
+:is(.app-shell:not(.home-shell), .site-popup) :is(.q-dialog, .confirm-dialog, .px-modal) {
+ border-radius:20px !important;
+ border:1.5px solid #8ebdc9 !important;
+ background:#fffef9 !important;
+ color:#123850 !important;
+ box-shadow:0 22px 54px rgba(12, 34, 50, 0.28) !important;
+}
+:is(.app-shell:not(.home-shell), .site-popup) :is(.q-dialog, .confirm-dialog) .px-button::after {
+ display:none !important;
+}
+:is(.app-shell:not(.home-shell), .site-popup) .q-dialog > header {
+ padding-bottom:12px;
+ margin-bottom:14px !important;
+ border-bottom:1px solid #d6e7ed;
+}
+:is(.app-shell:not(.home-shell), .site-popup) .q-dialog > header .q-icon-button {
+ width:36px !important;
+ height:36px !important;
+ min-width:36px !important;
+ border-radius:50% !important;
+ background:#eef6f8 !important;
+ border:1px solid #b5d6df !important;
+ color:#123850 !important;
+}
+:is(.app-shell:not(.home-shell), .site-popup) .confirm-symbol {
+ border-radius:50% !important;
+ border:1.5px solid #8ebdc9;
+}
+:is(.app-shell:not(.home-shell), .site-popup) .confirm-actions button {
+ border-radius:12px !important;
+ font-weight:800 !important;
+ text-transform:none !important;
+}
+
+/* Arrival Popup Modal in NavigationPage */
+.nav-arrival-overlay {
+ position:fixed;
+ inset:0;
+ z-index:2600;
+ display:grid;
+ place-items:center;
+ padding:18px;
+ background:rgba(11, 35, 50, 0.58);
+ backdrop-filter:blur(5px);
+}
+.nav-arrival-modal {
+ position:relative;
+ width:min(100%, 420px);
+ padding:26px 22px 22px;
+ border-radius:22px;
+ background:#fffef9;
+ border:1.5px solid #8ebdc9;
+ box-shadow:0 22px 54px rgba(10, 32, 48, 0.32);
+ text-align:center;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:10px;
+}
+.nav-arrival-modal.is-premium {
+ max-width:460px;
+ border:2px solid #dfa224;
+ background:linear-gradient(180deg, #fff9ea 0%, #fffef9 42%);
+}
+.nav-arrival-close {
+ position:absolute;
+ top:12px;
+ right:12px;
+ width:34px;
+ height:34px;
+ min-height:34px !important;
+ border-radius:50%;
+ border:1px solid #b5d6df;
+ background:#eef6f8;
+ color:#153b55;
+ font-size:18px;
+ line-height:1;
+ display:grid;
+ place-items:center;
+ cursor:pointer;
+}
+.nav-arrival-close:hover {
+ background:#dceef2;
+}
+.nav-arrival-badge {
+ display:inline-flex;
+ padding:4px 12px;
+ border-radius:999px;
+ background:#d1f3e2;
+ border:1px solid #7ec2a5;
+ color:#0f593d;
+ font-size:12px;
+ font-weight:800;
+}
+.nav-arrival-badge.is-premium {
+ background:linear-gradient(90deg, #ffda66 0%, #ffc233 100%);
+ border-color:#d1901b;
+ color:#123850;
+}
+.nav-arrival-title {
+ margin:4px 0 0;
+ font-size:22px;
+ font-weight:900;
+ color:#123850;
+ line-height:1.25;
+}
+.nav-arrival-desc {
+ margin:0;
+ font-size:14.5px;
+ line-height:1.55;
+ color:#3c6170;
+}
+.nav-arrival-place {
+ margin:0;
+ padding:6px 12px;
+ border-radius:10px;
+ background:#eef8f4;
+ border:1px solid #bce0d3;
+ color:#155943;
+ font-size:13px;
+ font-weight:800;
+}
+.nav-arrival-price-row {
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:10px;
+ margin:2px 0;
+}
+.nav-arrival-price-old {
+ color:#738f9c;
+ font-size:15px;
+ font-weight:700;
+ text-decoration:line-through;
+}
+.nav-arrival-price-new {
+ color:#123850;
+ font-size:24px;
+ font-weight:900;
+}
+.nav-arrival-price-save {
+ padding:3px 9px;
+ border-radius:999px;
+ background:#1f7b5c;
+ color:#ffffff;
+ font-size:11.5px;
+ font-weight:800;
+}
+.nav-arrival-cta {
+ width:100%;
+ min-height:48px;
+ margin-top:6px;
+ padding:10px 18px;
+ border-radius:14px;
+ background:linear-gradient(180deg, #ffda66 0%, #ffc233 100%);
+ border:1.5px solid #d1901b;
+ color:#123850;
+ font-family:inherit;
+ font-size:15px;
+ font-weight:800;
+ cursor:pointer;
+ box-shadow:0 5px 16px rgba(209, 144, 27, 0.28);
+}
+.nav-arrival-cta:hover:not(:disabled) {
+ background:linear-gradient(180deg, #ffe285 0%, #ffc947 100%);
+}
+
+/* Locked Quest Authorization Screen & Account Unlock History */
+.dq-locked-page {
+ display:grid !important;
+ place-items:center;
+ padding:24px 16px !important;
+ overflow-y:auto !important;
+}
+.dq-locked-screen {
+ width:min(100%, 540px);
+ padding:28px 24px;
+ border-radius:22px;
+ background:#fffef9;
+ border:1.5px solid #dfa224;
+ box-shadow:0 18px 46px rgba(18, 56, 80, 0.16);
+ text-align:center;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:12px;
+}
+.dq-locked-badge {
+ padding:4px 12px;
+ border-radius:999px;
+ background:linear-gradient(90deg, #ffda66 0%, #ffc233 100%);
+ color:#123850;
+ font-size:12px;
+ font-weight:800;
+}
+.dq-locked-screen h1 {
+ margin:0 !important;
+ font-size:24px !important;
+ color:#123850 !important;
+}
+.dq-locked-screen p {
+ margin:0;
+ font-size:14.5px;
+ line-height:1.55;
+ color:#456878;
+}
+.dq-locked-price {
+ display:flex;
+ align-items:baseline;
+ gap:10px;
+}
+.dq-locked-price s {
+ color:#738f9c;
+ font-size:16px;
+}
+.dq-locked-price strong {
+ color:#123850;
+ font-size:28px;
+ font-weight:900;
+}
+.dq-locked-actions {
+ width:100%;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+ margin-top:6px;
+}
+.dq-locked-buy-btn {
+ width:100%;
+ min-height:48px;
+ border-radius:14px;
+ background:linear-gradient(180deg, #ffda66 0%, #ffc233 100%);
+ border:1.5px solid #d1901b;
+ color:#123850;
+ font-family:inherit;
+ font-size:15px;
+ font-weight:800;
+ cursor:pointer;
+}
+.dq-locked-dir-link {
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ min-height:44px;
+ border-radius:12px;
+ background:#1f7b5c;
+ border:1.5px solid #155c43;
+ color:#ffffff !important;
+ font-size:14px;
+ font-weight:800;
+ text-decoration:none;
+}
+.dq-locked-back {
+ color:#186b56 !important;
+ font-size:14px;
+ font-weight:700;
+ text-decoration:underline;
+ padding:6px;
+}
+.ap-premium-history {
+ display:flex;
+ flex-direction:column;
+ gap:16px;
+}
+.ap-premium-cta-row {
+ display:flex;
+ flex-wrap:wrap;
+ align-items:center;
+ gap:12px;
+ margin-top:12px;
+}
+.ap-unlock-list {
+ list-style:none;
+ margin:10px 0 0;
+ padding:0;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+}
+.ap-unlock-item {
+ display:flex;
+ flex-wrap:wrap;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+ padding:14px 16px;
+ border-radius:14px;
+ background:#f2f9f8;
+ border:1.5px solid #bde0d3;
+}
+.ap-unlock-item strong {
+ display:block;
+ color:#123850;
+ font-size:15.5px;
+ margin-top:4px;
+}
+.ap-unlock-item small {
+ display:block;
+ color:#4d6e7d;
+ font-size:12.5px;
+ margin-top:2px;
+}
+.ap-unlock-status {
+ display:inline-flex;
+ padding:2px 8px;
+ border-radius:999px;
+ background:#d1f3e2;
+ color:#0f593d;
+ font-size:11px;
+ font-weight:800;
+}
+.ap-unlock-actions {
+ display:flex;
+ align-items:center;
+ gap:12px;
+ flex-wrap:nowrap;
+ flex-shrink:0;
+}
+.ap-unlock-actions > * {
+ white-space:nowrap !important;
+ width:auto !important;
+ flex:0 0 auto !important;
+}
+.app-shell:has(> main.qd-page) .next-step-chip-container,
+.app-shell:has(> main.navigation-screen) .next-step-chip-container {
+ display:none !important;
+}
+.app-shell:not(.home-shell) .navigation-screen .sim-control-bar {
+ top:94px !important;
+}
+.ap-active-sub-box {
+ display:flex;
+ flex-wrap:wrap;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+ margin-top:12px;
+ padding:14px 16px;
+ border-radius:14px;
+ background:#f0f8f7;
+ border:1.5px solid #b5d6df;
+}
+.ap-active-sub-box strong {
+ display:block;
+ margin-top:4px;
+ font-size:15px;
+ color:#123850;
+}
+.ap-unlock-status.is-free {
+ background:#e6f0f3;
+ color:#3c5b6b;
+}
+.ap-cancel-sub-btn {
+ min-height:38px;
+ padding:7px 14px;
+ border-radius:999px;
+ background:#fff5f5;
+ border:1.5px solid #df9b9b;
+ color:#a62b2b;
+ font-size:13px;
+ font-weight:800;
+ cursor:pointer;
+ transition:background-color 0.15s ease, border-color 0.15s ease;
+}
+.ap-cancel-sub-btn:hover {
+ background:#ffe3e3;
+ border-color:#c24b4b;
+}
+
+/* 17. Events & Event Details Modern UI Sync (#/su-kien, #/su-kien/:id) */
+.app-shell:not(.home-shell) > main.ev-page {
+ padding:18px max(18px, calc((100% - 1440px) / 2)) 36px !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-heading {
+ margin-bottom:14px !important;
+ gap:14px;
+ align-items:center;
+}
+.app-shell:not(.home-shell) .events-index .ev-heading p {
+ margin:0 0 3px !important;
+ font-size:13px !important;
+ font-weight:800;
+ color:#1f7b5c;
+ text-transform:uppercase;
+ letter-spacing:0.03em;
+}
+.app-shell:not(.home-shell) .events-index .ev-heading h1 {
+ font-size:clamp(26px, 2.5vw, 32px) !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ line-height:1.2 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-demo-trigger {
+ min-height:42px !important;
+ padding:8px 18px !important;
+ border-radius:999px !important;
+ font-size:14px !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-settings {
+ width:42px !important;
+ height:42px !important;
+ border-radius:50% !important;
+ border:1.5px solid #9ec5d1 !important;
+ background:#fffef9 !important;
+ color:#153b55 !important;
+ box-shadow:0 4px 12px rgba(18, 56, 80, 0.08) !important;
+ transition:background-color .15s ease, border-color .15s ease, transform .12s ease;
+}
+.app-shell:not(.home-shell) .events-index .ev-settings:hover {
+ background:#dcf4e7 !important;
+ border-color:#1f7b5c !important;
+ transform:translateY(-1px);
+}
+.app-shell:not(.home-shell) .events-index .ev-intro {
+ padding:16px 20px !important;
+ margin-bottom:14px !important;
+ border:1.5px solid #a5cad2 !important;
+ border-radius:16px !important;
+ background:linear-gradient(125deg, #dff3fa 0%, #e6f7e6 55%, #fff9e4 100%) !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.06);
+}
+.app-shell:not(.home-shell) .events-index .ev-intro h2 {
+ font-size:20px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ margin:0 0 4px !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-intro p {
+ font-size:14.5px !important;
+ line-height:1.5 !important;
+ color:#2b5364 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-tabs {
+ gap:8px !important;
+ padding:2px 2px 10px !important;
+ margin-bottom:10px !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-tabs button {
+ display:inline-flex !important;
+ align-items:center !important;
+ gap:7px !important;
+ min-height:38px !important;
+ padding:6px 16px !important;
+ border:1.5px solid #9dc5d1 !important;
+ border-radius:999px !important;
+ background:rgba(255, 254, 249, 0.94) !important;
+ color:#194759 !important;
+ font-size:13.5px !important;
+ font-weight:800 !important;
+ box-shadow:0 3px 10px rgba(18, 56, 80, 0.06);
+ transition:background-color .15s ease, border-color .15s ease, color .15s ease, transform .12s ease;
+}
+.app-shell:not(.home-shell) .events-index .ev-tabs button:hover:not([aria-pressed=true]) {
+ background:#e4f6ef !important;
+ border-color:#238768 !important;
+ transform:translateY(-1px);
+}
+.app-shell:not(.home-shell) .events-index .ev-tabs button[aria-pressed=true] {
+ background:linear-gradient(115deg, #165e45 0%, #1f7b5c 100%) !important;
+ border-color:#155c43 !important;
+ color:#ffffff !important;
+ box-shadow:0 5px 14px rgba(31, 123, 92, 0.25) !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-tabs button span {
+ margin-left:2px !important;
+ padding:1px 7px;
+ border-radius:999px;
+ background:rgba(18, 56, 80, 0.12);
+ font-size:11.5px;
+ font-weight:800;
+}
+.app-shell:not(.home-shell) .events-index .ev-tabs button[aria-pressed=true] span {
+ background:rgba(255, 255, 255, 0.24);
+ color:#ffffff;
+}
+.app-shell:not(.home-shell) .events-index .ev-filters {
+ background:rgba(255, 254, 249, 0.94) !important;
+ border:1.5px solid #b5d6df !important;
+ border-radius:16px !important;
+ padding:14px 16px !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.06) !important;
+ gap:12px !important;
+ align-items:end;
+}
+.app-shell:not(.home-shell) .events-index .ev-filters label {
+ font-size:12px !important;
+ font-weight:800 !important;
+ color:#3c6070 !important;
+ gap:5px !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-filters :is(input, select) {
+ min-height:40px !important;
+ height:40px;
+ border:1.5px solid #a6cbd5 !important;
+ border-radius:10px !important;
+ background:#f6fbfb !important;
+ padding:6px 12px !important;
+ font-size:14px !important;
+ font-weight:600;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-filter-toggle {
+ border-radius:999px !important;
+ min-height:38px !important;
+ padding:6px 16px !important;
+ font-size:13.5px !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-results {
+ margin:14px 0 12px !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-results p {
+ font-size:14.5px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-results span {
+ padding:4px 12px;
+ border-radius:999px;
+ background:#eaf5f6;
+ border:1px solid #c5dfe6;
+ font-size:12.5px !important;
+ font-weight:700;
+ color:#2b5364 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-grid {
+ gap:18px !important;
+ align-items:stretch;
+}
+.app-shell:not(.home-shell) .events-index .ev-card {
+ border-radius:18px !important;
+ border:1.5px solid #b5d6df !important;
+ background:#fffef9 !important;
+ box-shadow:0 10px 24px rgba(18, 56, 80, 0.08) !important;
+ overflow:hidden;
+ transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.app-shell:not(.home-shell) .events-index .ev-card:hover {
+ transform:translateY(-3px);
+ border-color:#1f7b5c !important;
+ box-shadow:0 14px 30px rgba(18, 56, 80, 0.14) !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-photo {
+ aspect-ratio:auto !important;
+ height:196px !important;
+ max-height:none !important;
+ background:#dceef4 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-photo img {
+ width:100% !important;
+ height:100% !important;
+ object-fit:cover !important;
+ transition:transform .25s ease;
+}
+.app-shell:not(.home-shell) .events-index .ev-card:hover .ev-card-photo img {
+ transform:scale(1.03);
+}
+.app-shell:not(.home-shell) .events-index .ev-badge,
+.app-shell:not(.home-shell) .ev-detail-photo .ev-badge {
+ top:12px !important;
+ left:12px !important;
+ border-radius:999px !important;
+ padding:5px 12px !important;
+ background:rgba(255, 254, 249, 0.94) !important;
+ backdrop-filter:blur(6px);
+ border:1px solid rgba(158, 197, 209, 0.75) !important;
+ color:#123850 !important;
+ font-size:12px !important;
+ font-weight:800 !important;
+ box-shadow:0 4px 12px rgba(18, 56, 80, 0.14) !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-price {
+ top:12px !important;
+ right:12px !important;
+ left:auto !important;
+ bottom:auto !important;
+ border-radius:999px !important;
+ padding:5px 12px !important;
+ background:linear-gradient(180deg, #ffe285 0%, #ffc43d 100%) !important;
+ border:1px solid #d1901b !important;
+ color:#123850 !important;
+ font-size:12px !important;
+ font-weight:800 !important;
+ box-shadow:0 4px 12px rgba(18, 56, 80, 0.16) !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-content {
+ padding:16px 18px !important;
+ display:flex !important;
+ flex-direction:column !important;
+ gap:8px !important;
+ flex:1 1 auto !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-content small {
+ display:inline-flex;
+ align-items:center;
+ width:fit-content;
+ padding:3px 10px;
+ border-radius:999px;
+ background:#e1f4ec;
+ border:1px solid #b6dfd0;
+ color:#145c43 !important;
+ font-size:11.5px !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-content h2 {
+ margin:2px 0 0 !important;
+ font-size:19px !important;
+ font-weight:800 !important;
+ line-height:1.3 !important;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-content p {
+ margin:0 !important;
+ font-size:13.5px !important;
+ line-height:1.5 !important;
+ color:#466877 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-content .ev-date {
+ padding:6px 10px !important;
+ border-radius:10px;
+ background:#f0f8f7;
+ border:1px solid #cfe3e8;
+ font-size:13px !important;
+ font-weight:700 !important;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-bottom {
+ display:flex !important;
+ flex-direction:row !important;
+ flex-wrap:wrap !important;
+ align-items:center !important;
+ justify-content:space-between !important;
+ gap:10px !important;
+ margin-top:auto !important;
+ padding-top:12px !important;
+ border-top:1px solid #dcebef !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-bottom .ev-text-link {
+ display:inline-flex !important;
+ align-items:center !important;
+ min-height:38px !important;
+ padding:6px 14px !important;
+ border-radius:10px !important;
+ background:#eef8f4 !important;
+ border:1.5px solid #92c5b6 !important;
+ color:#145b43 !important;
+ font-size:13px !important;
+ font-weight:800 !important;
+ text-decoration:none !important;
+ transition:background-color .15s ease;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-bottom .ev-text-link:hover {
+ background:#dcf3e8 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-bottom .ev-save {
+ flex:1 1 auto;
+ display:flex;
+ flex-direction:column;
+ align-items:flex-end;
+}
+.app-shell:not(.home-shell) .events-index .ev-card-bottom :is(.ev-save button, a.ev-primary) {
+ width:auto !important;
+ min-height:38px !important;
+ padding:7px 14px !important;
+ border-radius:10px !important;
+ font-size:13px !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-empty {
+ border:1.5px dashed #9dc5d1 !important;
+ border-radius:18px !important;
+ background:rgba(255, 254, 249, 0.94) !important;
+ padding:36px 20px !important;
+ box-shadow:0 8px 20px rgba(18, 56, 80, 0.06);
+}
+.app-shell:not(.home-shell) .events-index .ev-footnote {
+ margin-top:22px !important;
+ padding:16px 20px !important;
+ border-radius:16px !important;
+ background:#f2f9f8 !important;
+ border:1.5px solid #c5dfe6 !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-footnote h2 {
+ font-size:16px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ margin-bottom:4px !important;
+}
+.app-shell:not(.home-shell) .events-index .ev-footnote p {
+ font-size:13.5px !important;
+ color:#466877 !important;
+ margin:0 !important;
+}
+
+/* Event Details Page (#/su-kien/:id) matching QuestDetailsPage */
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-layout {
+ margin-top:14px !important;
+ border-radius:22px !important;
+ border:1.5px solid #cfe4ea !important;
+ background:rgba(255, 254, 249, 0.94) !important;
+ box-shadow:0 12px 32px rgba(18, 56, 80, 0.08) !important;
+ padding:24px !important;
+ gap:26px !important;
+}
+@media (min-width: 900px) {
+ .app-shell:not(.home-shell) .ev-detail-page .ev-detail-layout {
+  grid-template-columns:minmax(0, 1.6fr) minmax(300px, 370px) !important;
+  padding:28px !important;
+ }
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-photo {
+ border-radius:18px !important;
+ border:1.5px solid #c5dfe6 !important;
+ box-shadow:0 10px 26px rgba(18, 56, 80, 0.12) !important;
+ max-height:360px !important;
+ margin-bottom:18px !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-category {
+ display:inline-flex;
+ padding:4px 12px;
+ border-radius:999px;
+ background:#e1f4ec;
+ border:1px solid #b6dfd0;
+ color:#145c43 !important;
+ font-size:12.5px !important;
+ font-weight:800 !important;
+ margin-bottom:10px !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page h1 {
+ font-size:clamp(24px, 2.5vw, 32px) !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ line-height:1.25 !important;
+ margin:0 0 10px !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-copy {
+ margin-top:22px !important;
+ padding-top:18px !important;
+ border-top:1px solid #d5e6eb !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-copy h2 {
+ font-size:18px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+ margin:14px 0 6px !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel {
+ border-radius:20px !important;
+ border:1.5px solid #9ec5d1 !important;
+ background:#fffef9 !important;
+ box-shadow:0 14px 32px rgba(18, 56, 80, 0.12) !important;
+ padding:22px !important;
+ gap:12px !important;
+}
+@media (min-width: 900px) {
+ .app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel {
+  position:sticky;
+  top:76px;
+ }
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel h2 {
+ font-size:19px !important;
+ font-weight:800 !important;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel dl div {
+ padding:10px 0 !important;
+ border-bottom:1px dashed #d3e5ea !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel dt {
+ font-size:12px !important;
+ font-weight:800 !important;
+ color:#4c6e7d !important;
+ text-transform:uppercase;
+ letter-spacing:0.03em;
+ margin-bottom:2px !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel dd {
+ font-size:14.5px !important;
+ font-weight:700 !important;
+ color:#123850 !important;
+}
+.app-shell:not(.home-shell) .ev-detail-page .ev-detail-panel :is(.ev-primary, .ev-secondary) {
+ border-radius:12px !important;
+ min-height:44px !important;
+ font-weight:800 !important;
+}
+
+/* Account Page Plus / Pro Tag & Subscription Pill */
+.ap-identity-title-row {
+ display:flex;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:8px;
+}
+.ap-identity-title-row h2 {
+ margin:0;
+}
+.ap-plan-tag {
+ display:inline-flex;
+ align-items:center;
+ padding:3px 10px;
+ border-radius:999px;
+ font-size:11.5px;
+ font-weight:900;
+ letter-spacing:0.03em;
+ line-height:1.3;
+ white-space:nowrap;
+}
+.ap-plan-tag.is-plus {
+ background:linear-gradient(135deg, #ffe27a, #ffc43d);
+ border:1.5px solid #d1901b;
+ color:#123850;
+ box-shadow:0 2px 6px rgba(209, 144, 27, 0.22);
+}
+.ap-plan-tag.is-pro {
+ background:linear-gradient(135deg, #165e45, #1f7b5c);
+ border:1.5px solid #0f4733;
+ color:#ffffff;
+ box-shadow:0 2px 6px rgba(22, 94, 69, 0.25);
+}
+.ap-sub-pill {
+ margin-top:8px;
+ display:inline-flex;
+ align-items:center;
+ gap:6px;
+ padding:5px 12px;
+ border-radius:999px;
+ font-size:12px;
+ font-weight:800;
+ cursor:pointer;
+ transition:transform 0.12s ease, filter 0.15s ease;
+}
+.ap-sub-pill.is-free {
+ background:#eef6f8;
+ border:1px solid #a9cfd9;
+ color:#214b5e;
+}
+.ap-sub-pill.is-plus {
+ background:#fff5cf;
+ border:1.5px solid #e0a729;
+ color:#6b4300;
+}
+.ap-sub-pill.is-pro {
+ background:#ddf5ea;
+ border:1.5px solid #6ec2a8;
+ color:#0f593d;
+}
+.ap-sub-pill:hover {
+ transform:translateY(-1px);
+ filter:brightness(0.98);
+}
+
+/* 18. Full Mobile Mode Synchronization Across Pages & Popups (.device-mobile-shell) */
+.app-shell.device-mobile-shell.workspace-shell > main {
+ grid-column:auto !important;
+ grid-row:auto !important;
+ width:100% !important;
+ min-width:0 !important;
+}
+.app-shell.device-mobile-shell .discovery-page {
+ padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell .discovery-grid.quest-cover-grid {
+ display:grid !important;
+ grid-template-columns:minmax(0, 1fr) !important;
+ gap:14px !important;
+}
+.app-shell.device-mobile-shell .discovery-card {
+ padding:0 !important;
+ border:1.5px solid #b5d6df !important;
+ border-radius:16px !important;
+ box-shadow:0 8px 20px rgba(18, 56, 80, 0.1) !important;
+ background:#fffef9 !important;
+}
+.app-shell.device-mobile-shell .discovery-card-image {
+ height:172px !important;
+}
+.app-shell.device-mobile-shell .discovery-mode-filters {
+ flex-wrap:nowrap !important;
+ overflow-x:auto !important;
+ padding-bottom:4px;
+ scrollbar-width:none;
+}
+.app-shell.device-mobile-shell .discovery-mode-filters::-webkit-scrollbar {
+ display:none;
+}
+.app-shell.device-mobile-shell .discovery-active-quests {
+ gap:10px !important;
+}
+.app-shell.device-mobile-shell > main.ev-page {
+ padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-heading {
+ flex-direction:column !important;
+ align-items:flex-start !important;
+ gap:10px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-grid {
+ grid-template-columns:minmax(0, 1fr) !important;
+ gap:16px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-filters {
+ grid-template-columns:minmax(0, 1fr) !important;
+ padding:12px !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-filter-toggle {
+ display:inline-flex !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-filters[data-expanded=false] .ev-filter-extra {
+ display:none !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-filters[data-expanded=true] .ev-filter-extra {
+ display:grid !important;
+}
+.app-shell.device-mobile-shell .ev-detail-page .ev-detail-layout {
+ grid-template-columns:minmax(0, 1fr) !important;
+ padding:14px !important;
+ gap:18px !important;
+ border-radius:18px !important;
+}
+.app-shell.device-mobile-shell .ev-detail-page .ev-detail-panel {
+ position:static !important;
+ padding:16px !important;
+ border-radius:16px !important;
+}
+.app-shell.device-mobile-shell .shop-screen {
+ padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell .shop-screen .wallet-strip {
+ padding:12px 14px !important;
+ flex-wrap:wrap !important;
+}
+.app-shell.device-mobile-shell .shop-screen .reward-list {
+ grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+ gap:10px !important;
+}
+.app-shell.device-mobile-shell .shop-screen .reward-card-media {
+ height:112px !important;
+ padding:8px !important;
+}
+.app-shell.device-mobile-shell .shop-screen .reward-info {
+ padding:10px 10px 0 !important;
+}
+.app-shell.device-mobile-shell .library-page {
+ padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell :is(.library-grid.quest-cover-grid, .library-upload-bar, .library-form) {
+ grid-template-columns:minmax(0, 1fr) !important;
+}
+.app-shell.device-mobile-shell .ap-page {
+ padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell :is(.ap-profile-frame, .ap-settings-body:has(>.ap-section), .ap-earn-grid, .leader-grid, .ap-photo-grid.quest-cover-grid, .creator-page .creator-layout) {
+ grid-template-columns:minmax(0, 1fr) !important;
+ display:grid !important;
+ gap:14px !important;
+}
+.app-shell.device-mobile-shell .ap-community-column {
+ position:static !important;
+ max-height:none !important;
+ overflow:visible !important;
+}
+.app-shell.device-mobile-shell .ap-card {
+ border:1.5px solid #b5d6df !important;
+ border-radius:16px !important;
+ box-shadow:0 6px 18px rgba(18, 56, 80, 0.08) !important;
+ background:#fffef9 !important;
+ padding:14px !important;
+}
+.app-shell.device-mobile-shell .ap-unlock-item {
+ padding:12px !important;
+}
+.app-shell.device-mobile-shell .ap-unlock-actions {
+ flex-wrap:wrap !important;
+ width:100%;
+}
+.app-shell.device-mobile-shell > main.onboarding.custom-avatar-screen {
+ padding:12px 14px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell :is(.avatar-custom-grid, .avatar-custom-controls) {
+ grid-template-columns:minmax(0, 1fr) !important;
+ gap:14px !important;
+ padding:14px !important;
+}
+.app-shell.device-mobile-shell .avatar-custom-preview {
+ position:static !important;
+ padding:14px !important;
+}
+.app-shell.device-mobile-shell .qd-page {
+ padding:10px 12px calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.app-shell.device-mobile-shell .qd-page .qd-layout {
+ grid-template-columns:minmax(0, 1fr) !important;
+ padding:16px 14px !important;
+ gap:18px !important;
+ border-radius:18px !important;
+}
+.app-shell.device-mobile-shell .qd-page .qd-play-panel {
+ position:static !important;
+ padding:16px !important;
+}
+.app-shell.device-mobile-shell .qd-page .qd-hero :is(.quest-cover>img, .quest-cover>.landmark-art, .q-artwork svg, .q-due-photo img) {
+ height:210px !important;
+}
+.app-shell.device-mobile-shell .due-start .due-start-grid {
+ grid-template-columns:minmax(0, 1fr) !important;
+ gap:14px !important;
+}
+.app-shell.device-mobile-shell .due-start .due-start-scroll {
+ padding:6px 0 12px !important;
+ overflow:visible !important;
+}
+.app-shell.device-mobile-shell .due-start .due-start-actions {
+ width:100% !important;
+ height:auto !important;
+ min-height:54px !important;
+ padding:10px 12px !important;
+}
+.app-shell.device-mobile-shell .quest-player.due-player {
+ padding:0 !important;
+ overflow:hidden !important;
+ --q-reading-size:16px !important;
+}
+.app-shell.device-mobile-shell .quest-player .quest-journey-rail {
+ display:none !important;
+}
+.app-shell.device-mobile-shell .quest-player .q-play-layout {
+ padding:0 !important;
+ display:flex !important;
+ flex-direction:column !important;
+ flex:1 1 0 !important;
+ min-height:0 !important;
+}
+.app-shell.device-mobile-shell .quest-player .q-center {
+ flex:1 1 0 !important;
+ min-height:0 !important;
+ border-radius:0 !important;
+ border:0 !important;
+}
+.app-shell.device-mobile-shell .quest-player .q-hud {
+ padding:8px 10px !important;
+ grid-template-columns:38px minmax(0, 1fr) auto auto 38px !important;
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell .quest-player .due-play-mode small {
+ display:none !important;
+}
+/* Mobile NavigationPage overrides (beat desktop 1000px side-rail on Desktop->Mobile toggle) */
+.app-shell.device-mobile-shell > main.navigation-screen {
+ display:flex !important;
+ flex-direction:column !important;
+ position:relative !important;
+ grid-template-columns:none !important;
+ grid-template-rows:none !important;
+ height:100% !important;
+ overflow:hidden !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-map {
+ position:absolute !important;
+ inset:0 !important;
+ width:100% !important;
+ height:100% !important;
+ grid-column:auto !important;
+ grid-row:auto !important;
+}
+.app-shell.device-mobile-shell .device-mobile-header {
+ padding:6px 10px !important;
+ min-height:54px !important;
+ gap:6px !important;
+}
+.app-shell.device-mobile-shell .device-mobile-logo img {
+ width:48px !important;
+ height:34px !important;
+}
+.app-shell.device-mobile-shell .device-mobile-header-actions {
+ gap:5px !important;
+ flex-wrap:nowrap !important;
+ min-width:0 !important;
+}
+.app-shell.device-mobile-shell .device-mobile-header .device-mobile-mode-btn {
+ white-space:nowrap !important;
+ word-break:keep-all !important;
+ flex-shrink:0;
+ font-size:12px !important;
+ padding:4px 7px !important;
+ min-height:32px !important;
+ height:32px !important;
+ border-radius:8px !important;
+}
+@media (max-width: 390px) {
+ .app-shell.device-mobile-shell .device-mobile-logo img {
+  width:42px !important;
+  height:30px !important;
+ }
+ .app-shell.device-mobile-shell .device-mobile-account-name {
+  max-width:44px !important;
+  font-size:11px !important;
+ }
+ .app-shell.device-mobile-shell .device-mobile-header .device-mobile-mode-btn {
+  font-size:11px !important;
+  padding:3px 6px !important;
+ }
+}
+.app-shell.device-mobile-shell .device-mobile-nav {
+ display:grid !important;
+ grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+ gap:4px !important;
+ height:auto !important;
+ min-height:60px !important;
+ padding:4px 6px calc(6px + env(safe-area-inset-bottom, 0px)) !important;
+ background:#fffef9 !important;
+ border-top:2px solid #aacdd3 !important;
+}
+.app-shell.device-mobile-shell .device-mobile-nav-item {
+ min-width:0 !important;
+ min-height:48px !important;
+ padding:4px 4px !important;
+ border-radius:10px !important;
+ color:#244d64 !important;
+ text-align:center !important;
+ gap:3px !important;
+}
+.app-shell.device-mobile-shell .device-mobile-nav-item.active {
+ background:#dcf4e7 !important;
+ color:#1b6e4f !important;
+ box-shadow:inset 0 -3px 0 #217c5b !important;
+}
+.app-shell.device-mobile-shell .device-mobile-nav-label {
+ font-size:11.5px !important;
+ font-weight:700 !important;
+ line-height:1.15 !important;
+}
+.app-shell.device-mobile-shell .badge-grid {
+ grid-template-columns:minmax(0, 1fr) !important;
+ gap:10px !important;
+}
+.app-shell.device-mobile-shell .badge-theme-header {
+ align-items:flex-start !important;
+ gap:10px !important;
+}
+.app-shell.device-mobile-shell .badge-theme-title {
+ align-items:flex-start !important;
+}
+.app-shell.device-mobile-shell .badge-theme-title small {
+ display:block;
+ margin-top:3px;
+ font-size:13px !important;
+ line-height:1.45 !important;
+ color:#4b6778 !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-tabs {
+ scrollbar-width:none !important;
+}
+.app-shell.device-mobile-shell .events-index .ev-tabs::-webkit-scrollbar {
+ display:none;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-instruction {
+ position:absolute !important;
+ top:10px !important;
+ left:10px !important;
+ right:10px !important;
+ max-width:none !important;
+ z-index:600 !important;
+ background:#0b5d60 !important;
+ color:#ffffff !important;
+ border:0 !important;
+ border-radius:16px !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-instruction :is(a, b, strong, small) {
+ color:#ffffff !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-instruction > a.dq-back-btn {
+ background:rgba(255, 255, 255, 0.16) !important;
+ border:1px solid rgba(255, 255, 255, 0.42) !important;
+ color:#ffffff !important;
+ box-shadow:none !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .sim-control-bar {
+ position:absolute !important;
+ top:102px !important;
+ left:10px !important;
+ right:10px !important;
+ max-width:none !important;
+ z-index:610 !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-tools {
+ position:absolute !important;
+ top:104px !important;
+ bottom:auto !important;
+ left:auto !important;
+ right:10px !important;
+ flex-direction:row !important;
+ flex-wrap:wrap !important;
+ justify-content:flex-end !important;
+ gap:8px !important;
+ z-index:620 !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen:has(> .sim-control-bar) > .route-tools {
+ top:174px !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-tools .route-tool {
+ min-height:38px !important;
+ padding:5px 12px !important;
+ font-size:13px !important;
+ border-radius:999px !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-tools .route-tool.sim-btn {
+ background:#ffecb3 !important;
+ color:#9c5800 !important;
+ border:2px solid #f5b300 !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .route-tools .route-tool.sim-btn.active {
+ background:#f5b300 !important;
+ color:#ffffff !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .live-route-sheet {
+ position:absolute !important;
+ top:auto !important;
+ bottom:0 !important;
+ left:0 !important;
+ right:0 !important;
+ width:100% !important;
+ height:auto !important;
+ max-height:58% !important;
+ grid-column:auto !important;
+ grid-row:auto !important;
+ border-radius:20px 20px 0 0 !important;
+ border-right:1.5px solid #b5d6df !important;
+ padding:12px 16px 18px !important;
+ z-index:650 !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .live-route-sheet > .route-sheet-handle {
+ display:flex !important;
+}
+.app-shell.device-mobile-shell > main.navigation-screen > .arrival-action-banner {
+ left:12px !important;
+ right:12px !important;
+ bottom:24px !important;
+}
+/* Popups, Dialogs & Toast Synchronization inside Mobile Mode */
+body:has(.device-mobile-shell) dialog.site-popup {
+ width:min(calc(100vw - 20px), 416px) !important;
+ max-width:416px !important;
+ max-height:calc(100dvh - 28px) !important;
+ border-radius:18px !important;
+ margin:auto !important;
+}
+body:has(.device-mobile-shell) .site-popup .site-popup-body {
+ padding:14px 16px !important;
+}
+body:has(.device-mobile-shell) :is(.q-dialog, .confirm-dialog, .nav-arrival-modal, .delay-nudge-modal, .device-mode-card) {
+ width:min(calc(100vw - 24px), 400px) !important;
+ max-width:400px !important;
+ max-height:calc(100dvh - 36px) !important;
+ overflow-y:auto !important;
+ padding:18px 16px !important;
+ border-radius:18px !important;
+}
+body:has(.device-mobile-shell) .auth-modal-layer .login-sheet {
+ width:min(calc(100vw - 20px), 412px) !important;
+ max-height:calc(100dvh - 24px) !important;
+ border-radius:20px !important;
+}
+body:has(.device-mobile-shell) .ev-notice-position {
+ top:68px !important;
+ left:50% !important;
+ right:auto !important;
+ transform:translateX(-50%) !important;
+ width:min(calc(100vw - 24px), 408px) !important;
+}
+body:has(.device-mobile-shell) .ev-notice {
+ width:100% !important;
+ max-width:100% !important;
+}
+body:has(.device-mobile-shell) .notifications {
+ left:50% !important;
+ right:auto !important;
+ bottom:72px !important;
+ transform:translateX(-50%) !important;
+ width:min(calc(100vw - 24px), 400px) !important;
+ align-items:center !important;
+}
+body:has(.device-mobile-shell) .toast-banner {
+ max-width:100% !important;
+ font-size:13.5px !important;
+}
+
+/* Mobile Account Workspace Menu Button (☰) & Slide-out Drawer */
+.ap-profile-title-group {
+ display:inline-flex;
+ align-items:center;
+ gap:10px;
+ min-width:0;
+}
+.ap-workspace-menu-btn {
+ display:none;
+ align-items:center;
+ justify-content:center;
+ width:40px;
+ height:40px;
+ min-width:40px;
+ padding:0;
+ border:2px solid #1f7b5c;
+ border-radius:10px;
+ background:#fffef8;
+ color:#153b55;
+ cursor:pointer;
+ flex-shrink:0;
+ box-shadow:0 2px 0 rgba(31, 123, 92, 0.22);
+ transition:background-color .15s ease, border-color .15s ease, transform .12s ease;
+}
+.ap-workspace-menu-btn:hover,
+.ap-workspace-menu-btn:focus-visible {
+ background:#dcf4e7;
+ border-color:#13543b;
+ transform:translateY(-1px);
+}
+.ap-workspace-menu-btn svg {
+ width:20px !important;
+ height:20px !important;
+}
+.app-shell.device-mobile-shell .ap-workspace-menu-btn {
+ display:inline-flex !important;
+}
+@media (max-width: 767px) {
+ .ap-workspace-menu-btn {
+  display:inline-flex !important;
+ }
+}
+/* Compact, Single-Row Account Profile Header & Aligned Pill Controls */
+.app-shell:not(.home-shell) .ap-profile-header {
+ display:flex !important;
+ flex-wrap:nowrap !important;
+ align-items:center !important;
+ justify-content:space-between !important;
+ gap:8px !important;
+ margin-bottom:18px !important;
+}
+.app-shell:not(.home-shell) .ap-profile-title-group {
+ gap:8px !important;
+ flex:0 1 auto !important;
+ min-width:0 !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header h1 {
+ font-size:clamp(19px, 3vw, 26px) !important;
+ font-weight:800 !important;
+ line-height:1.2 !important;
+ white-space:nowrap !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header-actions {
+ display:inline-flex !important;
+ align-items:center !important;
+ gap:6px !important;
+ margin-left:auto !important;
+ flex-shrink:0 !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header-actions .streak-chip {
+ display:inline-flex !important;
+ align-items:center !important;
+ gap:4px !important;
+ height:34px !important;
+ min-height:34px !important;
+ padding:0 10px !important;
+ border-radius:999px !important;
+ font-size:12.5px !important;
+ font-weight:800 !important;
+ line-height:1 !important;
+ white-space:nowrap !important;
+ flex-shrink:0 !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header .ap-credit {
+ display:inline-flex !important;
+ align-items:center !important;
+ justify-content:center !important;
+ gap:4px !important;
+ height:34px !important;
+ min-height:34px !important;
+ padding:0 10px !important;
+ border-radius:999px !important;
+ border:1.5px solid #c98a14 !important;
+ background:linear-gradient(180deg, #ffe27a, #ffc43d) !important;
+ color:#123850 !important;
+ box-shadow:0 1.5px 0 rgba(18, 56, 80, 0.14) !important;
+ font-size:12.5px !important;
+ font-weight:800 !important;
+ line-height:1 !important;
+ white-space:nowrap !important;
+ flex-shrink:0 !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header .ap-credit svg {
+ width:15px !important;
+ height:15px !important;
+ flex-shrink:0 !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header .ap-credit span {
+ font-size:13px !important;
+ line-height:1 !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header .ap-settings-button {
+ width:34px !important;
+ min-width:34px !important;
+ height:34px !important;
+ min-height:34px !important;
+ padding:0 !important;
+ border:1.5px solid #28796b !important;
+ border-radius:9px !important;
+ background:#fffef8 !important;
+ color:#153b55 !important;
+ box-shadow:0 1.5px 0 rgba(40, 121, 107, 0.18) !important;
+ flex-shrink:0 !important;
+}
+.app-shell:not(.home-shell) .ap-profile-header .ap-settings-button svg {
+ width:18px !important;
+ height:18px !important;
+}
+.app-shell.device-mobile-shell .ap-profile-header {
+ flex-wrap:nowrap !important;
+ gap:6px !important;
+ margin-bottom:14px !important;
+}
+.app-shell.device-mobile-shell .ap-workspace-menu-btn {
+ width:36px !important;
+ height:36px !important;
+ min-width:36px !important;
+ border-width:1.5px !important;
+ border-radius:9px !important;
+}
+.app-shell.device-mobile-shell .ap-profile-header h1 {
+ font-size:18px !important;
+}
+.app-shell.device-mobile-shell .ap-profile-header-actions {
+ gap:4px !important;
+}
+.app-shell.device-mobile-shell .ap-profile-header-actions .streak-chip,
+.app-shell.device-mobile-shell .ap-profile-header .ap-credit {
+ height:32px !important;
+ min-height:32px !important;
+ padding:0 8px !important;
+ font-size:11.5px !important;
+ gap:3px !important;
+}
+.app-shell.device-mobile-shell .ap-profile-header .ap-credit svg {
+ width:13px !important;
+ height:13px !important;
+}
+.app-shell.device-mobile-shell .ap-profile-header .ap-settings-button {
+ width:32px !important;
+ min-width:32px !important;
+ height:32px !important;
+ min-height:32px !important;
+ border-radius:8px !important;
+}
+@media (max-width: 390px) {
+ .app-shell:not(.home-shell) .ap-profile-header h1 {
+  font-size:16.5px !important;
+ }
+ .app-shell:not(.home-shell) .ap-profile-header-actions {
+  gap:4px !important;
+ }
+ .app-shell:not(.home-shell) .ap-profile-header-actions .streak-chip,
+ .app-shell:not(.home-shell) .ap-profile-header .ap-credit {
+  height:30px !important;
+  min-height:30px !important;
+  padding:0 7px !important;
+  font-size:11px !important;
+ }
+ .app-shell:not(.home-shell) .ap-profile-header .ap-settings-button {
+  width:30px !important;
+  min-width:30px !important;
+  height:30px !important;
+  min-height:30px !important;
+ }
+}
+.app-shell.device-mobile-shell .ap-sub-header {
+ gap:8px !important;
+ flex-wrap:wrap !important;
+}
+.app-shell.device-mobile-shell .ap-sub-header h1 {
+ font-size:20px !important;
+ min-width:0;
+ flex:1 1 auto;
+}
+.ap-workspace-drawer-backdrop {
+ position:fixed;
+ inset:0;
+ z-index:2600;
+ background:rgba(15, 35, 52, 0.56);
+ backdrop-filter:blur(4px);
+ -webkit-backdrop-filter:blur(4px);
+ display:flex;
+ justify-content:flex-start;
+ align-items:stretch;
+ animation:apDrawerFadeIn .18s ease-out;
+}
+@media (min-width: 769px) {
+ .app-shell.device-mobile-shell .ap-workspace-drawer-backdrop {
+  left:50%;
+  right:auto;
+  transform:translateX(-50%);
+  width:440px;
+ }
+}
+.ap-workspace-drawer {
+ width:min(86%, 324px);
+ max-width:324px;
+ height:100%;
+ background:linear-gradient(180deg, #f4fbfd 0%, #fffef9 24%, #f8fcf9 100%);
+ border-right:2px solid #96c2ce;
+ box-shadow:10px 0 32px rgba(15, 42, 62, 0.28);
+ display:flex;
+ flex-direction:column;
+ overflow:hidden;
+ animation:apDrawerSlideIn .2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes apDrawerFadeIn {
+ from { opacity:0; }
+ to { opacity:1; }
+}
+@keyframes apDrawerSlideIn {
+ from { transform:translateX(-24px); opacity:0.6; }
+ to { transform:translateX(0); opacity:1; }
+}
+.ap-workspace-drawer-top {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ padding:14px 14px 12px;
+ background:linear-gradient(135deg, #123e54 0%, #1d6b56 100%);
+ color:#ffffff;
+ border-bottom:1.5px solid #2b7b6c;
+ flex-shrink:0;
+}
+.ap-workspace-drawer-user {
+ display:flex;
+ align-items:center;
+ gap:10px;
+ min-width:0;
+}
+.ap-workspace-drawer-avatar {
+ display:grid;
+ place-items:center;
+ width:44px;
+ height:44px;
+ border-radius:12px;
+ background:#fffef8;
+ border:2px solid rgba(255, 255, 255, 0.72);
+ overflow:hidden;
+ flex-shrink:0;
+ color:#153b55;
+}
+.ap-workspace-drawer-avatar img {
+ width:100%;
+ height:100%;
+ object-fit:cover;
+}
+.ap-workspace-drawer-avatar .pixel-avatar,
+.ap-workspace-drawer-avatar svg {
+ width:34px !important;
+ height:34px !important;
+}
+.ap-workspace-drawer-identity {
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ gap:4px;
+}
+.ap-workspace-drawer-identity strong {
+ font-size:15px;
+ font-weight:800;
+ color:#ffffff;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.ap-workspace-drawer-badges {
+ display:inline-flex;
+ align-items:center;
+ gap:6px;
+ flex-wrap:wrap;
+}
+.ap-workspace-drawer-badges .ap-plan-tag {
+ font-size:10px;
+ padding:2px 7px;
+}
+.ap-workspace-drawer-badges .ap-plan-tag.is-free {
+ background:rgba(255, 255, 255, 0.2);
+ border:1px solid rgba(255, 255, 255, 0.45);
+ color:#ffffff;
+}
+.ap-workspace-drawer-tier {
+ font-size:11px;
+ font-weight:700;
+ padding:1px 7px;
+ border-radius:999px;
+ background:rgba(255, 241, 191, 0.92);
+ color:#6c4300;
+}
+.ap-workspace-drawer-close {
+ display:grid;
+ place-items:center;
+ width:34px;
+ height:34px;
+ border-radius:999px;
+ border:1.5px solid rgba(255, 255, 255, 0.45);
+ background:rgba(255, 255, 255, 0.14);
+ color:#ffffff;
+ font-size:16px;
+ font-weight:800;
+ cursor:pointer;
+ flex-shrink:0;
+}
+.ap-workspace-drawer-close:hover {
+ background:rgba(255, 255, 255, 0.26);
+}
+.ap-workspace-drawer-nav {
+ flex:1 1 auto;
+ overflow-y:auto;
+ padding:12px 12px 24px;
+ display:flex;
+ flex-direction:column;
+ gap:14px;
+}
+.ap-workspace-drawer-group-title {
+ margin:0 0 6px 6px;
+ font-size:11px;
+ font-weight:800;
+ letter-spacing:0.06em;
+ text-transform:uppercase;
+ color:#48697a;
+}
+.ap-workspace-drawer-list {
+ list-style:none;
+ margin:0;
+ padding:0;
+ display:flex;
+ flex-direction:column;
+ gap:4px;
+}
+.ap-workspace-drawer-link {
+ display:flex;
+ align-items:center;
+ gap:10px;
+ min-height:42px;
+ padding:8px 10px;
+ border-radius:10px;
+ border:1px solid transparent;
+ text-decoration:none;
+ color:#163c56;
+ font-size:14px;
+ font-weight:700;
+ transition:background-color .14s ease, border-color .14s ease;
+}
+.ap-workspace-drawer-link:hover {
+ background:#eaf6f9;
+ border-color:#b6dae3;
+}
+.ap-workspace-drawer-link.is-current,
+.ap-workspace-drawer-link[aria-current="page"] {
+ background:#dcf4e7;
+ border-color:#74bfa2;
+ color:#12563c;
+ box-shadow:inset 3px 0 0 #1f7b5c;
+}
+.ap-workspace-drawer-link-icon {
+ display:grid;
+ place-items:center;
+ width:28px;
+ height:28px;
+ border-radius:8px;
+ background:#eef7fa;
+ color:#1c6c5b;
+ flex-shrink:0;
+}
+.ap-workspace-drawer-link.is-current .ap-workspace-drawer-link-icon {
+ background:#ffffff;
+ color:#155c42;
+}
+.ap-workspace-drawer-link-icon svg {
+ width:17px !important;
+ height:17px !important;
+}
+.ap-workspace-drawer-link-label {
+ flex:1 1 auto;
+ min-width:0;
+}
+.ap-workspace-drawer-link-arrow {
+ color:#678492;
+ font-size:16px;
+ flex-shrink:0;
+}
+
+/* 19. Quest Gameplay Scrollbars, Flex Layout, HUD, Actions & PlayerDialogs */
+.app-shell:not(.home-shell) > main.quest-player.due-player {
+ display:flex !important;
+ flex-direction:column !important;
+ height:100% !important;
+ min-height:0 !important;
+ overflow:hidden !important;
+ padding:0 !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player > .q-play-surface {
+ display:flex !important;
+ flex-direction:column !important;
+ flex:1 1 0 !important;
+ min-height:0 !important;
+ width:100% !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-hud {
+ display:grid !important;
+ grid-template-columns:40px minmax(0, 1fr) auto auto 40px !important;
+ align-items:center !important;
+ gap:8px !important;
+ flex-shrink:0 !important;
+ padding:10px clamp(12px, 3vw, 28px) !important;
+ border-bottom:1.5px solid #aacdd3 !important;
+ background:#f0f8fa !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-hud > .q-icon-button:first-child {
+ grid-column:1 !important;
+ grid-row:1 !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-hud-progress {
+ grid-column:2 !important;
+ grid-row:1 !important;
+ min-width:0 !important;
+ min-height:38px !important;
+ display:inline-flex !important;
+ align-items:center !important;
+ justify-content:center !important;
+ gap:4px !important;
+ padding:4px 10px !important;
+ font-size:13.5px !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .due-play-mode {
+ grid-column:3 !important;
+ grid-row:1 !important;
+ display:inline-flex !important;
+ align-items:center !important;
+ justify-content:center !important;
+ gap:6px !important;
+ min-height:38px !important;
+ padding:4px 10px !important;
+ font-size:12.5px !important;
+ font-weight:700 !important;
+ white-space:nowrap !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .due-play-mode small {
+ margin:0 !important;
+ font-size:11.5px !important;
+ color:#48697a !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-hud-score {
+ grid-column:4 !important;
+ grid-row:1 !important;
+ display:inline-flex !important;
+ align-items:center !important;
+ justify-content:center !important;
+ min-height:38px !important;
+ padding:4px 10px !important;
+ font-size:13px !important;
+ font-weight:800 !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-hud > .q-icon-button:last-child {
+ grid-column:5 !important;
+ grid-row:1 !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-hud .q-icon-button {
+ width:38px !important;
+ min-width:38px !important;
+ height:38px !important;
+ min-height:38px !important;
+ padding:6px !important;
+ border-radius:10px !important;
+ border:1.5px solid #9dc5d1 !important;
+ background:#fffef8 !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-play-layout {
+ display:flex !important;
+ flex-direction:column !important;
+ flex:1 1 0 !important;
+ min-height:0 !important;
+ width:100% !important;
+}
+@media (min-width: 1000px) {
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .quest-player.due-player .q-play-layout {
+  flex-direction:row !important;
+  max-width:1320px !important;
+  margin-inline:auto !important;
+  padding:16px 20px !important;
+  gap:20px !important;
+ }
+ .app-shell:not(.home-shell):not(.device-mobile-shell) .quest-player.due-player .quest-journey-rail {
+  max-height:100% !important;
+  overflow-y:auto !important;
+  scrollbar-width:thin !important;
+ }
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-center {
+ display:flex !important;
+ flex-direction:column !important;
+ flex:1 1 0 !important;
+ min-height:0 !important;
+ min-width:0 !important;
+ width:100% !important;
+ overflow:hidden !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-scroll {
+ flex:1 1 0 !important;
+ min-height:0 !important;
+ overflow-y:auto !important;
+ overflow-x:hidden !important;
+ overscroll-behavior:contain !important;
+ -webkit-overflow-scrolling:touch !important;
+ scrollbar-width:thin !important;
+ scrollbar-color:rgba(21, 59, 85, 0.35) rgba(21, 59, 85, 0.06) !important;
+ padding:18px clamp(14px, 3vw, 34px) 28px !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .due-story-art {
+ width:100% !important;
+ margin:0 0 18px !important;
+ border-radius:14px !important;
+ overflow:hidden !important;
+ border:1.5px solid #b5d6df !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .due-story-art :is(img, svg) {
+ height:clamp(180px, 30dvh, 270px) !important;
+ object-fit:cover !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-actions {
+ display:flex !important;
+ align-items:center !important;
+ gap:10px !important;
+ flex:0 0 auto !important;
+ height:auto !important;
+ min-height:66px !important;
+ padding:10px clamp(14px, 3vw, 28px) calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+ border-top:1.5px solid #aacdd3 !important;
+ background:#f0f8fa !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-actions .due-back-story {
+ flex:0 0 46px !important;
+ width:46px !important;
+ height:46px !important;
+ min-height:46px !important;
+ margin:0 !important;
+ border:1.5px solid #28796b !important;
+ background:#fffef8 !important;
+ color:#153b55 !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-actions > .q-primary {
+ flex:1 1 0 !important;
+ width:auto !important;
+ min-width:0 !important;
+ min-height:46px !important;
+ height:auto !important;
+ margin:0 !important;
+ padding:10px 14px !important;
+ white-space:normal !important;
+}
+.app-shell:not(.home-shell) .quest-player.due-player .q-actions > .q-footer-link {
+ flex:0 0 auto !important;
+ min-height:44px !important;
+ padding:6px 10px !important;
+ white-space:nowrap !important;
+ font-weight:700 !important;
+}
+@media (max-width: 899px) {
+ .app-shell:not(.home-shell) .quest-player.due-player {
+  --q-reading-size:16px !important;
+ }
+ .app-shell:not(.home-shell) .quest-player.due-player .q-hud {
+  padding:8px 10px !important;
+  grid-template-columns:36px minmax(0, 1fr) auto auto 36px !important;
+  gap:5px !important;
+ }
+ .app-shell:not(.home-shell) .quest-player.due-player .q-hud .q-icon-button {
+  width:36px !important;
+  min-width:36px !important;
+  height:36px !important;
+  min-height:36px !important;
+ }
+ .app-shell:not(.home-shell) .quest-player.due-player .due-play-mode small {
+  display:none !important;
+ }
+ .app-shell:not(.home-shell) .quest-player.due-player :is(.q-hud-progress, .due-play-mode, .q-hud-score) {
+  min-height:34px !important;
+  padding:3px 8px !important;
+  font-size:12px !important;
+ }
+}
+.app-shell.device-mobile-shell .quest-player.due-player .q-actions {
+ padding:10px 12px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Status, Locked & Exit Screens inside QuestPlayer: always scrollable */
+.app-shell:not(.home-shell) > main.quest-player:is(.q-status-screen, .dq-locked-page, .due-exit) {
+ display:flex !important;
+ flex-direction:column !important;
+ justify-content:flex-start !important;
+ height:100% !important;
+ min-height:0 !important;
+ overflow-y:auto !important;
+ overflow-x:hidden !important;
+ padding:20px 16px 36px !important;
+ scrollbar-width:thin !important;
+}
+.app-shell:not(.home-shell) > main.quest-player:is(.q-status-screen, .dq-locked-page, .due-exit) > :first-child {
+ margin-block:auto !important;
+}
+
+/* PlayerDialog Modal Containment & Scrollbar */
+.app-shell:not(.home-shell) .q-dialog-backdrop {
+ position:fixed !important;
+ inset:0 !important;
+ z-index:2500 !important;
+ align-items:center !important;
+ justify-content:center !important;
+ padding:14px !important;
+}
+.app-shell:not(.home-shell) .q-dialog-backdrop > .q-dialog {
+ width:min(100%, 660px) !important;
+ max-width:660px !important;
+ max-height:calc(100dvh - 28px) !important;
+ height:auto !important;
+ margin:auto !important;
+ padding:18px 20px !important;
+ border-radius:18px !important;
+ border:1.5px solid #8ebdc9 !important;
+ background:#fffef9 !important;
+ overflow-y:auto !important;
+ scrollbar-width:thin !important;
+ box-shadow:0 22px 54px rgba(12, 34, 50, 0.3) !important;
+}
+.app-shell.device-mobile-shell .q-dialog-backdrop > .q-dialog {
+ width:min(calc(100% - 8px), 408px) !important;
+ max-width:408px !important;
+ max-height:calc(100dvh - 24px) !important;
+ padding:16px !important;
+}
+.app-shell:not(.home-shell) .due-quit-button {
+ position:static !important;
+ margin-top:20px !important;
+}
+
+/* DueStartPage, DestinationPage & CelebrationPage Scrollbar Synchronization */
+.app-shell:not(.home-shell) > main.due-start {
+ display:block !important;
+ height:100% !important;
+ min-height:0 !important;
+ overflow-y:auto !important;
+ overflow-x:hidden !important;
+ padding:0 0 28px !important;
+ scrollbar-width:thin !important;
+}
+.app-shell:not(.home-shell) .due-start .due-start-top {
+ flex-wrap:nowrap !important;
+ gap:8px !important;
+}
+.app-shell:not(.home-shell) .due-start .due-start-top-actions > button {
+ width:36px !important;
+ height:36px !important;
+ min-width:36px !important;
+ border-radius:999px !important;
+ border:1.5px solid #a6cbd5 !important;
+ background:#e1f1f5 !important;
+}
+.app-shell.device-mobile-shell .due-start .due-start-surface {
+ padding:0 14px 20px !important;
+}
+.app-shell:not(.home-shell) > main.quest-page.arrival-screen {
+ margin:0 !important;
+ max-width:none !important;
+ width:100% !important;
+ height:100% !important;
+ min-height:0 !important;
+ overflow-y:auto !important;
+ overflow-x:hidden !important;
+ padding:16px clamp(14px, 3vw, 28px) 36px !important;
+ scrollbar-width:thin !important;
+}
+.app-shell.device-mobile-shell .arrival-screen .mission-list {
+ grid-template-columns:minmax(0, 1fr) !important;
+}
+.app-shell:not(.home-shell) > main.celebration-screen {
+ height:100% !important;
+ min-height:0 !important;
+ overflow-y:auto !important;
+ overflow-x:hidden !important;
+ padding:28px 16px 36px !important;
+ scrollbar-width:thin !important;
+}
+
+/* Visible Scrollbar Track for Active Quest Gameplay & Dialog Containers */
+.app-shell:not(.home-shell) :is(.q-scroll, .q-dialog, main.due-start, main.quest-page.arrival-screen, main.celebration-screen, main.quest-player)::-webkit-scrollbar {
+ width:6px !important;
+ height:6px !important;
+}
+.app-shell:not(.home-shell) :is(.q-scroll, .q-dialog, main.due-start, main.quest-page.arrival-screen, main.celebration-screen, main.quest-player)::-webkit-scrollbar-track {
+ background:rgba(21, 59, 85, 0.06) !important;
+ border-radius:999px !important;
+}
+.app-shell:not(.home-shell) :is(.q-scroll, .q-dialog, main.due-start, main.quest-page.arrival-screen, main.celebration-screen, main.quest-player)::-webkit-scrollbar-thumb {
+ background:rgba(21, 59, 85, 0.34) !important;
+ border-radius:999px !important;
+}

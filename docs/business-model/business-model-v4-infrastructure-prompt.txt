@@ -1,0 +1,35 @@
+Công cụ: image_gen tích hợp.
+
+Redesign the attached Vietnamese DANA QUEST business model diagram to ADD a clearly organized information-technology infrastructure layer while REDUCING clutter. Preserve all business actors including the GREEN BUS. This is a polished landscape university report infographic, high resolution, approximately 4:3 proportions. White background, dark indigo typography, royal blue thin orthogonal arrows with rounded corners, restrained pale blue panels, flat icons, central Dana Quest smartphone illustration as in reference. Readable Vietnamese with exact diacritics. NO tiny text, tangled arrows, crossed text, editor handles, fake partner contracts or arbitrary prices.
+
+NEW CLEAR THREE-TIER LAYOUT, visually separated by whitespace and restrained small section headings:
+
+TITLE: "MÔ HÌNH KINH DOANH DANA QUEST"
+Subtitle: "Mô hình đề xuất • giai đoạn demo trình duyệt"
+
+TIER 1 (about upper half): heading "KHÁCH HÀNG & PHÂN PHỐI". Central Dana Quest platform with a compact vertical phone and caption "DANA QUEST (Freemium)". Three surrounding actor nodes: left "NGƯỜI CHƠI" smaller "Du khách • người địa phương"; top-center "ĐƠN VỊ PHÂN PHỐI" smaller "Lữ hành • lưu trú • hướng dẫn viên"; right "KHÁCH HÀNG TỔ CHỨC" smaller "Điểm tham quan • trường học • doanh nghiệp". Six clear SOLID blue arrows, separate lanes:
+Players -> Dana Quest "Thanh toán quyền chơi".
+Dana Quest -> Players "Quest • câu chuyện • thử thách".
+Distributor -> Dana Quest "Giới thiệu khách / phân phối quest".
+Dana Quest -> Distributor "Chiết khấu / hoa hồng thỏa thuận".
+Organizational client -> Dana Quest "Đặt thiết kế • thanh toán".
+Dana Quest -> Organizational client "Thiết kế & triển khai quest riêng".
+Do NOT hide arrowheads or merge inbound and outbound paths.
+
+TIER 2 (middle): heading "HỢP TÁC DỰ KIẾN". THREE equal-size compact cards aligned horizontally, with visible icons and readable text. Left megaphone "QUẢNG BÁ / TÀI TRỢ", center prominent green BUS "VẬN CHUYỂN — XE BUÝT", right gift/voucher "ĐỐI TÁC ƯU ĐÃI". Rather than 6 long crisscrossing arrows, use a single horizontal DASHED connector bus from central Dana Quest above, with one short dashed two-way link to each of the three cards. Heading over this shared dashed connector: "Trao đổi theo thỏa thuận". Card text explains the two directions unambiguously:
+LEFT CARD lines: "Đối tác → Dana Quest: phí quảng bá / tài trợ" and "Dana Quest → đối tác: quyền lợi truyền thông".
+BUS CARD lines: "Đối tác → người chơi: dịch vụ di chuyển"; "Đối tác → Dana Quest: vé / ưu đãi"; "Dana Quest → đối tác: giới thiệu khách, xác thực & đối soát". A small highlighted badge below bus text: "Định hướng đổi Green Coin lấy ưu đãi".
+RIGHT CARD lines: "Đối tác → Dana Quest: voucher & điều kiện dùng"; "Dana Quest → đối tác: giới thiệu khách & đối soát".
+These inline arrows are text labels inside the cards; route the connecting graphic above cards only, so no text collisions. It is important the bus directly serves PLAYERS as stated in its text, not paid travel invented in the diagram.
+
+TIER 3 (bottom): heading "HẠ TẦNG CÔNG NGHỆ THÔNG TIN". A single wide pale mint/blue band containing FOUR clear icon modules separated by subtle dividers. This band is a SUPPORT RESOURCE, NOT a commercial partner or revenue source. Use one thin muted grey orthogonal outer connector from this infrastructure band up to the Dana Quest platform, labelled "Hỗ trợ vận hành nền tảng". Route along the far right margin outside all actors, never through business arrows or text.
+FOUR MODULES exact wording:
+1 map icon: "BẢN ĐỒ" / "Leaflet + OpenStreetMap" / "Phần mềm miễn phí; nền công cộng có giới hạn".
+2 location target/satellite icon: "ĐỊNH VỊ GPS" / "Vị trí từ thiết bị / trình duyệt" / "Không có phí API riêng; cần người dùng cấp quyền".
+3 route arrow icon: "CHỈ ĐƯỜNG ĐI BỘ" / "Valhalla" / "Đang dùng máy chủ demo miễn phí có giới hạn".
+4 server/database icon: "MÁY CHỦ & LƯU TRỮ" / "Tài khoản • nội dung • tiến độ" / "Local: máy cá nhân; triển khai có chi phí theo dịch vụ".
+
+Small footer with concise legend: "Nét liền: trao đổi cốt lõi đề xuất   |   Nét đứt: hợp tác dự kiến   |   Xám: hạ tầng hỗ trợ".
+Final footer: "Green Coin hiện là điểm trong game, chưa đổi thành dịch vụ thực tế. Chi phí vận hành thương mại được dự toán riêng."
+
+Preserve the role of a BUSINESS MODEL: technology must be less visually dominant than platform, customers and cash/value flows. Prioritize a balanced readable arrangement, fewer long arrows, enough padding, large card headings, consistent fonts. Do not depict OSM as a signed partner. Do not imply GPS is Google Maps or Valhalla is paid per request in this demo. No additional labels beyond the specified content.

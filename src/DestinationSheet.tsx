@@ -20,7 +20,7 @@ export default function DestinationSheet({ place, onClose }: { place: Destinatio
   const { info, loading } = useLiveVisitInfo(place, fallbackInfo)
   const { sprites, content } = usePlaceData()
   const custom = content[place.id]
-  const thumb = custom?.photos[0]?.url ?? sprites[place.id]?.url
+  const thumb = custom?.photos[0]?.url ?? (place.photo?`${import.meta.env.BASE_URL}${place.photo.replace(/^\//,'')}`:sprites[place.id]?.url)
   const [expanded, setExpanded] = useState(false)
   const [visible, setVisible] = useState(false)
   const [closing, setClosing] = useState(false)
@@ -126,13 +126,13 @@ export default function DestinationSheet({ place, onClose }: { place: Destinatio
     }}>
       <div className="sheet-grab" aria-hidden="true"><span className="sheet-handle" /></div>
       <div className="sheet-header">
-        <div className="sheet-thumbnail" aria-hidden="true">{custom ? (thumb ? <img className="sheet-thumb-img" src={thumb} alt=""/> : null) : <LandmarkArt id={place.id}/>}</div>
+        <div className="sheet-thumbnail" aria-hidden="true">{thumb ? <img className="sheet-thumb-img" src={thumb} alt=""/> : <LandmarkArt id={place.id}/>}</div>
         <div><h2>{place.name}</h2></div>
         <button type="button" className="sheet-close" aria-label={t("Đóng thông tin điểm đến")} onClick={close}>{t("×")}</button>
       </div>
     </div>
     {custom ? <div className="sheet-body" id="destination-sheet-details">
-      <AdminGallery key={place.id} name={place.name} photos={custom.photos}/>
+      <AdminGallery key={place.id} name={place.name} photos={custom.photos.length?custom.photos:place.photo?[{url:`${import.meta.env.BASE_URL}${place.photo.replace(/^\//,'')}`,caption:place.name,credit:''}]:[]}/>
       {custom.highlight && <p className="admin-highlight">{custom.highlight}</p>}
       {(custom.description || custom.detail) && <section className="sheet-detail-group visit-section"><h3>{t("Tổng quan")}</h3>{custom.description && <p>{custom.description}</p>}{custom.detail && <p>{custom.detail}</p>}</section>}
       {custom.activities.length > 0 && <section className="sheet-detail-group visit-section"><h3>{t("Gợi ý hoạt động")}</h3><ul>{custom.activities.map(activity => <li key={activity}>{activity}</li>)}</ul></section>}

@@ -68,7 +68,7 @@ export const DEFAULT_BADGE_THEMES = [
         description: 'Ghé thăm bãi biển Mỹ Khê quyến rũ hàng đầu hành tinh.',
         rarity: 'common',
         icon: '🏖️',
-        requiredDestinations: ['my-khe', 'bien-my-khe'],
+        requiredDestinations: ['my-khe', 'bien-my-khe', 'bai-bien-my-khe'],
         bonusCoins: 15,
         bonusXp: 20,
       },
@@ -88,7 +88,7 @@ export const DEFAULT_BADGE_THEMES = [
         description: 'Khám phá bán đảo Sơn Trà, Bãi Bụt và rừng nguyên sinh giáp biển.',
         rarity: 'rare',
         icon: '🐒',
-        requiredDestinations: ['son-tra', 'chua-linh-ung-son-tra'],
+        requiredDestinations: ['son-tra', 'chua-linh-ung-son-tra', 'chua-linh-ung-bai-but'],
         bonusCoins: 30,
         bonusXp: 50,
       },
@@ -221,7 +221,7 @@ export function createBadgeStore(directory, { readGame, readQuests, themes = DEF
         const game = await readGame(owner)
         const dests = game?.state?.destinations ?? {}
         for (const [id, val] of Object.entries(dests)) {
-          if (val && (val.started || (val.completed && val.completed.length > 0))) {
+          if (val && val.completed && val.completed.length > 0) {
             visitedPlaces.add(id)
           }
         }
@@ -237,7 +237,7 @@ export function createBadgeStore(directory, { readGame, readQuests, themes = DEF
           }
         }
         for (const [destId, val] of Object.entries(quests?.legacy?.destinations ?? {})) {
-          if (val && (val.started || (val.completed && val.completed.length > 0))) {
+          if (val && val.completed && val.completed.length > 0) {
             visitedPlaces.add(destId)
           }
         }

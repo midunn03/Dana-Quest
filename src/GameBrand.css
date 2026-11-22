@@ -1,0 +1,179 @@
+/* Dana Quest application brand: the approved homepage palette and local readable type. */
+.app-shell:not(.home-shell), .site-popup, .premium-modal-backdrop, .auth-modal-layer, .auth-full-page, .device-mode-backdrop {
+ --font-ui:'Dana Home Sans','Segoe UI',system-ui,sans-serif;
+ --font-vi:'Dana Home Sans','Segoe UI',system-ui,sans-serif; --font-en:'Dana Home Sans','Segoe UI',system-ui,sans-serif;
+ --px-font:var(--font-ui); --px-font-body:var(--font-ui); --px-font-display:var(--font-ui); --px-font-label:var(--font-ui);
+ --px-ink:#153b55; --px-muted:#506b7c; --px-page:#eef8f4; --px-surface:#fffef8;
+ --px-surface-soft:#e4f3ec; --px-surface-hover:#d7eee6; --px-selected:#dcf0e5;
+ --px-action:#ffd05a; --px-action-hover:#ffdc7d; --px-action-ink:#19394e;
+ --px-info:#2289b5; --px-focus:#167aa5; --px-reward:#ffc544; --px-reward-hover:#eeb32f;
+ --px-success:#217c5b; --px-success-soft:#e0f5e7; --px-warning:#ad3d36;
+ --px-play-canvas:#edf8f1; --px-play-ink:#153b55;
+ --px-border:2px solid #a5cad2; --px-radius:6px;
+ --px-shadow-low:0 3px 0 #b8d8d9; --px-shadow-mid:0 7px 20px #194d6420;
+ --text-sm:17px; --text-md:23px; --text-lg:32px; --text-xl:40px; --text-2xl:48px; --text-3xl:56px;
+ --px-text-sm:15px; --px-text-base:17px; --px-text-lg:22px; --px-text-xl:30px; --px-text-display:46px;
+ --px-nav-height:54px; --px-page-width:1440px; --px-page-gutter:clamp(14px,2.5vw,32px);
+ color:var(--px-ink); font-family:var(--font-ui);
+}
+.app-shell:not(.home-shell) :where([lang],.font-en,h1,h2,h3,h4,p,a,button,label,input,select,textarea,summary,small,span,legend),
+.site-popup :where([lang],.font-en,h1,h2,h3,h4,p,a,button,label,input,select,textarea,summary,small,span,legend),
+.premium-modal-backdrop :where([lang],.font-en,h1,h2,h3,h4,p,a,button,label,input,select,textarea,summary,small,span,legend,li,strong,s),
+.auth-modal-layer :where([lang],.font-en,h1,h2,h3,h4,p,a,button,label,input,select,textarea,summary,small,span,legend),
+.device-mode-backdrop :where([lang],.font-en,h1,h2,h3,h4,p,a,button,label,input,select,textarea,summary,small,span,legend) { font-family:'Dana Home Sans','Segoe UI',system-ui,sans-serif !important; }
+.premium-modal-backdrop :where(p,li,span,small,strong,s,a,button) { letter-spacing:normal; }
+.app-shell:not(.home-shell) { background: #eff8f2; }
+.app-shell:not(.home-shell)::before { content:''; position:absolute; inset:-10px; z-index:-2; background:url('/art/home/pixel-riverside-background.png') center/cover no-repeat; filter:blur(6px) saturate(.65); opacity:.32; pointer-events:none; }
+.app-shell:not(.home-shell)::after { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(140deg,#e9f8ffc7,#f0faedb8 65%,#fff9e5c9); pointer-events:none; }
+.app-shell:not(.home-shell) > main:not(.camera-page) { background:transparent !important; color:var(--px-ink); }
+.app-shell:not(.home-shell) > :is(.page-tools,.quest-main-nav,.workspace-navigation,.device-mobile-header,.device-mobile-nav) { background:#f0fafff2; border-color:#aacdd3; color:#153b55; }
+.app-shell:not(.home-shell) .page-tools-search { background:#e1f1f5; border:1px solid #a6cbd5; font-size:17px; min-height:46px; color:#244d64; }
+.app-shell:not(.home-shell) .quest-main-nav a { font-size:15px; font-weight:700; color:#244d64; }
+.app-shell:not(.home-shell) .quest-main-nav a[aria-current=page] { background:#dcf4e7; color:#1b6e4f; box-shadow:inset 0 -3px 0 #217c5b; }
+.app-shell:not(.home-shell) :is(h1,h2,h3),.site-popup :is(h1,h2,h3) { font-weight:800; letter-spacing:-.025em; text-transform:none; }
+.app-shell:not(.home-shell) :where(p,li),.site-popup :where(p,li) { line-height:1.65; overflow-wrap:break-word; }
+.app-shell:not(.home-shell) :where(button,a,input,select,textarea):focus-visible,.site-popup :where(button,a,input,select,textarea):focus-visible { outline:3px solid #168ac4; outline-offset:3px; }
+.app-shell:not(.home-shell) :is(.discovery-card,.qd-box,.ap-card,.ev-card,.reward-card,.help-card,.journey-frame,.avatar-custom-preview,.avatar-custom-controls,.due-before,.due-landmark-card,.q-challenge,.q-feedback,.creator-passport,.creator-lifetime,.library-card,.badge-card),
+.site-popup :is(.ap-card,.help-card,.journey-frame) { background:#fffef8ef; border:2px solid #a5cad2; border-radius:6px; box-shadow:0 4px 14px #224c6310; }
+.app-shell:not(.home-shell) :is(.discovery-intro,.ev-intro,.wallet-strip,.journey-notice,.qd-meta,.ap-profile-top,.due-distance) { background:linear-gradient(120deg,#ddf2f9e8,#e7f6dfeb); color:#153b55; border-color:#a5cad2; }
+.app-shell:not(.home-shell) :is(.ap-primary,.qd-primary,.q-primary,.journey-primary,.due-purple,.ev-primary),
+.site-popup :is(.ap-primary,.journey-primary,.device-mode-confirm-btn) { background:linear-gradient(180deg,#ffe07d,#ffc43d); border:2px solid #c98e27; color:#153b55; min-height:44px; box-shadow:inset 0 2px 0 #fff4c4,0 3px 0 #b07a22; font-size:16px; font-weight:800; border-radius:6px; transition:transform .12s ease,filter .12s ease; }
+.app-shell:not(.home-shell) :is(.ap-primary,.qd-primary,.q-primary,.journey-primary,.due-purple,.ev-primary):hover:not(:disabled) { transform:translateY(-1px); filter:brightness(1.03); }
+.app-shell:not(.home-shell) :is(.qd-secondary,.due-secondary,.q-secondary,.ev-secondary,.q-menu-item,.journey-option),.site-popup .booking-option { background:#eef9f4; border:1.5px solid #28796b; color:#185545; min-height:42px; font-weight:700; border-radius:6px; transition:background-color .15s ease; }
+.app-shell:not(.home-shell) :is(.qd-secondary,.due-secondary,.q-secondary,.ev-secondary):hover:not(:disabled) { background:#dcf3e8; }
+.app-shell:not(.home-shell) :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea),.site-popup :is(input:not([type=checkbox]):not([type=radio]),select,textarea) { font-size:17px; min-height:46px; border:2px solid #aac6cd; border-radius:4px; background:#fffef9; color:#153b55; }
+.app-shell:not(.home-shell) :is(.q-dialog,.px-modal,.due-start-actions,.qd-scroll-header,.q-hud,.q-actions,.ap-page-header) { background:#f4fcf6f5; color:#153b55; border-color:#a6cbd5; }
+.app-shell:not(.home-shell) .q-dialog-backdrop { background:#12384b80; backdrop-filter:blur(5px); }
+.app-shell:not(.home-shell) :is(.qd-frame,.ev-frame,.creator-frame) { width:min(100%,1440px); margin-inline:auto; }
+.app-shell:not(.home-shell) .discovery-page { padding:18px max(18px,calc((100% - 1440px)/2)); }
+.app-shell:not(.home-shell) .discovery-grid { gap:16px; }
+.app-shell:not(.home-shell) .discovery-title-row h1 { font-size:30px; line-height:1.2; }
+.app-shell:not(.home-shell) .discovery-intro { padding:16px 20px; border-radius:8px; }
+.app-shell:not(.home-shell) .discovery-card h3 { font-size:20px; line-height:1.3; }
+.app-shell:not(.home-shell) .discovery-card-body { padding:14px 16px; }
+.app-shell:not(.home-shell) .events-index .ev-intro h2 { font-size:28px; line-height:1.2; }
+.app-shell:not(.home-shell) .events-index .ev-card h2 { font-size:20px; line-height:1.3; }
+.app-shell:not(.home-shell) .qd-layout { gap:22px; }
+.app-shell:not(.home-shell) .qd-box { padding:18px; }
+.app-shell:not(.home-shell) .qd-content h1 { font-size:clamp(26px,2.6vw,38px); line-height:1.2; }
+.app-shell:not(.home-shell) .qd-meta { flex-wrap:wrap; gap:8px 14px; }
+.app-shell:not(.home-shell) .ap-card { padding:16px 18px; }
+.app-shell:not(.home-shell) .reward-card { gap:14px; padding:16px; }
+.app-shell:not(.home-shell) .reward-info h2 { font-size:23px; }
+.app-shell:not(.home-shell) .avatar-custom-stage { background:linear-gradient(145deg,#d6eff9,#e5f5da); border-color:#9bc9cb; }
+.app-shell:not(.home-shell) .due-player .q-story { color:#153b55; }
+.app-shell:not(.home-shell) .due-player .q-scroll { padding:20px 24px 28px; }
+.app-shell:not(.home-shell) .due-player .q-story p { font-size:var(--q-reading-size,20px); line-height:1.75; }
+.app-shell:not(.home-shell) .q-due-photo { border:0; background:#fffef8; }
+.q-due-photo img { display:block; width:100%; height:auto; object-fit:cover; object-position:center 65%; }
+.app-shell:not(.home-shell) .q-artwork figcaption { font-size:15px; padding:10px 16px; color:#506b7c; }
+.app-shell:not(.home-shell) :is(.qd-hero,.creator-quests) .q-due-photo img { aspect-ratio:16/9; object-fit:cover; }
+.app-shell:not(.home-shell) .due-start .q-due-photo img { aspect-ratio:16/9; object-fit:cover; }
+.app-shell:not(.home-shell) .help-content { max-width:1120px; }
+.app-shell:not(.home-shell) .help-card { padding:24px; }
+.app-shell:not(.home-shell) .help-page h1 { font-size:clamp(30px,4vw,44px); }
+.app-shell:not(.home-shell) .help-page h2 { font-size:26px; }
+.site-popup :is(h1,.login-sheet>h1) { font-size:30px; line-height:1.25; }
+.site-popup :is(p,label,li) { font-size:17px; }
+.site-popup .journey-notice { background:#e8f5ec; border:1px solid #b5d6c1; padding:16px; }
+.site-popup .booking-option { display:grid; grid-template-columns:44px minmax(0,1fr) 24px; gap:16px; padding:18px; margin-block:14px; text-decoration:none; }
+.site-popup .booking-option strong { display:block; font-size:19px; }
+.site-popup .booking-option small { font-size:15px; line-height:1.5; }
+@media(max-width:850px) {
+ .app-shell:not(.home-shell) { --px-page-gutter:16px; }
+ .app-shell:not(.home-shell) :is(.qd-layout,.creator-layout,.help-grid-two,.avatar-custom-grid) { grid-template-columns:minmax(0,1fr); gap:24px; }
+ .app-shell:not(.home-shell) .discovery-page { padding:20px 16px; }
+ .app-shell:not(.home-shell) .qd-box { padding:18px; }
+ .app-shell:not(.home-shell) .due-player .q-hud { gap:8px; }
+ .app-shell:not(.home-shell) .due-player .q-hud-score { font-size:15px; padding-inline:6px; }
+ .app-shell:not(.home-shell) .due-player .q-hud-progress { font-size:15px; }
+}
+.app-shell.device-mobile-shell:not(.home-shell) { --px-nav-height:54px; }
+.app-shell.device-mobile-shell:not(.home-shell) :is(.qd-layout,.creator-layout,.avatar-custom-grid,.help-grid-two) { grid-template-columns:minmax(0,1fr); gap:20px; }
+.app-shell.device-mobile-shell:not(.home-shell) .qd-box { padding:18px; }
+.app-shell.device-mobile-shell:not(.home-shell) .quest-main-nav a { font-size:14px; }
+@media(hover:hover) and (pointer:fine) {
+ .app-shell:not(.home-shell) :is(.discovery-card,.ev-card):hover { border-color:#388da6; }
+}
+/* Readable quest overview artwork and start controls. */
+.app-shell:not(.home-shell) .qd-hero .q-due-photo img { width:100%; height:360px; aspect-ratio:auto; object-fit:cover; object-position:center 65%; }
+.app-shell:not(.home-shell) .qd-hero .q-due-photo figcaption { bottom:0; left:0; right:0; background:#f4fcf1e8; padding:8px 16px; }
+.app-shell:not(.home-shell) .start-hub { padding:22px; border:2px solid #a5cad2; border-radius:6px; background:#fffef8f2; box-shadow:0 5px 16px #224c6310; }
+.app-shell:not(.home-shell) .start-hub-title { font-size:28px; font-weight:800; }
+.app-shell:not(.home-shell) .start-hub :is(.start-hub-summary,.start-hub-description) { font-size:17px; line-height:1.6; }
+.app-shell:not(.home-shell) .start-hub-meta-tag { font-size:15px; }
+.app-shell:not(.home-shell) .start-hub-primary-btn { color:#183a50 !important; font-size:17px; min-height:48px; background:linear-gradient(#ffdf77,#ffc743); border-color:#d6a036; }
+.app-shell:not(.home-shell) :is(.start-hub-secondary-btn,.start-hub-help-link) { font-size:16px; min-height:44px; }
+.app-shell:not(.home-shell) .start-step-item { font-size:15px; }
+.app-shell:not(.home-shell) .start-step-num { color:#217c5b; font-size:17px; }
+.app-shell:not(.home-shell) .discovery-search input { border:0; background:transparent; outline-offset:0; }
+.app-shell:not(.home-shell) .discovery-intro h2 { font-size:22px; }
+.app-shell:not(.home-shell) .next-step-chip { color:#244d64 !important; background:#fff5d5; border-color:#d6bd76; font-size:15px; box-shadow:0 3px 10px #224c6320; }
+.site-popup .information-page .journey-frame { border:0; padding:0; background:transparent; box-shadow:none; }
+.site-popup .information-page .journey-frame > h1 { margin-block:20px; }
+.site-popup .information-page section { padding-block:18px; border-color:#b5d6d5; }
+@media(max-width:850px) { .app-shell:not(.home-shell) .qd-hero .q-due-photo img { height:260px; } }
+.app-shell.device-mobile-shell:not(.home-shell) .qd-hero .q-due-photo img { height:240px; }
+.app-shell.device-mobile-shell:not(.home-shell) .start-hub { padding:18px; }
+.app-shell.device-mobile-shell:not(.home-shell) .start-hub-title { font-size:25px; }
+.app-shell:not(.home-shell) .qd-hero figcaption { position:static; background:#f5fcf2ed; padding:10px 16px; color:#506b7c; }
+.app-shell:not(.home-shell) .qd-hero .qd-beta { top:18px; bottom:auto; left:18px; background:#fff8d8f2; border:1px solid #dfc47a; }
+.app-shell:not(.home-shell) .qd-meta > :is(span,button) { border:1px solid #a6cbd5; background:#f5fcf8; }
+.app-shell:not(.home-shell) .qd-layout { background:#fffef8e8; padding:28px; }
+.app-shell:not(.home-shell) .qd-content .qd-text { font-size:18px; line-height:1.7; }
+.app-shell:not(.home-shell) .ap-profile-header h1 { font-size:32px; font-weight:800; }
+.app-shell:not(.home-shell) .ap-page h2 { font-size:22px; font-weight:800; }
+.app-shell:not(.home-shell) .ap-list { background:#fffef8ef; border:1px solid #a6cbd5; border-radius:6px; overflow:hidden; }
+.app-shell:not(.home-shell) .ap-row { border-color:#c8dcdd; min-height:64px; padding:14px 16px; }
+.app-shell:not(.home-shell) .ap-row-copy strong { font-size:17px; font-weight:700; }
+.app-shell:not(.home-shell) .ap-row-copy small { font-size:15px; line-height:1.5; }
+@media(max-width:850px) { .app-shell:not(.home-shell) .qd-layout { padding:20px 16px; } }
+.app-shell.device-mobile-shell:not(.home-shell) .qd-layout { padding:20px 16px; }
+
+:is(.auth-modal-layer,.auth-full-page,.device-mode-backdrop) :where(h1,h2,h3,p,a,button,label,input,small,span) { font-family:'Dana Home Sans','Segoe UI',system-ui,sans-serif !important; }
+.auth-modal-layer .login-sheet { width:min(100%,580px); background:#fffef5; border:2px solid #a6cbd5; border-radius:8px; box-shadow:0 18px 60px #173e4d40; font-size:17px; }
+.auth-modal-layer .login-sheet input { min-height:48px; font-size:17px; border:2px solid #aac6cd; background:#fffef9; color:#153b55; }
+.auth-modal-layer .login-sheet h1 { font-size:30px; font-weight:800; line-height:1.25; }
+.auth-modal-layer .login-sheet-description { font-size:17px; line-height:1.55; }
+.auth-modal-layer .login-submit { background:linear-gradient(#ffdf77,#ffc743); color:#19394e; border-color:#d6a036; font-size:17px; font-weight:800; }
+.auth-modal-layer .login-account-note { display:grid; grid-template-columns:32px minmax(0,1fr) 24px; gap:12px; background:#e5f4ec; border-color:#b5d6c1; padding:14px; }
+.auth-modal-layer .login-account-note>span { justify-self:end; }
+.auth-modal-layer .login-account-caption { max-width:none; width:100%; text-align:center; font-size:14px; }
+.app-shell:not(.home-shell),.site-popup,.auth-modal-layer,.auth-full-page,.device-mode-backdrop {
+ --px-navy:#153b55; --px-yellow:#ffc544; --px-orange:#eeb32f; --px-green:#217c5b;
+ --px-sky:#2289b5; --px-sky-light:#e4f3ec; --px-coral:#d76c55; --px-white:#fffef8;
+ --px-shadow-high:0 18px 45px #173e4d35;
+}
+.app-shell > .notifications { top:auto; bottom:calc(var(--px-nav-height, 54px) + 14px); right:16px; left:auto; }
+.app-shell .notifications .toast { pointer-events:auto; display:grid; grid-template-columns:minmax(0,1fr) 34px; gap:8px; align-items:center; width:min(calc(100vw - 32px),380px); padding:10px 12px; border:1.5px solid #8bbecb !important; border-left:4px solid #217c5b !important; border-radius:10px !important; background:#fffef8fa !important; color:#153b55 !important; font-family:'Dana Home Sans','Segoe UI',system-ui,sans-serif !important; box-shadow:0 8px 24px #153b5526 !important; }
+.app-shell .notifications .toast > span { font-size:14px; line-height:1.45; color:#153b55; }
+.app-shell .notifications .toast > button { color:#153b55; background:transparent; border:0; border-radius:6px; font-size:18px; }
+.app-shell.device-mobile-shell > .notifications { top:auto; bottom:calc(var(--px-nav-height, 54px) + 12px); right:12px; }
+.app-shell.device-mobile-shell:not(.home-shell) .quest-player.due-player { padding:0 !important; overflow:hidden !important; }
+.app-shell.device-mobile-shell:not(.home-shell) .quest-player.due-player .q-scroll { padding:18px 16px 24px; }
+.app-shell.device-mobile-shell:not(.home-shell) .quest-player h1 { font-size:24px !important; line-height:1.3 !important; }
+.app-shell.device-mobile-shell:not(.home-shell) .quest-player h2 { font-size:22px !important; line-height:1.35 !important; }
+.app-shell.device-mobile-shell:not(.home-shell) .quest-player .q-primary { font-size:17px !important; height:auto !important; min-height:48px !important; }
+.app-shell:not(.home-shell) :is(.route-instruction,.route-sheet) { background:#fffef8f2; border:1px solid #a6cbd5; border-radius:6px; box-shadow:0 5px 18px #244d6420; }
+.app-shell:not(.home-shell) .camera-page { background:#edf7f2; }
+.app-shell .atlas-pin .atlas-landmark-icon {
+ width:48px; height:48px; padding:4px; box-sizing:border-box; position:relative;
+ background:#fffbed; border:2px solid #153b55; border-radius:6px;
+ box-shadow:0 3px 0 #153b5550,0 4px 10px #153b5530;
+}
+.app-shell .atlas-landmark-icon svg { display:block; width:36px; height:36px; image-rendering:pixelated; }
+.app-shell .atlas-landmark-icon::after { content:''; position:absolute; bottom:-7px; left:18px; width:8px; height:8px; background:#153b55; clip-path:polygon(0 0,100% 0,50% 100%); }
+.app-shell .atlas-pin.event .atlas-landmark-icon { background:#fff0b5; border-color:#a46c19; }
+.app-shell .atlas-pin.is-selected .atlas-landmark-icon { background:#ffe293; outline:3px solid #fffef5; box-shadow:0 0 0 5px #267d76,0 5px 12px #153b5540; }
+.app-shell :is(.transit-map-pin,.transit-pin) { width:48px; height:48px; box-sizing:border-box; display:grid; place-items:center; font-size:29px; line-height:1; border:3px solid #fffef5; border-radius:8px; box-shadow:0 0 0 2px #17624d,0 4px 10px #153b5540; }
+.app-shell :is(.transit-map-pin,.transit-pin) span { font-size:29px; line-height:1; }
+.app-shell :is(.transit-map-pin,.transit-pin) { border-radius:50%; position:relative; box-shadow:0 0 0 2px #17624d,0 6px 0 #153b552b,0 8px 12px #153b5540; }
+.app-shell :is(.transit-map-pin,.transit-pin)::after { content:''; position:absolute; bottom:-10px; left:14px; width:14px; height:11px; background:#17624d; clip-path:polygon(0 0,100% 0,50% 100%); }
+.app-shell .atlas-pin .atlas-landmark-sample,.app-shell .atlas-pin.is-selected .atlas-landmark-sample,.app-shell .atlas-pin.event .atlas-landmark-sample { width:112px; height:84px; padding:0; background:transparent; border:0; border-radius:0; box-shadow:none; outline:none; filter:drop-shadow(0 2px 1px #153b5540); }
+.app-shell .atlas-pin .atlas-landmark-sample svg { width:112px; height:84px; }
+.app-shell .atlas-pin .atlas-landmark-sample::after { display:none; }
+.app-shell .atlas-pin.is-selected .atlas-landmark-sample { filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 3px #167b70); }
+.app-shell .atlas-pin .atlas-landmark-sample { width:156px; height:96px; }
+.app-shell .atlas-landmark-sample img { display:block; width:156px; height:96px; object-fit:contain; image-rendering:auto; user-select:none; }
+.app-shell .atlas-pin .atlas-landmark-sample { width:calc(156px * var(--landmark-scale,1)); height:calc(96px * var(--landmark-scale,1)); }
+.app-shell .atlas-results-layout .atlas-pin .atlas-landmark-sample img { width:calc(156px * var(--landmark-scale,1)); height:calc(96px * var(--landmark-scale,1)); max-width:none; max-height:none; }

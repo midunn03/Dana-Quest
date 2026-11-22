@@ -17,7 +17,7 @@ configure({asyncUtilTimeout:10000})
 
 
 beforeEach(async () => {
-  localStorage.removeItem('dana-quest-progress-v2')
+  localStorage.clear()
   vi.stubEnv('VITE_AUTH_API_URL', 'https://auth.test')
   const testProfile = { id: 'test-user', name: 'Người thử', phone: '0900000000', email: 'test@example.invalid', avatarId: 'bien' }
   vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -65,10 +65,13 @@ it('restores the session, navigates through map, plays the two-challenge Dragon 
   expect(screen.queryByText('Lọc khoảng cách')).toBeNull()
   expect(screen.queryByRole('heading', { name: 'Khám phá Đà Nẵng' })).toBeNull()
   await waitFor(()=>expect(document.querySelectorAll('.atlas-pin')).toHaveLength(quests.length))
-  await user.type(screen.getByRole('searchbox'), 'cau rong')
+  await user.type(screen.getByRole('searchbox', { name: 'Tìm kiếm trên bản đồ' }), 'cau rong')
   await waitFor(() => expect(document.querySelectorAll('.atlas-pin')).toHaveLength(mapEntries('quests','cau rong',Date.now()).length))
   await user.click(document.querySelector<HTMLButtonElement>('.atlas-list>button')!)
   await user.click(screen.getByRole('link',{name:'Xem chi tiết →'}))
+  await user.click(await screen.findByRole('button',{name:/Đăng ký Gói Plus · 30\.000đ\/tháng/},{timeout:10000}))
+  await user.click(await screen.findByRole('button',{name:/Chọn Gói Plus · 30\.000đ\/tháng/}))
+  await user.click(await screen.findByRole('button',{name:/^Mua ngay/}))
   await user.click(await screen.findByRole('checkbox',{name:'Tôi đã đọc hướng dẫn và lưu ý an toàn.'},{timeout:10000}))
   await user.click(screen.getByRole('button',{name:'Đến điểm bắt đầu',exact:true}))
   await user.click(await screen.findByRole('button',{name:'Xác nhận đã đến',exact:true}))
@@ -84,8 +87,7 @@ it('restores the session, navigates through map, plays the two-challenge Dragon 
   // Historical currency remains redeemable after the gameplay upgrade.
   await saveAction({type:'assign',destinationId:'cau-rong',count:10})
   for(const missionId of ['read','observe','learn','walk','respect'])await saveAction({type:'complete',destinationId:'cau-rong',missionId})
-  await user.click(within(screen.getByRole('navigation', { name: 'Điều hướng chính' })).getByRole('link', { name: 'Tài khoản' }))
-  await user.click(within(screen.getByRole('navigation',{name:'Không gian tài khoản'})).getByRole('link', { name: 'Cửa hàng đổi xu' }))
+  await user.click(within(screen.getByRole('navigation', { name: 'Điều hướng chính' })).getByRole('link', { name: 'Cửa hàng đổi xu' }))
   await screen.findByRole('heading', { name: 'Cửa hàng đổi xu' })
   // Device-only completions must never manufacture an account wallet balance.
   // Server-owned redemption and combined earnings are covered by wallet-api.test.
@@ -102,7 +104,7 @@ it('opens correct quest details from every map sidebar entry',async()=>{
  for(const [index,quest] of quests.entries()){
   await user.click(document.querySelectorAll<HTMLButtonElement>('.atlas-list>button')[index])
   const selection=document.querySelector('.atlas-selection') as HTMLElement
-  expect(within(selection).getByRole('heading',{name:quest.title})).toBeTruthy()
+  expect(within(selection).getByRole('heading',{name:destinations.find(place=>place.id===quest.id)?.name??quest.title})).toBeTruthy()
   expect(within(selection).getByRole('link',{name:'Xem chi tiết →'}).getAttribute('href')).toBe(`#/quest/${quest.id}`)
   await user.click(within(selection).getByRole('button',{name:'Đóng'}))
   expect(document.querySelector('.atlas-selection')).toBeNull()

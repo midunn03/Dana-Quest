@@ -86,7 +86,7 @@ export function createTransitClaims(directory, { dailyCap = DAILY_TRANSIT_CAP, s
         }
 
         // Chống gian lận 2: Kiểm tra tọa độ GPS
-        if (!Array.isArray(coordinates) || coordinates.length !== 2 || !coordinates.every(Number.isFinite)) {
+        if (!Array.isArray(coordinates) || coordinates.length !== 2 || !coordinates.every(Number.isFinite) || Math.abs(coordinates[0]) > 90 || Math.abs(coordinates[1]) > 180) {
           throw fail('INVALID_COORDINATES', 400, 'Tọa độ GPS không hợp lệ.')
         }
         const dist = distanceMeters(coordinates, station.position)
@@ -95,7 +95,7 @@ export function createTransitClaims(directory, { dailyCap = DAILY_TRANSIT_CAP, s
         }
 
         // Chống gian lận 3: Kiểm tra độ chính xác GPS
-        if (!Number.isFinite(accuracy) || accuracy > MAX_GPS_ACCURACY_METERS) {
+        if (!Number.isFinite(accuracy) || accuracy <= 0 || accuracy > MAX_GPS_ACCURACY_METERS) {
           throw fail('ACCURACY_TOO_LOW', 400, `Độ chính xác GPS (${Math.round(accuracy || 0)}m) chưa đạt yêu cầu (≤ ${MAX_GPS_ACCURACY_METERS}m).`)
         }
 

@@ -30,16 +30,18 @@ export function parsePlaceData(raw: unknown): PlaceData {
   if (!isObject(raw)) return data
   if (isObject(raw.items)) {
     for (const [id, item] of Object.entries(raw.items)) {
-      if (!isObject(item)) continue
+      if (!isObject(item) || ['__proto__','constructor','prototype'].includes(id)) continue
       const url = safeUrl(item.url)
       if (!url) continue
       const ground = parseGround(item.ground)
       data.sprites[id] = { url, meters: finite(item.meters) && item.meters > 0 ? item.meters : 200, ...(ground ? { ground } : {}) }
     }
   }
-  if (isObject(raw.content)) {
-    for (const [id, item] of Object.entries(raw.content)) {
-      if (!isObject(item)) continue
+  const records: [string, unknown][] = Array.isArray(raw.places) ? raw.places.flatMap(item=>isObject(item)&&typeof item.id==='string'?[[item.id,item] as [string,unknown]]:[]) : []
+  if(isObject(raw.content))records.push(...Object.entries(raw.content))
+  {
+    for (const [id, item] of records) {
+      if (!isObject(item) || ['__proto__','constructor','prototype'].includes(id)) continue
       const photos = Array.isArray(item.photos) ? item.photos.flatMap((photo): AdminPhoto[] => {
         if (!isObject(photo)) return []
         const url = safeUrl(photo.url)
@@ -62,7 +64,7 @@ const listeners = new Set<() => void>()
 function ensureLoaded() {
   if (requested || typeof fetch !== 'function') return
   requested = true
-  fetch('/api/pixel/places').then(r => r.ok ? r.json() : null).then(raw => {
+  fetch('/api/pixel/places').then(r => { if(!r.ok)throw new Error('Place content unavailable'); return r.json() }).then(raw => {
     if (!raw) return
     snapshot = parsePlaceData(raw)
     listeners.forEach(listener => listener())

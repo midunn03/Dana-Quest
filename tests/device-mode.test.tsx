@@ -11,6 +11,9 @@ import DeviceModeModal from '../src/mobile/DeviceModeModal'
 import MobileBottomNav from '../src/mobile/MobileBottomNav'
 import MobileBottomSheet from '../src/mobile/MobileBottomSheet'
 import MobileShell from '../src/mobile/MobileShell'
+import AccountExperience from '../src/AccountExperience'
+import { LocaleProvider } from '../src/i18n/LocaleProvider'
+import { AuthProvider } from '../src/AuthContext'
 
 describe('Device Mode & Mobile Layer (Stage C)', () => {
   beforeEach(() => {
@@ -92,30 +95,31 @@ describe('Device Mode & Mobile Layer (Stage C)', () => {
     expect(onClose).toHaveBeenCalled()
   })
 
-  it('renders MobileBottomNav with exactly 5 navigation items and active states', () => {
-    const { rerender } = render(<MobileBottomNav route="#/map" />)
+  it('renders MobileBottomNav with the 4 Web navigation items and active states', () => {
+    const { rerender } = render(<MobileBottomNav route="#/kham-pha" />)
 
-    // 5 tabs: Bản đồ, Sự kiện, Bộ sưu tập, Thưởng, Tài khoản
-    expect(screen.getByLabelText(/Bản đồ/)).toBeTruthy()
+    // 4 tabs matched to Web: Khám phá, Sự kiện, Quest, Cửa hàng đổi xu
+    expect(screen.getByLabelText(/Khám phá/)).toBeTruthy()
     expect(screen.getByLabelText(/Sự kiện/)).toBeTruthy()
-    expect(screen.getByLabelText(/Bộ sưu tập/)).toBeTruthy()
-    expect(screen.getByLabelText(/Thưởng/)).toBeTruthy()
-    expect(screen.getByLabelText(/Tài khoản/)).toBeTruthy()
+    expect(screen.getByLabelText(/^Quest$/)).toBeTruthy()
+    expect(screen.getByLabelText(/Cửa hàng đổi xu/)).toBeTruthy()
 
-    // When on #/map, Bản đồ is active
-    expect(screen.getByLabelText(/Bản đồ/).getAttribute('aria-current')).toBe('page')
+    // When on #/kham-pha or #/map, Khám phá is active
+    expect(screen.getByLabelText(/Khám phá/).getAttribute('aria-current')).toBe('page')
+    rerender(<MobileBottomNav route="#/map" />)
+    expect(screen.getByLabelText(/Khám phá/).getAttribute('aria-current')).toBe('page')
 
     // Switch route to #/su-kien
     rerender(<MobileBottomNav route="#/su-kien" />)
     expect(screen.getByLabelText(/Sự kiện/).getAttribute('aria-current')).toBe('page')
 
-    // Switch route to #/tai-khoan/badges
-    rerender(<MobileBottomNav route="#/tai-khoan/badges" />)
-    expect(screen.getByLabelText(/Bộ sưu tập/).getAttribute('aria-current')).toBe('page')
+    // Switch route to #/quest-cua-toi
+    rerender(<MobileBottomNav route="#/quest-cua-toi" />)
+    expect(screen.getByLabelText(/^Quest$/).getAttribute('aria-current')).toBe('page')
 
-    // Switch route to #/tai-khoan/wallet
-    rerender(<MobileBottomNav route="#/tai-khoan/wallet" />)
-    expect(screen.getByLabelText(/Thưởng/).getAttribute('aria-current')).toBe('page')
+    // Switch route to #/cua-hang
+    rerender(<MobileBottomNav route="#/cua-hang" />)
+    expect(screen.getByLabelText(/Cửa hàng đổi xu/).getAttribute('aria-current')).toBe('page')
   })
 
   it('renders MobileBottomSheet with grabber handle and content', () => {
@@ -161,5 +165,46 @@ describe('Device Mode & Mobile Layer (Stage C)', () => {
     expect(handler).toHaveBeenCalledTimes(1)
 
     window.removeEventListener('dana-open-device-modal', handler)
+  })
+
+  it('renders hamburger button left of Tài khoản title and opens full Account Workspace Drawer', () => {
+    render(
+      <AuthProvider>
+        <LocaleProvider>
+          <div className="app-shell device-mobile-shell">
+            <AccountExperience user={null} onLogout={async () => {}} />
+          </div>
+        </LocaleProvider>
+      </AuthProvider>
+    )
+
+    const menuBtn = screen.getByRole('button', { name: /Mở menu điều hướng tài khoản/ })
+    const heading = screen.getByRole('heading', { level: 1, name: 'Tài khoản' })
+    expect(menuBtn.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+
+    fireEvent.click(menuBtn)
+    const drawer = screen.getByRole('dialog', { name: 'Điều hướng tài khoản' })
+    expect(drawer).toBeTruthy()
+    for (const label of [
+      'Tài khoản',
+      'Chỉnh sửa hồ sơ',
+      'Nhân vật',
+      'Gói trải nghiệm & Quyền chơi',
+      'Nhật ký khám phá',
+      'Bộ sưu tập huy hiệu',
+      'Thư viện kỷ niệm',
+      'Nhóm bạn bè',
+      'Ví xu',
+      'Cửa hàng đổi xu',
+      'Thông báo',
+      'Cài đặt',
+      'Trợ giúp',
+    ]) {
+      expect(drawer.querySelector(`a[href]`)).toBeTruthy()
+      expect(screen.getAllByRole('link', { name: new RegExp(label) }).length).toBeGreaterThan(0)
+    }
+
+    fireEvent.click(screen.getByRole('button', { name: 'Đóng menu tài khoản' }))
+    expect(screen.queryByRole('dialog', { name: 'Điều hướng tài khoản' })).toBeNull()
   })
 })

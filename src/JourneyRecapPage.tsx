@@ -34,12 +34,13 @@ export default function JourneyRecapPage() {
       return hidePrivacyZones ? trimTrack(rawTrack, 200) : rawTrack
     }
     // Demo path across Da Nang (Cầu Rồng -> Cầu Sông Hàn -> Biển Mỹ Khê)
+    const baseTime = 1_774_000_000_000
     const demo = [
-      { lat: 16.061, lng: 108.227, timestamp: Date.now() - 3600000 },
-      { lat: 16.064, lng: 108.226, timestamp: Date.now() - 2800000 },
-      { lat: 16.071, lng: 108.224, timestamp: Date.now() - 1800000 },
-      { lat: 16.065, lng: 108.238, timestamp: Date.now() - 600000 },
-      { lat: 16.060, lng: 108.245, timestamp: Date.now() },
+      { lat: 16.061, lng: 108.227, timestamp: baseTime - 3600000 },
+      { lat: 16.064, lng: 108.226, timestamp: baseTime - 2800000 },
+      { lat: 16.071, lng: 108.224, timestamp: baseTime - 1800000 },
+      { lat: 16.065, lng: 108.238, timestamp: baseTime - 600000 },
+      { lat: 16.060, lng: 108.245, timestamp: baseTime },
     ]
     return hidePrivacyZones ? trimTrack(demo, 100) : demo
   }, [rawTrack, hidePrivacyZones])
@@ -100,7 +101,13 @@ export default function JourneyRecapPage() {
   }
 
   const svgPolyline = useMemo(() => {
-    return track.map((p) => getSvgPoint(p.lat, p.lng)).join(' ')
+    return track
+      .map((p) => {
+        const x = ((p.lng - bounds.minLng) / (bounds.maxLng - bounds.minLng)) * 400
+        const y = (1 - (p.lat - bounds.minLat) / (bounds.maxLat - bounds.minLat)) * 260
+        return `${x.toFixed(1)},${y.toFixed(1)}`
+      })
+      .join(' ')
   }, [track, bounds])
 
   // Generate PNG for sharing

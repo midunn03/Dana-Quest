@@ -1,14 +1,19 @@
+import { hasPixelLandmarkSample, pixelLandmarkSample } from './lib/pixelLandmarkSamples'
+import { pixelMapIcon } from './lib/pixelMapIcon'
 import './ui/MapControls.css'
 import {useEffect,useMemo,useRef,useState} from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import './Explore.css'
+import './MapResults.css'
 import {createRoot} from 'react-dom/client'
 import PixelAvatar from './PixelAvatar'
 import {useOptionalAuth} from './AuthContext'
 import {readAvatar,avatars,resolveAvatar} from './lib/avatar'
 import {usePlayerLocation} from './lib/usePlayerLocation'
-import {pixelTileLayer} from './lib/pixelTiles'
+import { getDestination,categoryLabels,type DestinationCategory } from './data/destinations'
+import { HeaderQuickToggles } from './PageTools'
+import QuestCover from './QuestCover'
 import {parseEvents,type EventItem} from './lib/events'
 import {runEventFeedNotifications} from './lib/eventNotifier'
 import {GREEN_TRANSIT_STATIONS, fetchLiveTransitStations, type GreenTransitStation} from './data/greenTransit'
@@ -20,6 +25,9 @@ import {useLocale} from './i18n/LocaleProvider'
 import StartHub from './StartHub'
 import CoachMarks from './CoachMarks'
 import { isUxFlagEnabled } from './lib/uxFlags'
+import { getQuest } from './data/quests'
+import { useQuestProgress } from './lib/useQuestProgress'
+import { getQuestPricing, usePremiumAccess } from './lib/premium'
 import { distanceMeters } from './lib/location'
 import { formatMeters } from './lib/routing'
 import { interpolate } from './i18n/locale'
@@ -33,17 +41,23 @@ export default function Explore(){
  const [mapBounds,setMapBounds]=useState<L.LatLngBounds|null>(null)
  const [transitStations,setTransitStations]=useState<GreenTransitStation[]>(()=>GREEN_TRANSIT_STATIONS.filter(s=>s.verified!==false))
  const {sample,error,updatePosition,retry}=usePlayerLocation()
+ const {state:questProgress}=useQuestProgress()
  const eventContext=useContext(EventContext)
  const [feed,setFeed]=useState<EventItem[]>([])
  const auth=useOptionalAuth()
+ const {hasAccess:hasQuestAccess}=usePremiumAccess(auth?.user?.id)
  const noticeOwner=auth?.status==='authenticated'&&auth.user?.id?auth.user.id:'guest'
  const eventNoticesEnabled=auth?.status==='authenticated'
   ?!!eventContext&&!eventContext.loading&&!eventContext.error&&eventContext.enabled
   :auth?.status==='checking'||auth?.status==='error'?false:eventContext?.enabled??true
  const playerAvatar=auth?.status==='authenticated'?(resolveAvatar(auth.user?.avatarId)??avatars[0]):avatar
  const fitted=useRef('')
- const entries=useMemo(()=>mapEntries(mode,query,now,eventContext?.catalog,feed),[mode,query,now,feed,eventContext?.catalog,locale])
+ const [category,setCategory]=useState<DestinationCategory|'all'>('all')
+ const [inView,setInView]=useState(false)
+ const allEntries=useMemo(()=>mapEntries(mode,query,now,eventContext?.catalog,feed).filter(entry=>category==='all'||getDestination(entry.placeId??'')?.category===category),[mode,query,now,feed,eventContext?.catalog,locale,category])
+ const entries=useMemo(()=>inView&&mapBounds?allEntries.filter(entry=>mapBounds.contains(entry.position)):allEntries,[allEntries,inView,mapBounds])
  const selected=entries.find(entry=>entry.id===selectedCandidate?.id)??null
+ useEffect(()=>{if(selected?.id)Array.from(document.querySelectorAll<HTMLButtonElement>('.atlas-list>button')).find(button=>button.dataset.entryId===selected.id)?.scrollIntoView?.({block:'nearest'})},[selected?.id])
 
  useEffect(()=>{let alive=true;const controller=new AbortController();const load=()=>fetch('/api/events/feed',{signal:controller.signal}).then(r=>r.ok?r.json():null).then(data=>{if(alive&&data)setFeed(parseEvents(data))}).catch(()=>{});void load();const timer=setInterval(load,60000);return()=>{alive=false;controller.abort();clearInterval(timer)}},[])
  useEffect(()=>{const timer=setInterval(()=>setNow(Date.now()),60000);return()=>clearInterval(timer)},[])
@@ -64,7 +78,7 @@ export default function Explore(){
      : [16.0544, 108.2022]
    const initialZoom = isUxFlagEnabled('MAP_ONE_KM') ? 15 : 12
 
-   instance=L.map(container.current,{zoomControl:false,scrollWheelZoom:false,minZoom:8}).setView(initialCenter, initialZoom)
+   instance=L.map(container.current,{zoomControl:false,scrollWheelZoom:true,minZoom:8}).setView(initialCenter, initialZoom)
    map.current=instance
 
    instance.on('zoomend',()=>{
@@ -79,8 +93,8 @@ export default function Explore(){
      }
    })
 
-   L.control.zoom({position:'topright',zoomInTitle:t('Phóng to','Zoom in'),zoomOutTitle:t('Thu nhỏ','Zoom out')}).addTo(instance)
-   pixelTileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).on('tileerror',()=>{setTileError(true);setLoading(false)}).on('tileload',()=>{clearTimeout(timeout);setLoading(false)}).addTo(instance)
+   L.control.zoom({position:'bottomright',zoomInTitle:t('Phóng to','Zoom in'),zoomOutTitle:t('Thu nhỏ','Zoom out')}).addTo(instance)
+   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).on('tileerror',()=>{setTileError(true);setLoading(false)}).on('tileload',()=>{clearTimeout(timeout);setTileError(false);setLoading(false)}).addTo(instance)
    const resize=()=>instance?.invalidateSize({pan:false});observer=new ResizeObserver(resize);observer.observe(container.current)
    queueMicrotask(()=>{
      setReady(n=>n+1)
@@ -95,17 +109,19 @@ export default function Explore(){
  useEffect(()=>{
   const instance=map.current;if(!instance||ready===0)return
   const group=L.layerGroup().addTo(instance)
-  entries.forEach(entry=>{
-   const icon=document.createElement('span');icon.className=`atlas-pin-symbol ${entry.kind}`;icon.textContent=entry.kind==='quest'?'✦':'◆'
-   const marker=L.marker(entry.position,{title:entry.title,alt:entry.title,icon:L.divIcon({className:`atlas-pin ${entry.kind}${selected?.id===entry.id?' is-selected':''}`,html:icon,iconSize:[34,42],iconAnchor:[17,38]})}).addTo(group)
+  allEntries.forEach(entry=>{
+   const sampleIcon=hasPixelLandmarkSample(entry.placeId)
+   const spriteScale=Math.min(.9,Math.max(.16,.7*Math.pow(2,zoom-14)))
+   const icon=document.createElement('span');icon.className=`atlas-pin-symbol ${entry.kind}`;icon.innerHTML=sampleIcon?pixelLandmarkSample(entry.placeId):pixelMapIcon(entry.placeId);icon.classList.add('atlas-landmark-icon');if(sampleIcon){icon.classList.add('atlas-landmark-sample');icon.style.setProperty('--landmark-scale',String(spriteScale))}
+   const marker=L.marker(entry.position,{title:entry.title,alt:entry.title,icon:L.divIcon({className:`atlas-pin ${entry.kind}${selected?.id===entry.id?' is-selected':''}`,html:icon,iconSize:sampleIcon?[156*spriteScale,96*spriteScale]:[48,54],iconAnchor:sampleIcon?[78*spriteScale,70*spriteScale]:[24,52]})}).addTo(group)
    marker.bindTooltip(entry.title).on('click',()=>setSelected(entry))
   })
-  const cameraKey=JSON.stringify([ready,mode,query,entries.map(e=>[e.id,e.position])])
-  if(entries.length&&fitted.current!==cameraKey){
+  const cameraKey=JSON.stringify([ready,mode,query,category,allEntries.map(e=>[e.id,e.position])])
+  if(allEntries.length&&fitted.current!==cameraKey){
     // [UX-FLOW] MAP_ONE_KM: Không fitBounds toàn bộ thành phố khi khởi tạo. Chỉ fit 1km hoặc khi tìm kiếm.
     if(isUxFlagEnabled('MAP_ONE_KM')){
-      if(query){
-        instance.fitBounds(L.latLngBounds(entries.map(e=>e.position)),{padding:[45,45],maxZoom:15,animate:!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches})
+      if(query||category!=='all'){
+        instance.fitBounds(L.latLngBounds(allEntries.map(e=>e.position)),{padding:[45,45],maxZoom:15,animate:!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches})
       } else {
         const center: [number, number] = sample ? [sample.latitude, sample.longitude] : [16.0601, 108.2236]
         const radiusMeters = 1000
@@ -118,20 +134,20 @@ export default function Explore(){
         instance.fitBounds(oneKmBounds, { padding: [20, 20], maxZoom: 15, animate: false })
       }
     } else {
-      instance.fitBounds(L.latLngBounds(entries.map(e=>e.position)),{padding:[45,45],maxZoom:15,animate:!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches})
+      instance.fitBounds(L.latLngBounds(allEntries.map(e=>e.position)),{padding:[45,45],maxZoom:15,animate:!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches})
     }
     fitted.current=cameraKey
     try { setMapBounds(instance.getBounds()) } catch {}
   }
   return()=>{group.remove()}
- },[entries,ready,mode,query,selected?.id,sample])
+ },[allEntries,ready,mode,query,category,selected?.id,sample,zoom])
 
  useEffect(()=>{
   const instance=map.current;if(!instance||ready===0||!showTransit||zoom<14)return
   const group=L.layerGroup().addTo(instance)
   transitStations.forEach(station=>{
    const pin=document.createElement('div');pin.className=`transit-map-pin ${station.type}`;pin.innerHTML=`<span>${station.type==='bike'?'🚲':'🚌'}</span>`
-   const marker=L.marker(station.position,{title:station.name,icon:L.divIcon({className:'transit-div-icon',html:pin,iconSize:[28,28],iconAnchor:[14,14]})}).addTo(group)
+   const marker=L.marker(station.position,{title:station.name,icon:L.divIcon({className:'transit-div-icon',html:pin,iconSize:[48,48],iconAnchor:[24,24]})}).addTo(group)
    marker.bindTooltip(`${station.name} (+${station.bonusCoins} xu)`)
   })
   return()=>{group.remove()}
@@ -242,8 +258,11 @@ export default function Explore(){
     return distanceMeters([sample.latitude, sample.longitude], selected.position)
   }, [selected, sample])
 
+  const selectedPlace = selected ? getDestination(selected.placeId ?? '') : undefined
+  const selectedQuest = selected?.kind === 'quest' && selected.placeId ? getQuest(selected.placeId) : undefined
 
- return <main className="explore-page atlas-page">
+
+ return <main className="explore-page atlas-page atlas-results-layout">
   <aside
     className={`atlas-sidebar ${isUxFlagEnabled('MOBILE_MAP_FIRST') ? `atlas-sidebar--snap-${sheetSnap}` : ''}`}
     data-snap={sheetSnap}
@@ -255,6 +274,9 @@ export default function Explore(){
        className="atlas-sheet-grabber"
        onPointerDown={onGrabberPointerDown}
        onPointerUp={onGrabberPointerUp}
+       onPointerCancel={()=>setIsSheetDragging(false)}
+       onKeyDown={event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();setSheetSnap(value=>value==='peek'?'half':value==='half'?'full':'peek')}}}
+       aria-expanded={sheetSnap!=='peek'}
        role="button"
        tabIndex={0}
        aria-label={t('Kéo mở danh sách địa điểm', 'Drag places list')}
@@ -276,28 +298,59 @@ export default function Explore(){
        </div>
      </div>
    )}
-   <header>
-    <a href="#/kham-pha">← {t('Khám phá','Discover')}</a>
-    <a href="#/huong-dan" style={{ marginLeft: 'auto', textDecoration: 'underline', fontSize: '13px', color: 'var(--px-ink)' }}>? {t('Hướng dẫn','Guide')}</a>
-    <h1>{t('Bản đồ hành trình','Adventure map')}</h1>
-    <p>{t('Chọn điểm hẹn, tìm câu chuyện tiếp theo.','Find a meeting point and your next story.')}</p>
-   </header>
-   <label className="atlas-search"><span className="sr-only">{t('Tìm kiếm trên bản đồ','Search map')}</span><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder={t('Tìm quest, địa điểm, sự kiện…','Search quests, places, events…')}/></label>
-   <div className="atlas-filters" aria-label={t('Bộ lọc bản đồ','Map filters')}><button aria-pressed={mode==='quests'} onClick={()=>{setMode('quests');setSelected(null)}}>✦ {t('Địa điểm quest','Quest places')}</button><button aria-pressed={mode==='events'} onClick={()=>{setMode('events');setSelected(null)}}>◆ {t('Sự kiện sắp tới','Upcoming events')}</button><button className="atlas-transit-toggle" aria-pressed={showTransit} onClick={()=>setShowTransit(v=>!v)}>🚲 {showTransit?t('Ẩn trạm xe xanh','Hide eco transit'):t('Hiện trạm xe xanh','Show eco transit')}</button></div>
-   <div className="atlas-location"><button onClick={locate} disabled={locating}>◎ {locating?t('Đang định vị…','Locating…'):t('Vị trí của tôi','My location')}</button><small role="status">{message||error||(sample?t(`Sai số vị trí ±${Math.ceil(sample.accuracy)} m`,`Location accuracy ±${Math.ceil(sample.accuracy)} m`):t('Cho phép định vị để đưa nhân vật lên bản đồ.','Allow location to place your avatar on the map.'))}</small></div>
+   <div className="atlas-sidebar-top">
+    <div className="atlas-sidebar-header-row">
+     <a className="atlas-back dq-back-btn" href="#/kham-pha" aria-label={t('Khám phá','Discover')}>← {t('Quay lại','Back')}</a>
+     <h1>{t('Kết quả','Results')}</h1><HeaderQuickToggles compact />
+     </div>
+    <label className="atlas-search"><span className="sr-only">{t('Tìm kiếm trên bản đồ','Search map')}</span><span aria-hidden="true">⌕</span><input type="search" value={query} onChange={e=>{setQuery(e.target.value);setSelected(null)}} placeholder={t('Tìm địa điểm, quest…','Search places, quests…')}/></label>
+
+   </div>
    <div className="atlas-list-heading"><strong>{entries.length} {t('điểm trên bản đồ','map places')}</strong><span>{mode==='quests'?'✦':'◆'} {mode==='quests'?t('Quest','Quest'):t('Sự kiện','Events')}</span></div>
-   <div className="atlas-list">{entries.map(entry=><button key={entry.id} className={selected?.id===entry.id?'selected':''} onClick={()=>choose(entry)}><span className={`atlas-list-icon ${entry.kind}`}>{entry.kind==='quest'?'✦':'◆'}</span><span><strong>{entry.title}</strong><small>{entry.subtitle}</small>{entry.start&&<small>{new Date(entry.start).toLocaleString(locale==='en'?'en-US':'vi-VN',{dateStyle:'medium',timeStyle:'short'})}</small>}</span><span aria-hidden="true">↗</span></button>)}{!entries.length&&<p className="atlas-empty">{t('Chưa có điểm phù hợp. Hãy đổi bộ lọc hoặc từ khóa.','No matching places. Change the filter or search.')}</p>}</div>
+   <div className="atlas-list">{entries.map(entry=>{const place=getDestination(entry.placeId??'');const quest=entry.kind==='quest'&&entry.placeId?getQuest(entry.placeId):undefined;const run=quest?questProgress.quests[quest.id]:undefined;const pricing=quest?getQuestPricing(quest.id):null;const unlocked=quest?hasQuestAccess(quest.id):true;const showQuestSubtitle=Boolean(place?.name&&place.name!==entry.title);return <button key={entry.id} data-entry-id={entry.id} className={selected?.id===entry.id?'selected':''} aria-pressed={selected?.id===entry.id} onClick={()=>{choose(entry);setSheetSnap('peek')}}>
+    <span className="atlas-result-photo"><QuestCover id={entry.placeId??''}/></span>
+    <span className="atlas-result-copy">
+     <span className="atlas-result-badges">
+      <small className="atlas-result-category">{place?categoryLabels[place.category]:entry.kind==='quest'?t('Quest','Quest'):t('Sự kiện','Event')}</small>
+      {pricing&&<small className={`atlas-result-price ${pricing.isPaid?(unlocked?'is-unlocked':'is-paid'):'is-free'}`}>{pricing.isPaid?(unlocked?t('✓ Đã mở khóa','✓ Unlocked'):`★ ${pricing.currencyLabel}`):t('Miễn phí','Free')}</small>}
+      {run&&<small className={`atlas-result-status ${run.completedAt?'is-done':'is-active'}`}>{run.completedAt?t('Đã hoàn thành','Completed'):t('Đang chơi','In progress')}</small>}
+     </span>
+     <strong>{place?.name??entry.title}</strong>
+     {showQuestSubtitle&&<small className="atlas-result-quest">{entry.title}</small>}
+     <small className="atlas-result-address">{entry.subtitle}</small>
+     <span className="atlas-result-footer">
+      {quest?<small className="atlas-result-meta">⏱ {quest.estimatedMinutes} {t('phút','min')} · {quest.checkpoints.length} {t('thử thách','steps')}</small>:entry.start?<small className="atlas-result-meta">{new Date(entry.start).toLocaleString(locale==='en'?'en-US':'vi-VN',{dateStyle:'medium',timeStyle:'short'})}</small>:<span/>}
+      <span className="atlas-result-action">{t('Xem trên bản đồ','Show on map')} ↗</span>
+     </span>
+    </span>
+   </button>})}{!entries.length&&<div className="atlas-empty"><strong>{t('Chưa có kết quả phù hợp','No matching results')}</strong><p>{t('Thử từ khóa khác hoặc mở rộng vùng bản đồ.','Try another search or expand the map area.')}</p><button onClick={()=>{setQuery('');setCategory('all');setInView(false)}}>{t('Xóa bộ lọc','Clear filters')}</button></div>}</div>
+
   </aside>
   <section className="atlas-map-area" aria-label={t('Bản đồ Đà Nẵng','Da Nang map')}>
    <div ref={container} className="map atlas-map"/>
+   <div className="atlas-top-controls">
+    <div className="atlas-mode-filters" role="group" aria-label={t('Nội dung bản đồ','Map content')}>
+     <button aria-pressed={mode==='quests'} onClick={()=>{setMode('quests');setSelected(null)}}>✦ {t('Địa điểm quest','Quest places')}</button>
+     <button aria-pressed={mode==='events'} onClick={()=>{setMode('events');setSelected(null)}}>◆ {t('Sự kiện','Events')}</button>
+    </div>
+    <div className="atlas-category-filters" role="group" aria-label={t('Loại địa điểm','Place categories')}>
+     <button aria-pressed={category==='all'} onClick={()=>{setCategory('all');setSelected(null)}}>{t('Tất cả','All')}</button>
+     {(['museum','landmark','park','beach','pagoda','nature','heritage'] as const).map(key=><button key={key} aria-pressed={category===key} onClick={()=>{setCategory(key);setSelected(null);setSheetSnap('half')}}>{categoryLabels[key]}</button>)}
+    </div>
+    <button className="atlas-transit-chip" aria-pressed={showTransit} onClick={()=>setShowTransit(value=>!value)}>🚲 {t('Trạm xe xanh','Eco transit')}</button>
+   </div>
+   <label className="atlas-viewport-filter"><input type="checkbox" checked={inView} onChange={event=>setInView(event.target.checked)}/>{t('Tìm trong vùng bản đồ','Search this map area')}</label>
+   <button className="atlas-map-locate" onClick={locate} disabled={locating} aria-label={t('Vị trí của tôi','My location')} title={t('Vị trí của tôi','My location')}>{locating?'…':'◎'}</button>
+   {(message||error)&&<p className="atlas-location-feedback" role="status">{message||error}</p>}
+
    {/* [UX-FLOW] Nút xem toàn cảnh thành phố khi bật MAP_ONE_KM */}
    {isUxFlagEnabled('MAP_ONE_KM') && (
      <button
        type="button"
        className="atlas-city-fit-btn"
        onClick={() => {
-         if (entries.length && map.current) {
-           map.current.fitBounds(L.latLngBounds(entries.map(e => e.position)), {
+         if (allEntries.length && map.current) {
+           map.current.fitBounds(L.latLngBounds(allEntries.map(e => e.position)), {
              padding: [45, 45],
              maxZoom: 15,
              animate: !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
@@ -310,11 +363,11 @@ export default function Explore(){
      </button>
    )}
    {/* [UX-FLOW] StartHub overlay trên bản đồ khi chưa chọn điểm cụ thể */}
-   {isUxFlagEnabled('START_HUB') && !selected && (
+   {isUxFlagEnabled('START_HUB') && !selected && !query && category==='all' && mode==='quests' && (
      <StartHub
        variant="overlay"
        onSelectQuest={id => {
-         const found = entries.find(e => e.id === id)
+         const found = entries.find(e => e.id === `quest:${id}`)
          if (found) choose(found)
        }}
      />
@@ -339,31 +392,29 @@ export default function Explore(){
    {isUxFlagEnabled('COACH_MARKS') && <CoachMarks />}
    {loading&&<p className="atlas-map-status" role="status">{t('Đang tải bản đồ…','Loading map…')}</p>}
    {tileError&&<div className="atlas-map-status" role="alert">{t('Nền bản đồ chưa tải đầy đủ. Danh sách vẫn dùng được.','Map tiles are unavailable. The list remains available.')} <button onClick={()=>{setTileError(false);setLoading(true);setAttempt(n=>n+1)}}>{t('Thử lại','Retry')}</button></div>}
-    {/* [UX-FLOW] Nút "Vị trí của tôi" nổi tròn 48px trên điện thoại */}
-    {isUxFlagEnabled('MOBILE_MAP_FIRST') && (
-      <button
-        type="button"
-        className="atlas-floating-locate-btn"
-        onClick={locate}
-        disabled={locating}
-        aria-label={t('Vị trí của tôi', 'My location')}
-        title={t('Vị trí của tôi', 'My location')}
-      >
-        <span aria-hidden="true">{locating ? '⏳' : '◎'}</span>
-      </button>
-    )}
     {selected && (
       <article className="atlas-selection">
         <button className="atlas-selection-close" aria-label={t('Đóng','Close')} onClick={()=>setSelected(null)}>×</button>
-        <div className="atlas-selection-meta">
+        <div className="atlas-selection-head">
+          {selected.placeId && <span className="atlas-selection-thumb"><QuestCover id={selected.placeId}/></span>}
+          <div className="atlas-selection-info">
+            <div className="atlas-selection-meta">
           <small>{selected.kind==='quest'?t('Hành trình khám phá','Exploration quest'):t('Sự kiện sắp tới','Upcoming event')}</small>
+          {selectedQuest&&(()=>{const sp=getQuestPricing(selectedQuest.id);const su=hasQuestAccess(selectedQuest.id);return <small className={`atlas-result-price ${sp.isPaid?(su?'is-unlocked':'is-paid'):'is-free'}`}>{sp.isPaid?(su?t('✓ Đã mở khóa','✓ Unlocked'):`★ ${sp.currencyLabel}`):t('Miễn phí','Free')}</small>})()}
           {selectedDistance !== null && (
             <span className="atlas-selection-dist">📍 {formatMeters(selectedDistance)}</span>
           )}
         </div>
-        <h2>{selected.title}</h2>
-        <p>{selected.subtitle}</p>
+            <h2>{selectedPlace?.name ?? selected.title}</h2>
+            {selectedPlace?.name && selectedPlace.name !== selected.title && <small className="atlas-selection-quest">{selected.title}</small>}
+            {selectedQuest && <span className="atlas-selection-steps">⏱ {selectedQuest.estimatedMinutes} {t('phút','min')} · {selectedQuest.checkpoints.length} {t('thử thách','steps')}</span>}
+          </div>
+        </div>
+        <p className="atlas-selection-address">{selected.subtitle}</p>
+        <div className="atlas-selection-actions">
         <a href={selected.href} className="atlas-selection-link">{t('Xem chi tiết','View details')} →</a>
+          {(selectedPlace||selectedQuest)&&selected.placeId&&<a className="atlas-directions-link" href={`#/chi-duong/${selected.placeId}?tu=map`}>↗ {t('Chỉ đường','Directions')}</a>}
+        </div>
       </article>
     )}
   </section>

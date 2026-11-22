@@ -94,6 +94,25 @@ Entry: `#/su-kien`.
 3. Công cụ sự kiện trình diễn (operator) mặc định tắt; bật bằng biến môi trường `DANA_PRESENTATION_EVENTS=1`, giữ cooldown 5 phút.
 Thông báo là nhắc cục bộ; Web Push khi app đóng hoàn toàn chưa có.
 
+## Flow 9: Gói trả phí hàng tháng (Plus / Pro), Mã khuyến mãi nội bộ & Hủy gói
+Entry: `#/quest/:id` (nút mở khóa), `#/tai-khoan`, hoặc modal `PremiumPricingModal`.
+1. **Phân cấp gói**:
+   - **Free**: mở 5 quest (`cau-song-han`, `cho-con`, `cho-han`, `my-khe`, `bao-tang-cham`).
+   - **Plus (`30.000đ/tháng`)**: mở khóa `cau-rong` + `x2` xu thưởng + huy hiệu Plus.
+   - **Pro (`50.000đ/tháng`)**: mở khóa thêm `cau-vang-ba-na-hills` và `ngu-hanh-son` + quyền lợi Plus + huy hiệu Pro + 2 mã voucher nhóm 4 người (`source: 'pro_plan'`).
+2. **Thanh toán & Mã nội bộ**: Khi người dùng tự nhập mã khuyến mãi nội bộ vào ô promo trong `PremiumPricingModal`, giá thanh toán giảm 100% về `0đ` và mã có thể dùng lại sau khi hủy gói; **giao diện web không được phép hiển thị công khai mã này**.
+3. **Hủy gói**: Thực hiện trong Cài đặt tài khoản → gọi `cancelPremiumPlan`: hạ gói về Free, chỉ thu hồi các voucher `source === 'pro_plan'`, **giữ lại** các voucher có `source === 'code'`.
+4. **Quest đang chơi dở sau hủy gói**: Nếu quest hiện tại thuộc gói trả phí vừa bị khóa lại, `NextStepChip` hiển thị `"🔒 Mở khóa để tiếp tục: <Tên quest>"` (bấm vào đi tới `#/quest/:id`) và phần chi tiết `.qd-testing` hiển thị thông báo yêu cầu mở khóa thay cho hướng dẫn miễn phí.
+
+## Flow 10: Giao diện Điện thoại (.device-mobile-shell), Luồng Chỉ đường Bản đồ (?tu=map) & Drawer Tài khoản
+Entry: Chuyển đổi `WEB / MOBILE` trên header hoặc viewport di động.
+1. **Thanh điều hướng dưới (`MobileBottomNav`)**: Hiển thị đồng bộ 4 mục chính của Web: `Khám phá`, `Sự kiện`, `Quest`, `Cửa hàng đổi xu`.
+2. **Header chế độ Điện thoại**: Bỏ `StreakChip` khỏi header; hiển thị `MobileAccountBadge` (`Avatar + Tên + Tag PLUS / ✦ PRO / FREE`) bấm để mở `#/tai-khoan`.
+3. **Drawer Tài khoản**: Tại `#/tai-khoan` trên điện thoại, nút `☰` (`WorkspaceMenuButton`) nằm bên trái chữ `Tài khoản`, mở drawer liệt kê đủ 13 trang con thuộc 4 nhóm (`getAccountWorkspaceGroups()`). Hàng nút `[🔥 ngày] [🎫 xu ›] [⚙]` hiển thị cân đối cùng một hàng.
+4. **Chỉ đường trực tiếp từ Bản đồ (`#/chi-duong/:id?tu=map`)**: Chọn điểm trên bản đồ → `🗺️ Chỉ đường` → khi tới bán kính `<= 50m` (hoặc bấm nút giả lập tới nơi) → bật Pop-up Thông tin địa điểm → chọn `🚀 Bắt đầu Quest ngay` (`#/bat-dau/:id`) hoặc `📍 Tiếp tục xem bản đồ`.
+5. **Cuộn màn chơi Quest**: Các màn `QuestPlayPage`, `PlayerDialog`, `DueStartPage`, `DestinationPage`, `CelebrationPage` sử dụng thanh cuộn dọc `6px` theo chuỗi flex container chuẩn, không cắt nội dung trên màn hình nhỏ.
+
+
 ## Navigation and accessibility
 Bottom nav xuất hiện trên các trang workspace/công khai nhưng **không có trên trang chủ** — đã ghi nhận là điểm cần thống nhất trong TASKS-05.
 Nút nổi riêng cho nhiệm vụ đang chơi trên bản đồ.

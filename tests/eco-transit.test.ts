@@ -4,7 +4,6 @@ import {
   claimTransitReward,
   hasClaimedTransitToday,
   getNearbyGreenTransit,
-  getTodayDateKey,
 } from '../src/lib/ecoTransit'
 import type { GreenTransitStation } from '../src/data/greenTransit'
 

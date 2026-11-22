@@ -9,7 +9,10 @@ import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties, type F
 import { getQuest } from './data/quests'
 import { useQuestProgress } from './lib/useQuestProgress'
 import { PlayerIcon, PlayerDialog } from './QuestPlayerUi'
-import { displayText, downloadLocalFile } from './lib/questDisplay'
+import { displayText } from './lib/questDisplay'
+import { useOptionalAuth } from './AuthContext'
+import { getQuestPricing, isPaidQuest, openPremiumModal, usePremiumAccess } from './lib/premium'
+import { downloadJourneyCardPng, renderJourneyCardPng } from './lib/journeyCard'
 import DueSupport from './DueSupport'
 import DueMemory from './DueMemory'
 const DueMap=lazy(()=>import('./DueMap'))
@@ -21,12 +24,17 @@ const dialogTitles:Record<Exclude<Dialog,null>,string>=localized({menu:'Menu',he
 
 export default function QuestPlayPage({id}:{id:string}) {
  const quest=getQuest(id)
+ const auth=useOptionalAuth()
+ const user=auth?.user??null
+ const {hasAccess:hasQuestAccess}=usePremiumAccess(user?.id)
  const {state,error,dispatch,busy,loading,ready}=useQuestProgress()
  const [answer,setAnswer]=useState('')
  const [dialog,setDialog]=useState<Dialog>(null)
  const [fontSize,setFontSize]=useState(24)
  const [exited,setExited]=useState(false)
  const [cardNotice,setCardNotice]=useState('')
+ const [cardPreviewUrl,setCardPreviewUrl]=useState('')
+ const [cardBusy,setCardBusy]=useState(false)
  const [imageScale,setImageScale]=useState(1)
  const scroll=useRef<HTMLDivElement>(null)
  const title=useRef<HTMLHeadingElement>(null)
@@ -37,7 +45,38 @@ export default function QuestPlayPage({id}:{id:string}) {
  const checkpoint=quest?.checkpoints[index]
  const navigation=useQuestNavigationGuard(!!run&&!!run.arrivalConfirmedAt&&!run.paused&&!run.completedAt&&!exited,()=>dispatch({type:'pause',questId:id}),busy)
  useEffect(()=>{if(scroll.current)scroll.current.scrollTop=0;title.current?.focus()},[phase,index,run?.paused])
+ useEffect(()=>{
+  if(dialog!=='card'||!quest||!run){
+   setCardPreviewUrl('')
+   return
+  }
+  let cancelled=false
+  let objectUrl=''
+  const cardTotals=quest.checkpoints.filter(item=>run.completedCheckpointIds.includes(item.id)).reduce((sum,item)=>({xp:sum.xp+item.reward.xp,coins:sum.coins+item.reward.coins}),{xp:0,coins:0})
+  void renderJourneyCardPng({
+   questId:id,
+   questTitle:displayText(quest.title),
+   area:displayText(quest.area),
+   solved:run.completedCheckpointIds.length,
+   total:quest.checkpoints.length,
+   xp:cardTotals.xp,
+   coins:cardTotals.coins,
+   playerName:user?.name,
+   completedAt:run.completedAt,
+  }).then(blob=>{
+   if(cancelled)return
+   objectUrl=URL.createObjectURL(blob)
+   setCardPreviewUrl(objectUrl)
+  }).catch(()=>{})
+  return ()=>{
+   cancelled=true
+   if(objectUrl)URL.revokeObjectURL(objectUrl)
+  }
+ },[dialog,id,quest,run,user?.name])
  if(!quest)return <main className="quest-page"><h1>{t("Không tìm thấy quest")}</h1><a href="#/kham-pha">{t("Về Khám phá")}</a></main>
+ if(isPaidQuest(id)&&!hasQuestAccess(id)){const lockedPricing=getQuestPricing(id);
+  return <main className="quest-player q-status-screen dq-locked-page"><section className="dq-locked-screen"><span className="dq-locked-badge">✦ {lockedPricing.tierId==='pro'?t("CẦN GÓI PRO HÀNG THÁNG","PRO PLAN REQUIRED"):t("CẦN GÓI PLUS HÀNG THÁNG","PLUS PLAN REQUIRED")}</span><h1>{displayText(quest.title)}</h1><p>{lockedPricing.tierId==='pro'?t(`Hãy kích hoạt Gói Pro hàng tháng để mở khóa "${displayText(quest.title)}" cùng toàn bộ 3 quest trả phí.`,`Activate Dana Quest Pro monthly to unlock "${displayText(quest.title)}" and all 3 paid quests.`):t("Hãy kích hoạt Gói Plus hoặc Pro hàng tháng để mở khóa cốt truyện và các thử thách tại Cầu Rồng.","Activate Plus or Pro monthly to unlock story chapters and challenges at Dragon Bridge.")}</p><div className="dq-locked-price"><s>{lockedPricing.originalCurrencyLabel}</s><strong>{lockedPricing.currencyLabel}</strong></div><div className="dq-locked-actions"><button type="button" className="dq-locked-buy-btn" onClick={()=>openPremiumModal({questId:id,reason:'unlock'})}>{t(`Đăng ký ${lockedPricing.tierName} · ${lockedPricing.currencyLabel} →`,`Subscribe ${lockedPricing.tierName} · ${lockedPricing.currencyLabel} →`)}</button><a className="dq-locked-dir-link" href={`#/chi-duong/${id}?tu=map`}>↗ {t(`Chỉ đường đến ${displayText(quest.title)}`,`Directions to ${displayText(quest.title)}`)}</a><a className="dq-locked-back" href={`#/quest/${id}`}>← {t("Quay lại giới thiệu quest","Back to quest details")}</a></div></section></main>
+ }
  if(loading)return <main className="quest-player q-status-screen"><p role="status">{t("Đang tải hành trình của bạn…")}</p></main>
  if(!ready)return <main className="quest-player q-status-screen"><h1>{t("Chưa mở được hành trình")}</h1><p role="alert">{t(error)}</p><button className="q-primary" onClick={()=>window.location.reload()}>{t("Thử tải lại")}</button><a href={`#/quest/${id}`}>{t("Về thông tin quest")}</a></main>
  if(!run)return <main className="quest-player q-status-screen"><h1>{t("Quest chưa bắt đầu")}</h1><a className="q-primary" href={`#/quest/${id}`}>{t("Mở thông tin quest")}</a></main>
@@ -47,8 +86,28 @@ export default function QuestPlayPage({id}:{id:string}) {
  const act=async(type:'continue-story'|'advance'|'pause'|'resume')=>{if(await dispatch({type,questId:id,checkpointId:checkpoint?.id})){setAnswer('');setDialog(null)}}
  async function submit(event:FormEvent){event.preventDefault();if(!checkpoint||busy)return;if(await dispatch({type:'complete-checkpoint',questId:id,checkpointId:checkpoint.id,answer:answer.trim()}))setAnswer('')}
  async function leave(){if(phase==='results'||await dispatch({type:'pause',questId:id})){setExited(true);setDialog(null)}}
- function saveCard(){
-  downloadLocalFile('dana-quest-hanh-trinh.svg',interpolate("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"900\" height=\"600\" viewBox=\"0 0 900 600\"><rect width=\"900\" height=\"600\" rx=\"36\" fill=\"#19152f\"/><text x=\"60\" y=\"100\" fill=\"#70deb0\" font-size=\"28\" font-family=\"sans-serif\">DANA QUEST</text><text x=\"60\" y=\"200\" fill=\"#fff\" font-size=\"42\" font-family=\"sans-serif\">${0}</text><text x=\"60\" y=\"300\" fill=\"#c6b6e8\" font-size=\"30\" font-family=\"sans-serif\">${1} / ${2} thử thách đã giải đúng</text><text x=\"60\" y=\"420\" fill=\"#f3d36e\" font-size=\"46\" font-family=\"sans-serif\">${3} XP · ${4} xu</text><text x=\"60\" y=\"520\" fill=\"#a99bbf\" font-size=\"20\" font-family=\"sans-serif\">Thẻ hành trình cá nhân.</text></svg>",[displayText(quest!.title).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'),solved,quest!.checkpoints.length,totals.xp,totals.coins]),'image/svg+xml');setCardNotice(t("Đã tạo thẻ để tải về. Đây là thẻ tiến độ, không phải ảnh chụp màn hình."))
+ async function saveCard(){
+  if(cardBusy)return
+  setCardBusy(true)
+  setCardNotice('')
+  try{
+   await downloadJourneyCardPng({
+    questId:id,
+    questTitle:displayText(quest!.title),
+    area:displayText(quest!.area),
+    solved,
+    total:quest!.checkpoints.length,
+    xp:totals.xp,
+    coins:totals.coins,
+    playerName:user?.name,
+    completedAt:run.completedAt,
+   })
+   setCardNotice(t("Đã tải thẻ hành trình cá nhân định dạng PNG về thiết bị."))
+  }catch(cause){
+   setCardNotice(cause instanceof Error?cause.message:t("Chưa tạo được thẻ hành trình PNG."))
+  }finally{
+   setCardBusy(false)
+  }
  }
  if(exited)return <main className="quest-player due-exit" aria-labelledby="q-exit-title"><section className="due-exit-card"><span className="due-exit-emblem" aria-hidden="true">⚑</span><h1 id="q-exit-title">{t("Hẹn bạn ở hành trình tiếp theo")}</h1><p>{t("Tiến độ quest đã được giữ lại. Bạn có thể tiếp tục trong Quest của bạn.")}</p><div className="due-exit-actions"><a className="q-primary" href="#/kham-pha">{t("Trở lại Khám phá")}</a><button className="due-text-button" onClick={()=>setExited(false)}>{t("Quay lại quest đang tạm dừng")}</button></div></section></main>
  return <main className="quest-player due-player" style={{'--q-reading-size':`${fontSize}px`} as CSSProperties} aria-labelledby="q-screen-title">
@@ -78,7 +137,7 @@ export default function QuestPlayPage({id}:{id:string}) {
    :dialog==='guide'?<><Suspense fallback={<p role="status">{t("Đang mở bản đồ…")}</p>}><DueMap questId={id}/></Suspense><p>{displayText(quest.area)}</p><p className="q-muted">{t("Các thử thách thuộc cùng khu vực điểm đến. Chỉ theo lối đi được phép.")}</p><a className="q-menu-item" href={`#/quest/${id}/chi-duong`}>{t("Mở màn chỉ đường và vị trí thiết bị")}</a></>
    :dialog==='journey'?<><ol className="due-journey-list">{quest.checkpoints.map((item,number)=><li key={item.id}><span>{run.completedCheckpointIds.includes(item.id)?'✓':number+1}</span><div><strong>{item.title}</strong><small>{run.completedCheckpointIds.includes(item.id)?t("Đã giải đúng"):number===index?t("Đang khám phá"):t("Chưa mở")}</small></div></li>)}</ol><p className="q-muted">{totals.xp} {" " + t("XP và") + " "}{totals.coins} {" " + t("xu đã ghi nhận. Thử thách mở theo thứ tự.")}</p></>
    :dialog==='memory'?<DueMemory/>
-   :dialog==='card'?<><div className="due-progress-card"><span lang="en">Dana Quest</span><h3>{displayText(quest.title)}</h3><p>{solved}/{quest.checkpoints.length} {" " + t("thử thách đã giải đúng")}</p><strong>{totals.xp} XP · {totals.coins} xu</strong></div><p>{t("Thẻ tiến độ tải về thiết bị. Không phải voucher hoặc ảnh chụp màn hình.")}</p><button className="due-purple" onClick={saveCard}>{t("Tải thẻ hành trình")}</button>{cardNotice&&<p role="status">{cardNotice}</p>}</>
+   :dialog==='card'?<>{cardPreviewUrl?<img className="due-journey-card-preview" src={cardPreviewUrl} alt={t("Xem trước thẻ hành trình cá nhân")}/>:<div className="due-progress-card"><span lang="en">Dana Quest</span><h3>{displayText(quest.title)}</h3><p>{solved}/{quest.checkpoints.length} {" " + t("thử thách đã giải đúng")}</p><strong>{totals.xp} XP · {totals.coins} xu</strong></div>}<p>{t("Thẻ hành trình cá nhân thiết kế dạng ảnh PNG 1200×675 để bạn lưu và chia sẻ.")}</p><button className="q-primary" disabled={cardBusy} onClick={()=>void saveCard()}>{cardBusy?t("Đang tạo ảnh PNG…"):t("📥 Tải thẻ hành trình (.PNG)")}</button>{cardNotice&&<p role="status">{cardNotice}</p>}</>
    :<div className="q-recap">{quest.checkpoints.filter((_,number)=>number<=index).map(item=><section key={item.id}><h3>{item.title}</h3><p>{item.story}</p></section>)}<p className="q-muted">{t("Xem lại câu chuyện không xóa tiến độ hoặc nhận lại thưởng.")}</p></div>}
   </PlayerDialog>}
  </main>

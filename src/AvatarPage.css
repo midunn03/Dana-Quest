@@ -54,8 +54,11 @@
   .app-shell > main.onboarding.custom-avatar-screen { padding:var(--px-space-8); }
   :where(.custom-avatar-screen) .avatar-custom-heading h1 { font-size:var(--text-lg); }
   :where(.custom-avatar-screen) .avatar-custom-grid { grid-template-columns:minmax(250px,.8fr) minmax(0,1.3fr); align-items:start; gap:var(--px-space-8); }
-  :where(.custom-avatar-screen) .avatar-custom-preview { position:sticky; top:0; padding-block:var(--px-space-10); }
+  :where(.custom-avatar-screen) .avatar-custom-preview { position:static; padding-block:var(--px-space-10); }
   :where(.custom-avatar-screen) .avatar-custom-stage { min-height:300px; }
   :where(.custom-avatar-screen) .avatar-custom-stage .pixel-avatar { width:192px; height:240px; }
   :where(.custom-avatar-screen) .avatar-custom-controls { padding:28px; }
+}
+@media(min-width:960px) {
+  :where(.custom-avatar-screen) .avatar-custom-preview { position:sticky; top:16px; }
 }

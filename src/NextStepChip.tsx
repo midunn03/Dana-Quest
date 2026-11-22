@@ -7,21 +7,36 @@ import { useQuestProgress } from './lib/useQuestProgress'
 import { usePlayerLocation } from './lib/usePlayerLocation'
 import { distanceMeters } from './lib/location'
 import { formatMeters } from './lib/routing'
+import { useOptionalAuth } from './AuthContext'
+import { isPaidQuest, usePremiumAccess } from './lib/premium'
 
 export interface NextStepChipProps {
   currentRoute: string
 }
 
 export default function NextStepChip({ currentRoute }: NextStepChipProps) {
+  const { state } = useQuestProgress()
+  const { sample } = usePlayerLocation()
+  const auth = useOptionalAuth()
+  const { hasAccess } = usePremiumAccess(auth?.user?.id)
   if (!isUxFlagEnabled('NEXT_STEP_CHIP')) {
     return null
   }
 
-  // Không hiện trên màn hình chơi immersive, camera, chúc mừng, đăng nhập hoặc đang tìm điểm / chỉ đường
+  // Không hiện trên màn hình chơi immersive, camera, chúc mừng, đăng nhập, onboarding, chọn nhân vật, nhập mã, văn bản hoặc chỉ đường
   const isHiddenRoute =
     currentRoute === '#/' ||
+    currentRoute === '#/map' ||
     currentRoute === '#/dang-nhap' ||
     currentRoute === '#/dang-ky' ||
+    currentRoute === '#/chon-nhan-vat' ||
+    currentRoute === '#/nhan-vat' ||
+    currentRoute === '#/kich-hoat' ||
+    currentRoute === '#/nhap-ma' ||
+    currentRoute === '#/huong-dan' ||
+    currentRoute === '#/dieu-khoan' ||
+    currentRoute === '#/quyen-rieng-tu' ||
+    currentRoute.startsWith('#/bat-dau/') ||
     currentRoute.startsWith('#/may-anh/') ||
     currentRoute.startsWith('#/hoan-thanh/') ||
     currentRoute.includes('/choi') ||
@@ -30,9 +45,6 @@ export default function NextStepChip({ currentRoute }: NextStepChipProps) {
     currentRoute.startsWith('#/chi-duong/')
 
   if (isHiddenRoute) return null
-
-  const { state } = useQuestProgress()
-  const { sample } = usePlayerLocation()
 
   // Tìm quest đang dở
   const activeEntry = Object.entries(state.quests)
@@ -48,7 +60,11 @@ export default function NextStepChip({ currentRoute }: NextStepChipProps) {
     const quest = getQuest(id)
     if (!quest) return null
 
-    if (run.arrivalConfirmedAt) {
+    if (isPaidQuest(id) && !hasAccess(id)) {
+      icon = '🔒'
+      text = `${t('Mở khóa để tiếp tục:', 'Unlock to continue:')} ${quest.title}`
+      href = `#/quest/${id}`
+    } else if (run.arrivalConfirmedAt) {
       // Đã đến nơi, đang trong thử thách
       const currentCheckpointIndex = run.completedCheckpointIds.length
       const currentCheckpoint = quest.checkpoints[currentCheckpointIndex] || quest.checkpoints[0]

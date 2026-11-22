@@ -6,6 +6,12 @@ import { metersPerPixel } from '../src/lib/markerScale'
 import { posterize } from '../src/lib/pixelTiles'
 
 describe('parsePlaceData', () => {
+  it('reads current Django places payloads and rejects unsafe admin photos',()=>{
+    const data=parsePlaceData({managed:true,places:[{id:'cau-rong',description:'Địa điểm thật',highlight:'Cầu',photos:[{url:'/media/bridge.jpg',caption:'Cầu Rồng',credit:'Tác giả'},{url:'javascript:alert(1)'}]},{id:'__proto__',photos:[]}]})
+    expect(data.content['cau-rong']?.photos).toEqual([{url:'/media/bridge.jpg',caption:'Cầu Rồng',credit:'Tác giả'}])
+    expect(data.content['cau-rong']?.description).toBe('Địa điểm thật')
+    expect(Object.hasOwn(data.content,'__proto__')).toBe(false)
+  })
   it('đọc ảnh ghim, ảnh dán mặt đất và nội dung admin', () => {
     const data = parsePlaceData({
       items: { 'cau-rong': { url: '/media/a.png', meters: 320, ground: { lat: 16.06, lng: 108.22, widthM: 600, heightM: 40, rotation: 30 } }, 'x': { url: 'javascript:alert(1)', meters: 5 } },

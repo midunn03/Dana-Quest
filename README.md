@@ -60,7 +60,7 @@ Các trang:
 
 - Bản đồ: http://127.0.0.1:5173/#/kham-pha
 - API gợi ý địa điểm nổi bật theo khu vực bản đồ: `/api/recommendations/nearby?lat=16.068&lng=108.224&limit=3`
-- Ví dụ chi tiết: http://127.0.0.1:5173/#/dia-diem/cau-rong
+- Ví dụ chi tiết: http://127.0.0.1:5173/#/dia-diem/cau-rong (chỉ đường quest: `#/quest/cau-rong/chi-duong`)
 - Album: http://127.0.0.1:5173/#/album
 - Cửa hàng: http://127.0.0.1:5173/#/cua-hang
 
@@ -111,7 +111,7 @@ Green Coins/voucher chỉ để thử luồng, không phải tiền và không c
 
 Dữ liệu cục bộ có thể bị sửa bởi người dùng. Một sản phẩm thực vẫn cần backend để quản lý người dùng, đồng bộ/sao lưu ảnh và tiến độ, xác thực hoàn thành, ghi sổ xu và quản lý voucher/đối tác thật. AI kiểm tra nội dung ảnh cần dịch vụ thực và quy trình xử lý dữ liệu phù hợp. Chưa kết nối các dịch vụ đó.
 
-Không có booking, premium trả phí hay AI tạo tour.
+Có chế độ chuyển đổi `WEB / MOBILE` (`.device-mobile-shell` với bottom nav 4 mục đồng bộ Web và drawer Tài khoản 13 mục) cùng hệ thống gói trả phí hàng tháng **Plus** (`30.000đ/tháng`) và **Pro** (`50.000đ/tháng`), hỗ trợ mở rộng không gian khám phá ngoài 5 quest miễn phí (chưa kết nối cổng thanh toán thực tế hay AI tạo tour). Xem [docs/DOC-INDEX.md](docs/DOC-INDEX.md) và [docs/USER-FLOWS.md](docs/USER-FLOWS.md) để nắm chi tiết kiến trúc và luồng người dùng cho AI agent.
 
 ## Các tệp chính
 
@@ -171,7 +171,7 @@ Thông báo nhỏ xuất hiện sau khi lưu thành công: giao nhiệm vụ, l�
 - Mỗi điểm đến có 3 hình minh họa SVG: ban ngày, hoàng hôn và ban đêm. Vuốt ngang trên điện thoại; trên laptop có thể kéo ảnh bằng chuột hoặc dùng các chấm/mũi tên. Đây là minh họa, không phải ảnh chụp hiện trường.
 - Thông tin bên dưới gồm Tổng quan, Giờ mở cửa, Địa điểm chi tiết và Thời gian đông đúc. Giờ tham khảo có nguồn trong giao diện; điểm chưa xác nhận lịch cố định được ghi rõ.
 - Chưa có nguồn dữ liệu đông đúc trực tiếp. Mục này hiển thị trạng thái chưa có dữ liệu, không tạo số người, phần trăm hoặc biểu đồ giả.
-- Kiểm tra ngày 03/10/2026: build/lint đạt; 74/74 test đạt, gồm kiểm tra catalog 15 điểm, marker riêng, mở sheet cho từng điểm, giao 5 nhiệm vụ cho từng điểm, luồng nhiệm vụ/xu gốc và giữ ảnh/tiến độ Chợ Hàn đã lưu. Đã thao tác trên trình duyệt: mở Cầu Rồng, kéo lên, kéo ngang ảnh 1 → 2 → 3, cuộn các mục thông tin, kiểm tra chiều rộng 390 px và kéo xuống đóng thẻ. Nền OpenStreetMap không tải được trong môi trường kiểm tra; thông báo lỗi và lựa chọn điểm đến vẫn hiện.
+- Kiểm tra ngày 21/11/2026: `tsc --noEmit` 0 lỗi, `oxlint` 0 lỗi, 349/349 test đạt (mốc cũ 03/10/2026: 74/74 test). Đã xác minh catalog 15 điểm active, marker riêng, mở sheet cho từng điểm, luồng nhiệm vụ/xu và giữ ảnh/tiến độ Chợ Hàn đã lưu.
 - Ảnh kiểm tra: `tests/visual/destination-gallery.png`, `tests/visual/destination-gallery-mobile.png`.
 
 ## Biểu tượng theo mức phóng bản đồ

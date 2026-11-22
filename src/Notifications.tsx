@@ -12,7 +12,7 @@ export default function Notifications() {
       const message = (event as CustomEvent<string>).detail
       const id = ++next.current
       setItems(old => [...old, { id, message }].slice(-4))
-      const timer = setTimeout(() => { setItems(old => old.filter(item => item.id !== id)); timers.delete(timer) }, 7000)
+      const timer = setTimeout(() => { setItems(old => old.filter(item => item.id !== id)); timers.delete(timer) }, 4500)
       timers.add(timer)
     }
     window.addEventListener('dana-toast', receive)

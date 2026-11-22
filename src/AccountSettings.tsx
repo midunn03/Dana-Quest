@@ -1,4 +1,7 @@
 import { useLocale } from './i18n/LocaleProvider'
+import { formatDate } from './i18n/locale'
+import { getQuest } from './data/quests'
+import { PAID_QUEST_IDS, PLUS_QUEST_IDS, openPremiumModal, usePremiumAccess } from './lib/premium'
 import { useDeviceMode } from './lib/deviceMode'
 import PlayerInformation from './PlayerInformation'
 import { useState } from 'react'
@@ -14,6 +17,7 @@ import packageInfo from '../package.json'
 const href=(page:string)=>`#/tai-khoan/${page}`
 export default function AccountSettings({view,user,data,save,t,onLogout}:{view:string;user:AuthUser|null;data:AccountFeatures;save:AccountSave;t:AccountText;onLogout:()=>void}){
  const {language,setLanguage}=useLocale()
+ const {records:premiumRecords,activePlanId,cancelPlan}=usePremiumAccess(user?.id)
  const {mode:deviceMode,setMode:setDeviceMode}=useDeviceMode(user?.id)
  const [error,setError]=useState(''),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false),[confirmCache,setConfirmCache]=useState(false)
  const [push,setPush]=useState(()=>{try{return remindersEnabled()}catch{return false}})
@@ -47,7 +51,52 @@ export default function AccountSettings({view,user,data,save,t,onLogout}:{view:s
  if(view==='gift')return <section className="ap-card"><h2>{t('Mời bạn khám phá','Invite a friend')}</h2><p>{t('Có thể chia sẻ liên kết quest miễn phí. Đây không phải vé/pass trả phí, không tạo lời mời chơi nhóm và không có tiền giới thiệu.','Share a free quest link. This is not a paid ticket/pass, does not create a multiplayer invitation and earns no referral money.')}</p><button className="ap-primary" onClick={()=>{const url=`${location.origin}${location.pathname}#/quest/due-dau-an-50-nam`;void copyAccountText(url).then(ok=>setNotice(ok?t('Đã sao chép liên kết quest.','Quest link copied.'):url))}}>{t('Sao chép liên kết DUE','Copy DUE quest link')}</button>{feedback}</section>
  if(view==='challenges')return <section className="ap-card ap-empty"><h2>{t('Chưa có lời thách đấu','No challenges yet')}</h2><p>{t('DUE hiện chơi solo. Chế độ gửi lời thách đấu và so điểm giữa các lượt chưa được bật; điểm hiện có vẫn được giữ.','DUE currently uses solo play. Sending challenges and comparing runs are not enabled; your existing scores are kept.')}</p><a className="ap-primary" href="#/quest-cua-toi">{t('Tiếp tục quest của bạn','Continue your quests')}</a></section>
  if(view==='host'||view==='private-tours')return <><div className="ap-notice"><h2>{t('Tour có người hướng dẫn','Hosted & private tours')}</h2><p>{t('Chưa mở đặt tour, thu tiền hoặc trả thù lao. Chức năng này cần chính sách, người vận hành và dịch vụ thanh toán. Bạn có thể gửi đề xuất để chủ dự án xem.','Bookings, payments and host payouts are not open. This needs policies, operators and a payment service. You can submit a proposal for the project owner.')}</p></div><AccountMessage category="tour" data={data} save={save} t={t}/></>
- return <section className="ap-card"><h2>{view==='videos'?t('Video và thù lao','Videos & payouts'):t('Pass 3 ngày','3-day pass')}</h2><p>{view==='videos'?t('Chưa có chương trình trả tiền theo lượt xem. Cần đối soát lượt xem, tài khoản nhận tiền và dịch vụ thanh toán. Không tự đăng video hoặc gửi dữ liệu đến nền tảng nào.','No pay-per-view program is active. View verification, payout accounts and payment services are required. No video or data is posted to a platform.'):t('Dana Quest đang là bản thử nghiệm, chưa bán pass hoặc kích hoạt gói trả phí. Việc thu tiền cần cổng thanh toán và chính sách thương mại riêng.','Dana Quest is a prototype. Pass sales and paid subscriptions are not enabled. Payments require a payment provider and commercial policies.')}</p><a className="ap-primary" href="#/kham-pha">{t('Khám phá quest hiện có','Explore available quests')}</a></section>
+ if(view==='videos')return <section className="ap-card"><h2>{t('Video và thù lao','Videos & payouts')}</h2><p>{t('Chưa có chương trình trả tiền theo lượt xem. Cần đối soát lượt xem, tài khoản nhận tiền và dịch vụ thanh toán. Không tự đăng video hoặc gửi dữ liệu đến nền tảng nào.','No pay-per-view program is active. View verification, payout accounts and payment services are required. No video or data is posted to a platform.')}</p><a className="ap-primary" href="#/kham-pha">{t('Khám phá quest hiện có','Explore available quests')}</a></section>
+ const unlockedIds = activePlanId === 'pro' ? [...PAID_QUEST_IDS] : activePlanId === 'plus' ? [...PLUS_QUEST_IDS] : []
+ return <div className="ap-premium-history">
+  <section className="ap-card ap-subscription-card">
+   <h2>{t('Gói trải nghiệm & Bảng giá','Experience packs & Pricing')}</h2>
+   <p>{t('Gói Plus (30.000đ/tháng) mở khóa Cầu Rồng; Gói Pro (50.000đ/tháng) mở khóa thêm 2 quest Cầu Vàng & Ngũ Hành Sơn. Hỗ trợ áp dụng mã khuyến mãi khi thanh toán và có thể hủy gói bất cứ lúc nào.','Plus (30.000đ/mo) unlocks Cầu Rồng; Pro (50.000đ/mo) unlocks Golden Bridge & Marble Mountains. Promo codes supported at checkout and cancel anytime.')}</p>
+   <div className="ap-active-sub-box" role="status">
+    <div>
+     <span className={`ap-unlock-status ${activePlanId === 'free' ? 'is-free' : ''}`}>{activePlanId === 'free' ? t('MẶC ĐỊNH','DEFAULT') : `✓ ${t('ĐANG HOẠT ĐỘNG','ACTIVE')}`}</span>
+     <strong>{activePlanId === 'pro' ? t('Gói Pro · 50.000đ/tháng (Mở khóa 3 quest trả phí)','Pro Plan · 50.000đ/mo (All 3 paid quests)') : activePlanId === 'plus' ? t('Gói Plus · 30.000đ/tháng (Mở khóa 1 quest Cầu Rồng)','Plus Plan · 30.000đ/mo (Cầu Rồng quest)') : t('Gói Miễn phí · 0đ/tháng (13 quest miễn phí)','Free Plan · 0đ/mo (13 free quests)')}</strong>
+    </div>
+    {activePlanId !== 'free' && (
+     <button type="button" className="ap-cancel-sub-btn" onClick={cancelPlan}>{t('Hủy gói đăng ký','Cancel plan')}</button>
+    )}
+   </div>
+   <div className="ap-premium-cta-row">
+    <button type="button" className="ap-primary" onClick={()=>openPremiumModal({reason:'browse'})}>{activePlanId === 'free' ? t('Chọn Gói Plus & Pro →','View Plus & Pro Plans →') : t('Xem bảng giá & Đổi gói →','View pricing & Change plan →')}</button>
+    <a className="ap-text-link" href="#/nhap-ma">{t('Có mã kích hoạt đoàn? Nhập mã','Have a group code? Redeem')}</a>
+   </div>
+  </section>
+  <section className="ap-card">
+   <h2>{t('Quyền chơi & Lịch sử mở khóa','Unlocked quests & History')}</h2>
+   {!unlockedIds.length && !premiumRecords.length ? (
+    <p>{t('Tài khoản của bạn chưa kích hoạt Gói Plus hay Gói Pro. Hãy mở bảng giá bên trên để chọn gói phù hợp!','No active Plus or Pro subscription. Open pricing above to choose a plan!')}</p>
+   ) : (
+    <ul className="ap-unlock-list">
+     {(unlockedIds.length ? unlockedIds : premiumRecords.map(r => r.questId)).map(qId => {
+      const q=getQuest(qId)
+      const qTitle=q?q.title.replace(/\s+[—–-]\s+(.+)$/,' ($1)'):qId
+      const latestRec=premiumRecords[0]
+      return <li key={qId} className="ap-unlock-item">
+       <div>
+        <span className="ap-unlock-status">✓ {t('Đang hoạt động','Active')}</span>
+        <strong>{qTitle}</strong>
+        <small>{latestRec?.planName || (activePlanId === 'pro' ? t('Gói Pro (Hàng tháng)','Pro Monthly') : t('Gói Plus (Hàng tháng)','Plus Monthly'))} · {latestRec?.paidPriceVnd === 0 ? t('0đ (Ưu đãi)', '0đ (Promo)') : latestRec?.paidPriceVnd ? `${latestRec.paidPriceVnd.toLocaleString('vi-VN')}đ/tháng` : t('Mã kích hoạt','Code')} · {latestRec?.unlockedAt ? formatDate(latestRec.unlockedAt,{dateStyle:'medium',timeStyle:'short'}) : t('Đang hiệu lực','Active')}</small>
+       </div>
+       <div className="ap-unlock-actions">
+        <a className="ap-primary" href={`#/quest/${qId}`}>{t('Vào chơi ngay →','Play Now →')}</a>
+        <a className="ap-text-link" href="#/tai-khoan/support">{t('Hỗ trợ','Support')}</a>
+       </div>
+      </li>
+     })}
+    </ul>
+   )}
+  </section>
+ </div>
 }
 function AccountFaq({howTo,t}:{howTo:boolean;t:AccountText}){
  const [query,setQuery]=useState('')

@@ -39,7 +39,11 @@ it('blocks completion without a photo, performs a free local check and keeps the
   render(<AlbumPage />)
   expect(screen.getByRole('heading',{name:'Thư viện kỷ niệm'})).toBeTruthy()
   expect(screen.queryByRole('img',{name:'Ảnh tại Chợ Hàn'})).toBeNull()
-  expect(screen.getAllByRole('link',{name:/Cầu Rồng/}).some(link=>link.getAttribute('href')==='#/quest/cau-rong')).toBe(true)
+  const dragonAlbum = screen.getByRole('button',{name:/Đánh thức Long Mạch/})
+  expect(dragonAlbum).toBeTruthy()
+  await user.click(dragonAlbum)
+  expect(screen.getByRole('heading',{name:/Đánh thức Long Mạch/})).toBeTruthy()
+  expect(screen.getByText(/Album ảnh kỷ niệm/)).toBeTruthy()
   expect((await loadPhotos()).some(photo=>photo.id==='cho-han:overview-photo')).toBe(true)
   expect(revokeObjectURL).toHaveBeenCalled()
 

@@ -1,0 +1,39 @@
+/* Shared phone presentation only; desktop and immersive game surfaces are excluded. */
+.app-shell.device-mobile-shell { --font-ui: 'Dana Home Sans','Segoe UI',system-ui,sans-serif; }
+.app-shell.device-mobile-shell .device-mobile-header { min-height: 64px; height: auto; padding: 8px 14px; background: #eef9fc; border-color: #a6cbd5; color: #163c56; }
+.app-shell.device-mobile-shell .device-mobile-logo img { display: block; width: 66px; height: 48px; object-fit: contain; }
+.app-shell.device-mobile-shell .device-mobile-mode-btn { min-height: 44px; height: auto; padding: 8px 10px; border: 2px solid #a6cbd5; background: #e0f1f3; color: #244d64; font: 700 14px var(--font-ui); }
+.app-shell.device-mobile-shell .device-mobile-nav { height: auto; min-height: 72px; padding-bottom: max(8px,env(safe-area-inset-bottom,0px)); border-color: #a6cbd5; background: #f0faff; }
+.app-shell.device-mobile-shell .device-mobile-nav-label { font: 700 12px/1.3 var(--font-ui); }
+.app-shell.device-mobile-shell .device-mobile-nav-item { min-height: 52px; color: #49677a; }
+.app-shell.device-mobile-shell .device-mobile-nav-item.active { color: #217c5b; background: #e5f4ec; }
+.app-shell.device-mobile-shell > :is(.events-index,.discovery-page) { color: #163c56; background: linear-gradient(155deg,#eef9ff,#f3fbef); font-family: var(--font-ui); }
+.app-shell.device-mobile-shell .events-index .ev-frame { min-width: 0; }
+.app-shell.device-mobile-shell .events-index .ev-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 18px; }
+.app-shell.device-mobile-shell .events-index .ev-filters { grid-template-columns: minmax(0,1fr); }
+.app-shell.device-mobile-shell .events-index .ev-tabs { overflow-x: auto; flex-wrap: nowrap; }
+.app-shell.device-mobile-shell .events-index .ev-tabs button { white-space: nowrap; min-height: 44px; font-size: 15px; }
+.app-shell.device-mobile-shell .events-index .ev-card { background: #fffef8; border-color: #a6cbd5; }
+.app-shell.device-mobile-shell .events-index .ev-card h2 { font-size: 23px; line-height: 1.3; }
+.app-shell.device-mobile-shell .events-index :is(p,input,select) { font-size: 17px; }
+.app-shell.device-mobile-shell .events-index h1 { font-size: 28px; }
+.app-shell.device-mobile-shell .discovery-title-row h1 { font-size: 28px !important; }
+.app-shell.device-mobile-shell .discovery-card h3 { font-size: 22px !important; }
+.app-shell.device-mobile-shell .discovery-card { border-color: #a6cbd5 !important; box-shadow: 3px 3px 0 #bddbdc !important; background: #fffef8 !important; }
+.app-shell.device-mobile-shell .discovery-page :is(input,select) { font-size: 17px; min-height: 44px; }
+.app-shell.device-mobile-shell .home-brand-refresh { background: transparent !important; }
+@media(max-width:400px) {
+ .device-mobile-shell .home-brand-refresh .home-header-inner { grid-template-columns: 56px minmax(0,1fr) !important; gap: 8px !important; }
+ .device-mobile-shell .home-brand-refresh .home-header .home-brand img { width: 52px !important; }
+ .device-mobile-shell .home-brand-refresh .home-header-actions { gap: 4px !important; }
+ .device-mobile-shell .home-brand-refresh .home-user { max-width: 32px; overflow: hidden; }
+ .device-mobile-shell .home-brand-refresh .home-header .home-button { font-size: 14px !important; padding-inline: 8px !important; }
+}
+.app-shell.device-mobile-shell .events-index .ev-intro { padding: 20px; background: #e3f3e9; }
+.app-shell.device-mobile-shell .events-index .ev-intro h2 { font: 800 29px/1.2 var(--font-ui); text-transform: none; }
+.app-shell.device-mobile-shell .next-step-chip-container { position: static; flex: 0 0 auto; width: auto; max-width: 100%; margin: 0; padding: 6px 12px; transform: none; background: #edf8f4; }
+.app-shell.device-mobile-shell .next-step-chip { display: flex; width: 100%; max-width: 100%; min-height: 44px; padding: 8px 12px; background: #fdf5d7; color: #244d64; border-color: #d6bb70; font: 700 14px var(--font-ui); box-shadow: none; }
+.app-shell.device-mobile-shell .next-step-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-shell.device-mobile-shell .next-step-chip { color: #244d64 !important; }
+.app-shell.device-mobile-shell .device-mobile-nav-label { font-size: 14px; }
+.app-shell.device-mobile-shell .device-mobile-mode-btn { font-size: 16px; }

@@ -20,9 +20,9 @@ it('keeps quest detail behind the login prompt when choosing to play',async()=>{
 it('retains text entered on a public page while a delayed session is restored',async()=>{
  vi.stubEnv('VITE_AUTH_API_URL','https://auth.test/api/auth');let resolveSession!:(value:unknown)=>void
  const fetchMock=vi.fn((input:unknown)=>String(input).endsWith('/session')?new Promise(resolve=>{resolveSession=resolve}):Promise.resolve({ok:false,status:404,json:async()=>({message:'Unavailable'})}));vi.stubGlobal('fetch',fetchMock)
- location.hash='#/tim-kiem';render(<App/>);const input=await screen.findByRole('searchbox');fireEvent.change(input,{target:{value:'cau rong'}})
+ location.hash='#/tim-kiem';render(<App/>);const inputs=await screen.findAllByRole('searchbox');const input=inputs.at(-1)!;fireEvent.change(input,{target:{value:'cau rong'}})
  resolveSession({ok:true,status:200,json:async()=>({user:{id:'delayed-fixture',name:'Minh',avatarId:'bien',storageMode:'account'}})})
- await waitFor(()=>expect(fetchMock.mock.calls.some(([url])=>String(url).endsWith('/event-state'))).toBe(true));expect((screen.getByRole('searchbox') as HTMLInputElement).value).toBe('cau rong')
+ await waitFor(()=>expect(fetchMock.mock.calls.some(([url])=>String(url).endsWith('/event-state'))).toBe(true));expect((screen.getAllByRole('searchbox').at(-1) as HTMLInputElement).value).toBe('cau rong')
 })
 
 it('keeps the public home mounted through inline login and registration changes',async()=>{

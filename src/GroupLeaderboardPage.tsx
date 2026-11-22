@@ -21,7 +21,7 @@ export default function GroupLeaderboardPage() {
     fetchMyGroups().then((res) => {
       setGroups(res)
       setLoading(false)
-    })
+    }).catch(error=>{setMessage(error instanceof Error?error.message:t('Chưa tải được nhóm.'));setLoading(false)})
   }
 
   useEffect(() => {
@@ -63,8 +63,9 @@ export default function GroupLeaderboardPage() {
   const handleLeave = async (groupId: number, groupName: string) => {
     if (!window.confirm(interpolate('Bạn có chắc chắn muốn rời nhóm "${0}" không?', [groupName]))) return
     setBusy(true)
-    await leaveGroup(groupId)
+    const result=await leaveGroup(groupId)
     setBusy(false)
+    if(!result.success){setMessage(result.message||t('Không thể rời nhóm.'));return}
     loadData()
   }
 

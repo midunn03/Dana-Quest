@@ -1,7 +1,7 @@
 import PixelLogo from './PixelLogo'
 import { interpolate } from './i18n/locale'
 import { t } from './i18n/locale'
-import LandmarkArt from './LandmarkArt'
+import QuestCover from './QuestCover'
 import PixelAvatar from './PixelAvatar'
 import { avatars, readAvatar } from './lib/avatar'
 import { useState } from 'react'
@@ -24,7 +24,8 @@ export default function DestinationPage({ id }: { id: string }) {
   const [resetOpen, setResetOpen] = useState(false)
   const place = getDestination(id)
   const custom = usePlaceData().content[id]
-  const heroPhoto = custom?.photos[0]
+
+
   const { state, loading, busy, error, corrupt, dispatch, resetProgress } = useProgress()
   const location = useLocation()
   const progress = state.destinations[id] ?? emptyProgress()
@@ -34,11 +35,7 @@ export default function DestinationPage({ id }: { id: string }) {
   const needed = requiredCount(progress.selected.length)
   return <main className="quest-page arrival-screen">
     <nav className="quest-nav"><a className="back-link" href="#/map">{t("← Bản đồ")}</a><a href="#/album">{t("Album ảnh")}</a><a href="#/" lang="en" aria-label="DANA QUEST"><PixelLogo compact/></a></nav>
-    <h1>{location.sample && hasArrived(location.sample, place.position, location.now) ? interpolate("Đã đến ${0}!",[place.name]) : interpolate("Khám phá ${0}",[place.name])}</h1><div className="arrival-hero">{custom
-      ? (heroPhoto ? <img className="destination-photo" src={heroPhoto.url} alt={heroPhoto.caption || place.name} /> : <span className="admin-hero-empty" aria-hidden="true" />)
-      : place.photo
-      ? <img className="destination-photo" src={`${import.meta.env.BASE_URL}${place.photo.replace(/^\//, '')}`} alt={interpolate("Ảnh thật ${0}",[place.name])} />
-      : <LandmarkArt id={id}/>}<div className="arrival-explorer"><PixelAvatar avatar={readAvatar()??avatars[0]}/></div><span className="arrival-bubble">!</span>{!custom && place.photo && place.photoCredit && <span className="photo-credit">{t("Ảnh:") + " "}{place.photoCredit}</span>}</div>
+    <h1>{location.sample && hasArrived(location.sample, place.position, location.now) ? interpolate("Đã đến ${0}!",[place.name]) : interpolate("Khám phá ${0}",[place.name])}</h1><div className="arrival-hero"><QuestCover id={id} credit sourceLink/><div className="arrival-explorer"><PixelAvatar avatar={readAvatar()??avatars[0]}/></div><span className="arrival-bubble">!</span></div>
     <details className="more-info"><summary>{t("Tiện ích hành trình")}</summary><QuestLinks /></details>
     {error && <p className="notice error" role="alert">{t(error)}</p>}
     {corrupt && <div className="notice error" role="alert"><p>{t("Dữ liệu tiến độ đã lưu bị hỏng nên không thể tiếp tục. Bạn có thể đặt lại tiến độ để chơi tiếp — một bản sao dữ liệu hỏng được giữ lại để khôi phục thủ công, ảnh đã lưu không bị xóa.")}</p><button type="button" className="cancel-quest-button" disabled={busy} onClick={() => setResetOpen(true)}>{t("Đặt lại tiến độ")}</button></div>}
