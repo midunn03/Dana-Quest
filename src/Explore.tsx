@@ -303,7 +303,7 @@ export default function Explore(){
      <a className="atlas-back dq-back-btn" href="#/kham-pha" aria-label={t('Khám phá','Discover')}>← {t('Quay lại','Back')}</a>
      <h1>{t('Kết quả','Results')}</h1><HeaderQuickToggles compact />
      </div>
-    <label className="atlas-search"><span className="sr-only">{t('Tìm kiếm trên bản đồ','Search map')}</span><span aria-hidden="true">⌕</span><input type="search" value={query} onChange={e=>{setQuery(e.target.value);setSelected(null)}} placeholder={t('Tìm địa điểm, quest…','Search places, quests…')}/></label>
+    <label className="atlas-search"><span className="sr-only">{t('Tìm kiếm trên bản đồ','Search map')}</span><span aria-hidden="true">⌕</span><input type="search" value={query} onFocus={()=>{if(sheetSnap==='peek')setSheetSnap('half')}} onChange={e=>{setQuery(e.target.value);setSelected(null);if(sheetSnap==='peek')setSheetSnap('half')}} placeholder={t('Tìm địa điểm, quest…','Search places, quests…')}/></label>
 
    </div>
    <div className="atlas-list-heading"><strong>{entries.length} {t('điểm trên bản đồ','map places')}</strong><span>{mode==='quests'?'✦':'◆'} {mode==='quests'?t('Quest','Quest'):t('Sự kiện','Events')}</span></div>

@@ -4,22 +4,9 @@
    Mọi nút bấm >= 44x44px. Bottom sheet 3 mức (peek ~72px, half ~45vh, full ~85vh).
    ========================================================================== */
 
-/* 1. Header nổi trên bản đồ (Không chiếm chiều cao cố định của trang) */
+/* 1. Ẩn header nổi trên bản đồ để nhường toàn bộ không gian cho bộ lọc bản đồ */
 .device-mobile-shell .device-mobile-header.device-mobile-header--floating-map {
-  position: absolute;
-  top: env(safe-area-inset-top, 0px);
-  left: 0;
-  right: 0;
-  height: 48px;
-  background: transparent;
-  border-bottom: none;
-  box-shadow: none;
-  z-index: 500;
-  pointer-events: none;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: none !important;
 }
 
 .device-mobile-shell .device-mobile-header.device-mobile-header--floating-map > * {
@@ -123,39 +110,37 @@
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
-  padding: 0 14px calc(56px + env(safe-area-inset-bottom, 0px));
+  padding: 0 12px 10px;
   transition: height 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: height;
   box-sizing: border-box;
 }
 
-/* Mức 1: Nghỉ (peek) - 72px */
+/* Mức 1: Nghỉ (peek) - 108px: hiện thanh kéo + ô tìm kiếm */
 .device-mobile-shell .atlas-sidebar.atlas-sidebar--snap-peek,
 .device-mobile-shell .atlas-sidebar[data-snap="peek"] {
-  height: 72px;
-  min-height: 72px;
-  max-height: 72px;
+  height: 108px;
+  min-height: 108px;
+  max-height: 108px;
   overflow: hidden;
 }
 
-/* Mức 2: Nửa (half) - 45vh */
+/* Mức 2: Nửa (half) - 58dvh */
 .device-mobile-shell .atlas-sidebar.atlas-sidebar--snap-half,
 .device-mobile-shell .atlas-sidebar[data-snap="half"] {
-  height: 45vh;
-  min-height: 45vh;
-  max-height: 45vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  height: 58dvh;
+  min-height: 58dvh;
+  max-height: 58dvh;
+  overflow: hidden;
 }
 
-/* Mức 3: Đầy (full) - 85vh */
+/* Mức 3: Đầy (full) - 88dvh */
 .device-mobile-shell .atlas-sidebar.atlas-sidebar--snap-full,
 .device-mobile-shell .atlas-sidebar[data-snap="full"] {
-  height: 85vh;
-  min-height: 85vh;
-  max-height: 85vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  height: 88dvh;
+  min-height: 88dvh;
+  max-height: 88dvh;
+  overflow: hidden;
 }
 
 /* Grab handle kéo sheet */

@@ -9,3 +9,5 @@
 @media(max-height:500px){.ev-notice-position{max-height:calc(100dvh - 24px);overflow:auto;top:12px}}
 @media(max-height:500px){.ev-notice>img{display:none}}
 @media(prefers-reduced-motion:reduce){.ev-notice{animation:none}}
+body:has(.app-shell.device-mobile-shell) .ev-notice-position{top:72px;left:50%;right:auto;transform:translateX(-50%);width:min(396px,calc(100vw - 24px));justify-content:center}
+body:has(.app-shell.device-mobile-shell) .ev-notice{width:100%}

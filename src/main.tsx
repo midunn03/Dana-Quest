@@ -9,6 +9,15 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-if ('serviceWorker' in navigator && import.meta.env.PROD) {
-  window.addEventListener('load', () => void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`))
+if ('serviceWorker' in navigator) {
+  const isLocalHost = location.hostname === '127.0.0.1' || location.hostname === 'localhost'
+  if (isLocalHost) {
+    void navigator.serviceWorker.getRegistrations().then(list => {
+      list.forEach(registration => {
+        void registration.unregister()
+      })
+    })
+  } else if (import.meta.env.PROD) {
+    window.addEventListener('load', () => void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`))
+  }
 }

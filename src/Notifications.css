@@ -6,3 +6,4 @@
 .notifications .toast button:hover{background:var(--px-surface-hover)}
 @media(prefers-reduced-motion:reduce){.notifications .toast{animation:none}}
 .app-shell > .notifications { position:fixed; }
+body:has(.app-shell.device-mobile-shell) .notifications { left:50%; right:auto; transform:translateX(-50%); width:min(396px, calc(100vw - 24px)); bottom:calc(82px + env(safe-area-inset-bottom, 0px)); justify-items:stretch; }
