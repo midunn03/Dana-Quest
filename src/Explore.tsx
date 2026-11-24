@@ -4,6 +4,7 @@ import './ui/MapControls.css'
 import {useEffect,useMemo,useRef,useState} from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { createBaseTileLayer } from './lib/mapTiles'
 import './Explore.css'
 import './MapResults.css'
 import {createRoot} from 'react-dom/client'
@@ -94,7 +95,7 @@ export default function Explore(){
    })
 
    L.control.zoom({position:'bottomright',zoomInTitle:t('Phóng to','Zoom in'),zoomOutTitle:t('Thu nhỏ','Zoom out')}).addTo(instance)
-   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).on('tileerror',()=>{setTileError(true);setLoading(false)}).on('tileload',()=>{clearTimeout(timeout);setTileError(false);setLoading(false)}).addTo(instance)
+   createBaseTileLayer().on('tileerror',()=>{setTileError(true);setLoading(false)}).on('tileload',()=>{clearTimeout(timeout);setTileError(false);setLoading(false)}).addTo(instance)
    const resize=()=>instance?.invalidateSize({pan:false});observer=new ResizeObserver(resize);observer.observe(container.current)
    queueMicrotask(()=>{
      setReady(n=>n+1)

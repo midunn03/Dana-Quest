@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { createRoot } from 'react-dom/client'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { createBaseTileLayer } from './lib/mapTiles'
 import { getDestination } from './data/destinations'
 import PixelAvatar from './PixelAvatar'
 import { avatars, readAvatar } from './lib/avatar'
@@ -161,7 +162,7 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
     map.attributionControl.setPrefix(false)
 
     const timer = window.setTimeout(() => setError(true), 12000)
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map)
+    const tiles = createBaseTileLayer().addTo(map)
     tiles.on('tileerror', () => { setError(true); window.clearTimeout(timer) })
     tiles.on('tileload', () => { setError(false); window.clearTimeout(timer) })
 

@@ -3,6 +3,7 @@ import { t } from './i18n/locale'
 import {useEffect,useRef,useState} from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { createBaseTileLayer } from './lib/mapTiles'
 import type {Quest} from './data/quests'
 export default function QuestPreviewMap({quest}:{quest:Quest}){
  const node=useRef<HTMLDivElement>(null),[error,setError]=useState(false)
@@ -10,7 +11,7 @@ export default function QuestPreviewMap({quest}:{quest:Quest}){
   if(!node.current)return
   const view=L.map(node.current,{scrollWheelZoom:false}).setView(quest.startPosition,17)
   view.attributionControl.setPrefix(false)
-  const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(view)
+  const tiles=createBaseTileLayer().addTo(view)
   tiles.on('tileerror',()=>setError(true))
   const timer=setTimeout(()=>setError(true),10000);tiles.once('load',()=>clearTimeout(timer))
   L.circleMarker(quest.startPosition,{radius:10,color:'#df2776',fillColor:'#df2776',fillOpacity:1}).addTo(view).bindTooltip(t("Điểm bắt đầu"))

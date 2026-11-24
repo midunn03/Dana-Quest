@@ -3,6 +3,7 @@ import { t } from './i18n/locale'
 import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { createBaseTileLayer } from './lib/mapTiles'
 import type { LocationSample } from './lib/location'
 import { useWalkingRoute } from './lib/useWalkingRoute'
 import { formatMeters, nextTurnText, turnText } from './lib/routing'
@@ -21,7 +22,7 @@ export default function DueMap({sample=null,questId='due-dau-an-50-nam'}:{sample
   if(!node.current)return
   const view=L.map(node.current,{scrollWheelZoom:false}).setView(quest.startPosition,17);map.current=view
   view.attributionControl.setPrefix(false)
-  const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(view)
+  const tiles=createBaseTileLayer().addTo(view)
   tiles.on('tileerror',()=>setError(true));tiles.on('tileload',()=>setError(false))
   const timer=window.setTimeout(()=>setError(true),12000)
   tiles.once('load',()=>window.clearTimeout(timer))
