@@ -1,6 +1,6 @@
 import { randomBytes, randomUUID, scrypt, timingSafeEqual, createHash } from 'node:crypto'
 import { promisify } from 'node:util'
-import { mkdir, readFile, writeFile, rename } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, rename, isDatabaseEnabled } from './db-storage.mjs'
 import { dirname, resolve } from 'node:path'
 import { createWallet } from './wallet.mjs'
 import { createAccountData } from './account-data.mjs'
@@ -87,6 +87,40 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
   })
   const deleting = new Set()
   const sessions = new Map()
+  const sessionsFile = resolve(dirname(file), 'sessions.json')
+  let sessionsLoaded = false
+  let sessionWriteQueue = Promise.resolve()
+  async function ensureSessionsLoaded() {
+    if (sessionsLoaded || !isDatabaseEnabled()) return
+    sessionsLoaded = true
+    try {
+      const saved = JSON.parse(await readFile(sessionsFile, 'utf8'))
+      if (saved && typeof saved === 'object') {
+        const now = Date.now()
+        for (const [id, entry] of Object.entries(saved)) {
+          if (entry && typeof entry.userId === 'string' && Number.isFinite(entry.expires) && entry.expires > now) {
+            sessions.set(id, { userId: entry.userId, expires: entry.expires })
+          }
+        }
+      }
+    } catch (error) {
+      if (error?.code !== 'ENOENT') sessionsLoaded = false
+    }
+  }
+  function persistSessions() {
+    if (!isDatabaseEnabled()) return Promise.resolve()
+    const now = Date.now()
+    const payload = {}
+    for (const [id, entry] of sessions) {
+      if (entry.expires > now) payload[id] = entry
+    }
+    const task = sessionWriteQueue.then(async () => {
+      await writeFile(`${sessionsFile}.tmp`, JSON.stringify(payload), { mode: 0o600 })
+      await rename(`${sessionsFile}.tmp`, sessionsFile)
+    })
+    sessionWriteQueue = task.catch(() => {})
+    return task
+  }
   const attempts = createPersistentLimiter({ file: resolve(dirname(file), 'rate-limits.sqlite3') })
   let queue = Promise.resolve()
   async function load() {
@@ -120,7 +154,9 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
     }
     void (async () => {
       attempts.prune()
-      const secure = Boolean(req.socket.encrypted)
+      await ensureSessionsLoaded()
+      const forwardedProto = String(req.headers['x-forwarded-proto'] ?? '').split(',')[0].trim().toLowerCase()
+      const secure = Boolean(req.socket.encrypted || ((trustProxy || Boolean(process.env.RENDER)) && forwardedProto === 'https'))
       const origin = `${secure ? 'https' : 'http'}://${req.headers.host}`
       if (req.headers.origin && req.headers.origin !== origin) throw fail(403, 'Yêu cầu khác nguồn không được phép.')
       const token = req.headers.cookie?.split(';').map(part => part.trim()).find(part => part.startsWith(`${cookieName}=`))?.slice(cookieName.length + 1) ?? ''
@@ -224,7 +260,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
         return send(200, { user: publicUser(user) })
       }
       if (path === '/api/auth/logout' && req.method === 'POST') {
-        sessions.delete(key); setCookie(res, '', secure, 0)
+        sessions.delete(key); await persistSessions(); setCookie(res, '', secure, 0)
         return send(200, { ok: true })
       }
       if (!['POST', 'PATCH'].includes(req.method)) throw fail(405, 'Phương thức không được hỗ trợ.')
@@ -268,6 +304,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
           const salt=randomBytes(16).toString('hex');found.hash=(await derive(input.newPassword,salt,64)).toString('hex');found.salt=salt;return found
         })
         for(const [id,value] of sessions)if(value.userId===session.userId&&id!==key)sessions.delete(id)
+        await persistSessions()
         return send(200,{ok:true})
       }
       if(path==='/api/auth/delete-account'&&req.method==='POST'){
@@ -282,6 +319,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
           await Promise.all([wallet.remove(user.id),transit.remove(user.id),streak.remove(user.id),badges.remove(user.id),goldenHours.remove(user.id),greenMobility.remove(user.id),game.remove(user.id),questRuns.remove(user.id),accountFeatures.remove(user.id),codes.removeOwner(user.id),community.removeOwner(user.id),groups.removeOwner(user.id)])
           await mutate(users=>{const index=users.findIndex(item=>item.id===user.id);if(index>=0)users.splice(index,1);return user})
           for(const [id,value] of sessions)if(value.userId===user.id)sessions.delete(id)
+          await persistSessions()
           setCookie(res,'',secure,0);return send(200,{ok:true})
         }finally{deleting.delete(user.id)}
       }
@@ -433,6 +471,7 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
       if(deleting.has(user.id))throw fail(409,'Tài khoản đang được xóa.')
       sessions.delete(key)
       sessions.set(digest(newToken), { userId: user.id, expires: Date.now() + lifetime })
+      await persistSessions()
       setCookie(res, newToken, secure)
       send(200, { user: publicUser(user) })
     })().catch(error => send(error.status ?? 500, { code: error.code, message: error.status ? error.message : 'Không thể lưu hoặc đọc tài khoản. Vui lòng thử lại.' }))

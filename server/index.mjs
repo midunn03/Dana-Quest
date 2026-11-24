@@ -8,8 +8,9 @@ import { eventsFeedProxy } from './events-feed-proxy.mjs'
 import { createReadStream, existsSync, statSync } from 'node:fs'
 import { extname, join, normalize } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { isDatabaseEnabled, verifyDatabaseConnection } from './db-storage.mjs'
 
-const port = Number(process.env.API_PORT ?? 3001)
+const port = Number(process.env.API_PORT ?? process.env.PORT ?? 3001)
 const host = process.env.API_HOST ?? '127.0.0.1'
 const djangoHost = process.env.DJANGO_HOST ?? '127.0.0.1'
 const djangoPort = Number(process.env.DJANGO_PORT ?? 8000)
@@ -59,4 +60,13 @@ const server = createServer((request, response) => {
   })))))))
 })
 
-server.listen(port, host, () => console.log(`DANA QUEST listening on http://${host}:${port}`))
+server.listen(port, host, () => {
+  console.log(`DANA QUEST listening on http://${host}:${port}`)
+  if (isDatabaseEnabled()) {
+    verifyDatabaseConnection()
+      .then(() => console.log('DANA QUEST storage: PostgreSQL (DATABASE_URL) ready'))
+      .catch(error => console.error('DANA QUEST storage: PostgreSQL connection error:', error.message))
+  } else {
+    console.log('DANA QUEST storage: local filesystem (.data)')
+  }
+})

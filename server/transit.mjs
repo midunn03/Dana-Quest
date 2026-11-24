@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, rename, unlink } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, rename, unlink } from './db-storage.mjs'
 import { join } from 'node:path'
 
 export const DAILY_TRANSIT_CAP = 20

@@ -1,5 +1,5 @@
 import { randomBytes, createHash } from 'node:crypto'
-import { mkdir, open, readFile, writeFile, rename, unlink } from 'node:fs/promises'
+import { mkdir, open, readFile, writeFile, rename, unlink } from './db-storage.mjs'
 import { readFileSync } from 'node:fs'
 import { dirname } from 'node:path'
 

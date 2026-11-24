@@ -1,6 +1,6 @@
 import {isChallengeCorrect,migrateCatalogRun} from '../shared/quest-challenges.mjs'
 import { readFileSync } from 'node:fs'
-import { mkdir, readFile, writeFile, rename, unlink } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, rename, unlink } from './db-storage.mjs'
 import { join } from 'node:path'
 const quests=JSON.parse(readFileSync(new URL('../src/data/questCatalog.json',import.meta.url),'utf8'))
 const fail=(status,message)=>Object.assign(new Error(message),{status})

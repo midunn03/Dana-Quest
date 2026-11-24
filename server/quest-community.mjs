@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs'
-import {readFile,writeFile,mkdir,rename} from 'node:fs/promises'
+import {readFile,writeFile,mkdir,rename} from './db-storage.mjs'
 import {dirname} from 'node:path'
 import {createHash} from 'node:crypto'
 const fail=message=>Object.assign(new Error(message),{status:400})

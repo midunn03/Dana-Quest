@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, rename, unlink, readdir } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, rename, unlink, readdir } from './db-storage.mjs'
 import { join, basename } from 'node:path'
 import { applyGameAction, readGameState } from './game-logic.mjs'
 

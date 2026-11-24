@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, rename, unlink } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, rename, unlink } from './db-storage.mjs'
 import { join } from 'node:path'
 
 export const DAILY_GREEN_MOBILITY_CAP = 25 // tối đa 25 xu xanh mỗi ngày từ di chuyển thực tế

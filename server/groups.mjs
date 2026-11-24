@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir,rename} from 'node:fs/promises'
+import {readFile,writeFile,mkdir,rename} from './db-storage.mjs'
 import {dirname} from 'node:path'
 import {randomBytes} from 'node:crypto'
 
