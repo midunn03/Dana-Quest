@@ -27,10 +27,12 @@ function currentArrivalClock(seconds: number): string {
   return arrivalClock(Date.now(), seconds)
 }
 
-function routeViewport(map: L.Map): L.FitBoundsOptions {
+function routeViewport(map: L.Map, isExpanded = false, isBannerHidden = false): L.FitBoundsOptions {
   const { x: width, y: height } = map.getSize()
-  const side = Math.min(55, width * .12)
-  return { paddingTopLeft: [side, Math.min(110, height * .32)], paddingBottomRight: [side, Math.min(230, height * .44)], maxZoom: 16, animate: false }
+  const side = Math.min(48, width * .1)
+  const topPad = isBannerHidden ? Math.min(56, height * .09) : Math.min(104, height * .16)
+  const bottomPad = isExpanded ? Math.round(height * .38) : Math.min(190, height * .25)
+  return { paddingTopLeft: [side, topPad], paddingBottomRight: [side, bottomPad], maxZoom: 16, animate: false }
 }
 
 export interface NavigationTarget {
@@ -63,6 +65,7 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
   const moved = useRef(false)
 
   const [expanded, setExpanded] = useState(false)
+  const [instructionHidden, setInstructionHidden] = useState(false)
   const [height, setHeight] = useState<number | null>(null)
   const [error, setError] = useState(false)
   const [follow, setFollow] = useState(true)
@@ -551,11 +554,38 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
     setTransitUpdateTick(v => v + 1)
   }
 
-  return <main className="navigation-screen">
+  const hideBannerOnMobile = expanded || instructionHidden
+
+  return <main className={`navigation-screen ${expanded ? 'is-sheet-expanded' : ''} ${hideBannerOnMobile ? 'is-instruction-hidden' : ''}`}>
     <div className="route-map" ref={container} role="region" aria-label={t('Bản đồ vị trí của bạn và điểm đến')} />
 
+    {/* Nút nổi nhỏ gọn trên mobile khi khung xanh chỉ đường đang ẩn */}
+    {hideBannerOnMobile && (
+      <div className="route-floating-top">
+        <button
+          type="button"
+          className="route-floating-pill route-floating-back"
+          aria-label={t('Quay lại', 'Back')}
+          onClick={() => setPendingLeave(place.backHref)}
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          className="route-floating-pill route-floating-restore"
+          aria-label={t('Hiện khung chỉ đường', 'Show direction banner')}
+          onClick={() => {
+            setInstructionHidden(false)
+            if (expanded) setExpanded(false)
+          }}
+        >
+          <span aria-hidden="true">🧭</span> {t('Chỉ đường', 'Directions')}
+        </button>
+      </div>
+    )}
+
     {/* Bảng chỉ dẫn kiểu Google Maps */}
-    <div className="route-instruction">
+    <div className={`route-instruction ${hideBannerOnMobile ? 'is-hidden' : ''}`}>
       <a ref={backLink} className="dq-back-btn" href={place.backHref} aria-label={t('Quay lại chi tiết')} onClick={event => { event.preventDefault(); setPendingLeave(place.backHref) }}>← {t('Quay lại')}</a>
       <b aria-hidden="true">{lost ? '⤺' : turnIcon(progress?.next)}</b>
       <div aria-live="polite">
@@ -563,6 +593,15 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
         <small>{subline}</small>
       </div>
       {progress && !arrived && progress.toTurn > 12 && <span className="route-turn-distance" aria-hidden="true">{formatMeters(progress.toTurn)}</span>}
+      <button
+        type="button"
+        className="route-instruction-hide-btn"
+        aria-label={t('Ẩn khung chỉ đường', 'Hide direction banner')}
+        title={t('Ẩn khung chỉ đường để nhìn bản đồ rộng hơn', 'Hide direction banner for a wider map')}
+        onClick={() => setInstructionHidden(true)}
+      >
+        <span aria-hidden="true">✕</span>
+      </button>
     </div>
 
     {/* Thanh điều khiển Mô Phỏng Demo */}
@@ -654,7 +693,7 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
             if (!map) return
             followRef.current = false
             setFollow(false)
-            map.fitBounds([...(navigation.route ?? navigation.initialRoute!).geometry.coordinates.map(toLatLng), ...(here ? [here] : [])], routeViewport(map))
+            map.fitBounds([...(navigation.route ?? navigation.initialRoute!).geometry.coordinates.map(toLatLng), ...(here ? [here] : [])], routeViewport(map, expanded, hideBannerOnMobile))
           }}
         >
           {t('Xem toàn tuyến')}
@@ -757,7 +796,7 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
           if (!start || start.pointer !== event.pointerId) return
           const delta = start.y - event.clientY
           if (Math.abs(delta) > 5) moved.current = true
-          if (moved.current) setHeight(Math.max(190, Math.min(start.max, start.height + delta)))
+          if (moved.current) setHeight(Math.max(120, Math.min(start.max, start.height + delta)))
         }}
         onPointerUp={event => {
           const start = drag.current
@@ -768,112 +807,141 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
         }}
         onPointerCancel={() => { drag.current = null; moved.current = true; setHeight(null) }}
       >
-        <span aria-hidden="true" />
+        <span className="route-sheet-pill" aria-hidden="true" />
+        <span className="route-sheet-toggle-label" aria-hidden="true">
+          {expanded ? `▼ ${t('Thu gọn · Xem bản đồ rộng', 'Collapse · Wider map')}` : `▲ ${t('Lướt lên xem thông tin điểm đến', 'Swipe up for destination info')}`}
+        </span>
       </button>
 
       <div id="route-sheet-content" className="route-sheet-content">
-        <JourneyTrack stages={stages} fraction={journeyFraction} moving={moving} arrived={arrived} />
-        <h1>{t('Đến') + ' '}{place.name}</h1>
-        <h2 className="route-distance" aria-live="polite">
-          {arrived ? t('Bạn đã đến nơi!') : progress ? interpolate('Còn ${0} đi bộ', [formatMeters(progress.remaining)]) : instruction}
-        </h2>
+        <div className="route-sheet-compact-head">
+          <div className="route-sheet-compact-titles">
+            <h1>{t('Đến') + ' '}{place.name}</h1>
+            <h2 className="route-distance" aria-live="polite">
+              {arrived ? t('Bạn đã đến nơi!') : progress ? interpolate('Còn ${0} đi bộ', [formatMeters(progress.remaining)]) : instruction}
+            </h2>
+          </div>
+          {progress && !arrived && (
+            <span className="route-compact-eta" aria-hidden="true">{minutes} {t('phút')}</span>
+          )}
+        </div>
 
-        {!arrived && activeSample && (
-          <p className="journey-caption" style={{ margin: '0 0 10px', color: '#135e4d' }}>
-            {arrivalFeedback.hint}
-          </p>
-        )}
+        <div className="route-sheet-details">
+          <JourneyTrack stages={stages} fraction={journeyFraction} moving={moving} arrived={arrived} />
 
-        {/* Gợi ý trạm xe đạp TNGo / xe bus Danabus */}
-        {nearbyTransit.length > 0 && !nearbyTransit[0].claimed && !arrived && (() => {
-          const item = nearbyTransit[0]
-          const isSim = simulating
-          const poorGps = !activeSample || (activeSample.accuracy ?? 0) > 50
-          const tooFar = item.distance > 80
-          const needDwell = dwellSeconds < 60
-          const canClaim = !isSim && !poorGps && !tooFar && !needDwell
-          const buttonLabel = isSim
-            ? t('Mô phỏng (không nhận xu)')
-            : poorGps
-            ? t('GPS yếu (> 50m)')
-            : tooFar
-            ? interpolate('Chưa tới trạm (${0}m)', [Math.round(item.distance)])
-            : needDwell
-            ? interpolate('Ở lại trạm (${0}s)', [60 - dwellSeconds])
-            : interpolate('Tôi đã đến trạm (+${0} xu)', [item.station.bonusCoins])
+          {!arrived && activeSample && (
+            <p className="journey-caption" style={{ margin: '0 0 10px', color: '#135e4d' }}>
+              {arrivalFeedback.hint}
+            </p>
+          )}
 
-          return (
-            <div className="eco-transit-banner">
-              <div className="eco-transit-icon">
-                {item.station.type === 'bike' ? '🚲' : '🚌'}
-              </div>
-              <div className="eco-transit-body">
-                <div className="eco-transit-title">
-                  <strong>{item.station.type === 'bike' ? t('Trạm xe đạp TNGo') : t('Điểm xe buýt DanaBus')} {t('gần bạn')}</strong>
-                  <span className="eco-tag">+{item.station.bonusCoins} {t('Xu')}</span>
+          {(destination || quest) && (
+            <div className="route-destination-info">
+              {destination?.highlightReason && (
+                <p className="route-destination-highlight">✦ {destination.highlightReason}</p>
+              )}
+              {(destination?.location || quest?.area) && (
+                <p className="route-destination-address">📍 {destination?.location ?? quest?.area}</p>
+              )}
+              {(destination?.description || quest?.summary) && (
+                <p className="route-destination-desc">{destination?.description ?? quest?.summary}</p>
+              )}
+            </div>
+          )}
+
+          {/* Gợi ý trạm xe đạp TNGo / xe bus Danabus */}
+          {nearbyTransit.length > 0 && !nearbyTransit[0].claimed && !arrived && (() => {
+            const item = nearbyTransit[0]
+            const isSim = simulating
+            const poorGps = !activeSample || (activeSample.accuracy ?? 0) > 50
+            const tooFar = item.distance > 80
+            const needDwell = dwellSeconds < 60
+            const canClaim = !isSim && !poorGps && !tooFar && !needDwell
+            const buttonLabel = isSim
+              ? t('Mô phỏng (không nhận xu)')
+              : poorGps
+              ? t('GPS yếu (> 50m)')
+              : tooFar
+              ? interpolate('Chưa tới trạm (${0}m)', [Math.round(item.distance)])
+              : needDwell
+              ? interpolate('Ở lại trạm (${0}s)', [60 - dwellSeconds])
+              : interpolate('Tôi đã đến trạm (+${0} xu)', [item.station.bonusCoins])
+
+            return (
+              <div className="eco-transit-banner">
+                <div className="eco-transit-icon">
+                  {item.station.type === 'bike' ? '🚲' : '🚌'}
                 </div>
-                <p className="eco-transit-desc">
-                  {interpolate('Cách ${0}m (${1}). Ở lại trạm 60s để nhận thưởng!', [Math.round(item.distance), item.station.name])}
-                </p>
+                <div className="eco-transit-body">
+                  <div className="eco-transit-title">
+                    <strong>{item.station.type === 'bike' ? t('Trạm xe đạp TNGo') : t('Điểm xe buýt DanaBus')} {t('gần bạn')}</strong>
+                    <span className="eco-tag">+{item.station.bonusCoins} {t('Xu')}</span>
+                  </div>
+                  <p className="eco-transit-desc">
+                    {interpolate('Cách ${0}m (${1}). Ở lại trạm 60s để nhận thưởng!', [Math.round(item.distance), item.station.name])}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="eco-transit-claim-btn"
+                  disabled={!canClaim}
+                  onClick={() => void handleClaimTransit(item)}
+                >
+                  {buttonLabel}
+                </button>
               </div>
-              <button
-                type="button"
-                className="eco-transit-claim-btn"
-                disabled={!canClaim}
-                onClick={() => void handleClaimTransit(item)}
-              >
-                {buttonLabel}
+            )
+          })()}
+
+          {progress && (
+            <div className="route-summary">
+              <strong>{minutes} {t('phút')}</strong>
+              <span>{t('Đến lúc')} {currentArrivalClock(minutes * 60)} · {t('Tuyến đi bộ ngắn nhất')}</span>
+              <button type="button" className="route-exit" aria-label={t('Thoát khỏi hành trình')} onClick={() => setPendingLeave(place.backHref)}>
+                {t('Thoát')}
               </button>
             </div>
-          )
-        })()}
+          )}
+        </div>
 
-        {progress && (
-          <div className="route-summary">
-            <strong>{minutes} {t('phút')}</strong>
-            <span>{t('Đến lúc')} {currentArrivalClock(minutes * 60)} · {t('Tuyến đi bộ ngắn nhất')}</span>
-            <button type="button" className="route-exit" aria-label={t('Thoát khỏi hành trình')} onClick={() => setPendingLeave(place.backHref)}>
-              {t('Thoát')}
-            </button>
-          </div>
-        )}
+        <div className="route-sheet-primary-action">
+          {locationError && !simulating && Boolean(activeSample) && <p role="status" className="error">{t(locationError)}</p>}
+          {!activeSample && locationError && !simulating && <button type="button" onClick={retryLocation}>{t('Thử lấy vị trí')}</button>}
+          {error && <p role="alert" className="error">{t('Không tải được nền bản đồ.')}</p>}
 
-        {locationError && !simulating && Boolean(activeSample) && <p role="status" className="error">{t(locationError)}</p>}
-        {!activeSample && locationError && !simulating && <button type="button" onClick={retryLocation}>{t('Thử lấy vị trí')}</button>}
-        {error && <p role="alert" className="error">{t('Không tải được nền bản đồ.')}</p>}
-
-        {place.requireArrival && !arrived ? (
-          <button type="button" className="blue-button" disabled>
-            {simulating ? t('Đang chạy mô phỏng đến điểm bắt đầu...', 'Simulating walk to starting point...') : t('Đến điểm bắt đầu để mở nhiệm vụ')}
-          </button>
-        ) : fromMap ? (
-          !arrived ? (
+          {place.requireArrival && !arrived ? (
             <button type="button" className="blue-button" disabled>
-              {simulating ? t('Đang di chuyển đến điểm hẹn…') : t('Di chuyển đến điểm hẹn để bắt đầu')}
+              {simulating ? t('Đang chạy mô phỏng đến điểm bắt đầu...', 'Simulating walk to starting point...') : t('Đến điểm bắt đầu để mở nhiệm vụ')}
             </button>
-          ) : lockedPaidQuest ? (
-            <button
-              type="button"
-              className="blue-button is-premium-cta"
-              onClick={() => openPremiumModal({ questId: id, reason: 'arrival', onUnlocked: () => setArrivalModalDismissed(false) })}
-            >
-              {t('Mua ngay để trải nghiệm →', 'Buy Now to Experience →')}
-            </button>
+          ) : fromMap ? (
+            !arrived ? (
+              <button type="button" className="blue-button" disabled>
+                {simulating ? t('Đang di chuyển đến điểm hẹn…') : t('Di chuyển đến điểm hẹn để bắt đầu')}
+              </button>
+            ) : lockedPaidQuest ? (
+              <button
+                type="button"
+                className="blue-button is-premium-cta"
+                onClick={() => openPremiumModal({ questId: id, reason: 'arrival', onUnlocked: () => setArrivalModalDismissed(false) })}
+              >
+                {t('Mua ngay để trải nghiệm →', 'Buy Now to Experience →')}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="blue-button"
+                disabled={questBusy}
+                onClick={() => void handleStartAfterArrival()}
+              >
+                {questBusy ? t('Đang mở…') : t('Bắt đầu ngay →', 'Start Now →')}
+              </button>
+            )
           ) : (
-            <button
-              type="button"
-              className="blue-button"
-              disabled={questBusy}
-              onClick={() => void handleStartAfterArrival()}
-            >
-              {questBusy ? t('Đang mở…') : t('Bắt đầu ngay →', 'Start Now →')}
-            </button>
-          )
-        ) : (
-          <a className="blue-button" href={place.continueHref} onClick={() => { allowLeave.current = true }}>
-            {place.continueLabel ?? t('Xem nhiệm vụ')} →
-          </a>
-        )}
+            <a className="blue-button" href={place.continueHref} onClick={() => { allowLeave.current = true }}>
+              {place.continueLabel ?? t('Xem nhiệm vụ')} →
+            </a>
+          )}
+        </div>
       </div>
     </section>
 

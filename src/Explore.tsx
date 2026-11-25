@@ -1,4 +1,4 @@
-import { hasPixelLandmarkSample, pixelLandmarkSample } from './lib/pixelLandmarkSamples'
+import { computeLandmarkLayout, hasPixelLandmarkSample, pixelLandmarkSample } from './lib/pixelLandmarkSamples'
 import { pixelMapIcon } from './lib/pixelMapIcon'
 import './ui/MapControls.css'
 import {useEffect,useMemo,useRef,useState} from 'react'
@@ -111,10 +111,52 @@ export default function Explore(){
   const instance=map.current;if(!instance||ready===0)return
   const group=L.layerGroup().addTo(instance)
   allEntries.forEach(entry=>{
+   const isSelected=selected?.id===entry.id
    const sampleIcon=hasPixelLandmarkSample(entry.placeId)
-   const spriteScale=Math.min(.9,Math.max(.16,.7*Math.pow(2,zoom-14)))
-   const icon=document.createElement('span');icon.className=`atlas-pin-symbol ${entry.kind}`;icon.innerHTML=sampleIcon?pixelLandmarkSample(entry.placeId):pixelMapIcon(entry.placeId);icon.classList.add('atlas-landmark-icon');if(sampleIcon){icon.classList.add('atlas-landmark-sample');icon.style.setProperty('--landmark-scale',String(spriteScale))}
-   const marker=L.marker(entry.position,{title:entry.title,alt:entry.title,icon:L.divIcon({className:`atlas-pin ${entry.kind}${selected?.id===entry.id?' is-selected':''}`,html:icon,iconSize:sampleIcon?[156*spriteScale,96*spriteScale]:[48,54],iconAnchor:sampleIcon?[78*spriteScale,70*spriteScale]:[24,52]})}).addTo(group)
+   const layout=computeLandmarkLayout(entry.placeId,entry.position,zoom,isSelected)
+   const icon=document.createElement('span')
+   let iconSize:[number,number]
+   let iconAnchor:[number,number]
+   let pinVariant=''
+
+   if(layout.mode==='hidden'){
+    icon.className=`atlas-pin-symbol atlas-pin-far ${entry.kind}`
+    iconSize=[1,1]
+    iconAnchor=[0.5,0.5]
+    pinVariant=' is-zoom-hidden'
+   } else if(layout.mode==='dot'){
+    icon.className=`atlas-pin-symbol atlas-pin-dot ${entry.kind}`
+    iconSize=[layout.widthPx,layout.heightPx]
+    iconAnchor=[layout.anchorX,layout.anchorY]
+    pinVariant=' is-dot'
+   } else if(sampleIcon){
+    icon.className=`atlas-pin-symbol ${entry.kind} atlas-landmark-icon atlas-landmark-sample`
+    icon.innerHTML=pixelLandmarkSample(entry.placeId)
+    icon.style.setProperty('--landmark-w',`${layout.widthPx.toFixed(1)}px`)
+    icon.style.setProperty('--landmark-h',`${layout.heightPx.toFixed(1)}px`)
+    icon.style.setProperty('--landmark-rotate',`${layout.rotationDeg.toFixed(2)}deg`)
+    icon.style.setProperty('--landmark-origin-y',`${layout.originYPercent}%`)
+    iconSize=[layout.widthPx,layout.heightPx]
+    iconAnchor=[layout.anchorX,layout.anchorY]
+   } else {
+    icon.className=`atlas-pin-symbol ${entry.kind} atlas-landmark-icon`
+    icon.innerHTML=pixelMapIcon(entry.placeId)
+    iconSize=[48,54]
+    iconAnchor=[24,52]
+   }
+
+   const marker=L.marker(layout.position,{
+    title:entry.title,
+    alt:entry.title,
+    zIndexOffset:layout.zIndexOffset,
+    interactive:layout.mode!=='hidden',
+    icon:L.divIcon({
+     className:`atlas-pin ${entry.kind}${pinVariant}${isSelected?' is-selected':''}`,
+     html:icon,
+     iconSize,
+     iconAnchor,
+    }),
+   }).addTo(group)
    marker.bindTooltip(entry.title).on('click',()=>setSelected(entry))
   })
   const cameraKey=JSON.stringify([ready,mode,query,category,allEntries.map(e=>[e.id,e.position])])
@@ -138,6 +180,8 @@ export default function Explore(){
       instance.fitBounds(L.latLngBounds(allEntries.map(e=>e.position)),{padding:[45,45],maxZoom:15,animate:!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches})
     }
     fitted.current=cameraKey
+    const fittedZoom=instance.getZoom()
+    if(Number.isFinite(fittedZoom)&&fittedZoom!==zoom) setZoom(fittedZoom)
     try { setMapBounds(instance.getBounds()) } catch {}
   }
   return()=>{group.remove()}
