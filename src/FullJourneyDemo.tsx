@@ -17,22 +17,6 @@ import './FullJourneyDemo.css'
 
 export const DEMO_TOTAL_SECONDS = 104
 
-export interface DemoChapter {
-  id: number
-  icon: string
-  shortLabel: string
-  startSec: number
-  endSec: number
-}
-
-export const DEMO_CHAPTERS: readonly DemoChapter[] = [
-  { id: 1, icon: '📍', shortLabel: '06:00 Trưng Vương', startSec: 0, endSec: 15 },
-  { id: 2, icon: '🚌', shortLabel: 'Xe buýt 05 (32s)', startSec: 15, endSec: 47 },
-  { id: 3, icon: '⛰️', shortLabel: 'Lên Sơn Trà', startSec: 47, endSec: 57 },
-  { id: 4, icon: '📖', shortLabel: 'Chơi Quest (35s)', startSec: 57, endSec: 92 },
-  { id: 5, icon: '🏆', shortLabel: 'Thẻ Thông Hành', startSec: 92, endSec: DEMO_TOTAL_SECONDS },
-]
-
 // Real road-snapped walking polyline: Nhà hát Trưng Vương -> Trạm Số 9 Lê Duẩn (~400m)
 const DEMO_WALK_TO_BUS: [number, number][] = [
   [16.06861, 108.2219],
@@ -87,15 +71,8 @@ const DEMO_QUEST_ID = 'chua-linh-ung-bai-but'
 const DEMO_CH1_ANSWER = 'Chùa Linh Ứng – Bãi Bụt, Sơn Trà'
 const QR_PATTERN = [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1]
 
-function formatDurationClock(sec: number): string {
-  const s = Math.max(0, Math.round(sec))
-  const m = Math.floor(s / 60)
-  const r = s % 60
-  return `${m}:${String(r).padStart(2, '0')}`
-}
-
 function getSimMorningClock(elapsedSec: number): string {
-  // 0s = 06:00, 15s = 06:02, 47s = 06:16, 57s = 06:28, 92s = 06:40, 104s = 06:42
+  // Bắt đầu đúng 06:00 sáng và tự tăng nhẹ theo mạch hành trình thực tế
   let minsAfterSix = 0
   if (elapsedSec <= 15) {
     minsAfterSix = (elapsedSec / 15) * 2
@@ -111,7 +88,7 @@ function getSimMorningClock(elapsedSec: number): string {
   const totalMins = 6 * 60 + Math.floor(minsAfterSix)
   const h = Math.floor(totalMins / 60)
   const m = totalMins % 60
-  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')} sáng`
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`
 }
 
 interface DemoMapProps {
@@ -123,7 +100,6 @@ interface DemoMapProps {
 
 function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMapProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const mapRef = useRef<L.Map | null>(null)
   const playerMarkerRef = useRef<L.Marker | null>(null)
   const busMarkerRef = useRef<L.Marker | null>(null)
 
@@ -147,7 +123,6 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
     const initialCenter: [number, number] = mode === 'start-to-bus' ? [16.0706, 108.2229] : [16.0865, 108.2615]
     const initialZoom = mode === 'start-to-bus' ? 16 : 13
     const map = L.map(el, { zoomControl: false, attributionControl: false }).setView(initialCenter, initialZoom)
-    mapRef.current = map
     createBaseTileLayer().addTo(map)
 
     if (mode === 'start-to-bus') {
@@ -159,8 +134,8 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
         icon: L.divIcon({
           className: 'fjd-map-pin-wrap',
           html: '<span class="fjd-map-pin-label">🎭 Nhà hát Trưng Vương</span>',
-          iconSize: [160, 26],
-          iconAnchor: [80, 32],
+          iconSize: [154, 24],
+          iconAnchor: [77, 30],
         }),
       }).addTo(map)
 
@@ -168,8 +143,8 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
         icon: L.divIcon({
           className: 'fjd-map-pin-wrap',
           html: '<span class="fjd-map-pin-label">🚏 Trạm Số 9 Lê Duẩn</span>',
-          iconSize: [152, 26],
-          iconAnchor: [76, 30],
+          iconSize: [144, 24],
+          iconAnchor: [72, 28],
         }),
       }).addTo(map)
 
@@ -179,8 +154,8 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
         icon: L.divIcon({
           className: 'fjd-bus-icon-wrap',
           html: '<div class="fjd-map-bus-marker">🚌 05⚡</div>',
-          iconSize: [44, 26],
-          iconAnchor: [22, 13],
+          iconSize: [46, 26],
+          iconAnchor: [23, 13],
         }),
       }).addTo(map)
     } else {
@@ -191,8 +166,8 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
         icon: L.divIcon({
           className: 'fjd-map-pin-wrap',
           html: '<span class="fjd-map-pin-label">🚏 CV Biển Đông</span>',
-          iconSize: [120, 26],
-          iconAnchor: [60, 28],
+          iconSize: [116, 24],
+          iconAnchor: [58, 26],
         }),
       }).addTo(map)
 
@@ -213,8 +188,8 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
         icon: L.divIcon({
           className: 'fjd-map-pin-wrap',
           html: '<span class="fjd-map-pin-label">🛕 Chùa Linh Ứng – Bãi Bụt</span>',
-          iconSize: [176, 26],
-          iconAnchor: [88, 28],
+          iconSize: [168, 24],
+          iconAnchor: [84, 26],
         }),
       }).addTo(map)
     }
@@ -238,7 +213,6 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
 
     return () => {
       cancelAnimationFrame(raf)
-      mapRef.current = null
       playerMarkerRef.current = null
       busMarkerRef.current = null
       map.remove()
@@ -256,7 +230,7 @@ function DemoLeafletMap({ mode, progress, busApproachProgress, avatar }: DemoMap
     }
   }, [mode, progress, busApproachProgress, route05ApproachSegment])
 
-  return <div ref={containerRef} className="fjd-map-canvas" aria-label={t('Bản đồ mô phỏng hành trình Đà Nẵng', 'Simulated Da Nang journey map')} />
+  return <div ref={containerRef} className="fjd-map-canvas" aria-label={t('Bản đồ hành trình Đà Nẵng', 'Da Nang journey map')} />
 }
 
 export default function FullJourneyDemo({ onClose, standalone = false }: { onClose?: () => void; standalone?: boolean }) {
@@ -266,9 +240,6 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
   const quest = useMemo(() => getQuest(DEMO_QUEST_ID), [])
 
   const [elapsedSec, setElapsedSec] = useState(0)
-  const [playing, setPlaying] = useState(true)
-  const [speed, setSpeed] = useState<1 | 1.5 | 2>(1)
-  const [soundOn, setSoundOn] = useState(false)
   const [cardPreviewUrl, setCardPreviewUrl] = useState('')
   const [cardSaving, setCardSaving] = useState(false)
   const [cardNotice, setCardNotice] = useState('')
@@ -284,7 +255,6 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
     }
   }
 
-  // Keyboard Escape closes modal
   useEffect(() => {
     if (standalone) return
     const onKey = (event: KeyboardEvent) => {
@@ -294,21 +264,15 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
     return () => window.removeEventListener('keydown', onKey)
   })
 
-  // Deterministic playback ticker
+  // Pure natural gameplay simulation ticker (no demo speed bar)
   useEffect(() => {
-    if (!playing) return
     const timer = window.setInterval(() => {
-      setElapsedSec(prev => {
-        const next = Math.min(DEMO_TOTAL_SECONDS, +(prev + 0.1 * speed).toFixed(2))
-        if (next >= DEMO_TOTAL_SECONDS) setPlaying(false)
-        return next
-      })
+      setElapsedSec(prev => (prev >= DEMO_TOTAL_SECONDS ? DEMO_TOTAL_SECONDS : +(prev + 0.1).toFixed(2)))
     }, 100)
     return () => window.clearInterval(timer)
-  }, [playing, speed])
+  }, [])
 
-  // Derived stage index (1..5)
-  const chapterIndex = useMemo(() => {
+  const stage = useMemo(() => {
     if (elapsedSec < 15) return 1
     if (elapsedSec < 47) return 2
     if (elapsedSec < 57) return 3
@@ -316,7 +280,6 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
     return 5
   }, [elapsedSec])
 
-  // Derived simulated rewards (purely sandboxed, zero mutation to real account)
   const earnedCoins =
     (elapsedSec >= 13.5 ? 5 : 0) +
     (elapsedSec >= 28.5 ? 10 : 0) +
@@ -326,7 +289,6 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
 
   const earnedXp = (elapsedSec >= 72 ? 50 : 0) + (elapsedSec >= 88 ? 70 : 0)
 
-  // Floating reward toast & chime triggers
   useEffect(() => {
     const milestone =
       elapsedSec >= 88
@@ -343,14 +305,14 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
 
     if (milestone > lastMilestoneRef.current && milestone > 0) {
       const messages: Record<number, string> = {
-        1: '🚌 +5 Xu Dana · Xác nhận lên xe buýt điện Tuyến 05!',
-        2: '🎮 +10 Xu Dana · Hoàn thành Minigame trên xe buýt!',
-        3: `🎁 +15 Xu Dana · Áp dụng Giftcode ${DEMO_GIFTCODE}!`,
-        4: '📖 +50 EXP & +10 Xu · Giải đúng chặng 1 "Nốt nhạc không địa chỉ"!',
-        5: '🌟 +70 EXP & +10 Xu · Hoàn thành Quest "Dấu lặng trên Sơn Trà"!',
+        1: '🚌 +5 Xu · Lên Tuyến 05!',
+        2: '🎮 +10 Xu · Minigame trên xe!',
+        3: `🎁 +15 Xu · Mã ${DEMO_GIFTCODE}!`,
+        4: '📖 +50 EXP · +10 Xu!',
+        5: '🌟 +70 EXP · +10 Xu!',
       }
       setRewardToast(messages[milestone])
-      const hideTimer = window.setTimeout(() => setRewardToast(''), 2800)
+      const hideTimer = window.setTimeout(() => setRewardToast(''), 2200)
       lastMilestoneRef.current = milestone
       return () => window.clearTimeout(hideTimer)
     }
@@ -362,15 +324,17 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
   useEffect(() => {
     if (elapsedSec >= 40 && elapsedSec < 47 && !chimedStopRef.current) {
       chimedStopRef.current = true
-      if (soundOn) playBusArrivalChime(true)
+      try {
+        playBusArrivalChime(true)
+      } catch {}
     } else if (elapsedSec < 39) {
       chimedStopRef.current = false
     }
-  }, [elapsedSec, soundOn])
+  }, [elapsedSec])
 
-  // Render authentic PNG Journey Card when reaching Stage 5
+  // Render authentic PNG Journey Card when completing the quest
   useEffect(() => {
-    if (chapterIndex !== 5 || !quest) return
+    if (stage !== 5 || !quest) return
     let cancelled = false
     let objectUrl = ''
     void renderJourneyCardPng({
@@ -394,7 +358,7 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
       cancelled = true
       if (objectUrl) URL.revokeObjectURL(objectUrl)
     }
-  }, [chapterIndex, quest, user?.name])
+  }, [stage, quest, user?.name])
 
   async function handleDownloadPass() {
     if (!quest || cardSaving) return
@@ -420,19 +384,18 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
     }
   }
 
-  function jumpTo(sec: number) {
+  function advanceTo(sec: number) {
     setElapsedSec(sec)
-    if (sec < DEMO_TOTAL_SECONDS) setPlaying(true)
   }
 
-  // Stage 1 derived progress
+  // Stage 1: 06:00 Nhà hát Trưng Vương -> Trạm Số 9 Lê Duẩn
   const walkToBusProgress = Math.max(0, Math.min(1, elapsedSec / 11))
   const busApproachProgress = Math.max(0, Math.min(1, elapsedSec / 13.5))
   const showBusInvite = elapsedSec >= 3.2
   const busBoardFocused = elapsedSec >= 9.5 && elapsedSec < 13.5
   const busBoardConfirmed = elapsedSec >= 13.5
 
-  // Stage 2 derived bus sub-phase (15..47s)
+  // Stage 2: On-bus Tuyến 05 (~32s)
   const busElapsed = Math.max(0, elapsedSec - 15)
   const busRidePct = Math.max(4, Math.min(100, Math.round((busElapsed / 29) * 100)))
   const busNotifOn = elapsedSec >= 17.5
@@ -451,11 +414,11 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
     : ''
   const giftcodeClaimed = elapsedSec >= 37.5
 
-  // Stage 3 derived Son Tra travel (47..57s)
+  // Stage 3: Công viên Biển Đông -> Chùa Linh Ứng
   const sonTraProgress = Math.max(0, Math.min(1, (elapsedSec - 47) / 6.5))
   const arrivedAtPagoda = elapsedSec >= 52.5
 
-  // Stage 4 derived Quest Play (57..92s)
+  // Stage 4: Authentic Quest Play ("Dấu lặng trên Sơn Trà")
   const ch1 = quest?.checkpoints[0]
   const ch2 = quest?.checkpoints[1]
   const questStep:
@@ -491,26 +454,15 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
       className={`fjd-overlay ${standalone ? 'is-standalone' : ''}`}
       role={standalone ? 'main' : 'dialog'}
       aria-modal={standalone ? undefined : true}
-      aria-label={t('Mô phỏng toàn trình Dana Quest: Nhà hát Trưng Vương đến Chùa Linh Ứng', 'Dana Quest Full Journey Demo')}
+      aria-label={t('Hành trình Dana Quest: Nhà hát Trưng Vương đến Chùa Linh Ứng', 'Dana Quest Journey')}
     >
       <div className="fjd-shell">
-        {/* Top HUD */}
-        <header className="fjd-header">
-          <div className="fjd-brand-row">
-            <span className="fjd-live-pill">
-              <span className="fjd-live-dot" aria-hidden="true" />
-              DEMO TOÀN TRÌNH
-            </span>
-            <div className="fjd-title-block">
-              <h2>Nhà hát Trưng Vương → Xe buýt 05 → Chùa Linh Ứng</h2>
-              <small>Mô phỏng thực tế toàn bộ tính năng · Không cần di chuyển ngoài trời</small>
-            </div>
-          </div>
-
+        {/* Ultra-slim single-row status bar: only morning clock starting at 06:00 + EXP/Xu + Close */}
+        <header className="fjd-topbar">
+          <span className="fjd-clock-badge" aria-label="Thời gian hành trình">
+            🌅 {getSimMorningClock(elapsedSec)}
+          </span>
           <div className="fjd-hud-metrics">
-            <span className="fjd-clock-badge" aria-label="Giờ mô phỏng">
-              🌅 {getSimMorningClock(elapsedSec)}
-            </span>
             <span key={`xp-${earnedXp}`} className={`fjd-stat-badge is-xp ${earnedXp > 0 ? 'is-pop' : ''}`}>
               ⚡ {earnedXp} EXP
             </span>
@@ -521,106 +473,31 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
               type="button"
               className="fjd-close-btn"
               onClick={handleClose}
-              aria-label={t('Đóng demo hành trình', 'Close journey demo')}
+              aria-label={t('Đóng mô phỏng', 'Close simulation')}
             >
               ✕
             </button>
           </div>
         </header>
 
-        {/* Chapter jump pills + Playback controls */}
-        <div className="fjd-timeline-bar">
-          <div className="fjd-chapters" role="tablist" aria-label={t('Các chặng mô phỏng', 'Demo chapters')}>
-            {DEMO_CHAPTERS.map(ch => {
-              const isActive = chapterIndex === ch.id
-              const isDone = chapterIndex > ch.id
-              return (
-                <button
-                  key={ch.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`fjd-chapter-btn ${isActive ? 'is-active' : isDone ? 'is-done' : ''}`}
-                  onClick={() => jumpTo(ch.startSec)}
-                >
-                  <span aria-hidden="true">{isDone ? '✓' : ch.icon}</span>
-                  <span>{ch.shortLabel}</span>
-                </button>
-              )
-            })}
+        {rewardToast && (
+          <div className="fjd-reward-toast" role="status">
+            {rewardToast}
           </div>
+        )}
 
-          <div className="fjd-controls-row">
-            <button
-              type="button"
-              className="fjd-ctrl-btn is-primary"
-              onClick={() => {
-                if (elapsedSec >= DEMO_TOTAL_SECONDS) {
-                  setElapsedSec(0)
-                  setPlaying(true)
-                } else {
-                  setPlaying(p => !p)
-                }
-              }}
-            >
-              {elapsedSec >= DEMO_TOTAL_SECONDS ? '🔄 Phát lại' : playing ? '⏸ Tạm dừng' : '▶ Tiếp tục'}
-            </button>
-
-            <div className="fjd-scrub-wrap">
-              <input
-                type="range"
-                className="fjd-scrub-input"
-                min={0}
-                max={DEMO_TOTAL_SECONDS}
-                step={0.5}
-                value={elapsedSec}
-                aria-label={t('Thanh thời gian demo', 'Demo timeline')}
-                onChange={e => setElapsedSec(Number(e.target.value))}
-              />
-              <span className="fjd-time-label">
-                {formatDurationClock(elapsedSec)} / {formatDurationClock(DEMO_TOTAL_SECONDS)}
-              </span>
-            </div>
-
-            {([1, 1.5, 2] as const).map(s => (
-              <button
-                key={s}
-                type="button"
-                className={`fjd-ctrl-btn ${speed === s ? 'is-active-speed' : ''}`}
-                onClick={() => setSpeed(s)}
-              >
-                {s}x
-              </button>
-            ))}
-
-            <button
-              type="button"
-              className={`fjd-ctrl-btn ${soundOn ? 'is-active-speed' : ''}`}
-              onClick={() => setSoundOn(v => !v)}
-              title={t('Bật/tắt chuông báo trạm', 'Toggle arrival chime')}
-              aria-label={soundOn ? 'Tắt âm báo trạm' : 'Bật âm báo trạm'}
-            >
-              {soundOn ? '🔊' : '🔇'}
-            </button>
-          </div>
-        </div>
-
-        {/* Interactive Stage Viewport */}
+        {/* Full-screen pure gameplay viewport */}
         <div className="fjd-stage-viewport">
-          {rewardToast && (
-            <div className="fjd-reward-toast" role="status">
-              {rewardToast}
-            </div>
-          )}
-
-          {/* CHAPTER 1: 06:00 Start at Nhà hát Trưng Vương + DanaBus Suggestion */}
-          {chapterIndex === 1 && (
-            <section className="fjd-map-stage" aria-label="Chặng 1: Xuất phát tại Nhà hát Trưng Vương">
+          {/* STAGE 1: 06:00 Start at Nhà hát Trưng Vương + DanaBus Suggestion */}
+          {stage === 1 && (
+            <section className="fjd-map-stage" aria-label="Bản đồ xuất phát từ Nhà hát Trưng Vương">
               <div className="fjd-map-banner-top">
-                <span>
-                  📍 <strong>06:00 sáng</strong> · Xuất phát tại <strong>Nhà hát Trưng Vương</strong> → Mục tiêu: <strong>Chùa Linh Ứng (Sơn Trà)</strong>
+                <span className="fjd-ellipsis">
+                  📍 <strong>Nhà hát Trưng Vương</strong> → <strong>Chùa Linh Ứng</strong>
                 </span>
-                <span>Đi bộ tới trạm: ~{Math.max(0, Math.round((1 - walkToBusProgress) * 400))}m</span>
+                <span className="fjd-map-dist-pill">
+                  ~{Math.max(0, Math.round((1 - walkToBusProgress) * 400))}m
+                </span>
               </div>
 
               <DemoLeafletMap
@@ -637,24 +514,23 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                     <div className="fjd-invite-copy">
                       <h3>2 phút nữa xe buýt điện Tuyến 05 sắp đến trạm dừng này!</h3>
                       <p>
-                        Xe <strong>Tuyến 05 ⚡</strong> (chuyến 05:30 từ Hòa Hiệp Nam) đang cách trạm{' '}
-                        <strong>Số 9 Lê Duẩn</strong> chỉ ~350m và chạy thẳng qua Cầu Sông Hàn → Công viên Biển Đông (hướng lên Chùa Linh Ứng).{' '}
+                        Xe <strong>Tuyến 05 ⚡</strong> sắp tới trạm <strong>Số 9 Lê Duẩn</strong>, chạy thẳng qua Cầu Sông Hàn → Công viên Biển Đông (hướng lên Chùa Linh Ứng).{' '}
                         <strong>Bạn có muốn đi chuyến này để nhận thêm xu không?</strong>
                       </p>
                     </div>
                   </div>
                   <div className="fjd-invite-meta">
-                    <span className="fjd-chip is-gold">⏱️ Còn 2 phút tới trạm</span>
-                    <span className="fjd-chip">🌿 Xe buýt điện DanaBus</span>
-                    <span className="fjd-chip is-gold">🪙 Tới +30 Xu (Trạm + Minigame + Giftcode)</span>
+                    <span className="fjd-chip is-gold">⏱️ 2 phút nữa tới trạm</span>
+                    <span className="fjd-chip">🌿 Xe buýt điện</span>
+                    <span className="fjd-chip is-gold">🪙 Tới +30 Xu</span>
                   </div>
                   <button
                     type="button"
                     className={`fjd-action-btn ${busBoardConfirmed ? 'is-green is-tapped' : busBoardFocused ? 'is-focus' : ''}`}
-                    onClick={() => jumpTo(15)}
+                    onClick={() => advanceTo(15)}
                   >
                     {busBoardConfirmed
-                      ? '✓ Đã xác nhận lên xe buýt Tuyến 05 (+5 Xu trạm xanh)!'
+                      ? '✓ Đã lên Tuyến 05 (+5 Xu trạm xanh)!'
                       : '🚌 Xác nhận tham gia chuyến đi này (+5 Xu)'}
                     {busBoardFocused && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
                   </button>
@@ -663,30 +539,13 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
             </section>
           )}
 
-          {/* CHAPTER 2: ~32s On-Bus Waiting Screen (Tò te + Minigame + QR/Giftcode + Stop Alert) */}
-          {chapterIndex === 2 && (
-            <section className="fjd-bus-stage" aria-label="Chặng 2: Trải nghiệm trên xe buýt điện Tuyến 05">
-              {busStopAlert && (
-                <div className="fjd-bus-alert" role="alert">
-                  <strong>🔔 SẮP ĐẾN TRẠM CUỐI CÔNG VIÊN BIỂN ĐÔNG!</strong>
-                  <p>
-                    Xe buýt Tuyến 05 chỉ còn cách trạm <strong>Bãi tắm số 3 – Công viên Biển Đông</strong> 180m (~1 phút). Chuẩn bị xuống xe để tiếp tục cung đường ven biển lên Chùa Linh Ứng!
-                  </p>
-                  <button
-                    type="button"
-                    className={`fjd-action-btn is-green ${elapsedSec >= 43 ? 'is-focus' : ''}`}
-                    onClick={() => jumpTo(47)}
-                  >
-                    🚶 Đã xuống xe · Tiếp tục lên Chùa Linh Ứng →
-                    {elapsedSec >= 43 && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
-                  </button>
-                </div>
-              )}
-
-              {/* Animated "tò te" bus stage */}
+          {/* STAGE 2: On-Bus Waiting Screen (Tò te + Minigame + QR/Giftcode + Stop Alert) */}
+          {stage === 2 && (
+            <section className="fjd-bus-stage" aria-label="Màn hình trên xe buýt điện Tuyến 05">
+              {/* Compact animated "tò te" bus */}
               <div className="fjd-bus-hero-card">
                 <div className="fjd-bus-sky-row">
-                  <span className="fjd-bus-route-tag">🚌 TUYẾN 05 ⚡ · ĐANG CHẠY QUA CẦU SÔNG HÀN</span>
+                  <span className="fjd-bus-route-tag">🚌 Tuyến 05 ⚡</span>
                   <span className="fjd-bus-notes" aria-hidden="true">♪ ♫ tò te~</span>
                 </div>
 
@@ -707,181 +566,220 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
 
                 <div className="fjd-bus-progress-box">
                   <div className="fjd-bus-progress-top">
-                    <span>
+                    <span className="fjd-ellipsis">
                       {busStopAlert
-                        ? '🏁 Đang tiến vào trạm cuối Công viên Biển Đông!'
-                        : '🚌 Đang qua Cầu Sông Hàn → đường Phạm Văn Đồng'}
+                        ? '🏁 Sắp tới trạm cuối CV Biển Đông!'
+                        : '🚌 Cầu Sông Hàn → Phạm Văn Đồng'}
                     </span>
-                    <span>{busRidePct}%</span>
+                    <strong>{busRidePct}%</strong>
                   </div>
                   <div className="fjd-bus-track">
                     <div className="fjd-bus-track-fill" style={{ width: `${busRidePct}%` }} />
                   </div>
                   <div className="fjd-bus-stops-line">
-                    <span>📍 Số 9 Lê Duẩn</span>
-                    <span>🌉 Cầu Sông Hàn</span>
-                    <span>🏁 CV Biển Đông</span>
+                    <span>📍 Lê Duẩn</span>
+                    <span>🌉 Sông Hàn</span>
+                    <span>🏁 Biển Đông</span>
                   </div>
                 </div>
               </div>
 
-              {/* Interactive Bus Sub-tabs */}
-              <div className="fjd-bus-tabs">
-                <button
-                  type="button"
-                  className={`fjd-bus-tab ${busSubTab === 'wait' ? 'is-active' : ''}`}
-                  onClick={() => jumpTo(15.5)}
-                >
-                  🔔 Màn hình chờ & Báo ngầm
-                </button>
-                <button
-                  type="button"
-                  className={`fjd-bus-tab ${busSubTab === 'quiz' ? 'is-active' : ''}`}
-                  onClick={() => jumpTo(19.5)}
-                >
-                  🎮 Minigame (+10 Xu)
-                </button>
-                <button
-                  type="button"
-                  className={`fjd-bus-tab ${busSubTab === 'giftcode' ? 'is-active' : ''}`}
-                  onClick={() => jumpTo(30.5)}
-                >
-                  🎁 Quét QR / Giftcode (+15 Xu)
-                </button>
-              </div>
-
-              {busSubTab === 'wait' && (
-                <div className="fjd-bus-subcard">
-                  <strong>✨ Xác nhận lên xe thành công — Chế độ chờ thông minh</strong>
-                  <p style={{ margin: 0, fontSize: 13.5, color: '#2f5568' }}>
-                    Bạn có thể thoát ra lướt Facebook, TikTok hoặc YouTube. Hệ thống vẫn theo dõi lộ trình ngầm và sẽ reo chuông báo ngay khi gần tới trạm xuống!
+              {busStopAlert ? (
+                <div className="fjd-bus-subcard is-alert-card" role="alert">
+                  <strong style={{ fontSize: 'clamp(14.5px, 4vw, 16px)' }}>
+                    🔔 SẮP ĐẾN TRẠM CUỐI CÔNG VIÊN BIỂN ĐÔNG!
+                  </strong>
+                  <p style={{ margin: 0, fontSize: 'clamp(13px, 3.5vw, 14px)', lineHeight: 1.45 }}>
+                    Xe buýt Tuyến 05 chỉ còn cách trạm <strong>Bãi tắm số 3 – Công viên Biển Đông</strong> 180m (~1 phút). Chuẩn bị xuống xe để tiếp tục lên Bán đảo Sơn Trà → Chùa Linh Ứng!
                   </p>
-                  <button
-                    type="button"
-                    className={`fjd-action-btn ${busNotifOn ? 'is-green' : 'is-focus'}`}
-                    onClick={() => jumpTo(19.5)}
-                  >
-                    {busNotifOn
-                      ? '✓ Đang theo dõi ngầm · Sắp tới trạm sẽ reo thông báo!'
-                      : '🔔 Bật thông báo reo khi sắp đến trạm'}
-                    {!busNotifOn && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
-                  </button>
+                  <div className="fjd-quest-footer-cta">
+                    <button
+                      type="button"
+                      className={`fjd-action-btn is-green ${elapsedSec >= 42.5 ? 'is-focus' : ''}`}
+                      onClick={() => advanceTo(47)}
+                    >
+                      🚶 Đã xuống xe · Lên Chùa Linh Ứng →
+                      {elapsedSec >= 42.5 && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                    </button>
+                  </div>
                 </div>
-              )}
+              ) : (
+                <>
+                  <div className="fjd-bus-tabs">
+                    <button
+                      type="button"
+                      className={`fjd-bus-tab ${busSubTab === 'wait' ? 'is-active' : ''}`}
+                      onClick={() => advanceTo(15.5)}
+                    >
+                      🔔 Chờ xe
+                    </button>
+                    <button
+                      type="button"
+                      className={`fjd-bus-tab ${busSubTab === 'quiz' ? 'is-active' : ''}`}
+                      onClick={() => advanceTo(19.5)}
+                    >
+                      🎮 Minigame
+                    </button>
+                    <button
+                      type="button"
+                      className={`fjd-bus-tab ${busSubTab === 'giftcode' ? 'is-active' : ''}`}
+                      onClick={() => advanceTo(30.5)}
+                    >
+                      🎁 QR / Code
+                    </button>
+                  </div>
 
-              {busSubTab === 'quiz' && (
-                <div className="fjd-bus-subcard">
-                  {quizPhase === 'q1' && (
-                    <>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12.5, fontWeight: 800 }}>
-                        <span>🎮 Minigame trên xe · Câu 1/2</span>
-                        <span>Thưởng: +10 Xu Dana</span>
-                      </div>
-                      <strong>{quiz1.question}</strong>
-                      <div className="fjd-quiz-opts">
-                        {quiz1.options.map((opt, idx) => (
-                          <div key={opt} className={`fjd-quiz-opt ${q1Picked && idx === quiz1.correctIndex ? 'is-picked' : ''}`}>
-                            {q1Picked && idx === quiz1.correctIndex ? '✅ ' : ''}{opt}
-                          </div>
-                        ))}
-                      </div>
-                      {q1Picked && <div className="fjd-ok-banner">✅ Chính xác! {quiz1.fact}</div>}
-                    </>
-                  )}
-
-                  {quizPhase === 'q2' && (
-                    <>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12.5, fontWeight: 800 }}>
-                        <span>🎮 Minigame trên xe · Câu 2/2</span>
-                        <span>Đúng: 1/2</span>
-                      </div>
-                      <strong>{quiz2.question}</strong>
-                      <div className="fjd-quiz-opts">
-                        {quiz2.options.map((opt, idx) => (
-                          <div key={opt} className={`fjd-quiz-opt ${q2Picked && idx === quiz2.correctIndex ? 'is-picked' : ''}`}>
-                            {q2Picked && idx === quiz2.correctIndex ? '✅ ' : ''}{opt}
-                          </div>
-                        ))}
-                      </div>
-                      {q2Picked && <div className="fjd-ok-banner">✅ Chính xác! {quiz2.fact}</div>}
-                    </>
-                  )}
-
-                  {quizPhase === 'done' && (
-                    <>
-                      <strong>🎉 Xuất sắc! Bạn trả lời đúng 100% câu đố trên xe Tuyến 05!</strong>
-                      <button
-                        type="button"
-                        className={`fjd-action-btn ${quizClaimed ? 'is-green' : 'is-focus'}`}
-                        onClick={() => jumpTo(30.5)}
-                      >
-                        {quizClaimed ? '✓ Đã cộng +10 Xu Dana vào ví!' : '🪙 Nhận +10 Xu Dana thưởng Minigame'}
-                        {!quizClaimed && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
-                      </button>
-                    </>
-                  )}
-                </div>
-              )}
-
-              {busSubTab === 'giftcode' && (
-                <div className="fjd-bus-subcard">
-                  <div className="fjd-qr-grid">
-                    <div className="fjd-qr-scanner" aria-label="Mô phỏng camera quét mã QR trên xe buýt">
-                      <div className="fjd-qr-box" aria-hidden="true">
-                        {QR_PATTERN.map((cell, i) => (
-                          <i key={i} className={cell ? '' : 'is-blank'} />
-                        ))}
-                      </div>
-                      {!qrScanned && <div className="fjd-qr-laser" aria-hidden="true" />}
-                      <small style={{ fontSize: 11, fontWeight: 800 }}>
-                        {qrScanned ? '✅ Đã quét QR DanaBus!' : '📷 Đang quét QR dán trên xe…'}
-                      </small>
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                      <strong style={{ fontSize: 14 }}>🎁 Quét mã QR hoặc nhập Giftcode dán trên xe</strong>
-                      <small style={{ color: '#396174', fontSize: 12 }}>
-                        Mỗi tuyến có 6 mã (VD: DANABUS05, DANABUS05A… DANABUS05E) · Mỗi tài khoản dùng mỗi mã 1 lần.
-                      </small>
-                      <div className="fjd-gift-input-row">
-                        <input
-                          type="text"
-                          readOnly
-                          className="fjd-gift-input"
-                          value={typedGiftcode}
-                          placeholder="Đang quét mã QR…"
-                          aria-label="Mã giftcode mô phỏng"
-                        />
+                  {busSubTab === 'wait' && (
+                    <div className="fjd-bus-subcard">
+                      <strong style={{ fontSize: 'clamp(14px, 3.8vw, 15.5px)' }}>
+                        ✨ Đã lên xe Tuyến 05 — Bật báo trạm ngầm
+                      </strong>
+                      <p style={{ margin: 0, fontSize: 'clamp(12.5px, 3.4vw, 14px)', lineHeight: 1.5, color: '#2f5568' }}>
+                        Bạn có thể thoát app xem Facebook, TikTok hay YouTube. Hệ thống vẫn theo dõi lộ trình ngầm và sẽ reo chuông báo khi sắp tới trạm xuống!
+                      </p>
+                      <div className="fjd-quest-footer-cta">
                         <button
                           type="button"
-                          className={`fjd-action-btn ${giftcodeClaimed ? 'is-green' : qrScanned ? 'is-focus' : ''}`}
-                          style={{ width: 'auto', minWidth: 112 }}
-                          onClick={() => jumpTo(40.2)}
+                          className={`fjd-action-btn ${busNotifOn ? 'is-green' : 'is-focus'}`}
+                          onClick={() => advanceTo(19.5)}
                         >
-                          {giftcodeClaimed ? '✓ +15 Xu' : 'Nhận xu'}
-                          {qrScanned && !giftcodeClaimed && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                          {busNotifOn
+                            ? '✓ Đang theo dõi ngầm · Sắp tới trạm sẽ reo!'
+                            : '🔔 Bật thông báo reo khi sắp đến trạm'}
+                          {!busNotifOn && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
                         </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {busSubTab === 'quiz' && (
+                    <div className="fjd-bus-subcard">
+                      {quizPhase === 'q1' && (
+                        <>
+                          <div className="fjd-bus-subcard-head">
+                            <span>🎮 Minigame · Câu 1/2</span>
+                            <span>+10 Xu Dana</span>
+                          </div>
+                          <p className="fjd-quiz-question">{quiz1.question}</p>
+                          <div className="fjd-quiz-opts">
+                            {quiz1.options.map((opt, idx) => (
+                              <button
+                                key={opt}
+                                type="button"
+                                className={`fjd-quiz-opt ${q1Picked && idx === quiz1.correctIndex ? 'is-picked' : ''}`}
+                                onClick={() => advanceTo(21.5)}
+                              >
+                                {q1Picked && idx === quiz1.correctIndex ? '✅ ' : ''}{opt}
+                              </button>
+                            ))}
+                          </div>
+                          {q1Picked && <div className="fjd-ok-banner">✅ Chính xác! {quiz1.fact}</div>}
+                        </>
+                      )}
+
+                      {quizPhase === 'q2' && (
+                        <>
+                          <div className="fjd-bus-subcard-head">
+                            <span>🎮 Minigame · Câu 2/2</span>
+                            <span>Đúng: 1/2</span>
+                          </div>
+                          <p className="fjd-quiz-question">{quiz2.question}</p>
+                          <div className="fjd-quiz-opts">
+                            {quiz2.options.map((opt, idx) => (
+                              <button
+                                key={opt}
+                                type="button"
+                                className={`fjd-quiz-opt ${q2Picked && idx === quiz2.correctIndex ? 'is-picked' : ''}`}
+                                onClick={() => advanceTo(25.5)}
+                              >
+                                {q2Picked && idx === quiz2.correctIndex ? '✅ ' : ''}{opt}
+                              </button>
+                            ))}
+                          </div>
+                          {q2Picked && <div className="fjd-ok-banner">✅ Chính xác! {quiz2.fact}</div>}
+                        </>
+                      )}
+
+                      {quizPhase === 'done' && (
+                        <>
+                          <strong style={{ fontSize: 'clamp(14.5px, 3.8vw, 16px)' }}>
+                            🎉 Tuyệt vời! Trả lời đúng 2/2 câu đố trên xe!
+                          </strong>
+                          <div className="fjd-quest-footer-cta">
+                            <button
+                              type="button"
+                              className={`fjd-action-btn ${quizClaimed ? 'is-green' : 'is-focus'}`}
+                              onClick={() => advanceTo(30.5)}
+                            >
+                              {quizClaimed ? '✓ Đã cộng +10 Xu Dana vào ví!' : '🪙 Nhận +10 Xu Dana'}
+                              {!quizClaimed && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
+
+                  {busSubTab === 'giftcode' && (
+                    <div className="fjd-bus-subcard">
+                      <div className="fjd-qr-layout">
+                        <div className="fjd-qr-scanner" aria-label="Quét mã QR trên xe buýt">
+                          <div className="fjd-qr-box" aria-hidden="true">
+                            {QR_PATTERN.map((cell, i) => (
+                              <i key={i} className={cell ? '' : 'is-blank'} />
+                            ))}
+                          </div>
+                          {!qrScanned && <div className="fjd-qr-laser" aria-hidden="true" />}
+                          <span className="fjd-qr-caption">
+                            {qrScanned ? '✅ Đã quét QR!' : '📷 Quét QR…'}
+                          </span>
+                        </div>
+
+                        <div className="fjd-qr-right">
+                          <strong>🎁 Quét QR / Nhập Giftcode</strong>
+                          <small>Mã dán trên xe buýt DanaBus · Mỗi tài khoản dùng 1 lần/mã.</small>
+                          <div className="fjd-gift-input-row">
+                            <input
+                              type="text"
+                              readOnly
+                              className="fjd-gift-input"
+                              value={typedGiftcode}
+                              placeholder="Đang quét…"
+                              aria-label="Mã giftcode xe buýt"
+                            />
+                            <button
+                              type="button"
+                              className={`fjd-action-btn fjd-gift-submit ${giftcodeClaimed ? 'is-green' : qrScanned ? 'is-focus' : ''}`}
+                              onClick={() => advanceTo(40.2)}
+                            >
+                              {giftcodeClaimed ? '✓ +15 Xu' : 'Nhận xu'}
+                              {qrScanned && !giftcodeClaimed && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                            </button>
+                          </div>
+                        </div>
                       </div>
                       {giftcodeClaimed && (
                         <div className="fjd-ok-banner">
-                          🎉 Nhập mã {DEMO_GIFTCODE} thành công (+15 Xu Dana vào ví tài khoản)!
+                          🎉 Nhập mã {DEMO_GIFTCODE} thành công (+15 Xu Dana)!
                         </div>
                       )}
                     </div>
-                  </div>
-                </div>
+                  )}
+                </>
               )}
             </section>
           )}
 
-          {/* CHAPTER 3: Coastal Road up Son Tra Peninsula -> Chùa Linh Ứng */}
-          {chapterIndex === 3 && (
-            <section className="fjd-map-stage" aria-label="Chặng 3: Di chuyển dọc biển Hoàng Sa lên Chùa Linh Ứng">
+          {/* STAGE 3: Coastal Road up Son Tra -> Chùa Linh Ứng */}
+          {stage === 3 && (
+            <section className="fjd-map-stage" aria-label="Di chuyển dọc biển Hoàng Sa lên Chùa Linh Ứng">
               <div className="fjd-map-banner-top">
-                <span>
-                  ⛰️ <strong>Công viên Biển Đông</strong> → Đường ven biển <strong>Hoàng Sa</strong> → <strong>Chùa Linh Ứng – Bãi Bụt</strong>
+                <span className="fjd-ellipsis">
+                  ⛰️ <strong>Hoàng Sa</strong> → <strong>Chùa Linh Ứng – Bãi Bụt</strong>
                 </span>
-                <span>{arrivedAtPagoda ? 'Đã tới điểm hẹn!' : `Còn ~${Math.max(0.1, +((1 - sonTraProgress) * 5.2).toFixed(1))} km`}</span>
+                <span className="fjd-map-dist-pill">
+                  {arrivedAtPagoda ? 'Đã tới!' : `~${Math.max(0.1, +((1 - sonTraProgress) * 5.2).toFixed(1))} km`}
+                </span>
               </div>
 
               <DemoLeafletMap
@@ -898,16 +796,16 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                     <div className="fjd-invite-copy">
                       <h3>Bạn đã đến Chùa Linh Ứng – Bãi Bụt, Sơn Trà!</h3>
                       <p>
-                        Hệ thống GPS xác nhận vị trí trong bán kính điểm hẹn. Mở Quest <strong>“{quest?.title || 'Dấu lặng trên Sơn Trà'}”</strong> ngay để bắt đầu giải mật thư!
+                        GPS đã xác nhận điểm hẹn. Bắt đầu mở Quest <strong>“{quest?.title || 'Dấu lặng trên Sơn Trà'}”</strong> ngay!
                       </p>
                     </div>
                   </div>
                   <button
                     type="button"
                     className="fjd-action-btn is-green is-focus"
-                    onClick={() => jumpTo(57)}
+                    onClick={() => advanceTo(57)}
                   >
-                    ✦ Xác nhận đã đến · Bắt đầu Quest ngay →
+                    ✦ Xác nhận đã đến · Bắt đầu Quest →
                     <span className="fjd-tap-hand" aria-hidden="true">👆</span>
                   </button>
                 </div>
@@ -915,13 +813,12 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
             </section>
           )}
 
-          {/* CHAPTER 4: Authentic Quest Play ("Dấu lặng trên Sơn Trà") */}
-          {chapterIndex === 4 && quest && ch1 && ch2 && (
-            <section className="fjd-quest-stage" aria-label="Chặng 4: Chơi Quest Dấu lặng trên Sơn Trà">
+          {/* STAGE 4: Authentic Quest Play ("Dấu lặng trên Sơn Trà") */}
+          {stage === 4 && quest && ch1 && ch2 && (
+            <section className="fjd-quest-stage" aria-label="Chơi Quest Dấu lặng trên Sơn Trà">
               <div className="fjd-quest-hud">
-                <span>⌖ {questStep.startsWith('ch1') ? '1/2' : '2/2'} · {quest.title}</span>
-                <span>Tự do · Không đếm giờ</span>
-                <span style={{ color: '#b45309' }}>ϟ {earnedXp} XP</span>
+                <span className="fjd-ellipsis">⌖ {questStep.startsWith('ch1') ? '1/2' : '2/2'} · {quest.title}</span>
+                <span style={{ color: '#b45309', flexShrink: 0 }}>ϟ {earnedXp} XP</span>
               </div>
 
               <div className="fjd-quest-card">
@@ -935,20 +832,22 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                       alt="Chùa Linh Ứng – Bãi Bụt, Sơn Trà"
                     />
                     <p className="fjd-quest-story">{ch1.story}</p>
-                    <button
-                      type="button"
-                      className={`fjd-action-btn is-green ${elapsedSec >= 60.5 ? 'is-focus' : ''}`}
-                      onClick={() => jumpTo(63.2)}
-                    >
-                      Tiếp tục đến thử thách
-                      {elapsedSec >= 60.5 && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
-                    </button>
+                    <div className="fjd-quest-footer-cta">
+                      <button
+                        type="button"
+                        className={`fjd-action-btn is-green ${elapsedSec >= 60.5 ? 'is-focus' : ''}`}
+                        onClick={() => advanceTo(63.2)}
+                      >
+                        Tiếp tục đến thử thách
+                        {elapsedSec >= 60.5 && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                      </button>
+                    </div>
                   </>
                 )}
 
                 {questStep === 'ch1-challenge' && (
                   <>
-                    <span className="fjd-quest-phase-pill">Thử thách 1 (Nhập đáp án)</span>
+                    <span className="fjd-quest-phase-pill">Thử thách 1 · Nhập đáp án</span>
                     <h3>{ch1.title}</h3>
                     <p className="fjd-quest-story" style={{ fontWeight: 800 }}>
                       {ch1.challenge.prompt}
@@ -961,14 +860,16 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                       placeholder={ch1.challenge.type === 'text' ? ch1.challenge.placeholder : ''}
                       aria-label="Đáp án thử thách 1"
                     />
-                    <button
-                      type="button"
-                      className={`fjd-action-btn is-green ${typedCh1Chars >= DEMO_CH1_ANSWER.length ? 'is-focus' : ''}`}
-                      onClick={() => jumpTo(72.2)}
-                    >
-                      Kiểm tra đáp án
-                      {typedCh1Chars >= DEMO_CH1_ANSWER.length && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
-                    </button>
+                    <div className="fjd-quest-footer-cta">
+                      <button
+                        type="button"
+                        className={`fjd-action-btn is-green ${typedCh1Chars >= DEMO_CH1_ANSWER.length ? 'is-focus' : ''}`}
+                        onClick={() => advanceTo(72.2)}
+                      >
+                        Kiểm tra đáp án
+                        {typedCh1Chars >= DEMO_CH1_ANSWER.length && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                      </button>
+                    </div>
                   </>
                 )}
 
@@ -981,7 +882,7 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                     <button
                       type="button"
                       className={`fjd-action-btn is-green ${elapsedSec >= 75 ? 'is-focus' : ''}`}
-                      onClick={() => jumpTo(77.2)}
+                      onClick={() => advanceTo(77.2)}
                     >
                       Tiếp tục câu chuyện
                       {elapsedSec >= 75 && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
@@ -994,14 +895,16 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                     <span className="fjd-quest-phase-pill">Câu chuyện 2</span>
                     <h3>{ch2.title}</h3>
                     <p className="fjd-quest-story">{ch2.story}</p>
-                    <button
-                      type="button"
-                      className={`fjd-action-btn is-green ${elapsedSec >= 80 ? 'is-focus' : ''}`}
-                      onClick={() => jumpTo(82.2)}
-                    >
-                      Tiếp tục đến thử thách
-                      {elapsedSec >= 80 && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
-                    </button>
+                    <div className="fjd-quest-footer-cta">
+                      <button
+                        type="button"
+                        className={`fjd-action-btn is-green ${elapsedSec >= 80 ? 'is-focus' : ''}`}
+                        onClick={() => advanceTo(82.2)}
+                      >
+                        Tiếp tục đến thử thách
+                        {elapsedSec >= 80 && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                      </button>
+                    </div>
                   </>
                 )}
 
@@ -1009,7 +912,7 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                   const singleChoice = ch2.challenge
                   return (
                     <>
-                      <span className="fjd-quest-phase-pill">Thử thách 2 (Chọn một đáp án)</span>
+                      <span className="fjd-quest-phase-pill">Thử thách 2 · Chọn đáp án</span>
                       <h3>{ch2.title}</h3>
                       <p className="fjd-quest-story" style={{ fontWeight: 800 }}>
                         {singleChoice.prompt}
@@ -1019,21 +922,28 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                           const isCorrect = opt.id === singleChoice.correctOptionId
                           const isPicked = ch2Selected && isCorrect
                           return (
-                            <div key={opt.id} className={`fjd-quest-choice ${isPicked ? 'is-selected' : ''}`}>
+                            <button
+                              key={opt.id}
+                              type="button"
+                              className={`fjd-quest-choice ${isPicked ? 'is-selected' : ''}`}
+                              onClick={() => advanceTo(85)}
+                            >
                               <span aria-hidden="true">{isPicked ? '🟢' : '⚪'}</span>
                               <span>{opt.label}</span>
-                            </div>
+                            </button>
                           )
                         })}
                       </div>
-                      <button
-                        type="button"
-                        className={`fjd-action-btn is-green ${ch2Selected ? 'is-focus' : ''}`}
-                        onClick={() => jumpTo(88.2)}
-                      >
-                        Kiểm tra đáp án
-                        {ch2Selected && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
-                      </button>
+                      <div className="fjd-quest-footer-cta">
+                        <button
+                          type="button"
+                          className={`fjd-action-btn is-green ${ch2Selected ? 'is-focus' : ''}`}
+                          onClick={() => advanceTo(88.2)}
+                        >
+                          Kiểm tra đáp án
+                          {ch2Selected && <span className="fjd-tap-hand" aria-hidden="true">👆</span>}
+                        </button>
+                      </div>
                     </>
                   )
                 })()}
@@ -1047,9 +957,9 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                     <button
                       type="button"
                       className="fjd-action-btn is-focus"
-                      onClick={() => jumpTo(92.2)}
+                      onClick={() => advanceTo(92.2)}
                     >
-                      🏆 Xem tổng kết & Nhận Thẻ Thông Hành
+                      🏆 Xem tổng kết & Thẻ Thông Hành
                       <span className="fjd-tap-hand" aria-hidden="true">👆</span>
                     </button>
                   </div>
@@ -1058,24 +968,22 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
             </section>
           )}
 
-          {/* CHAPTER 5: Celebration + Total Coins/EXP + Explorer Pass / Journey Card */}
-          {chapterIndex === 5 && quest && (
-            <section className="fjd-summary-stage" aria-label="Chặng 5: Tổng kết Xu, EXP và Thẻ Thông Hành">
+          {/* STAGE 5: Celebration + Coins/EXP + Explorer Pass */}
+          {stage === 5 && quest && (
+            <section className="fjd-summary-stage" aria-label="Tổng kết hành trình và Thẻ Thông Hành">
               <div className="fjd-summary-hero">
                 <div>
-                  <h3>🎉 Hành trình đã hoàn thành — {quest.title}!</h3>
-                  <p>
-                    06:00 Nhà hát Trưng Vương → 🚌 Xe buýt điện Tuyến 05 → 🛕 Chùa Linh Ứng – Bãi Bụt, Sơn Trà
-                  </p>
+                  <h3>🎉 Hoàn thành — {quest.title}!</h3>
+                  <p>Nhà hát Trưng Vương → Tuyến 05 ⚡ → Chùa Linh Ứng, Sơn Trà</p>
                 </div>
                 <div className="fjd-summary-totals">
                   <div className="fjd-total-pill">
                     <strong>+120 EXP</strong>
-                    <small>Điểm kinh nghiệm</small>
+                    <small>Kinh nghiệm</small>
                   </div>
                   <div className="fjd-total-pill">
                     <strong>+50 Xu</strong>
-                    <small>Xu Dana tích lũy</small>
+                    <small>Xu Dana</small>
                   </div>
                 </div>
               </div>
@@ -1083,15 +991,15 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
               <div className="fjd-receipt-grid">
                 <div className="fjd-receipt-item">
                   <strong>+5 Xu</strong>
-                  <span>🚌 Lên trạm xanh Tuyến 05</span>
+                  <span>🚌 Lên Tuyến 05</span>
                 </div>
                 <div className="fjd-receipt-item">
                   <strong>+10 Xu</strong>
-                  <span>🎮 Minigame trên xe buýt</span>
+                  <span>🎮 Minigame xe buýt</span>
                 </div>
                 <div className="fjd-receipt-item">
                   <strong>+15 Xu</strong>
-                  <span>🎁 Giftcode {DEMO_GIFTCODE}</span>
+                  <span>🎁 Mã {DEMO_GIFTCODE}</span>
                 </div>
                 <div className="fjd-receipt-item">
                   <strong>+120 EXP · +20 Xu</strong>
@@ -1101,8 +1009,8 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
 
               <div className="fjd-pass-card">
                 <div className="fjd-pass-header">
-                  <span className="fjd-pass-badge">✦ THẺ THÔNG HÀNH · THẺ HÀNH TRÌNH ĐÀ NẴNG</span>
-                  <span className="fjd-chip">🌿 Huy hiệu Du khách Xanh Sơn Trà</span>
+                  <span className="fjd-pass-badge">✦ THẺ THÔNG HÀNH ĐÀ NẴNG</span>
+                  <span className="fjd-chip">🌿 Du khách Xanh</span>
                 </div>
 
                 {cardPreviewUrl ? (
@@ -1115,11 +1023,11 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                   <div className="fjd-pass-fallback">
                     <img src={`${base}photos/chua-linh-ung-bai-but.jpg`} alt="Chùa Linh Ứng" />
                     <div>
-                      <strong style={{ display: 'block', fontSize: 16 }}>{quest.title}</strong>
-                      <small style={{ display: 'block', color: '#2b5568', margin: '3px 0 6px' }}>
-                        {quest.area} · 2/2 thử thách đã chinh phục · 06:00–06:42
+                      <strong style={{ display: 'block', fontSize: 14.5 }}>{quest.title}</strong>
+                      <small style={{ display: 'block', color: '#2b5568', margin: '3px 0 6px', fontSize: 12 }}>
+                        {quest.area} · 2/2 thử thách
                       </small>
-                      <span className="fjd-chip is-gold">⚡ 120 EXP · 🪙 50 Xu Dana · ✓ ĐÃ ĐÓNG DẤU</span>
+                      <span className="fjd-chip is-gold">⚡ 120 EXP · 🪙 50 Xu · ✓ ĐÃ ĐÓNG DẤU</span>
                     </div>
                   </div>
                 )}
@@ -1130,31 +1038,29 @@ export default function FullJourneyDemo({ onClose, standalone = false }: { onClo
                   <button
                     type="button"
                     className="fjd-action-btn"
-                    style={{ fontSize: 13, padding: '10px 12px' }}
                     disabled={cardSaving}
                     onClick={() => void handleDownloadPass()}
                   >
                     {cardSaving ? 'Đang tạo PNG…' : '📥 Tải Thẻ Thông Hành (.PNG)'}
                   </button>
-                  <button
-                    type="button"
-                    className="fjd-secondary-link"
-                    onClick={() => {
-                      setElapsedSec(0)
-                      setPlaying(true)
-                    }}
-                  >
-                    🔄 Xem lại Demo từ đầu
-                  </button>
-                  <a
-                    className="fjd-secondary-link"
-                    href="#/map"
-                    onClick={() => {
-                      if (onClose) onClose()
-                    }}
-                  >
-                    🗺️ Mở bản đồ chơi thật →
-                  </a>
+                  <div className="fjd-pass-actions-row">
+                    <button
+                      type="button"
+                      className="fjd-secondary-link"
+                      onClick={() => setElapsedSec(0)}
+                    >
+                      🔄 Chơi lại
+                    </button>
+                    <a
+                      className="fjd-secondary-link"
+                      href="#/map"
+                      onClick={() => {
+                        if (onClose) onClose()
+                      }}
+                    >
+                      🗺️ Mở bản đồ →
+                    </a>
+                  </div>
                 </div>
               </div>
             </section>
