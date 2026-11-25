@@ -6,6 +6,47 @@ export const MAX_TRANSIT_DISTANCE_METERS = 80
 export const MAX_GPS_ACCURACY_METERS = 50
 export const MIN_DWELL_SECONDS = 60
 
+// Danh mục 8 tuyến DanaBus Đà Nẵng — mỗi tuyến có 6 giftcode (tổng 48 mã) để test liên tục;
+// mỗi tài khoản chỉ được nhập mỗi mã duy nhất 1 lần.
+const BUS_ROUTE_GIFTCODE_SPECS = [
+  { routeCode: '02', label: 'Tuyến 02 · BX Trung tâm ↔ Cửa Đại', coins: 15 },
+  { routeCode: '03', label: 'Tuyến 03 · Sân bay ↔ Bà Nà Hills', coins: 20 },
+  { routeCode: '05', label: 'Tuyến 05 · Hòa Hiệp Nam ↔ CV Biển Đông', coins: 15 },
+  { routeCode: '06', label: 'Tuyến 06 · Sân bay ↔ Cầu Rồng ↔ Mỹ Khê', coins: 15 },
+  { routeCode: '07', label: 'Tuyến 07 · Xuân Diệu ↔ Hòa Phước', coins: 15 },
+  { routeCode: '08', label: 'Tuyến 08 · Vũng Thùng ↔ ĐH Kinh tế DUE', coins: 15 },
+  { routeCode: '11', label: 'Tuyến 11 · Xuân Diệu ↔ Lotte ↔ BV Phụ sản Nhi', coins: 15 },
+  { routeCode: '12', label: 'Tuyến 12 · Xuân Diệu ↔ Sân bay ↔ Phạm Hùng', coins: 15 },
+]
+
+export const BUS_GIFTCODE_SUFFIXES = ['', 'A', 'B', 'C', 'D', 'E']
+
+export const BUS_GIFTCODES = Object.fromEntries(
+  BUS_ROUTE_GIFTCODE_SPECS.flatMap(spec =>
+    BUS_GIFTCODE_SUFFIXES.map(suffix => {
+      const code = `DANABUS${spec.routeCode}${suffix}`
+      return [code, { code, routeCode: spec.routeCode, label: spec.label, coins: spec.coins }]
+    }),
+  ),
+)
+
+export const BUS_MINIGAME_REWARD_COINS = 10
+
+export function normalizeBusGiftcode(raw) {
+  if (typeof raw !== 'string') return ''
+  const trimmed = raw.trim()
+  if (!trimmed) return ''
+  // Hỗ trợ quét QR dạng URL ?buscode=DANABUS06 hoặc ?code=DANABUS06
+  try {
+    if (/^https?:\/\//i.test(trimmed)) {
+      const parsed = new URL(trimmed)
+      const q = parsed.searchParams.get('buscode') || parsed.searchParams.get('code') || parsed.searchParams.get('giftcode')
+      if (q) return q.replace(/[^a-z0-9]/gi, '').toUpperCase()
+    }
+  } catch {}
+  return trimmed.replace(/[^a-z0-9]/gi, '').toUpperCase()
+}
+
 const fail = (code, status = 400, message = code) => Object.assign(new Error(message), { status, code })
 
 export function getVietnamDateKey(timestamp = Date.now()) {
@@ -114,9 +155,9 @@ export function createTransitClaims(directory, { dailyCap = DAILY_TRANSIT_CAP, s
           throw fail('ALREADY_CLAIMED_TODAY', 409, 'Bạn đã nhận thưởng cho trạm này trong ngày hôm nay rồi.')
         }
 
-        // Trần xu di chuyển xanh mỗi ngày
+        // Trần xu di chuyển xanh mỗi ngày (chỉ tính các lượt check-in trạm)
         const todayCoins = state.claims
-          .filter(c => c.dateKey === dateKey)
+          .filter(c => c.dateKey === dateKey && typeof c.source === 'string' && c.source.startsWith('transit:'))
           .reduce((sum, c) => sum + c.amount, 0)
         if (todayCoins + station.bonusCoins > dailyCap) {
           throw fail('DAILY_CAP_REACHED', 409, `Bạn đã đạt trần nhận thưởng di chuyển xanh trong ngày (${dailyCap} xu/ngày).`)
@@ -133,6 +174,65 @@ export function createTransitClaims(directory, { dailyCap = DAILY_TRANSIT_CAP, s
           dwellSeconds,
         }
 
+        state.claims.push(record)
+        await save(owner, state)
+        return record
+      }),
+
+    redeemGiftcode: (owner, { code, now = Date.now() }) =>
+      serial(async () => {
+        const normalized = normalizeBusGiftcode(code)
+        if (!normalized || !Object.hasOwn(BUS_GIFTCODES, normalized)) {
+          throw fail('INVALID_GIFTCODE', 404, 'Mã giftcode xe buýt không hợp lệ. Vui lòng kiểm tra lại mã dán trên xe.')
+        }
+        const entry = BUS_GIFTCODES[normalized]
+        const source = `bus-giftcode:${normalized}`
+        const state = await read(owner)
+
+        if (state.claims.some(c => c.source === source)) {
+          throw fail('GIFTCODE_ALREADY_REDEEMED', 409, `Tài khoản của bạn đã sử dụng mã ${normalized} rồi (mỗi tài khoản chỉ được nhập 1 lần).`)
+        }
+
+        const dateKey = getVietnamDateKey(now)
+        const record = {
+          stationId: `giftcode-${normalized.toLowerCase()}`,
+          giftcode: normalized,
+          routeCode: entry.routeCode,
+          amount: entry.coins,
+          claimedAt: now,
+          dateKey,
+          source,
+        }
+        state.claims.push(record)
+        await save(owner, state)
+        return { ...record, label: entry.label }
+      }),
+
+    claimMinigame: (owner, { routeCode, score, total = 5, now = Date.now() }) =>
+      serial(async () => {
+        const cleanRoute = typeof routeCode === 'string' ? routeCode.replace(/[^a-z0-9]/gi, '').toUpperCase().slice(0, 12) : ''
+        if (!cleanRoute) throw fail('INVALID_ROUTE', 400, 'Thiếu mã tuyến xe buýt.')
+        if (!Number.isFinite(score) || !Number.isFinite(total) || total < 3 || score < 3) {
+          throw fail('SCORE_TOO_LOW', 400, 'Bạn cần trả lời đúng ít nhất 3/5 câu để nhận thưởng minigame trên xe.')
+        }
+        const dateKey = getVietnamDateKey(now)
+        const source = `bus-minigame:${cleanRoute}:${dateKey}`
+        const state = await read(owner)
+
+        if (state.claims.some(c => c.source === source)) {
+          throw fail('MINIGAME_ALREADY_CLAIMED', 409, `Bạn đã nhận thưởng minigame trên tuyến ${cleanRoute} hôm nay rồi.`)
+        }
+
+        const record = {
+          stationId: `minigame-${cleanRoute.toLowerCase()}`,
+          routeCode: cleanRoute,
+          score: Math.round(score),
+          total: Math.round(total),
+          amount: BUS_MINIGAME_REWARD_COINS,
+          claimedAt: now,
+          dateKey,
+          source,
+        }
         state.claims.push(record)
         await save(owner, state)
         return record

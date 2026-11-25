@@ -358,6 +358,34 @@ export function createAuthApi({ file = resolve('.data/accounts.json'), eventCloc
           message: `Nhận thưởng thành công (+${claim.amount} Xu Dana).`
         })
       }
+      if ((path === '/api/auth/transit/giftcode' || path === '/api/transit/giftcode') && req.method === 'POST') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        if (!attempts.consume(`busgift:${session.userId}`, 10, 60000)) throw fail(429, 'Bạn đã thử quá nhiều mã. Hãy chờ 1 phút rồi thử lại.')
+        const claim = await transit.redeemGiftcode(session.userId, { code: input.code, now: Date.now() })
+        const updated = await wallet.read(session.userId)
+        return send(200, {
+          success: true,
+          claim,
+          code: claim.giftcode,
+          bonusCoins: claim.amount,
+          balance: updated.balance,
+          message: `Nhập mã ${claim.giftcode} thành công (+${claim.amount} Xu Dana)!`,
+        })
+      }
+      if ((path === '/api/auth/transit/minigame' || path === '/api/transit/minigame') && req.method === 'POST') {
+        if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
+        if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')
+        const claim = await transit.claimMinigame(session.userId, { routeCode: input.routeCode, score: input.score, total: input.total, now: Date.now() })
+        const updated = await wallet.read(session.userId)
+        return send(200, {
+          success: true,
+          claim,
+          bonusCoins: claim.amount,
+          balance: updated.balance,
+          message: `Hoàn thành minigame trên tuyến ${claim.routeCode} (+${claim.amount} Xu Dana)!`,
+        })
+      }
       if ((path === '/api/auth/golden-hours/claim' || path === '/api/golden-hours/claim') && req.method === 'POST') {
         if (!session) throw fail(401, 'WALLET_AUTH_REQUIRED')
         if (req.headers['x-dana-user'] && req.headers['x-dana-user'] !== session.userId) throw fail(409, 'WALLET_OWNER_CHANGED')

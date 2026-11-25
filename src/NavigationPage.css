@@ -227,6 +227,65 @@
 .transit-pin.bike { background: #2fa36b; }
 .transit-pin.bus { background: #248ae1; }
 
+/* ---------- Tuyến xe buýt DanaBus & Xe buýt đang chạy tới (<= 2 km) ---------- */
+.danabus-live-marker { background: transparent; border: 0; }
+.danabus-live-pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 4px 8px; border-radius: 999px;
+  background: #0d9488; color: #fff; border: 2px solid #fff;
+  font-size: 11.5px; font-weight: 800; line-height: 1; white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(13, 148, 136, 0.45);
+}
+.danabus-live-pill small {
+  padding: 1px 5px; border-radius: 999px; background: rgba(255, 255, 255, 0.22);
+  font-size: 10.5px; font-weight: 800;
+}
+.danabus-live-dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: #fde047; flex-shrink: 0;
+  animation: pulse-glow 1s infinite alternate;
+}
+.route-tool.danabus-alert-chip {
+  background: #0d9488 !important; color: #fff !important;
+  border: 1.5px solid #fff !important;
+  box-shadow: 0 3px 12px rgba(13, 148, 136, 0.35);
+}
+.danabus-suggestion-card {
+  margin: 8px 0 12px; padding: 10px 12px; border-radius: 12px;
+  background: #ecfdf5; border: 1.5px solid #34d399;
+  display: flex; flex-direction: column; gap: 5px;
+  font-size: 12.5px; color: #064e3b;
+}
+.danabus-card-head {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+}
+.danabus-card-head strong { font-size: 13.5px; color: #065f46; }
+.danabus-electric-tag {
+  padding: 1px 7px; border-radius: 999px; background: #0d9488; color: #fff;
+  font-size: 10.5px; font-weight: 800;
+}
+.danabus-fare-tag {
+  margin-left: auto; font-size: 11px; font-weight: 700; color: #047857;
+}
+.danabus-route-title { margin: 0 !important; font-size: 12px !important; font-weight: 700; color: #0f766e; }
+.danabus-stops-summary {
+  display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: #134e4a;
+}
+.danabus-approaching-live {
+  margin: 2px 0 0 !important; padding: 6px 8px; border-radius: 8px;
+  background: #0d9488; color: #fff !important; font-size: 12px !important; font-weight: 700;
+  display: flex; align-items: center; gap: 6px; line-height: 1.35;
+}
+.danabus-next-schedule {
+  margin: 2px 0 0 !important; font-size: 12px !important; font-weight: 600; color: #0f766e;
+}
+.danabus-alt-routes {
+  margin: 0 !important; font-size: 11.5px !important; color: #047857;
+}
+.danabus-source-note {
+  font-size: 10.5px; color: #475569; line-height: 1.3;
+}
+
 /* ---------- Thông báo "Đập vô mặt" khi Delay / Dừng lại (Idle Nudge) ---------- */
 .delay-nudge-overlay {
   position: fixed; inset: 0; z-index: 9999;

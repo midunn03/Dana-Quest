@@ -15,8 +15,18 @@ import { advanceFraction, planStages } from './lib/routeStages'
 import { useWalkingRoute } from './lib/useWalkingRoute'
 import { arrivalClock, bearing, directionName, formatMeters, headingBetween, turnIcon, turnText, nextTurnText, toLatLng, type Point } from './lib/routing'
 import { getNearbyGreenTransit, claimTransitReward, type NearbyTransitResult } from './lib/ecoTransit'
+import {
+  APPROACHING_BUS_RADIUS_METERS,
+  NEARBY_STATION_RADIUS_METERS,
+  findMatchingBusOptions,
+  getNearbyDanaBusStops,
+  getVietnamMinutesOfDay,
+  type BusRouteMatch,
+} from './lib/danabusEngine'
 import './NavigationPage.css'
 import ConfirmDialog from './ConfirmDialog'
+import BusRideCompanion from './BusRideCompanion'
+import { requestBusNotificationPermission } from './lib/busNotifications'
 import { getQuest } from './data/quests'
 import { useOptionalAuth } from './AuthContext'
 import { requestLogin } from './lib/authPrompt'
@@ -55,6 +65,7 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
   const connectorRef = useRef<L.Polyline | null>(null)
   const turnRef = useRef<L.CircleMarker | null>(null)
   const transitMarkersRef = useRef<L.Marker[]>([])
+  const busLayerRef = useRef<L.LayerGroup | null>(null)
   const avatarRef = useRef<HTMLDivElement | null>(null)
   const lastPoint = useRef<Point | null>(null)
   const followRef = useRef(true)
@@ -86,6 +97,10 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
 
   // ---------- Phương tiện xanh & Delay Nudge ----------
   const [transitUpdateTick, setTransitUpdateTick] = useState(0)
+  const [busNowMs, setBusNowMs] = useState(() => Date.now())
+  const [activeBusRide, setActiveBusRide] = useState<BusRouteMatch | null>(null)
+  const [busRideMinimized, setBusRideMinimized] = useState(false)
+  const [busInviteDismissedKey, setBusInviteDismissedKey] = useState<string | null>(null)
   const [showDelayNudge, setShowDelayNudge] = useState(false)
   const [journeyFraction, setJourneyFraction] = useState(0)
   const lastMoveTimestamp = useRef(0)
@@ -211,6 +226,7 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
       casingRef.current = null
       connectorRef.current = null
       turnRef.current = null
+      busLayerRef.current = null
       avatarRef.current = null
       accuracyRef.current = null
       lastPoint.current = null
@@ -356,12 +372,56 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
     }
   }
 
-  // Trạm xe đạp TNGo & DanaBus gần đó
+  // Trạm xe đạp TNGo & điểm dừng DanaBus trong bán kính 500m quanh GPS
   const nearbyTransit: NearbyTransitResult[] = useMemo(() => {
     if (!activeSample) return []
     void transitUpdateTick
-    return getNearbyGreenTransit([activeSample.latitude, activeSample.longitude], 350)
+    return getNearbyGreenTransit([activeSample.latitude, activeSample.longitude], NEARBY_STATION_RADIUS_METERS)
   }, [activeSample, transitUpdateTick])
+
+  const nearbyDanaBusStops = useMemo(() => {
+    if (!activeSample) return []
+    return getNearbyDanaBusStops([activeSample.latitude, activeSample.longitude], NEARBY_STATION_RADIUS_METERS)
+  }, [activeSample])
+
+  // Cập nhật vị trí xe buýt đang chạy theo biểu đồ giờ thực tế mỗi 5 giây
+  useEffect(() => {
+    const timer = window.setInterval(() => setBusNowMs(Date.now()), 5000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  // Lọc các tuyến DanaBus đi qua điểm đến + có trạm lên <= 500m + xe đang chạy tới <= 2km quanh GPS
+  const busMatches: BusRouteMatch[] = useMemo(() => {
+    if (!activeSample || !place) return []
+    const realMinutes = getVietnamMinutesOfDay(busNowMs)
+    const outsideServiceHours = realMinutes < 330 || realMinutes > 1165
+    const useDemoClock = simulating && outsideServiceHours
+    const demoMinutes = 8 * 60 + 18 + ((Math.floor(busNowMs / 1000) % 900) / 60)
+
+    return findMatchingBusOptions({
+      origin: [activeSample.latitude, activeSample.longitude],
+      destinationPos: place.position,
+      destinationId: id,
+      now: busNowMs,
+      overrideMinutesOfDay: useDemoClock ? demoMinutes : undefined,
+      scheduleMode: useDemoClock ? 'demo-schedule' : 'live-schedule',
+      boardRadiusMeters: NEARBY_STATION_RADIUS_METERS,
+      busRadiusMeters: APPROACHING_BUS_RADIUS_METERS,
+    })
+  }, [activeSample, place, id, busNowMs, simulating])
+
+  const primaryBusMatch = busMatches[0] ?? null
+  const primaryApproachingBus = primaryBusMatch?.approachingBuses[0] ?? null
+  const primaryBusInviteKey = primaryBusMatch ? `${primaryBusMatch.route.code}:${primaryBusMatch.direction}` : null
+
+  const handleJoinBusRide = useCallback((match: BusRouteMatch) => {
+    setActiveBusRide(match)
+    setBusRideMinimized(false)
+    void requestBusNotificationPermission()
+    window.dispatchEvent(new CustomEvent('dana-toast', {
+      detail: interpolate('🚌 Đã xác nhận tham gia Tuyến ${0}! Chơi minigame hoặc nhập giftcode trên xe để nhận thêm xu.', [match.route.code]),
+    }))
+  }, [])
 
   // Đếm thời gian lưu lại khu vực trạm (tối thiểu 60s để chống gian lận)
   useEffect(() => {
@@ -388,7 +448,7 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
     }
   }, [activeSample, simulating, nearbyTransit])
 
-  // Marker các trạm xe đạp TNGo / xe bus trên bản đồ
+  // Marker các trạm xe đạp TNGo / điểm dừng DanaBus trong bán kính 500m quanh GPS
   useEffect(() => {
     const map = mapRef.current
     if (!map) return
@@ -396,15 +456,35 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
     transitMarkersRef.current.forEach(m => m.remove())
     transitMarkersRef.current = []
 
+    const shownPositions: [number, number][] = []
+
     nearbyTransit.forEach(({ station, distance, claimed }) => {
+      if (station.type === 'bus' && nearbyDanaBusStops.some(stop => distanceMeters(stop.position, station.position) <= 100)) {
+        return
+      }
       const icon = L.divIcon({
         className: 'custom-transit-marker',
         html: `<div class="transit-pin ${station.type}" title="${station.name}"><span>${station.type === 'bike' ? '🚲' : '🚌'}</span></div>`,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
+        iconSize: [44, 44],
+        iconAnchor: [22, 22],
       })
       const marker = L.marker(station.position, { icon }).addTo(map)
       marker.bindTooltip(`<b>${station.name}</b><br/>${interpolate('Cách bạn ${0}m · ${1}', [String(Math.round(distance)), claimed ? t('Đã nhận thưởng') : `+${station.bonusCoins} Green Coins`])}`, { direction: 'top' })
+      transitMarkersRef.current.push(marker)
+      shownPositions.push(station.position)
+    })
+
+    nearbyDanaBusStops.forEach(stop => {
+      if (shownPositions.some(pos => distanceMeters(pos, stop.position) <= 60)) return
+      const routesLabel = stop.routeCodes.join(', ')
+      const icon = L.divIcon({
+        className: 'custom-transit-marker',
+        html: `<div class="transit-pin bus" title="${stop.name}"><span>🚌</span></div>`,
+        iconSize: [44, 44],
+        iconAnchor: [22, 22],
+      })
+      const marker = L.marker(stop.position, { icon }).addTo(map)
+      marker.bindTooltip(`<b>${t('Trạm DanaBus', 'DanaBus Stop')}: ${stop.name}</b><br/>${t('Tuyến', 'Routes')} ${routesLabel} · ${interpolate('Cách bạn ${0}m', [String(Math.round(stop.distanceMeters))])}`, { direction: 'top' })
       transitMarkersRef.current.push(marker)
     })
 
@@ -412,7 +492,76 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
       transitMarkersRef.current.forEach(m => m.remove())
       transitMarkersRef.current = []
     }
-  }, [nearbyTransit])
+  }, [nearbyTransit, nearbyDanaBusStops])
+
+  // Lớp tuyến xe buýt DanaBus phù hợp lộ trình + xe buýt đang chạy tới trong bán kính 2 km
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+
+    busLayerRef.current?.remove()
+    busLayerRef.current = null
+
+    if (!busMatches.length) return
+
+    const layer = L.layerGroup().addTo(map)
+    busLayerRef.current = layer
+
+    const primary = busMatches[0]
+    if (primary.segmentPolyline.length >= 2) {
+      L.polyline(primary.segmentPolyline, {
+        color: '#0d9488',
+        weight: 5,
+        opacity: 0.82,
+        dashArray: '10 7',
+        interactive: false,
+      }).addTo(layer)
+    }
+
+    // Đánh dấu trạm lên (<= 500m) và trạm xuống (gần điểm đến) của tuyến chính
+    L.circleMarker(primary.boardStop.position, {
+      radius: 7,
+      color: '#ffffff',
+      weight: 2.5,
+      fillColor: '#0d9488',
+      fillOpacity: 1,
+    })
+      .bindTooltip(`<b>${t('Trạm lên tuyến', 'Board route')} ${primary.route.code}</b><br/>${primary.boardStop.name} (${primary.walkToBoardMeters}m)`, { direction: 'top' })
+      .addTo(layer)
+
+    L.circleMarker(primary.alightStop.position, {
+      radius: 7,
+      color: '#ffffff',
+      weight: 2.5,
+      fillColor: '#0f766e',
+      fillOpacity: 1,
+    })
+      .bindTooltip(`<b>${t('Trạm xuống tuyến', 'Alight route')} ${primary.route.code}</b><br/>${primary.alightStop.name} (${t('cách đích', 'from destination')} ${primary.walkFromAlightMeters}m)`, { direction: 'top' })
+      .addTo(layer)
+
+    // Hiện tất cả các xe buýt thuộc các tuyến phù hợp đang tiến về trạm bạn trong bán kính <= 2km
+    busMatches.forEach(match => {
+      match.approachingBuses.forEach(bus => {
+        const icon = L.divIcon({
+          className: 'danabus-live-marker',
+          html: `<div class="danabus-live-pill"><span class="danabus-live-dot"></span><span>🚌 ${bus.routeCode}</span><small>~${bus.etaToBoardMinutes}p</small></div>`,
+          iconSize: [78, 30],
+          iconAnchor: [39, 15],
+        })
+        L.marker(bus.position, { icon, zIndexOffset: 1600 })
+          .bindTooltip(
+            `<b>${t('Xe buýt DanaBus tuyến', 'DanaBus route')} ${bus.routeCode}</b><br/>${interpolate('Cách bạn ${0} · Dự kiến ~${1} phút tới trạm', [formatMeters(bus.distanceToPlayerMeters), String(bus.etaToBoardMinutes)])}<br/><small>${t('Ước tính theo biểu đồ giờ DanaBus 2026', 'Estimated from DanaBus 2026 schedule')}</small>`,
+            { direction: 'top' },
+          )
+          .addTo(layer)
+      })
+    })
+
+    return () => {
+      layer.remove()
+      if (busLayerRef.current === layer) busLayerRef.current = null
+    }
+  }, [busMatches])
 
   // Phát hiện Delay & Hiện Popup Nudge
   useEffect(() => {
@@ -699,7 +848,58 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
           {t('Xem toàn tuyến')}
         </button>
       )}
+
+      {primaryBusMatch && primaryApproachingBus && !arrived && !activeBusRide && (
+        <button
+          type="button"
+          className="route-tool danabus-alert-chip"
+          onClick={() => handleJoinBusRide(primaryBusMatch)}
+        >
+          🚌 {t('Tuyến', 'Bus')} {primaryBusMatch.route.code} · ~{primaryApproachingBus.etaToBoardMinutes}p ({formatMeters(primaryApproachingBus.distanceToPlayerMeters)})
+        </button>
+      )}
     </div>
+
+    {/* Thông báo gợi nhắc sử dụng chuyến xe buýt phù hợp để nhận thêm xu */}
+    {primaryBusMatch && !arrived && !activeBusRide && busInviteDismissedKey !== primaryBusInviteKey && (
+      <aside className="danabus-invite-banner" role="status" aria-label={t('Gợi ý đi xe buýt DanaBus nhận thêm xu', 'DanaBus ride reward suggestion')}>
+        <div className="danabus-invite-top">
+          <div>
+            <strong>
+              🚌 {interpolate('Sử dụng Tuyến ${0} để nhận thêm xu!', [primaryBusMatch.route.code])}
+            </strong>
+            <small>
+              {primaryApproachingBus
+                ? interpolate('Xe đang chạy tới cách bạn ${0} (~${1}p) · Trạm ${2}', [
+                    formatMeters(primaryApproachingBus.distanceToPlayerMeters),
+                    String(primaryApproachingBus.etaToBoardMinutes),
+                    primaryBusMatch.boardStop.name,
+                  ])
+                : interpolate('Trạm lên ${0} (${1}m) → xuống tại ${2}', [
+                    primaryBusMatch.boardStop.name,
+                    String(primaryBusMatch.walkToBoardMeters),
+                    primaryBusMatch.alightStop.name,
+                  ])}
+            </small>
+          </div>
+          <button
+            type="button"
+            className="danabus-invite-close"
+            aria-label={t('Đóng gợi ý xe buýt', 'Dismiss bus suggestion')}
+            onClick={() => setBusInviteDismissedKey(primaryBusInviteKey)}
+          >
+            ×
+          </button>
+        </div>
+        <button
+          type="button"
+          className="danabus-join-btn"
+          onClick={() => handleJoinBusRide(primaryBusMatch)}
+        >
+          🚌 {t('Xác nhận tham gia chuyến đi này', 'Confirm & join this bus ride')}
+        </button>
+      </aside>
+    )}
 
     {/* [UX-FLOW] Thẻ nổi xác nhận khi mô phỏng chạy đến 100% */}
     {arrived && !arrivalModalDismissed && (fromMap || simulating || lockedPaidQuest) && (
@@ -849,6 +1049,69 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
             </div>
           )}
 
+          {/* Gợi ý tuyến xe buýt DanaBus đi qua điểm đến (trạm lên <= 500m, xe đang chạy tới <= 2km) */}
+          {primaryBusMatch && !arrived && (
+            <div className="danabus-suggestion-card" role="region" aria-label={t('Gợi ý tuyến xe buýt DanaBus', 'DanaBus route suggestion')}>
+              <div className="danabus-card-head">
+                <strong>
+                  🚌 {t('Tuyến DanaBus', 'DanaBus Route')} {primaryBusMatch.route.code}
+                </strong>
+                {primaryBusMatch.route.electric && (
+                  <span className="danabus-electric-tag">⚡ {t('Xe điện', 'Electric')}</span>
+                )}
+                <span className="danabus-fare-tag">{primaryBusMatch.route.fareText}</span>
+              </div>
+              <p className="danabus-route-title">{primaryBusMatch.route.shortName}</p>
+              <div className="danabus-stops-summary">
+                <span>
+                  <b>{t('Lên trạm:', 'Board:')}</b> {primaryBusMatch.boardStop.name} ({primaryBusMatch.walkToBoardMeters}m)
+                </span>
+                <span>
+                  <b>{t('Xuống trạm:', 'Alight:')}</b> {primaryBusMatch.alightStop.name} (~{primaryBusMatch.rideMinutes} {t('phút đi xe', 'min ride')})
+                </span>
+              </div>
+              {primaryApproachingBus ? (
+                <p className="danabus-approaching-live">
+                  <span className="danabus-live-dot" aria-hidden="true" />
+                  {interpolate('Xe đang chạy tới trạm · cách bạn ${0} · dự kiến ~${1} phút tới trạm (đến đích ~${2})', [
+                    formatMeters(primaryApproachingBus.distanceToPlayerMeters),
+                    String(primaryApproachingBus.etaToBoardMinutes),
+                    primaryApproachingBus.etaClockAtDestination,
+                  ])}
+                </p>
+              ) : primaryBusMatch.nextBoardClock ? (
+                <p className="danabus-next-schedule">
+                  {interpolate('Chưa có xe trong bán kính 2 km · Chuyến kế tiếp qua trạm lúc ${0} (~${1} phút nữa)', [
+                    primaryBusMatch.nextBoardClock,
+                    String(primaryBusMatch.nextBoardInMinutes ?? 0),
+                  ])}
+                </p>
+              ) : (
+                <p className="danabus-next-schedule">
+                  {interpolate('Tuyến hoạt động ${0} hằng ngày (ngoài giờ chạy hiện tại)', [primaryBusMatch.route.operatingHours])}
+                </p>
+              )}
+              {busMatches.length > 1 && (
+                <p className="danabus-alt-routes">
+                  {t('Tuyến khác cùng lộ trình:', 'Other matching routes:')}{' '}
+                  {busMatches.slice(1).map(m => `${t('Tuyến', 'Bus')} ${m.route.code}`).join(', ')}
+                </p>
+              )}
+              <small className="danabus-source-note">
+                {primaryBusMatch.scheduleMode === 'demo-schedule'
+                  ? t('Đang mô phỏng khung giờ chạy ban ngày theo biểu đồ giờ DanaBus 2026', 'Simulating daytime schedule from DanaBus 2026 timetable')
+                  : `${t('Ước tính theo biểu đồ giờ công bố', 'Estimated from official timetable')} · ${primaryBusMatch.route.sourceNote}`}
+              </small>
+              <button
+                type="button"
+                className="danabus-join-btn"
+                onClick={() => handleJoinBusRide(primaryBusMatch)}
+              >
+                🚌 {t('Xác nhận tham gia chuyến đi này (+Xu trên xe)', 'Confirm & join this bus ride (+Coins)')}
+              </button>
+            </div>
+          )}
+
           {/* Gợi ý trạm xe đạp TNGo / xe bus Danabus */}
           {nearbyTransit.length > 0 && !nearbyTransit[0].claimed && !arrived && (() => {
             const item = nearbyTransit[0]
@@ -944,6 +1207,23 @@ export default function NavigationPage({ id, target, fromMap = false }: { id: st
         </div>
       </div>
     </section>
+
+    {/* Màn hình chờ trên xe buýt: animation tò te + minigame + QR/giftcode + báo xuống trạm */}
+    {activeBusRide && (
+      <BusRideCompanion
+        match={activeBusRide}
+        destinationName={place.name}
+        playerSample={activeSample}
+        simulating={simulating}
+        minimized={busRideMinimized}
+        onMinimize={() => setBusRideMinimized(true)}
+        onRestore={() => setBusRideMinimized(false)}
+        onExitRide={() => {
+          setActiveBusRide(null)
+          setBusRideMinimized(false)
+        }}
+      />
+    )}
 
     {/* POPUP "ĐẬP VÔ MẶT" KHI NGƯỜI DÙNG DELAY / NGHỈ CHÂN */}
     {showDelayNudge && !arrived && (

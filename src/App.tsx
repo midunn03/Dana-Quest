@@ -42,6 +42,7 @@ const Explore = lazy(() => import('./Explore'))
 const NavigationPage = lazy(() => import('./NavigationPage'))
 const QuestNavigationPage = lazy(() => import('./QuestNavigationPage'))
 const DueStartPage = lazy(() => import('./DueStartPage'))
+const FullJourneyDemo = lazy(() => import('./FullJourneyDemo'))
 import { AuthProvider, useAuth } from './AuthContext'
 import { canNavigateFrom } from './lib/navigationGuard'
 import './mobile/Mobile.css'
@@ -128,7 +129,7 @@ function AppRouter() {
   const isMap = route === '#/map'
   const journeyRoute = route.startsWith('#/bat-dau/') || ['#/kich-hoat', '#/nhap-ma', '#/dieu-khoan', '#/quyen-rieng-tu'].includes(route)
   // [UX-FLOW] Cho phép truy cập công khai #/huong-dan
-  const publicRoute = route.startsWith('#/nha-sang-tao/') || route==='#/quest-cua-toi' || route.startsWith('#/su-kien/') || route.startsWith('#/chi-duong/') || route.startsWith('#/tai-khoan') || route === '#/huong-dan' || journeyRoute || ['#/', '#/dang-nhap', '#/dang-ky', '#/kham-pha', '#/explore', '#/map', '#/tim-kiem', '#/su-kien', '#/huong-dan'].includes(route) || /^#\/(quest|dia-diem)\/[^/]+$/.test(route)
+  const publicRoute = route.startsWith('#/nha-sang-tao/') || route==='#/quest-cua-toi' || route.startsWith('#/su-kien/') || route.startsWith('#/chi-duong/') || route.startsWith('#/tai-khoan') || route === '#/huong-dan' || route === '#/demo' || journeyRoute || ['#/', '#/dang-nhap', '#/dang-ky', '#/kham-pha', '#/explore', '#/map', '#/tim-kiem', '#/su-kien', '#/huong-dan'].includes(route) || /^#\/(quest|dia-diem)\/[^/]+$/.test(route)
   const authRoute = route === '#/dang-nhap' || route === '#/dang-ky'
   useEffect(() => {
     if(authRoute){setHomeAuthMode(route==='#/dang-ky'?'register':'login');window.history.replaceState(window.history.state,'','#/');setHash('#/');return}
@@ -146,6 +147,7 @@ function AppRouter() {
     : blocked
     ? <main className="auth-loading"><p role="status">{auth.status==='checking'?t("Đang kiểm tra phiên tài khoản…"):t("Đang mở trang đăng nhập…","Opening sign-in…")}</p></main>
     : route === '#/huong-dan' ? <HelpPage />
+    : route === '#/demo' ? <FullJourneyDemo standalone />
     : route === '#/bat-dau/thanh-pho' ? <OnboardingPage key="city" step="city" />
     : route === '#/bat-dau/ke-hoach' ? <OnboardingPage key="plans" step="plans" />
     : route === '#/bat-dau/gioi-thieu' ? <OnboardingPage key="intro" step="intro" />
@@ -179,7 +181,7 @@ function AppRouter() {
     : route.startsWith('#/dia-diem/') ? <DestinationDetails key={route} id={route.slice('#/dia-diem/'.length)} />
     : route !== '#/' ? <NotFoundPage/>  : <WelcomePage initialMode={homeAuthMode}/>
   const workspace = route.startsWith('#/tai-khoan') || ['#/album','#/cua-hang'].includes(route)
-  const onboarding = /^#\/quest\/[^/]+\/chi-duong$/.test(route) || /^#\/quest\/[^/]+\/choi$/.test(route) || journeyRoute || route === '#/' || authRoute || route === '#/chon-nhan-vat' || route === '#/nhan-vat' || route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
+  const onboarding = route === '#/demo' || /^#\/quest\/[^/]+\/chi-duong$/.test(route) || /^#\/quest\/[^/]+\/choi$/.test(route) || journeyRoute || route === '#/' || authRoute || route === '#/chon-nhan-vat' || route === '#/nhan-vat' || route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
   const interceptClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if(auth.status==='authenticated'||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return
     const link=(event.target as Element).closest<HTMLAnchorElement>('a[href]')
@@ -192,7 +194,7 @@ function AppRouter() {
 
   const isMobile = deviceMode === 'mobile'
   const isHome = route === '#/' || authRoute
-  const isFullscreen = route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
+  const isFullscreen = route === '#/demo' || route.startsWith('#/may-anh/') || route.startsWith('#/hoan-thanh/')
   const isQuestImmersive = (route.startsWith('#/quest/') && (route.includes('/choi') || route.includes('/chi-duong') || route.includes('/dan-duong'))) || route.startsWith('#/chi-duong/') || isFullscreen
   const showMobileHeader = isMobile && !isHome && !isQuestImmersive
   const showMobileNav = isMobile && !isHome && !onboarding && !isQuestImmersive && !isFullscreen

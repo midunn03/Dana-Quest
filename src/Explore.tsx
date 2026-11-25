@@ -18,6 +18,7 @@ import QuestCover from './QuestCover'
 import {parseEvents,type EventItem} from './lib/events'
 import {runEventFeedNotifications} from './lib/eventNotifier'
 import {GREEN_TRANSIT_STATIONS, fetchLiveTransitStations, type GreenTransitStation} from './data/greenTransit'
+import { getNearbyDanaBusStops, NEARBY_STATION_RADIUS_METERS } from './lib/danabusEngine'
 import {mapEntries,type MapEntry} from './lib/mapEntries'
 import {EventContext} from './lib/eventContext'
 import {useContext} from 'react'
@@ -190,13 +191,49 @@ export default function Explore(){
  useEffect(()=>{
   const instance=map.current;if(!instance||ready===0||!showTransit||zoom<14)return
   const group=L.layerGroup().addTo(instance)
-  transitStations.forEach(station=>{
+  const center: [number, number] = sample
+    ? [sample.latitude, sample.longitude]
+    : mapBounds
+      ? [mapBounds.getCenter().lat, mapBounds.getCenter().lng]
+      : [16.0601, 108.2236]
+
+  // Vẽ vòng tròn bán kính 500m quanh GPS/tâm để người chơi thấy rõ phạm vi lọc trạm xanh
+  L.circle(center, {
+    radius: NEARBY_STATION_RADIUS_METERS,
+    color: '#0d9488',
+    weight: 1.5,
+    dashArray: '5, 6',
+    fillColor: '#0d9488',
+    fillOpacity: 0.04,
+    interactive: false,
+  }).addTo(group)
+
+  const nearbyBusStops = getNearbyDanaBusStops(center, NEARBY_STATION_RADIUS_METERS)
+  const nearbyTngoAndLegacy = transitStations.filter(station => {
+    const dist = distanceMeters(center, station.position)
+    if (dist > NEARBY_STATION_RADIUS_METERS) return false
+    if (station.type === 'bus' && nearbyBusStops.some(stop => distanceMeters(stop.position, station.position) <= 100)) {
+      return false
+    }
+    return true
+  })
+
+  nearbyTngoAndLegacy.forEach(station=>{
+   const dist = Math.round(distanceMeters(center, station.position))
    const pin=document.createElement('div');pin.className=`transit-map-pin ${station.type}`;pin.innerHTML=`<span>${station.type==='bike'?'🚲':'🚌'}</span>`
-   const marker=L.marker(station.position,{title:station.name,icon:L.divIcon({className:'transit-div-icon',html:pin,iconSize:[48,48],iconAnchor:[24,24]})}).addTo(group)
-   marker.bindTooltip(`${station.name} (+${station.bonusCoins} xu)`)
+   const marker=L.marker(station.position,{title:station.name,icon:L.divIcon({className:'transit-div-icon',html:pin,iconSize:[44,44],iconAnchor:[22,22]})}).addTo(group)
+   marker.bindTooltip(`${station.name} · ${dist}m (+${station.bonusCoins} xu)`)
+  })
+
+  nearbyBusStops.forEach(stop=>{
+   const dist = Math.round(stop.distanceMeters)
+   const routeBadge = stop.routeCodes.join(', ')
+   const pin=document.createElement('div');pin.className='transit-map-pin bus';pin.innerHTML=`<span>🚌</span>`
+   const marker=L.marker(stop.position,{title:stop.name,icon:L.divIcon({className:'transit-div-icon',html:pin,iconSize:[44,44],iconAnchor:[22,22]})}).addTo(group)
+   marker.bindTooltip(`DanaBus ${routeBadge} · ${stop.name} (${dist}m)`)
   })
   return()=>{group.remove()}
- },[showTransit,zoom,transitStations,ready])
+ },[showTransit,zoom,transitStations,ready,sample,mapBounds])
 
  useEffect(()=>{
   const instance=map.current;if(!instance||!sample)return
